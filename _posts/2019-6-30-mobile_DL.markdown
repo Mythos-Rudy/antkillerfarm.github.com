@@ -1,8 +1,35 @@
 ---
 layout: post
-title:  移动端推理框架, Kubernetes, Dubbo, Arm ML, DRL实战, GPU通信技术
+title:  MLPerf, 移动端推理框架, DL Backend, DRL实战
 category: AI 
 ---
+
+* toc
+{:toc}
+
+# MLPerf
+
+MLPerf是谷歌、百度、斯坦福等联手打造的基准测量工具，用于测量机器学习软件与硬件的执行速度。
+
+它的到来代表着原本市场规模较为有限的AI性能比较方案正式踏上发展正轨。简而言之就是：以后各大公司发布的AI性能对比不能再王婆卖瓜自卖自夸了。
+
+官网：
+
+https://mlperf.org/
+
+论文：
+
+《MLPerf Inference Benchmark》
+
+![](/images/img4/MLPerf.png)
+
+---
+
+2022.7
+
+官网改名为：
+
+https://mlcommons.org
 
 # 移动端推理框架
 
@@ -29,6 +56,24 @@ NCNN是腾讯的作品。
 代码：
 
 https://github.com/Tencent/ncnn
+
+## TNN
+
+TNN是腾讯新近（2020.6）推出的作品。
+
+代码：
+
+https://github.com/Tencent/TNN
+
+参考：
+
+https://mp.weixin.qq.com/s/6V5ccGLAGcKwM3pi1nonZQ
+
+腾讯优图移动端推理框架TNN开源啦！
+
+https://mp.weixin.qq.com/s/31gFtdMqfv-IfmHAuAXTvg
+
+深度学习推理引擎：MNN pk TNN
 
 ## MACE
 
@@ -70,85 +115,15 @@ https://mp.weixin.qq.com/s/EcwmGKpCfVy22BWTB0Ro2g
 
 淘宝开源深度学习推理引擎MNN，移动AI的挑战与应对全面解读
 
-# Kubernetes
+https://mp.weixin.qq.com/s/1ynCqcFJTmxeo8lwKVm-XA
 
-Kubernetes是Google开源的容器集群管理系统，基于Docker构建一个容器的调度服务，提供资源调度、均衡容灾、服务注册、动态扩缩容等功能套件。
+谈谈MNN GPU性能优化策略
 
-官网：
+# DL Backend
 
-https://kubernetes.io/
+DL Backend是框架和硬件驱动之间的一层软件，用于向上提供AI硬件加速的能力。在AI芯片层出不穷的当下，相应的DL Backend也同样丰富。
 
-Kubernetes还有个ML的工具集叫KubeFlow。
-
-https://github.com/kubeflow/kubeflow
-
-参考：
-
-https://mp.weixin.qq.com/s/HEUIWK4skqMge8oziQg6Nw
-
-kubernetes简介和实战
-
-http://violetgo.com/blogs/2015/10/14/k8s.html
-
-docker学习笔记(k8s)
-
-https://mp.weixin.qq.com/s/wwwB8OHQmbwqmKKE8Lyv-w
-
-容器技术演化史
-
-https://mp.weixin.qq.com/s/LpNlUlXpt2poRKXEvuIDjw
-
-Kubernetes NetworkPolicy工作原理浅析
-
-https://mp.weixin.qq.com/s/s5eDSQF6mFt2F9_nVtYemQ
-
-PaaS将吞噬云计算？Kubernetes的市场冲击波
-
-https://mp.weixin.qq.com/s/19xreKtNlllfFx43eUGhuQ
-
-如何使用Kubernetes轻松部署深度学习模型
-
-https://mp.weixin.qq.com/s/4e9l-GP22T-myP54hJJjPA
-
-Kubernetes如何打赢容器之战？ 
-
-https://mp.weixin.qq.com/s/iTfHv8EFx4O4G1sNxsuMkg
-
-再见，Yarn！滴滴机器学习平台架构演进
-
-https://mp.weixin.qq.com/s/CmHok-9gKVrHfiXpYUQ4nw
-
-浅析Kubernetes资源管理
-
-# Dubbo
-
-Dubbo是一个分布式服务框架，致力于提供高性能和透明化的RPC远程服务调用方案，是阿里巴巴SOA服务化治理方案的核心框架，每天为2,000+个服务提供3,000,000,000+次访问量支持，并被广泛应用于阿里巴巴集团的各成员站点。
-
->阿里巴巴算是国内开源较多的IT企业了。但是早期仅仅满足于开源本身，对于开源项目的维护没有章法。Dubbo就是典型一例，开源之后的数年，没有任何官方升级和维护。社区由于官方的缺位，也没有大的动静。直到2016年，才纳入正轨。
-
-官网：
-
-http://dubbo.io/
-
-官网的用户指南写的不错，非常值得一看。
-
-https://mp.weixin.qq.com/s/bcwIMIir2RHPbQQr8HgTOQ
-
-如何快速开发一个Dubbo应用？
-
-https://mp.weixin.qq.com/s/fnrGjiywiySA8iAZh_cF0Q
-
-阿里巴巴新开源项目Nacos发布第一个版本，助力构建Dubbo生态
-
-https://mp.weixin.qq.com/s/AAcQRHZPvW11jvlbrLfRJA
-
-携程的Dubbo之路
-
-https://mp.weixin.qq.com/s/ZW4tO01gC65kZgOUappL9Q
-
-漫话：什么是RPC
-
-# Arm ML
+## Arm ML
 
 Arm ML是Arm的作品。它包括了两部分：Arm NN和Arm Compute Library。
 
@@ -156,7 +131,7 @@ Arm ML是Arm的作品。它包括了两部分：Arm NN和Arm Compute Library。
 
 https://mlplatform.org/
 
-## Arm NN
+### Arm NN
 
 官网：
 
@@ -166,7 +141,7 @@ https://developer.arm.com/ip-products/processors/machine-learning/arm-nn
 
 https://github.com/Arm-software/armnn
 
-## Arm Compute Library
+### Arm Compute Library
 
 官网：
 
@@ -176,7 +151,7 @@ https://developer.arm.com/ip-products/processors/machine-learning/compute-librar
 
 https://github.com/ARM-software/ComputeLibrary
 
-## CMSIS NN
+### CMSIS NN
 
 CMSIS NN是ARM提供的一个针对Cortex-M CPU的NN计算库。
 
@@ -192,17 +167,131 @@ http://www.keil.com/pack/doc/CMSIS_Dev/NN/html/index.html
 
 https://github.com/ARM-software/CMSIS_5
 
-## 概述
+### 概述
 
 ![](/images/img3/arm_nn_frameworks.png)
 
 ![](/images/img3/arm_ml_platforms.png)
 
-## 其他
+### 其他
 
 https://www.veryarm.com/872.html
 
 armel、armhf和arm64区别选择
+
+## Intel
+
+和ARM类似，Intel的方案包括了高层库nGraph和低层库DNNL。
+
+### nGraph
+
+nGraph是Intel推出的一款能兼容所有框架的深度神经网络（DNN）模型编译器，可用于多种硬件设备（其实主要还是Intel家的硬件）。
+
+官网：
+
+https://ngraph.nervanasys.com/docs/latest/
+
+参考：
+
+https://www.zhihu.com/question/269332944
+
+如何评价英特尔开源的nGraph编译器？
+
+### MKL
+
+Intel Math Kernel Library是一套经过高度优化和广泛线程化的数学例程，专为需要极致性能的科学、工程及金融等领域的应用而设计。
+
+官网：
+
+https://software.intel.com/zh-cn/mkl
+
+针对DNN加速，Intel推出了MKL-DNN库，后改名DNNL，又改名oneDNN。
+
+官网：
+
+https://github.com/intel/mkl-dnn
+
+参考：
+
+https://zhuanlan.zhihu.com/p/483936837
+
+深入了解英特尔深度学习编译器-GraphCompiler
+
+## MS
+
+MS也是一样：高层库WinML+中层库ONNX Runtime+低层库DirectML。
+
+### ONNX Runtime
+
+官网：
+
+https://microsoft.github.io/onnxruntime/
+
+代码：
+
+https://github.com/microsoft/onnxruntime
+
+build + run test:
+
+`./build.sh --config RelWithDebInfo --build_shared_lib --parallel --cmake_path /home/ubuser/my/setup/cmake-3.16.4-Linux-x86_64/bin/cmake`
+
+build only:
+
+`./build.sh --config RelWithDebInfo --build_shared_lib --parallel --cmake_path /home/ubuser/my/setup/cmake-3.16.4-Linux-x86_64/bin/cmake --skip_tests`
+
+test:
+
+```bash
+cd onnxruntime/build/Linux/RelWithDebInfo
+
+/home/ubuser/my/opensource/onnxruntime/build/Linux/RelWithDebInfo/onnxruntime_test_all --gtest_output=xml:/home/ubuser/my/opensource/onnxruntime/build/Linux/RelWithDebInfo/onnxruntime_test_all.RelWithDebInfo.results.xml --gtest_filter=ActivationOpTest.Relu
+```
+
+log:
+
+`LOGS_DEFAULT(WARNING) << "Hello!";`
+
+performance test:
+
+`onnxruntime_perf_test -m times -r 3 -e cpu model.onnx ./result.txt`
+
+backend的代码在onnxruntime/core/providers下。
+
+其中，openvino的fused graph代理是写的比较好的。关键函数有：
+
+GetUnsupportedNodeIndices：上报op是否支持。
+
+GetPartitionedClusters：根据支持列表分割计算图
+
+AppendClusterToSubGraph：将切割好的图打包发给backend。
+
+### DirectML
+
+基于DirectX 12提出的加速方案。
+
+# GLOW
+
+代码：
+
+https://github.com/pytorch/glow
+
+参考：
+
+https://zhuanlan.zhihu.com/p/102127047
+
+Glow: Graph Lowering Compiler for Neural Networks
+
+# NNFusion
+
+代码：
+
+https://github.com/microsoft/nnfusion
+
+参考：
+
+https://mp.weixin.qq.com/s/CMTOW3cYQkkECpPuzZl0nQ
+
+RAMMER如何进一步“压榨”加速器性能
 
 # DRL实战
 
@@ -274,6 +363,10 @@ https://zhuanlan.zhihu.com/p/21477488
 
 150行代码实现DQN算法玩CartPole。这是参考代码的作者本人写的另一个blog，其中的框架部分沿用到了Flappy Bird上。
 
+https://mp.weixin.qq.com/s/nmqX05c2qS3Jeg66W5NOzA
+
+尝试用强化学习算法来玩下FlappyBird？这篇blog只用Q-Learning算法，而不是DQN来玩FlappyBird。
+
 ## CartPole
 
 这是Google官方的教程，使用的是A3C算法：
@@ -302,48 +395,30 @@ https://mp.weixin.qq.com/s/atQHJ5U2pJpSG6PguN7J4Q
 
 如何保持运动小车上的旗杆屹立不倒？TensorFlow利用A3C算法训练智能体玩CartPole游戏
 
-# GPU通信技术
+# 朝鲜+
 
-## RDMA
+今臣战船尚有十二，出死力拒战，则犹可为也。
 
-RDMA网卡（Remote Direct Memory Access，这是一种硬件的网络技术，它使得计算机访问远程的内存时无需远程机器上CPU的干预）已经可以提供50~100Gbps的网络带宽和微秒级的传输延迟。
+---
 
-目前许多以深度学习为目标应用的GPU机群都部署了这样的网络。
+李承晚出身朝鲜王朝王族全州李氏，是朝鲜太宗李芳远之长子(废世子)让宁大君李禔的16世孙。如果按血统论，李承晚比金更有资格。
 
-参考：
+李承晚匪帮麾下的池青天、李范奭、宋虎声、金弘壹，都曾在中国大陆参与抗战。但由于李承晚的支持，韩国军方逐渐被伪军系军官把持。
 
-https://mp.weixin.qq.com/s/_xcE8RUs0m4gwk3kxpe9jA
+---
 
-基于HTM/RDMA的可扩展内存事务处理系统
+https://zhuanlan.zhihu.com/p/28517736
 
-## NVLink
+百货大楼20秒塌为平地，贪得无厌导致1500人遭活埋（韩国三丰百货店倒塌灾难）
 
-NVLink技术提供比PCIe 3更高的带宽与更多的链路，并可提升多GPU和多GPU/CPU系统配置的可扩展性。
+https://www.zhihu.com/question/291798701
 
-官网：
+朝鲜人的实际生活是什么样子的？
 
-https://www.nvidia.cn/data-center/nvlink/
+https://zhuanlan.zhihu.com/p/444286151
 
-![](/images/img3/nvlink.png)
+世界卷王--从两个数据看韩国的现状
 
-Tesla V100中以NVLink连接的GPU至GPU和GPU至CPU通信。
+https://mp.weixin.qq.com/s/Z_OrKMIDGbcvbdqscCKtSA
 
-![](/images/img3/nvlink_2.png)
-
-在DGX-1V服务器中，混合立体网络拓扑使用NVLink连接8个Tesla V100加速器。每个GPU有6条nvlink通道，总带宽高达300GB/s。
-
-从上图可以看到，即使每个GPU拥有6条nvlink通道，仍然无法做到“全连接”（即任意两个GPU之间存在双向通道）。这就引出了下一个更加疯狂的技术：nvswitch。
-
-![](/images/img3/nvswitch.png)
-
-NVSwitch是首款节点交换架构，可支持单个服务器节点中16个全互联的GPU，并可使全部8个GPU对分别以300GB/s的惊人速度进行同时通信。这16个全互联的GPU还可作为单个大型加速器，拥有0.5 TB统一显存空间和2 PetaFLOPS计算性能。
-
-## 参考
-
-https://www.infoq.cn/article/3D4MsRVS8ZOtGCj7*krT
-
-GPU通信技术初探
-
-https://zhuanlan.zhihu.com/p/67785062
-
-不止显卡！这些硬件因素也影响着你的深度学习模型性能
+韩国“梨泰院事件”：“没人必须承担责任，所以无人负责”

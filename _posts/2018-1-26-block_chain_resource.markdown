@@ -1,8 +1,143 @@
 ---
 layout: post
-title:  区块链参考资源, 传感器
+title:  矿机江湖, 区块链参考资源
 category: resource 
 ---
+
+* toc
+{:toc}
+
+# 矿机江湖
+
+傻子的共识也是共识。
+
+## 2018.9
+
+https://mp.weixin.qq.com/s/yyoUoIUBUPV5zkeE88P7Iw
+
+矿机芯片：转型背后的江湖纷争与隐忧
+
+这篇文章把中国矿机界的几个主角的恩恩怨怨基本都讲了一遍，不错的江湖文章。
+
+只是比特币这东西价格起起落落，2018年第一季度，比特大陆豪赚20亿美元，利润甚至超过了近年风头甚高的NVIDIA，岂料第二季度，形势急转直下，坊间甚至有比特大陆亏损6、7亿美元的传闻。
+
+至于比特大陆的AI芯片，似乎对标的是NVIDIA的云服务领域。不是我小看比特大陆，AI芯片这东西光有钱，没有时间积累，是做不好的。
+
+## 2018.11
+
+http://finance.sina.com.cn/blockchain/roll/2018-11-16/doc-ihnvukff8764739.shtml
+
+算力之战：告诉你吴忌寒是怎么赢的 CSW是怎么输的
+
+## 2019.1
+
+http://tech.sina.com.cn/i/2018-10-10/doc-ihkvrhpt4844011.shtml
+
+矿机围城里的比特大陆：研发持续落后 公司四面楚歌
+
+詹克团、吴忌寒、杨作兴
+
+## 2019.11
+
+http://finance.ifeng.com/c/7rSObfR7d0p
+
+币圈风云：比特大陆詹克团被踢下台 战争或许才刚刚开始
+
+https://mp.weixin.qq.com/s/RgH3std9f5f6sMq8fHSGjQ
+
+36岁北航校友打造中国自主AI芯片第一股！挖矿起家，6年IPO，市值百亿（嘉楠创始人及CEO张楠赓）
+
+https://mp.weixin.qq.com/s/dFI5e4f2J7R7BHZrjtiWZg
+
+涉嫌职务侵占十万元！前比特大陆矿机芯片设计总监，神马矿机创始人杨作兴被捕
+
+---
+
+杨作兴2001年从清华大学核物理专业博士毕业后，先后进入了北京方舟科技、北京中星微电子、扬州稻源微电子、深圳君正时代等公司。
+
+经过一年调查，2020年底杨作兴在朋友圈宣布归来。2021年4月，比特大陆对杨作兴和比特微提起第三次诉讼。
+
+在杨作兴离开后，詹克团研发的芯片多次流片失败，一直到2019年，比特大陆的产品几乎没有迭代，比特微则在这期间陆续发布了神马M3（28nm）、M10（16nm）、M20（10nm）、M30（8nm）共4款产品，流片速度上远超比特大陆。
+
+## 2021.4
+
+短短几个月的时间，狗币的价格上涨了一百倍，屎币的价格上涨了28万倍，创造了2021年的财富神话。
+
+狗币和屎币，被币圈的人合称“狗屎双雄”。
+
+狗币，中文全称叫狗狗币，英文名叫DOGE。
+
+为了讽刺比特币，马库斯故意把狗狗币的总数设置为1200亿枚，而且每年必定增发50亿枚，数量永远膨胀，年年超发。
+
+SHIB，柴犬币，绰号狗狗币杀手，诞生的唯一目的就是为了搞死狗狗币。SHIB的发行量被定为了令所有人类都目瞪口呆的1000万亿枚。
+
+为了致敬自己的偶像V神，SHIB在发行之初，就把500万亿屎币直接发到了V神的数字地址上。至于V神是出售，还是销毁，那要看V神自己的选择。
+
+V神作为以太坊的创始人，币圈里神一样的人物，没想到如今屎币却成为了他最大的数字资产，价格远超他持有的以太币。
+
+中国也曾经兴起过一段虚拟货币热潮，也曾经诞生过不少这样的搞笑币。比如说AV币，女优币，嫩模币，韭菜币，马勒戈币。
+
+https://mp.weixin.qq.com/s/LzBsdLEaIHyfw6OyMHMyuw
+
+狗币涨112倍，屎币涨28万倍，这世界真魔幻
+
+## 2021.6
+
+https://view.inews.qq.com/wxn/20210705A0353200
+
+在闲鱼上叫卖小水电站，他们遭遇了什么？
+
+https://view.inews.qq.com/wxn/20210705A0736X00
+
+比特币矿场大逃亡：我把结婚买房的钱全投到矿场，不到一年亏光
+
+https://mp.weixin.qq.com/s/SZJxVFa3PcDRWdbt3etqaQ
+
+比特币“矿难”：当草根的财富梦碎
+
+## 2022.5
+
+https://www.zhihu.com/question/532645455
+
+LUNA跌至几乎归零，孙宇晨一天或亏上亿泰达币，赵长鹏身家缩水5736亿，如何看待币圈大逃杀？
+
+## 参考
+
+https://mp.weixin.qq.com/s/H860_Es3uO9ozDTnifNvgQ
+
+比特大陆前总监揭秘：一款古老又简单的电路，让S9成为了一代机皇
+
+https://mp.weixin.qq.com/s/umuSPhwBJSwRWSzqD6hf3g
+
+听过坟头蹦迪，但你听过坟头挖矿吗
+
+https://zhuanlan.zhihu.com/p/351521871
+
+骗局揭秘：你的矿机真的在挖矿吗？
+
+https://zhuanlan.zhihu.com/p/358569252
+
+闷声发大财，没人知道俄罗斯挖出了多少比特币
+
+https://www.zhihu.com/question/454794462
+
+chia(奇亚）最近很火爆，导致大容量硬盘市场缺货，chia的真实收益怎么样？
+
+https://mb.yidianzixun.com/article/0KTeDrnq
+
+正副校长迷上炒币在教室“挖矿” 挖崩全校网络
+
+https://mp.weixin.qq.com/s/FtgskvIWrkw2DwhoI24WEg
+
+走路就能赚钱，趣步的鬼话你也信
+
+https://mp.weixin.qq.com/s/kc0M19VFjfz8Ji1461V8nw
+
+狗狗币大火：一枚“山寨币”为啥被追着买？
+
+https://mp.weixin.qq.com/s/_kSC3ALUtVZQFHkAsG7ayw
+
+全球割韭菜40亿美元，中国成重灾区！“加密货币女王”人间蒸发已五年
 
 # 区块链参考资源
 
@@ -18,6 +153,14 @@ https://github.com/LiuBoyu/blockchain
 
 区块链参考资源
 
+https://mp.weixin.qq.com/s/ebOZi1KtcHSKHLowgC-AOQ
+
+区块链技术原理与应用综述
+
+https://mp.weixin.qq.com/s/bMXGo0Kezx1CQwHoqwc9tA
+
+区块链技术前沿报告，32页pdf
+
 https://mp.weixin.qq.com/s/UvTc1ftOZq6Q57ksEYgzKA
 
 普通程序员如何快速上手区块链？这个课程的目录很有参考意义。
@@ -25,6 +168,10 @@ https://mp.weixin.qq.com/s/UvTc1ftOZq6Q57ksEYgzKA
 https://mp.weixin.qq.com/s/NF1tQaOTFklGM5U9kQ7yKA
 
 终于把区块链的技术与应用讲清楚了
+
+https://mp.weixin.qq.com/s/Q3OkAAV_j3fThbBPiSM-cg
+
+弄明白HASH，你就弄明白区块链的一大半
 
 http://www.chinacloud.cn/show.aspx?id=24053&cid=22
 
@@ -205,195 +352,3 @@ https://mp.weixin.qq.com/s/c9Ix4d8NqyOFlX75e6Gnsg
 https://mp.weixin.qq.com/s/K9zSNM2SKjC0BEqoYr2U5w
 
 比特币的数据版图
-
-https://mp.weixin.qq.com/s/m9KwANPIudVesoXjejnOJA
-
-火币袁煜明：区块链的本质、意义与商业体系设计
-
-iele虚拟机, plutus-marlowe智能合约语言，hydra分片，sidechain侧链, ourobros generic共识协议，kemadelia p2p网络
-
-https://mp.weixin.qq.com/s/Z2wz5jb7k4QVf0PNCd0THg
-
-Cocos王哲：讲解COCOS区块链游戏的发展之路！
-
-https://mp.weixin.qq.com/s/iKiU_QF5y4t1KMmr6WMctw
-
-一文看懂DGames（区块链游戏）的技术架构和业务逻辑！
-
-https://mp.weixin.qq.com/s/zyU0ANfBS_JrFLNylnErUw
-
-C# 200行代码实现区块链
-
-https://mp.weixin.qq.com/s/OUfDGYdgw6XKRgaUXmog1w
-
-区块链对供应链管理的五大意义
-
-https://mp.weixin.qq.com/s/k_mYbnchN2UF0kZ_2JD4Wg
-
-教你用C++搭建一条迷你区块链！
-
-https://mp.weixin.qq.com/s/9hhUZyeax206bAsSqks-1w
-
-比特币黑客攻击手段大揭秘
-
-https://mp.weixin.qq.com/s/Xxi50rDBjrqG-7MIloZMDw
-
-浅谈区块链技术与阿里云的探索实践
-
-https://blog.csdn.net/blockchain_lemon/article/details/84801413
-
-一文读懂11个主流共识算法, 彻底搞懂PoS,PoW,dPoW,PBFT,dBFT这些究竟是什么鬼...
-
-https://mp.weixin.qq.com/s/cxzI5oFBAUdtV6akre678w
-
-当区块链与人工智能相遇，会有怎样火花？这篇23页《Blockchain for AI》综述论文告诉你
-
-https://mp.weixin.qq.com/s/4lccUIoXrfWn_Za8xJXH-w
-
-基于tendermint实现Hyperledger Fabric的拜占庭容错排序
-
-https://mp.weixin.qq.com/s/TaHiX6uZiGt-K4Na1r7kcA
-
-社科院商法研究室赵磊：证券交易信用机制，从CSD到DLT
-
-https://mp.weixin.qq.com/s/V4PUZF7JkV9N_EkSCtql2w
-
-Facebook发币，AI大牛签署白皮书，Keras之父评价：没用
-
-# 传感器
-
-这里主要讨论自动驾驶方面的传感器，但也包括了一些非自动驾驶类的传感器知识。
-
-https://mp.weixin.qq.com/s/Ee18sjKXNGMowKwqLB0jVg
-
-给自动驾驶一双"通天眼"——环境感知器篇
-
-https://mp.weixin.qq.com/s/dusPUCjKUzhfmTRhzXte-A
-
-新的图像传感器给汽车装上眼睛
-
-https://mp.weixin.qq.com/s/4HNaS8Dpi9pcPzE_nN-BvA
-
-全球12家顶级激光雷达公司解读：谁有机会撼动Velodyne
-
-https://mp.weixin.qq.com/s/Ef6aWgs9xkHaAwTX4rxjKA
-
-用激光雷达感知世界
-
-https://mp.weixin.qq.com/s/45xNWa_32DAsKdlfYY_QfA
-
-Uber自动驾驶撞死行人视频公布：无人车环境感知解决方案该如何优化？
-
-https://mp.weixin.qq.com/s/VBpOwGrTPs0nlmTyXvqDwA
-
-为什么只用摄像头和光学雷达是不够的：我们能从Uber的自动驾驶车致死事件中学到什么
-
-https://mp.weixin.qq.com/s/WiS-iJHA1zoIyb1cvKiuZQ
-
-自动驾驶传感器“一哥之争”，这事儿你怎么看？
-
-https://mp.weixin.qq.com/s/WWm1tkCXVJgdlVbsXCTYIg
-
-自动驾驶汽车硬件系统概述
-
-https://mp.weixin.qq.com/s/C77q2LEA-lMEabtsO30LxQ
-
-自动驾驶需要几个camera
-
-https://mp.weixin.qq.com/s/2-PB-5tTNeGPLPHQBdRwBA
-
-40张动态图详解全部传感器工作原理
-
-https://mp.weixin.qq.com/s/oCEeIM_DhmQ67zT_KLVb7Q
-
-Face ID与3D传感技术科普
-
-https://blog.csdn.net/carson2005/article/details/72972414
-
-光纤陀螺简介
-
-https://mp.weixin.qq.com/s/ZRakGZWXlQaUgtMfe2c2aw
-
-不要轻易碰我，不然我就知道你有多软了
-
->鲍哲南，女，1970年生，芝加哥大学博士（1995）。现为Stanford教授，美国工程院院士。
-
-https://mp.weixin.qq.com/s/NwptdxWiN4SadjUQafA5rw
-
-高端MEMS固体波动陀螺的发展与应用
-
-https://blog.csdn.net/richard_liujh/article/details/49615395
-
-光学心率测量原理
-
-https://mp.weixin.qq.com/s/NrNojDc9gEU3F_GybKA67Q
-
-三大屏下指纹技术方案对比
-
-https://mp.weixin.qq.com/s/g5VKcxcp6QWesfegcU_GuQ
-
-手机指纹解锁和密码解锁，哪个更安全？
-
-https://mp.weixin.qq.com/s/2TKkoWZcYVVvlEKvA6iNyA
-
-近年值得关注的新兴MEMS和传感器技术
-
-https://mp.weixin.qq.com/s/mlwDZ1DUDbHIn4hQvkumAw
-
-自动驾驶感知神器——激光雷达概述
-
-https://mp.weixin.qq.com/s/elSezCSBPnuEqOFmHACLVg
-
-24GHz雷达的应用案例
-
-https://mp.weixin.qq.com/s/SgUcLH3kfRVha661PLyMeg
-
-体声波(BAW)是什么？
-
-https://mp.weixin.qq.com/s/zX2Jy5a32AVnhOUeLgS_wA
-
-摄像头、雷达、激光雷达——自动驾驶几大传感器系统大揭秘
-
-https://mp.weixin.qq.com/s/FohJ81sPT_Zk7s1qLuP1-A
-
-动态视觉传感器（DVS）：高级自动驾驶的“超眼”
-
-https://mp.weixin.qq.com/s/ya-CHw572C2nnk8XraEMqQ
-
-功率半导体器件现状及未来
-
-https://mp.weixin.qq.com/s/0K595c2GdhPrdWBgpvU-Gw
-
-超声波雷达在汽车上的应用
-
-https://mp.weixin.qq.com/s/ecqeQdOo3xUV-PvL_T48eA
-
-一文读懂三角法和TOF激光雷达
-
-https://mp.weixin.qq.com/s/j0-Lj8lOyDP0RArB7NzUNw
-
-特斯拉的整车传感器配置方案
-
-https://mp.weixin.qq.com/s/hVhutvHeXsZOvJZfG1xaFw
-
-自动驾驶车载激光雷达技术现状分析
-
-https://mp.weixin.qq.com/s/WIjbYMvMis-YBr_ev_wjmQ
-
-霍尔元件及其应用
-
-https://mp.weixin.qq.com/s/vbTR1A0rgzCQY8XG70SNPQ
-
-了不起的MEMS发明人
-
-https://mp.weixin.qq.com/s/kO5yy7x0r3LhttBhLVpT5w
-
-固态激光雷达研究进展
-
-https://mp.weixin.qq.com/s/gHvvMG7D_W0M2RFntyRaDw
-
-车载抬头显示AR HUD成像技术大解密
-
-https://mp.weixin.qq.com/s/qOnMNbA9C7bcwZ6IvOxyCA
-
-一组动图看懂3D打印原理

@@ -1,0 +1,233 @@
+---
+layout: post
+title: Maxwell's equations, Doppler effect, 物理（二）
+category: Nature 
+---
+
+* toc
+{:toc}
+
+# Maxwell's equations
+
+| Name | Differential form | Integral form |
+|:--:|:--:|:--:|
+| Gauss's law | $$\nabla \cdot \mathbf{D} = \rho$$ | $$\oint_S \mathbf{D} \cdot d\mathbf{A} =  \int_V \rho \cdot dV$$ |
+| Gauss' law for magnetism | $$\nabla \cdot \mathbf{B} = 0$$ | $$\oint_S \mathbf{B} \cdot d\mathbf{A} = 0$$ |
+| Faraday's law of induction | $$\nabla \times \mathbf{E} = -\frac{\partial \mathbf{B}} {\partial t}$$ | $$\oint_C \mathbf{E} \cdot d\mathbf{l} - \oint_C \mathbf {B} \times \mathbf{v} \cdot d{\mathbf {l}}  = - \ { d \over dt }   \int_S   \mathbf{B} \cdot d\mathbf{A}$$ |
+| Ampère's law | $$\nabla \times \mathbf{H} = \mathbf{J} + \frac{\partial \mathbf{D}} {\partial t}$$ | $$\oint_C \mathbf{H} \cdot d\mathbf{l} = \int_S \mathbf{J} \cdot d \mathbf{A} + \int_S\frac{\partial \mathbf{D} }{\partial t}\cdot d \mathbf{A}$$ |
+
+| Symbol | Meaning |
+|:--:|:--:|
+| $$\mathbf{E}$$ | electric field |
+| $$\mathbf{H}$$ | magnetic field |
+| $$\mathbf{D}$$ | electric displacement field |
+| $$\mathbf{B}$$ | Magnetic field density |
+| $$\rho$$ | electric charge |
+| $$\mathbf{J}$$ | current density |
+| $$\mathbf{v}$$ | velocity |
+| $$\nabla \cdot$$ | divergence operator |
+| $$\nabla \times$$ | curl operator |
+
+---
+
+除了最简单的微分和积分形式之外，Maxwell方程还有协变形式（Covariant Formulation）和几何代数形式（Geometric Algebra (GA) formulation）。
+
+参考文档中的$$4\pi$$是高斯单位制的写法，在SI单位制中，该系数为1，可以省略。
+
+如果你对于上述任何一种形式的Maxwell方程都不了解，那么你肯定大学时候没学过物理；如果你熟悉第一种表达形式，那说明你大学本科是物理系的，或者至少学过大学物理、电磁学、电动力学等；此外，如果你还知道第二种表述，那说明你大学期间看过一些更深的物理教材，或者你读研的时候是物理类或接触过物理偏向理论的方向；如果你了解第三种表述，那么多半你了解一些广义相对论；如果你熟悉第四种表述，那么很可能你深入的学过微分几何、广义相对论、规范场论以及数学上的纤维丛结构等。当然上述四种形式的Maxwell方程本质上都讲的一样的内容，只是表达形式不同，但可以互相转化。可见，随着你对现代物理学的深入研究和学习会发现Maxwell方程组的形式可以变的越来越简洁，这也正是一个好的物理理论所具有的特质：简单但普适。
+
+参考：
+
+https://www.zhihu.com/answer/2316605114
+
+Maxwell方程的四种形式
+
+---
+
+https://zhuanlan.zhihu.com/p/71793554
+
+最美的公式：你也能懂的麦克斯韦方程组（积分篇）
+
+https://zhuanlan.zhihu.com/p/78503083
+
+最美的公式：你也能懂的麦克斯韦方程组（微分篇）
+
+https://zhuanlan.zhihu.com/p/81867668
+
+见证奇迹的时刻：如何从麦克斯韦方程组推出电磁波
+
+https://www.zhihu.com/question/511590823
+
+如何评价王中林院士拓展麦克斯韦方程组？对物理学理论有多大价值？
+
+# Doppler effect
+
+>Christian Johann Doppler，1803～1853，奥地利物理学家，数学家和天文学家。维也纳大学物理学院的第一任院长。
+
+![](/images/img4/Doppler_effect.gif)
+
+v=0
+
+![](/images/img4/Doppler_effect_2.gif)
+
+v<c
+
+![](/images/img4/Doppler_effect_3.gif)
+
+v=c
+
+![](/images/img4/Doppler_effect_4.gif)
+
+v>c
+
+https://mp.weixin.qq.com/s/TU6FOTEfLu_pN9_3Ya085g
+
+多普勒，那个和声音赛跑的男人
+
+https://mp.weixin.qq.com/s/j8KvzZ6gvOsW2fVMSwI51Q
+
+多普勒，石破能惊天的孙大圣？还是凡人唐三藏？
+
+# 镇楼之宝
+
+![](/images/article/nb.png)
+
+https://mp.weixin.qq.com/s/o0kvX1cyGLHGFuQin4HgrA
+
+一流物理学的传承与发展：文化、学派、风格和诺奖
+
+https://mp.weixin.qq.com/s/dn3KUkxuZhHdMh5Z11gMJw
+
+那一年，爱因斯坦被十几个诺奖得主怼了一遍（第五届索尔维会议）
+
+https://mp.weixin.qq.com/s/ibfOg3D_iVd6-sloQFC_Jw
+
+爱因斯坦被打脸最惨的一次，还是搬起石头砸自己的脚……（第六届索尔维会议）
+
+# 物理
+
+顾静薇被安排和一名哲学教授去相亲。相亲对象非常浪漫，带她去看晚霞。
+
+顾静薇：“他带我去看晚霞，我跟他讲，这是瑞利散射。他那个表情你是没有看见哦！”
+
+https://mp.weixin.qq.com/s/RPkEHmI2soIsHvukUgpZDg
+
+导演朱虹璇问气象科学家：为什么黄昏能看见红色的晚霞？
+
+>顾静薇，或作顾静徽，1900～1983，女，物理学家。1920年入上海大同大学，成为胡刚复的学生。1923年考取留美公费生，入美国康奈尔大学文理学院。康奈尔大学本科（1926）+耶鲁大学硕士（1928）+密歇根大学博士（1931）。中国近代史上第一个物理学女性博士。先后执教于南开大学、大同大学、广西大学和北京钢铁学院。她和丈夫施汝为创办了中国科学院物理研究所，后者为所长。学生有吴健雄、郭永怀等。
+
+---
+
+过去玻璃窗的制作方法基本都是吹个球或者静置，但这种方法制作的玻璃基本都不平，所以那时的玻璃窗只能小块用木头框隔开。
+
+英国皮尔金顿平板玻璃兄弟有限公司的阿拉斯塔、皮尔金顿于1952年在一次偶然的机会，看到一层油漂浮在水面上，该公司根据上述这一设想，发明了一种生产平板玻璃的革命性的方法-浮法工艺。它是因玻璃液漂浮在熔融的金属表面上获得抛光成型而得名的。
+
+---
+
+https://mp.weixin.qq.com/s/1PhFbQUUNJ4_kZB3Vc-y1w
+
+物理学奖给黑洞，或许是因为错过了霍金
+
+https://mp.weixin.qq.com/s/KD3IeebIsFEt0IlZTd4emA
+
+89岁诺奖得主Roger Penrose，有一个令人咂舌的家族
+
+https://mp.weixin.qq.com/s/JRWBEqgnLcr53D5T0C0U-Q
+
+七位彭罗斯
+
+https://mp.weixin.qq.com/s/tlu5kKHgIGFpkF5cnZZaUA
+
+靠数学“拿了”两次诺贝尔奖，彭罗斯从“铺地砖”帮忙发现2011年化学奖的秘密
+
+---
+
+![](/images/img4/superconductor.png)
+
+https://www.zhihu.com/answer/1525306973
+
+10月15日《Nature》文章宣称首次在高压下实现室温超导，意味着什么？
+
+https://mp.weixin.qq.com/s/IDvJP1XUVNGISSQuObgUzQ
+
+人类首次实现室温超导，同行们为何评价不一？
+
+https://mp.weixin.qq.com/s/0w_a92wIRsfbClaSkvoMVg
+
+超导有什么用？铁基超导又是什么？
+
+---
+
+![](/images/img2/Physics.jpg)
+
+https://mp.weixin.qq.com/s/ClYZySe6vcgxM4l-F5v3Hg
+
+中科院“网红井盖”24张设计图和公式首次集齐，拿走不谢！
+
+---
+
+真空中的球形鸡源自一个物理学笑话。用于讽刺盲目简化条件假设前提、过度简化(物理)模型，以至于得出的结论完全不符合现实的情况。
+
+---
+
+1676年，奥勒·罗默首次对光速进行了测定。
+
+罗默观察木星的卫星木卫一，木卫一绕木星公转，绕到木星背后时被遮住就会出现卫星蚀。随着地球在公转轨道上移向木星，在地球上观测到木卫一蚀之间的时间间隔将逐渐变短；而当地球远离木星时，木卫一蚀的间隔则逐渐变长。
+
+累加时间点相差高达22分钟！他意识到，这22分钟就是光在地球公转轨道上传播的时间。
+
+https://mp.weixin.qq.com/s/d4Qf5SaVYf6V2cffTVZpfw
+
+光速这么快，是如何被人类测出来的？
+
+---
+
+在相当长的时间里，人造钻石成本高。
+
+每年天然钻石的开采量大约为26吨，但开采成本只有40-60美元/克拉。
+
+人造钻石的产量早已把天然钻石甩开，高达1000吨/年，但之前人造宝石级钻石的合成的成本约为每克拉2500美元。（早于2012年）
+
+从2016年开始，人造钻石开始大幅降价，已经低于天然钻石15-20%。
+
+https://www.zhihu.com/answer/1742334537
+
+人造钻石和天然钻石几乎没有差别，可以量产，为何钻石价格没有降？
+
+---
+
+大约在公元前 600 年左右，来自米利都（Miletus）的古希腊哲学家泰勒斯（Thales，没错，就是那个用大金字塔影子的长度测算了塔高的泰勒斯）记录了一种被他称为 “Lodestone” 的矿石。在希腊时代，这种矿石主要分布在麦格尼西亚（Magnesia）。这个地名，日后成为了西方语言中“磁铁”（magnet）一词的词源。
+
+https://mp.weixin.qq.com/s/t_LW5fpxI4pnCMA3TrNBHQ
+
+新物理的魅影？
+
+---
+
+光速不变的历史要点：
+
+1.莫雷-迈克尔孙干涉实验表明光速不变。
+
+2.洛伦兹认为既然速度不变，那就是距离和时间变了。
+
+3.爱因斯坦在此基础上导出狭义相对论和原子弹理论。
+
+4.群众表示不服，你丫的idea是洛伦兹的。
+
+5.爱因斯坦：我要放大招，看我的广义相对论。
+
+6.群众表示：看不懂。。。
+
+7.爱因斯坦：这就对了。
+
+---
+
+虚位移原理，是由丹尼尔·伯努利的父亲约翰·伯努利于1717年的一封信中提出的。对在任一组力作用下保持平衡的物体系统来说，我们可以假定它有一个小小的位移，显然随之每一个力的作用点都会相应有一个小小的位移，那么各个力与其相应位移的乘积之和应该为零。这个假定的小小位移就是虚位移，而这个原理就称为虚位移原理。后来人们知道，力与位移之乘积实际上就是功，因此虚位移原理后来也被称为虚功原理。
+
+达朗贝尔是一个私生子，出生后不久就被遗弃在圣让勒朗教堂。他被一对制玻璃工人夫妇收养，并随他们姓了达朗贝尔。长大后，他的生父出资让他受教育，结果他在数学和哲学上显露出惊人的才能。他的生母试图与他相认，他回答说：“玻璃工人的妻子才是我的母亲。”达朗贝尔是当时法国学界的活跃人物，他与狄德罗一起主编《百科全书》，并撰写了“前言”等重要条目。
+
+1743年，年仅26岁的他发表了《论动力学》，提出了分析力学中极为重要的达朗贝尔原理。正像虚位移原理处理静力学问题一样，达朗贝尔原理处理动力学问题。他把作用于物体系统所有质点的力分解为外力和内力。内力相互抵消，对整个系统的运动没有影响，而加于每一质点的外力就可以看成独立的决定该质点的运动。他把这一原理做了大量的运用，其中包括用于流体运动。
+
+https://zhuanlan.zhihu.com/p/29377221
+
+达朗贝尔原理：从牛顿力学到拉格朗日力学

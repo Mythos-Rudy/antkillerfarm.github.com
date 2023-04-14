@@ -1,10 +1,19 @@
 ---
 layout: post
-title:  机器学习（十八）——独立成分分析, 时间序列分析
+title:  机器学习（十八）——独立成分分析, 压缩感知
 category: ML 
 ---
 
-# 独立成分分析（续）
+* toc
+{:toc}
+
+# 独立成分分析
+
+这一节我们将讲述独立成分分析（Independent Components Analysis，ICA）算法。
+
+首先，我们介绍一下经典的鸡尾酒宴会问题(cocktail party problem)。
+
+假设在party中有n个人，他们可以同时说话，我们也在房间中放置了n个声音接收器(Microphone)用来记录声音。宴会过后，我们从n个麦克风中得到了m组数据$$x^{(i)}$$，其中的i表示采样的时间顺序。由于宴会上人们的说话声是混杂在一起的，因此，采样得到的声音也是混杂不清的，那么我们是否有办法从混杂的数据中，提取出每个人的声音呢？
 
 为了更为正式的描述这个问题，我们假设数据$$s\in R^n$$是由n个独立的源生成的。我们接收到的信号可写作：$$x=As$$。其中，A被称为混合矩阵（mixing matrix）。在这个问题中，$$s^{(i)}$$是一个n维向量，$$s_j^{(i)}$$表示第j个说话者在i时刻的声音。同理，$$x_j^{(i)}$$表示第j个麦克风在i时刻的记录下的数据。
 
@@ -114,161 +123,144 @@ $$\nabla_W\ell(W)=\begin{bmatrix}
 
 >注意：我们计算最大似然估计时,假设了$$x^{(i)}$$和$$x^{(j)}$$之间是独立的，然而对于语音信号或者其他具有时间连续依赖特性(比如温度)上，这个假设不能成立。但是在数据足够多时，假设独立对效果影响不大。
 
-# 时间序列分析
+# 压缩感知
 
-## 书籍和教程
+https://blog.csdn.net/jbb0523
 
-http://www.stat.berkeley.edu/~bartlett/courses/153-fall2010/
+一个压缩感知+贝叶斯网络方面的blog
 
-berkeley的时间序列分析课程
+http://blog.csdn.net/abcjennifer/article/details/7721834
 
-http://people.duke.edu/%7Ernau/411home.htm
+初识压缩感知Compressive Sensing
 
-回归和时间序列分析
+http://blog.csdn.net/abcjennifer/article/details/7724360
 
-《应用时间序列分析》，王燕著。
+中国压缩传感资源（China Compressive Sensing Resources）
 
-## 概述
+http://blog.csdn.net/xiahouzuoxin/article/details/38820925
 
-时间序列，就是按时间顺序排列的，随时间变化的数据序列。
+白话压缩感知（含Matlab代码）
 
-生活中各领域各行业太多时间序列的数据了，销售额，顾客数，访问量，股价，油价，GDP，气温...
+http://blog.csdn.net/abcjennifer/article/details/7748833
 
-随机过程的特征有均值、方差、协方差等。
+压缩感知进阶——有关稀疏矩阵
 
-如果随机过程的特征随着时间变化，则此过程是非平稳的；相反，如果随机过程的特征不随时间而变化，就称此过程是平稳的。
+https://zhuanlan.zhihu.com/p/85558304
 
-下图所示，左边非稳定，右边稳定。
+深度学习压缩感知（DCS）历史最全资源汇总分享
 
-![](/images/article/time_series.png)
+## Robust PCA
 
-非平稳时间序列分析时，若导致非平稳的原因是确定的，可以用的方法主要有趋势拟合模型、季节调整模型、移动平均、指数平滑等方法。
+http://www.cnblogs.com/quarryman/p/robust_pca.html
 
-若导致非平稳的原因是随机的，方法主要有ARIMA及自回归条件异方差模型等。
+最优化之Robust PCA
 
-## ARIMA
+http://www.aiuxian.com/article/p-2634727.html
 
-ARIMA模型全称为差分自回归移动平均模型(Autoregressive Integrated Moving Average Model,简记ARIMA)，也叫求和自回归移动平均模型，是由George Edward Pelham Box和Gwilym Meirion Jenkins于70年代初提出的一著名时间序列预测方法，所以又称为box-jenkins模型、博克思-詹金斯法。
+Robust PCA
 
->注：Gwilym Meirion Jenkins，1932～1982，英国统计学家。伦敦大学学院博士，兰卡斯特大学教授。
+http://blog.csdn.net/abcjennifer/article/details/8572994
 
-同《数学狂想曲（十一）》中的PID算法一样，ARIMA模型实际上是三个简单模型的组合。
+Robust PCA学习笔记
 
-### AR模型
+http://patternrecognition.cn/~jin/gs/seminar/20140515_jinzhong.ppt
 
-$$X_t = c + \sum_{i=1}^p \varphi_i X_{t-i}+ \varepsilon_t$$
+Robust PCA-模式识别
 
-其中，p为阶数，$$\varepsilon_t$$为白噪声。上式又记作**AR(p)**。显然，AR模型是一个系统状态模型。
+# 模型压缩与加速进阶+
 
-### MA模型
+https://mp.weixin.qq.com/s/Lv1JuwNohAsIAB1SKT7Lkg
 
-$$X_t = \mu + \varepsilon_t + \sum_{i=1}^q \theta_i \varepsilon_{t-i}$$
+深度卷积网络的剪枝和加速
 
-上式记作**MA(q)**，其中q和$$\varepsilon_t$$的含义与上同。MA模型是一个噪声模型。
+https://mp.weixin.qq.com/s/VEnX3YKQ02mRg2qbqMbXcg
 
-### ARMA模型
+轻量级网络综述—主干网络篇
 
-AR模型和MA模型合起来，就是ARMA模型：
+https://mp.weixin.qq.com/s/s9Bp3s-Ep3QPDpo1mmwgWw
 
-$$X_t = c + \varepsilon_t +  \sum_{i=1}^p \varphi_i X_{t-i} + \sum_{i=1}^q \theta_i \varepsilon_{t-i}$$
+模型压缩系列一：模型替换
 
-同理，上式也被记作**ARMA(p,q)**。
+https://mp.weixin.qq.com/s/CNaQbeLbN4J3CsUIMaezFw
 
-### Lag operator
+模型压缩系列二：模型蒸馏
 
-在继续下面的描述之前，我们先来定义一下Lag operator--L。
+https://mp.weixin.qq.com/s/WVwB-ldc8Yoin6I_m6RT5g
 
-$$L X_t = X_{t-1} \; \text{or} \; X_t = L X_{t+1}$$
+CNN轻量化模型及其设计原则综述
 
-### I模型
+https://mp.weixin.qq.com/s/IfvXrsUq8-cBDC4_3O5v_w
 
-$$(1-L)^d X_t$$
+Facebook新研究优化硬件浮点运算，强化AI模型运行速率
 
-上式中d为阶数，因此上式也记作**I(d)**。显然$$I(0)=X_t$$。
+https://mp.weixin.qq.com/s/Jsxiha_BFtWVLvO4HMwJ3Q
 
-I模型有什么用呢？我们观察一下I(1)：
+工业界第一手实战经验：深度学习高效网络结构设计
 
-$$(1-L) X_t = X_t - X_{t-1} = \Delta X$$
+https://mp.weixin.qq.com/s/F0ykoKv027ycinsAZZjbWQ
 
-有的时候，虽然I(0)不是平稳序列，但I(1)是平稳序列，这时我们称该序列是**1阶平稳序列**。n阶的情况，可依此类推。
+ThunderNet：国防科大、旷视提出首个在ARM上实时运行的通用目标检测算法
 
-### ARIMA模型
+https://mp.weixin.qq.com/s/J3ftOKDPBY5YYD4jkS5-aQ
 
-ARIMA模型可以看作是两个随机过程的组合。
+ThunderNet：Two-stage形式的目标检测也可很快而且精度很高
 
-首先是非平稳过程：
+https://mp.weixin.qq.com/s/uXbLb5ITHOU0dZRSWNobVg
 
-$$Y_t = (1-L)^d X_t$$
+算力限制场景下的目标检测实战浅谈
 
-接着是一个广义平稳过程：
+https://mp.weixin.qq.com/s/DoeoPGnS88HQmxagKJWLlg
 
-$$\left( 1 - \sum_{i=1}^p \phi_i L^i \right) Y_t = \left( 1 + \sum_{i=1}^q \theta_i L^i \right) \varepsilon_t$$
+小米开源FALSR算法：快速精确轻量级的超分辨率模型
 
-最后得到ARIMA模型的公式：
+https://mp.weixin.qq.com/s/wT39oUWfrQK-dg7hGXRynQ
 
-$$\left( 1 - \sum_{i=1}^p \phi_i L^i\right)
-(1-L)^d X_t = \delta + \left( 1 + \sum_{i=1}^q \theta_i L^i \right) \varepsilon_t$$
+实时单人姿态估计，在自己手机上就能实现
 
-上式也被记作**ARIMA(p,d,q)**。从上式可以看出，ARIMA模型实际上就是利用I模型，将时间序列转化为平稳序列之后的ARMA模型。
+https://mp.weixin.qq.com/s/RVsXUnAJ2f0Cby7BPaWifA
 
->注：上面的内容只是对ARIMA模型给出一个简单的定义。实际的假设检验、参数估计的步骤，还是比较复杂的，完全可以写本书来说。
+人物属性模型移动端实验记录
 
-## 其它
+https://mp.weixin.qq.com/s/yCcK6UJqm850HON7xU3R6g
 
-除了ARIMA系列模型之外，ARCH系列模型也用的比较多：
+模型压缩重要方向-动态模型，如何对其长期深入
 
-autoregressive conditional heteroskedasticity, ARCH
+https://zhuanlan.zhihu.com/p/93020471
 
-generalized autoregressive conditional heteroskedasticity, GARCH
+轻量型网络：IdleBlock
 
-## Prophet
+https://mp.weixin.qq.com/s/AjuTXFmxHYdUUqodSpP_4w
 
-Prophet是FaceBook提出的时间序列算法。同时，也是该算法的工具包的名字。
+10倍加速！爱奇艺超分辨模型加速实践
 
-官网：
+https://mp.weixin.qq.com/s/rzv8VCAxBQi0HsUcnLqqUA
 
-https://facebook.github.io/prophet/
+处理移动端传感器时序数据的深度学习框架：DeepSense
 
-参考：
+https://mp.weixin.qq.com/s/UYk3YQmFW7-44RUojUqfGg
 
-https://mp.weixin.qq.com/s/ven_4JbWYFswIkGyhjTcww
+上交大ICCV：精度保证下的新型深度网络压缩框架
 
-Prophet：教你如何用加法模型探索时间序列数据
+https://mp.weixin.qq.com/s/ZuEi32ZBSjruvtyUimBgxQ
 
-https://mp.weixin.qq.com/s/PMsAjk7WbGRu2n3s6Q8prQ
+揭秘支付宝中的深度学习引擎：xNN
 
-Facebook时间序列预测算法Prophet的研究
+https://mp.weixin.qq.com/s/0KlnQ8UUxpyhBRdeo0EOAA
 
-https://mp.weixin.qq.com/s/bf_CHcoZMjqP6Is4ebD58g
+用于网络压缩的滤波器级别剪枝算法ThiNet
 
-使用Prophet预测股价并进行多策略交易
+https://mp.weixin.qq.com/s/FvR6loJ8KUxm7qwclestcQ
 
-https://mp.weixin.qq.com/s/pJTDJrMCfv5y4LQ2itt1tQ
+专门为卷积神经网络设计的训练方法：RePr
 
-Facebook的 Prophet 算法简介与使用
+https://mp.weixin.qq.com/s/67GSnZnJySFrCESvmwhO9A
 
-## Lebesgue积分
+论文解读Channel pruning for Accelerating Very Deep Neural Networks
 
-![](/images/img3/Riemann_Lebesgue.jpg)
+https://mp.weixin.qq.com/s/Lkxc_9sbRY157sMWaD5c7g
 
-蓝色的是Riemann积分，红色的是Lebesgue积分。
+视频分割在移动端的算法进展综述
 
->Henri Léon Lebesgue，1875～1941，法国数学家。
+https://mp.weixin.qq.com/s/ie2O5BPT-QxTRhK3S0Oa0Q
 
-参考：
-
-https://zhuanlan.zhihu.com/p/34407471
-
-如何理解时间序列？—从Riemann积分和Lebesgue积分谈起
-
-https://zhuanlan.zhihu.com/p/49262150
-
-从Riemann积分到Lebesgue积分
-
-https://zhuanlan.zhihu.com/p/90607361
-
-Quadrature求积法
-
-https://zhuanlan.zhihu.com/p/91709767
-
-ODE's Initial value problem (IVP)
+剪枝需有的放矢，快手&罗切斯特大学提出基于能耗建模的模型压缩

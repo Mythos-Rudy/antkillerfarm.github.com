@@ -1,10 +1,165 @@
 ---
 layout: post
-title:  深度语音识别（三）——语音合成参考资源
+title:  深度语音识别（三）——语音识别参考资源
 category: speech 
 ---
 
-# 语音识别参考资源（续）
+* toc
+{:toc}
+
+# 语音合成
+
+## WaveRNN（续）
+
+3.我们可以将B组数据看作B个赛道。第1行首先发车（生成数据），当第1行生成了F个数据之后，第2行开始发车。依此类推。显然，只要赛道足够长，则在大多数时间中，都是B个赛车同时再跑。这样就达到了并行运算的效果。如上图中的三个白色方格就是同时生成的。
+
+4.数据生成好之后，再重新组合回去，得到最终的结果序列。
+
+WaveRNN还有一个trick：
+
+- 生成语音的时候，并不是直接采用最大可能的音素，而是使用采样的方法，根据各个音素的概率，随机选择可能的音素。
+
+参考：
+
+https://mp.weixin.qq.com/s/H77iom38lTR0KzeFXrdWew
+
+DeepMind与谷歌大脑联手推出WaveRNN，移动端合成高保真音频媲美WaveNet
+
+https://www.monthly-hack.com/entry/2018/02/26/211248
+
+这是个日文blog，有两张图不错。
+
+https://www.jianshu.com/p/b3019f2773ed
+
+语音合成text-to-speech WaveRNN
+
+http://slides.com/smerity/reading-group-efficient-neural-audio-synthesis#/
+
+Efficient Neural Audio Synthesis
+
+# 语音分离
+
+https://mp.weixin.qq.com/s/T96S0b7Lp9YWR4cRcMQr6A
+
+一文概览基于深度学习的监督语音分离
+
+https://mp.weixin.qq.com/s/XP4NVYMmKj9RLsgonP3ooQ
+
+无需进行滤波后处理，利用循环推断算法实现歌唱语音分离
+
+https://mp.weixin.qq.com/s/9QrahPP1gDM3eMNgx91spA
+
+深度学习也能实现“鸡尾酒会效应”：谷歌提出新型音频-视觉语音分离模型
+
+https://mp.weixin.qq.com/s/-ULMtt2GsrUk8B-kC6AnXw
+
+入门语音分离，从鸡尾酒问题开始！
+
+# WeNet
+
+WeNet是出门问问联合西北工业大学音频语音与语言处理研究组推出面向产品和工业界的端到端语音识别开源工具。
+
+代码：
+
+https://github.com/wenet-e2e/wenet
+
+参考：
+
+https://mp.weixin.qq.com/s/oR6AKKxsZ2WA9-D8e9rCWA
+
+WeNet 1.0正式发布: 更快更高更强更有生产力
+
+https://mp.weixin.qq.com/s/EqLCyHn9we2zn-lCnunDNA
+
+WeNet更新：支持多机并行训练
+
+https://mp.weixin.qq.com/s/QpTZSW2TZ1clEBt4iwoe4Q
+
+WeNet更新：支持语言模型
+
+# Attention Based
+
+https://mp.weixin.qq.com/s/4xUIF0tqKCnTMyfkVX1JJw
+
+​使用transformer模型进行流式自动语音识别
+
+https://mp.weixin.qq.com/s/TTPpOOxSLbCgOmAsI9TLiw
+
+百度发布Deep Voice 3：全卷积注意力机制TTS系统
+
+# 语音识别参考资源
+
+https://zhuanlan.zhihu.com/p/69637495
+
+语音转写技术入门
+
+https://mp.weixin.qq.com/s/rAfNNS6Y4vLAmnNhtfAbwA
+
+微软亚研《神经语音合成》综述论文
+
+https://mp.weixin.qq.com/s?__biz=MzI3MTA0MTk1MA==&mid=400189223&idx=1&sn=1cb32bee42de626443ebadbf065ec79c
+
+百度贾磊：汉语语音识别技术重大突破：LSTM+CTC详解
+
+https://mp.weixin.qq.com/s/PXYt4FYWlldUmvryh53kVg
+
+滴滴单通道语音分离与目标说话人提取和抑制技术进展
+
+https://mp.weixin.qq.com/s/MXAxL753oEUPSVtL_H34jA
+
+语音识别中Chain Model的原理和实践
+
+https://mp.weixin.qq.com/s/7C7UFfE2dIM8ZtvwW8kbWQ
+
+使用TensorFlow Lite快速构建移动端声音分类应用
+
+https://www.zhihu.com/question/46829056
+
+语音识别领域的最新进展目前是什么样的水准？
+
+https://www.zhihu.com/question/29168274
+
+语音识别中，如何理解HMM是一个生成模型，而DNN是一个判别模型呢？
+
+https://zhuanlan.zhihu.com/p/24979135
+
+从声学模型算法总结2016年语音识别的重大进步
+
+https://mp.weixin.qq.com/s/zEqgDh6_fnDgXEI8MC9cmg
+
+端对端的深度卷积神经网络在语音识别中的应用
+
+https://mp.weixin.qq.com/s/RjoGmtiyqrx8cG6JtgqsxQ
+
+181页PPT专题讲座——语音识别与声纹识别
+
+https://mp.weixin.qq.com/s/pimQBFd5uxrZk4dSgUsblg
+
+苹果机器学习期刊“Siri三部曲”之一：通过跨带宽和跨语言初始化提升神经网络声学模型
+
+https://mp.weixin.qq.com/s/u1R7NUg_kgI_mpjIFrO02A
+
+探索Siri背后的技术：将逆文本标准化（ITN）转化为标签问题
+
+https://mp.weixin.qq.com/s/2xpwLVHT8qU68uoV7Uj2cw
+
+小米的语音识别系统是如何搭建的
+
+https://mp.weixin.qq.com/s/cYBMy4TIhcutvrAt0y70Ow
+
+腾讯AI Lab副主任俞栋：过去两年基于深度学习的声学模型进展
+
+https://mp.weixin.qq.com/s/cvSz5Pxe3z54Tl5z3WTbQA
+
+手把手教你在音频分类DCASE2017比赛中夺冠
+
+https://blog.csdn.net/ffmpeg4976/article/details/52347845
+
+语音识别系统及科大讯飞最新实践
+
+http://mp.weixin.qq.com/s/0WNJq4OLZlZETKPf1Ewq7w
+
+浅谈语音测试方案
 
 https://mp.weixin.qq.com/s/b0bOf1bZ2p0yWMzhp66HhA
 
@@ -14,17 +169,9 @@ https://mp.weixin.qq.com/s/0AvV268s3TZ0z8WwtJv6sw
 
 一文概览语音识别中尚未解决的问题
 
-https://mp.weixin.qq.com/s/T96S0b7Lp9YWR4cRcMQr6A
-
-一文概览基于深度学习的监督语音分离
-
 http://mp.weixin.qq.com/s/xRA9Xh-FTrhbIg0wLnfzhA
 
 温正棋谈语音质检方案：从关键词检索到情感识别
-
-https://mp.weixin.qq.com/s/XP4NVYMmKj9RLsgonP3ooQ
-
-无需进行滤波后处理，利用循环推断算法实现歌唱语音分离
 
 https://mp.weixin.qq.com/s/GZI4uvCR3QzZDNddpBX2OQ
 
@@ -53,10 +200,6 @@ https://mp.weixin.qq.com/s/mRmbrUJ2MgeDxbZn_0UiIQ
 https://mp.weixin.qq.com/s/xR172RUG3JO59_2cJj_U2A
 
 显著超越流行长短时记忆网络，阿里提出DFSMN语音识别声学模型
-
-https://mp.weixin.qq.com/s/9QrahPP1gDM3eMNgx91spA
-
-深度学习也能实现“鸡尾酒会效应”：谷歌提出新型音频-视觉语音分离模型
 
 https://wenku.baidu.com/view/942891aba98271fe910ef9e3.html
 
@@ -89,6 +232,10 @@ https://mp.weixin.qq.com/s/xW_KvR5y12_eyp3FvtmBwQ
 https://mp.weixin.qq.com/s/2DaBsFnRzqkf9PgvY3tWqw
 
 谷歌神经网络人声分离技术再突破！词错率低至23.4%
+
+https://mp.weixin.qq.com/s/kdUxaffyKI_Hu9RCEM5SZw
+
+谷歌开源框架FUSS，让声音分离不再成为难题
 
 https://mp.weixin.qq.com/s/V1W_M-lIJKdyGtuQyBbUPA
 
@@ -134,10 +281,6 @@ https://mp.weixin.qq.com/s/c-lQETCPQTztZjV4TYTsZA
 
 语音关键词检测方法综述
 
-https://mp.weixin.qq.com/s/iLNuBSwWQ13sc4XfNzPuHw
-
-RNN已老，TCN崛起！李飞飞团队提出口语语音识别新方法
-
 https://mp.weixin.qq.com/s/BDPYtq_6i54Itvz3MnnDSw
 
 谷歌手机输入法可以离线语音识别了！模型精度远超经典CTC
@@ -178,10 +321,6 @@ https://mp.weixin.qq.com/s/UmVFCnwKqSQoowfQdefDdA
 
 昆山杜克大学李明博士：基于端到端深度神经网络的说话人与语言识别综述
 
-https://mp.weixin.qq.com/s/Xc-OmRpDPgw2qIgswsCeSA
-
-从嘈杂视频中提取超清人声，语音增强模型PHASEN已加入微软视频服务
-
 https://mp.weixin.qq.com/s/fc58gK4BVN-NeGdyVxjuPg
 
 沟壑易填：端到端语音翻译中预训练和微调的衔接方法
@@ -202,108 +341,38 @@ https://mp.weixin.qq.com/s/k5BZGPVwH_DZylZ9dMK6zA
 
 语音识别2019指南
 
-# 语音合成参考资源
+https://mp.weixin.qq.com/s/eu_BhsjIWo41jncyl2VYIg
 
-https://mp.weixin.qq.com/s/bFjXDQlxRbt1ia-DSfYazw
+audio-visual recognition
 
-SampleRNN语音合成模型
+https://mp.weixin.qq.com/s/DJVeNlLi5GHDeE7ajYZbdw
 
-https://mp.weixin.qq.com/s/xAO7mX64miTXE8E2vZ5q_w
+SPICE：新一代自监督式基音检测模型
 
-Facebook开源TTS神经网络VoiceLoop：基于室外声音的语音合成
+https://mp.weixin.qq.com/s/3M2lCnXUG2MolcS7A79k8A
 
-https://mp.weixin.qq.com/s/CVBSvQwnDqT-IVCZV7idog
+疑车无据：大熊猫何时交配才能怀上宝宝？四川学者用音频AI给出预测
 
-极限元语音算法专家刘斌：基于深度学习的语音生成问题
+https://mp.weixin.qq.com/s/NoKaBQssgd3uvgKzDvXnNg
 
-https://mp.weixin.qq.com/s/TTPpOOxSLbCgOmAsI9TLiw
+从算法到应用：滴滴端到端语音AI技术实践
 
-百度发布Deep Voice 3：全卷积注意力机制TTS系统
+https://mp.weixin.qq.com/s/KpMl1ebWghKQikFCj8_8Ag
 
-https://mp.weixin.qq.com/s/zWmJ3uXnFtXaI2BotoadHA
+CIF：基于神经元整合发放的语音识别新机制
 
-从技术到产品，苹果Siri深度学习语音合成技术揭秘
+https://mp.weixin.qq.com/s/idXP4Y-B4pYYfM2egg6KYQ
 
-https://mp.weixin.qq.com/s/6xxXOx59lDZx0kUPb_ftBA
+Hey Siri唤醒原理
 
-漫谈语音合成之Char2Wav模型
+https://mp.weixin.qq.com/s/GTzGwKQfJgopd96doe8rIg
 
-https://mp.weixin.qq.com/s/8e4bkyTJIxHZ1y95GshA0Q
+用于语音自动处理的深度神经网络综述:从大型语料库到有限数据的调查
 
-开源的语音合成系统WORLD介绍以及使用方法
+https://mp.weixin.qq.com/s/wjVDgwHpLYM3vZWL5AJvDg
 
-https://mp.weixin.qq.com/s/JSnyE2k7jqd5GR1lHA6WUg
+解决“鸡尾酒会问题”的利器-基于盲源分离的前端信号处理框架
 
-阿里巴巴Oral论文：用于语音合成的深度前馈序列记忆网络
+https://mp.weixin.qq.com/s/bJ4xdXcHPI8VQcXAvE8i1w
 
-https://mp.weixin.qq.com/s/p_VjFwwDCu1i_ovUljaoVw
-
-阿里巴巴语音交互智能团队：基于线性网络的语音合成说话人自适应
-
-https://mp.weixin.qq.com/s/imotc0RfPsvA9h5-1nouMA
-
-端到端语音合成及其优化实践(上))
-
-https://mp.weixin.qq.com/s/NlOH0wmToJvDudIDC-aM1g
-
-端到端语音合成及其优化实践(下)
-
-https://mp.weixin.qq.com/s/HLe4DUZWWfdorcgYOj9gzw
-
-语音合成领域的首个完全端到端模型，百度提出并行音频波形生成模型ClariNet
-
-https://zhuanlan.zhihu.com/p/45702794
-
-微信是不是可以来一个文字转语音功能了？
-
-https://mp.weixin.qq.com/s/DB2C-a_xEyoczuNSG9Bt7w
-
-基于深度前馈序列记忆网络，如何将语音合成速度提升四倍？
-
-https://mp.weixin.qq.com/s/t1ht3weG63Sj59n-MW-Prw
-
-语音合成论文和英伟达撞车，韩国小哥紧急放出全部草稿代码和样本
-
-https://mp.weixin.qq.com/s/1glxeUx-4DCWRjJQMW7IiQ
-
-语音合成论文与韩国小哥“撞车”后续：英伟达“赶紧”把代码开源了
-
-https://mp.weixin.qq.com/s/c1QSGia52ICTc25i-C91Rg
-
-GAN跨界合成高保真音乐，Jeff Dean听了都陶醉
-
-https://mp.weixin.qq.com/s/f1W7PFLwkoJtVXb_7Rh3sw
-
-极大提升合成速度，百度提出首个全并行语音合成模型ParaNet
-
-https://mp.weixin.qq.com/s/aHupAjPNFdUdaG9Uof_obQ
-
-速度提升270倍！微软和浙大联合推出全新语音合成系统FastSpeech
-
-https://mp.weixin.qq.com/s/JEYucJ16Zsxc6yWHPHGaZA
-
-浙大研发AudioFace：随心录语音就能实时生成3D面部动画
-
-https://mp.weixin.qq.com/s/HubxAFbxCdoaFHNOhfm9QQ
-
-Facebook频谱图模型生成比尔·盖茨声音，性能完胜WaveNet、MAESTRO
-
-https://mp.weixin.qq.com/s/QbSPOHvYD9CGnbPmigeYdA
-
-多语言语音合成和跨语言语音克隆
-
-https://mp.weixin.qq.com/s/McWHS0esRRhIiBlB4CAGXA
-
-柯南变声器的算法原理解析
-
-https://mp.weixin.qq.com/s?__biz=MzIzNjc0MTMwMA==&mid=2247491892&idx=1&sn=d23d0c20e3af340e5a55f19f98636811
-
-2019深度学习语音合成指南
-
-https://mp.weixin.qq.com/s?__biz=MzI3MTA0MTk1MA==&mid=2652055045&idx=3&sn=5c2a564350bdf5c2acb8679d05cba219
-
-DeepMind推出GAN-TTS：用生成对抗网络实现高保真语音
-
-https://mp.weixin.qq.com/s/-X2bgZ5P5BrPZFDJ-Dl1AQ
-
-MelGAN：基于生成对抗网络快速生成音频
+可控时延语音识别文本后处理技术

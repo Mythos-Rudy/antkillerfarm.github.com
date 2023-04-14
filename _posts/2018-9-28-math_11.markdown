@@ -1,8 +1,160 @@
 ---
 layout: post
-title:  数学狂想曲（十一）——高阶统计, 勾股定理, PID算法, 辛普森悖论, 抛物线
+title:  数学狂想曲（十一）——平稳离散时间随机过程, 功率谱, 高阶统计, PID算法
 category: math 
 ---
+
+* toc
+{:toc}
+
+# 平稳离散时间随机过程
+
+## Toeplitz矩阵
+
+Toeplitz矩阵（diagonal-constant matrix），指矩阵中每条自左上至右下的斜线上的元素相同。
+
+>Otto Toeplitz，1881～1940，德国犹太裔数学家。University of Breslau博士（1905），先后执教于Göttingen University（在David Hilbert手下供职）、University of Kiel和Bonn University。1939年，为了躲避元首的迫害，逃亡耶路撒冷，次年去世。
+
+广义平稳离散时间随机过程的相关矩阵是Hermite矩阵，也是Toeplitz矩阵。反之，如果相关矩阵是Toeplitz矩阵，则该离散时间随机过程，一定是广义平稳的。
+
+离散时间随机过程的相关矩阵是非负定的，并且几乎总是正定的。（等于零，只有在无噪声且观测向量线性相关的情况下，才会出现。）
+
+## 白噪声
+
+$$E[v(n)v^*(n-k)]=\begin{cases}
+\sigma_v^2, & k = 0 \\
+0, & k \neq 0 \\
+\end{cases}$$
+
+## 线性差分方程
+
+时间随机过程本身是由时间序列组成的，因此也可以使用《机器学习（三十七）》中提到的ARIMA模型。该模型的关键是求解线性差分方程。这通常要使用“信号与系统”课程中的z变换（离散域的拉普拉斯变换）求解。考虑到“信号与系统”是一个很大的课程。这里仅对本人关心的要点，做一个简要记录。
+
+绝对可积->收敛域
+
+z变换：$$f(z)\to F(z)$$
+
+z逆变换：$$F(z)\to f(z)$$
+
+系统函数：$$H(z)=\frac{R(z)}{E(z)}$$。其中，E是激励信号，R是系统响应。
+
+E的收敛域：$$\mid z\mid >1$$
+
+差分算子->特征方程->特征根
+
+H的平稳条件：H的特征根满足$$\mid z\mid \le 1$$
+
+特征根是正实数，且$$\mid z \mid<1$$：自相关函数为阻尼曲线，仅有幅变。
+
+特征根是负实数或者复数，且$$\mid z \mid<1$$：自相关函数为正弦阻尼曲线，不仅有幅变，还有相变。
+
+## 选择ARIMA的阶数
+
+如前所述，ARIMA(p,d,q)除了一些参数之外，还包括p，d，p这三个阶数的超参数。
+
+AIC信息准则即Akaike information criterion，是衡量统计模型拟合优良性(Goodness of fit)的一种标准，由于它为日本统计学家赤池弘次创立和发展的，因此又称赤池信息量准则。AIC方法主要使用了KL散度。
+
+MDL(minimum description length,最小描述长度) 原理是Rissane在研究通用编码时提出的。其基本原理是选择总描述长度最小的模型。
+
+参考：
+
+https://mp.weixin.qq.com/s/66lY17sOO83Q-xhvQi72dw
+
+周期性时间序列的预测
+
+# 功率谱
+
+随机过程（设时间序列为$$u(n)$$）二阶统计：
+
+时域——**自相关函数**：
+
+$$r_N(n-k)=E[u_N(n)u_N^*(k)]\tag{1}$$
+
+其中，$$u_N^*(k)$$是$$u_N(k)$$的复共轭。
+
+频域：
+
+$$U_N(\omega)=\sum_{n=-N}^Nu_N(n)e^{-j\omega n}\tag{2}$$
+
+$$S(\omega)=\lim_{N\to\infty}\frac{1}{N}E[\mid U_N(\omega)\mid^2]=\sum_{l=-\infty}^{+\infty}r(l)e^{-j\omega l}\tag{3}$$
+
+其中，$$S(\omega)$$就是**功率谱密度（power spectral density, PSD）**，也称为功率谱（power spectrum）。
+
+自相关函数和功率谱密度组成了傅立叶变换对，这种关系又被称为**EWK（Einstein-Wiener-Khintchine）关系**。
+
+>Einstein最早提出idea，Wiener证明了一个特例，Khintchine做了扩展证明。
+
+>Aleksandr Yakovlevich Khinchin，1894～1959，苏联数学家。莫斯科州立大学毕业，并留校任教，直到去世。苏联概率学派的重要人物。苏联科学院院士。概率论中，著名的Khintchine inequality就是他的成果。
+
+在频域上，我们有Nyquist频率，相应的在时域上，我们也有**Nyquist间隔**：在这个间隔之外，$$S(\omega)$$是周期性的。
+
+**离散时间随机过程的功率谱密度是非负实函数。**
+
+$$S_o(\omega)=\mid H(e^{j\omega})\mid S(\omega)\tag{4}$$
+
+其中，H为系统函数，$$S_o$$输出信号的功率谱密度。
+
+功率谱密度的Cramér表示：
+
+$$u(n)=\frac{1}{2\pi}\int_{-\pi}^{\pi}e^{j\omega n}\mathrm{d}Z(\omega)\tag{5}$$
+
+其中，$$\mathrm{d}Z(\omega)$$被称为**增量过程（increment process）**。
+
+>Harald Cramér，1893～1985，瑞典数学家、统计学家。Stockholm University博士（1917）、教授、校长、瑞典高等教育系统大臣。被誉为“统计理论的巨人”。
+
+由公式2和5，可得：
+
+$$U_N(\omega)=\frac{1}{2\pi}\int_{-\pi}^{\pi}\sum_{n=-N}^N e^{(-j(\omega-v) n)}\mathrm{d}Z(v)\tag{6}$$
+
+我们定义：
+
+$$K_N(\omega)=\sum_{n=-N}^N e^{j\omega n}=\frac{\sin((2N+1)\omega/2)}{\sin(\omega/2)}\tag{7}$$
+
+则公式6可改写为：
+
+$$U_N(\omega)=\frac{1}{2\pi}\int_{-\pi}^{\pi}K_N(\omega-v)\mathrm{d}Z(v)\tag{8}$$
+
+这里的K被称作Dirichlet Kernel。参见《数学狂想曲（一）》的相关章节。
+
+一般来说，在公式8中，$$U_N(\omega)$$是已知的，而$$\mathrm{d}Z(\omega)$$是未知的。从数学上来说，这个积分方程可看做第一类Fredholm积分方程的一个例子。
+
+>Erik Ivar Fredholm，1866～1927，瑞典数学家。Uppsala University博士（1898）+Stockholm University教授。不知道是不是瑞典的保险业比较发达，他和Cramér居然都当过兼职的精算师。。。瑞典皇家科学院院士。
+
+>Uppsala University是瑞典，也是北欧，最古老的大学，始建于1477年。
+
+功率谱密度的估计方法主要包括参数法和非参数法两大类。
+
+参数法包括：
+
+1.模型辨识法。基本就是上面提到的ARIMA或者其变种。
+
+2.最小方差无失真响应法（MVDR）。
+
+3.特征分解法。将相关矩阵R分解为两个子空间：信号子空间和噪声子空间。
+
+非参数法包括：
+
+1.周期图法。
+
+2.多窗口法。
+
+一般来说，随机过程的功率谱包含两个分量：确定性分量和连续分量。前者是增量过程$$\mathrm{d}Z(\omega)$$的一阶矩，后者是$$\mathrm{d}Z(\omega)$$的二阶中心矩。
+
+参数法一般在知道相关物理规律时使用，它具有较高的精确度。而非参数法由于只依赖增量过程的一阶矩和二阶中心矩，因此适用范围更广泛，即使不知道系统的物理规律也可以使用。（有些类似万能拟合的GMM）
+
+参考：
+
+https://www.zhihu.com/question/29520851
+
+功率谱密度如何理解？
+
+https://mp.weixin.qq.com/s/i84yW8L7qGVpPtwpaJhhgw
+
+深入浅出聊抖动（Jitter）
+
+https://mp.weixin.qq.com/s/XZHh7O-aiTA4Z-jnz20HgA
+
+功率谱密度
 
 # 高阶统计
 
@@ -14,9 +166,9 @@ Moment（矩）的定义为：
 
 $$\mu_n = \int_{-\infty}^\infty (x - c)^n\,f(x)\,\mathrm{d}x$$
 
-其中，当c=0时，被称作Raw Moment。当c为均值时，被称作Central Moment。如果用$$\mu_n/\sigma^n$$替换$$\mu_n$$，就是所谓的Normalised Moment了。
+其中，当c=0时，被称作Raw Moment。当c为均值时，被称作Central Moment。如果用$$\mu_n/\sigma^n$$替换$$\mu_n$$，就是所谓的Normalised Moment（标准矩）了。
 
-1阶Raw Moment，常称为Mean。2阶Central Moment，常称为Variance。3阶Normalised Moment，常称为Skewness。4阶Normalised Moment，常称为kurtosis。
+1阶Raw Moment，常称为Mean。2阶Central Moment，常称为Variance（方差）。3阶Normalised Moment，常称为Skewness（偏态）。4阶Normalised Moment，常称为Kurtosis（峰度）。
 
 ## Cumulants
 
@@ -74,8 +226,6 @@ Polyspectrum一般翻译成高阶谱或者多谱。
 
 以上讨论的是Cumulants的一般定义，在处理离散时间随机过程的时候，我们往往采用如下形式的定义。
 
-
-
 ## 参考
 
 https://www.zhihu.com/question/25344430
@@ -98,27 +248,9 @@ https://wenku.baidu.com/view/136b666c561252d380eb6e8c.html
 
 高阶统计量的定义与性质
 
-# 勾股定理
+https://mp.weixin.qq.com/s/SOpBf0fAoqau0ac5kXlQIQ
 
-勾股定理在西方被称为Pythagorean theorem。它的命题本身并不复杂，也就是初中几何的内容，但是内涵非常丰富。即使大学数学也未必能穷尽其中的奥妙。这里仅罗列一二。
-
->Pythagoras of Samos，约570 BC～约495 BC，古希腊哲学家。那时候的哲学家比现在牛多了，通常都是兼通数门学科的宗师级人物。
-
-使用勾股定理定义的距离，也就是通常的Euclidean Distance。之所以用Euclid命名是因为：**勾股定理实际上和Euclid几何的平行公理是等价的。**
-
-空间拓扑结构对于定理的影响不仅于此。以下就是欧氏空间的一些有意思的等价结论：
-
-Euclidean Distance（2范数） => 最小二乘法 => 正态分布
-
-由于GMM隐含使用了Euclidean Distance，所以K-Means聚类可以采用任意距离，但GMM只能采用欧氏距离。
-
-同理，为什么多数误差都符合正态分布？因为我们生活的空间是Euclidean space，多数的物理定律都是各向同性的，也只有Euclidean space才满足这种对称性。
-
-不对称的空间也有，例如：
-
-Manhattan Distance（1范数） => 拉普拉斯分布
-
-不满足勾股定理的几何，也就是非欧几何。但实际上，Euclid对于其中的特例——球面几何，也有一定的研究。比如，著名的“**球面三角形相似必全等**”，就是他发现的。
+数学好吃吗？好吃！
 
 # PID算法
 
@@ -135,121 +267,3 @@ PID算法的流程如下图所示：
 **场景1**：假设我们面对的系统是一个简单的水箱的液位，要从空箱开始注水直到达到某个高度，而你能控制的变量是注水龙头的开关大小。
 
 图1中的$$r(t)$$表示期待的设定值，在这个场景中，就是水箱的液位。$$y(t)$$表示当前的液位。$$e(t)=r(t)-y(t)$$表示误差值。
-
-针对这个场景，我们可以设计如下算法：
-
-水箱液位离预定高度远的时候开关开大点，离的近的时候开关就开小点，随着液位逐步接近预定高度逐渐关掉水龙头。用数学表示就是：
-
-$$u(t) = K_\text{p} e(t)\tag{1}$$
-
-上式中的$$u(t)$$表示需要控制的量，在这里就是水龙头的开合度。$$K_\text{p}$$被称为比例系数。
-
-**场景2**：假设这个水箱不仅仅是装水的容器了，还需要持续稳定的给用户供水。
-
-以下用c表示给用户供水的量($$c\ge 0$$)。显然如果使用公式1，则系统稳定时，$$u(t)-c=0$$，即$$K_\text{p} e(t)=c$$。
-
-由于c和$$K_\text{p}$$都不为0，因此$$e(t)$$也不为0，这就导致始终无法加注到指定水位。这种稳态误差被称为静差。
-
-为了平衡c，我们修改算法为：
-
-$$u(t) = K_\text{p} e(t) + K_\text{i} \int_0^t e(\tau) \,d\tau\tag{2}$$
-
-$$K_\text{i}$$被称为积分系数。积分环节的意义就相当于你增加了一个水龙头，这个水龙头的开关规则是水位比预定高度低就一直往大了拧，比预定高度高就往小了拧。如果漏水速度不变，那么总有一天这个水龙头出水的速度恰好跟漏水的速度相等了，系统就和第一小节的那个一样了。那时，静差就没有了。这就是所谓的积分环节可以消除系统静差。
-
-**场景3**：假设用户的用水量是变化的，即$$c(t)$$。
-
-这时，如果仍采用公式2，则由于$$c(t)$$的变化，导致$$e(t)$$不恒为0。为了减小$$c(t)$$的变化，对$$e(t)$$的影响，我们继续修改算法：
-
-$$u(t) = K_\text{p} e(t) + K_\text{i} \int_0^t e(\tau) \,d\tau + K_\text{d} \frac{de(t)}{dt}\tag{3}$$
-
-$$K_\text{d}$$被称为微分系数。由于$$c(t)$$的变化不可能事先得知，因此，微分环节只能减小$$c(t)$$的变化所造成的影响，而不能消除。
-
-公式3在Laplace域可写做：
-
-$$L(s) = K_\text{p} + K_\text{i}/s + K_\text{d} s\tag{4}$$
-
-从公式4可以看出，PID controller的数学原理和锁相环（Phase-locked loop）非常类似，它们实际上都是Feedback Control系统。
-
-![](/images/article/PLL.png)
-
-参考：
-
-https://en.wikipedia.org/wiki/PID_controller
-
-《Feedback Control of Dynamic Systems》，Gene F. Franklin，J David Powell，Abbas Emami-Naeini著。
-
->注：Gene F. Franklin，1927~2012，美国控制论学家。哥伦比亚大学博士，斯坦福大学教授。
-
->J David Powell，美国航空航天学家。斯坦福大学博士和教授。
-
->Abbas Emami-Naeini，斯坦福大学博士和讲师，SC Solutions公司总监。
-
-https://www.zhihu.com/question/23088613/answer/23942834
-
-如何通俗地解释PID参数整定？
-
-http://blog.163.com/suyanqiang0613@126/blog/static/1100531332012111475650867/
-
-PID算法原理
-
-https://zhuanlan.zhihu.com/p/35473808
-
-PID控制器的贝叶斯理解
-
-## 串级PID控制
-
-实际使用中，为了改善PID控制的效果，一般还会用到串级PID控制。
-
-参考：
-
-https://blog.csdn.net/qq_25005909/article/details/77941243
-
-串级PID控制四轴飞行状态-分析
-
-https://blog.csdn.net/nemol1990/article/details/45131603
-
-四轴PID讲解
-
-# 辛普森悖论
-
-![](/images/img2/Simpson.png)
-
-如果分专业来看，你就会发现：在各个专业女生的录取率其实都是更高的。之所以会产生“总体录取率女生偏低”这一结果，是因为女生大部分都报考了那些本身就难以录取的学院，而男生则大部分报考了那些录取率本身就偏高的学院。
-
-参考：
-
-https://mp.weixin.qq.com/s/5jZ2dzLInLtUw7rWZF4mtg
-
-张忠元：渣男受女生欢迎？当心统计陷阱
-
-https://mp.weixin.qq.com/s/o1a2YlYritcOrsLN2YuLmA
-
-神奇的霍特林法则：为什么汉堡王总是开在麦当劳旁边？
-
-https://mp.weixin.qq.com/s/eq4MllJta5NmaLARPpvang
-
-公交车总迟到？你大概掉进了“等待时间悖论”
-
-https://zhuanlan.zhihu.com/p/43934918
-
-诡异的布雷斯悖论：为什么越是修新路，城市反而更堵了！
-
-https://mp.weixin.qq.com/s/-0VMucGBq4Trb_9FnsW6KQ
-
-10大反直觉的数学结论
-
-https://mp.weixin.qq.com/s/FqY19sTQd7GPdGSsB5L9eQ
-
-数学大反例合集
-
-https://mp.weixin.qq.com/s/EICefFM3dfv5A6V9kVqGWw
-
-吸烟致癌的迷思是如何破除的
-
-# 抛物线
-
-![](/images/img2/conic_section.jpg)
-
-我们都知道抛物线只有一个焦点，而椭圆、双曲线有两个焦点，但是对于真正天体的运行来说，其实只有一个焦点是有意义的，就是中心恒星的位置；另一个焦点没有实在的意义。这两个焦点中任取一个就可以构成这条圆锥曲线，而取哪一个作为恒星位置都是一样的。因为对于椭圆、双曲线来说，这两个焦点是对称的。
-
-那么抛物线呢？实际上抛物线是椭圆和双曲线的临界状态，它的另一个焦点在无穷远的地方。对于绕恒星的抛物线轨道来说，取的是那个通常说的焦点位置作为恒星位置；对于地面上的斜抛运动来说，取的是无穷远处的那个焦点位置作为恒星位置。

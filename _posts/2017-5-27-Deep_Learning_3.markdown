@@ -1,12 +1,143 @@
 ---
 layout: post
-title:  深度学习（三）——Neural Network Zoo, CNN
+title:  深度学习（三）——深度学习常用术语解释
 category: DL 
 ---
 
+* toc
+{:toc}
+
+# Dropout
+
+## Dropout训练阶段（续）
+
+除了Dropout之外，还有**DropConnect**。两者原理上类似，后者只隐藏神经元之间的连接。DropConnect也被称作Weight dropout。
+
+总的来说，Dropout类似于机器学习中的L1、L2规则化等增加稀疏性的算法，也类似于随机森林、模拟退火之类的增加随机性的算法。
+
+对drop方法的改进有两种明显的趋势:
+
+随机drop-> 自适应drop
+
+像素级drop -> 区域级drop
+
+![](/images/img5/dropblock.png)
+
+上图是区域级drop的示意图。区域级drop也叫做DropBlock。drop掉一块区域，会迫使网络学习其他区域信息，更有利于提取全局特征。
+
+---
+
+经过dropout之后，输出的均值没有发生变化，但是方差发生了变化。
+
+如果使用了dropout，在训练时隐藏层神经元的输出的方差会与验证时输出的方差不一致，这个方差的变化在经过非线性层的映射之后会导致输出值发生偏移，最终导致了在验证集上的效果很差。
+
+由于回归问题输出是一个绝对值，对这种变化就很敏感，但是分类问题输出只是一个相对的logit，对这种变化就没那么敏感，因此，在回归问题上最好不要用dropout，而在分类问题上才用dropout。
+
+https://zhuanlan.zhihu.com/p/561124500
+
+为什么回归问题不能用Dropout
+
+---
+
+参考：
+
+https://zhuanlan.zhihu.com/p/23178423
+
+Dropout解决过拟合问题
+
+https://mp.weixin.qq.com/s/WvPS9LQ6vfD4OkaRbZ0wBw
+
+如何通过方差偏移理解批归一化与Dropout之间的冲突
+
+https://mp.weixin.qq.com/s/yvwAPmclvgtytfhmETM_mg
+
+Hinton提出的经典防过拟合方法Dropout，只是SDR的特例
+
+https://mp.weixin.qq.com/s/QT7X_ubXS13X5E_5KdbNNQ
+
+谷歌大脑提出DropBlock卷积正则化方法，显著改进CNN精度
+
+https://mp.weixin.qq.com/s/0Go146A5dU0-RESQAaAHzQ
+
+Dropout可能要换了，Hinton等研究者提出神似剪枝的Targeted Dropout
+
+https://mp.weixin.qq.com/s/xmNuUPBuNo6E6XvBA8BR4Q
+
+Dropout的前世与今生
+
+https://mp.weixin.qq.com/s/jFz-2Bdn4dbFAza6MXtroA
+
+Dropout的那些事
+
+https://mp.weixin.qq.com/s/XgiWfRcIMiPUSoadMtAbIg
+
+神经网络Dropout层中为什么dropout后还需要进行rescale？
+
+https://mp.weixin.qq.com/s/L7DwT5LpfWoS474MwWOiLA
+
+华为开源自研算法Disout，多项任务表现更佳
+
+https://zhuanlan.zhihu.com/p/146876678
+
+一文看尽12种Dropout及其变体（在DNN、CNN和RNN中的应用）
+
+https://mp.weixin.qq.com/s/dkIHSRY6Edy8kpFHPJVCOQ
+
+DropBlock正则化的介绍
+
+https://mp.weixin.qq.com/s/g1XSxGG_l7MexuokaChlsQ
+
+理解dropout: 组合 or 噪声？
+
+https://mp.weixin.qq.com/s/n5VXSS_t9JPyLE8UNcWlbA
+
+Drop大法
+
+## Dropout预测阶段
+
+经Dropout处理过的模型，在预测阶段不再Dropout，而是打开所有的神经元。这样的效果类似于集成学习，即若干个弱分类器，集成为一个强分类器。
+
+假设p是训练时Dropout的概率。预测阶段由于所有神经元都会参与运算，这会导致$$Wx+b$$是训练阶段的$$\frac{1}{1-p}$$倍，因此需要对W进行相应修正才行，即：
+
+$$W_{ij} \to (1-p)W_{ij}$$
+
+这种修正在预测阶段看来是有些不方便的，因此又出现了Inverted Dropout。它的做法是训练阶段在dropout之后，接上一个除以p的rescale操作，这样的话在预测阶段，就可以忽略dropout操作了。
+
+参考：
+
+https://mp.weixin.qq.com/s/cP8KO3JPIn4lK-n-KdUejA
+
+Dropout有哪些细节问题？
+
 # 深度学习常用术语解释
 
-## weight decay（续）
+## 深度学习中epoch、batch size、iterations的区别
+
+one epoch：所有的训练样本完成一次Forword运算和BP运算。
+
+batch size：一次Forword运算以及BP运算中所需要的训练样本数目，其实深度学习每一次参数的更新所需要损失函数并不是由一个{data：label}获得的，而是由一组数据加权得到的，这一组数据的数量就是[batch size]。当然batch size越大，所需的内存就越大，要量力而行。
+
+iterations（迭代）：每一次迭代都是一次权重更新，每一次权重更新需要batch size个数据进行Forward运算得到损失函数，再BP算法更新参数。
+
+最后可以得到一个公式one epoch = numbers of iterations = N = 训练样本的数量/batch size
+
+参考：
+
+https://zhuanlan.zhihu.com/p/83626029
+
+浅析深度学习中Batch Size大小对训练过程的影响
+
+## Vanilla
+
+Vanilla是神经网络领域的常见词汇，比如Vanilla Neural Networks、Vanilla CNN等。Vanilla本意是香草，在这里基本等同于raw。比如Vanilla Neural Networks实际上就是BP神经网络，而Vanilla CNN实际上就是最原始的CNN。
+
+## weight decay
+
+在《机器学习（十四）》中，我们已经指出了规则化在防止病态矩阵中的应用。实际上，规则化也是防止过拟合的重要手段。
+
+$$J(W,b)= \left[ \frac{1}{m} \sum_{i=1}^m J(W,b;x^{(i)},y^{(i)}) \right] + \frac{\lambda}{2} \sum_{l=1}^{n_l-1} \; \sum_{i=1}^{s_l} \; \sum_{j=1}^{s_{l+1}} \left( W^{(l)}_{ji} \right)^2$$
+
+上式中在普通loss函数后，添加的规则项也被称作weight decay。
 
 weight decay的误差反向传播公式如下：
 
@@ -20,6 +151,8 @@ $$W^{(l)} = W^{(l)} - \alpha \left[ \left(\frac{1}{m} \Delta W^{(l)} \right) + \
 https://www.zhihu.com/question/24529483
 
 在神经网络中weight decay起到的做用是什么？momentum呢？normalization呢？
+
+<a name="BN"/>
 
 ## Batch Normalization
 
@@ -50,6 +183,20 @@ Batch Normalization是Google提出的一种神经网络优化技巧。
 2.提升学习速率。归一化后的数据能够快速的达到收敛。
 
 3.减少模型训练对初始化的依赖。
+
+---
+
+Normalization：
+
+$$x'=\frac{x-\min(x)}{\max(x)-\min(x)}$$
+
+Standardization：
+
+$$x'=\frac{x-\overline{x}}{\sigma}$$
+
+Standardization虽然也能约束取值空间，但没有Normalization那么严格。它的主要目的是**将数据映射为正态分布**，因此对于异常点，超出$$3\sigma$$也是有可能的。
+
+---
 
 参考：
 
@@ -89,6 +236,18 @@ https://www.jianshu.com/p/35a3bf866c46
 
 浅析数据标准化和归一化，优化机器学习算法输出结果
 
+https://blog.csdn.net/u010315668/article/details/80374711
+
+机器学习之特征归一化（normalization）
+
+https://www.jianshu.com/p/95a8f035c86c
+
+归一化（Normalization）、标准化（Standardization）和中心化/零均值化（Zero-centered）
+
+https://mp.weixin.qq.com/s/gWcejm_CMGPKes6tUhbQ5A
+
+BatchNorm的避坑指南
+
 ## 鞍点
 
 在微分方程中，沿着某一方向是稳定的，而另一方向是不稳定的奇点，叫做鞍点（Saddle point）。在泛函中，既不是极大值点也不是极小值点的临界点，叫做鞍点。在矩阵中，一个数在所在行中是最大值，而在所在列中是最小值，则被称为鞍点。在物理上要广泛一些，指在一个方向是极大值，另一个方向是极小值的点。
@@ -106,6 +265,12 @@ https://www.jianshu.com/p/35a3bf866c46
 ![](/images/img2/Saddle.gif)
 
 这是各种优化方法逃离鞍点的动画。
+
+参考：
+
+https://mp.weixin.qq.com/s/Cava8C_s4JikR0BTHx__KQ
+
+神经网络逃离鞍点
 
 ## 欠拟合和过拟合
 
@@ -136,135 +301,3 @@ https://zhuanlan.zhihu.com/p/74553341
 ## 模型容量
 
 如果你切换到工业级数据集，上亿条数据的时候，你会发现有些模型会随着数据量的增大，效果持续变好，而其他模型，一开始随着数据增加上升很快，但慢慢就会进入一个瓶颈期，再怎么增加数据都无法提高了。我们一般认为这是模型容量导致的。
-
-# Neural Network Zoo
-
-在继续后续讲解之前，我们首先给出常见神经网络的结构图：
-
-![](/images/article/Neural_Networks.png)
-
-上图的原地址为：
-
-http://www.asimovinstitute.org/neural-network-zoo/
-
-单元结构：
-
-![](/images/article/neuralnetworkcells.png)
-
-层结构：
-
-![](/images/article/neuralnetworkgraphs.png)
-
-上图的原地址为：
-
-http://www.asimovinstitute.org/neural-network-zoo-prequel-cells-layers/
-
-参考：
-
-https://mp.weixin.qq.com/s/ysnLwvbSD4fcL5LK7wSnyA
-
-MIT高赞深度学习教程：一文看懂CNN、RNN等7种范例
-
-# CNN
-
-## 概述
-
-卷积神经网络（Convolutional Neural Networks，ConvNets或CNNs）属于神经网络的范畴，已经在诸如图像识别和分类的领域证明了其高效的能力。
-
-CNN的开山之作是Yann LeCun的论文：
-
-《Gradient-Based Learning Applied to Document Recognition》
-
->注：科学界的许多重要成果的开山之作，其名称往往和成果的最终名称有一定的差距。比如LeCun的这篇文章的名称中，就没有CNN。类似的还有Vapnik的SVM，最早被称为Support Vector Network。
-
-英文不好的，推荐以下文章：
-
-http://www.hackcv.com/index.php/archives/104/
-
-CNN的直观解释
-
-## 关键点
-
-这里以最经典的LeNet-5为例，提点一下CNN的要点。
-
-![](/images/article/LeNet_5.jpg)
-
-LeNet-5的caffe模板：
-
-https://github.com/BVLC/caffe/blob/master/examples/mnist/lenet.prototxt
-
-### 卷积
-
-在《数学狂想曲（五）》中我们讨论了卷积的数学含义，结合《 图像处理理论（一）》和《 图像处理理论（二）》，不难看出卷积或者模板（算子），在前DL时代，几乎是图像处理算法的基础和灵魂。为了实现各种目的，人们手工定义或发现了一系列算子。
-
-到了DL时代，卷积仍然起着非常重要的作用。但这个时候，不再需要人工指定算子，**算子本身也将由学习获得**。我们需要做的只不过是指定算子的个数而已。
-
-![](/images/img2/ML.jpg)
-
-![](/images/img2/DL.jpg)
-
-上面的两图形象的指出了ML和DL的差别。
-
-比如，LeNet-5的C1:6@28*28，其中的6就是算子的个数。显然算子的个数越多，计算越慢。但太少的话，又会导致提取的特征数太少，神经网络学不到东西。
-
-需要注意的是，传统的CV算法中，通常只有单一的卷积运算。而CNN中的卷积层，实际上包括了**卷积+激活**两种运算，即：
-
-$$L_2=\sigma(Conv(L_1,W)+b)$$
-
-因此，相比全连接层而言，卷积层每次只有部分元素参与到最终的激活运算。从宏观角度看，这些元素实际上对应了图片的局部空间二维信息，它和后面的Pooling操作一道，起到了空间降维的作用。
-
-实际上，传统的MLP（MultiLayer Perceptron）网络，就是由于1D全连接的神经元控制了太多参数，而不利于学习到稀疏特征。
-
-CNN网络中，2D全连接的神经元则控制了局部感受野，有利于解离出稀疏特征。
-
-至于激活函数，则是为了保证变换的非线性。这也是CNN被归类为NN的根本原因。
-
-### 池化
-
-Pooling操作（也称Subsampling）使输入表示（特征维度）变得更小，并且网络中的参数和计算的数量更加可控的减小，因此，可以控制过拟合。
-
-它还可使网络对于输入图像中更小的变化、冗余和变换变得不变性。
-
-### Gaussian Connections
-
-LeNet-5最后一步的Gaussian Connections是一个当年的历史遗迹，目前已经被Softmax所取代。它的含义在上面提到的Yann LeCun的原始论文中有描述。
-
->注意：现代版的LeNet-5最后一步的Softmax层，实际上包含了$$Wx+b$$和Softmax两种计算。相当于用Softmax函数替换Sigmoid/ReLU函数。
-
-### 其他
-
-![](/images/article/CNN_1.jpg)
-
-上图展示了不同分类的图片特征在特征空间中的分布，可以看出在CNN的低层中，这些特征是混杂在一起的；而到了CNN的高层，这些特征就被区分开来了。
-
-![](/images/article/CNN_2.jpg)
-
-上图是若干ML、DL算法按照不同维度划分的情况。
-
-## 多通道卷积
-
-MNIST的例子中，由于图像是单通道（灰度图）的，因此，多数教程都只是展示了单通道卷积的计算步骤：
-
-$$g(i,j)=\sum_{k,l}f(i+k,j+l)h(k,l)$$
-
-而多通道（例如彩色图像的RGB三通道）卷积实际上就是将各通道卷积之后的结果再加在一起：
-
-$$g(i,j)=\sum_{c,k,l}f(i+k,j+l)h(k,l)$$
-
-![](/images/article/conv_1.png)
-
-上图展示了一个4通道图像经卷积之后，得到2通道图像的过程。
-
-从中可以得出以下结论：
-
-1.RGB通道信息在卷积之后，就不复存在了。无论输入图像有多少个通道，输出图像的通道数只和feature的个数相关。
-
-2.即使是LeNet-5的MNIST示例中，实际上也是有多通道卷积的，只不过不在第一个卷积层而已。
-
-3.多通道卷积除了二维空间信息的卷积之外，还包括了**通道间信息**的卷积。这也是CNN中1x1卷积的意义之一。
-
-多通道卷积操作最终可以转化为矩阵运算，如下图所示：
-
-![](/images/article/conv.png)
-
-这种将卷积运算变为矩阵乘法运算的方法，一般被称为GEMM（General Matrix Multiply）。因为卷积变为矩阵这一步运算在Caffe中是用im2col函数实现的，因此，也有使用im2col来指代这类方法的。

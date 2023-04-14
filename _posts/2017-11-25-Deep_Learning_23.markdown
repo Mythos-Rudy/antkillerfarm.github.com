@@ -1,8 +1,11 @@
 ---
 layout: post
-title:  深度学习（二十三）——MemNet, RDN, ShuffleSeg, SVDF, LCNN, AI前沿, LSTM进阶
+title:  深度学习（二十三）——MemNet, RDN, ShuffleSeg, SVDF, LCNN, Image Caption Generation
 category: DL 
 ---
+
+* toc
+{:toc}
 
 # DemosaicNet（续）
 
@@ -176,160 +179,196 @@ http://blog.csdn.net/feynman233/article/details/69785592
 
 LCNN论文阅读笔记
 
-# AI前沿
+# Image Caption Generation
 
-人工智能前沿7大热点：
+Image Caption Generation的目标是：给定一张图片，让计算机用一句话来描述这张图片。如果将这里的Image换成Video，那就是Video Caption Generation了。
 
-1.强化学习
-
-2.元学习
-
-3.模仿学习
-
-4.机器人
-
-5.概念与抽象
-
-6.感知与意识
-
-7.因果推理
-
-最前沿 = good new idea
-
-工业界 = proven idea in practice
+当然，它也有反操作：Generating Image/Videos from Captions。
 
 参考：
 
-https://mp.weixin.qq.com/s/QtO-4ARpAQf0kXfALqMKSQ
+http://geek.csdn.net/news/detail/97193
 
-DeepMind-深度学习: AI革命及其前沿进展
+李理：从Image Caption Generation理解深度学习（part I）
 
-https://mp.weixin.qq.com/s/sji2HVli-Y7am37YjTbq3w
+http://geek.csdn.net/news/detail/98776
 
-谷歌Jeff Dean 64页 PPT 讲述《用深度学习解决挑战性问题》
+李理：从Image Caption Generation理解深度学习（part II）
 
-https://mp.weixin.qq.com/s/AQrgvjFPXUpqfqQQgOFN9A
+https://mp.weixin.qq.com/s/i4zL-bPaPXUlwpKZzlRtcg
 
-36页最新深度学习综述论文：算法、技术、应用，181篇参考文献
+Image Captioning36页最新综述
 
-https://mp.weixin.qq.com/s/cGKsZYxrVP7hVnv7Jli9Zg
+https://zhuanlan.zhihu.com/p/30893160
 
-MIT课程全面解读2019深度学习最前沿
+CVPR2017 Image Caption有关论文总结
 
-# LSTM进阶
+https://mp.weixin.qq.com/s/4IX6vc0Fk9TPofhTI5Gi-Q
 
-## 《Long short-term memory》
+从视觉到文本: 图像描述生成的研究进展综述
 
-这是最早提出LSTM这个概念的论文。这篇论文偏重数学推导，实话说不太适合入门之用。但既然是起点，还是有列出来的必要。
+https://mp.weixin.qq.com/s/3l4mYVSVfjFS_06j3OvX8g
 
-## 《LSTM Neural Networks for Language Modeling》
+阿里提出新图像描述框架，解决梯度消失难题
 
-这也是一篇重要的论文。
+https://mp.weixin.qq.com/s/O1LqJftEezBuuA8JHeqMzw
 
-## 《Sequence to Sequence - Video to Text》
+基于对比学习的Image Captioning
 
-https://vsubhashini.github.io/s2vt.html
+https://mp.weixin.qq.com/s/-K3WIo64_wJb9p6C49Z5fA
 
-![](/images/article/S2VTarchitecture.png)
+基于属性学习和额外知识库的图像描述生成和视觉问答
 
-参考：
+https://mp.weixin.qq.com/s/CBqDR7JEPfhIwTc8BDdeoQ
 
-https://mp.weixin.qq.com/s/HqffHVMKJkA6H1E9ItQU4A
+“诗画合一”的跨媒体理解与检索
 
-《sequence to sequence: video to text》视频描述的全文翻译
+https://mp.weixin.qq.com/s/vRHA3Hf1ivsgKBB2XuECNg
 
-## 《Long-term Recurrent Convolutional Networks for Visual Recognition and Description》
+李飞飞论文：神经网络是怎样给一幅图增加文字描述，实现“看图说话”的？
 
-Long-term Recurrent Convolutional Networks是LSTM的一种应用方式，它结合了LSTM、CNN、CRF等不同网络组件。
+https://mp.weixin.qq.com/s/DXRiGSI0p8u7yA9uW1hHxA
 
-![](/images/article/LSTM_X.png)
+最新四篇CVPR2018 视频描述生成相关论文—双向注意力、Transformer、重构网络、层次强化学习
 
-上图展示了LSTM在动作识别、图片和视频描述等任务中的网络结构。
+https://mp.weixin.qq.com/s/bDLVD_8LscgWSNp0ZNc0Pg
 
-![](/images/article/LSTM_X_2.png)
+图像和文本的融合表示学习——Text2Image和Image2Text
 
-上图展示了图片描述任务中几种不同的网络连接方式：
+https://mp.weixin.qq.com/s/oV8gcKqmp43EBYzQhr5S6w
 
-1.单层LRCN。
+逆视觉问答任务：一种根据回答与图像想问题的模型
 
-2.双层LRCN。CNN连接在第一个LSTM层。传统的LSTM只有一个输入，这里的CNN是第二个输入，也就是所谓的静态输入。可参看caffe的LSTM实现。
+https://mp.weixin.qq.com/s/YgYod-gcFZruEGtE4wF87w
 
-2.双层LRCN。CNN连接在第二个LSTM层。
+牛津大学提出全新生成式模型“SQAIR”，用于移动目标的视频理解
 
-![](/images/article/LSTM_X_3.png)
+https://mp.weixin.qq.com/s/eBNoTDOMLlVymiU3LUqSgQ
 
-![](/images/article/LSTM_X_4.png)
+用Attention模型自动生成图像字幕
 
-![](/images/article/LSTM_X_5.png)
+https://mp.weixin.qq.com/s/4wuYNYGDesNgsJ13y65XQA
 
-这是视频描述任务中LSTM和CRF结合的示例。
+AI都可以将文字轻松转成图像
 
-## 《Training RNNs as Fast as CNNs》
+https://mp.weixin.qq.com/s/TtU0R8P-YIq8JOJrgHP07w
 
-这篇论文提出了如下图所示的Simple Recurrent Unit（SRU）的新结构：
+Facobook开源视觉问答VQA框架：Pythia
 
-![](/images/article/SRU.jpg)
+https://mp.weixin.qq.com/s/a0Xt_hkcW2OVlEzhQFWugg
 
-由于普通LSTM计算步骤中，很多当前时刻的计算都依赖$$h_{t-1}$$的值，导致整个网络的计算无法并行化。SRU针对这一点去掉了当前时刻计算对于$$h_{t-1}$$的依赖，而仅保留$$C_{t-1}$$（这个计算较为廉价）以记忆信息，大大改善了整个RNN网络计算的并行性。
+由浅及深，细致解读图像问答 VQA 2018 Challenge冠军模型Pythia
 
-但是SRU的精度没有LSTM高，需要通过增加layer和filter的数量来达到相同的精度，当然即使这样，计算时间仍然小于LSTM。
+https://zhuanlan.zhihu.com/p/35305264
 
-参考：
+一文看懂深度学习中的VQA(视觉问答)技术
 
-https://mp.weixin.qq.com/s/PsIa3XDFqZlY2tKcvqvddw
+https://mp.weixin.qq.com/s/shBHKh2emSIL5uWV7po8cw
 
-Training RNNs as Fast as CNNs
+梅涛：“看图说话”
 
-## 《Neural Machine Translation in Linear Time》
+https://mp.weixin.qq.com/s/BQy3qpmQqeQquhf92hwcvQ
 
-该论文是Deepmind的作品，它提出的ByteNet，计算复杂度为线性，也是LSTM的优化方案之一。
+2017 VQA Challenge第一名技术报告
 
-## 《Long Short-Term Memory Based Recurrent Neural Network Architectures for Large Vocabulary Speech Recognition》
+https://mp.weixin.qq.com/s/0yb-YRGe-q4-vpKpuE4D_w
 
-$$
-i_t=\delta(W_{ix}x_t+W_{im}m_{t-1}+W_{ic}c_{t-1}+b_i)\\
-f_t=\delta(W_{fx}x_t+W_{fm}m_{t-1}+W_{fc}c_{t-1}+b_i)\\
-c_t=f_t\odot c_{t-1}+i_t\odot g(W_{cx}x_t+W_{cm}m_{t-1}+b_c)\\
-o_t=\delta(W_{ox}x_t+W_{om}m_{t-1}+W_{oc}c_{t}+b_o)\\
-m_t=o_t\odot h(c_t)\\
-\color{blue}{y_t=W_{ym}m_t+b_y}
-$$
+多种注意力机制互补完成VQA（视觉问答）
 
-上式是LSTM的公式（其中的最后一步在多数模型中，往往直接用$$y_t=m_t$$代替。），从中可以看出类似$$W_{ix}x_t+W_{im}m_{t-1}+W_{ic}c_{t-1}+b_i$$的FC运算占据了LSTM的绝大部分运算量。其中W的参数量为：
+https://mp.weixin.qq.com/s/YBaELQlBHOZTGEqc2WI9NQ
 
-$$W=\color{blue}{n_c\times n_c\times 4}+n_i\times n_c\times 4+\color{red}{n_c\times n_o}+n_c\times 3$$
+MIT等提出NS-VQA：结合深度学习与符号推理的视觉问答
 
-为了精简相关运算，Google的Hasim Sak于2014年提出了LSTMP。
+https://mp.weixin.qq.com/s/gaNSQ_8JGqX4a3lGuf-9fA
 
->Hasim Sak，土耳其伊斯坦布尔海峡大学博士，Google研究员。
+如何让电脑成为看图说话的高手？
 
-LSTMP的结构图如下：
+https://mp.weixin.qq.com/s/-b8FuEQlpEb5G0L0QAxVEA
 
-![](/images/img2/LSTMP.png)
+如何使用深度学习为照片自动生成文本描述
 
-改写成数学公式就是：
+https://zhuanlan.zhihu.com/p/50784504
 
-$$
-i_t=\delta(W_{ix}x_t+W_{im}r_{t-1}+W_{ic}c_{t-1}+b_i)\\
-f_t=\delta(W_{fx}x_t+W_{fm}r_{t-1}+W_{fc}c_{t-1}+b_i)\\
-c_t=f_t\odot c_{t-1}+i_t\odot g(W_{cx}x_t+W_{cm}r_{t-1}+b_c)\\
-o_t=\delta(W_{ox}x_t+W_{om}r_{t-1}+W_{oc}c_{t}+b_o)\\
-m_t=o_t\odot h(c_t)\\
-\color{blue}{r_t = W_{rm}m_t\\
-p_t = W_{pm}m_t\\
-y_t = W_{yr}r_t + W_{yp}p_t + b_y}
-$$
+《Reconstruction Network for Video Captioning》阅读笔记
 
-LSTMP的主要思想是对$$m_t$$做一个映射，只有部分数据$$r_t$$参与recurrent运算，其余部分$$p_t$$直接输出即可（这一步是可选项，所以用虚框表示）。
+https://mp.weixin.qq.com/s/tEzZ770T1NpYLAxUK-MwIg
 
-这样W的参数量为：
+综述：Image Caption 任务之语句多样性
 
-$$W=\color{blue}{n_c\times n_r\times 4}+n_i\times n_c\times 4+\color{red}{n_r\times n_o+n_c\times n_r}+n_c\times 3$$
+https://zhuanlan.zhihu.com/p/53220566
 
-参数量公式用蓝色和红色标出修改前后对应的部分，可以看出计算量有了明显下降。
+《Adaptive Co-Attention Network for NER in Tweet》阅读笔记
 
-参考：
+https://mp.weixin.qq.com/s/sQoqt-7EqZmy5gvIWTtMKQ
 
-http://blog.csdn.net/xmdxcsj/article/details/53326109
+更有智慧的眼睛：图像描述（Image Caption）&视觉问答（VQA）综述（上）
 
-模型压缩lstmp
+https://mp.weixin.qq.com/s/3Y5f7JsxsmmuCjAX625h1Q
+
+MirrorGAN出世！浙大等提出文本-图像新框架
+
+https://mp.weixin.qq.com/s/1rtONnhwEc3Osf9gP5fBCQ
+
+李飞飞CVPR最新论文“文本转图”效果优化可多一步：物体关系描述
+
+https://mp.weixin.qq.com/s/9XiAJzC2_vmZturE9ELVLA
+
+多级语言与视觉集成用于文本-剪辑检索
+
+https://mp.weixin.qq.com/s/UehKCDiBRnjZWLEcx_iU-g
+
+微软最新提出ObjGAN，输入一句话秒生成图片
+
+https://mp.weixin.qq.com/s/p8K4eixOwCiUkhzntKYa-Q
+
+视觉问答：VQA经典模型Up-Down以及VQA 2017challenge 冠军方案解读
+
+https://mp.weixin.qq.com/s/hGaX4I_WsPv9P_WAHaDuog
+
+NLP+CV《桥接视觉与语言的研究综述》，带你全面了解视觉+语言最新应用和方法
+
+https://mp.weixin.qq.com/s/XrElAz67uxEo-1zEea9dxA
+
+Video Description视频描述综述论文-方法、数据集和评估指标，UWA
+
+https://mp.weixin.qq.com/s/rbqsBrVBs374GipQ2QXUwg
+
+看图说话之随心所欲
+
+https://mp.weixin.qq.com/s/St6ndWeW9P1vvnhNBF4Nyw
+
+使用神经网络为图像生成标题
+
+https://mp.weixin.qq.com/s/-g5opYPyM488Fit5fP5Y_Q
+
+图像描述生成研究进展
+
+https://mp.weixin.qq.com/s/7mr6nGaADsc450Q0iHauxw
+
+最新《图像描述Image Captioning》综述论文，22页pdf
+
+# LSM
+
+liquid state machine (LSM)
+
+http://www.docin.com/p-390935406.html
+
+基于液体状态机的脑运动神经系统的建模研究
+
+# DNC
+
+https://zhuanlan.zhihu.com/p/27773709
+
+浅析至强RNN可微分神经计算机(DNC)
+
+https://zhuanlan.zhihu.com/p/27964341
+
+浅析至强RNN可微分神经计算机(DNC)-2
+
+https://zhuanlan.zhihu.com/p/28209628
+
+DNC-3滚动分类的模式识别
+
+https://zhuanlan.zhihu.com/p/28433712
+
+DNC4广义线性回归

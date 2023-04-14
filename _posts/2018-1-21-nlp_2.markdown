@@ -1,10 +1,51 @@
 ---
 layout: post
-title:  NLP（二）, Storm, Pulsar
+title:  NLP（二）, Storm
 category: AI 
 ---
 
+* toc
+{:toc}
+
 # NLP
+
+### TorchNLP
+
+代码：
+
+https://github.com/kolloldas/torchnlp
+
+参考：
+
+https://mp.weixin.qq.com/s/xCHvB7gKCBxXk1_rAtG0sw
+
+基于PyTorch/TorchText的自然语言处理库
+
+### fuzzywuzzy
+
+fuzzywuzzy可以很容易地实现诸如字符串比较比率、token比率等操作。对于匹配不同数据库中的记录也很方便。
+
+代码：
+
+https://github.com/seatgeek/fuzzywuzzy
+
+## NLPchina
+
+NLPchina(中国自然语言处理开源组织)旗下有许多好用的工具。
+
+官网：
+
+http://www.nlpcn.org/
+
+Github：
+
+https://github.com/NLPchina
+
+### Ansj
+
+Ansj是一个NLPchina旗下的开源的Java中文分词工具，基于中科院的ictclas中文分词算法，比其他常用的开源分词工具（如mmseg4j）的分词准确率更高。
+
+https://github.com/NLPchina/ansj_seg
 
 ### Word2VEC_java
 
@@ -83,6 +124,28 @@ https://github.com/NervanaSystems/nlp-architect
 https://mp.weixin.qq.com/s/mKEFOTWyfF86ee8P-d2jJg
 
 英特尔推出自然语言处理开源库，代号“NLP Architect”
+
+## Rasa
+
+Rasa是一个基于机器学习实现多轮对话的开源机器人框架。
+
+官网：
+
+https://rasa.com/
+
+Rasa NLU是自然语言理解模型集合，主要包括意图识别，实体识别，它会把用户的输入转换为结构化的数据。
+
+Rasa Core是一个对话管理的平台，它的工作是决定接下来机器该返回什么内容给用户，即实现与用户的交互逻辑。
+
+参考：
+
+https://blog.csdn.net/qq_42189083/article/details/88310407
+
+Rasa聊天机器人（一）:简介及环境搭建
+
+https://blog.csdn.net/qq_42189083/article/details/88076128
+
+Rasa聊天机器人（二）:训练及构建
 
 ## 其他工具
 
@@ -181,6 +244,14 @@ https://github.com/shibing624/pycorrector
 https://mp.weixin.qq.com/s/8tKbejWS7wnGrgOzMuEP6g
 
 TextCluster：短文本聚类预处理模块Short text cluster
+
+https://mp.weixin.qq.com/s/0QGfxsx1ZSNukSPDo_ae9w
+
+45个小众而实用的NLP开源字典和工具
+
+https://mp.weixin.qq.com/s/CcXFHul__qtu-6-iiEvmXw
+
+如何更有效率的加载大型词嵌入模型？（Pymagnitude）
 
 ## 词性标注
 
@@ -353,33 +424,3 @@ Nimbus的作用是将运行的jar分发到各Node去执行。
 官网：
 
 http://jstorm.io/
-
-# Pulsar
-
-https://mp.weixin.qq.com/s/O8pj4pChyw8PK-G_4A3DWg
-
-发布订阅消息系统Apache Pulsar简介
-
-https://mp.weixin.qq.com/s/ToJJTBWJXlpj3LkDj5YYvw
-
-为什么要选择Apache Pulsar
-
-https://mp.weixin.qq.com/s/B9zo0zThARAi11hRuJ-AqA
-
-开源实时数据处理系统Pulsar：一套搞定Kafka+Flink+DB
-
-https://mp.weixin.qq.com/s/v4A--nGiDTt58pZyIzepeg
-
-比拼Kafka，大数据分析新秀Pulsar到底好在哪
-
-https://mp.weixin.qq.com/s/x4GW5zvjD5Fyc-NrXDqpmA
-
-Kafka不够好，智联招聘基于Pulsar打造企业级事件中心
-
-https://mp.weixin.qq.com/s/sWrUlwEe4CBPQklzFWNE3A
-
-选择Pulsar而不是Kafka的7大理由
-
-https://mp.weixin.qq.com/s/L84Ll2PlJLHhQYo134bcFQ
-
-如何基于Apache Pulsar和Spark进行批流一体的弹性数据处理？

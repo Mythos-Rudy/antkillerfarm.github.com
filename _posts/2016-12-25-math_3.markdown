@@ -1,12 +1,157 @@
 ---
 layout: post
-title:  数学狂想曲（三）——统计杂谈
+title:  数学狂想曲（三）——随机变量的特征函数, 概率分布（1）
 category: math 
 ---
 
+* toc
+{:toc}
+
+# 随机变量的特征函数
+
+特征函数（Characteristic function）是描述随机变量概率分布的重要工具，其定义如下。
+
+设随机变量X的CDF为$$F_X(x)$$，则其特征函数定义为：
+
+$$\varphi_X(t)=E(e^{itX})=\int_{-\infty}^{+\infty}e^{itx}\mathrm{d}F_X(x)$$
+
+其中，$$i=\sqrt{-1}$$，并且
+
+$$e^{itx}=\cos(tx)+i\sin(tx)$$
+
+根据上述定义，$$\varphi_X(t)$$是$$F_X(x)$$的傅立叶变换。因此$$\varphi_X(t)$$和$$F_X(x)$$包含相同的信息，且是一一对应的。特别的，若X的PDF $$f_X(x)$$存在，则可通过傅立叶逆变换得到：
+
+$$f_X(x)=\frac{1}{2\pi}\int_{-\infty}^{+\infty}e^{-itx}\varphi_X(t)\mathrm{d}t$$
+
+特征函数具有连续可微等良好的分析性质，因此对于那些矩母函数（Moment Generating Function，MGF）不存在的分布（如柯西分布和对数正态分布）很有用处。
+
+特征函数本质上不是概率论的内容，而属于函数论的内容。不用傅立叶变换，用拉普拉斯变换、希尔伯特变换等等，也可能产生类似效果，当然具体结论会颇有不同。
+
 # 概率分布（1）
 
-## 泊松分布（续）
+进入正题之前，先介绍两个函数：贝塔函数和伽马函数。
+
+## 贝塔函数
+
+$$B(\alpha,\beta)=\int_{0}^{1}x^{\alpha-1}(1-x)^{\beta-1}dx$$
+
+## 伽马函数
+
+$$\Gamma(\theta)=\int_{0}^{\infty}x^{\theta-1}e^{-x}dx$$
+
+http://cos.name/2013/01/lda-math-gamma-function/
+
+神奇的Gamma函数
+
+这篇文章对伽马函数的历史由来，讲的比较透彻。
+
+简单来说，伽马函数就是阶乘算子在复数域的扩展。
+
+伽马函数有以下一些性质：
+
+$$\Gamma(x+1)=x\Gamma(x)$$
+
+$$\Gamma(n)=(n-1)!,n为整数$$
+
+$${\Gamma(1-x)\Gamma(x)}=\frac{\pi}{\sin(\pi x)},x\in{(0,1)}$$
+
+$$\Gamma({1 \over 2})=\sqrt{\pi}$$
+
+$$B(m,n) = \frac{\Gamma(m)\Gamma(n)}{\Gamma(m+n)}$$
+
+上式中的B函数，也就是现在的Beta函数。
+
+对Gamma函数的定义做一个变形，就可以得到如下式子：
+
+$$\int_0^{\infty} \frac{x^{\alpha-1}e^{-x}}{\Gamma(\alpha)}dx = 1$$
+
+取积分中的函数作为概率密度，就得到一个形式最简单的Gamma分布的密度函数：
+
+$$Gamma(x|\alpha) = \frac{x^{\alpha-1}e^{-x}}{\Gamma(\alpha)}$$
+
+如果做一个变换$$x=\beta t$$，就得到Gamma分布的更一般的形式：
+
+$$Gamma(t|\alpha, \beta) = \frac{\beta^\alpha t^{\alpha-1}e^{-\beta t}}{\Gamma(\alpha)}$$
+
+其中$$\alpha$$称为shape parameter，主要决定了分布曲线的形状; 而$$\beta$$称为rate parameter或者inverse scale parameter($$1/\beta$$称为scale parameter)，主要决定曲线有多陡。
+
+参考：
+
+http://blog.csdn.net/u010945683/article/details/48950063
+
+贝塔、伽马分布
+
+## 排列组合
+
+排列组合是高中数学的内容，这里仅列出公式，以备参考。
+
+$$P^m_n=\frac{n!}{(n-m)!}$$
+
+$$C^m_n=\frac{P^m_n}{m!}=\frac{n!}{m!(n-m)!}$$
+
+$$C^m_n$$有时也被记作$$\binom{n}{m}$$，注意这两种表示法的上下标的顺序。
+
+## 伯努利试验
+
+伯努利试验(Bernoulli experiment)是在同样的条件下重复地、**相互独立**地进行的一种随机试验。其特点是该随机试验只有两种可能结果：**发生**或者**不发生**。然后我们假设该项试验独立重复地进行了n次，那么我们就称这一系列重复独立的随机试验为n重伯努利试验，或称为伯努利概型。
+
+n重伯努利试验导出了两个重要的分布。
+
+### 二项分布
+
+n重伯努利试验中，事件A发生K次的概率是：
+
+$$\Pr(X = k) = \binom n k p^k(1-p)^{n-k}$$
+
+其中，p为单次试验中，事件A发生的概率。
+
+这种分布，被称为二项分布（Binomial Distribution）。特别的，当n=1时，被称为伯努利分布。
+
+### 几何分布
+
+几何分布（Geometric distribution）有两个定义：
+
+1.在n重伯努利试验中，试验k次才得到第一次成功的概率：
+
+$$\Pr(X = k) = (1-p)^{k-1}\,p\,$$
+
+1.在n重伯努利试验中，第一次成功之前，失败k次的概率：
+
+$$\Pr(Y=k) = (1 - p)^k\,p\,$$
+
+显然$$Y=X-1$$。
+
+## 二项分布的极限
+
+二项分布实际上有两个极限分布。
+
+如上所述，二项分布有两个参数n和p。
+
+如果p为定值，$$n\to\infty$$，则极限分布为正态分布。正态分布的性质参见[《图像处理理论（二）》](/graphics/2016/06/30/graphics_2.html#Gauss)。
+
+如果$$p\to 0,n\to\infty$$，则极限分布为泊松分布（Poisson distribution）。
+
+## 泊松分布
+
+泊松分布有两个定义：
+
+定义一：一个随机变量X, 只能取值非负整数（x=0,1,2,...），且相应的概率为$$e^{-\lambda }\frac{\lambda ^x}{x!}$$，则称该变量服从poisson分布。
+
+定义二：假定一个事件在一段时间内随机发生，且符合以下条件：
+
+（1）将该时间段无限分隔成若干个小的时间段，在这个接近于零的小时间段里，该事件发生一次的概率与这个极小时间段的长度成正比。
+
+（2）在每一个极小时间段内，该事件发生两次及以上的概率恒等于零。
+
+（3）该事件在不同的小时间段里，发生与否相互独立。
+
+则该事件称为poisson process。
+
+比如，一段时间t内，电话交换站收到的呼叫次数k，就是泊松分布的。很显然，呼叫次数和时间是有关系的，时间越长，呼叫次数越多。反之，$$t\to 0$$，则$$k\to 0$$。这正好符合二项分布的泊松极限的定义。
+
+泊松分布的独特之处，还在于它的两个要素t和k，一个是连续型随机变量，另一个是离散型随机变量。无形之中，它成为了这两类变量之间的桥梁。与此相关的数学分支，一般被称为泊松分析。
+
+仍以上面的例子为例，如果反过来，求两次来电的时间间隔t，则t符合**指数分布**。
 
 参考：
 
@@ -22,11 +167,19 @@ http://blog.csdn.net/kicilove/article/details/78655856
 
 数据科学家应知必会的6种常见概率分布
 
+https://mp.weixin.qq.com/s/PIKvYvXd9PaVHFi_I0U4cw
+
+一文读懂泊松分布，指数分布和伽马分布
+
+https://mp.weixin.qq.com/s/BySEOOgPpTispZi_XBER4w
+
+Poisson过程
+
 ## 贝塔分布和共轭先验分布
 
 $$f(x;\alpha,\beta)=\frac{x^{\alpha-1}(1-x)^{\beta-1}}{B(\alpha,\beta)}$$
 
-贝塔分布的PDF和CDF如下图所示：
+贝塔分布的PDF（probability density function）和CDF（cumulative distribution function）如下图所示：
 
 ![](/images/article/beta.png)
 
@@ -91,6 +244,14 @@ http://blog.csdn.net/u010945683/article/details/49149815
 
 共轭先验分布
 
+https://mp.weixin.qq.com/s/B-yvH8ecirsROfYZ5CcZjg
+
+一文读懂正态分布与贝塔分布
+
+https://mp.weixin.qq.com/s/4uia4ijUUaumc2PNvCEWiw
+
+“共轭分布”是什么？
+
 ## 多项分布和狄利克雷分布
 
 伯努利试验只有两个可能的实验结果，如果实验结果的个数超过2个，那么二项分布就变成了多项分布（multinomial distribution）：
@@ -110,169 +271,3 @@ $$\mathrm{B}(\boldsymbol\alpha) = \frac{\prod_{i=1}^K \Gamma(\alpha_i)}{\Gamma\l
 ![](/images/article/dirichlet-distribution.png)
 
 上面的图，实际上是个4维图，只不过用一个平面上的三角形代表实验结果的3维而已。这也是一种高维数据可视化的方法。
-
-和多项分布类似的还有Categorical Distribution：
-
-- 将一个小球放入k个桶，记变量X为k个桶内的小球个数，所以是一个向量，并且是One-hot的形式，因为这个小球只能在一个桶里面，所以是服从Categorical分布；
-
-- 将n个小球放入k个桶，记变量X为k个桶内的小球个数，是一个向量，并且向量元素的和为n，所以是服从多项分布。
-
-参考：
-
-http://cos.name/2013/01/lda-math-beta-dirichlet/
-
-LDA-math-认识Beta/Dirichlet分布
-
-http://www.cs.cmu.edu/~epxing/Class/10701-08s/recitation/dirichlet.pdf
-
-Dirichlet Distribution, Dirichlet Process and Dirichlet Process Mixture
-
-https://zhuanlan.zhihu.com/p/59550457
-
-Categorical Distribution
-
-## 各种概率分布的关系
-
-![](/images/article/distribution.jpg)
-
-参考：
-
-http://www.math.wm.edu/~leemis/2008amstat.pdf
-
-Univariate Distribution Relationships
-
-http://www.wzchen.com/s/probability_cheatsheet.pdf
-
-Probability Cheatsheet v2.0
-
-https://mp.weixin.qq.com/s/svNVryWhiGxWFBz0s0dX5g
-
-概率论简史
-
-# 统计杂谈
-
-## 统计模拟
-
-统计模拟是数理统计中非常有用的工具之一， 它是利用计算机产生某概率模型的随机数，再通过这些随机数来模拟真实模型。
-
-这方面的书籍首推Sheldon M.Ross所著的《Simulation》。
-
->注：Sheldon M.Ross，斯坦福大学统计学博士（1968），UCB教授（1976～2004），南加州大学Industrial and Systems Engineering系主任。
-
-以下仅记录一些简单的结论。
-
-### 均匀分布
-
-通过线性同余生成器（linear congruential generator, LCG）可以生成伪随机数，且该随机数满足均匀分布。
-
-$$x_n=ax_{n-1}\quad \mathrm{modulo} \quad m$$
-
-这里的a和m通常都是大质数。
-
-### 正态分布
-
-**Box-Muller变换**：如果随机变量$$U_1,U_2$$独立且$$U_1, U_2 \sim Uniform(0,1)$$，
-
-$$\begin{align} 
-Z_0 & = \sqrt{-2\ln U_1} cos(2\pi U_2) \\ 
-Z_1 & = \sqrt{-2\ln U_1} sin(2\pi U_2) 
-\end{align}$$
-
-则$$Z_0,Z_1$$独立且服从标准正态分布。
-
->注：George Edward Pelham Box，1919~2013，英国统计学家。伦敦学院大学博士，先后供职于普林斯顿大学和威斯康辛-麦迪逊大学。Ronald Aylmer Fisher的女婿。英国皇家学会会员，美国统计协会主席，数理统计学会（这是一个国际组织）主席。
-
->Mervin Edgar Muller，俄亥俄州立大学教授。
-
-https://mp.weixin.qq.com/s?__biz=MzI1MTIzMzI2MA==&mid=2650561098&idx=1&sn=675375265279cce7fdb1ecd94fd7a549
-
-生成特定分布随机数的方法
-
-### numpy实战
-
-从上面的描述可以看出，统计模拟一般包括两步：
-
-1.生成均匀分布的随机数（Random generator）。例如：`numpy.random.rand`或`tf.random.uniform`。
-
-2.通过采样（Draw samples）将分布变为特定分布。例如：`numpy.random.multinomial`或`tf.random.categorical`。
-
-### Mersenne Twister
-
-LCG是最古老，也是最知名的伪随机序列生成器算法（Pseudorandom number generator, PRNG）。然而它也有一些缺点：
-
-1.如果用于选择n维空间中的点，那么这些点至多会位于$$(n! \cdot m)^{1/n}$$超平面（Marsaglia's Theorem）。
-
-2.当m为2的幂时，低阶比特周期较短。
-
-因此，在Monte Carlo模拟或者加密算法领域，通常要使用更高质量的PRNG。
-
-Mersenne Twister算法是1997年由Makoto Matsumoto(松本 眞)和Takuji Nishimura(西村 拓士)提出的算法。这种算法由于和梅森素数（Mersenne prime）有关，故名。
-
-该算法最常见的实现基于梅森素数$$2^{19937}-1$$，因此又被称为MT19937。原始的MT19937可以生成32位的随机数，它还有64位的版本：MT19937-64。
-
-MT算法的实现也很多了，参见原作者的官网：
-
-http://www.math.sci.hiroshima-u.ac.jp/~m-mat/MT/emt.html
-
-----
-
-除了MT算法之外，Philox算法也是比较常用的，且后者更适合并行，速度也更快。
-
-Philox原作者官网：
-
-http://www.thesalmons.org/john/random123/
-
-Philox算法的实现一般以philox_4x32_10的形式命名，它表明算法一次能生成4个32位的无符号数，10表示运算迭代的次数。
-
-官方的代码由于要考虑各种兼容性，写的复杂无比，这里有一个精简版：
-
-https://github.com/antkillerfarm/antkillerfarm_crazy/blob/master/Tool/Gcc/random/philox.c
-
-还有一个进阶版，增加了多线程并行生成、均匀分布变换、正态分布变换的功能：
-
-https://github.com/antkillerfarm/antkillerfarm_crazy/blob/master/Tool/Gcc/random/philox_1.c
-
-----
-
-https://bashtage.github.io/randomgen/index.html
-
-这是一个RNG（Random Number Generation）项目，集成了多种算法。
-
-参考：
-
-https://blog.csdn.net/wuha391/article/details/78486021
-
-随机算法mt19937
-
-https://blog.csdn.net/caimouse/article/details/55668071
-
-mt19937是什么鬼？
-
-http://michaelbrundage.com/note/2005/01/05/random-number-generation/
-
-这是一篇RNG方面的综述。
-
-http://www.azillionmonkeys.com/qed/random.html
-
-这篇blog讲述了将随机整数变为浮点数，需要注意的问题。
-
-## 统计力学与组合优化
-
-MCMC和Gibbs Sampling最早都是统计力学的概念，后来才被用于机器学习领域。现将统计力学与组合优化的对应关系罗列如下：
-
-| 统计力学 | 组合优化 |
-|:--:|:--:|
-| 样本 | 问题实例 |
-| 状态（构形） | 构形 |
-| 能量 | 代价函数 |
-| 温度 | 控制参数 |
-| 基态能量 | 最小代价 |
-| 基态构形 | 最小构形 |
-
-## 频率统计学派 vs. 贝叶斯学派
-
-对数学史感兴趣的朋友，可以看看陈希孺院士的《数理统计学简史》一书。rickjin文章的内容有相当部分取自该书。
-
->注：陈希孺，1934～2005，数理统计学家。1956年毕业于武汉大学数学系，1997年当选为中国科学院院士。
-
-该书中关于频率统计学派和贝叶斯学派的争议，引起了我的注意。

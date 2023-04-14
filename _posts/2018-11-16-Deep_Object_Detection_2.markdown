@@ -4,9 +4,24 @@ title:  深度目标检测（二）——RCNN, SPPNet
 category: Deep Object Detection 
 ---
 
+* toc
+{:toc}
+
 # RCNN
 
 ## Selective Search（续）
+
+Selective Search的主要思想:
+
+**Step 1**：使用一种过分割手段，将图像分割成小区域 (1k~2k个)。
+
+这里的步骤实际上并不简单，可参考论文：
+
+《Efficient Graph-Based Image Segmentation》
+
+中文版：
+
+http://blog.csdn.net/surgewong/article/details/39008861
 
 **Step 2**：查看现有小区域，按照合并规则合并可能性最高的相邻两个区域。重复直到整张图像合并成一个区域位置。
 
@@ -40,6 +55,14 @@ https://mp.weixin.qq.com/s/dlP3bZoSdm3w3YSDD8DPVg
 
 Selective Search算法与演示
 
+https://mp.weixin.qq.com/s/DygWoZSEvbW_BBFVBOJNbg
+
+新手也能彻底搞懂的目标检测Anchor是什么？怎么科学设置？
+
+https://zhuanlan.zhihu.com/p/150332784
+
+目标检测Anchor的What/Where/When/Why/How
+
 ## 非极大值抑制（NMS）
 
 RCNN会从一张图片中找出n个可能是物体的矩形框，然后为每个矩形框为做类别分类概率（如上图所示）。我们需要判别哪些矩形框是没用的。
@@ -64,6 +87,10 @@ Non-Maximum Suppression顾名思义就是抑制不是极大值的元素，搜索
 
 参考：
 
+https://mp.weixin.qq.com/s/NPoB4_kpTIYAO34qZFRbQA
+
+对象检测网络中的NMS算法详解
+
 http://mp.weixin.qq.com/s/Cg9tHG1YgDCdI3NPYl5-vQ
 
 如何用Soft-NMS实现目标检测并提升准确率
@@ -75,18 +102,6 @@ https://mp.weixin.qq.com/s/Pd1zA-xZS_xEALfMJ3aHNw
 https://mp.weixin.qq.com/s/SewmtFCVpsthQ4dWUGmEsA
 
 Softer-NMS:CMU&旷视最新论文提出定位更加精确的目标检测算法
-
-https://mp.weixin.qq.com/s/ro0lG3uMUPYNZA9rM3I_YQ
-
-目标检测算法中检测框合并策略技术综述
-
-https://mp.weixin.qq.com/s/NPoB4_kpTIYAO34qZFRbQA
-
-对象检测网络中的NMS算法详解
-
-https://mp.weixin.qq.com/s/GdNcQqDeVQ1vtIJrAIYpWw
-
-目标检测之非极大值抑制(NMS)各种变体
 
 ## NMS的快速算法
 
@@ -128,9 +143,27 @@ CNN训练的时候，本来就是对bounding box的物体进行识别分类训�
 
 ## CNN base
 
-目标检测任务不是一个独立的任务，而是在目标分类基础之上的进一步衍生。因此，无论何种目标检测框架都需要一个目标分类的CNN作为base，仅对其最上层的FC层做一定的修改。
+目标检测任务不是一个独立的任务，而是在目标分类基础之上的进一步衍生。因此，无论何种目标检测框架都需要一个目标分类的CNN作为base（也被称为backbone），仅对其最上层的FC层做一定的修改。
 
 VGG、AlexNet都是常见的CNN base。
+
+![](/images/img3/backbone.jpg)
+
+每一个不同的任务所对应的网络，被称为head，比如目标检测就是Detection Head。
+
+随着技术的发展，除了backbone和head这两部分，更多的新奇的技术和模块被提了出来，最著名的，莫过于FPN了。除了FPN这种新颖的结构，还有诸如ASFF、RFB、SPP等好用的模块，都可以插在backbone和detection head之间。由于其插入的位置的微妙，故而将其称之为“neck”。
+
+因此，现在一个完整的目标检测网络主要由三部分构成：
+
+**detector=backbone+neck+head**
+
+或者还可以把流程更细分一下：
+
+![](/images/img4/AlphaRotate.png)
+
+https://zhuanlan.zhihu.com/p/93451942
+
+Backbone与Detection head
 
 ## 评价标准
 
@@ -235,19 +268,3 @@ https://zhuanlan.zhihu.com/p/24780433
 http://www.cnblogs.com/objectDetect/p/5947169.html
 
 卷积神经网络物体检测之感受野大小计算
-
-**Problem 2**：ROI的在特征图上的对应的特征区域的维度不满足全连接层的输入要求怎么办（又不可能像在原始ROI图像上那样进行截取和缩放）？
-
-对于Problem 2我们分析一下：
-
-这个问题涉及的流程主要有: 图像输入->卷积层1->池化1->...->卷积层n->池化n->全连接层。
-
-引发问题的原因主要有：全连接层的输入维度是固定死的，导致池化n的输出必须与之匹配，继而导致图像输入的尺寸必须固定。
-
-解决办法可能有：
-
-1.想办法让不同尺寸的图像也可以使池化n产生固定的输出维度。（打破图像输入的固定性）
-
-2.想办法让全连接层（罪魁祸首）可以接受非固定的输入维度。（打破全连接层的固定性，继而也打破了图像输入的固定性）
-
-以上的方法1就是SPPnet的思想。

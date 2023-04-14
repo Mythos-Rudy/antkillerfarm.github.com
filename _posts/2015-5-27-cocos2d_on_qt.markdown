@@ -1,8 +1,11 @@
 ---
 layout: post
-title:  Cocos2d-x v3在Qt 5上的移植, lex&yacc
+title:  Cocos2d-x v3在Qt 5上的移植, 代码文档生成工具
 category: technology 
 ---
+
+* toc
+{:toc}
 
 # 前言
 
@@ -44,7 +47,7 @@ honghaier的blog，近乎是手把手操作的流水账，对于关键的理论�
 
 # 编译环境
 
-可供选择的方案无非两种，或者采用Qt的Qmake，或者采用cocos2d-x的Cmake。
+可供选择的方案无非两种，或者采用Qt的Qmake，或者采用cocos2d-x的CMake。
 
 以下是稍早写的一篇心得。
 
@@ -66,7 +69,7 @@ http://blog.csdn.net/dbzhang800/article/details/6314073
 
 ## 例子一
 
-{% highlight bash %}
+```bash
 .
 ├── bin
 ├── build
@@ -76,7 +79,7 @@ http://blog.csdn.net/dbzhang800/article/details/6314073
 ├── mainwindow.h
 ├── mainwindow.ui
 └── qt_cmake.pro
-{% endhighlight %}
+```
 
 实现这样效果的代码参见
 
@@ -86,7 +89,7 @@ https://github.com/antkillerfarm/antkillerfarm_crazy/tree/master/Qt/qt_cmake
 
 ## 例子二
 
-{% highlight bash %}
+```bash
 .
 ├── bin
 ├── CMakeLists.txt
@@ -95,7 +98,7 @@ https://github.com/antkillerfarm/antkillerfarm_crazy/tree/master/Qt/qt_cmake
     ├── mainwindow.cpp
     ├── mainwindow.h
     └── mainwindow.ui
-{% endhighlight %}
+```
 
 实现这样效果的代码参见
 
@@ -110,6 +113,10 @@ https://github.com/antkillerfarm/antkillerfarm_crazy/tree/master/Qt/MyOpenGL
 遇到cmake问题时，查看具体的命令执行是很有帮助的：
 
 `make VERBOSE=1`
+
+`cmake --debug-output`
+
+`cmake --trace`
 
 ## 例子四
 
@@ -195,57 +202,118 @@ https://github.com/ascetic85/quick-cocos2d-x-20130509
 
 这个代码有些老，是基于cocos2d-x v2的，但是基本的思路是一样的。
 
-# lex&yacc（2014.2）
+# 代码文档生成工具
 
-* 前言
+## Doxygen
 
-春节期间，空闲时间较多，于是研究了一下lex和yacc的用法。知道lex和yacc，那还是大四学习编译原理那门课时候的事情了。转眼之间，那已经是十年前的事情了。
+代码：
 
-编译原理在整个大学期间的专业课中，属于难度比较高的课程。而且如果不是计算机专业的话，基本没有可能学到这门课。当时的课程作业是完成一个支持脚本绘图的软件。其难度即使以我现在的眼光来看，也颇不容易。当时只有少数人能够做出来，但基本上是参考教这门课的老师出的一本教辅书来写的。
+https://github.com/doxygen/doxygen
 
-这个课程作业之所以复杂，主要在于老师要求词法和语法的分析器都必须要自己编码。如果退一步，可以使用lex和yacc的话，就没有那么困难了。当然这也与大学里以传授理论为主的思想有关，我还是相当认同这一点的。
+文档：
 
-再顺便说一句，lex的作者之一是google的前CEO Eric Schmidt，这是他20岁时，在贝尔实验室的作品。当然，不全是他的功劳。实际上lex和yacc都是贝尔实验室的作品，这从lex效仿yacc的书写风格就能略见一斑。相比而言，yacc的地位和复杂度更为重要些。
+http://cs.swan.ac.uk/~csoliver/ok-sat-library/internet_html/doc/doc/Doxygen/1.7.6.1/html/
 
-* 前置条件
+安装：
 
-要想研究lex和yacc，除了需要有C语言的基础之外。还需要对正则式和BNF（Backus-Naur Form）有所了解。顺便提一下，John Warner Backus，FORTRAN、ALGOL语言之父，1977年ACM图灵奖得主。他在中学时代居然是个勉强毕业的差生，在大学里换了两次专业，还是一事无成。。。
+`sudo apt install doxygen-gui`
 
-* 教材
+命令行工具可以通过`doxygen`命令运行，而图形界面可以通过`doxywizard`命令运行。
 
-LEX & YACC TUTORIAL by Tom Niemann——这本书比较简练，且附有代码，入门级的极品
+参考：
 
-Aho, Alfred V., Ravi Sethi and Jeffrey D. Ullman [2006]. Compilers, Prinicples, Techniques and Tools——这本书是编译原理方面的权威作品，堪称编译原理界的TAOCP，不过篇幅太长了。。。
+https://www.jianshu.com/p/bf5afbbe183b
 
-* 心得
+Doxygen文档生成工具教程
 
-lex生成的代码中，最重要的是yylex函数，该函数每匹配一个词，就返回一次。yacc生成的代码中，最重要的是yyparse函数，这个函数调用yylex函数以获得所需要的语法词汇。
+https://zhuanlan.zhihu.com/p/100223113
 
-lex的词法分析，依据用法的不同，可分为三类：
+Doxygen快速入门
 
-1）需要匹配识别的词汇。
+https://ahnniu.github.io/2014/10/15/doxygen/
 
-2）需要过滤的词汇。一般是空白、TAB之类的分隔符。
+自定义Doxygen生成小而美的文档
 
-3）直译的词汇。就是那些lex不处理，也不吃掉，而是直接交给yacc分析的词汇。
+## Sphinx
 
-这三类词汇必须仔细规划，因为被解析的文本中，一旦出现不在上述三类的任何一类中的词汇时，程序就会报错。
+Sphinx可用于为python库生成doc。目前绝大多数python库的帮助文档都是用Sphinx生成的。
 
-yacc的BNF中一般都要包括类似下面的语句：
+官网：
 
-{% highlight c %}
-stmt_list:
-          stmt                  { }
-        | stmt_list stmt        { }
-        ;
-{% endhighlight %}
+http://www.sphinx-doc.org/en/master/
 
-其中stmt表示单个语句的语法目标，而stmt_list则是一系列语句的集合。
+代码：
 
-为什么要添加这一句呢？因为yacc在处理被解析的文本时，如果文本不能最终归结为一个单一的语法目标的时候，程序也会报错。
+https://github.com/sphinx-doc/sphinx
 
-代码示例参见：
+Sphinx是如下网站的默认解决方案：
 
-https://github.com/antkillerfarm/antkillerfarm_crazy/tree/master/mylex
+https://readthedocs.org/
 
-这里使用的是lex/yacc在linux上现代版本——flex/bison。
+Read the Docs网站包含了大量python库的帮助文档，还为另外一些库提供了Hosting服务，即便后者有独立的域名。
+
+参考：
+
+https://blog.csdn.net/preyta/article/details/73647937
+
+使用Sphinx为你的python模块自动生成文档
+
+https://www.ibm.com/developerworks/cn/opensource/os-sphinx-documentation/
+
+使用sphinx制作简洁而又美观的文档
+
+## for C++
+
+https://exhale.readthedocs.io/en/latest/
+
+参考：
+
+https://www.bilibili.com/read/cv3247399/
+
+如何使用Sphinx生成C++文档
+
+## apiDoc
+
+`sudo npm install apidoc apidoc-markdown -g`
+
+apidoc.json：
+
+```json
+{
+  "name": "apidoc-demo",
+  "description": "You write something here to describe your project",
+  "title": "The title of this doc"
+}
+```
+
+apidoc demo:
+
+```cpp
+/**
+ * @api {get} /user/:id Request User information
+ * @apiName GetUser
+ * @apiGroup User
+ *
+ * @apiParam {Number} id Users unique ID.
+ *
+ * @apiSuccess {String} firstname Firstname of the User.
+ * @apiSuccess {String} lastname  Lastname of the User.
+ */
+```
+
+```bash
+apidoc -i src/ -o docs/
+apidoc-markdown -p ./docs/ -o doc.md
+```
+
+https://zhuanlan.zhihu.com/p/83487114
+
+apiDoc-超简单的文档生成器
+
+https://apidocjs.com/
+
+APIDOC
+
+https://github.com/rigwild/apidoc-markdown
+
+https://github.com/apidoc/apidoc

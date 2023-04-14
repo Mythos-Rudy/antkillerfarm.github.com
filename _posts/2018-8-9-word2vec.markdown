@@ -1,8 +1,11 @@
 ---
 layout: post
-title:  word2vec, LSTM Speech Recognition实战, 图数据库
+title:  word2vec, LSTM Speech Recognition实战, 炼丹实录
 category: AI 
 ---
+
+* toc
+{:toc}
 
 # word2vec
 
@@ -92,10 +95,10 @@ https://github.com/antkillerfarm/antkillerfarm_crazy/tree/master/python/ml/tenso
 
 在识别验证码的例子中，假如有两幅图，分别是123和4567，那么Label就是：
 
-{% highlight text %}
+```text
 [[1,2,3,0]
  [4,5,6,7]]
-{% endhighlight %}
+```
 
 虽然英语是表音文字，但直接分解字母作为标签显然是不太精确的。
 
@@ -147,6 +150,14 @@ https://blog.csdn.net/congwulong/article/details/7576012
 
 FFTW中文参考
 
+## ocenaudio
+
+一个用于音频剪辑处理的工具。免费但不开源。
+
+官网：
+
+http://www.ocenaudio.com/
+
 ## aubio
 
 aubio是一个C语言的音频分析库，提供了提取fbank、MFCC等特征的能力。
@@ -165,7 +176,7 @@ https://github.com/aubio/aubio
 
 安装：
 
-`sudo apt-get install python3-aubio python-aubio aubio-tools libaubio-dev`
+`sudo apt install python3-aubio python-aubio aubio-tools libaubio-dev`
 
 aubio的fft结果是以极坐标的格式保存的，而LibROSA则是以平面坐标的格式保存的。
 
@@ -259,102 +270,58 @@ https://mp.weixin.qq.com/s/_hVHettrQLNZRTrO7Qh8qg
 
 简单的音频识别
 
-# 图数据库
+# 炼丹实录
 
-## Neo4j
+## loss & accuracy
 
-Neo4j大概算是最著名的图数据库了，它具有成熟和健壮的数据库的所有特性。相对于关系数据库来说，图数据库（Graph Database）善于处理大量复杂、互连接、低结构化的数据，这些数据变化迅速，需要频繁的查询——在关系数据库中，这些查询会导致大量的表连接，因此会产生性能上的问题。
+loss：训练集损失值
 
-官网：
+accuracy:训练集准确率
 
-https://neo4j.com/
+val_loss:测试集损失值
 
-参考：
+val_accruacy:测试集准确率
 
-http://blog.csdn.net/xingxiupaioxue/article/details/71747284
+以下5种情况可供参考：
 
-如何将大规模数据导入Neo4j
+train loss 不断下降，test loss不断下降，说明网络仍在学习;（最好的）
 
-https://mp.weixin.qq.com/s/_Zm88TyBcXAZ4LeQOuJCHA
+train loss 不断下降，test loss趋于不变，说明网络过拟合;（max pool或者正则化）
 
-管理neo4j的用户
+train loss 趋于不变，test loss不断下降，说明数据集100%有问题;（检查dataset）
 
-https://mp.weixin.qq.com/s/dzPZTqUhWKIiKj2o7OkMbA
+train loss 趋于不变，test loss趋于不变，说明学习遇到瓶颈，需要减小学习率或批量数目;（减少学习率）
 
-Neo4j的python操作库Neo4j-Driver
-
-https://mp.weixin.qq.com/s/mupuyM7m_41eOzQc7LGRRw
-
-Neo4j的python操作库Neomodel
-
-https://mp.weixin.qq.com/s/YVo6KduIvckYKH53fjDogw
-
-neo4j扩展包APOC的图算法
-
-https://zhuanlan.zhihu.com/p/61096301
-
-一文教你用Neo4j快速构建明星关系图谱
-
-https://mp.weixin.qq.com/s/dnqbsBXHodJB0ZRUrcukCw
-
-使用Docker安装Neo4j
-
-https://mp.weixin.qq.com/s/UlgRDOm93QbjWA4q_kky9g
-
-获取到知识后，如何进行存储和便捷的检索？
-
-## neo4j-graph-algorithms
-
-Neo4j Graph Algorithms扩展包，是一个关于图算法的jar包，集成了一些常见的图算法，比如社区发现，路径扩展，中心点计算，PageRank等。
-
-代码：
-
-https://github.com/neo4j-contrib/neo4j-graph-algorithms
-
-## InteractiveGraph
-
-InteractiveGraph是一个图结构的可视化库。
-
-代码：
-
-https://github.com/grapheco/InteractiveGraph
+train loss 不断上升，test loss不断上升，说明网络结构设计不当，训练超参数设置不当，数据集经过清洗等问题。（最不好的情况）
 
 参考：
 
-https://zhuanlan.zhihu.com/p/63221921
+https://www.cnblogs.com/Timeouting-Study/p/12591448.html
 
-InteractiveGraph实现酷炫关系图谱之前瞻
+TensorFlow中loss与val_loss、accuracy和val_accuracy分别是什么含义
 
-## openCypher
+## lenet
 
-openCypher是基于Neo4j的查询语言Cypher开发的，Cypher用于在图数据库中存储和检索数据。在图数据库领域，目前还没有像关系数据库中访问数据的SQL这样的通用查询语言标准。
+最近对Lenet的训练过程作了一个有趣的测试。
 
-openCypher的目标是通过简化存储、分析，以及用于访问图数据模型的工具平台，促进图处理和分析的使用。技术厂商可以在他们的工具和平台内实现Cypher。
+下表以accuracy达到90%，作为测试的目标：
 
-官网：
+| Batch size | Epochs | Iterations | 计算量（以batch size=4的一个iteration为基准1） | 时间 |
+|:--:|:--:|:--:|:--:|:--:|
+| 4 | 4 | 15000 * 4 = 60000 | 60000 | 350min * 4 = 1400min |
+| 8 | 7 | 7500 * 7 = 52500 | 52500 * 2 = 105000 | 190min * 7 = 1330min |
+| 16 | 13 | 3750 * 13 = 48750 | 48750 * 4 = 195000 | 95min * 13 = 1235min |
+| 32 | 25 | 1875 * 25 = 46875 | 46875 * 8 = 375000 | 65min * 25 = 1625min |
+| 64 | 50 | 938 * 50 = 46900 | 46900 * 16 = 750400 | 41min * 50 = 2050min |
 
-http://www.opencypher.org/
+从上表可以看出增大batch size可以减少iteration的数量，但是该方法有极限，不可任意小。
 
-## RedisGraph
+增大batch size会增加计算量，但是由于设备IO和计算量的平衡，并不是batch size越小，运行时间就越短。
 
-RedisGraph是Redis推出的基于Redis的图数据库。
+## Other
 
-官网：
+他是做图网络分类的，同一个数据集之前的测试准确率只有80出头，后来几篇文章就飙到了接近90，师兄怎么都复现不出来，后来开源了代码一看，好家伙，之前训练测试是二八分，新文章直接变成了三七分，就在dataloader里改的，但是作者文章完全没有提及，而且师兄把分布换成最开始的数据分布之后，那个新方法的效果还比不上原来的baseline
 
-http://redisgraph.io/
+https://www.zhihu.com/question/265953178
 
-参考：
-
-https://mp.weixin.qq.com/s/BzQBy6AoMXXpjsdGyXh1zA
-
-揭秘RedisGraph: Redis内嵌高性能内存图数据库
-
-## 参考
-
-https://mp.weixin.qq.com/s/YfNlDoGOlHtpG9VFBCZHnQ
-
-VLDB2019特邀报告《图处理》综述进展，滑铁卢大学数据库大牛M. Tamer Özsu教授，170页ppt
-
-https://mp.weixin.qq.com/s/PkFscGq8tjzc3HQiF-SSsA
-
-在图数据上做机器学习，应该从哪个点切入？
+如何评价深度学习相关顶级期刊论文难复现的问题？

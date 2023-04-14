@@ -4,6 +4,9 @@ title:  Machine Learning之Python篇（一）
 category: AI 
 ---
 
+* toc
+{:toc}
+
 # Machine Learning之Python篇
 
 ## 概述
@@ -60,13 +63,32 @@ Conda是一个开源的软件包管理系统和环境管理系统，用于安装
 
 https://conda.io/docs/
 
+Conda一般有两个发行版——Anaconda和Miniconda。前者默认安装的包比较多，而后者则是一个最小安装。
+
+参考：
+
+https://mp.weixin.qq.com/s/NX2zWc7y8Y2kK9ZNxlUBVA
+
+conda+jupyter玩转数据科学环境搭建
+
+https://mp.weixin.qq.com/s/SGhKcD9zakXOInkZSmKX9A
+
+Conda太慢？试试这个加速工具！
+
 ## Anaconda
 
 Anaconda是一个科学计算方面的python发行版，下面提到的所有工具都可以通过Anaconda一站式安装。
 
+>Python:蟒   
+>Anaconda：森蚺
+
 官网：
 
 https://www.anaconda.com/download/
+
+镜像：
+
+https://mirrors.tuna.tsinghua.edu.cn/help/anaconda/
 
 基本命令：
 
@@ -84,9 +106,46 @@ Anaconda同时也支持多个Python版本的并存和切换。它的底层用到
 
 这条命令会在Anaconda/envs下创建一个python2文件夹。
 
+>也可能是`~/.conda/envs`
+
+显示env：
+
+`conda env list`
+
 将命令行环境切换到该版本：
 
-`activate python2`
+`conda activate python2`
+
+最新的Anaconda提供了`conda init`命令用于将环境添加到shell中。如果不想要的话，可以到`~/.bashrc`删除之。
+
+退出环境：
+
+`conda deactivate`
+
+安装包：
+
+`conda install XXX`
+
+conda环境也支持用pip安装包，而且在`conda list`的时候会给出来源。
+
+在conda环境中，使用pip的话，需要`conda install pip`。
+
+更换源：
+
+`vim ~/.condarc`
+
+```text
+channels:
+  - https://mirrors.ustc.edu.cn/anaconda/pkgs/main/
+  - https://mirrors.ustc.edu.cn/anaconda/pkgs/free/
+  - https://mirrors.ustc.edu.cn/anaconda/cloud/conda-forge/
+ssl_verify: true
+```
+
+```bash
+conda install -c conda-forge cudatoolkit=11.2 cudnn=8.1.0
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$CONDA_PREFIX/lib/
+```
 
 参考：
 
@@ -102,9 +161,15 @@ http://www.jianshu.com/p/d2e15200ee9b
 
 Anaconda多环境多版本python配置指导
 
+https://mp.weixin.qq.com/s/i4oUKZXAUMLGaRpJVmT1ZQ
+
+一行命令装下所有“炼丹”工具及依赖项，就靠这个免费软件源了
+
 ## virtualenv
 
 安装：
+
+`sudo apt install python3-pip python3-virtualenv`
 
 `pip3 install virtualenv`
 
@@ -120,6 +185,16 @@ Anaconda多环境多版本python配置指导
 
 `deactivate`
 
+Conda可以创建当前系统中没有的python版本的env，但是virtualenv则不行。
+
+---
+
+venv多了，有的时候查找lib path就成了问题。
+
+```python
+print(tensorflow.__file__)
+```
+
 ## NumPy
 
 NumPy是python语言所有数学计算库的基础。它主要提供了矩阵运算的功能。
@@ -127,6 +202,10 @@ NumPy是python语言所有数学计算库的基础。它主要提供了矩阵运
 官网：
 
 http://www.numpy.org/
+
+官方中文网：
+
+https://www.numpy.org.cn/
 
 教程：
 
@@ -222,6 +301,27 @@ https://zhuanlan.zhihu.com/p/71639781
 
 一个函数打天下，einsum
 
+https://mp.weixin.qq.com/s/QxowSMirwnsUjIA-MFCj7g
+
+特斯拉AI高管都推荐的张量工具（Einops）
+
+### pad
+
+`arr1D = np.array([1, 1, 2, 2, 3, 4])`
+
+```bash
+constant:  [0 0 1 1 2 2 3 4 0 0 0]
+edge:  [1 1 1 1 2 2 3 4 4 4 4]
+linear_ramp:  [0 0 1 1 2 2 3 4 3 1 0]
+maximum:  [4 4 1 1 2 2 3 4 4 4 4]
+mean:  [2 2 1 1 2 2 3 4 2 2 2]
+median:  [2 2 1 1 2 2 3 4 2 2 2]
+minimum:  [1 1 1 1 2 2 3 4 1 1 1]
+reflect:  [2 1 1 1 2 2 3 4 3 2 2]
+symmetric:  [1 1 1 1 2 2 3 4 4 3 2]
+wrap:  [3 4 1 1 2 2 3 4 1 1 2]
+```
+
 ### 参考
 
 https://mp.weixin.qq.com/s/FVI3zEp4it-fd99-3MU9vA
@@ -256,6 +356,18 @@ https://mp.weixin.qq.com/s/MxvA-f6ocpmGLW5JQ8qsSg
 
 玩数据必备Python库：Numpy使用详解
 
+https://mp.weixin.qq.com/s/udKMuAfMVD4axulCR6Wgvw
+
+这100道练习，带你玩转Numpy
+
+https://mp.weixin.qq.com/s/2_q89PIfw43zivwHmTmY-A
+
+在向量化NumPy数组上进行移动窗口操作
+
+https://mp.weixin.qq.com/s/m-j1_2la-tg38NwNvDDSjw
+
+Numpy中常用的10个矩阵操作示例
+
 ## SciPy
 
 SciPy提供了一些更高阶的数学运算库，比如：积分、插值、信号处理、傅立叶变换、矩阵特征值、统计计算等。
@@ -270,9 +382,9 @@ API参考：
 
 https://docs.scipy.org/doc/scipy/reference/
 
-### Gaussian filter
+- Gaussian filter
 
-w = 2*int(truncate*sigma + 0.5) + 1
+`w = 2*int(truncate*sigma + 0.5) + 1`
 
 参考：
 
@@ -284,9 +396,27 @@ https://mp.weixin.qq.com/s/vGS4U3g4eaPuQwBWh-lTiA
 
 机器学习核心：优化问题基于Scipy
 
+https://mp.weixin.qq.com/s/xN0mX9XWvVUpi0p5Tc6vLA
+
+利用SciPy求解非线性规划问题
+
+https://mp.weixin.qq.com/s/44RjMdARJMSM1_seImaSbg
+
+SciPy稀疏矩阵
+
+https://mp.weixin.qq.com/s/5g1WgWEOkA-38MXbkKUtWg
+
+Scipy使用大全
+
 ## sklearn
 
 Scikit-learn提供了常见的机器学习算法的实现。
+
+安装：
+
+`pip install scikit-learn`
+
+>注：`sklearn`似乎是另外的包。
 
 官网：
 
@@ -331,115 +461,3 @@ Scikit-Learn决策树算法类库使用小结
 https://mp.weixin.qq.com/s/O1wPvi_aKK73yJcUpDf6EQ
 
 开源sk-dist，超参数调优仅需3.4秒，sk-learn训练速度提升100倍
-
-## Matplotlib
-
-Matplotlib是一个高阶的图形库，主要提供生成图表等数据可视化方面的功能。
-
-官网：
-
-http://matplotlib.org/
-
-API参考：
-
-http://matplotlib.org/1.5.3/api/index.html
-
-示例：
-
-https://github.com/antkillerfarm/antkillerfarm_crazy/blob/master/python/ml/plot/matplotlib_helloworld.py
-
-参考：
-
-https://mp.weixin.qq.com/s/mpj1QpWpnGm8117p3cEWZw
-
-如何优雅而高效地使用Matplotlib实现数据可视化
-
-https://mp.weixin.qq.com/s/LBrlXEhGYOx1aPFZzQcyTQ
-
-5种快速易用的Python Matplotlib数据可视化方法
-
-https://mp.weixin.qq.com/s/aBi1PTEumRs0frUpb_uYrA
-
-用Python做图像处理（2）
-
-https://mp.weixin.qq.com/s/3VgFKiUOFvtWmqg1BO9xGw
-
-matplotlib--python的数据可视化
-
-https://mp.weixin.qq.com/s/LuXyUBkaJUfg4WteFxStrg
-
-Matplotlib可视化最有价值的50个图表
-
-https://mp.weixin.qq.com/s/hlJFoh0jfduPswr7WrDikQ
-
-当年为什么不好好学“数据可视化”！
-
-https://mp.weixin.qq.com/s/Oh2ma7UjQhklE6YBo0EQBA
-
-快速入门Matplotlib教程
-
-https://mp.weixin.qq.com/s/fmoUGFjqlJf46r_iOrg9fA
-
-高效使用Python可视化工具Matplotlib
-
-https://mp.weixin.qq.com/s/MYqPHzzoWfaV2N7c4ZgfPQ
-
-Python绘图，我只用Matplotlib
-
-https://mp.weixin.qq.com/s/y4W7zK2-nFF-y_hSmB8j2g
-
-超火动态排序图：代码不到40行，手把手教你！
-
-https://zhuanlan.zhihu.com/p/82910169
-
-Matplotlib输出动画实现K-means聚类过程可视化
-
-https://mp.weixin.qq.com/s/6h-1k_D7QIFpknagnA8FZA
-
-Python绘图，我只用Matplotlib
-
-https://mp.weixin.qq.com/s/pBTsByIftGbMMUumSKCvFw
-
-数据分析最有用的Top 50 Matplotlib图(上)
-
-https://mp.weixin.qq.com/s/RctPwneKUIUZCcLr1Ry_8g
-
-数据分析最有用的Top 50 Matplotlib图(下)
-
-https://mp.weixin.qq.com/s/bD9XDg2kMtXDb45xMvY5tA
-
-Python绘图还在用Matplotlib？发现一款手绘可视化神器！
-
-https://mp.weixin.qq.com/s/PvK1acmL1D3byEylmhtEaQ
-
-数据可视化简易入门（Matplotlib和Seaborn）
-
-## Pandas
-
-Pandas是一个数据分析方面的工具库。它提供的Series(1-dimensional)和DataFrame(2-dimensional)数据结构，可以提供类似sql的数据操作和查询的功能。
-
-官网：
-
-http://pandas.pydata.org/
-
-文档：
-
-http://pandas.pydata.org/pandas-docs/stable/
-
-API参考：
-
-http://pandas.pydata.org/pandas-docs/stable/api.html
-
-参考：
-
-http://www.cnblogs.com/chaosimple/p/4153083.html
-
-十分钟搞定pandas
-
-http://pandas.pydata.org/pandas-docs/stable/comparison_with_sql.html
-
-Pandas和SQL的比较
-
-https://mp.weixin.qq.com/s/fXI5suCVna6fBxPnVyKevw
-
-浅谈NumPy和Pandas库

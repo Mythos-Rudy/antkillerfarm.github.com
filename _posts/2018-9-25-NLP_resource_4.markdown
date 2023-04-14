@@ -1,10 +1,97 @@
 ---
 layout: post
 title:  NLP参考资源（四）
-category: resource 
+category: DL & NLP resource 
 ---
 
+* toc
+{:toc}
+
 # NLP参考资源
+
+## KBQA/DBQA
+
+知识库问答（knowledge base question answering, KB-QA）即给定自然语言问题，通过对问题进行语义理解和解析，进而利用知识库进行查询、推理得出答案。
+
+DBQA是基于文档的问答。换言之，KBQA利用的是结构化的知识，而DBQA所利用的是非结构化的文本。
+
+https://mp.weixin.qq.com/s/GSHk-otPeyGZN5xRNehAyw
+
+KBQA从入门到放弃—入门篇
+
+https://mp.weixin.qq.com/s/-Zz5Cv4QJaRHdBFrGyBuLg
+
+KBQA从入门到放弃-Part 2
+
+https://mp.weixin.qq.com/s/NDsQzT4nktbw1fHLLFUhEQ
+
+KBQA: 基于开放域知识库上的QA系统
+
+## 参考
+
+https://mp.weixin.qq.com/s/klfTdvfti0xCg2lGitG4hg
+
+用户表示方法对新浪微博中用户属性分类性能影响的研究
+
+https://mp.weixin.qq.com/s/IvbJ_d7z91BCcRVpJ9_jMA
+
+如何用深度学习做自然语言处理？这里有份最佳实践清单
+
+https://mp.weixin.qq.com/s/xYvYEJA0ssAOZ-NvEXQcZg
+
+阿里小蜜这一年，经历了哪些技术变迁？
+
+https://mp.weixin.qq.com/s/rzglhAUJVNsnbyptORH5lg
+
+对话系统原理和实践
+
+https://mp.weixin.qq.com/s/rXIAR37wn2tGMpR8xPdxqw
+
+南洋理工75页最新“深度学习对话系统”大综述论文，最全面概述深度学习对话技术进展
+
+https://mp.weixin.qq.com/s/C0hjVv2YOQw__tvSs8zn1A
+
+OpenAI提出新型神经网络：自动计算词对象，实现实体消岐
+
+https://mp.weixin.qq.com/s/dThV1YtMvYtToJFqgXnEzQ
+
+谷歌大脑提出通过多文档摘要方法生成维基百科，可处理较长序列
+
+https://mp.weixin.qq.com/s/odRDdSNNuTd5LnUf8rfRaw
+
+Google发布语义文本相似度研究新成果：通用语句编码器
+
+https://mp.weixin.qq.com/s/3aipKax9Md4nG8YGrGc4Tg
+
+提高NLP语义解析准确度：融合SQL语法的生成式语义解析模型
+
+https://mp.weixin.qq.com/s/xILU9fJhs64z8nE1-sDnOA
+
+基于递归联合注意力的句子匹配模型
+
+https://mp.weixin.qq.com/s/Dq-H4rUM19MaQb5W2DGlqA
+
+用递归神经网络，撰写一份特朗普式发言稿！
+
+https://mp.weixin.qq.com/s/VCeEz5QhGqQ5TF0lkCk40A
+
+COLING 2018 最佳论文解读：序列标注经典模型复现
+
+https://mp.weixin.qq.com/s/QUbZZokROzxUwy2kZZ7jeA
+
+Hybrid semi-Markov CRF for Neural Sequence Labeling
+
+https://mp.weixin.qq.com/s/wHweI0_LYHaW7K8jEAY74g
+
+文综提分哪家强？上海交大找AI
+
+https://mp.weixin.qq.com/s/yXs_bLSAIPcUOIrvJ9-0Sw
+
+ACM BCB 2018 CausalTriad: 从医学文本数据中推断出新的因果关系假设
+
+https://mp.weixin.qq.com/s/C7GkZk7UWk_2XsVfn1J_lg
+
+ACL 2018使用知识蒸馏提高基于搜索的结构预测
 
 https://mp.weixin.qq.com/s/kbF8WnaVWf6nOpzvbELpOw
 
@@ -33,10 +120,6 @@ https://mp.weixin.qq.com/s/5DvSVL0CRJTymtXPDvS-0w
 https://mp.weixin.qq.com/s/4Tj92Mmj2-zOHfk1Tk167w
 
 白翔：复杂开放场景中的文本理解
-
-https://mp.weixin.qq.com/s/5toWf90bJeSMGso6HaNTMQ
-
-腾讯提出用于文本匹配的多信道信息交叉模型，在真实任务中表现优异
 
 https://mp.weixin.qq.com/s/Z4Mv_L68QaG7KfGmA3pBwQ
 
@@ -109,10 +192,6 @@ http://dataunion.org/9331.html
 https://www.zhihu.com/question/46272554
 
 如何评价SyntaxNet
-
-https://mp.weixin.qq.com/s/PxyazOPKV3eB-qat8hM9ZQ
-
-神经网络语义匹配技术
 
 https://mp.weixin.qq.com/s/6_FHq8IrkAW_Y5FSYcJ0fw
 
@@ -290,13 +369,13 @@ https://mp.weixin.qq.com/s/Srpv04X2vaIr2da4xbEMdg
 
 从对话生成和文本风格转化看文本生成技术
 
+https://mp.weixin.qq.com/s/DeLB7mV9p-MX-c9LI-XwBQ
+
+文本生成魔改方案汇总
+
 https://zhuanlan.zhihu.com/p/47949269
 
 开放域下的对话系统
-
-https://mp.weixin.qq.com/s/1WtJEqhxCtBKVRs_-EevjA
-
-基于排序思想的弱监督关系抽取选种与降噪算法
 
 https://mp.weixin.qq.com/s/dXU-HMi8LIjVTwzfMqOzuQ
 
@@ -317,87 +396,3 @@ https://zhuanlan.zhihu.com/p/50349824
 https://mp.weixin.qq.com/s/rLFm2J6Bao6H5Qj9Fw0wUg
 
 百度陈翔：基于机器学习的搜索语义理解技术！
-
-https://mp.weixin.qq.com/s/BWg77FZ2IugBhO_HWHpfHw
-
-深度学习在自然语言处理中的应用综述
-
-http://mp.weixin.qq.com/s/fn9WKu0_aH2-lx6VvxC_RA
-
-生成式关键短语识别
-
-https://mp.weixin.qq.com/s/Naj1u0LZwvQhOe6Iay0nFA
-
-常识用于回答生成式多跳问题
-
-https://mp.weixin.qq.com/s/fkBkSakTtuGPhi3mK563mg
-
-结合贪心搜索和蒙特卡洛随机游走的面向DBpedia的实体链接方法
-
-https://mp.weixin.qq.com/s/2zFOjOuDKo--wTvu5rVWNw
-
-基于局内去噪和迁移学习的关系抽取
-
-https://mp.weixin.qq.com/s/eI-u_RsabtuyRajDYnnZDg
-
-基于深度强化学习的远程监督关系抽取
-
-https://mp.weixin.qq.com/s/UZbt1E6QntwtWWvJfTL3eQ
-
-车万翔：任务型对话系统研究进展
-
-https://mp.weixin.qq.com/s/cFKZxtlAAABWn8CgXJz4kA
-
-多内容实体和关系联合抽取的对抗训练
-
-https://mp.weixin.qq.com/s/nGb-8M4S1a_4Yz9Lzjvzew
-
-基于Universal Schema与Memory Network的知识+文本问答
-
-https://mp.weixin.qq.com/s/Pm3wB4VRuoBR-XLjW_jpfQ
-
-反讽识别综述
-
-https://mp.weixin.qq.com/s/whWaseYWcurOLp-V8gCBvQ
-
-基于不同颗粒度语言联合训练的表示学习
-
-https://mp.weixin.qq.com/s/5F6h2F8L-OdFJxBY2QrWJg
-
-不只有BERT！盘点2018年NLP令人激动的10大想法
-
-https://mp.weixin.qq.com/s/wBsh9dmMPks04X2pDB8Ang
-
-沈向洋等重磅论文：公开微软小冰系统设计，迄今最详细！
-
-https://mp.weixin.qq.com/s/-zDMPfR1wWSV9A7HDzJlZA
-
-事件抽取及推理(上)
-
-https://mp.weixin.qq.com/s/GtO3Zf87BTbBQqHAtgAmlA
-
-事件抽取及推理(下)
-
-https://mp.weixin.qq.com/s/tvfCW7Lwkug9ILKpJuMnUA
-
-上下文敏感的改写式回复生成模型
-
-https://mp.weixin.qq.com/s/6IO-pAP6Jcct5W-tReaLtw
-
-基于深度强化学习的远程监督数据集的降噪
-
-https://zhuanlan.zhihu.com/p/26461511
-
-关于WordNet，我的一些用法和思路
-
-https://speechlab.sjtu.edu.cn/pages/sz128/homepage/year/10/27/survey-on-grammar-retrieval/
-
-论文调研：基于“规则、槽值”检索的口语语义理解
-
-https://mp.weixin.qq.com/s/BdvBV542AZnMw7hnjDSwWw
-
-百度语义计算技术及其应用
-
-https://mp.weixin.qq.com/s/KQPLDhnlxks4DQNZEhEacQ
-
-百度阅读理解技术研究及应用

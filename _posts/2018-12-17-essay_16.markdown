@@ -1,277 +1,164 @@
 ---
 layout: post
-title: 流浪地球
+title: 刺客列传, 步步高
 category: essay 
 ---
 
-# 流浪地球
+* toc
+{:toc}
 
-2019.2
+# 刺客列传
 
-最近，电影《流浪地球》大火，我也因此看了很多天文方面的帖子，特把这些帖子归纳如下。
+安重根（1879年—1910年），1909年10月26日，在中国哈尔滨成功刺杀了侵略朝鲜的元凶、前日本首相伊藤博文，当场被捕。日本关东都督府地方法院判处安重根绞刑，于1910年3月26日在中国旅顺就义。
 
-## 轨道学
+尹奉吉（1908—1932），1932年4月29日，在上海虹口公园成功刺杀日本陆军大将白川义则，被当场逮捕，同年12月押送日本，在石川县金泽日本陆军基地内壮烈就义。
 
-最有名的当然是三体问题了。
+李奉昌（1900年8月10日—1932年10月10日），1932年1月8日，在日本东京樱田门刺杀日本天皇裕仁未成，被日军逮捕杀害。
 
-https://mp.weixin.qq.com/s/nbA86PutvWWcA7t89XWhfA
+# 步步高
 
-三体问题
+https://www.zhihu.com/question/21338484
 
-https://mp.weixin.qq.com/s/aa41t7GoMl2im5uJuhc_KQ
+步步高、OPPO、Vivo 这几个品牌是什么关系？
 
-双体：有两颗恒星的星系是怎样的？
+段永平，1961年生，1989～1995，小霸王电子工业公司总经理。产品：小霸王学习机。
 
-https://mp.weixin.qq.com/s/L72Iwf7EZ5LbbBPRGQibdA
+>不要和段永基搞混了，后者是四通公司老总，40后。
 
-双体：拥有两个太阳的家园
+1995年，创办步步高电子有限公司。旗下有三大部门（后来先后独立）：
 
-https://mp.weixin.qq.com/s/HoCibMd3YurC1TeFIYm4jA
+1.教育电子业务。产品：步步高点读机。2011年，创立小天才品牌。
 
-双体：非环双星中的双体文明
+2.通信业务。产品：无绳电话、步步高音乐手机。初期使用BBK品牌，后来转为Vivo品牌。
 
-https://mp.weixin.qq.com/s/gjE_gqg14sGF8dFxNfeeWA
+3.视听业务。产品：VCD、DVD、MP3、蓝光DVD等。由于这个业务在2003年以后就不太行了，因此也进军手机领域，创立Oppo品牌。
 
-双体：环双星系统中的地球
+Oppo副总刘作虎于2013年，创立一加品牌。
 
-https://www.zhihu.com/question/267166775
+杨明贵接替段永平成为了小霸王总经理。后离开，创立金正品牌，产品：VCD。
 
-真空中有两个位置固定的引力源(恒星)，一个质量较小的小球(行星)有哪些典型的稳定绕转方式?
+杨的手下刘立荣，在金正没落之后，得到杨的投资，创立金立手机。但刘加盟小霸王时，段永平据说刚好离开一个月左右。
 
-----
+类似的还有波导手机的副总竺兆江，离开波导后，创立了传音手机。
 
-https://www.zhihu.com/question/303562583/answer/564059120
+---
 
-水星为什么没有卫星？这个答案同样可以解释——为什么卫星没有卫星？
+在这份报告中还出现了一个陌生的品牌，Tecno。截至2018年第二季度，Tecno共计出售了超过940万部智能手机，成为全球十大手机销量的第十名。这是一个什么品牌又是靠什么出现在全球十大智能手机出货量排行榜中？
 
-![](/images/img2/earth_moon.jpg)
+Tecno是个国产品牌，中文名叫传音。还是没听说过？其实也很正常，毕竟它业务重心在非洲和南亚市场。在第一季度国货手机出货量中，连小米，OV都比不上它。
 
-上图是地球和月亮之间的引力场图，以及5个**拉格朗日点**。
+根据Canalys提供的数据，今年第一季度，三星凭借340万销量、23%的市占率、高达42%的销量增长率，成为了非洲智能手机市场的第一大品牌。但是，这只是表面数据，真正的赢家并非三星，而是传音。因为itel和Infinix均为传音的子品牌。三品牌相加，传音系总销量高达490万台，市场占有率为38%，是毫无争议的非洲第一大手机厂商。
 
-木星的轨道上存在两个与木星运行轨道及速率一致两群小行星，统称为特洛伊群，其中运行在木星“前方”的为“希腊群”，运行在木星“后方”的为“纯特洛伊群”。
+传音因为是非洲做起来的，所以虽然出货量大，但是经验效率严重不足，而华米ov品牌清楚非洲的利润空间不大，主要以走量为主，加之渠道已经被传音系做成熟了，各品牌对非洲持有鸡肋的态度（毛利太低，这也是为何华为把市场放在欧洲的原因），传音才能坐得稳。
 
-![](/images/img2/InnerSolarSystem-en.png)
+其他区域，如南亚甚至北非（摩洛哥、埃及等地）中东，传音系面对华米ov甚至金立这种品牌的竞争，弊病直接暴露，显得非常疲软。
 
-上图中橙色的部分是Hilda asteroid，它实际上是一群更有意思的小行星。它们与木星间形成2:3的轨道共振。希尔达小行星的远日点可能是L3、L4、L5这三个拉格朗日点。当其连续绕太阳旋转三圈，会相继通过这三个点。
+https://mp.weixin.qq.com/s/T1sTKFcigLrkoj-xN_im3g
 
-![](/images/img2/Hildas01.jpg)
-
-上图是Hilda asteroid的分布图。其中左图还叠加了其他小行星群（主要是希腊群和特洛伊群）。
-
-由开普勒定律可知，公转周期越短，公转半径越小。所以可以利用这点的将Hilda asteroid从中区分开来。
-
-从上图还可以看出Hilda asteroid的公转轨道被木星引力挤压成了等边三角形。
-
-轨道共振现象还有木星和它的几个卫星：
-
-![](/images/img2/Galilean_moon_Laplace_resonance.gif)
-
-https://en.wikipedia.org/wiki/Titius–Bode_law
-
-https://en.wikipedia.org/wiki/Orbital_resonance
-
-当然，也不是所有的共振都能稳定存在，不能稳定存在的共振区也有，比如木星的Kirkwood Gaps。这个共振区的小行星都被木星清除了。
-
-参见：
-
-https://www.zhihu.com/question/47287395/answer/106715405
-
-金星每八年的运行轨迹真的是五角形吗？
-
-## 天体物理
-
-https://www.zhihu.com/question/40030083
-
-太阳在变成红巨星之前（逐渐变热，外围膨胀到地球轨道），人类有什么办法回避，并生存下来？
-
-https://en.wikipedia.org/wiki/Dyson_sphere
-
-https://en.wikipedia.org/wiki/Kardashev_scale
-
-![](/images/img2/Kardashev.png)
-
-![](/images/img2/Sundeath.gif)
-
-![](/images/img2/Hertzsprung-Russel_StarData.png)
-
-https://www.atnf.csiro.au/outreach/education/senior/astrophysics/stellarevolution_hrintro.html
-
-The Hertzsprung-Russell Diagram
-
-https://mp.weixin.qq.com/s/tqUNYZk8I1Yf-u3DEIxNxA
-
-一篇读懂超新星——宇宙中最酷的星
-
-https://mp.weixin.qq.com/s/V2RHcey7BaS3vQdkcdFaMw
-
-宇宙膨胀到底有多快？科学家也困惑了
-
-https://mp.weixin.qq.com/s/UsNxfDC94RKOkGfu4HQMGQ
-
-任时光匆匆流去，我只在乎宇宙的过去
-
-## 流浪地球
-
-https://mp.weixin.qq.com/s/O8tAEBMmZ29N1fr7BGW_UQ
-
-一文读懂电影《流浪地球》没有交代清楚的烧脑科学知识
-
-https://www.zhihu.com/question/311007231
-
-《流浪地球》从物理上来说有哪些地方是很“bug”的？
-
-https://mp.weixin.qq.com/s/S_zfa_vv1wBPXU2klopMvA
-
-理科生终于哭了！《流浪地球》竟隐藏了这么多高考考点，是魔鬼吗？
-
-https://mp.weixin.qq.com/s/kt2uw6GGn1HJoJ9q2XWlLQ
-
-氧气太少、爆炸不给力，吴京白死了（及《流浪地球》其他20多处硬伤）
-
-----
-
-![](/images/img2/Solar.gif)
-
-为了解决地心坐标系下，行星运动轨迹的问题，托勒密创造性的将本轮-均轮的概念应用于该问题中。托勒密这个不反映宇宙实际结构的数学图景，却较为完满的解释了当时观测到的行星运动情况，并取得了航海上的实用价值，从而被人们广为信奉。
-
-从数学家的角度看，托勒密完爆哥白尼。
-
->本轮-均轮的概念是由阿波罗尼奥斯提出的。
-
-----
-
-![](/images/img2/The_Wandering_Earth.jpg)
-
-https://mp.weixin.qq.com/s/O8Zp7ok0JpPuFkofnQ7UaQ
-
-《流浪地球》幕后概念设计大揭秘！！！概念设计艺术指导，故事板总监专访来了！
-
-https://mp.weixin.qq.com/s/kFKphYDOKGDtCH7YnM_uiQ
-
-《流浪地球》不科学？刘慈欣的答案在这里
-
-https://mp.weixin.qq.com/s/aeO0LYuHHDqz1Inf5ONBgQ
-
-没钱没人没经验，《流浪地球》的拍摄究竟有多艰难？
-
-## 天文学史
-
-https://www.zhihu.com/question/312142122
-
-如何评价NASA宣布机遇号火星车永久失联？
-
-https://mp.weixin.qq.com/s/cllhuj8m3RmG_JE7QrG4Uw
-
-生的伟大，死的光荣——致敬卡西尼号土星探测器
-
-https://mp.weixin.qq.com/s/ros-kBOIgTgQF2SaGc99qQ
-
-哈佛名镜的前世今生
-
-https://mp.weixin.qq.com/s/aY4gFbK_aKWcgwvr0Rk5gQ
-
-“波多黎各，波多黎各，世界最大射电望远镜，倒闭了”——让我们阻止这成为事实
-
-https://mp.weixin.qq.com/s/DKMs8sZtE_JzWaxr8o-DWA
-
-你好，冥王星
-
-https://mp.weixin.qq.com/s/sv6McqKzoqJ3snUeDvFfwg
-
-这地儿跟中国一个时区，你却从来没听说过？这个blog介绍了西澳大学和它的天文学成就。
-
-https://mp.weixin.qq.com/s/EZWl8UwhiAkIXWkWE0abUQ
-
-半个世纪的角逐：二战后的国际脉冲星搜寻竞赛
-
-https://mp.weixin.qq.com/s/tmSL5NIyjBpivtbGpbdKqQ
-
-威廉·赫歇尔：我一个德国音乐家，怎么就跑到英国当了天文学家？
-
-https://mp.weixin.qq.com/s/R2Hco-nE-e0S_gmTSImrAA
-
-它曾“超长待机”俯瞰地球，最终在“回家”路上粉身碎骨
-
-## 天文软件
-
-Space Engine是一款免费太空模拟程序，由俄罗斯天文学家和程序员Vladimir Romanyuk开发。有了它，你可以随意穿梭于浩瀚星尘之间，也可以驾驶一艘宇宙飞船，登陆到程序中的任何天体，尽情享受美丽的异星风情与震撼的天文奇观。
-
-官网：
-
-http://spaceengine.org/
-
-----
-
-Stellarium是一款免费开源的软件，它使用OpenGL图形接口对星空进行实时渲染。软件可以真实地表现通过肉眼、双筒望远镜和小型天文望远镜所看到的天空。
-
-官网：
-
-http://stellarium.org/
-
-----
-
-Universe Sandbox是一款模拟天体运行的天文模拟软件，类似物理沙盘游戏，玩家可以自行创造天体系统，通过软件计算模拟天体运行，演化等。它是一款收费软件。
-
-官网：
-
-http://universesandbox.com/
-
-----
-
-![](/images/img3/Earth's_Location_in_the_Universe.jpg)
-
-原始图片地址（超大，size 21M）：
-
-https://commons.wikimedia.org/wiki/User:Azcolvin429#/media/File:Earth's_Location_in_the_Universe.jpg
+“非洲华为”中国造，一年出口1.33亿部手机，这个国产品牌是如何征服非洲的？
 
 # 世说新语
 
-## 2018.11（续）
+## 2021.5（续）
 
-在重庆铁路客运“两主两辅”规划确定前，重庆北站（南广场）是按照三等站的规模去修建的，因兰渝铁路、渝利铁路、渝万高铁等快速、高速铁路的获批，重庆北站的规划又不得不追加规模，在原站场的北侧修建标准和规格更高的站场，即现在的重庆北站北广场。
+小张成绩出众，卷到GPA3.9，顺利保研本校，遇到坑导师发不出文章，延毕再做博后，36岁找不到教职去了二本；
 
-----
+小王排名倒数，挂了几科，躺平去辅导机构，年薪秒杀还在读博延毕的同学，五年后被新来的毕业生淘汰而失业；
 
-任正非第一任妻子为四川省原副省长孟东波之女孟军，两人育有女儿孟晚舟和儿子任平；Annabel Yao的母亲则是Ling Yao。
+小李转行金融/CS，去了传统工科同学羡慕的高薪岗位996+，奋力拼搏之后收入勉强支付房贷，几年后进了ICU；
 
-----
+小陈曾经信仰环化材生改变21世纪，毕业之后拿着好几千的工资，每周两次相亲问对方“你接受和我一辈子租房吗”。
 
-![](/images/img2/CAS9.jpg)
+---
 
-https://zhuanlan.zhihu.com/p/20547746
+红楼梦里的女孩子没嫁人之前哪怕是丫鬟过得也是小仙女的生活，嫁人之后重则殒命轻则受虐，完全没有人的尊严。
 
-人类改造生命的“魔剪”：CRISPR发现之旅
+---
 
-----
+https://epaper.scdaily.cn/shtml/scrb/20210531/255352.shtml
 
-https://www.zhihu.com/question/301633935/answer/540540030
+老成都游了54年的露天泳池明日关门
 
-蜀汉当时如果不全力进攻关中，慢慢经营南中的话，会那么快覆灭吗？
+## 2021.6
 
-----
+“将军们的妻子怎么都又老又丑？要是我，肯定能当个出色的将军夫人。”
 
-![](/images/img2/SI.png)
+“想当将军夫人，就得先嫁给中尉，跟他在边境上、森林里、沙漠上，过上20年。” 
 
-![](/images/img2/periodic_table.png)
+---
 
-话说NIST上的好东西真不少。。。
+https://mp.weixin.qq.com/s/OzvTC5MjAALg0JI7bDTW5w
 
-## 2018.12
+环游地球100天：我在海上“躺平”的日子
 
-https://www.zhihu.com/question/51459956/answer/513535282
+---
 
-皮内尔湖灾难（Lake Peigneur Disaster）
+读过鲁迅先生的文集都知道，鲁迅一生都鄙视吴稚晖，因为在清末反满革命的时候，吴在著名的苏报案中曾经出卖过章太炎先生和邹容。吴一生都是反复小人。出卖和自己没什么关联的陈延年，他这种垃圾根本没有心理负担的。
 
-----
+## 2021.7
 
-1279年2月，被蒙古军队围困于广东崖山（今广东新会）海上的南宋末代皇帝赵昺投水自尽后，宜宾兴文县凌霄城的南宋军民在明知南宋已亡，四川境内抗蒙的方山城堡钓鱼城、神臂城、云顶城等已全部失陷的情况下，仍以一座孤城屹立于蒙古军队如雨的箭矢、如林的弯刀之中，坚持抗击蒙古军队达9年之久。
+![](/images/img4/Yuan.png)
 
-----
+如果不是袁隆平的亲笔题字并授权挂牌，恐怕没人敢相信，这么破的一个理发店，居然是袁隆平理发16年的地方。
 
-https://mp.weixin.qq.com/s/eI-u_RsabtuyRajDYnnZDg
+https://mp.weixin.qq.com/s/YRslW865reivpvfOsBlSZA
 
-殷极物理竞赛作弊事件
+明星怎么就成了凌驾于我们之上的人上人？
 
-http://www.sohu.com/a/279764465_102101
+https://mp.weixin.qq.com/s/2YuWV0wuUeB-uadSyWLcmA
 
-年薪百万的清华网红情侣约人3p遭拒狂喷人，却被扒联手学术造假骗3W奖学金
+一天650的伙食费，居然还不能让明星吃饱
+
+---
+
+在以往的诸多次战役中，经常有将领汇报说“无粮进攻”，可是他们驻守在原地时，似乎又活得有滋有味，这是怎么回事呢？
+
+我们人人都知道马要吃草，可是我们不知道草的热量很低，如果一匹马要吃草吃到饱，需要大半天，留给人骑马的时间就不多了。
+
+如果要一整天都用这匹马，那就得喂它粮食。吃纯谷物的话，最多半个小时，它就能吃饱，剩下的时间，都可以供人驾驭了。
+
+不打仗的时候，反正也是闲着，就让马慢慢吃草好了。但是征战中，马是以吃粮食为主的，还特别能吃，比人的饭量多五六倍。一支2万人的部队，如果有1万匹战马，粮食的消耗需要增加四五倍，运输消耗也要成倍增加，粮食自然不够用了。
+
+如果草原上的游牧民族要进攻敌人，难道也要喂马吃粮食吗？可是他们没有粮食呀！
+
+难道没有注意到草原上的游牧民族，一般都是在秋季才发动进攻吗？马吃了一个夏天的草，长了很多膘，所以饿一饿也没有关系。再加上他们每个人都有很多匹马，可以换着用，这样南侵的时候，他们才能保持机动性。
+
+---
+
+柳谷书，1921～2003，男，江苏镇江人，1944年毕业于上海大夏大学，1947年参加革命工作，1956年8月加入中国共产党，中国第二号律师证的持有者，从事知识产权事业近40年，是我国知识产权事业的创始人。
+
+---
+
+那是淘宝、京东尚未崛起的时代，线上零售的概念还未风靡，中国家电零售市场上演的是一场轰轰烈烈的“美苏争霸”——国美与苏宁激烈争夺着“家电零售第一”的名号。
+
+---
+
+有的省总队的一把手明明有机会去北京的，却愿意平调到其他省继续做总队长或者总队政委，千万不要奇怪，那个地方一定是高配副军的。局里位置也紧张，最起码待在地方上可以解决一个将衔，没什么不好的。
+
+---
+
+https://mp.weixin.qq.com/s/LijxriUUHrg8oQXv2j0-JQ
+
+往头盖骨里注水泥！为了整形，这些人不要命了，竟然还把自己的腿筋挑断...
+
+---
+
+https://mp.weixin.qq.com/s/DbvfTRDWO2IjnXUjRq_ydg
+
+为什么我说世界末日前人一定要挣够1个亿？（末日地堡）
+
+---
+
+你知道吗？女人在爱你或者自以为爱你的时候，是愿意欺骗你甚至欺骗自己的，我们每个人都爱过你，或者自以为自己爱过，所以为了保护你，才欺骗你。你知道真实感受是什么样吗？大概率，就是你想挖鼻屎，本来想用手指，但是只能用牙签这么一种感觉。你改名叫吴签吧，反正以后你这个名字也用不了了。
+
+Probably, it’s the feeling like you want to pick your nose, and you wanted to use your finger, but you can only pick it with a toothpick. It’s a slow and painful process. You should change your name to Wu-Pick, since you will never be able to use your name ever again.
+
+丶在头上的“凢”和“凣”。它们俩仍旧读fán。其实就是“凡”的两个异体字。
+
+https://www.zhihu.com/question/473055960
+
+请问你怎么看吴亦凡被叫做“吴签”?
+
+https://www.zhihu.com/question/473201427
+
+怎么看吴亦凡丑闻上了推特热搜和世界各国热搜？

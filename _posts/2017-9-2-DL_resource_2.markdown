@@ -1,8 +1,11 @@
 ---
 layout: post
 title:  DL参考资源（二）
-category: resource 
+category: DL & NLP resource 
 ---
+
+* toc
+{:toc}
 
 # DL参考资源
 
@@ -72,10 +75,6 @@ https://mp.weixin.qq.com/s/S6_HzgyTnoNvc8vp4_C1kw
 
 利用Matlab实现深度学习
 
-https://mp.weixin.qq.com/s/z360mTVRqeDFMBiJ0Q_9SQ
-
-调参心得：超参数优化之旅
-
 https://mp.weixin.qq.com/s/miKs4tWu8Hh1yHvx-XZFwg
 
 构建深度神经网络，我有20条“不成熟”的小建议
@@ -99,10 +98,6 @@ https://mp.weixin.qq.com/s/yMq-m2uGS705Jyxm_oVUng
 https://mp.weixin.qq.com/s/d85UM4BjiARk42WUj4Xo4w
 
 16篇论文、70多页PPT帮你优化深度学习模型
-
-https://mp.weixin.qq.com/s/8qR7Ew3oLzOZV2hV1QjMAA
-
-最新49页《深度学习异常检测综述》论文，带你全面了解深度学习异常检测方法
 
 https://mp.weixin.qq.com/s/2qvLk4gqSrI2dslD4d9V5g
 
@@ -177,6 +172,10 @@ https://mp.weixin.qq.com/s/2gBoVr_072DLJ_MMHPHNLQ
 https://mp.weixin.qq.com/s/SeNIQQL_MqjFG4ek_wJoIg
 
 必须了解的8种神经网络架构
+
+https://zhuanlan.zhihu.com/p/152362317
+
+22张深度学习精炼图笔记总结
 
 ## 行业
 
@@ -282,11 +281,49 @@ https://mp.weixin.qq.com/s/UGx3FI9GsHuUreNb8yByAA
 
 手绘稿如何1秒变身数据大屏？深度学习让人人成为可视化专家
 
+https://mp.weixin.qq.com/s/rbdke7cKAkXbxvSyFMXX4g
+
+独家下载！阿里如何用AI写代码？
+
+https://mp.weixin.qq.com/s/tTx5kbr4tPEdme3R410uEA
+
+layoutGAN是如何实现自动排版的
+
+## 图像配准
+
+https://mp.weixin.qq.com/s/0BeqQ6-ZZM-T38sJJWeX1Q
+
+图像配准的前世今生：从人工设计特征到深度学习
+
+https://zhuanlan.zhihu.com/p/80985475
+
+图像配准综述
+
+https://zhuanlan.zhihu.com/p/90593936
+
+fluid(流）方法图像配准简介
+
+https://mp.weixin.qq.com/s/bYr1BAlAn2vp9jUAPhgXDA
+
+用MNIST数据集进行基于深度学习的可变形图像配准的验证实验
+
+https://mp.weixin.qq.com/s?__biz=MzI0ODcxODk5OA==&mid=2247508603&idx=2&sn=cfb091884ccc7a0ea03af38b1a629823
+
+巧解图像处理经典难题之图像配准
+
+https://mp.weixin.qq.com/s/4F-goAdut2qrb4m5fRVN2g
+
+基于深度学习的2D和3D仿射变换配准
+
 ## CV
 
 https://mp.weixin.qq.com/s/gsHu7vNs9cm1tH2nz9mmMg
 
 推荐一个不错的边缘检测网络：HED
+
+https://mp.weixin.qq.com/s/gEYzS6iiktUJM_EW4s_CEA
+
+在OpenCV中基于深度学习的边缘检测
 
 https://mp.weixin.qq.com/s/7zFcWAmtpW2S_PVYru_lxg
 
@@ -304,13 +341,13 @@ https://mp.weixin.qq.com/s/SN1Fc48sa4NZzm_K16kUnw
 
 通过空间上下文特征进行阴影检测
 
-https://mp.weixin.qq.com/s/oOru4Dn2uyVuHVOLDxvsBg
-
-最新的图像质量评价
-
 https://mp.weixin.qq.com/s/fTFyH5jaLEWWPka_XP9EaQ
 
 视觉识别新范式：开放世界下的大规模长尾识别
+
+https://mp.weixin.qq.com/s/k4KyBOoxfAdvHQXxz2GSmA
+
+长尾识别中的Tricks汇总
 
 https://mp.weixin.qq.com/s/sOeBUZi5-7fGkqcd1MPmiQ
 
@@ -320,19 +357,11 @@ https://zhuanlan.zhihu.com/p/55286828
 
 当低级视觉任务遇上高级视觉任务
 
-https://mp.weixin.qq.com/s/0BeqQ6-ZZM-T38sJJWeX1Q
-
-图像配准的前世今生：从人工设计特征到深度学习
-
-https://zhuanlan.zhihu.com/p/80985475
-
-图像配准综述
-
 https://zhuanlan.zhihu.com/p/37404280
 
 图像处理：从bilateral filter到HDRnet
 
-https://zhuanlan.zhihu.com/p/78053406
+https://zhuanlan.zhihu.com/p/112114806
 
 基于深度学习的特征提取和匹配方法介绍
 
@@ -360,20 +389,18 @@ https://zhuanlan.zhihu.com/p/76960575
 
 深度学习在图像处理的应用一览
 
-## 光神经网络
+https://mp.weixin.qq.com/s/1ZnacYeqkd_y_HoK8XIWWQ
 
-https://mp.weixin.qq.com/s/EdDMj-fH2jXA222qyWvcuQ
+旷视成都研究院负责人刘帅成：图像对齐及其应用
 
-3D打印的深度神经网络，光速执行AI运算
+https://mp.weixin.qq.com/s/FQ8uqDxXemJVLGmktGuZCQ
 
-https://mp.weixin.qq.com/s/5zt8UIpNBcgNZpwHHJj68Q
+真实场景中的玻璃检测，有趣的应用
 
-光学CNN层替换传统CNN层，超省电
+https://zhuanlan.zhihu.com/p/89205060
 
-https://mp.weixin.qq.com/s/IheyYAC1yIigYOW-gtc5Eg
+图像分类中常用的tricks
 
-Science重磅！用光速实现深度学习，跟GPU说再见
+https://mp.weixin.qq.com/s/xN8Ks8qrCxM3AjUd8Cabmg
 
-https://mp.weixin.qq.com/s/ENYX87SMlgv30x08iYFQIw
-
-几乎零能耗零延迟！UCLA科学家发明光衍射神经网络，登上Science
+如何让拍摄的照片适配不同分辨率的设备？

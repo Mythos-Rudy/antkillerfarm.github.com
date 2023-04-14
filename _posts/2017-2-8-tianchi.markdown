@@ -1,8 +1,11 @@
 ---
 layout: post
-title:  天池大赛, Redis
+title:  天池大赛
 category: AI 
 ---
+
+* toc
+{:toc}
 
 # 简介
 
@@ -35,6 +38,10 @@ https://biendata.com/
 https://challenger.ai/
 
 由创新工场、搜狗、今日头条联合发起。
+
+https://mp.weixin.qq.com/s/LgFpuRXfKtxS1tlPApgp8w
+
+国内NLP竞赛平台一览
 
 我之前虽然参加了其中的“广东航空大数据创新大赛——机场客流量的时空分布预测”（2016.9～2016.11），然而由于首次参赛，各项准备和工具都不纯熟，仰仗队友给力，最终获得了第318名。
 
@@ -222,61 +229,6 @@ https://mp.weixin.qq.com/s/1T5Iv87JRVdTS66yAzs-DQ
 
 IJCAI获奖团队答辩干货独家放送
 
-# Redis
+https://mp.weixin.qq.com/s/3cER2nr7oiF0IrqDem3bkQ
 
-REmote DIctionary Server(Redis) 是一个由Salvatore Sanfilippo写的key-value存储系统。
-
-http://www.runoob.com/redis/redis-tutorial.html
-
-Redis教程
-
-http://www.yiibai.com/redis/
-
-另一个Redis教程
-
-参考：
-
-https://mp.weixin.qq.com/s/3WmGpZkEuSz-ox_2CPCsqg
-
-伯克利推出世界最快的KVS数据库Anna：秒杀Redis和Cassandra
-
-https://mp.weixin.qq.com/s/320HQlFOXdzbBh2ofrpANA
-
-Redis高负载下的中断优化
-
-https://mp.weixin.qq.com/s/3ISOT_9HTFrnxpJdnHTnsg
-
-redis哈希表的rehash分析
-
-https://www.jianshu.com/p/dbc62ed27f03
-
-玩转Redis集群
-
-https://mp.weixin.qq.com/s/My6gZIVBVEjjDoQ5IpPKCw
-
-Redis查漏补缺：最易错过的技术要点大扫盲
-
-https://mp.weixin.qq.com/s/T2AmwNTYwTPlB0WbCsy-3g
-
-Redis单线程架构
-
-https://mp.weixin.qq.com/s/XZYxHEUx0AJozQ2oM5fTrw
-
-秒杀Redis的KVS上云了！伯克利重磅开源Anna 1.0
-
-https://mp.weixin.qq.com/s/FyYhLS3X7LDe0PLxooz_cQ
-
-Redis的n种妙用，不仅仅是缓存
-
-https://mp.weixin.qq.com/s/X1gh_mtXvc9KnI2jK-cTyw
-
-如果面试官问你：Redis内存满了怎么办？
-
-# Pika
-
-Pika是一个可持久化的大容量redis存储服务，兼容string、hash、list、zset、set的绝大部分接口(兼容详情)，解决redis由于存储数据量巨大而导致内存不够用的容量瓶颈。
-
-官网：
-
-https://github.com/Qihoo360/pika/
-
+时间序列异常检测—节假日效应的应对之道

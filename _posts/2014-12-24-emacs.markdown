@@ -1,8 +1,11 @@
 ---
 layout: post
-title:  Emacs, Vi, IDE
+title:  Emacs
 category: language 
 ---
+
+* toc
+{:toc}
 
 # emacs学习心得
 
@@ -14,91 +17,91 @@ emacs是大名鼎鼎的Richard Stallman的作品，我闻名已久。但作为�
 
 M-x使用技巧：M-x下输入的命令过长的时候，可以输入开头的字符串，然后按TAB，emacs会显示所有满足输入前缀的命令。
 
-复制、剪切——M-w、C-w，或者用M-x cua-mode切换到CUA模式，就可以用C-c和C-v来复制粘贴了
+复制、剪切: M-w、C-w，或者用M-x cua-mode切换到CUA模式，就可以用C-c和C-v来复制粘贴了
 
-粘贴——C-y
+粘贴: C-y
 
-搜索——C-s，如果要利用剪切板的内容来进行搜索的话，使用Esc-y
+搜索: C-s，如果要利用剪切板的内容来进行搜索的话，使用Esc-y
 
-搜索下一个——继续按C-s
+搜索下一个: 继续按C-s
 
-向前搜索——C-r
+向前搜索: C-r
 
-正则式搜索和普通搜索的快捷键类似——C-M-s和C-M-r //在ubuntu里由于C-M-s和系统快捷键冲突，因此可以用Esc C-s的方式启动向前的正则式搜索。
+正则式搜索和普通搜索的快捷键类似: C-M-s和C-M-r //在ubuntu里由于C-M-s和系统快捷键冲突，因此可以用Esc C-s的方式启动向前的正则式搜索。
 
-替换——M-%
+替换: M-%
 
-保存缓冲区——C-x C-s
+保存缓冲区: C-x C-s
 
-十六进制模式——M-x hexl-mode
+十六进制模式: M-x hexl-mode
 
-十六进制模式下跳转到某个十六进制地址——M-g
+十六进制模式下跳转到某个十六进制地址: M-g
 
-十六进制模式退出——C-c C-c
+十六进制模式退出: C-c C-c
 
-多窗口的时候切换窗口——C-x o //"o",not zero
+多窗口的时候切换窗口: C-x o //"o",not zero
 
-关闭当前的窗口——C-x 0
+关闭当前的窗口: C-x 0
 
-只保留当前的窗口——C-x 1
+只保留当前的窗口: C-x 1
 
-新建一个上下式的窗口——C-x 2
+新建一个上下式的窗口: C-x 2
 
-新建一个左右式的窗口——C-x 3
+新建一个左右式的窗口: C-x 3
 
-退出emacs——C-x C-c
+退出emacs: C-x C-c
 
-召唤菜单——M-`
+召唤菜单: M-`
 
-打开shell——M-x shell //shell模式下，如果需要按C-c，终止程序的话，可以按两下C-c
+打开shell: M-x shell //shell模式下，如果需要按C-c，终止程序的话，可以按两下C-c
 
-关闭缓冲区——C-x k
+关闭缓冲区: C-x k
 
-比较两个已经打开的缓冲区——M-x ediff-buffers
+比较两个已经打开的缓冲区: M-x ediff-buffers
 
-比较两个文件夹——M-x edirs
+比较两个文件夹: M-x edirs
 
-缓冲区被外部程序改变之后，重新刷新缓冲区——M-x revert-buffer
+缓冲区被外部程序改变之后，重新刷新缓冲区: M-x revert-buffer
 
-Undo——C-x u
+Undo: C-x u
 
-Redo——用C-f中断Undo执行序列，然后再Undo，就可以Undo之前做的“Undo”操作，也就是Redo操作了。
+Redo: 用C-f中断Undo执行序列，然后再Undo，就可以Undo之前做的“Undo”操作，也就是Redo操作了。
 
-打开文件——C-x C-f//这个命令不仅可用于打开文件，还可用于确定emacs默认的操作目录，.emacs配置文件就放在这个目录下，这一点对Windows用户来说十分重要。
+打开文件: C-x C-f//这个命令不仅可用于打开文件，还可用于确定emacs默认的操作目录，.emacs配置文件就放在这个目录下，这一点对Windows用户来说十分重要。
 
-空格变TAB——M-x tabify
+空格变TAB: M-x tabify
 
-在emacs中去除`^M`——M-x replace-string C-q C-m RET
+在emacs中去除`^M`: M-x replace-string C-q C-m RET
 
-选择整个缓冲区——C-x h
+选择整个缓冲区: C-x h
 
-在windows下使用ediff——windows版的emacs没有自带diff工具，可以用cygwin中的diff代替之，具体的办法是将cygwin的bin文件夹加到PATH环境变量中。
+在windows下使用ediff: windows版的emacs没有自带diff工具，可以用cygwin中的diff代替之，具体的办法是将cygwin的bin文件夹加到PATH环境变量中。
 
-高亮显示——C-x w h//后面需要跟正则表达式，如果是要全字匹配才高亮显示的话，可以用\的方式给出相应的正则表达式。
+高亮显示: C-x w h//后面需要跟正则表达式，如果是要全字匹配才高亮显示的话，可以用\的方式给出相应的正则表达式。
 
-取消高亮显示——C-x w r
+取消高亮显示: C-x w r
 
-M-x list-matching-lines 或 M-x occur——另开一个buffer列出当前buffer中所有匹配正则表达式的那些行。这个功能我找了好半天才查到，之前还以为只有UltraEdit里才有呢。。。
+M-x list-matching-lines 或 M-x occur: 另开一个buffer列出当前buffer中所有匹配正则表达式的那些行。这个功能我找了好半天才查到，之前还以为只有UltraEdit里才有呢。。。
 
-M-x find-grep-dired——列出文件夹下所有匹配字符串的文件的名字。这个命令只能列出文件名，而不能列出在该文件中出现的匹配字符串的位置，有的时候仍然不太好用。
+M-x find-grep-dired: 列出文件夹下所有匹配字符串的文件的名字。这个命令只能列出文件名，而不能列出在该文件中出现的匹配字符串的位置，有的时候仍然不太好用。
 
-M-x rgrep——这个命令可以解决上面的问题，列出匹配字符串在文件夹中所有出现的位置。
+M-x rgrep: 这个命令可以解决上面的问题，列出匹配字符串在文件夹中所有出现的位置。
 
 C代码相关的内容：
 
-选择缩进的版式——C-c . //然后会提问使用什么风格，默认的gnu风格是缩进两个空格，我比较喜欢bsd风格的——缩进一个TAB
+选择缩进的版式: C-c . //然后会提问使用什么风格，默认的gnu风格是缩进两个空格，我比较喜欢bsd风格的: 缩进一个TAB
 
-代码排版——TAB//可支持块操作
+代码排版: TAB//可支持块操作
 
-输入TAB——C-q TAB
+输入TAB: C-q TAB
 
-块小写——C-x C-l
+块小写: C-x C-l
 
-块大写——C-x C-u
+块大写: C-x C-u
 
-显示行号——`(global-linum-mode t)`
+显示行号: `(global-linum-mode t)`
 
-跳到第N行——M-g g
+跳到第N行: M-g g
 
 以指定编码读取文件--M-x revert-buffer-with-coding-system
 
@@ -112,15 +115,15 @@ C代码相关的内容：
 
 1）除了安装cscope还需要安装cscope-el，不然找不到xcscope.el
 
-`sudo apt-get install cscope-el cscope`
+`sudo apt install cscope-el cscope`
 
 2）xcscope.el的默认路径：/usr/share/emacs/site-lisp。安装好之后，还需要在配置文件~/.emacs（如果当前没有这个配置文件的话，直接创建一个即可）里面加上`(require 'xcscope)`。或者，如果希望在打开c或者c++文件的时候才加载xcsope，可以这样写：
 
-{% highlight lisp %}
+```lisp
 (add-hook 'c-mode-common-hook
 '(lambda ()
 (require 'xcscope)))
-{% endhighlight %}
+```
 
 注：Windows下创建配置文件的步骤：
 
@@ -160,7 +163,7 @@ http://melpa.org/
 
 melpa的安装方法：
 
-{% highlight lisp %}
+```lisp
 (when (>= emacs-major-version 24)
   (require 'package)
   (add-to-list
@@ -168,7 +171,7 @@ melpa的安装方法：
    '("melpa" . "http://melpa.org/packages/")
    t)
   (package-initialize))
-{% endhighlight %}
+```
 
 重启emacs之后，执行：
 
@@ -198,7 +201,7 @@ http://ctags.sourceforge.net/
 
 1.安装GNU GLOBAL。
 
-`sudo apt-get install global`
+`sudo apt install global`
 
 GLOBAL中虽然有gtags.el，然而并不好用。这一点官网上也认为debian的包太老了。
 
@@ -218,12 +221,12 @@ https://github.com/leoliu/ggtags
 
 在配置文件~/.emacs中添加：
 
-{% highlight lisp %}
+```lisp
 (add-hook 'c-mode-common-hook
           (lambda ()
             (when (derived-mode-p 'c-mode 'c++-mode 'java-mode)
               (ggtags-mode 1))))
-{% endhighlight %}
+```
 
 ## scratch缓冲区
 
@@ -243,11 +246,11 @@ https://github.com/leoliu/ggtags
 
 在配置文件~/.emacs中添加：
 
-{% highlight lisp %}
+```lisp
 (require 'recentf)
 (setq recentf-max-saved-items 100)
 (recentf-mode 1)
-{% endhighlight %}
+```
 
 ## 添加scala支持
 
@@ -279,84 +282,76 @@ https://github.com/myuhe/ess-R-data-view.el
 
 2.搜索中文时，不要用引号括起来，否则什么都找不到。
 
-# Vi
+# Lazarus
 
-## 常用操作
+Lazarus为开放的IDE，且在Linux下表现良好，目前被中国计算机学会指定为NOI系列竞赛的Pascal语言推荐IDE。
 
-`dd`——删除整行
+官网：
 
-`/`是向下查找，而`?`是向上查找，n是继续查找。
+https://www.lazarus-ide.org/
 
-`u`——撤销上一个编辑操作
+# 古希腊/罗马++
 
-`:set nu`——显示行号
+外交界里有个术语叫迦太基和平。迦太基和平就是根本没有和平打算的和平条约，目的只是为了把对手的军事能力完全瘫痪，让下一次进攻更方便而已。只要让步一次，那么就会第二次，第三次，一直到亡国为止。
 
-`:行号`——跳转到行号
+---
 
-## 分栏显示
+其实资深执政官的产生并没有什么特别之处，有过执政官经历的人，就是资深执政官。
 
-`vim -on file1 file2 ...`：上下分屏。n为分屏个数。
+---
 
-`vim -On file1 file2 ...`：左右分屏。
+因为政变往往离不开禁卫军，这一继承法又被叫做禁卫军继承法。
 
-`:new`——创建一个空白分栏界面，和原文件窗口上下排列。
+https://baijiahao.baidu.com/s?id=1612136685598160040
 
-`:split`——将当前文件分成上下两栏显示。
+古罗马帝国奇葩的王位继承法，叛乱继承制，没错叛乱继承法！
 
-`:vnew`和`:vsplit`——功能相同，不同的是新窗口是左右排列的。
+---
 
-`:only`——取消分屏。
+https://www.bilibili.com/read/cv5699454/
 
-按下ctrl+w之后再利用方向键或者h,j,k,l可以选择当前激活的窗口。
+历代罗马皇帝列表
 
-把光标移动到下一个的屏：ctrl+w w
+http://www.ict.griffith.edu.au/wiseman/Roman/EmpiresStrikeBack.html
 
-把光标移动到上一个的屏：ctrl+w p
+476年以后罗马帝国鼎盛期疆域所出现过的各大强权
 
-关闭其他窗口：Ctrl + w, o
+https://www.zhihu.com/question/317408964
 
-关闭当前屏：Ctrl+w，c
+如何过得像个东罗马贵族?
 
-`:vertical diffsplit file2`——垂直对比两个文档。
+https://www.163.com/dy/article/G2TB7GMH0543HIJQ.html
 
-## 参考
+辟谣：罗马士兵工资发了等于没发？太低级的谣言
 
-https://mp.weixin.qq.com/s/5694PDHy9BeoL8qy31MaxQ
+https://www.zhihu.com/question/505031003
 
-如何用vim格式化代码
+罗马帝国最大领土是怎么样的？
 
-https://mp.weixin.qq.com/s/QpJWyLY5AyrXGF-j7LYTGg
+https://www.zhihu.com/question/423981182
 
-1700页数学笔记火了！全程敲代码，速度飞快易搜索，硬核小哥教你上手LaTeX+Vim
+古罗马历史上哪些军团可以称为王牌？
 
-https://mp.weixin.qq.com/s/tvn2SKXyrZZRGDF6-Myx3A
+https://zhuanlan.zhihu.com/p/74453316
 
-Vim激荡30年发展史
+古罗马斗兽场完全八卦手册（上）
 
-# IDE
+https://zhuanlan.zhihu.com/p/74610242
 
-http://pypl.github.io/IDE.html
+古罗马斗兽场完全八卦手册（下）
 
-这个网站提供了常用IDE的流行排名
+https://zhuanlan.zhihu.com/p/456545071
 
-## Source Insight
+钱币上的罗马（上）
 
-Shift+F8：高亮选中的字
+https://zhuanlan.zhihu.com/p/461540485
 
-http://www.cnblogs.com/bluestorm/archive/2012/10/28/2743792.html
+钱币上的罗马（下）
 
-Source Insight常用设置和快捷键大全
+https://www.zhihu.com/question/266774805
 
-## Eclipse
+如何评价罗马皇帝巴西尔二世？
 
-### 分栏显示
+https://zhuanlan.zhihu.com/p/24781429
 
-1.拖住一个文件不放，直到鼠标图案发生改变。
-
-2.如果需要左右显示两个文件，向左右移动鼠标，如果需要上下显示两个文件，上下移动。这里的移动需要移出编辑窗口范围。
-
-## Other
-
-http://dcloud.io/index.html
-
-HBuilder，一个html编辑的IDE。
+帝国贵族服饰变迁（6世纪-11世纪早期）

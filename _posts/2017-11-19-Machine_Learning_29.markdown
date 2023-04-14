@@ -1,8 +1,11 @@
 ---
 layout: post
-title:  机器学习（二十九）——在线学习, 贝叶斯学习, Beam Search
+title:  机器学习（二十九）——在线学习, 贝叶斯学习, Beam Search, 集成学习
 category: ML 
 ---
+
+* toc
+{:toc}
 
 # 在线学习
 
@@ -156,6 +159,22 @@ https://mp.weixin.qq.com/s/GuM0jZlI4mC-DFSWybtG1A
 
 贝叶斯优化简介
 
+https://mp.weixin.qq.com/s/YtSYiw23J3oTXUXwNeoIEg
+
+一文读懂贝叶斯优化
+
+https://mp.weixin.qq.com/s/7GamrrteCUsePWStOuHbVw
+
+贝叶斯推断随机过程，449页pdf
+
+https://mp.weixin.qq.com/s/kqs5Gwr1XgldX-Yz2iJjzw
+
+贝叶斯优化(Bayesian Optimization)
+
+https://mp.weixin.qq.com/s/WPpAqLuisfN3za1LJpG6JQ
+
+一文看懂贝叶斯优化/Bayesian Optimization
+
 # Beam Search
 
 ## 概述
@@ -172,9 +191,9 @@ Beam Search（集束搜索）是一种启发式图搜索算法，通常用在图
 
 当Beam Width为1时，也就是著名的A*算法了。
 
-Beam Search主要用于机器翻译、语音识别等系统。这类系统虽然从理论来说，也就是个多分类系统，然而由于分类数等于词汇数，简单的套用softmax之类的多分类方案，明显是计算量过于巨大了。
+https://mp.weixin.qq.com/s/R7oxzvlTZfyhtxc2wkgbWQ
 
-PS：中文验证码识别估计也可以采用该技术。
+你一直在用的Beam Search，是否真的有效？
 
 ## Beam Search与Viterbi算法
 
@@ -206,16 +225,48 @@ https://mp.weixin.qq.com/s/GTtjjBgCDdLRwPrUqfwlVA
 
 如何使用贪婪搜索和束搜索解码算法进行自然语言处理
 
-# 模型驱动 vs 数据驱动
+https://mp.weixin.qq.com/s/7bpvoZykdAkHXwDL7-39Qw
 
-最近阅读了这篇文章，深有感慨：
+十分钟读懂Beam Search(1/2)
 
-https://mp.weixin.qq.com/s/N7DE0kvf8THhJQwroHj4vA
+https://mp.weixin.qq.com/s/BuvLXx0ZItOvhno4XAUpTg
 
-成不了AI高手？因为你根本不懂数据！听听这位老教授多年心血练就的最实用统计学
+十分钟读懂Beam Search(2/2)
 
->注：吴喜之教授是我国著名的统计学家，退休前在中国人民大学统计学院任统计学教授。吴教授上世纪六十年代就读于北京大学数学力学系，八十年代出国深造，在美国北卡罗来纳大学获得统计学博士学位，是改革开放之后第一批留美并获得统计学博士学位的中国学者。多年来吴教授在国内外数十所高校讲授统计学课程，在国内统计学界享有盛誉。其知名的学生有李舰和刘思喆。
+https://mp.weixin.qq.com/s/HFXzBZtf6-s_IQpZvdQ8Tw
 
->李舰，从2003年开始，一直把R当作随身武器奋战在统计学和数据分析的第一线，是Rweibo、Rwordseg、tmcn等高质量R包的作者，在业界积累了大量的经验，目前供职于Mango Solutions（中国），任数据总监。
+Beam Search、GREEDY DECODER、SAMPLING DECODER等解码器工作原理可视化
 
->刘思喆，2012至2016年就职于京东商城，推荐系统平台部高级经理，主要负责和推荐系统离线、在线相关的用户行为、商品特征的建模，以及数据监控平台。因工作业绩，在《京东技术解密》一书中获“数据达人”称号。
+# 集成学习
+
+https://mp.weixin.qq.com/s/hGoprRIeyoXPt5OnzgV-bg
+
+集成学习算法(Ensemble Method)浅析
+
+https://mp.weixin.qq.com/s/_rKnE833oPkRTUfkZGn7fQ
+
+机器学习之集成学习
+
+https://mp.weixin.qq.com/s/VgFnREuG_D6lbTvs3JLBHg
+
+集成学习基础通俗入门
+
+https://mp.weixin.qq.com/s/I41c-i-6y-pPdZOeiMM_0Q
+
+通俗讲解集成学习算法！
+
+https://mp.weixin.qq.com/s/z42pMRSOSt8GkOCRHcDtNg
+
+集成深度学习在生物信息学中的应用
+
+https://mp.weixin.qq.com/s/7RU3Nzy5qkTL8-2LOjg9qg
+
+从基础到实现：集成学习综合教程
+
+https://mp.weixin.qq.com/s/Pkc8KyDZ53ZGO5lNLVjoBg
+
+一份完备的集成学习手册！
+
+https://mp.weixin.qq.com/s/jQqSWEaxeUZ6UBeFZO7tJQ
+
+机器学习集成学习与模型融合

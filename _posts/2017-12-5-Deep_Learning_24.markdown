@@ -1,114 +1,11 @@
 ---
 layout: post
-title:  深度学习（二十四）——深度目标跟踪, Spatial Transformer Networks, L2 Normalization
+title:  深度学习（二十四）——深度目标跟踪, L2 Normalization, Regularization
 category: DL 
 ---
 
-# LSTM进阶（续）
-
-## 《On the compression of recurrent neural networks with an application to lvcsr acoustic modeling for embedded speech recognition》
-
-![](/images/img2/RNN_SVD.png)
-
-这是另一篇RNN模型压缩的论文。上图中的a是原始RNN，而b是对$$W_h^l$$使用了SVD之后的RNN。
-
-## 《Video Summarization with Long Short-term Memory》
-
-这是一篇用于提取视频关键帧（也叫静态视频摘要）的论文，是南加州大学沙飞小组的作品。
-
-![](/images/img2/dppLSTM.png)
-
-上图是该文提出的DPP LSTM的网络结构图。它的主体是一个BiLSTM，算是中规中矩吧。
-
-该文的创新点在于提出了DPP loss的概念。上图中的$$y_t$$表示帧的分值（越大表示越重要），$$\phi_t$$表示帧之间的相似度。该文的实验表明，将两个特征分开抽取，有助于提升模型的准确度。
-
-这篇论文主要用到了3个数据集：
-
-TVSum dataset: 
-
-https://github.com/yalesong/tvsum
-
-这个需要Yahoo账号和一个高校的邮件地址才行。
-
-SumMe dataset: 
-
-https://people.ee.ethz.ch/~gyglim/vsum/#benchmark
-
-OVP and YouTube datasets: 
-
-https://sites.google.com/site/vsummsite/
-
-需要翻墙。
-
-## LSTM运算加速技巧
-
-LSTM的主要运算量集中在$$W[h_{t-1},x_t]$$上，这里实际上可以用$$W[(h_{t-2}+\Delta h_{t-1}),x_t]$$代替。
-
-由于时间序列通常具有惯性，因此$$\Delta h_{t-1}$$一般包含了大量的0，这对于某些具有跳0功能的硬件来说，是非常有利的。
-
-## Convolutional LSTM Network
-
-论文：
-
-《Convolutional LSTM Network: A Machine Learning Approach for Precipitation Nowcasting》
-
-## 参考
-
-https://mp.weixin.qq.com/s/4IHzOAvNhHG9c8GP0zXVkQ
-
-Simple Recurrent Unit For Sentence Classification
-
-https://mp.weixin.qq.com/s/fCzHbOi7aJ8-W9GzctUFNg
-
-LSTM文本分类实战
-
-http://mp.weixin.qq.com/s/3nwgft9c27ih172ANwHzvg
-
-从零开始：如何使用LSTM预测汇率变化趋势
-
-https://mp.weixin.qq.com/s/M18c3sgvjV2b2ksCsyOxbQ
-
-Nested LSTM：一种能处理更长期信息的新型LSTM扩展
-
-https://www.zhihu.com/question/62399257
-
-如何理解LSTM后接CRF？
-
-https://mp.weixin.qq.com/s/XAbzaMXP3QOret_vxqVF9A
-
-用深度学习LSTM炒股：对冲基金案例分析
-
-https://mp.weixin.qq.com/s/eeA5RZh35BvlFt45ywVvFg
-
-可视化LSTM网络：探索“记忆”的形成
-
-https://mp.weixin.qq.com/s/h-MYTNTLy7ToPPEZ2JVHpw
-
-阿里巴巴论文提出Advanced LSTM：关于更优时间依赖性刻画在情感识别方面的应用
-
-https://mp.weixin.qq.com/s/pv3gQfCayGmsmGKLbMIFpA
-
-神奇！只有遗忘门的LSTM性能优于标准LSTM
-
-https://mp.weixin.qq.com/s/8BPZ_M8EGk3KxkSleYWSNw
-
-训练可解释、可压缩、高准确率的LSTM
-
-https://hanxiao.github.io/2018/06/24/4-Encoding-Blocks-You-Need-to-Know-Besides-LSTM-RNN-in-Tensorflow/
-
-4 Sequence Encoding Blocks You Must Know Besides RNN/LSTM in Tensorflow
-
-https://mp.weixin.qq.com/s/zMCBQ2D21HoDcDgDolmGMA
-
-上海交大：基于近似随机Dropout的LSTM训练加速
-
-https://mp.weixin.qq.com/s/wPYd2jLUPzlPwIZkb_wSbA
-
-深度递归LSTM-LRP非线性时变多因子模型
-
-https://mp.weixin.qq.com/s/3djAWJs6ecDdPSpQMxqmrg
-
-清华、李飞飞团队等提出强记忆力E3D-LSTM网络
+* toc
+{:toc}
 
 # 深度目标跟踪
 
@@ -121,6 +18,10 @@ https://github.com/foolwood/benchmark_results
 这也是一个Visual Tracking的Paper List。
 
 参考：
+
+https://mp.weixin.qq.com/s/i5TyVvaRuTZ8c54Iiu4VHg
+
+跟踪综述推荐：目标跟踪40年
 
 https://zhuanlan.zhihu.com/p/22334661
 
@@ -137,6 +38,14 @@ https://mp.weixin.qq.com/s/yunmBZ_5acDZlIN0mLf66g
 https://zhuanlan.zhihu.com/p/76153871
 
 一文带你了解视觉目标跟踪
+
+https://zhuanlan.zhihu.com/p/96631118
+
+单目标跟踪paper小综述
+
+https://mp.weixin.qq.com/s/Qh_gn5fLJ-HwVsl4WAZzrQ
+
+2020年两篇目标跟踪算法最佳综述
 
 https://zhuanlan.zhihu.com/p/27293523
 
@@ -246,9 +155,37 @@ https://zhuanlan.zhihu.com/p/74460341
 
 光流估计——从传统方法到深度学习
 
+https://zhuanlan.zhihu.com/p/261046950
+
+光流估计
+
 https://mp.weixin.qq.com/s?__biz=MzI5MDUyMDIxNA==&mid=2247491156&idx=2&sn=e088a817c9c6b4f52527cfcf51dc7ffe
 
 首个siamese网络中训练GCNs的视觉追踪方法《Graph Convolutional Tracking》
+
+https://zhuanlan.zhihu.com/p/95842960
+
+D3S
+
+https://mp.weixin.qq.com/s/3NiCkJoTBt2qLaOsMAkCNg
+
+MAML-Tracker:用目标检测思路做目标跟踪？小样本即可得高准确率
+
+https://mp.weixin.qq.com/s/vFEHZv6qh1dWhQ27WUEDEQ
+
+目标跟踪系列--C-COT算法
+
+https://mp.weixin.qq.com/s/nDkaOb4q9cPSqW4w76kcNg
+
+码隆科技提出SiamAttn，将孪生网络跟踪器的性能提至最优水平
+
+https://mp.weixin.qq.com/s/DWaKFhK-dv43ap99fRnpAw
+
+概率回归的视觉追踪
+
+https://mp.weixin.qq.com/s/kPaPB-2pal--Hlh9F7WxhA
+
+目标跟踪又添重磅开源工具箱，MMTracking来了
 
 ## FlowNet
 
@@ -286,6 +223,10 @@ https://mp.weixin.qq.com/s/hWtiRPyeuk7VNoZhOwEUCQ
 
 FlowNet
 
+https://mp.weixin.qq.com/s/utlOnJ08ksu5BPOwqSQT-A
+
+MaskFlownet：基于可学习遮挡掩模的非对称特征匹配
+
 ## SpyNet
 
 论文：
@@ -322,6 +263,14 @@ https://zhuanlan.zhihu.com/p/65177442
 
 多目标跟踪：近年论文及开源代码汇总
 
+https://zhuanlan.zhihu.com/p/97449724
+
+多目标跟踪（MOT）入门
+
+https://mp.weixin.qq.com/s/hCg0kn2x8q-K9n_96-7p8A
+
+基于深度学习的多目标跟踪（MOT）技术一览
+
 https://zhuanlan.zhihu.com/p/36462982
 
 多目标追踪算法：条件随机场算法
@@ -346,6 +295,10 @@ https://mp.weixin.qq.com/s/KLTSUqprwfFBVeVIP7HJRw
 
 视频中的多目标跟踪
 
+https://huangpiao.tech/archives/
+
+一个多目标跟踪方面的专栏
+
 https://zhuanlan.zhihu.com/p/55738110
 
 商汤等提出：统一多目标跟踪框架
@@ -358,52 +311,92 @@ https://mp.weixin.qq.com/s/R2OE76ipTX3r_vvj0lYYYQ
 
 精度优秀，速度214.7fps！卡内基梅隆大学开源强大的3D多目标跟踪系统
 
-# Spatial Transformer Networks
+https://mp.weixin.qq.com/s/Siy_FaRmMRGPn4VBZuVRUQ
 
-论文：
+基于深度学习的多目标跟踪算法（上）：端到端的数据关联
 
-《Spatial Transformer Networks》
+https://mp.weixin.qq.com/s/7IzqglD0e89Y2Oai9Jv2XQ
 
-参考：
+打遍天下无敌手，却说它只是个baseline！多目标跟踪FairMOT的烦恼
 
-http://www.cnblogs.com/neopenx/p/4851806.html
+https://mp.weixin.qq.com/s/eN9PgGBbM-5R3xQ6zSFiYA
 
-Spatial Transformer Networks(空间变换神经网络)
+多目标跟踪（MOT）领域近期值得读的几篇论文
 
-http://blog.csdn.net/shaoxiaohu1/article/details/51809605
+https://zhuanlan.zhihu.com/p/138443415
 
-论文笔记：Spatial Transformer Networks
+从UMA Tracker(CVPR2020)出发谈谈SOT类MOT算法
 
-http://blog.csdn.net/shaoxiaohu1/article/details/51809605
+https://mp.weixin.qq.com/s/lj926JcCYX8qbUOBTRsQIw
 
-Spatial Transformer Networks
+实时多人追踪论文--MOTDT
 
-https://mp.weixin.qq.com/s/ciqQMezcB-oM24X8eQqTNg
+https://zhuanlan.zhihu.com/p/143798072
 
-花式玩耍Spatial Transformation Networks
+One Shot MOT Overview
 
-https://mp.weixin.qq.com/s/4VE2lZeFf05AyLp_s3nTFQ
+https://mp.weixin.qq.com/s/rIMOKYgXaFEbvRZ14brrjw
 
-理解Spatial Transformer Networks
+Deep SORT论文阅读总结
 
-# L2 Normalization
+https://mp.weixin.qq.com/s/wjKbKF8McGOjbjudi3cOVQ
 
-L2 Normalization本身并不复杂，然而多数资料都只提到1维的L2 Normalization的计算公式：
+FairMOT：统一检测、重识别的多目标跟踪框架，全新Baseline
 
-$$x=[x_1,x_2,\dots,x_d]\\
-y=[y_1,y_2,\dots,y_d]\\
-y=\frac{x}{\sqrt{\sum_{i=1}^dx_i^2}}=\frac{x}{\sqrt{x^Tx}}
-$$
+https://zhuanlan.zhihu.com/p/151105050
 
-对于多维L2 Normalization几乎未曾提及，这里以3维tensor：A[width, height, channel]为例介绍一下多维L2 Normalization的计算方法。
+基于图卷积GNN的多目标跟踪算法解析
 
-多维L2 Normalization有一个叫axis(有时也叫dim)的参数，如果axis=0的话，实际上就是将整个tensor flatten之后，再L2 Normalization。这个是比较简单的。
+https://mp.weixin.qq.com/s/bMBBYWk5-o5XEOSzI7DyDg
 
-这里说说axis=3的情况。axis=3意味着对channel进行Normalization，也就是：
+从FairMOT到VoxelPose，揭秘微软以“人”为中心的最新视觉理解成果
 
-$$B_{xy}=\sum_{z=0}^Z \sqrt{A_{xyz}^2}\\
-C_{xyz}=\frac{A_{xyz}}{B_{xy}}\\
-D_{xyz}=C_{xyz} \cdot S_{z}
-$$
+https://mp.weixin.qq.com/s/qpNbHKZ0V5do77jQlZDBBw
 
-一般来说，求出C被称作L2 Normalization，而求出D被称作L2 Scale Normalization，S被称为Scale。
+从零开始学习Deep SORT+YOLO V3进行多目标跟踪
+
+https://mp.weixin.qq.com/s/mvx_LyGVzn_H3XpwTsuFMA
+
+多目标跟踪：监控领域你必须要了解的算法
+
+https://mp.weixin.qq.com/s/GQtyVdCBie7jN38bB0SlaA
+
+带你入门多目标跟踪（一）领域概述
+
+https://mp.weixin.qq.com/s/sk1I37Jwdf7sH5uSgd3juA
+
+带你入门多目标跟踪（二）SORT&DeepSORT
+
+https://mp.weixin.qq.com/s/oseEmzgb8iCoOf9lTbAssg
+
+带你入门多目标跟踪（三）匈牙利算法&KM算法
+
+https://mp.weixin.qq.com/s/Z-_iZl_CTixqK0vl0_CHfQ
+
+基于深度学习的视觉多目标跟踪算法综述
+
+# Regularization
+
+DL中的Regularization除了常见的$$l_1$$-norm、$$l_2$$-norm和squared $$l_2$$-norm之外，还有Group Regularization。它的定义如下：
+
+$$loss(W;x;y) = loss_D(W;x;y) + \lambda_R R(W) + \lambda_g \sum_{l=1}^{L} R_g(W_l^{(G)})$$
+
+$$R_g(w^{(g)}) = \sum_{g=1}^{G} \lVert w^{(g)} \rVert_g = \sum_{g=1}^{G} \sum_{i=1}^{|w^{(g)}|} {(w_i^{(g)})}^2$$
+
+Group Regularization也叫做Block Regularization或Structured Regularization。
+
+# 何恺明
+
+## MoCo
+
+https://mp.weixin.qq.com/s/9zaTjwwGPHHzSv1ZmHf8_g
+
+不妨试试MoCo，来替换ImageNet上pretrain模型！
+
+https://mp.weixin.qq.com/s/GC6PGlweneYtYo7_SUr0Zw
+
+MoCo V3：我并不是你想的那样！
+
+https://mp.weixin.qq.com/s/sAYh3l2eab2r2KpbdxN30A
+
+MoCo三部曲

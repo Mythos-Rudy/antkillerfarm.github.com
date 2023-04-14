@@ -1,15 +1,18 @@
 ---
 layout: post
-title:  机器学习（三十六）——XGBoost, LightGBM, Parameter Server
+title:  机器学习（三十六）——XGBoost, LightGBM, CatBoost
 category: ML 
 ---
+
+* toc
+{:toc}
 
 # XGBoost
 
 XGBoost是陈天奇于2014年提出的一套并行boost算法的工具库。
 
->注：陈天奇，华盛顿大学计算机系博士（2019），研究方向为大规模机器学习。上海交通大学本科（2006～2010）和硕士（2010～2013）。   
->http://homes.cs.washington.edu/~tqchen/
+>注：陈天奇，华盛顿大学计算机系博士（2019），研究方向为大规模机器学习。上海交通大学本科（2006～2010）和硕士（2010～2013）。CMU助理教授。   
+>https://tqchen.com/
 
 ![](/images/img2/XGBoost.png)
 
@@ -51,10 +54,10 @@ http://xgboost.apachecn.org/cn/latest/
 
 编译：
 
-{% highlight java %}
+```bash
 git clone --recursive https://github.com/dmlc/xgboost
 cd xgboost; make -j4
-{% endhighlight %}
+```
 
 python安装：
 
@@ -118,14 +121,6 @@ https://mp.weixin.qq.com/s/_uscpKaRXZbwfMiWGoY0Uw
 
 多GPU加速学习，这是一份崭新的XGBoost库
 
-https://mp.weixin.qq.com/s/7RU3Nzy5qkTL8-2LOjg9qg
-
-从基础到实现：集成学习综合教程
-
-https://mp.weixin.qq.com/s/Pkc8KyDZ53ZGO5lNLVjoBg
-
-一份完备的集成学习手册！
-
 https://mp.weixin.qq.com/s/pwuOFj_rT5Z_XY9siZosKQ
 
 线性模型已退场，XGBoost时代早已来
@@ -133,6 +128,10 @@ https://mp.weixin.qq.com/s/pwuOFj_rT5Z_XY9siZosKQ
 https://mp.weixin.qq.com/s/hYuBHHfAGLO3Y0l5t6y94Q
 
 XGBoost缺失值引发的问题及其深度分析
+
+https://mp.weixin.qq.com/s/Il_S6y4UkN5nim91mwVcVw
+
+缺失值处理
 
 https://mp.weixin.qq.com/s/wgiNutl3FhJSAtfJNd5B5g
 
@@ -149,6 +148,42 @@ https://mp.weixin.qq.com/s/HcWoDmrp4taRGREvV7x4vA
 https://mp.weixin.qq.com/s/X4K6UFZPxL05v2uolId7Lw
 
 XGBoost在携程搜索排序中的应用
+
+https://mp.weixin.qq.com/s/5zSLod4oyL4m6LADI6KC0Q
+
+深入理解XGBoost，优缺点分析，原理推导及工程实现
+
+https://mp.weixin.qq.com/s/uvUN4JiqSb-bS4HAVCDTIQ
+
+集成模型Xgboost！机器学习最热研究方向入门，附学习路线图
+
+https://mp.weixin.qq.com/s/-aRRORqBnTMmBDXuW749_w
+
+在没有技术术语的情况下介绍Adaptive、GBDT、XGboosting等提升算法的原理简介
+
+https://mp.weixin.qq.com/s/umGzRySCnJo25e5_0nO7cw
+
+如何用XGBoost做时间序列预测？
+
+https://mp.weixin.qq.com/s/QYMPBWMVTQf3LACGGWGX7A
+
+样本不平衡处理：xgboost几种权重设置方法比较
+
+https://mp.weixin.qq.com/s/d6sVDAKnaU97mAeDs_Gedg
+
+从零解读Xgboost(原理+代码)
+
+https://mp.weixin.qq.com/s/YunDfYPLywc0tMJF72YIAQ
+
+数据分析利器：XGBoost算法最佳解析
+
+https://mp.weixin.qq.com/s/QAu0nM72E2gVhbRXmtCMcw
+
+XGBoost和时间序列
+
+https://www.zhihu.com/question/359567100
+
+XGBoost为什么若模型决策树的叶子节点值越大，越容易过拟合呢？
 
 # LightGBM
 
@@ -212,6 +247,38 @@ https://mp.weixin.qq.com/s/LoX987dypDg8jbeTJMpEPQ
 
 终于有人把XGBoost和LightGBM讲明白了，项目中最主流的集成算法！
 
+https://mp.weixin.qq.com/s/l6Fp5WTNH0b_cl2y7Az76Q
+
+深入理解LightGBM
+
+https://mp.weixin.qq.com/s/H9zkyO9oZAysWMyigd1tNw
+
+LightGBM
+
+https://mp.weixin.qq.com/s/RaWeiQwlQjCi1zz5S3tOmA
+
+LightGBM的参数详解以及如何调优
+
+https://mp.weixin.qq.com/s/9gEfkiZyZkoIgwRCYISQgQ
+
+你应该知道的LightGBM各种操作！
+
+https://mp.weixin.qq.com/s/YSDB6SSrU7xlzZ73PrjIAw
+
+比赛杀器LightGBM常用操作总结！
+
+https://mp.weixin.qq.com/s/_y16bW-afo9gOI5ObMBRYQ
+
+Kaggle神器LightGBM最全解读！
+
+https://mp.weixin.qq.com/s/A3b2L_0-atm5jJslhr50Bg
+
+最新LightGBM进展介绍报告，39页ppt
+
+https://mp.weixin.qq.com/s/M0W6-bLZcsdMsKBUAeKDnw
+
+树模型奠基性论文解读——GBM: Gradient Boosting Machine
+
 # CatBoost
 
 这是Yandex推出的Boost工具包。
@@ -250,63 +317,44 @@ https://mp.weixin.qq.com/s/E3pSPsG18053F5GG1Z8jNQ
 
 一文详尽系列之CatBoost
 
-# Parameter Server
+https://mp.weixin.qq.com/s/eCZHpFvtDYnpI6jm2nEtnQ
 
-在深度学习概念提出之前，算法工程师手头能用的工具其实并不多，就LR、SVM、感知机等寥寥可数、相对固定的若干个模型和算法；那时候要解决一个实际的问题，算法工程师更多的工作主要是在特征工程方面。而特征工程本身并没有很系统化的指导理论（至少目前没有看到系统介绍特征工程的书籍），所以很多时候特征的构造技法显得光怪陆离，是否有用也取决于问题本身、数据样本、模型以及运气。如果给这种方式起一个名字的话，大概是**简单模型+复杂特征**；
+深入理解CatBoost
 
-深度学习代表的**简单特征+复杂模型**是解决实际问题的另一种方式。
+https://mp.weixin.qq.com/s/pQ9_0d8sl5Sr5O360Risnw
 
-两种模式孰优孰劣还难有定论，以点击率预测为例，在计算广告领域往往以海量特征+LR为主流，根据VC维理论，LR的表达能力和特征个数成正比，因此海量的feature也完全可以使LR拥有足够的描述能力。
+使用CatBoost进行不确定度估算：模型为何不确定以及如何估计不确定性水平
 
-Parameter Server就是处理海量特征计算的一种方法。
+https://mp.weixin.qq.com/s/o129MwpGzx8tzjUCkz1npw
 
->我最初也被某系统号称上亿的特征给吓到了，毕竟自己设计的推荐系统搜肠刮肚也不过500左右的特征。后来才了解到，国内几家大公司在特征构造方面的成功率在后期一般不会超过20%。也就是80%的新构造特征往往并没什么正向提升效果。一个特征随便弄一下（窗口滑动、离散化、归一化、开方、平方、笛卡尔积、多重笛卡尔积）就弄出一堆特征。。。   
->一些所谓从事数据挖掘工作多年的专家，其实从方法论上也没有多高明。特征工程严重依赖领域知识，理论知识嘛，LR又不是多高深的东西。。。
+使用CatBoost和NODE建模表格数据对比测试
 
->2017.5，我曾去某电商面试推荐系统职位。言谈之中发现他们对于DL几乎一无所知，当时就觉得有些古怪。直到接触Parameter Server才明白了他们的玩法。。。非常庆幸他们鄙视了我。后来到了2017.12的时候，他们主动找我，想再次面试，被我婉拒。
+# 俄乌战争=
 
-这类问题的另一个特征是：特征虽多，但单独的一个样本具有的有效特征相对有限，一般不过数百个。使用样本更新参数时，只考虑这几百个特征即可，这也为相关的分布式运算提供了有利条件。
+https://mp.weixin.qq.com/s/n4EMEdHNJuhrHwsCUE6m4A
 
-参考：
+被欧洲人买爆的中国电热毯，真有那么火吗？
 
-https://www.zhihu.com/question/26998075
+https://www.zhihu.com/question/557681794
 
-最近比较火的parameter server是什么？
+如果你来设计《使命召唤：俄乌战争》的剧情，会是怎样的？
 
-http://blog.csdn.net/cyh_24/article/details/50545780
+https://zhuanlan.zhihu.com/p/579537323
 
-Parameter Server详解
+垮塌的大厦——俄罗斯坦克工业现状和梅德韦杰夫无法完成的任务
 
-https://mp.weixin.qq.com/s/yuHavuGTYMH5JDC_1fnjcg
+https://zhuanlan.zhihu.com/p/582340201
 
-阿里妈妈基于TensorFlow做了哪些深度优化？TensorFlowRS架构解析
+俄媒：三百年的荣耀被普京这个生物20年败光了
 
-https://zhuanlan.zhihu.com/p/29968773
+https://zhuanlan.zhihu.com/p/496556274
 
-大规模机器学习框架的四重境界
+大毛的航模
 
-https://mp.weixin.qq.com/s/2RCH2Or_ITUTGrlfYLB8mg
+https://zhuanlan.zhihu.com/p/588914690
 
-腾讯千亿级参数分布式ML系统无量背后的秘密
+你给我从车顶上下来！”——再评BMP系列随车步兵搭乘方式
 
-https://mp.weixin.qq.com/s/Na2SJkfC9LzgfbTfSCclOw
+https://www.zhihu.com/question/570589126
 
-如何基于Ray使用15行代码实现参数服务器
-
-https://zhuanlan.zhihu.com/p/82116922
-
-一文读懂“Parameter Server”的分布式机器学习训练原理
-
-# Bloom Filter
-
-https://blog.csdn.net/zhaodedong/article/details/78186450
-
-Bloom Filter的原理和实现
-
-https://blog.csdn.net/zhaodedong/article/details/78445910
-
-Bloom Filter的数学背景
-
-https://mp.weixin.qq.com/s/aPepcwG_VMioqGQ_Fp3deg
-
-海量数据处理利器之布隆过滤器
+如何评价俄罗斯萨拉托夫空军基地被不明无人机袭击导致两架图95核战略轰炸机受损和两人受伤？

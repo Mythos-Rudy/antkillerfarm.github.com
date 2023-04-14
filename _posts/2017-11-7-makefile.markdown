@@ -1,8 +1,11 @@
 ---
 layout: post
 title:  makefile, Autotools, premake, Bazel
-category: technology 
+category: toolchain 
 ---
+
+* toc
+{:toc}
 
 # makefile
 
@@ -13,6 +16,11 @@ http://www.gnu.org/software/make/manual/html_node/index.html
 应该说make的语法，除了规则依赖之外，大多数与bash相同。但是make也有一些内置函数，它们的用法就不在bash的范畴了，比如call函数。碰到这样的情况，可以查阅以下网页，以快速定位帮助文档的位置：
 
 http://www.gnu.org/software/make/manual/html_node/Quick-Reference.html
+
+使用`make -n`或`make VERBOSE=1`将显示make命令正在试图做的事情。
+
+>问：在常用系统软件，比如find、grep、gcc等，对并发支持得最好的是？   
+>答：make！哈哈哈！所以，Makefile是以前并发编程的一个常用选择。写一些单线程程序，外面用Makefile来调用，轻松并发。
 
 # Autotools
 
@@ -36,6 +44,18 @@ https://autotools.io/index.html
 
 这个网站基本上每个工具都讲到了，非常值得一看。
 
+## 源码包编译4步曲
+
+1)autogen.sh
+
+2)configure
+
+3)make
+
+4)su -c "make install"
+
+其中一二两步有时只要一个就够了，如果源码包中这两个都有的话，先运行1)
+
 ## autoconf&automake
 
 这两个工具是整个autotools工具集的核心，使用的流程也比较复杂。教程中最经典的是：
@@ -56,7 +76,7 @@ https://github.com/antkillerfarm/antkillerfarm_crazy/tree/master/gtk_browser/aut
 
 4.运行automake之前，需要先用autoheader生成config.h文件。
 
-从整个流程来说，autotools相比Cmake无疑复杂的多了。但实际使用中，由于这几个步骤都是流程化的，简化起来也比较容易。因此新版本提供了autoreconf命令，用来一站式生成所需的编译配置文件。其示例如下：
+从整个流程来说，autotools相比CMake无疑复杂的多了。但实际使用中，由于这几个步骤都是流程化的，简化起来也比较容易。因此新版本提供了autoreconf命令，用来一站式生成所需的编译配置文件。其示例如下：
 
 `autoreconf -fi`
 
@@ -67,6 +87,8 @@ https://github.com/antkillerfarm/antkillerfarm_crazy/tree/master/gtk_browser/aut
 pkg-config就是用来解决编译连接界面不统一问题的一个工具。
 
 它的基本思想：pkg-config是通过库提供的一个.pc文件获得库的各种必要信息的，包括版本信息、编译和连接需要的参数等。需要的时候可以通过pkg-config提供的参数(–cflags, –libs)，将所需信息提取出来供编译和连接使用。这样，不管库文件安装在哪，通过库对应的.pc文件就可以准确定位,可以使用相同的编译和连接命令，使得编译和连接界面统一。
+
+.pc文件一般在`/usr/lib/x86_64-linux-gnu/pkgconfig`。
 
 参见：
 
@@ -92,9 +114,9 @@ http://www.mike.org.cn/articles/description-configure-pkg-config-pkg_config_path
 
 ## CMake和pkg-config的协同工作
 
-Cmake虽然主要用于Qt项目，但用于GTK项目，实际上也没有什么问题。
+CMake虽然主要用于Qt项目，但用于GTK项目，实际上也没有什么问题。
 
-Cmake使用的pkg_check_modules宏，和上面的PKG_CHECK_MODULES宏，从原理来说，是类似的。这里不再赘述。
+CMake使用的pkg_check_modules宏，和上面的PKG_CHECK_MODULES宏，从原理来说，是类似的。这里不再赘述。
 
 参考文档：
 
@@ -146,11 +168,11 @@ premake的缺点在于，它基本上是个人作品，全职开发人员太少�
 
 安装：
 
-{% highlight bash %}
+```bash
 echo "deb [arch=amd64] http://storage.googleapis.com/bazel-apt stable jdk1.8" | sudo tee /etc/apt/sources.list.d/bazel.list
 curl https://bazel.build/bazel-release.pub.gpg | sudo apt-key add -
-sudo apt-get update && sudo apt-get install bazel
-{% endhighlight %}
+sudo apt update && sudo apt install bazel
+```
 
 官网：
 
@@ -169,6 +191,8 @@ https://github.com/bazelbuild/bazel/releases
 `chmod +x bazel-<version>-installer-linux-x86_64.sh`
 
 `./bazel-<version>-installer-linux-x86_64.sh --user`
+
+>需要注意的是，即使这种安装也只是部分安装，安装后仍然需要联网下载依赖，并不能达到离线安装的效果。这也是Bazel的安装文件体积越来越小的根本原因。只有早期100M+的安装包，才是能离线安装的。
 
 bazel使用Starlark语言编写扩展，后者的语法主要源自python，但并不是通用语言，也没有python那么强的功能。
 
@@ -194,6 +218,16 @@ https://github.com/antkillerfarm/antkillerfarm_crazy/tree/master/cpp/bazel
 
 bazel还可以从网上下载依赖文件：`http_archive`
 
+清理：
+
+`bazel clean --expunge`
+
+---
+
+可以通过在工作区中运行`bazel info output_base`来查找该工作区的输出库。但请注意，有一个包含最后一个命令输出的`command.log`文件，而`bazel info`本身是一个命令，因此这将覆盖`command.log`。
+
+---
+
 参考：
 
 http://www.cnblogs.com/Jack47/p/bazel-faq.html
@@ -208,80 +242,34 @@ https://www.cnblogs.com/puyangsky/p/7596282.html
 
 bazel的使用
 
-# Other
+https://zhuanlan.zhihu.com/p/421489117
 
-## blade
+创建宏与规则
 
-blade是腾讯出品的构建工具。
+## 引用第三方库
 
-官网：
+```text
+git_repository(
+    name = "XXX",
+    remote = "https://github.com/XXX/XXX.git",
+    tag = "v1.1",
+    patches = ["xxx.patch"],
+    patch_args = ["-p1"],
+    verbose = True,
+)
+```
 
-https://github.com/chen3feng/blade-build
+https://brentley.dev/patching-bazel-external-dependencies/
 
-## SCons
+Patching Bazel external dependencies
 
-blade的底层用到了SCons。后者是一个python语言写的构建工具，可用于多种编程语言程序的构建。
+# Bazelisk
 
-官网：
+这是基于Go语言编写的Bazel启动器，它会为你的工作区下载最适合的Bazel，并且透明的将命令转发给该Bazel。
 
-http://www.scons.org/
+由于Bazellisk提供了和Bazel一样的接口，因此通常直接将其命名为bazel：
 
-安装：
-
-`sudo apt install scons`
-
-和make类似，可以用如下方式并行编译：
-
-`scons -j 4`
-
-使用示例：
-
-https://github.com/antkillerfarm/antkillerfarm_crazy/tree/master/cpp/scons
-
-项目的工程文件为SConstruct。
-
-从个人角度，我认为一个好的构建工具需要具备以下特点：
-
-- 常见任务书写简单。换句话说就是预先内置好了大量规则。make在这一点上做的不太好，手工任务太多，以致出现了Autotools和Cmake这样的辅助工具。
-
-- 特殊任务扩展简单。make系列工具的DSL都不是完备的语言，这一点是比不了python的。
-
-因此，我是比较看好SCons的。
-
-上述特点在Java的构建工具上也得到了体现，ANT书写麻烦，所以被Maven取代，而Maven扩展不便，又被Gradle挑战。
-
-参考：
-
-https://www.ibm.com/developerworks/cn/linux/l-cn-scons/
-
-使用SCons轻松建造程序
-
-## MSbuild
-
-MSbuild当然是微软的构建工具了。
-
-官网：
-
-https://msdn.microsoft.com/en-us/library/dd393574.aspx
-
-参考：
-
-http://www.cnblogs.com/linianhui/archive/2012/08/30/2662648.html
-
-MSBuild入门
-
-## OkBuck
-
-OkBuck是Uber推出的构建工具。
-
-官网：
-
-https://github.com/uber/okbuck
-
-## WAF
-
-WAF是一个python写的构建工具。
-
-官网：
-
-https://waf.io
+```bash
+sudo wget -O /usr/local/bin/bazel https://github.com/bazelbuild/bazelisk/releases/download/v1.10.1/bazelisk-linux-amd64
+sudo chmod +x /usr/local/bin/bazel
+```

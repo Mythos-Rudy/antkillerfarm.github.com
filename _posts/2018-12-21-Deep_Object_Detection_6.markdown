@@ -1,10 +1,59 @@
 ---
 layout: post
-title:  深度目标检测（六）——R-FCN, FPN, RetinaNet, CornerNet
+title:  深度目标检测（六）——Tiny-YOLO, One-stage vs. Two-stage, R-FCN, FPN, RetinaNet
 category: Deep Object Detection 
 ---
 
-# One-stage vs. Two-stage（续）
+* toc
+{:toc}
+
+# Tiny-YOLO
+
+YOLO系列还包括了一个速度更快但精度稍低的嵌入式版本系列——Tiny-YOLO。
+
+到了YOLOv3时代，Tiny-YOLO被改名为YOLO-LITE。
+
+此外，还有使用其他轻量级骨干网络的YOLO变种，如MobileNet-YOLOv3。
+
+参考：
+
+https://mp.weixin.qq.com/s/xNaXPwI1mQsJ2Y7TT07u3g
+
+YOLO-LITE:专门面向CPU的实时目标检测
+
+https://zhuanlan.zhihu.com/p/50170492
+
+重磅！YOLO-LITE来了
+
+https://zhuanlan.zhihu.com/p/52928205
+
+重磅！MobileNet-YOLOv3来了
+
+https://mp.weixin.qq.com/s/LhXXPyvxci1d4xLzT0XFaw
+
+xYOLO：最新最快的实时目标检测
+
+# One-stage vs. Two-stage
+
+虽然我们在概述一节已经提到了One-stage和Two-stage的概念。但鉴于这个概念的重要性，在介绍完主要的目标检测网络之后，很有必要再次总结一下。
+
+![](/images/img2/One_stage.png)
+
+![](/images/img2/Two_stage.png)
+
+上两图是One-stage(YOLO)和Two-stage(Faster R-CNN)的网络结构图。
+
+One-stage一步搞定分类和bbox问题。
+
+而Two-stage则分为两步：
+
+1.根据区域是foreground，还是background，生成bbox。
+
+2.对bbox进行分类和细调。
+
+论文：
+
+《Speed/accuracy trade-offs for modern convolutional object detectors》
 
 通常来说，One-stage模型运算速度比Two-stage模型快，但精度略有不足。究其原因主要是“类别不平衡”问题。
 
@@ -120,6 +169,10 @@ FPN(Feature Pyramid Network)是Tsung-Yi Lin（Ross Girshick和何恺明小组成
 
 ![](/images/img3/FP.png)
 
+FPN是从上到下的提取特征，后来的PAN在此基础上又来了一些从下而上的套路：
+
+![](/images/img5/PAN.png)
+
 参考：
 
 https://mp.weixin.qq.com/s/mY_QHvKmJ0IH_Rpp2ic1ig
@@ -141,6 +194,14 @@ https://zhuanlan.zhihu.com/p/70523190
 https://mp.weixin.qq.com/s/xMQA97k0USl69v1MC86HKA
 
 多尺度特征金字塔结构用于目标检测
+
+https://mp.weixin.qq.com/s/rMR98woa1y_sjSFgG24cGQ
+
+常见特征金字塔网络FPN及变体
+
+https://mp.weixin.qq.com/s/ZqNRxexEFRxVXI7-bGPx0A
+
+Feature Pyramid Network详解特征金字塔网络FPN的来龙去脉
 
 # RetinaNet
 
@@ -178,7 +239,7 @@ https://zhuanlan.zhihu.com/p/68786098
 
 >CornerNet并非第一个提出Anchor-Free思想的模型，但却是第一个精度和性能达到与anchor base方法同等水平的Anchor-Free模型。
 
-----
+---
 
 CornerNet是Princeton University的Hei Law的作品。（2018.8）
 
@@ -199,43 +260,3 @@ CornerNet认为Two-stage目标检测最明显的缺点是在Region Proposal阶�
 ## Hourglass Network
 
 这是CornerNet的骨干部分。详情参见《深度学习（十二）》。
-
-## Bottom-right corners & Top-left Corners Prediction Module
-
-CornerNet堆叠两个Hourglass Network生成Top-left和Bottom-right corners，每一个corners都包括corners Pooling，以及对应的Heatmaps, Embeddings vector和offsets。
-
-![](/images/img3/CornerNet.png)
-
-上图是Heatmaps, Embeddings vector的示意图。
-
-- heatmaps包含C channels（C是目标的类别，没有background channel），每个channel是二进制掩膜，表示相应类别的顶点位置。
-
-- embedding vector使相同目标的两个顶点（左上角和右下角）距离最短。或者也可以反过来说，**两个顶点的embedding vector越相近，则它们越有可能配对。**
-
-- offsets用于调整生成更加紧密的边界定位框。
-
-## corner pooling
-
-corner pooling是CornerNet新提出的一种操作。其步骤如下图所示：
-
-![](/images/img3/corner_pooling.png)
-
-依top-left corner pooling为例，对每个channel，分别提取特征图的水平和垂直方向的最大值，然后求和。具体的计算如下图所示：
-
-![](/images/img3/corner_pooling_2.png)
-
-论文认为corner pooling之所以有效，是因为：
-
-- 目标定位框的中心难以确定，和边界框的4条边相关，但是每个顶点只与边界框的两条边相关，所以corner更容易提取。
-
-- 顶点更有效提供离散的边界空间，使用$$O(w\times h)$$顶点可以表示$$O(w^2\times h^2)$$个anchor boxes。
-
-## 参考
-
-https://mp.weixin.qq.com/s/e74-zFcMZzn67KaFXb_fdQ
-
-CornerNet目标检测开启预测“边界框”到预测“点对”的新思路
-
-https://zhuanlan.zhihu.com/p/41865617
-
-CornerNet：目标检测算法新思路

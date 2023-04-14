@@ -1,8 +1,11 @@
 ---
 layout: post
-title:  FreeType, FFmpeg, SDL, 图像处理软件
+title:  FreeType, 图像处理软件
 category: technology 
 ---
+
+* toc
+{:toc}
 
 # FreeType使用指南
 
@@ -10,7 +13,9 @@ FreeType是一套跨平台的字体文件编程开发包。它的官网是www.fr
 
 网上的关于FreeType的文献很多。写得较好的有以下两篇：
 
-http://www.cppblog.com/wlwlxj/archive/2006/11/08/14843.aspx   （文献A）
+http://www.cppblog.com/wlwlxj/archive/2006/11/08/14843.aspx
+
+FreeType2研究（文献A）
 
 这篇文章比较概括，且有demo，适合入门之用。
 
@@ -22,7 +27,7 @@ http://www.cppblog.com/wlwlxj/archive/2006/11/08/14843.aspx   （文献A）
 
 ## 2.字符对齐
 
-文献A中的代码，显示单个字是没有问题的，但显示一排字尤其是数字符号时，就有问题了。虽然我们已经使用了FT_Set_Char_Size或FT_Set_Pixel_Sizes设定了字模的大小，但返回的字模并不都是一样大的。空白字符返回的字模，大小为0，逗号、句号返回的字模只有普通字的几分之一。这时就需要用glyph->bitmap_left和glyph->bitmap_top来指定起始位置。（详见文献B）
+文献A中的代码，显示单个字是没有问题的，但显示一排字尤其是数字符号时，就有问题了。虽然我们已经使用了FT_Set_Char_Size或FT_Set_Pixel_Sizes设定了字模的大小，但返回的字模并不都是一样大的。空白字符返回的字模，大小为0，逗号、句号返回的字模只有普通字的几分之一。这时就需要用glyph->bitmap_left和glyph->bitmap_top来指定起始位置。
 
 ## 3.文献A勘误
 
@@ -43,82 +48,6 @@ pitch指字模一行所占的字节数，在ft_render_mode_normal模式（即256
 ## 4.小尺寸字体
 
 并不是所有的矢量字库都包含小字体的，例如微软的宋体就不支持小于20*20的字模，所以，使用小尺寸字体时，必须仔细选择字库。
-
-# FFmpeg
-
-## 官网 & 安装
-
-http://www.ffmpeg.org/
-
-这是FFmpeg的官网。
-
-值得注意的是，在官网的下载页面默认下载的是源代码。对于不需要源代码的使用者来说，需要在左下角的“Get the Package”处，根据所用平台选择合适的安装包。
-
-安装包分为三类：
-
-1.Static。只有一个可以自解压的exe文件。
-
-2.Shared。相当于要用解压工具来解压的压缩文件。
-
-3.Dev。相关链接库的的头文件和链接文件。
-
-一般没有二次开发需要的话，下载Shared包是最佳的选择。
-
-## 工具的使用
-
-Fabrice Bellard是我崇拜的一位高人。他除了发明ffmpeg之外，还是Qemu和TinyCC的作者和圆周率计算记录的获得者（2009）。
-
-之前的想法，ffmpeg主要是一套编解码框架，其本身的功能有限，需要进行二次开发方可使用。没想到其实它自带的程序，功能已经相当强大了。
-
-安装包中包含三个命令行程序：
-
-1.ffmpeg。编解码工具。功能十分强大，使用它可以很轻松的改变视频文件格式或者压缩视频文件。不过也因为视频格式及编辑选项实在太多，以至于想给ffmpeg做一个好用且功能齐全的GUI外壳都不是件容易的事情。
-
-2.ffplay。播放工具。
-
-3.ffprobe。多媒体流分析工具。
-
-## 教程
-
-官方教程《FFmpeg Basics》，在CSDN可以下载到。但该书偏重于如何使用ffmpeg的命令行工具以及编解码的基本流程。对于ffmpeg源代码，以及如何使用ffmpeg做二次开发讲的很少。
-
-http://dranger.com/ffmpeg/
-
-这篇文章是使用ffmpeg做二次开发的入门手册，写的不错。
-
-## ffmpeg常见用法
-
-1.转换视频格式
-
-`ffmpeg -i src.avi des.mp4`
-
-2.转换视频的尺寸
-
-`ffmpeg -i src.mp4 -s 540x960 -acodec copy des.mp4`
-
-3.屏幕录像
-
-`ffmpeg -f alsa -ac 2 -i pulse -f x11grab -r 30 -s 1024x768 -i :0.0 -acodec pcm_s16le -vcodec libx264 -preset ultrafast -crf 0 -threads 0 output.mkv`
-
-参考：
-
-http://www.cnblogs.com/dwdxdy/p/3240167.html
-
-FFmpeg常用基本命令
-
-https://mp.weixin.qq.com/s/5S_NgjxoswrGcrQzBOyoYQ
-
-视频数据处理方法！关于开源软件FFmpeg视频抽帧的学习
-
-# SDL
-
-目前网上查到的中文教程，多是针对SDL v1.2的。至于SDL v2.0的例子，Github上已经有不少了，可惜多是英文，查找起来还是不太方便。因此这里我也提供一个自己写的SDL v2.0的Hello World代码。
-
-https://github.com/antkillerfarm/antkillerfarm_crazy/tree/master/HelloSDL
-
-可以用这个代码确认SDL v2.0的环境搭建是否正确。
-
-`sudo apt install libsdl2-dev`
 
 # 图像处理软件
 
@@ -164,6 +93,8 @@ GIMP中的Noise Reduction算法原理及快速实现
 
 最近打算做一个软件，需要一组图标，无奈网上一直找不到合用的。于是只好自己来，然后就接触到了Inkscape。
 
+`sudo apt install inkscape`
+
 以下就一些实用功能做一个备忘。这个备忘不能取代教程，仅是一种补充，自己也是找了好半天才弄清楚的。
 
 1）画正圆、正方形
@@ -186,9 +117,13 @@ GIMP中的Noise Reduction算法原理及快速实现
 
 首先画一个圆，选中之后，点击左侧的“edit paths”工具的图标。然后会出现三个控制点，其中两个方形的控制点用于调整大小。选中其中的圆形控制点，并用左键拖动即可指定扇形的角度。这里需要注意拖动时鼠标所在的位置，当鼠标在圆内时，画出来的是弓形，否则，画出来的是扇形。
 
+---
+
+有的pdf中本身包含了矢量图，但是无论GIMP，还是下面提到的ImageMagick，都会光栅化矢量图。因此即使导出为SVG，仍然会有放大失真的问题。还是Inkscape对于矢量图的处理专业一些。
+
 ## ImageMagick
 
-前面两个工具是典型的“所见即所得”的图形化工具，而ImageMagick是一个命令行工具。
+前面两个工具是典型的“所见即所得”的图形化工具，而ImageMagick有一个命令行接口。
 
 通常来说图形化工具操作简单，效率也较高。但命令行工具也有其存在的价值，比如批处理。
 
@@ -198,7 +133,7 @@ GIMP中的Noise Reduction算法原理及快速实现
 
 我在之前的公司就遇到过这样的情况：
 
-有一次（2008年），美工部门需要处理一批10万量级的图片。操作很简单，就是对每张图片生成一个尺寸较小的缩略图。但由于没有称手的工具，即使用ACDSee批量处理，半小时也只能处理1000张左右。整个工程预计耗时10天。而这样任务，大概每3个月就会进行一次。
+有一次（2008年），美工部门需要处理一批10万量级的图片。操作很简单，就是对每张图片生成一个尺寸较小的缩略图。但由于没有称手的工具，即使使用ACDSee的批量处理，半小时也只能处理1000张左右。整个工程预计耗时10天。而这样任务，大概每3个月就会进行一次。
 
 于是，他们不得不求助技术部门提供解决办法。当时我花了2天的时间，写了一个批处理的图像处理工具，然后耗时20分钟处理完了所有的图片。不过该工具基于.NET平台，在Linux下无法使用。
 
@@ -221,3 +156,87 @@ ImageMagick将PDF转换为PNG的示例：
 `<!-- <policy domain="path" rights="none" pattern="@*" /> -->`
 
 `<policy domain="coder" rights="read|write" pattern="PDF" />`
+
+Word转PDF：
+
+`libreoffice --convert-to pdf xxx.doc --outdir .`
+
+## Webp
+
+WebP格式是google于2010年推出的一种旨在加快图片加载速度的图片格式。图片压缩体积大约只有JPEG的2/3，并能节省大量的服务器宽带资源和数据空间。
+
+`sudo apt install webp`
+
+`cwebp -q 80 image.png -o image.webp`
+
+`dwebp image.webp -o image.png`
+
+webp转gif：
+
+`convert a.webp a.gif`
+
+## AVIF
+
+AVIF（ AV1 Image File Format）是一种由AOM（ Alliance for Open Media）开发的基于AV1编解码器的网络图像格式。
+
+![](/images/img5/codec.webp)
+
+## 3D
+
+Maya、3DS Max、ZBrush、Blender、BodyPaint 3D、CINEMA 4D、Rhino。
+
+https://www.blendercn.org/
+
+斑斓社区
+
+https://space.bilibili.com/299275195
+
+一个blender方面的视频教程
+
+https://zhuanlan.zhihu.com/p/41814701
+
+Rhino超详细基础教程
+
+## Others
+
+Adobe无疑是图像处理的王者，所以它家的产品线也有标杆价值，一般用“XX替代品”作为关键字搜索，就能得到你想要的东西。所以这里也列一下Adobe的产品。
+
+PS：全名Photoshop，大方向在平面设计、电商美工、摄影摄像等，大部分二维处理。
+
+PR：全名Premiere，主攻是视频、音频剪辑上，可进行一些基础动画、特效制作。
+
+AE：全名After Effects，方向于PR相似，但AE在特效制作上，效果更加强大。
+
+---
+
+GIMP vs Adobe Photoshop
+
+Inkscape vs Adobe Illustrator
+
+Pencil2D vs Adobe Animate
+
+Krita vs Clip Studio Paint
+
+Kdenlive vs Adobe Premiere
+
+---
+
+Linux平台的绘图软件还有KolourPaint、mtPaint、MyPaint。
+
+# CPU+
+
+https://www.zhihu.com/question/503287789
+
+当两个CPU核心要求读写同一内存地址时，其后果是未定义行为吗？
+
+https://mp.weixin.qq.com/s/Kake5sQm79L2j_uDqKfznQ
+
+在《我的世界》里从零打造一台计算机有多难？复旦本科生大神花费了一年心血
+
+https://www.zhihu.com/question/562917157
+
+为什么intel的7nm工艺的处理器没有像amd的那样积热那么严重?
+
+https://www.zhihu.com/question/552957041
+
+书上说代码地址总是从0x400000开始，但是查看编译好的elf头起始地址是从0开始的，这是为什么？

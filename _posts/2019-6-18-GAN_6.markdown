@@ -4,6 +4,9 @@ title:  GAN（六）——GAN参考资源（2）
 category: GAN & VAE 
 ---
 
+* toc
+{:toc}
+
 # GAN参考资源
 
 https://mp.weixin.qq.com/s/8Vt3p8iXFq9rI-ph1Syt-Q
@@ -354,6 +357,10 @@ https://mp.weixin.qq.com/s/axCd8GZZ8tGg4S90NyApbw
 
 综述：基于GAN的图像翻译模型盘点
 
+https://mp.weixin.qq.com/s/p0n4ex2RRTMU98d94SEP7g
+
+近年图像翻译先进模型小结
+
 https://mp.weixin.qq.com/s/grEBwYzGN-573cvY5goT6g
 
 详解GAN中的一致优化问题
@@ -381,15 +388,3 @@ https://mp.weixin.qq.com/s?__biz=MzIzNjc0MTMwMA==&mid=2247491852&idx=1&sn=572806
 https://mp.weixin.qq.com/s?__biz=MzA4MDExMDEyMw==&mid=2247487111&idx=1&sn=e0d4e343704d61086aa702fc58e38af6
 
 深度学习中最常见GAN模型应用与解读
-
-https://mp.weixin.qq.com/s/ctB90bNhaMYvbLE4yketHQ
-
-一文读懂对抗机器学习Universal adversarial perturbations
-
-https://mp.weixin.qq.com/s/zRNtEKS2dKxyQU4VZm6Mwg
-
-用GANs来自动生成音乐
-
-https://mp.weixin.qq.com/s/zwzl-Tel3Avc4Dm7L5FS5A
-
-NLP中的对抗训练+PyTorch实现

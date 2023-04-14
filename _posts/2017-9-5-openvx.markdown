@@ -1,28 +1,23 @@
 ---
 layout: post
-title:  OpenVX, 运算加速库, NVIDIA
+title:  OpenVX, 运算加速库
 category: AI 
 ---
+
+* toc
+{:toc}
 
 # OpenVX
 
 ## Khronos Group
 
-Khronos Group是一个行业组织，创建开放标准以实现并行计算、图形、视觉、传感处理和动态媒体在各种平台和设备上的编写和加速。Khronos标准包括Vulkan, OpenGL, OpenGL ES, WebGL, OpenCL, SPIR, SYCL, WebCL, OpenVX, EGL, OpenMAX, OpenVG, OpenSL ES, StreamInput, COLLADA和glTF。
+Khronos Group是一个行业组织，创建开放标准以实现并行计算、图形、视觉、传感处理和动态媒体在各种平台和设备上的编写和加速。Khronos标准包括Vulkan, OpenGL, OpenGL ES, WebGL, OpenCL, SPIR-V, SYCL, WebCL, OpenVX, EGL, OpenMAX, OpenVG, OpenSL ES, StreamInput, COLLADA和glTF。
 
 OpenSL：音频的硬件加速接口。
-
-Vulkan：OpenGL的升级版本。在OpenGL中Context和单一线程是绑定的，所以所有需要作用于Context的操作，例如改变渲染状态，绑定Shader，调用Draw Call，都只能在单一线程上进行。Vulkan中不再需要依赖于绑定在某个线程上的Context，而是用全新的基于Queue的方式向GPU递交任务，并且提供多种Synchronization的组件让多线程编程更加亲民。
 
 简单来说，Khronos的任务就是创建一个统一的硬件和软件之间的API，这样无论软件厂商，还是硬件厂商，都能各行其道，互不干扰了。
 
 ![](/images/img3/AI_software.png)
-
-参考：
-
-https://zhuanlan.zhihu.com/p/20712354
-
-Vulkan-高性能渲染
 
 ## 概述
 
@@ -31,6 +26,10 @@ Vulkan-高性能渲染
 https://www.khronos.org/openvx/
 
 ![](/images/article/openvx.png)
+
+![](/images/img4/opencl-api-overview.jpg)
+
+![](/images/img4/opencl-api-overview_2.jpg)
 
 上图给出了OpenVX的主要用途，以及它和Khronos其他兄弟项目之间的关系。
 
@@ -47,6 +46,26 @@ Khronos官方提供了一个OpenVX的软件参考实现，用于软硬件厂商�
 相关API文档和参考实现（sample code）参见：
 
 https://www.khronos.org/registry/OpenVX/
+
+## Graph mode
+
+Graph mode是OpenVX NN提出的一个基本概念，与之相对的则是原先VX/CL/GL系列标准的immediate mode。
+
+尽管VX标准至今影响力有限，但Graph mode的概念却被越来越多的硬件厂商所接受，比如NVIDIA。
+
+![](/images/img4/cuda-graphs.png)
+
+使用Graph的好处如上图所示，它主要减少了Launch阶段所需要的时间。
+
+参考：
+
+https://developer.nvidia.com/blog/constructing-cuda-graphs-with-dynamic-parameters
+
+Constructing CUDA Graphs with Dynamic Parameters
+
+https://blog.csdn.net/qq_38505858/article/details/124290876
+
+OpenVX的立即模式(immediate mode)和图模式(graph mode)和示例讲解
 
 ## Host & Device
 
@@ -80,6 +99,16 @@ OpenCL是一个硬件中立标准，原则上和计算机的体系结构无关�
 
 简单来说，**OpenVX的封装粒度在层一级，而OpenCL最多只提供到矩阵运算一级的API**。
 
+---
+
+执行内核的各个实例称为work-item。若干个同类的work-item组成一个work-group。
+
+https://www.cnblogs.com/biglucky/p/3755189.html
+
+kernel,work_item和workgroup
+
+---
+
 参考：
 
 http://blog.csdn.net/leonwei/article/details/8880012
@@ -88,19 +117,33 @@ http://blog.csdn.net/leonwei/article/details/8880012
 
 ## SYCL
 
-SYCL是Khronos提供的基于OpenCL的C++接口层。
+SYCL是Khronos提供的基于OpenCL的C++接口层。近来有向通用HPC发展的趋势，后端已不再限于OpenCL，开始包括OpenMP/CUDA等。
 
 官网：
 
 https://www.khronos.org/sycl
 
-## ComputeCpp
+### ComputeCpp
 
 ComputeCpp是Codeplay公司提供的SYCL接口的实现。它除了支持OpenCL之外，还支持CUDA和C++AMP。
 
 官网：
 
 https://www.codeplay.com/products/computesuite/computecpp
+
+### 其他实现
+
+triSYCL：
+
+https://github.com/triSYCL/triSYCL
+
+DPC++：
+
+https://github.com/intel/llvm/tree/sycl
+
+hipSYCL：
+
+https://github.com/illuhad/hipSYCL
 
 ## OpenVG
 
@@ -122,21 +165,101 @@ OpenVG和OpenGL 3D的差异：
 
 上图是OpenVG的pipeline。
 
+## Vulkan
+
+Vulkan是OpenGL的升级版本。
+
+在OpenGL中Context和单一线程是绑定的，所以所有需要作用于Context的操作，例如改变渲染状态，绑定Shader，调用Draw Call，都只能在单一线程上进行。
+
+Vulkan中不再需要依赖于绑定在某个线程上的Context，而是用全新的基于Queue的方式向GPU递交任务，并且提供多种Synchronization的组件让多线程编程更加亲民。
+
+OpenGL(ES)从来也没很好地解决过硬件设备本身的能力差异问题。
+
+Vulkan：设备都不一样，就别假装自己上层能一样了，上层是否要一样，就让开发者自己决定吧。
+
+Vulkan与Metal、DirectX12并称为三大现代图形API。
+
+---
+
+OGL：非常老的API，包袱重。如果想做手机端，可以用GLES，相对来说干净很多；
+
+D3D11：状态API，有非常强大完善的驱动支持，易用并且性能非常高。并且有延迟状态模式，和D3D12很多情况下打的有来有回；
+
+D3D12：命令机式的API，完全异步的操作模式，开始把GPU作为异步硬件的更多细节呈现给程序员，难用；
+
+Vulkan：同上，但是全平台。因为没有D3D那么多的包袱，设计更加符合GPU行为。但加入了很多TBD/TBR概念，且信号量复杂，更加难用；
+
+---
+
+Sample:
+
+https://github.com/KhronosGroup/Vulkan-Samples
+
+教程：
+
+https://vulkan-tutorial.com/
+
+RHI：Render Hardware Interface
+
+参考：
+
+https://zhuanlan.zhihu.com/p/20712354
+
+Vulkan-高性能渲染
+
+https://www.zhihu.com/people/snowfox-68/posts
+
+一个Vulkan的专栏
+
+https://www.zhihu.com/question/456407362
+
+跨平台图形编程的未来会是怎么样的？
+
+https://zhuanlan.zhihu.com/p/456417172
+
+关于实时渲染和图形API的一些学习资料收录
+
+https://zhuanlan.zhihu.com/p/598557707
+
+Vulkan渲染流程总结
+
+## RenderDoc
+
+RenderDoc是一种图形调试器，目前可用于Windows、Linux、Android、Stadia和Nintendo Switch上的Vulkan、D3D11、D3D12、OpenGL和OpenGL ES开发。
+
+官网：
+
+https://renderdoc.org/
+
+## OpenMax
+
+一个免费的跨平台抽象软件层，用于加速在嵌入式和移动设备上的多媒体应用程序中捕获和呈现音频、视频和图像。
+
+但是在目前实际应用中，大部分硬件厂商主要提供算法功能，通常也以OMX IL层组件接口方式提供。所以OMX IL层的标准使用最多，DL层几乎没有厂商提供。而AL层是应用逻辑层，大部分系统也都有自己的多媒体框架，也比较少使用AL层接口。
+
+https://zhuanlan.zhihu.com/p/366810565
+
+OpenMax (OMX) 开发入门
+
+## DRM
+
+![](/images/img4/Graphics_Framework.png)
+
+DRM是Linux内核层的显示驱动框架，它把显示功能封装成open/close/ioctl等标准接口，用户空间的程序调用这些接口，驱动设备，显示数据。
+
+https://blog.csdn.net/weixin_41028621/article/details/110202300
+
+Libdrm库
+
+## DDX/DRI/Glamor
+
+DDX是X Server的2D驱动模块。
+
+DRI的主要作用是让X客户机和X服务器直接控制硬件用的。Linux OpenGL 3D的支持就是通过DRI实现的。其最流行的实现就是Mesa了。
+
+Glamor是一个统一的接口，用于GPU加速2D/3D应用。
+
 # 运算加速库
-
-## MKL
-
-Intel Math Kernel Library是一套经过高度优化和广泛线程化的数学例程，专为需要极致性能的科学、工程及金融等领域的应用而设计。
-
-官网：
-
-https://software.intel.com/zh-cn/mkl
-
-针对DNN加速，Intel推出了MKL-DNN库。
-
-官网：
-
-https://github.com/intel/mkl-dnn
 
 ## Neon
 
@@ -198,176 +321,10 @@ http://www.netlib.org/blas/index.html
 
 LAPACK和BLAS的历史非常悠久，是用Fortran语言编写的。
 
-# 常用线性代数库
+## GMP
 
-## ATLAS（Automatically Tuned Linear Algebra Soft）
-
-代码：
-
-https://sourceforge.net/projects/math-atlas/
-
-安装：
-
-`sudo apt-get install libatlas-base-dev`
-
-## OpenBLAS
+GMP是一个C/C++的大整数计算库。
 
 官网：
 
-http://www.openblas.net/
-
-代码：
-
-https://github.com/xianyi/OpenBLAS
-
->作者：张先轶，北京理工大学本硕（2005年、2007年）+中科院博士（2014年）。PerfXLab（澎峰科技）创始人。   
->个人主页：   
->http://xianyi.github.io/index_cn.htm
-
-OpenBLAS需要gfortran参与编译：
-
-`sudo apt install gfortran`
-
-需要注意gcc的版本和gfortran的版本必须一致。例如，某台机器为了项目需要，没有使用ubuntu默认的gcc版本，这样即使安装了gfortran，也还是不行。最后，安装匹配的gfortran才解决了该问题。
-
-## Armadillo
-
-Armadillo是一个线性代数和科学计算的C++库。
-
-官网：
-
-http://arma.sourceforge.net/
-
-## ensmallen
-
-ensmallen是一个基于Armadillo的数学优化方面的C++库。
-
-官网：
-
-https://ensmallen.org/
-
-# NVIDIA
-
-NVIDIA作为行业龙头，其影响力甚至在Khronos Group之上，它提出的标准很多成为了行业的事实标准。
-
->最近（2018.2），公司副总M给我们讲座的时候，回顾他早年在NVIDIA的经历，当时他曾拥有数万股NV的股票，可惜早都卖了。这十几年来，NV股票经过5次分拆，当初的一股现在要值6500美元。他要不卖，现在可能已经是亿万富翁了。。。
-
-## 术语
-
-iGPU：Integrated Graphics Processing Unit。
-
-dGPU：Discrete Graphics Processing Unit。
-
-## CUDA
-
-CUDA是NVIDIA最早推出的通用数学运算库。除了基本的数学运算之外，还提供了一些工具包：
-
-cuBLAS：线性计算库。
-
-NVBLAS：多GPU版的cuBLAS。
-
-cuFFT：FFT计算库。
-
-nvGRAPH：图计算库。（这里的图是数学图论中的图，和DL框架中的计算图是两回事。）
-
-cuRAND：随机数生成库。
-
-cuSPARSE；稀疏矩阵计算库。
-
-cuSOLVER：解线性方程的计算库。包括解稠密方程的cuSolverDN、解稀疏方程的cuSolverSP和矩阵分解的cuSolverRF。
-
-## Deep Learning SDK
-
-cuDNN：DL计算库。
-
-NCCL：多结点、多GPU的通信库。
-
-TensorRT：嵌入式设备上专用于DL inference的计算库。
-
-NVIDIA DIGITS：一款web应用工具，可在网页上对Caffe进行图形化操作和可视化。
-
-TensorRT还有个云端的集群版本：
-
-https://github.com/NVIDIA/tensorrt-inference-server
-
-参考：
-
-https://mp.weixin.qq.com/s/v8-JHd5tWm41WLqR-h6eKA
-
-使用TensorRT集成加速TensorFlow推理
-
-https://mp.weixin.qq.com/s/rMvhsi2vXxVC65C5Z4IXIw
-
-AI视频处理加速引擎TensorRT及Deepstream介绍
-
-https://zhuanlan.zhihu.com/p/35657027
-
-高性能深度学习支持引擎实战——TensorRT
-
-## NVDLA
-
-NVIDIA Deep Learning Accelerator是一个开源的用于inference的芯片方案。官网：
-
-http://nvdla.org/
-
-## NVIDIA DALI
-
-NVIDIA DALI是一个GPU加速的数据增强和图像加载库，为优化深度学习框架数据pipeline而设计，而其中的NVIDIA nvJPEG是用于JPEG解码的高性能GPU加速库。
-
-代码：
-
-https://github.com/NVIDIA/dali
-
-## Tensor Core
-
-https://mp.weixin.qq.com/s/pPjPLqgXZ8iCPS42vXJpuQ
-
-NVIDIA Tensor Core深度学习核心解析
-
-## CUDA实战
-
-安装：
-
-http://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html
-
-参考：
-
-http://ishare.iask.sina.com.cn/f/17211495.html
-
-深入浅出谈CUDA技术
-
-http://peghoty.blog.163.com/blog/static/493464092013016113254852/
-
-CUDA编程入门
-
-http://blog.csdn.net/xsc_c/article/category/2186063
-
-某人的并行计算专栏
-
-http://tieba.baidu.com/p/2155772860
-
-GPU和Shader技术的基础知识
-
-http://www.cnblogs.com/geniusalex/archive/2008/12/26/1941766.html
-
-CPU GPU设计工作原理
-
-http://www.jianshu.com/p/8687a040eb48
-
-GPU处理图像Shader的入门
-
-https://mp.weixin.qq.com/s/bvNnzkOzGYYYewc3G9DOIw
-
-GPU是如何优化运行机器学习算法的？
-
-https://mp.weixin.qq.com/s/nAwxtOUi6HpIjVOREgEfaA
-
-CUDA编程入门极简教程
-
-https://mp.weixin.qq.com/s/-zdIWkuRZXhsLJmOZljOBw
-
-CUDA编程精品教材分享《基于GPU-多核-集群等并行化编程》
-
-https://mp.weixin.qq.com/s/bCb5VsH58JII886lpg9lvg
-
-如何在CUDA中为Transformer编写一个PyTorch自定义层
+https://gmplib.org/

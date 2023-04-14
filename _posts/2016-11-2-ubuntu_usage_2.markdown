@@ -4,6 +4,9 @@ title:  Ubuntu使用技巧（二）
 category: linux 
 ---
 
+* toc
+{:toc}
+
 # Ubuntu 16.04使用手记
 
 Ubuntu 16.04正式发布（2016.4.21）之后，我第一时间下载了下来。
@@ -30,7 +33,7 @@ Ubuntu 16.04正式发布（2016.4.21）之后，我第一时间下载了下来�
 
 这是一个ISP DNS导致的问题。其中一个解决方法：
 
-`sudo apt-get remove gvfs-backends`
+`sudo apt remove gvfs-backends`
 
 # Battle of Wesnoth
 
@@ -50,17 +53,33 @@ https://github.com/tualatrix/ubuntu-tweak
 
 安装依赖：
 
-`sudo apt-get install python-pip python-aptdaemon.gtk3widgets python-gi python-lxml libwebkitgtk-3.0-dev libgconf2-dev python-compizconfig libdbus-glib-1-dev python-dbus python-xdg python-cairo`
+`sudo apt install python-pip python-aptdaemon.gtk3widgets python-gi python-lxml libwebkitgtk-3.0-dev libgconf2-dev python-compizconfig libdbus-glib-1-dev python-dbus python-xdg python-cairo`
 
 2.BleachBit
 
 支持平台广泛，大多数Linux发行版都有对应的软件包。
 
+3.gnome-tweaks
+
+这是Gnome官方的优化工具，当然了这个主要关注gnome桌面的设置，并没有系统设置的内容。
+
+4.gconf-editor
+
+这个相当于是Windows的注册表编辑器在Gnome桌面的等价物。
+
+---
+
+如何以管理员身份操作Gnome的资源管理器--nautilus
+
+`apt install nautilus-gksu`
+
+地址栏不能用输入，使用快捷键Ctrl+L
+
 # 清理系统
 
 ## 清理安装包
 
-`sudo apt-get clean`
+`sudo apt clean`
 
 ## 清理旧内核
 
@@ -70,7 +89,7 @@ https://github.com/tualatrix/ubuntu-tweak
 
 2.删除旧内核
 
-`sudo apt-get purge linux-image-4.4.0-21-generic linux-headers-4.4.0-21`
+`sudo apt purge linux-image-4.4.0-21-generic linux-headers-4.4.0-21`
 
 智能版：
 
@@ -100,7 +119,7 @@ https://github.com/ellson/graphviz/
 
 安装方法：
 
-`sudo apt-get install graphviz graphviz-dev`
+`sudo apt install graphviz libgraphviz-dev`
 
 其中，后者是graphviz的开发工具包，便于其他软件集成graphviz的相关功能。
 
@@ -118,13 +137,13 @@ graphviz包括了以下工具：
 
 1.xdot
 
-`sudo apt-get install xdot`
+`sudo apt install xdot`
 
 这个工具功能简单，只能按照dot布局方式查看文件。
 
 2.kgraphviewer
 
-`sudo apt-get install kgraphviewer-dev`
+`sudo apt install kgraphviewer-dev`
 
 这个工具可以选择查看的布局方式。
 
@@ -138,9 +157,9 @@ graphviz包括了以下工具：
 
 `sudo add-apt-repository ppa:webupd8team/unstable`
 
-`sudo apt-get update`
+`sudo apt update`
 
-`sudo apt-get install go-mtpfs`
+`sudo apt install go-mtpfs`
 
 `sudo chown <user name> /media/mtp`
 
@@ -148,7 +167,7 @@ graphviz包括了以下工具：
 
 `fusermount -u /media/mtp`
 
->2018.7 Ubuntu 18.04最近的更新终于可以默认支持MTP连接了。
+>2018.7 Ubuntu 18.04最近的更新终于可以默认支持MTP连接了。偶尔遇到问题的话，可以尝试同时重启PC和手机，再重新连接的方法。
 
 在没有MTP之前，有些手机的USB传输文件功能采用了如下方式：
 
@@ -164,7 +183,15 @@ MTP类似于HTTP之类的应用层通信协议传输，由于不涉及驱动的�
 
 # 文件校验和
 
-计算文件校验和，一般采用MD5和SHA算法。在Ubuntu中，这些算法的命令包括：md5sum、sha1sum(160-bit) ,sha224sum(224-bit) ,sha256sum(256-bit),sha384sum(384-bit),sha512sum(512-bit)等。
+计算文件校验和，一般采用MD5和SHA算法。在Ubuntu中，这些算法的命令包括：md5sum、sha1sum(160-bit)、sha224sum(224-bit)、sha256sum(256-bit)、sha384sum(384-bit)、sha512sum(512-bit)等。
+
+`sha256sum a.data>a.sha256.txt`
+
+参考：
+
+https://mp.weixin.qq.com/s/FPf2EMwHPsNetxx_sCBzNA
+
+MD5算法和SHA-1算法
 
 # 产品设计工具
 
@@ -175,29 +202,51 @@ MTP类似于HTTP之类的应用层通信协议传输，由于不涉及驱动的�
 | 思维导图 | Mindmanager | FreeMind |
 | 快速原型 | Axure RP | pencil |
 
-# Firefox插件
+## UMLet
 
-http://mozilla.com.cn/addon/76-pagesaver/
+UMLet是最近流行的一个绘制UML图的工具。它生成后缀为`.uxf`的UML图文件。
 
-这个插件可以将网页保存为图片。
+官网：
 
-# Virtual MIDI Piano Keyboard
+https://www.umlet.com/
 
-VMPK是一款MIDI生成工具软件，也就是俗称的“虚拟电子琴”软件。但它本身只生成MIDI输出，需要配合使用MIDI后处理软件，才能发声。常见的MIDI后处理软件有Qsynth、TiMidity。
+除了独立工具之外，还提供了VSCode和Eclipse的插件。
 
-# 远程桌面
+## draw.io
 
-Linux下的远程桌面软件主要有RealVNC和rdesktop。前者支持VNC协议，而后者支持MS RDP协议，可连接Windows系统。
+draw.io是一个在线的流程图工具。
 
-## rdesktop
+官网：
 
-安装方法：
+https://app.diagrams.net/
 
-`sudo apt-get install rdesktop`
+此外，它也有离线版和VSCode插件。
 
-使用方法：
+## ProcessOn
 
-`rdesktop -u administrator -p ****** -a 16 192.168.1.1`
+ProcessOn也是一个在线的流程图工具。
+
+官网：
+
+https://www.processon.com
+
+## mxGraph
+
+mxGraph是一个JS的流程图工具库。上面提到draw.io、ProcessOn都使用了该库。
+
+官网：
+
+https://jgraph.github.io/mxgraph/
+
+参考：
+
+https://juejin.cn/post/6844903811115401224
+
+mxgraph的艰难入门
+
+https://yejinzhan.gitee.io/2019/04/27/mxGraph%20%E5%85%A5%E9%97%A8%E5%AE%9E%E4%BE%8B%E6%95%99%E7%A8%8B/
+
+mxGraph入门实例教程
 
 # Xming
 
@@ -325,46 +374,8 @@ https://www.freeplane.org/wiki/index.php/Home
 
 功能上来说，Freeplane不算太强，但是它原生支持Latex。。。
 
-# Chrome
+## Other
 
-`sudo wget http://www.linuxidc.com/files/repo/google-chrome.list -P /etc/apt/sources.list.d/`
+https://mp.weixin.qq.com/s/yD12Ih29_9CwwOe4z5BtgQ
 
-`wget -q -O - https://dl.google.com/linux/linux_signing_key.pub  | sudo apt-key add -`
-
-`sudo apt update`
-
-`sudo apt install google-chrome-stable`
-
-`google-chrome-stable`
-
-安装flash：
-
-1、首先在adobe官网下载tar.gz格式的linux安装包，之后将其解压。
-
-2.`sudo gedit /usr/share/applications/google-chrome.desktop`
-
-3.将`Exec=/usr/bin/google-chrome-stable %U`后，添加`--ppapi-flash-path=path/libpepflashplayer.so --ppapi-flash-version=<version>`
-
-# 常用快捷键
-
-Ctrl+Alt+T：启动Terminal
-
-Ctrl+Shift+T：在terminal中打开多个标签
-
-alt+1 alt+2 alt+3........：切换标签
-
-Ctrl+Super+D：最小化所有窗口
-
-# 便签软件
-
-主要有两类便签软件：
-
-1.支持超链接的便签。典型的有Gnote和Tomboy，这两个软件都有内容检索的功能。
-
-2.桌面随意贴。典型的有Indicator Stickynotes和Knotes。后者有内容检索的功能，而前者没有。
-
-# ASCII表情
-
-╮(╯_╰)╭
-
-(^ω^)
+被收费绘图工具PUA了怎么办？来看看这个老实工具吧

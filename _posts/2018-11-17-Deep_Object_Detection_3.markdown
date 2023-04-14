@@ -4,7 +4,26 @@ title:  深度目标检测（三）——Fast R-CNN, Faster R-CNN
 category: Deep Object Detection 
 ---
 
+* toc
+{:toc}
+
 # SPPNet（续）
+
+**Problem 2**：ROI的在特征图上的对应的特征区域的维度不满足全连接层的输入要求怎么办（又不可能像在原始ROI图像上那样进行截取和缩放）？
+
+对于Problem 2我们分析一下：
+
+这个问题涉及的流程主要有: 图像输入->卷积层1->池化1->...->卷积层n->池化n->全连接层。
+
+引发问题的原因主要有：全连接层的输入维度是固定死的，导致池化n的输出必须与之匹配，继而导致图像输入的尺寸必须固定。
+
+解决办法可能有：
+
+1.想办法让不同尺寸的图像也可以使池化n产生固定的输出维度。（打破图像输入的固定性）
+
+2.想办法让全连接层（罪魁祸首）可以接受非固定的输入维度。（打破全连接层的固定性，继而也打破了图像输入的固定性）
+
+以上的方法1就是SPPnet的思想。
 
 ![](/images/article/spp.png)
 
@@ -196,7 +215,7 @@ $$L(\{p_i\},\{t_i\})=\frac{1}{N_{cls}}\sum_iL_{cls}(p_i,p_i^*)+\lambda \frac{1}{
 
 此方法其实就是一个不断迭代的训练过程，既然分别训练RPN和Fast-RCNN可能让网络朝不同的方向收敛：
 
-a)那么我们可以先独立训练RPN，然后用这个RPN的网络权重对Fast-RCNN网络进行初始化并且用之前RPN输出proposal作为此时Fast-RCNN的输入训练Fast R-CNN。
+a) 我们可以先独立训练RPN，然后用这个RPN的网络权重对Fast-RCNN网络进行初始化并且用之前RPN输出proposal作为此时Fast-RCNN的输入训练Fast R-CNN。
 
 b) 用Fast R-CNN的网络参数去初始化RPN。之后不断迭代这个过程，即循环训练RPN、Fast-RCNN。
 
@@ -220,6 +239,10 @@ b) 用Fast R-CNN的网络参数去初始化RPN。之后不断迭代这个过程�
 
 ![](/images/article/4_Step_Alternating_Training.png)
 
+### 数据不平衡问题
+
+如果每幅图的所有anchor都去参与优化loss function，那么最终会因为负样本过多导致最终得到的模型对正样本预测准确率很低。因此，可在每幅图像中随机采样256个anchors去参与计算一次mini-batch的损失。正负比例1:1(如果正样本少于128则补充采样负样本)
+
 ## 总结
 
 ![](/images/article/faster_rcnn_p.png)
@@ -238,42 +261,6 @@ https://mp.weixin.qq.com/s/VKQufVUQ3TP5m7_2vOxnEQ
 
 通过Faster R-CNN实现当前最佳的目标计数
 
-http://blog.csdn.net/zy1034092330/article/details/62044941
-
-Faster RCNN详解
-
 https://zhuanlan.zhihu.com/p/31426458
 
 一文读懂Faster RCNN
-
-https://mp.weixin.qq.com/s/IZ9Q3fDJVawiEbD6x9WRLg
-
-Object Detection系列（三）Fast R-CNN
-
-https://mp.weixin.qq.com/s/M_i38L2brq69BYzmaPeJ9w
-
-像玩乐高一样拆解Faster R-CNN：详解目标检测的实现过程
-
-https://mp.weixin.qq.com/s/oTo12fgl1p5D7yzdfWIT8Q
-
-使用Faster R-CNN、ResNet诊断皮肤病，深度学习再次超越人类专家
-
-https://mp.weixin.qq.com/s/5OkPWPLRyf07mZwLRSZ3Fw
-
-机器视觉目标检测补习贴之R-CNN系列—R-CNN,Fast R-CNN,Faster R-CNN
-
-https://mp.weixin.qq.com/s/KL6gB0SsclyHqedS_tThXA
-
-里程碑式成果Faster RCNN复现难？我们试了一下
-
-# YOLO
-
-YOLO: Real-Time Object Detection，是一个基于神经网络的实时对象检测软件。它的原理基于Joseph Chet Redmon 2016年的论文：
-
-《You Only Look Once: Unified, Real-Time Object Detection》
-
-这也是Ross Girshick去Facebook之后，参与的又一力作。
-
-官网：
-
-https://pjreddie.com/darknet/yolo/

@@ -1,395 +1,419 @@
 ---
 layout: post
 title:  TensorFlow（四）
-category: AI 
+category: DL Framework 
 ---
 
-# TensorFlow
+* toc
+{:toc}
 
-https://mp.weixin.qq.com/s/MYBTWL3X_OhLZL6C4rISzw
+# Debug
 
-TensorFlow训练线性回归
+## VS Code + gdb
 
-https://mp.weixin.qq.com/s/5QYlh6gV9IqdQfraK4DC8w
+- 设置python
 
-10种深度学习算法的TensorFlow实现
+Setting中搜索`python path`，设置路径类似于：`/anaconda3/envs/mlbook/bin/python`
 
-https://mp.weixin.qq.com/s/W1KP213Ngj-BNEyx-_nVyw
+打开python文件，在状态栏有python版本的提示，点击该提示，可以切换不同的python版本。
 
-利用TensorFlow实现卷积自编码器
+- gdb调试
 
-https://mp.weixin.qq.com/s/2COA8aRQBpxaihKnlLkXZQ
+Tensorflow App，一般是从python开始的，因此需要掌握python+C的混合调试方法。
 
-快速上手图像识别：用TensorFlow API实现图像分类实例
+在所有模块import之后（否则后面的gdb加载不到相关的符号），添加如下语句：
 
-https://mp.weixin.qq.com/s/TZMOO_LFCxk297lKNQfvGQ
+`input("pid: " + str(os.getpid()) +", press enter after attached")`
 
-TensorFlow从基础到实战：一步步教你创建交通标志分类神经网络
+启动gdb，使用attach命令，attach到相关的进程。设置断点，然后continue即可。
 
-https://mp.weixin.qq.com/s/HUUwtyjRllg-5olqYHK4XA
+参考：
 
-基于TensorFlow的开源项目FaceRank
+https://sketch2sky.com/2019/08/25/tensorflow-debugtrick/
 
-https://mp.weixin.qq.com/s/N2OP1uX7JjfIJQ_B4NHKpw
+Tensorflow XLA Debug/Profiling Methods
 
-横向对比三大分布式机器学习平台：Spark、PMLS、TensorFlow
+https://www.cnblogs.com/djzny/p/4956752.html
 
-https://mp.weixin.qq.com/s/bJigyEv6iNDp799KlHsclg
+gdb命令中attach使用
 
-TensorFlow 不仅用于机器学习，还能模拟偏微分方程（水滴特效）
+https://wzzju.github.io/tensorflow/gdb/2020/03/17/tf-compile/
 
-https://mp.weixin.qq.com/s/dmNEzrWNX3YWmocjpORpig
+使用gdb调试并阅读TensorFlow源码
 
-谷歌开源TF-Ranking可扩展库，支持多种排序学习
+- vscode调试
 
-https://mp.weixin.qq.com/s/ww0nd07DaK4eVcexqebn3g
+vscode调试同样需要两段式的方法：
 
-基于TensorFlow卷积神经网络的短期股票预测
+https://nadiah.org/2020/03/01/example-debug-mixed-python-c-in-visual-studio-code/
 
-https://mp.weixin.qq.com/s/n_zU7Rg7v6PwjZWEF88fNA
+Example debugging mixed Python C++ in VS Code
 
-如何使用TensorFlow实现音频分类任务
+相关配置文件参见：
 
-https://mp.weixin.qq.com/s/UbBJYOmWtUXPFliRMyzDrg
+https://github.com/antkillerfarm/antkillerfarm_crazy/blob/master/vscode/launch.json
 
-最新TensorFlow专业深度学习实战书籍和代码《Pro Deep Learning with TensorFlow》
+## 打印stack trace
 
-https://mp.weixin.qq.com/s/skl5w2cJaO3mYtr656lb9Q
+C++：
+```cpp
+#include "tensorflow/core/platform/stacktrace.h"
+tensorflow::CurrentStackTrace()
+```
 
-见人识面，TensorFlow实现人脸性别/年龄识别
+Python：`tf.debugging.disable_traceback_filtering()`
 
-https://mp.weixin.qq.com/s/g2xMUmhxUTuQugR2PWUJtw
+## Log
 
-组成TensorFlow核心的六篇论文
+TF里有两套Log系统：`LOG`和`VLOG`。
 
-https://mp.weixin.qq.com/s/n4nEtyRc5G44kj3zmHpd5g
+`LOG`由`TF_CPP_MIN_LOG_LEVEL`控制，值越小，信息越多。
 
-TensorFlow实战——图像分类神经网络模型
+`VLOG`都是INFO级别的Log，因此，`TF_CPP_MIN_LOG_LEVEL`必须为0。此外，`VLOG`本身亦有不同等级，可使用`TF_CPP_MIN_VLOG_LEVEL`控制，值越大，信息越多。
 
-https://mp.weixin.qq.com/s?__biz=MzU1OTMyNDcxMQ==&mid=2247484836&idx=1&sn=0bc47c662ea64aa833df9fb9c4b1d706
+# TensorBoard
 
-TensorFlow模型优化工具包正式推出
+TensorBoard是一个http服务，用以监控TensorFlow的执行。
 
-https://mp.weixin.qq.com/s/EytvywrsgydXAJQhuUqKvg
+`writer = tf.summary.FileWriter("logs/", sess.graph)`
 
-简易浣熊识别器是如何实现的
+然后
 
-http://www.jianshu.com/p/d443aab9bcb1
+`tensorboard --logdir='logs/'`
 
-在TensorFlow上使用LSTM进行情感分析
+启动之后，用浏览器打开`http://localhost:6006`即可。
 
-https://mp.weixin.qq.com/s/gW_KX6eF9XEsSUO1UzJ3WQ
+如果想在局域网中用另一台PC访问TensorBoard服务，则可：
 
-基于LSTM的情感分析
+`tensorboard --logdir='logs/' --host=0.0.0.0 --port=1234`
 
-https://mp.weixin.qq.com/s/KZhL477ApHgQfmM2xFrYJw
+TensorBoard会将同类结点Group，但Group之后，有时反而不易观察具体的结构。这个时候最好Ungroup一下。
 
-Tensorlang：基于TensorFlow的可微编程语言
+参考：
 
-https://mp.weixin.qq.com/s/_9NJ6QLQArUAD1DKb0KRfA
+https://neptune.ai/blog/tensorboard-tutorial
 
-如何使用TensorFlow mobile部署模型到移动设备
+Deep Dive Into TensorBoard: Tutorial With Examples
 
-https://mp.weixin.qq.com/s/e_TzQxFLAonLMyYAhte6Cg
+http://blog.csdn.net/u013082989/article/details/53510625
 
-face-api.js：在浏览器中进行人脸识别的JavaScript接口
+TensorFlow学习_01_安装_基本操作_可视化结构、过程_Mnist
 
-https://mp.weixin.qq.com/s/23FoaaA3Z_3kf03BmepFPg
+https://blog.csdn.net/sinat_33761963/article/details/62433234
 
-如何将模型部署到安卓移动端，这里有一份简单教程
+Tensorflow的可视化工具Tensorboard的初步使用
 
-https://mp.weixin.qq.com/s/MT1YaMm4KBWsIZeHehahgw
+https://mp.weixin.qq.com/s/Zaz9hmTuUbd-hCx-zHhBgg
 
-TensorFlow重大升级：自动将Python代码转为TF Graph，大幅简化动态图处理！
+TensorBoard：可视化学习
 
-https://mp.weixin.qq.com/s/zeZs48XbYJGhvOoIysZ8QA
+https://www.cnblogs.com/deepllz/p/9207981.html
 
-Docker Compose+GPU+TensorFlow所产生的奇妙火花
+Tensorboard数据(tfevents文件)格式解析及ofstream使用问题
 
-https://mp.weixin.qq.com/s/sOggiB57D-ekWOsbL6TY_A
+https://mp.weixin.qq.com/s/Kc-DqiuG2kn0NlVxkcNa4w
 
-TensorFlow中那些鲜为人知却又极其实用的知识
+TensorBoard直方图信息中心
 
-https://mp.weixin.qq.com/s/XHKrkNf2bWLF7r7gzdU24w
+https://mp.weixin.qq.com/s?__biz=MzU2OTA0NzE2NA==&mid=2247515390&idx=2&sn=ebf548bac3c7db9b0174265666c67d0c
 
-Quick, Draw!涂鸦分类递归神经网络
+tensorboard学习笔记
 
-https://mp.weixin.qq.com/s/QQednlKYl6t3aO0xCzgGmA
+https://mp.weixin.qq.com/s/JRa0tgXtGdzaj0UnYcmZ3Q
 
-带你轻松使用TensorFlow创建大型线性模型
+tensorboard指南
 
-https://mp.weixin.qq.com/s/BfwTOtLnwnMsS3-PQQBHSg
+https://mp.weixin.qq.com/s/BAR-UM3rTveYrKa4kiJvcQ
 
-使用TensorFlow训练WDL模型性能问题定位与调优
+使用TensorBoard进行超参数优化
 
-https://mp.weixin.qq.com/s/kw3BYTXdyhnIyVZrnQuPew
+https://mp.weixin.qq.com/s/5zfKiP9Fxpl7suqBQILL-g
 
-基于深度学习和迁移学习的识花实践
+还在用Tensorboard？机器学习实验管理平台大盘点
 
-https://mp.weixin.qq.com/s/F965Zu_PgA-1ZUGIQ0nIEQ
+https://mp.weixin.qq.com/s/8scMr0jcW87y6k_wFgOBEg
 
-TensorFlow协同过滤推荐实战
+使用Tensorboard投影进行高维向量的可视化
 
-https://mp.weixin.qq.com/s/KohwsQQetwjfTj-PXvLjwA
+# Profiling
 
-使用MNIST数据集，在TensorFlow上实现基础LSTM网络
+## 查看
 
-http://mp.weixin.qq.com/s/ioaS7RQ6bsJs4_X0G4ZHyQ
+文档：
 
-如何优雅地用TensorFlow预测时间序列：TFTS库详细教程
+https://tensorflow.google.cn/guide/profiler
 
-https://mp.weixin.qq.com/s/pIESRzjsmqoO46P4x5Iqhw
+Optimize TensorFlow performance using the Profiler
 
-Tensorflow卷积神经网络
+https://tensorflow.google.cn/tensorboard/tensorboard_profiling_keras
 
-https://mp.weixin.qq.com/s/Cge_GY19aZ1AcMkhW93C1A
+TensorFlow Profiler: Profile model performance
 
-TensorFlow中的那些高级API
+安装：
 
-https://mp.weixin.qq.com/s/kYOwUWlTP4T0IYKDWDbCsg
+`pip install -U tensorboard-plugin-profile`
 
-tensorflow object detection API训练公开数据集Oxford-IIIT Pets Dataset
+代码：
 
-https://mp.weixin.qq.com/s/8uDsaZjsiKXGea6M-w-RvA
+```python
+from tensorflow.profiler.experimental import Profile
 
-tensorflow object detection API使用之GPU训练实现宠物识别
+with Profile('/logdir_path'):
+    # do sth
+```
 
-https://mp.weixin.qq.com/s/knw7yuUxHe-qeCLfj20onw
+```python
+# Create a TensorBoard callback
+logs = "logs/" + datetime.now().strftime("%Y%m%d-%H%M%S")
 
-Bayesian GAN的TensorFlow实现
+tboard_callback = tf.keras.callbacks.TensorBoard(log_dir = logs,
+                                                 profile_batch = (2,6))
 
-https://mp.weixin.qq.com/s/Sxui9CvdGocIxVG2FM4JtQ
+model.fit(ds_train,
+          epochs=2,
+          validation_data=ds_test,
+          callbacks = [tboard_callback])
+```
 
-基于tensorflow使用CNN-RNN进行中文文本分类！
+profile_batch参数用于设置在第几个batch进行profile。为0，表示disable。一般从第2个batch开始，以避免硬件冷启动对于profile的影响。
 
-https://mp.weixin.qq.com/s/X7ISLRMy5cddpmO5mev4MA
+脚本运行之后，会在logs路径下生成plugins/profile文件夹。
 
-自创数据集，使用TensorFlow预测股票入门
+查看步骤：
 
-https://mp.weixin.qq.com/s/kJxXIN6D5TEEFSFhGJNIyw
+1.打开TensorBoard之后，右上角下拉中选择`PROFILE`。
 
-开源神经网络图片上色技术解析
+2.左侧的`Tools`下拉中，有好多工具。其中`tensorflow_stats`和`trace_viewer`比较重要。
 
-https://mp.weixin.qq.com/s/qXMRHxDDRa-_rJZMhXWB4w
+trace可以保存在本地，也可以用grpc输出到远程，并通过`trace_viewer`中的`Capture Profile`按钮来接收。
 
-详解TensorFlow的新seq2seq模块及其用法
+---
 
-https://mp.weixin.qq.com/s/YdcIDXadEnDsyfc6Iu1gGw
+Trace Viewer是Google的Chromium项目开发的一个强大的可视化展示和分析工具。TensorBoard中也使用了它。
 
-手把手教你用TensorFlow训练模型
+Trace Viewer有一套自己的Trace Event Format，只要文件遵循这个格式，就可以被展示。
 
-https://mp.weixin.qq.com/s/Off0pgaRNyik2nvjHaQQkw
+查看方法：
 
-在TensorFlow中对比两大生成模型：VAE与GAN
+chrome://tracing/
 
-https://mp.weixin.qq.com/s/rMYjsIgFNvv47F4YZjY8SA
+或者
 
-如何在K8S上玩转TensorFlow？
+https://ui.perfetto.dev/
 
-https://zhuanlan.zhihu.com/p/30751039
+后者是Chromium项目新开发的用以替代前者的工具。
 
-TensorFlow全新的数据读取方式：Dataset API入门教程
+https://blog.csdn.net/u011331731/article/details/108354605
 
-https://mp.weixin.qq.com/s/SDVQSn1aVDXk_RPGuVcQgQ
+强大的可视化利器Chrome Trace Viewer使用详解
 
-TensorFlow深度自动编码器入门实践
+---
 
-https://mp.weixin.qq.com/s/mZ79KAuSIJLtBEXvKwUi-w
+LTTng是一个开源的trace框架。
 
-如何利用TensorFlow.js部署简单的AI版“你画我猜”图像识别应用
+官网：
 
-https://mp.weixin.qq.com/s/yi-PNmMNMbwSi56aXo6ZSQ
+https://lttng.org/
 
-tensorflow对象检测框架训练VOC数据集常见的两个问题
+LTTng有相关的工具，可以导出CTF（Chrome Trace Format）格式的数据。
 
-https://mp.weixin.qq.com/s/bcLCCvWrJLbMxwDl9GutjQ
+---
 
-TensorFlow动态图5行代码实现迁移学习-识别转变风格的MNIST
+minitrace可以直接生成CTF格式的数据。
 
-https://mp.weixin.qq.com/s/iQIRj7ifsOEnupYZuQsVwQ
+代码：
 
-是时候放弃TensorFlow集群，拥抱Horovod了
+https://github.com/hrydgard/minitrace
 
-https://mp.weixin.qq.com/s/NMRwXqwr4VFbMUPgI8Uccg
+---
 
-使用Google Cloud上的tf.Transform对TensorFlow管道模式进行预处理
+https://blog.csdn.net/zkbaba/article/details/106178542
 
-https://mp.weixin.qq.com/s/UKt1cFLcRYZQTJiZRiajwQ
+TensorFlow性能分析工具—TensorFlow Profiler
 
-TensorFlow Servering C/S通信约束
+https://zhuanlan.zhihu.com/p/140343833
 
-https://mp.weixin.qq.com/s/DpqI4AfjiygCh8dqq_Kgmw
+tensorflow profiling工具简介——tensorflow原生工具
 
-基于TensorFlow Serving的深度学习在线预估
+https://www.tensorflow.org/tensorboard/tensorboard_profiling_keras
 
-https://mp.weixin.qq.com/s/XcqVtFBY5rIn0FgPEx0eTg
+TensorBoard性能分析:在Keras中对基本训练指标进行性能分析
 
-工业领域中的AI：BHGE通过使用TensorFlow概率编程工具包开发的基于物理的概率深度学习
+https://github.com/tensorflow/benchmarks
 
-http://brucedone.com/archives/1005
+TensorFlow benchmarks
 
-Tensorflow破解验证码
+https://blog.csdn.net/kenneth_yu/article/details/77466776
 
-https://mp.weixin.qq.com/s/CjlEY_m6tp-NJ3B2MiAZRg
+使用profiler检测神经网络模型的运行性能
 
-基于TensorFlow的深度模型训练GPU显存优化
+## 代码实现
 
-http://gitbook.cn/books/593d71ba4686067a2200aec6/index.html
+GPU Profiling需要硬件厂商的支持。
 
-用TensorFlow实现智能机器人的原理及如何实现一个对话机器人
+比如Nvidia的CUDA Profiling Tools Interface (CUPTI)、Graphcore的PopVision trace instrumentation library (libpvti)等。
 
-https://mp.weixin.qq.com/s/lLaSXG1VF9Rys2GNzFP7pw
+```cpp
+class GpuTracer : public profiler::ProfilerInterface {
+ public:
+  GpuTracer(RocmTracer* rocm_tracer)
+```
 
-轻松使用多种预训练卷积网络抽取图像特征
+CuptiTracerEvent/RocmTracerEvent
 
-https://mp.weixin.qq.com/s/tVqp1Tht1P-0EQazJizQaA
+HloExecutionProfile/ExecutionProfile
 
-利用人口普查收入数据集预测收入
+`export XLA_FLAGS="--xla_hlo_profile"`
 
-https://mp.weixin.qq.com/s/3WleFm9S_wMIPTz_WfjKQw
+```cpp
+tensorflow::profiler::XLineBuilder
+XEventBuilder
+XPlaneBuilder
+HumanReadableProfileBuilder
+```
 
-TensorFlow支持Unicode，中文NLP终于省心了
+```
+{
+  TraceMe trace("step");
+  ... do some work ...
+}
 
-https://mp.weixin.qq.com/s/jFEOokxfJ1Kw-P3wvw3EAg
+auto id = ActivityStart("step");
+  ... do some work ...
+ActivityEnd(id);
 
-带你了解，不规则张量！
+profiler::AnnotatedTraceMe
+```
 
-https://mp.weixin.qq.com/s/tMtx4PZbpo5IrnhzLz8Lzw
+参考：
 
-AutoGraph：图的简易控制流程
+https://zhuanlan.zhihu.com/p/357191706
 
-https://mp.weixin.qq.com/s/zY7rGh-kA-36VEo9DiaKbg
+使用Graphcore PopVision分析工具优化AI性能
 
-TensorFlow进行简单的图像处理
+# op Backprop
 
-https://mp.weixin.qq.com/s/DAV3TDI4JYr0sXqTGU6t2A
+## compute_gradients & apply_gradients
 
-分布式TensorFlow入坑指南：从实例到代码带你玩转多机器深度学习
+由源代码可以知道`optimizer.minimize`实际上包含了两个步骤，即`compute_gradients`和`apply_gradients`，前者用于计算梯度，后者用于使用计算得到的梯度来更新对应的variable。
 
-https://mp.weixin.qq.com/s/QU5NjksCEswjHnkY7WXWXQ
+如果想要部分更新某个Variable的话，可用如下步骤：
 
-分布式TensorFlow入门教程
+1.生成需要更新的元素的mask tensor。1代表要更新，0代表不更新。
 
-https://mp.weixin.qq.com/s/pBR4wMITrigbSVAvn0d6vQ
+2.`compute_gradients`得到grad tensor。
 
-利用TensorFlow实现上下文的Chat-bots
+3.`grad = grad * mask`
 
-https://mp.weixin.qq.com/s/8I5Nvw4t2jT1NR9vIYT5XA
+4.`apply_gradients`。
 
-深入理解TensorFlow中的tf.metrics算子
+通常来说，如果一个计算图中没有optimizer，则一般只包含forward运算，而没有backward运算。
 
-https://mp.weixin.qq.com/s/aMarI-nyIvFqhtpJWQrNhQ
+## Add
 
-谷歌推强化学习新框架“多巴胺“，基于TensorFlow，已开源
+```cpp
+//forward
+REGISTER3(BinaryOp, GPU, "AddV2", functor::add, float, Eigen::half, double);
+tensorflow/core/kernels/cwise_ops_common.h: BinaryOp
 
-https://mp.weixin.qq.com/s/ntHkMIef1o2-FF-AJf_bZQ
+//backward
+tensorflow/python/ops/math_grad.py:
+@ops.RegisterGradient("AddV2")
+def _AddGrad(op, grad):
+tensorflow/core/ops/math_grad.cc:
+REGISTER_OP_GRADIENT("AddV2", AddGrad);
 
-三分钟训练眼球追踪术，AI就知道你在盯着哪个妹子——TensorFlow.js代码
+//RegisterGradient
+tensorflow/python/framework/ops.py:
+class RegisterGradient(object):
+```
 
-https://mp.weixin.qq.com/s/7rTmEBfh613SrNnTQvfSjw
+Gradient有两种处理方式：（tensorflow/python/ops/gradients_util.py: _GradientsHelper）
 
-懒人福利：不写代码调优深度模型，谷歌开源的“What-If”了解一下
+- 有RegisterGradient的op，直接调用注册的函数。
 
-https://mp.weixin.qq.com/s/eX3LWYiSH-KObH_7F_3QCA
+- 没有的，调用SymbolicGradient。
 
-TensorFlow 1.11.0发布，一键多GPU
+参考：
 
-https://mp.weixin.qq.com/s/316VVXLQfeIsKNk4ld-VRw
+https://www.zhihu.com/question/56443480
 
-TensorFlow语义分割套件开源了ECCV18旷视科技BiSeNet实时分割算法
+TensorFlow的自动求导具体是在哪部分代码里实现的？
 
-https://mp.weixin.qq.com/s/XI1J4ardEWKP4UQ4IXZGTQ
+## Conv
 
-TensorFlow Hub,给您带来全新的Web体验
+```cpp
+tensorflow/cc/gradients/nn_grad.cc:
+REGISTER_GRADIENT_OP("Conv2D", Conv2DGrad);
 
-http://www.jianshu.com/p/1da012a83b74
+tensorflow/python/ops/nn_grad.py:
+@ops.RegisterGradient("Conv2DBackpropInput")
+def _Conv2DBackpropInputGrad(op, grad):
 
-利用TensorFlow实现排序和搜索算法
+@ops.RegisterGradient("Conv2DBackpropFilter")
+def _Conv2DBackpropFilterGrad(op, grad):
+```
 
-https://mp.weixin.qq.com/s/oEqMjOTj8xpd3sg60ZUhqA
+Conv2D的Backprop操作可分为两部分：
 
-TensorFlow的c++实践及各种坑
+- Conv2DBackpropInput负责计算上一层的梯度，也就是所谓的in_grad。
 
-https://mp.weixin.qq.com/s/-5RCRl9ztQ2dQmX00QvfvQ
+- Conv2DBackpropFilter负责计算Kernel的梯度。（似乎没有计算bias梯度）
 
-在Python和TensorFlow上构建Word2Vec词嵌入模型
+```cpp
+// BP input
+// tensorflow source code:
+tensorflow/core/kernels/conv_grad_input_ops.cc: LaunchConv2DBackpropInputOp
+tensorflow/core/kernels/conv_grad_input_ops.h: LaunchConv2DBackpropInputOpImpl
+tensorflow/core/kernels/eigen_backward_spatial_convolutions.h: Eigen::SpatialConvolutionBackwardInput
+// eigen source code:
+unsupported/Eigen/CXX11/src/Tensor/TensorBase.h: TensorBase::contract()
+unsupported/Eigen/CXX11/src/Tensor/TensorContraction.h: evalGemmPartial
+unsupported/Eigen/CXX11/src/Tensor/TensorContraction.h: TensorContractionKernel
+Eigen/src/Core/products/GeneralBlockPanelKernel.h: gebp_kernel::operator()
 
-https://mp.weixin.qq.com/s/Nyjp0mZxcn04vLKjJXLSaw
+// BP filter
+// tensorflow source code:
+tensorflow/core/kernels/conv_grad_filter_ops.cc: LaunchConv2DBackpropFilterOp
+tensorflow/core/kernels/eigen_backward_spatial_convolutions.h: Eigen::SpatialConvolutionBackwardKernel
+// eigen source code:
+unsupported/Eigen/CXX11/src/Tensor/TensorBase.h: TensorBase::contract()
+```
 
-如何用TensorFlow在安卓设备上实现深度学习推断
+以上是CPU计算BP的调用路径，要点如下：
 
-https://mp.weixin.qq.com/s/OVWbxBNc4i0_5jgy06xS1A
+- 无论是计算BP input，还是BP filter，最终都会转换成GEMM运算。
 
-基于Tensorflow Estimators的文本分类
+- GEMM运算会调用TensorContractionKernel。
 
-https://mp.weixin.qq.com/s/c_2_9gvOynHaVW6pi4qQjQ
+Tensor contraction是一种Tensor运算，参见《线性代数（一）》中的“张量分析”一节。
 
-用TensorFlow让机器人唱首歌给你听
+# 我的TensorFlow实践
 
-https://mp.weixin.qq.com/s/hn-LqyREkusxP2TOWfTJ6g
+## MNIST+Softmax
 
-使用TensorFlow官方Java API调用TensorFlow模型
+代码：
 
-https://mp.weixin.qq.com/s/kS92vYyeHLc38RGc_4CZbg
+https://github.com/antkillerfarm/antkillerfarm_crazy/tree/master/python/ml/tensorflow/hello_mnist.py
 
-如何应用TFGAN快速实践生成对抗网络？
+## MNIST+CNN
 
-https://mp.weixin.qq.com/s/hquOoKeeHQXqWcHM6Bkvbw
+代码：
 
-如何训练一个简单的音频识别网络
+https://github.com/antkillerfarm/antkillerfarm_crazy/tree/master/python/ml/tensorflow/hello_cnn.py
 
-https://mp.weixin.qq.com/s/aWez5FYXXnRnDbb0zcXFXQ
+第一个例子中，我对CPU的计算能力还没有切肤之痛，但在这里使用CPU差不多要花半个小时时间。。。
 
-如何在TensorFlow中训练提升树模型
+# Broadcast
 
-https://mp.weixin.qq.com/s/kEowgNPVS1nAGBPbzkatlQ
+Broadcast是一种填充元素以使操作数的形状相匹配的操作。例如，对一个[3,2]的张量和一个[3,1]的张量相加在TF中是合法的，TF会使用默认的规则将[3,1]的张量填充为[3,2]的张量，从而使操作能够执行下去。
 
-如何构建高可读性和高可重用的TensorFlow模型
+参考：
 
-https://mp.weixin.qq.com/s/O_IN39FBVPeD5fRYBsPuZQ
+https://www.cnblogs.com/yangmang/p/7125458.html
 
-用TensorFlow开发问答系统
+numpy数组广播
 
-https://mp.weixin.qq.com/s/8Hrq_z8s_5ms6Q_6OOaU-g
+https://blog.csdn.net/LoseInVain/article/details/78763303
 
-如何使用TensorFlow和自编码器模型生成手写数字
-
-https://mp.weixin.qq.com/s/rQ9eZosHOoDOXg9tAg4t6A
-
-tensorflow Object Detection API使用预训练模型mask r-cnn实现对象检测
-
-https://mp.weixin.qq.com/s/cPWXAI2TBv3_ssnWDFoQ4w
-
-TensorFlow sucks，有人吐槽TensorFlow晦涩难用
-
-https://mp.weixin.qq.com/s/_kr28kN0_1QFP8BR_wGo5w
-
-TensorFlow RNN入门
-
-https://mp.weixin.qq.com/s/WqE-FRl-Thys7tHUvFNlWQ
-
-盯住梅西：TensorFlow目标检测实战
-
-https://mp.weixin.qq.com/s/WfzlHtz0FFJMsPFwPoMqJg
-
-如何利用VGG-16等模型在CPU上测评各深度学习框架
-
-http://www.jianshu.com/p/4e16ae0aad25
-
-利用TensorFlow入门Word2Vec
-
-https://mp.weixin.qq.com/s/YJmMfBhQ3cLNUp_HHsXhGA
-
-手把手教你使用TensorFlow生成对抗样本
-
-https://mp.weixin.qq.com/s/nnjyR4XGVZQ1zXCIPzTNlg
-
-基于TensorFlow的变分自编码器实现
-
-https://mp.weixin.qq.com/s/iMgesGmdb7Jq4muCxb-nFA
-
-Tensorflow实战：Discuz验证码识别
-
-https://mp.weixin.qq.com/s/4aJUGBpPG_6Oc5EqOmM0Iw
-
-作为TensorFlow的底层语言，你会用C++构建深度神经网络吗？
+TensorFlow中的广播Broadcast机制

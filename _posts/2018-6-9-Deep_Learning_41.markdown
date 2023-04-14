@@ -4,6 +4,9 @@ title:  深度学习（四十一）——迁移学习
 category: DL 
 ---
 
+* toc
+{:toc}
+
 # 迁移学习
 
 ![](/images/img2/small_data.png)
@@ -48,9 +51,17 @@ https://mp.weixin.qq.com/s/sZOlUiqOjNjt7q17B_5QnQ
 
 新一代联邦学习技术及应用实战
 
+https://mp.weixin.qq.com/s/f9Wskw0DFwYXD8TEMvL9Tw
+
+人工智能新技术：联邦学习的前世今生
+
+https://mp.weixin.qq.com/s/bwguSX8rfGCHti0qOlyz4g
+
+Federated Learning: 架构
+
 ## 参考
 
->龙明盛，清华本科（2008）+博士（2016），迁移学习的最早提出者之一。清华大学副教授，博导。   
+>龙明盛，清华本科（2008）+博士（2014），迁移学习的最早提出者之一。清华大学副教授，博导。   
 >个人主页：   
 >http://ise.thss.tsinghua.edu.cn/~mlong/
 
@@ -66,7 +77,7 @@ https://mp.weixin.qq.com/s/HkuIJUw99DhJkUSuCYdfjg
 
 《迁移学习简明手册》pdf分享
 
-https://mp.weixin.qq.com/s/WuX7-w--MGX3BfU_K7qT0A
+https://www.zhihu.com/question/41979241
 
 什么是迁移学习(Transfer Learning)？这个领域历史发展前景如何？
 
@@ -74,13 +85,25 @@ https://mp.weixin.qq.com/s/ThwsfHME_2csqTlKuG5heg
 
 综述论文：四大类深度迁移学习
 
+https://mp.weixin.qq.com/s/l-a8W9CW9aUtYegJRxOVbA
+
+龙明盛：迁移学习理论与算法，59页ppt
+
 https://mp.weixin.qq.com/s/01WLhFsni1WRTYPgqoV0Ww
 
 深度学习之迁移学习介绍与使用
 
+https://mp.weixin.qq.com/s/ywwlpTNOjXgUOglnn56NIw
+
+深度迁移学习方法的基本思路
+
 https://mp.weixin.qq.com/s/yuuvX85M5HfWDbYZwycL4A
 
 迁移学习全面指南：概念、应用、优势、挑战
+
+https://mp.weixin.qq.com/s/XPAVUD33Z1do2hz2rGrIIQ
+
+各细分学习领域调研(A Survey for Learning Fields)
 
 https://mp.weixin.qq.com/s/7cvErbQRnTAKjTz67dNRDw
 
@@ -105,6 +128,14 @@ https://mp.weixin.qq.com/s/SZlFgnUBL0T6yNa-i_WLvg
 https://zhuanlan.zhihu.com/p/34656727
 
 零次学习（Zero-Shot Learning）入门
+
+https://mp.weixin.qq.com/s/epsXg46st-37FjwIjPUOqg
+
+124页ppt，Learning with Small Data，宾夕法尼亚州立大学
+
+https://mp.weixin.qq.com/s/FqS6RsL8Ewp2m_qr1hpQ1w
+
+AAAI2020最新“迁移表示学习最新进展”247页PPT，宾夕法尼亚大学
 
 https://mp.weixin.qq.com/s/sAf2fLLnKHOs433pV_6bSQ
 
@@ -133,6 +164,10 @@ https://mp.weixin.qq.com/s/rVYWV-LsbmA4QhC6207SWA
 https://mp.weixin.qq.com/s/06FWeGysBjU9wTMUx_eY0Q
 
 一文看懂自然语言处理中迁移学习的现状
+
+https://zhuanlan.zhihu.com/p/258562899
+
+小样本学习——概念、原理与方法简介（Few-shot learning）
 
 https://mp.weixin.qq.com/s/3AhiaNilRyTX_f7F306yng
 
@@ -220,7 +255,17 @@ https://mp.weixin.qq.com/s/Kw5v9nKP0FbVDH8aO7LtcA
 
 https://mp.weixin.qq.com/s/TUwhd7ruF-156GDmInpA7w
 
-《小样本学习(Few-shot learning)》最新41页综述论文，来自港科大和第四范式
+《小样本学习(Few-shot learning)
+
+![](/images/img3/few_shot.jpg)
+
+https://zhuanlan.zhihu.com/p/146777068
+
+标注样本少怎么办？“文本增强+半监督”方法总结
+
+https://mp.weixin.qq.com/s/H0CAeFR7VymwxWbE330kDg
+
+浅谈文本增强技术
 
 https://mp.weixin.qq.com/s/FHmijTVqQ26osp6PzZsbvQ
 
@@ -237,10 +282,6 @@ https://mp.weixin.qq.com/s/A7PAu6-B1JRUfGmb2Fm_vA
 https://mp.weixin.qq.com/s/P4kGtXZRW_fMbKbkGIJEfA
 
 迁移学习比赛：OpenAI喊你重温“音速小子索尼克”
-
-https://mp.weixin.qq.com/s/e4iv6FJAMZACEqWFmxeSFg
-
-让AI掌握星际争霸微操：中科院提出强化学习+课程迁移学习方法
 
 https://mp.weixin.qq.com/s/ovSltv5Ct8AsPcxCFsYwYw
 
@@ -340,31 +381,3 @@ Deep Domain Adaptation论文集(三)：基于深度网络结构差异&几何差�
 https://zhuanlan.zhihu.com/p/57083034
 
 Deep Domain Adaptation论文集(四)：基于生成对抗网络GAN
-
-https://zhuanlan.zhihu.com/p/57656210
-
-Deep Domain Adaptation论文集(五)：基于数据重构的迁移方法
-
-https://zhuanlan.zhihu.com/p/57930557
-
-Deep Domain Adaptation论文集(六)：源域与目标域特征空间不一致的处理方法
-
-https://zhuanlan.zhihu.com/p/58514431
-
-Domain Adaptation：不用深度网络，如何处理源域和目标域异构问题？
-
-https://mp.weixin.qq.com/s/U45X5kKMw_E4vfHfVmWZTA
-
-FSAF：来自CMU的Single-Shot目标检测算法
-
-https://mp.weixin.qq.com/s/45CLHvP1cumzcwMV0myj_g
-
-微软-少标签样本构建高性能文本分类器
-
-https://zhuanlan.zhihu.com/p/60420771
-
-领域自适应：利用DIRT-T模型提高性能
-
-https://mp.weixin.qq.com/s/duJK5y9ZeFkYsFkAg4E2Jw
-
-IBM-小样本学习（Few-shot Learning）State of the art方法及论文讲解

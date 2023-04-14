@@ -4,7 +4,32 @@ title:  AI工具
 category: resource 
 ---
 
+* toc
+{:toc}
+
 # AI工具
+
+## Huggingface
+
+Hugging face起初是一家总部位于纽约的聊天机器人初创服务商，他们本来打算创业做聊天机器人，然后在github上开源了一个Transformers库，虽然聊天机器人业务没搞起来，但是他们的这个库在机器学习社区迅速大火起来。目前已经共享了超100,000个预训练模型，10,000个数据集，变成了机器学习界的github。
+
+官网：
+
+http://www.huggingface.co
+
+https://zhuanlan.zhihu.com/p/535100411
+
+Huggingface超详细介绍
+
+https://mp.weixin.qq.com/s/yRn1AELGK3jgfOaaxIo67Q
+
+Huggingface简介及BERT代码浅析
+
+https://mp.weixin.qq.com/s/-fQ9VlaOjssDufcZuCe91w
+
+结合HuggingFace代码浅析Transformer
+
+## 参考
 
 https://mp.weixin.qq.com/s/w6asQp2cI3_K6omlZKtICw
 
@@ -29,14 +54,6 @@ Netflix开源稀疏数据专用神经网络库：Vectorflow
 https://mp.weixin.qq.com/s/bMfJ1Ez6bOBjHLquuZFnmQ
 
 Uber与斯坦福大学开源深度概率编程语言Pyro：基于PyTorch
-
-https://mp.weixin.qq.com/s/ImtSR6VwYalN6gTgjVJOsQ
-
-十五分钟完成Regex五天任务：FlashText，语料库数据快速清理利器
-
-https://mp.weixin.qq.com/s/dsxyQLHcOsNIlNAIf8FQfw
-
-Facebook开源相似性搜索类库Faiss，超越已知最快算法8.5倍
 
 https://mp.weixin.qq.com/s/3r8c63BOiiYfts9KLkXovw
 
@@ -101,6 +118,14 @@ Detectron精读系列之一：学习率的调节和踩坑
 https://mp.weixin.qq.com/s/kUNOE3u40NZmKxUSN7Ie8w
 
 Facebook发布Detectron2，下一个万星目标检测新框架
+
+https://mp.weixin.qq.com/s/L4brTp6ApFC7Zqs5DFpQcA
+
+物体检测和分割轻松上手：从detectron2开始（上篇）
+
+https://mp.weixin.qq.com/s/qFHqFE1jx9K0vOn61Am50Q
+
+物体检测和分割轻松上手：从detectron2开始（下篇）
 
 http://mp.weixin.qq.com/s/TByhSlSbVU5oHqLTLIJgwA
 
@@ -234,14 +259,6 @@ https://mp.weixin.qq.com/s/qT8EhRuVn83OFpy94Ywqiw
 
 HiddenLayer：可视化PyTorch、TensorFlow神经网络图的轻量级工具！
 
-https://mp.weixin.qq.com/s/Tm6fTjXG_7BVc70GROPdag
-
-TensorSpace：超酷炫3D神经网络可视化框架
-
-https://mp.weixin.qq.com/s/Nyb9qTYn5_XFhQPa8KZojw
-
-最新Apache Spark平台的NLP库,助你轻松搞定自然语言处理任务
-
 https://mp.weixin.qq.com/s/CRuBdhZwTk79z46sZsHmIQ
 
 IBM、哈佛共同研发：Seq2Seq模型可视化工具
@@ -281,10 +298,6 @@ Python推荐系统框架：RecQ
 https://mp.weixin.qq.com/s/NJujC9QQtNF27IonW5lI6Q
 
 Facebook开源增强版LASER库，包含93种语言工具包
-
-https://mp.weixin.qq.com/s/sXAntMlz3eg5RmYVSy0i4A
-
-一键免费自动AI抠图，效果连PS大哥也点赞！
 
 https://mp.weixin.qq.com/s/QNk3vf8WWqSPNN-61W64zQ
 
@@ -353,11 +366,3 @@ https://mp.weixin.qq.com/s/a3zu7nvy0itOvzvgOlf01Q
 https://mp.weixin.qq.com/s/cyTHnDGdMZvhxg7hUmuYZw
 
 训练速度提升超3倍！斯坦福推出全新深度学习并行计算框架FlexFlow
-
-https://mp.weixin.qq.com/s/6q7wy7Xq7GcepdLkQN-1wA
-
-最新中文NLP开源工具箱来了！支持6大任务，面向工业应用
-
-https://mp.weixin.qq.com/s/203UyMxZ-Sx14WEX-KMusg
-
-异类框架BigDL，TensorFlow的潜在杀器！

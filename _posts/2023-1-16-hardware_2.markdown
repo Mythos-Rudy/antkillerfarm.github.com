@@ -1,0 +1,326 @@
+---
+layout: post
+title:  硬件杂谈（二）, 硬盘, 内存
+category: Chip 
+---
+
+* toc
+{:toc}
+
+# 硬件杂谈
+
+## USB
+
+![](/images/img4/lightning.webp)
+
+Lightning的8针接口只有一条用于电流输送，最大电流也不会超过3.3A，4条数据传输线最高也只能实现480Mbps的传输速度，这些设计上的缺陷都不是后期优化可以解决的。
+
+![](/images/img4/usb.webp)
+
+过流保护有个前提条件，可以说是防君子不防小人的。不知道大家注意没有，被保护的只有VBUS，没有保护数据信号D+/D-。What if攻击的是数据信号呢？
+
+USB Killer利用VBUS为电容充电到200V，然后反向将它们释放在数据信号上，瞬间击穿了PCH南桥芯片，造成永久的损坏。
+
+https://mp.weixin.qq.com/s/pL_98GmL2qkvt71hw6A-DA
+
+终结混乱，USB族谱终极整理！
+
+https://mp.weixin.qq.com/s/EDv1ArAG5s8al33FoBfmfQ
+
+USB的前世今生
+
+https://zhuanlan.zhihu.com/p/65478149
+
+为什么USB Type C电缆正反插都可以？它是怎么做到的？
+
+https://mp.weixin.qq.com/s/dk_sl3OvPwvnRWPpPJ4D_Q
+
+USB3.1 Type-C高速接口设计指南
+
+https://zhuanlan.zhihu.com/p/153254485
+
+为什么短路的USB设备不会烧掉你的主板？著名的USB Killer又是怎么干掉主板的？
+
+https://view.inews.qq.com/wxn/20220608A0D8H200
+
+Type-C成为通用接口，苹果告别“躺赚时代”？
+
+https://www.zhihu.com/question/31304026
+
+为什么两台电脑不能直接连接USB传输文件？
+
+https://www.zhihu.com/question/571811693
+
+现在usb口普遍都有过流保护为什么还会烧南桥的例子啊?
+
+## Others
+
+SERDES是英文SERializer(串行器)/DESerializer(解串器)的简称。
+
+在一个独立的信道上，每次同时传输1bit为串口，每次同时传输多个bit为并口。
+
+标准的串口如XAUI，HDMI等，每对差分线组成一个信道（channel）,每个信道是否能成功传输并不取决于其他信道。
+
+而DDR这种，10根线组成一个信道，每次同时传8bit，错了某一bit只能重新传，便是标准并口。
+
+但前述串口本身由于包含多个信道，有一些并行的意思，因此也被称为并用多组差分串行。
+
+---
+
+https://mp.weixin.qq.com/s/ZexnsNmqsD2yq-7YNASohw
+
+数模转换器的基本原理及DAC类型简介
+
+https://mp.weixin.qq.com/s/1XmbkoRkXUtmR0pnENhfGA
+
+基于高速DDFS的高精度DAC的设计
+
+https://mp.weixin.qq.com/s/aavlfxII5PW_RrsF6nS99g
+
+模-数转换(A/D)技术
+
+https://mp.weixin.qq.com/s/Coz81Zidz_LaSYkcErJsOQ
+
+NAND Flash与NOR Flash究竟有何不同
+
+http://mp.weixin.qq.com/mp/homepage?__biz=MzUyMTA2OTM1MA==&hid=4&sn=192b1f4e49979e13c7df491725415d06&scene=18
+
+一个OLED方面的公众号
+
+https://mp.weixin.qq.com/s/lBRHV1mnO1JMwlnO_rQjxA
+
+LCD与OLED之争：谁才是真正的赢家？
+
+https://zhuanlan.zhihu.com/p/48343011
+
+芯片中的数学——均衡器EQ和它在高速外部总线中的应用。这个blog主要介绍了眼图的概念。
+
+https://mp.weixin.qq.com/s/oCBSGVtGSwq9c59rcVc2-A
+
+无线接收器的百年创新及架构发展史
+
+https://mp.weixin.qq.com/s/KPmkphlJFv5dScLlhAigEw
+
+新型存储器技术盘点
+
+https://zhuanlan.zhihu.com/p/54517790
+
+内存条应该怎么插？为什么要从远端插起？不遵循为啥还可以work？有啥副作用？
+
+https://mp.weixin.qq.com/s/AJA01Cvm3k2HntUUAg9FPg
+
+关于“陶瓷电容”，你不知道的事
+
+https://mp.weixin.qq.com/s/NKWvIJ7-J_IugnAgUehVIg
+
+博通要卖掉的射频前端，是个怎样的市场？
+
+https://www.zhihu.com/question/514589190
+
+为什么嘉立创打PCB不要钱？
+
+# 硬盘
+
+早期，磁带和硬盘驱动器的面密度相似。但由于的市场规模和硬盘销售收入的增加，为更大规模的研发工作提供了资金，这使得他们的制造商能够更积极地扩大存储密度。因此，大容量硬盘驱动器的当前面密度约为最新磁带驱动器的100倍。
+
+相比之下，磁带存储设备目前的区域密度远低于超顺磁极限。因此，磁带的摩尔定律可以持续十年或更长时间，而不会遇到基础物理学方面的障碍。
+
+参考：
+
+https://mp.weixin.qq.com/s/Fzu5YmWYxEohDJjmcGGjhQ
+
+为什么说，数据存储的未来属于磁带
+
+---
+
+随着硬件设备存储介质的改变和性能不断的提升，存储设备处理IO的能力越来越快，传统的旋转设备HDD单个IO需要几毫秒到十几毫秒不等，而如今的高性能的NVMe SSD已经降低到了微秒级别。
+
+因此也有了一些专门针对SSD硬盘的存储软件框架。
+
+https://mp.weixin.qq.com/s/d8aoAFi_lpFoZZCZsPij_g
+
+SPDK概览
+
+---
+
+千年盘，是美国Millenniata的公司将推出新型磁盘存储技术，这种光盘新技术可以将数据在室温下存储1000年，使用这种技术的特殊光盘叫Millennial Disc。
+
+---
+
+https://zhuanlan.zhihu.com/p/34858149
+
+128G的固态硬盘为什么有的标120G，有的标100G？固态硬盘容量背后的秘密
+
+https://zhuanlan.zhihu.com/p/38847308
+
+为什么硬盘转速是5400或者7200这么奇怪的数字？7200转的硬盘一定比5400快吗？
+
+https://www.zhihu.com/answer/470917953
+
+Windows等操作系统是如何做到复制几G文件不出错的？
+
+https://zhuanlan.zhihu.com/p/53547723
+
+一篇文章告诉你SLC、MLC、TLC和QLC究竟有啥区别?
+
+https://zhuanlan.zhihu.com/p/92712620
+
+SLC、MLC、TLC、QLC究竟有什么不同
+
+https://zhuanlan.zhihu.com/p/71267390
+
+固态硬盘和u盘的区别
+
+https://mp.weixin.qq.com/s/7athL-OWrFSxMwxqvR73TA
+
+为了让你的硬盘资源能完好地传给曾曾曾孙，科学家想到了这些办法
+
+https://mp.weixin.qq.com/s/ChAfcT5xDgExiEXytTfynw
+
+关于存储技术的最强入门科普
+
+https://www.sohu.com/a/394211914_444417
+
+SMR硬盘到底能用不？
+
+https://zhuanlan.zhihu.com/p/378639081
+
+给大家科普下什么是叠瓦盘？顺便告诉你叠瓦盘为什么不能买？
+
+# 内存
+
+2008年，金融危机爆发，DRAM价格再次雪崩，从2.25美元狂跌至0.31美元。
+
+众厂商哀鸿遍野时，已经羽翼丰满的三星，又一次祭出了逆周期投资的看家法宝，将三星电子上一年的总利润的118%，全部用于扩大产能，故意扩大行业的亏损！
+
+2009年，行业排名第三的德国巨头奇梦达资金链断裂，欧洲仅存的内存厂商就此成为历史。
+
+2012年，在日本人苦苦挣扎数年后，尔必达支撑不住，宣布破产。
+
+---
+
+https://mp.weixin.qq.com/s/HOhBNZfOf5xQIFLYQ5ntCw
+
+内存的故事
+
+https://mp.weixin.qq.com/s/qhR0St3CLWEYqV_kl_oXAw
+
+Rambus之战
+
+https://mp.weixin.qq.com/s/gh9cL0BPzCQ2JFOoXdtqyg
+
+内存的技术发展
+
+https://mp.weixin.qq.com/s/kHPTZlDtjqtr0Vi-5OWycQ
+
+金士顿的传说
+
+https://zhuanlan.zhihu.com/p/57780996
+
+内存延迟：因与果
+
+https://mp.weixin.qq.com/s/XcC18tulYdnwqlusg2QrxA
+
+嵌入式内存STT-MRAM趋势分析
+
+https://zhuanlan.zhihu.com/p/62234511
+
+DDR3 vs DDR4?为什么说内存是个很傻的设备？DDR5在哪里？
+
+https://zhuanlan.zhihu.com/p/40601422
+
+双通道、四通道内存对游戏重要吗？
+
+https://mp.weixin.qq.com/s/9skWM6yirEupLj2wdpgqkA
+
+带你深入理解内存对齐最底层原理
+
+https://mp.weixin.qq.com/s/Mb7iSXfrOtettVn-Sz8QUA
+
+主板上这家伙，要当CPU和内存的中间商！
+
+# GPU通信技术+
+
+## NVLink（续）
+
+官网：
+
+https://www.nvidia.cn/data-center/nvlink/
+
+![](/images/img3/nvlink.png)
+
+Tesla V100中以NVLink连接的GPU至GPU和GPU至CPU通信。
+
+![](/images/img3/nvlink_2.png)
+
+在DGX-1V服务器中，混合立体网络拓扑使用NVLink连接8个Tesla V100加速器。每个GPU有6条nvlink通道，总带宽高达300GB/s。
+
+从上图可以看到，即使每个GPU拥有6条nvlink通道，仍然无法做到“全连接”（即任意两个GPU之间存在双向通道）。这就引出了下一个更加疯狂的技术：nvswitch。
+
+![](/images/img3/nvswitch.png)
+
+NVSwitch是首款节点交换架构，可支持单个服务器节点中16个全互联的GPU，并可使全部8个GPU对分别以300GB/s的惊人速度进行同时通信。这16个全互联的GPU还可作为单个大型加速器，拥有0.5 TB统一显存空间和2 PetaFLOPS计算性能。
+
+https://zhuanlan.zhihu.com/p/35470532
+
+全球最大GPU 背后的秘密：NVSwitch如何实现NVIDIA DGX-2的超强功力？
+
+---
+
+![](/images/img5/Nvidia_Grace_Hopper.jpg)
+
+https://zhuanlan.zhihu.com/p/600638633
+
+Nvidia Grace Hopper超级芯片架构解读（一）
+
+https://zhuanlan.zhihu.com/p/601072219
+
+Nvidia Grace Hopper超级芯片架构解读（二）
+
+## NCCL
+
+NCCL是Nvidia Collective multi-GPU Communication Library的简称，它是一个实现多GPU的collective communication通信库，可以在PCIe、Nvlink、InfiniBand上实现较高的通信速度。
+
+InfiniBand（直译为“无限带宽”技术，缩写为IB）是一个用于高性能计算的计算机网络通信标准，它具有极高的吞吐量和极低的延迟，用于计算机与计算机之间的数据互连。相当于是面向HPC的以太网的替代品。
+
+Mellanox Technologies是一家InfiniBand制造商，于2020年被Nvidia收购。
+
+官方文档：
+
+https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/index.html
+
+nccl v1：支持单机多卡通信，不支持多机通信。
+
+nccl v2：支持多机通信。
+
+参考：
+
+https://www.zhihu.com/question/63219175
+
+如何理解Nvidia英伟达的Multi-GPU多卡通信框架NCCL？
+
+https://zhuanlan.zhihu.com/p/364816069
+
+NCCL--GPU的collective communication通信技术
+
+https://blog.csdn.net/TH_NUM/article/details/81479317
+
+nvidia-nccl学习笔记
+
+https://developer.nvidia.com/blog/fast-multi-gpu-collectives-nccl/
+
+Fast Multi-GPU collectives with NCCL
+
+https://www.zhihu.com/question/422501188
+
+什么是InfiniBand，它和以太网的区别在于什么？
+
+## 参考
+
+https://www.infoq.cn/article/3D4MsRVS8ZOtGCj7*krT
+
+GPU通信技术初探
+
+https://zhuanlan.zhihu.com/p/67785062
+
+不止显卡！这些硬件因素也影响着你的深度学习模型性能

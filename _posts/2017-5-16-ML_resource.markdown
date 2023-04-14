@@ -4,6 +4,9 @@ title:  ML参考资源（一）
 category: resource 
 ---
 
+* toc
+{:toc}
+
 # ML参考资源
 
 ## blog
@@ -36,10 +39,6 @@ https://mp.weixin.qq.com/s/8LwlA6sR9K5Hti1lJh9M2Q
 
 13种编程语言对应的机器学习资源大全！
 
-https://zhuanlan.zhihu.com/xiahongjin
-
-一个ML+NLP+金融的blog
-
 http://setosa.io/ev/
 
 一个将很多算法可视化的blog
@@ -66,6 +65,14 @@ https://mp.weixin.qq.com/s/WozN8-FdASaku0UKT9EQ3A
 
 机器学习实用指南
 
+https://mp.weixin.qq.com/s/Y8l6v7xI6rRkoQutgX6Jug
+
+机器学习面试必备CheatSheet
+
+https://mp.weixin.qq.com/s/tDn9_4-EFolRth87O-E4NA
+
+机器学习模型训练全流程！
+
 https://mp.weixin.qq.com/s/ejdrNCY6ZdAqwT-_EjC8rQ
 
 近千人点赞！哈佛博士放出超多资源，机器学习课程教程小抄全都有
@@ -85,6 +92,10 @@ https://mp.weixin.qq.com/s/k_UA4LIEji14fucj_NH7Cg
 https://mp.weixin.qq.com/s/JwwrmsfmUsph8eSl1o0EaQ
 
 39个slides带你回顾那些传统数据挖掘算法
+
+https://mp.weixin.qq.com/s/M5Hj5exvdPwb1PWgoFfFHw
+
+机器学习中的七宗罪
 
 http://url.cn/40IkU7z
 
@@ -334,10 +345,6 @@ https://mp.weixin.qq.com/s/c4Lp4D-COP2I12zRC9beIA
 
 从Boosting到Stacking，概览集成学习的方法与性能
 
-https://mp.weixin.qq.com/s?__biz=MzU3ODIwMjA3NQ==&mid=2247483661&idx=1&sn=5efbd5aabd294ce39f1b9ae05f066a28
-
-现金贷、消费金融反欺诈规则设置
-
 https://mp.weixin.qq.com/s?__biz=MzU3ODIwMjA3NQ==&mid=2247483696&idx=1&sn=b407416595afb3b7bf2aad33e5341f6a
 
 规则模型的监测与调整
@@ -398,6 +405,14 @@ https://mp.weixin.qq.com/s/lQKD83sKwgcrBH6o_QUxvg
 
 抛弃爬下来的灰色数据，有门槛的风控怎么做？
 
+https://mp.weixin.qq.com/s/DVUgCMHjq26bn8s9SnwcsQ
+
+电商薅羊毛研究报告
+
+https://mp.weixin.qq.com/s/y5zmR3vmBaodtxz2fG1F9Q
+
+全面介绍金融风控反欺诈之图算法
+
 https://mp.weixin.qq.com/s/wJ2lD-llSB4KedD4RixqLQ
 
 苏宁场景实践：小包裹背后的大智慧
@@ -418,10 +433,10 @@ https://mp.weixin.qq.com/s/7N6eDoEV8oEwUpP-zK1RpQ
 
 560万Facebook人际关系数据，揭秘家庭职业传承“真相”
 
-http://www.jianshu.com/p/af7e063ac9b3
-
-机器学习在金融比赛中的应用
-
 https://www.zhihu.com/question/28810567
 
 ELM算法相关
+
+https://mp.weixin.qq.com/s/uNUQl9fkL2CFyqDPMjcrdg
+
+提高回归模型精度的技巧总结

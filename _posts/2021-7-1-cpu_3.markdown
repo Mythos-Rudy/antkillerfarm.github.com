@@ -1,0 +1,224 @@
+---
+layout: post
+title: CPU(三)
+category: Chip 
+---
+
+* toc
+{:toc}
+
+# CPU
+
+## C Model
+
+在芯片的架构设计阶段需要对芯片进行建模（modeling），建模的主要目的是在大规模投入人力之前先用低成本的计算机软件实现目标芯片的主要功能，评估芯片的工作效果，验证设计思想，并作为后续开发活动的标准和依据。由于这里的软件开发一般使用C语言，所以也叫做C Model。
+
+一般而言，C Model的功能定位可能会有以下几种：
+
+1. 作为算法模型的C版本，定义模块输入输出行为的标准，实现数据的bit-match；
+
+2. 在1的基础上，定义模块的内部结构和资源约束；
+
+3. 在2的基础上，精确定义模块的输入输出时序，实现cycle-accurate；
+
+https://zhuanlan.zhihu.com/p/263012865
+
+ASIC Design and C Model
+
+## Jim Keller
+
+<table style="text-align:center" width="85%">
+  <tbody>
+    <tr>
+      <td colspan="5">Jim Keller: Work Experience</td>
+    </tr>
+    <tr>
+      <td colspan="2" rowspan="1"></td>
+      <td>Company</td>
+      <td>Title</td>
+      <td>Important<br />
+      Product</td>
+    </tr>
+    <tr>
+      <td><strong>1980s</strong></td>
+      <td><strong>1998</strong></td>
+      <td>DEC</td>
+      <td>Architect</td>
+      <td>Alpha</td>
+    </tr>
+    <tr>
+      <td><strong>1998</strong></td>
+      <td><strong>1999</strong></td>
+      <td>AMD</td>
+      <td>Lead Architect</td>
+      <td>K7, K8v1<br />
+      HyperTransport</td>
+    </tr>
+    <tr>
+      <td><strong>1999</strong></td>
+      <td><strong>2000</strong></td>
+      <td>SiByte</td>
+      <td>Chief Architect</td>
+      <td>MIPS Networking</td>
+    </tr>
+    <tr>
+      <td><strong>2000</strong></td>
+      <td><strong>2004</strong></td>
+      <td>Broadcom</td>
+      <td>Chief Architect</td>
+      <td>MIPS Networking</td>
+    </tr>
+    <tr>
+      <td><strong>2004</strong></td>
+      <td><strong>2008</strong></td>
+      <td>P.A. Semi</td>
+      <td>VP Engineering</td>
+      <td>Low Power Mobile</td>
+    </tr>
+    <tr>
+      <td><strong>2008</strong></td>
+      <td><strong>2012</strong></td>
+      <td>Apple</td>
+      <td>VP Engineering</td>
+      <td>A4 / A5 Mobile</td>
+    </tr>
+    <tr>
+      <td><strong>8/2012</strong></td>
+      <td><strong>9/2015</strong></td>
+      <td>AMD</td>
+      <td>Corp VP and<br />
+      Chief Cores Architect</td>
+      <td>Skybridge / K12<br />
+      (+ Zen)</td>
+    </tr>
+    <tr>
+      <td><strong>1/2016</strong></td>
+      <td><strong>4/2018</strong></td>
+      <td>Tesla</td>
+      <td>VP Autopilot<br />
+      Hardware Engineering</td>
+      <td>Fully Self-Driving<br />
+      (FSD) Chip</td>
+    </tr>
+    <tr>
+      <td><strong>4/2018</strong></td>
+      <td><strong>6/2020</strong></td>
+      <td>Intel</td>
+      <td>Senior VP<br />
+      Silicon Engineering</td>
+      <td>?</td>
+    </tr>
+    <tr>
+      <td colspan="2" rowspan="1"><strong>2021</strong></td>
+      <td>Tenstorrent</td>
+      <td>President and CTO</td>
+      <td>TBD</td>
+    </tr>
+  </tbody>
+</table>
+
+## IPC
+
+IPC就是每个时钟周期(1Hz)执行指令的数量，但对于现代CPU，IPC这个参数已经不适用。因此现在是把使用测试程序得到的CPU单核成绩换算到1GHz，把每GHz的成绩称为IPC或PPC。奔腾4的频率与现代CPU差不多，但因PPC/IPC不到Intel 11代酷睿的1/5，所以在频率相同的时候，奔腾4的单核性能就不到11代酷睿的1/5。
+
+CPU的IPC比频率更加重要，因为IPC代表了CPU核心的设计水平，频率则只要使用更新的工艺，就几乎一定能得到提升。
+
+CPU的核心设计会影响提高频率的难度，通常IPC越高，频率就越难提高，但也不是决定性的因素。因为Intel的CPU不但IPC比国产CPU都高，频率还能超过5.0GHz。
+
+龙芯认为在CPU核心逻辑设计水平接近同期的主流产品之前，没有必要过于注重工艺和频率。因此龙芯在中科院计算所时，每一代设计都在大幅度修改CPU核心的逻辑设计。
+
+## 存算一体
+
+![](/images/img4/bottleneck.png)
+
+传统架构存在上图所示的“存储墙”问题。
+
+目前存算技术主要有几个方向：
+
+查存计算（Processing With Memory）：GPU中对于复杂函数就采用了这种计算方法，是早已落地多年的技术。存储芯片内部的存储单元完成查表计算操作，存储单元和计算单元完全融合，没有一个独立的计算单元。
+
+近存计算（Computing Near Memory）：典型代表包括AMD的Zen系列CPU。计算操作由位于存储区域外部的独立计算芯片/模块完成。这种架构设计的代际设计成本较低，适合传统架构芯片转入。
+
+存内计算（Computing In Memory）：典型代表是Mythic、闪忆、知存、九天睿芯。计算操作由位于存储芯片/区域内部的独立计算单元完成，存储和计算可以是模拟的也可以是数字的。这种路线适合算法固定的场景算法计算，目前主要用于语音等轻算力场景。
+
+![](/images/img5/Computing_In_Memory.webp)
+
+https://mp.weixin.qq.com/s/kq5F47N3LS43ZKdwe9-CUQ
+
+端侧智能存算一体芯片的需求、现状与挑战
+
+https://zhuanlan.zhihu.com/p/480612865
+
+存算一体技术是什么？发展史、优势、应用方向、主要介质
+
+https://zhuanlan.zhihu.com/p/522755103
+
+存算一体芯片设计与编译器开发
+
+## 国产CPU
+
+当年引进“以赛亚”内核的时候，兆芯的性能是优于龙芯的，然而，经过这些年的发展，龙芯通过不断迭代内核大幅提升的CPU性能，CPU性能已经超越兆芯。要知道，当时，兆芯承接核高基01专项，而且还有上海市地方海量资金扶持，而龙芯获得的经费和补贴相对于兆芯少的可怜。龙芯用实践证明了自主研发更具发展后劲，自主研发具有更高的效费比，可以花小钱办大事。
+
+2013年前后，兆芯向威盛支付了一大笔钱购买技术。2020年10月，兆芯又向威盛支付了一大笔钱。这种“买了又买”的事实很容易让人产生疑惑，兆芯到底能不能不再向威盛买技术？能不能真正独立自主发展？
+
+VIA为了让兆芯更加尊重知识、珍惜技术，即使是落后的技术，VIA也会用高昂的价格体现知识的价值。
+
+VIA已经离开主流电脑市场十几年，芯片组技术也至少落后了主流十几年。现在才把相关技术转让给兆芯，可能是为了避免拔苗助长，才敝帚自珍。
+
+这次交易掏空了VIA所剩无几的技术储备，Centaur新设计的CPU核心也没能超过国内自主设计的水平，因此Centaur已经失去了继续存在的价值。
+
+VIA在2021年11月把Centaur的技术团队卖给了Intel，之后又出售厂房和设备，完全放弃了继续研发CPU的能力。
+
+兆芯的传承起至1980年，那一年美国Integrated Device Technology（IDT公司）成立。1988年美国Cyrix公司成立。这两家公司都设计x86架构CPU，以性价比与Intel产品竞争。
+
+威盛（VIA）在1999年6月先后买下Cyrix微处理器设计部门和Centaur（从前的IDT）后，合并为VIA在美国的处理器研发总部，仍然叫作Centaur。这是第一次传承转移，然后VIA把Centaur在x86方面的技术成果全盘出售给兆芯，完成了第二次衣钵传承。
+
+https://mp.weixin.qq.com/s/HDTNCrKYJ7daZieg4rb4VA
+
+英特尔收购威盛X86业务 兆芯何去何从
+
+https://zhuanlan.zhihu.com/p/530763927
+
+兆芯枯木育新枝，前尘入魂续今世
+
+---
+
+多年前，ARM Cortex A57大致与X86阵营吊车尾的VIA nano性能相当，短短数年间，ARM公版架构就接近到X86主流水平。而同期飞腾的Arm CPU的CPU核则进步缓慢，从2014年至2021年，其CPU IPC仅提升了20%左右，即便是以牙膏厂闻名遐迩的英特尔也只能自叹不如。
+
+倚天710证明了ARM芯片从设计到制造的全球产业链在流程上已经非常成熟，证明了在全球分工的情况下，只要有钱就能设计出高性能ARM CPU。
+
+龙芯首席科学家胡伟武在公开讲座上就表示：“你给我一笔钱，叫我做一个芯片，我可以不用一个技术人员，只要行政助理，然后购买arm imagination的ip，委托第三方设计，然后给代工厂生产做出来......但你要我做一个A76级别的IP，（从零开始迭代演进）我可能要10年才能做出来”。
+
+国内这些ARM CPU如果不能实现自产自销，就只能宣传自主可控，卯足了劲往党政国企采购冲，一旦失去地方政府的支持，就只能关门倒闭，比如华芯通。
+
+https://mp.weixin.qq.com/s/KdJ0b-E0ckK6WMG5HDcEUw
+
+互联网巨头基于全球产业链打造ARM CPU
+
+---
+
+龙芯2E/2F：当时是作为中法半导体战略合作协议的一部分，被要求在意法半导体生产，此时龙芯还是计算所的一个项目组。
+
+2010年，龙芯1000系列：65nm，因为意法半导体合作得很好，且龙芯正穷，无法承担更换代工厂的风险，就继续在意法半导体生产。
+
+2012～14年，龙芯1500系列：32nm/28nm，当时境内尚未有成熟的32/28nm工艺，且龙芯仍然很穷，继续在意法半导体生产。
+
+2015年，龙芯2000系列：40nm，龙芯开始盈利，在境内生产。境内28nm工艺生产大芯片比较困难，于是制程退步到40nm，但成品率仍然有点低。
+
+2017年，龙芯3000系列：28nm，在境内和意法半导体都有生产，境内的版本为了拉高成品率，而降低了CPU运行频率。
+
+2019年，龙芯4000系列：28nm，在意法半导体生产（传闻也有境内生产的版本），仍然保持28nm制程，随时可以切换回境内生产。
+
+2020～21年，龙芯5000系列：在境内生产，境内的14/12nm制程成熟，使用14/12nm制程，CPU单核性能达到国内第一，略超华为使用7nm工艺的ARM服务器/桌面CPU，且4核的3A5000性能与国内另一家ARM厂商的最新8核产品相当。
+
+下一代龙芯6000系列：坚持不使用最新工艺，境内能生产什么，龙芯就设计什么，仍然是14/12nm制程，预计单核整数性能提高40%，浮点性能提高60%，与市场主流（中端桌面CPU产品）水平更加接近。
+
+https://mp.weixin.qq.com/s/NPMCtGGM5iN9ZCznnt-OIw
+
+胡伟武：我国手机CPU的自给率是0%
+
+---
+
+https://mp.weixin.qq.com/s/SaUr2Mp4W5xmlyTcePrzlQ
+
+目前最全国产芯片公司一览

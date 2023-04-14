@@ -1,371 +1,408 @@
 ---
 layout: post
-title:  深度学习（四十三）——图像变换（1）
+title:  深度学习（四十三）——Conv计算量分析
 category: DL 
 ---
 
-# 图像变换
+* toc
+{:toc}
 
-## 语义分割逆变换
+# Conv计算量分析
 
-![](/images/img2/SCAN.png)
+I: Input
 
-参考：
+O: Output
 
-https://mp.weixin.qq.com/s/tusm3CYqKKep-BJQ0Vp6Ww
+K: Kernel
 
-腾讯AI lab & 复旦大学合作提出无监督高分辨率的图像到图像转换方法SCAN
+c: Channel
 
-https://mp.weixin.qq.com/s/X96oI-duHwyCFAR79inlig
+h: Height
 
-真实到可怕！英伟达MIT造出马良的神笔
+w: Width
 
-## 图像修复
+forward:
 
-https://mp.weixin.qq.com/s/33VKfq-jFHfn9GBQzFYq0Q
+$$O = I * K$$
 
-震撼！英伟达用深度学习做图像修复，毫无ps痕迹
+filter gradient:
 
-https://zhuanlan.zhihu.com/p/50620348
+因为Conv是不可交换群，所以：
 
-基于内容感知生成模型的图像修复，论文翻译、解读
+$$I' \star O = I' \star (I * K) = (I' \star I) * K = K$$
 
-https://mp.weixin.qq.com/s/1vswG1chkXRJAPnpeUmWLA
+I'是I的逆元。
 
-为了修复打码女神脸，他们提出二阶段生成对抗网络EdgeConnect
+$$K = I' \star O$$
 
-https://mp.weixin.qq.com/s/FnLm2bF-1uipBTsPS-q7zA
+input gradient:
 
-Deep Image Prior——图像恢复入门
+$$O \bullet K = I * (K \bullet K')$$
 
-https://mp.weixin.qq.com/s/mtocyqpybSEpwekS20xgmQ
+$$I = O \bullet K'$$
 
-使用CNN生成图像先验，实现更广泛场景的盲图像去模糊
+如果是FC运算的话，则上述所有二元运算符退化为矩阵乘法，I'为转置运算。
 
-https://mp.weixin.qq.com/s/qD6_ygJjnV5rbppzy0WEmg
+## forward
 
-比无所不能的DIP更强大的图像恢复方法：DeepRED
+single point:
 
-https://mp.weixin.qq.com/s/IlJhZo5Ue2G2hu4nPMbY4A
+$$I_c \times K_h \times K_w \times 2$$
 
-基于关联语义注意力模型的图像修复
+point number:
 
-# 抠图
+$$O_c \times O_h \times O_w$$
 
-https://mp.weixin.qq.com/s/dRa1mss4dve487FhS4KjTg
+all:
 
-AI帮你抠图，阿里妈妈自研算法入选国际顶级学术会议
+$$(O_c \times O_h \times O_w) \times (I_c \times K_h \times K_w \times 2)$$
 
-https://mp.weixin.qq.com/s/Y35r_UbNV1bekj9KVvi1_A
+## backward
 
-谷歌提出多图像抠图算法，并弥补水印技术的一致性漏洞
+- filter gradient
 
-https://mp.weixin.qq.com/s/5VHPc99NsFkz1Vl5iU8qkg
+single point:
 
-详解如何用深度学习消除背景，实现抠图
+$$O_h \times O_w \times 2$$
 
-https://mp.weixin.qq.com/s/E11HfgE8dU4xIvJwOn_Lwg
+point number:
 
-揭秘阿里妈妈智能抠图算法：简单几笔，精准抠图
+$$I_c \times O_c \times K_h \times K_w$$
 
-https://mp.weixin.qq.com/s/-FmBrHJ6IGVIiT5PwNhczw
+all:
 
-那些一键抠图的软件是怎么做到的？这些语义分割方法了解一下
+$$(I_c \times O_c \times K_h \times K_w) \times (O_h \times O_w \times 2)$$
 
-https://mp.weixin.qq.com/s/01D9wYK92i4PjjGcwFTxOw
+- input gradient
 
-揭秘阿里巴巴神奇的人物抠图算法内幕
+single point:
 
-https://mp.weixin.qq.com/s/LVD7rry0BajGh9iQg-Y2jw
+$$K_h \times K_w \times 2$$
 
-MIT用AI实现3分钟自动抠图，精细到头发丝
+point number:
 
-https://mp.weixin.qq.com/s/4BvvwV11f9MrrYyLwUrX9w
+$$I_c \times O_c \times O_h \times O_w$$
 
-还在用ps抠图抠瞎眼？机器学习通用背景去除产品诞生记
+all:
 
-## 换脸技术
+$$(I_c \times O_c \times O_h \times O_w) \times (K_h \times K_w \times 2)$$
 
-https://mp.weixin.qq.com/s/X_cBFBc42qUFpuNGBtISRw
+## 参数对计算量的影响
 
-换脸算法都有哪些经典的思路？
+pad/stride/dilation改变$$O_h,O_w$$。
 
-https://zhuanlan.zhihu.com/p/34042498
+group改变$$K_o, O_c$$。
 
-深度解密换脸应用Deepfake
+multiplier改变$$O_c$$，但不改变$$K_o$$，计算量不变，IO增加N倍。所以将上述公式的$$O_c$$改为$$K_o$$即可满足所有情况。
 
-https://mp.weixin.qq.com/s/gvPTNtrd5Du9Oablp3jZYw
+# 深度信息检索+
 
-如何使用DeepFake实现视频换脸
+https://mp.weixin.qq.com/s/N3JBHlqneG9dI0I26M3wHQ
 
-https://mp.weixin.qq.com/s/Lzv3wQR2DOrw5AmyCXWvsw
+如何做好大规模视觉搜索？eBay基于实践总结出了7条建议
 
-拯救北京卫视！如何用Deepfakes把“吴秀波”的脸换掉
+https://mp.weixin.qq.com/s/8Twe3e3WKCY9pTiNtnW2sg
 
-https://mp.weixin.qq.com/s/rkAVGTNca1zudrrutXll0w
+重磅！谷歌等推出基于机器学习的数据库SageDB
 
-传统图像算法+深度学习方法结合会有什么样的火花？本文主要描述了deepfake中非深度学习的算法部分
+https://mp.weixin.qq.com/s/WpITPvYmixMHa0ha0MgWVA
 
-https://mp.weixin.qq.com/s/NstPpjfSxXpmHWkhjDSxZg
+神马搜索如何提升搜索的时效性？
 
-AI换脸常见方法，从头细说
+https://zhuanlan.zhihu.com/p/163358322
 
-https://mp.weixin.qq.com/s/bBvp0PXgDyQMP0xq2OF3LQ
+learning to match for product search
 
-沉迷AI换脸？不如来试试“AI换衣”
+https://mp.weixin.qq.com/s/_MpfRGYG_pleaEQMpQT5Mg
 
-https://mp.weixin.qq.com/s/Zq3ngbTAObQuIr86nkTwjQ
+深度学习在视觉搜索和匹配中的应用
 
-视频换脸技术，女神都下海了吗？
+https://mp.weixin.qq.com/s/s8swIdAPw_VeAWnZTL1riA
 
-https://mp.weixin.qq.com/s/BTzV7ulweqFQokdQ-AX2Rg
+搜你所想，从Query意图识别到类目识别的演变
 
-三位一体的纯正视频换脸术，拒绝别人的嘴替我说话
+https://mp.weixin.qq.com/s/dO3eDlhCSYRh3pjbI_gsQg
 
-https://mp.weixin.qq.com/s/12_Gl4snq-LdMHJSZn4oOA
+深度学习图像检索(CBIR): 十年之大综述
 
-换脸AI升级版：面部表情、身体动作、视线方向都能实时迁移
+https://mp.weixin.qq.com/s/q4aPtUYi27h-0sqD4bokQQ
 
-https://mp.weixin.qq.com/s/VFq3BWLpzyKZ3sqVWf1HKA
+再谈搜索中的Query扩展技术
 
-从换脸到换姿势，AI在图像处理的道路上越走越魔幻
+https://mp.weixin.qq.com/s/vwIbM2XNvj-OKCtzqjCVWQ
 
-https://mp.weixin.qq.com/s/s6VHo8QW9OENMrbqfp6--w
+搜索中涉及的算法问题
 
-视频换脸新境界：CMU不仅给人类变脸，还能给花草、天气变脸
+https://mp.weixin.qq.com/s/LC4ch4O2eUjgbMLH9zT0pw
 
-https://mp.weixin.qq.com/s/k-IIEMtaSQ1gsRvjNTtlUA
+如何用深度学习来做检索：度量学习中关于排序损失函数的综述（1）
 
-3D实时换脸又有新进展！中科院博士生提出改进版本，每张图推理只需0.27毫秒
+https://mp.weixin.qq.com/s/TwG6_KJvTGCzDMy6ZD6jsA
 
-https://mp.weixin.qq.com/s/2cY3NCtMYiRlLayB32wl-w
+如何用深度学习来做检索：度量学习中关于排序损失函数的综述（2）
 
-下一个GAN？OpenAI提出可逆生成模型Glow
+https://mp.weixin.qq.com/s/wni3F9lKuO4OT32BVe0QDQ
 
-https://mp.weixin.qq.com/s/1cUM8_AUZ40JWGI37HsqFw
+谷歌发大招：搜索全面AI化，不用关键词就能轻松“撩书”
 
-换脸效果媲美GAN！一文解析OpenAI最新流生成模型Glow
+https://mp.weixin.qq.com/s/TrWwp-DBTrKqIT_Pfy_o5w
 
-## 艺术字
+阿里妈妈首次公开新一代智能广告检索模型，重新定义传统搜索框架
 
-https://mp.weixin.qq.com/s/-ZudmG9-qEPaWOu--Hd6SQ
+https://mp.weixin.qq.com/s/fZv9FgbdQ1bWPoNdl9sF1A
 
-Editing Text in the Wild
+“宝石迷阵”与信息检索
 
-https://mp.weixin.qq.com/s/5BuGyj3SaqZPD2kR_jpUWA
+https://mp.weixin.qq.com/s/Vvo3Ti3XiGQz0IwLgATfWQ
 
-基于单阶段小样本学习的艺术风格字形图片生成
+电商搜索算法技术的演进
 
-https://mp.weixin.qq.com/s/dHRyH7S6jV2jxgoxbQDNSg
+https://mp.weixin.qq.com/s/-UxlJb4GCOTV1uTyZehyZw
 
-DynTypo: 基于样例的动态文本特效迁移
+ESIM：语义相似度领域小模型的尊严
 
-https://mp.weixin.qq.com/s/FWBYNBlSwj-adjcgXMk3XA
+https://mp.weixin.qq.com/s/hMaZ_6y3b4CRzq2p9eVkVw
 
-ShapeMatchingGAN：打造炫酷动态的艺术字
+使用Python过滤出类似的文本的简单方法
 
-## 参考
+https://mp.weixin.qq.com/s/7F-35VjIp_cmFNEceti1uA
 
-https://mp.weixin.qq.com/s/YbRo7TJ3j4dloSmKX40uAA
+利用孪生网络，Keras，Tensorflow比较图片相似度
 
-Image-to-Image的论文汇总
+https://mp.weixin.qq.com/s/MpuUdZi8CWcu0b-ij-bHjA
 
-https://mp.weixin.qq.com/s/88tBoAVziGEFXIGfvZZp8g
+Jeff Dean出品：用机器学习索引替代B-Trees，3倍性能提升，10-100倍空间缩小
 
-深度学习图像处理项目集锦：生成可爱的动漫头像，骡子变斑马等入选
+https://mp.weixin.qq.com/s/uztYEW_azetOkOGiZcbCuw
 
-https://mp.weixin.qq.com/s/iV-OXiKF1jgAhSmX4QUIXw
+JeffDean又用深度学习搞事情：这次要颠覆整个计算机系统结构设计。这篇blog介绍了如何用DL方法提高内存访问的命中率。
 
-综述：图像风格化算法最全盘点
+https://zhuanlan.zhihu.com/p/37020639
 
-https://mp.weixin.qq.com/s/eqI5fVuF68RQWb1a5O219w
+读论文系列：CVPR2018 SSAH
 
-腾讯研发“一键卸妆” ,让女神秒变路人!
+https://mp.weixin.qq.com/s/TdnstQaBcLaXg8BvuR7oYA
 
-https://mp.weixin.qq.com/s/73mkWlqJsVdu9m1kPDvfbQ
+基于素描图的细粒度图像检索
 
-用AI让静图变动图：CVPR热文提出动态纹理合成新方法
+https://mp.weixin.qq.com/s/YrepffjMkxeuFRVMv8MClg
 
-https://mp.weixin.qq.com/s/gEFzogsteK_1VeywbQxbgQ
+信息检索技术进展: 从词袋到BERT，230页ppt
 
-(GAN)延时摄影视频的生成
+https://mp.weixin.qq.com/s/vN9X3CRwJuHLJwzvfDg1kA
 
-https://mp.weixin.qq.com/s/97Uj-ATLToy1bNhnSUO8Jw
+强化学习如何用于信息检索？请看ECIR2021《基于强化学习的信息检索》教程
 
-非监督任意姿势人体图像合成
+https://mp.weixin.qq.com/s/CAzafDevfNs0hHUmquds2Q
 
-https://mp.weixin.qq.com/s/cfw8mRsmzE1lU8PRM8UC0w
+如何构建一个好的电商搜索引擎？
 
-秒变莫扎特、贝多芬，Facebook提出完美转换音乐风格的神经网络
+# AutoDL+
 
-https://mp.weixin.qq.com/s/TiXILy4l6Q3dxVwapyd9KQ
+https://mp.weixin.qq.com/s/qou0uUQVsU306KvB5JMKVg
 
-二维码太丑？用风格迁移生成个性二维码了解一下
+贝叶斯分析助你成为优秀的调参侠：自动化搜索物理模型的参数空间
 
-https://mp.weixin.qq.com/s/RMz5fwt72j2ufrGpdD6POw
+https://mp.weixin.qq.com/s/pJ4cSS4qXQaM8ACv_Aq--A
 
-带自注意力机制的生成对抗网络，实现效果怎样？
+结合Sklearn的网格和随机搜索进行自动超参数调优
 
-https://mp.weixin.qq.com/s/PVM7wMsT6TpJkQUlt7d2Aw
+https://mp.weixin.qq.com/s/fqNl6WPqIP7TiAmg5emkRw
 
-用风格迁移搞事情！超越艺术字：卷积神经网络打造最美汉字
+针对目标检测任务从基础运算符号自动构建损失函数
 
-https://mp.weixin.qq.com/s/lPzPfjYiAsNvVcVWdL08dA
+https://mp.weixin.qq.com/s/pDvl1LEV5ujJbOfU-PDuiA   
 
-照片闭眼也无妨，Facebook黑科技完美补全大眼睛
+走马观花AutoML
 
-https://mp.weixin.qq.com/s/h-mp7_oO9aZ1yYxiJMLziQ
+https://mp.weixin.qq.com/s/y-5Gh0Jy3Fpz8xvw_tOICg
 
-作画、写诗、弹曲子，AI还能这么玩？
+MixPath：基于权重共享的神经网络搜索统一方法
 
-https://mp.weixin.qq.com/s/txJAnu4FOOjmLhbtGTM-BQ
+https://mp.weixin.qq.com/s/tYV_ratEA0NxzJukF-RTSA
 
-还敢吹“毫无PS痕迹”？小心被Adobe官方AI打脸
+玩转网络结构搜索？你需要更大的搜索空间
 
-https://mp.weixin.qq.com/s/a1Qg1Hl5NMvEJPXhJR-2BA
+https://mp.weixin.qq.com/s/IRDE4RqwXR5W7QFhD_tSPQ
 
-效果惊艳！北大团队提出Attentive GAN去除图像中雨滴
+AutoML在深度学习模型设计和优化中有哪些用处？
 
-https://mp.weixin.qq.com/s/iK7XR0tHV_dE0p1grNQIHw
+https://zhuanlan.zhihu.com/p/143730467
 
-只需一张照片，运动视频分分钟伪造出来
+One Shot NAS总结
 
-https://mp.weixin.qq.com/s/-j4p7nUF-rCGk6yK0nccvw
+https://mp.weixin.qq.com/s/e7Whr2Im5fu8O7zF95Afkw
 
-机器人也会画漫画
+进化算法如何用于自动模型搜索(NAS)
 
-https://mp.weixin.qq.com/s?__biz=MzIzNjc1NzUzMw==&mid=2247504381&idx=2&sn=465027cc2a8f75a7f6ddf400830f61e0
+https://mp.weixin.qq.com/s/QtYNb1bVnWghNFK6fbynLw
 
-这个品质超高的漫画自动上色AI，让你DIY出喜欢的配色
+激活函数如何进行自动学习和配置
 
-https://mp.weixin.qq.com/s/3Aq1HXpBzgNdcB130tCKbQ
+https://mp.weixin.qq.com/s/0fVNW5hekUNCsD6L9KL1iQ
 
-GAN网络图像翻译机：图像复原、模糊变清晰、素描变彩图
+PNAS：渐进式神经网络搜索，准确率预测，21倍加速
 
-https://mp.weixin.qq.com/s/djkjAfUO_DefTP2drzY_iQ
+https://mp.weixin.qq.com/s/Ho6XDRYmOBs9TqLMq7aPAg
 
-在《绝地求生》中玩《堡垒之夜》！深度学习帮你转换画风
+MetaQNN: 与Google同场竞技，MIT经典作，基于Q-Learning的神经网络搜索
 
-https://mp.weixin.qq.com/s/moDVf7h8Q2S1SL0IuxXQtQ
+https://mp.weixin.qq.com/s/5NGCr6oMW2p5u4kF7YMCPw
 
-算法音乐往事：二次元女神“初音未来”诞生记
+NAS太难了，搜索结果堪比随机采样！华为ICLR 2020论文给出6条建议
 
-https://mp.weixin.qq.com/s/4UH-XWyIxYHq_ErRfkzzsQ
+https://zhuanlan.zhihu.com/p/110527110
 
-与神经网络相比，你对P图一无所知
+Neural Architecture Search
 
-https://mp.weixin.qq.com/s/FTfpjo-qT_PK4cbR5j0ulw
+https://zhuanlan.zhihu.com/p/111213620
 
-AI当“暖男”：给裸照自动穿上比基尼
+AutoML在计算机视觉领域的能与不能
 
-https://mp.weixin.qq.com/s/LwYzxFO6Fj9Biiww3Y22qw
+https://mp.weixin.qq.com/s/MIJHiYk-CjYtmW_9zW4hjA
 
-斯坦福CS230第一名：图像超级补全，效果惊艳
+Hyper-Parameter Optimization，56页pdf
 
-https://mp.weixin.qq.com/s/MFKhmHcaQvufdRawFqisjA
+https://mp.weixin.qq.com/s/MkXBtGq4xt5YOh1-uhMBbg
 
-Distill详述“可微图像参数化“：神经网络可视化和风格迁移利器！
+循环神经网络自动生成程序：谷歌大脑提出“优先级队列训练”
 
-https://mp.weixin.qq.com/s/Mk_EkwTYK2141cU9zC1hvQ
+https://mp.weixin.qq.com/s/vctbsYk4LRwrQ7_Hs7fqkg
 
-合成逼真图像，试试港中大&英特尔的半参数方法
+谷歌大脑发布神经架构搜索新方法：提速1000倍
 
-https://mp.weixin.qq.com/s/K2kptEfezAbcQTE8OgPMtQ
+https://mp.weixin.qq.com/s/9qpZUVoEzWaY8zILc3Pl1A
 
-手把手教你用OpenCV和Python实现图像和视频神经风格迁移
+进化算法+AutoML，谷歌提出新型神经网络架构搜索方法
 
-https://mp.weixin.qq.com/s/l33D8zNtHVcaMjlw4IY05g
+https://mp.weixin.qq.com/s/HJ5caV1bQi7qVDeNXZ21qg
 
-想让照片里的美女“回头”？清华MIT谷歌用AI帮你实现了
+手把手教你用Cloud AutoML做毒蜘蛛分类器
 
-https://mp.weixin.qq.com/s/UySQTv8uuGungjxFNeHbRw
+https://mp.weixin.qq.com/s/smAlLm-JZn_s2utSCVk7ig
 
-给动漫人物轻松换装、编舞，这家游戏公司用GAN做到了！
+归一化(Normalization)方法如何进行自动学习和配置
 
-https://mp.weixin.qq.com/s?__biz=MzI3MTA0MTk1MA==&mid=2652026913&idx=2&sn=fc38fa94211c277d616f4f37aa6d8b5d
+https://mp.weixin.qq.com/s/E0ULyXGz3UEcD0cIg-XkNA
 
-pix2pix 3D版：几笔线条生成超炫猫咪霹雳舞！
+优化方法可以进行自动搜索学习吗？
 
-https://mp.weixin.qq.com/s?__biz=MzA3MzI4MjgzMw==&mid=2650748774&idx=4&sn=efb794e4e418493f17138e7fa7eb84ab
+https://mp.weixin.qq.com/s/439I6hHIfq6KpkLEwAgDrw
 
-这种两阶段深度着色模型，为黑白照披上了彩衣
+MIT韩松团队开发“万金油”母网，嵌套10^19个子网，包下全球所有设备
 
-https://mp.weixin.qq.com/s/BWBrso7O1O3Rfxa4QWZH4g
+https://mp.weixin.qq.com/s/OL_MuzKqAaDoOU3LF3Xmow
 
-分分钟学会基于深度学习的图像真实风格迁移！
+强化学习如何用于自动模型设计(NAS)与优化？
 
-https://mp.weixin.qq.com/s?__biz=MzIzNjc1NzUzMw==&mid=2247505181&idx=1&sn=2e817ec2ae918fd85c0ebcf85e810997
+https://mp.weixin.qq.com/s/c7S_hV_8iRhR4ZoFxQYGYQ
 
-惊！史上最佳GAN现身，超真实AI假照片，行家们都沸腾了
+CVPR 2019神经网络架构搜索进展综述
 
-https://mp.weixin.qq.com/s/MPdGF2-cJbNcvaEx-2BnFg
+https://mp.weixin.qq.com/s/hWRStNp0Gu_ZO7J1Sjr6-w
 
-把2D公路变成3D飞车游戏，MIT、清华打破图像编辑的次元壁
+视频架构搜索的研究
 
-https://mp.weixin.qq.com/s/h6sktVd1ywCCncUb9iwyFQ
+https://mp.weixin.qq.com/s/ABNPCpgyk_2EeYwnJFFehg
 
-中科院自动化所：高清真实图像生成领域及GAN研究在人脸识别领域的进展
+自动优化架构，这个算法能帮工程师设计神经网络
 
-https://mp.weixin.qq.com/s/9LvP3AH1PJhjrokTGg3blA
+https://mp.weixin.qq.com/s/0kGJfKARKs2TuIQ4YJYbUA
 
-心中无码：这是一个能自动脑补漫画空缺部分的AI项目
+比手工模型快10~100倍，谷歌揭秘视频NAS三大法宝
 
-https://mp.weixin.qq.com/s/cBTnX1lNHJhCMDX926aujA
+https://zhuanlan.zhihu.com/p/100570132
 
-想怎么GAN就怎么GAN，一键拯救发际线
+NAS evaluation is frustratingly hard
 
-https://mp.weixin.qq.com/s/HinUtoYNq_e8HYBqPKozsQ
+https://mp.weixin.qq.com/s/QEkOQG2dQrPG-aa8OsVSOg
 
-GAN：艺术家眼里生成作品的创作利器
+NASNet: Google Brain经典作，改造搜索空间，性能全面超越人工网络，继续领跑NAS领域
 
-https://mp.weixin.qq.com/s/Cyy4FgVZyVN-4KvG-9pHMA
+https://mp.weixin.qq.com/s/ClqOWx1RJGzoS0akI2s93w
 
-品质超高！超火的漫画线稿上色AI最新版来了
+多媒体的AutoML与元学习，清华大学朱文武教授等
 
-https://mp.weixin.qq.com/s/lp769k6wsyh-991ACf5upw
+https://mp.weixin.qq.com/s/dS3nHGcQ1VoOyVBcRPFtkg
 
-计算机也会ps图片：TL-GAN
+AutoML都有哪些核心技术，如何对其进行长期深入学习
 
-https://mp.weixin.qq.com/s/OmSb1dl9smyZt_uASOcofQ
+https://mp.weixin.qq.com/s/A3Bg4-WoEQxFk3G5hCKNPQ
 
-人人都是画家：朱俊彦&周博磊等人的GAN画笔帮你开启艺术生涯
+连续可微分架构如何用于网络结构搜索
 
-https://mp.weixin.qq.com/s/7xGtUHfk_FNpDTksLxKaHw
+https://mp.weixin.qq.com/s/0AE8w_0cZGcMZIwjUTKPrg
 
-杨超越的声音+高晓松的脸~如此酸爽的技术，你值得拥有！
+如何学习AutoML在模型优化中的应用，这12篇文章可以作为一个参考
 
-https://mp.weixin.qq.com/s/y9h6xkK9Keq4UrdpGJS-4Q
+https://mp.weixin.qq.com/s/LxLTsz7T_lAkqfZ9voSX5Q
 
-这些假脸实在太逼真了！英伟达造出新一代GAN，生成壁纸级高清大图毫无破绽
+强化学习网络结构搜索(一)
 
-https://mp.weixin.qq.com/s/V4PN0L42iisRxQ6y4Hc8fw
+https://mp.weixin.qq.com/s/wL0prNVm5bKWOvEg3PE33g
 
-英伟达“AI假脸王”开源：新一代GAN攻破几乎所有人脸识别系统
+强化学习网络结构搜索(二)
 
-https://mp.weixin.qq.com/s/-3e5xhbz01FerZp8DcRV5g
+https://mp.weixin.qq.com/s/9vGQUqKyf9Ct6im0zv6YiQ
 
-谷歌小姐姐搞出魔法画板：你随便画，补不齐算AI输
+强化学习网络结构搜索(三)
 
-https://mp.weixin.qq.com/s/M9r8m--Sd9kHxZrOEHbY7A
+https://mp.weixin.qq.com/s/1XDknbIapmuQi5eb61Jlaw
 
-视频直接变漫画！GAN又有了新玩法
+遗传算法与网络结构搜索
 
-https://mp.weixin.qq.com/s/CbdERPAHhmLB2hVVl2Dgkg
+https://mp.weixin.qq.com/s/1zm2iMXD142Ug0_coVIGMg
 
-裤子换裙子，就问你GAN的这波操作秀不秀
+Darts: 可微结构搜索
 
-https://mp.weixin.qq.com/s/Ug0jyloNkeL6uuCqv9K0SA
+https://zhuanlan.zhihu.com/p/266102401
 
-图像/人脸补全问题的前世今生
+Auto Seg-Loss: 自动损失函数设计
 
-https://mp.weixin.qq.com/s/xdFxQfgj61pgB-aCq31rLA
+https://mp.weixin.qq.com/s/y3SIK1sAscrWQuZ3mB9lew
 
-旷视等提出GIF2Video：首个深度学习GIF质量提升方法
+手动搜索超参数的一个简单方法
 
-https://mp.weixin.qq.com/s/gTD5H_Vy2b-7fuvAYxVsnQ
+https://mp.weixin.qq.com/s/ACxAAvvKK-DX5UDMe-RsXg
 
-基于GAN和CNN的图像盲去噪
+最新《神经架构搜索NAS》教程，33页pdf
 
-https://mp.weixin.qq.com/s/MePEEuwH-e5c2hwiEXo2wg
+https://mp.weixin.qq.com/s/2hSmI8xo1jUHgWrEu3YBIA
 
-去噪、去水印、超分辨率，这款不用学习的神经网络无所不能
+一文读懂目前大热的AutoML与NAS
+
+https://mp.weixin.qq.com/s/1JgHE1juxuYEmKO9SXMssA
+
+NAS+Det
+
+https://mp.weixin.qq.com/s/xnqAPh3hlQq3_QDmk2lOLg
+
+NAS在检测中的应用
+
+https://mp.weixin.qq.com/s/nG_Mzlevs9ougnyeJyT38A
+
+一文看懂AutoML
+
+https://mp.weixin.qq.com/s/VdjHp5Tb1fSyV3CQblPQmw
+
+利用NAS寻找最佳GAN：AutoGAN架构搜索方案专为GAN打造
+
+https://mp.weixin.qq.com/s/d60EKUJjYfYfcfhMnaCpPA
+
+基于强化学习的自动搜索
+
+https://mp.weixin.qq.com/s/JC1MlSfR2INd5RqSFolV5A
+
+NAS的挑战和解决方案-一份全面的综述
+
+https://mp.weixin.qq.com/s/Nmkcy2nBczUccwIdMJiH_A
+
+MaskConnect: 探究网络结构搜索中的Module间更好的连接
+
+https://mp.weixin.qq.com/s/of9C3l2cmzAVEt9opIgfKw
+
+损失函数也可以进行自动搜索学习吗？
+
+https://mp.weixin.qq.com/s/OX0C9h5l6xffcQt6HOe_tQ
+
+DetNAS：首个搜索物体检测Backbone的方法

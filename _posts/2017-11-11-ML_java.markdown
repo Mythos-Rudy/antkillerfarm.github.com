@@ -1,8 +1,11 @@
 ---
 layout: post
-title:  Machine Learning之Java篇, Matlab, 数据描述语言
+title:  Machine Learning之Java篇, MPI
 category: AI 
 ---
+
+* toc
+{:toc}
 
 # Machine Learning之Java篇
 
@@ -31,6 +34,18 @@ Deeplearning4j：使用CNN进行文本分类:图文+代码
 https://mp.weixin.qq.com/s/geJDbL1eVcJXDtsO_mu4-w
 
 Deeplearning4j手把手深度学习教程系列完整版
+
+## DJL
+
+Deep Java Library是AWS开源的Java深度学习框架。和DL4J不同，DJL没有自己的运算层，而必须依靠TF或Pytorch进行计算。
+
+https://github.com/awslabs/djl/
+
+参考：
+
+https://mp.weixin.qq.com/s/-GaxCVUOSe_2lFAeLRaIpQ
+
+用Java训练深度学习模型，原来这么简单
 
 ## Joinery
 
@@ -92,6 +107,10 @@ https://mp.weixin.qq.com/s/UZWSUUuPWcyv6yUx-woF4g
 
 Smile实战（一）SVM
 
+https://mp.weixin.qq.com/s/WE7afgw1VzvClKdbAaXVnA
+
+Smile一下，轻松用Java玩转机器学习
+
 ## java-string-similarity
 
 这个库虽然功能有限，但却针对字符处理进行了优化。比如Jaccard距离，weka没有实现，ELKI提供的是通用的集合类实现，用起来没有java-string-similarity方便。
@@ -112,269 +131,213 @@ https://github.com/yuantiku/ytk-learn
 
 https://github.com/yuantiku/ytk-mp4j
 
+## Apache Zeppelin
+
+Zeppelin是一个让交互式数据分析变得可行的基于网页的开源框架。Zeppelin提供了数据分析、数据可视化等功能。
+
+官网：
+
+https://zeppelin.apache.org/
+
 ## 参考
 
 https://mp.weixin.qq.com/s/WsjZERRkgnReWuDw_z5Hxw
 
 LibRec：一个覆盖70多种算法的推荐系统开源库！
 
-# Matlab
+https://mp.weixin.qq.com/s/hn8Es-l1f6raJ_wj5HkqMA
 
-https://zhuanlan.zhihu.com/p/30905298
+LinkedIn开源Dagli，发布Java机器学习函数库
 
-XML和MATLAB交互的基本操作
+# MPI
 
-# 数据描述语言
+集群可以很好解决单节点计算力不足的问题，但在集群中大规模的数据交换是很耗费时间的，因此需要一种在多节点的情况下能快速进行数据交流的标准，这就是Message passing interface(MPI)。
 
-## JSON
+MPI的主流实现主要是：mpich和openmpi。
 
-JSON(JavaScript Object Notation) 是一种轻量级的数据交换格式。 易于人阅读和编写。同时也易于机器解析和生成。 它基于JavaScript Programming Language, Standard ECMA-262 3rd Edition - December 1999的一个子集。
+和MPI类似的技术，还有NVIDIA的NCCL，FaceBook的gloo等。
 
-其官网为：
+MPI官网：
 
-http://json.org/
+http://www.mpi-forum.org/docs/
 
-官网上列出了各种语言的JSON解析库。其中C语言的解析库中以json-c最为流行，其官网为：
+1994：MPI-1
 
-https://github.com/json-c/json-c
+1998：MPI-2
 
-和XML Path类似，JSON也定义了自己的JSON Path。参见：
+2012：MPI-3
 
-http://goessner.net/articles/JsonPath/
+2021：MPI-4
 
-参考：
+因为MPI的历史比较久远，深刻影响了后来的分布式并行程序，比如TF等。所以这里简单介绍一下几个关键的术语。
 
-https://addons.mozilla.org/zh-CN/firefox/addon/jsonview/
+gloo官网：
 
-jsonview是一个用于检验JSON格式是否合法的Firefox插件。
+https://github.com/facebookincubator/gloo
 
-http://www.bejson.com/
+## Barrier
 
-一个在线验证JSON语法的库。
+![](/images/img4/barrier.png)
 
-https://docs.python.org/2/library/json.html
+这个方法会构建一个屏障，任何进程都没法跨越屏障，直到所有的进程都到达屏障。
 
-python自带的json包的文档
+实现屏障的方式有很多，最简单的是令牌环（token ring）。
 
-https://mp.weixin.qq.com/s/qk8hlcE3oxa-4a-G4sxGVg
+第一个进程到达的屏障生成一个token，然后传递给下一个到达屏障的进程。所有的进程都到达屏障之后，token被传递回第一个进程。
 
-为什么说JSON不适合做配置语言？
+`MPI_Barrier`在TF中被称为`AfterAll`。
 
-https://mp.weixin.qq.com/s/qjDj02UuJ8KB4bklZG3odA
+## Bcast & Scatter
 
-9款你不能错过的JSON工具
+![](/images/img4/broadcastvsscatter.png)
 
-## Jackson
+`MPI_Bcast`给每个进程发送的是同样的数据，然而`MPI_Scatter`给每个进程发送的是一个数组的一部分数据。
 
-Jackson是常用的Java语言的JSON库。
+![](/images/img4/broadcast_tree.png)
 
-Maven安装：
+在上图的树形算法里，能够利用的网络连接每个阶段都会比前一阶段翻番，直到所有的进程接收到数据为止。
 
-{% highlight text %}
-<dependency>
-	<groupId>com.fasterxml.jackson.core</groupId>
-	<artifactId>jackson-databind</artifactId>
-	<version>2.6.4</version>
-</dependency>
-{% endhighlight %}
+## Gather & Allgather
 
-Jackson提供了三种处理方法：
+![](/images/img4/gather.png)
 
-**流式API**：（也称为"增量分析/生成"）读取和写入 JSON 内容作为离散事件。类似于XML SAX。
+`MPI_Gather`跟`MPI_Scatter`是相反的。
 
-com.fasterxml.jackson.JsonParser读，com.fasterxml.jackson.JsonGenerator写。
+![](/images/img4/allgather.png)
 
-**树模型**：提供一个JSON文档可变内存树的表示形式。类似于XML DOM。
+`MPI_Allgather`相当于一个`MPI_Gather`操作之后跟着一个`MPI_Bcast`操作。
 
-com.fasterxml.jackson.databind.ObjectMapper生成树；树组成JsonNode节点集。
+## Reduce & Allreduce
 
-**数据绑定**：JSON和POJO相互转换，基于属性访问器规约或注解。
+![](/images/img4/mpi_reduce_1.png)
 
-Jackson不支持JSON Path，可以使用以下项目：
+数据归约包括通过函数将一组数字归约为较小的一组数字。例如，假设我们有一个数字列表[1,2,3,4,5]。用sum函数归约此数字列表将产生`sum([1、2、3、4、5]) = 15`。
 
-https://github.com/jayway/JsonPath
+![](/images/img4/mpi_allreduce_1.png)
 
-这个项目的后端可以选择Jackson或Gson。
+`MPI_Allreduce`等效于先执行`MPI_Reduce`，然后执行`MPI_Bcast`。
 
-## BSON
+## Alltoall
 
-Binary JSON是在JSON的基础上，添加了索引及数据类型的一种二进制格式。相比JSON，它牺牲了可阅读性，得到了可遍历性和高效性。
+![](/images/img4/all-to-all-collective.png)
 
-BSON最早由MongoDB项目提出并使用，它的官网为：
+`MPI_Alltoall`的工作方式是`MPI_Scatter`和`MPI_Gather`的组合。它的用途之一就是上图所示的数据的行列转置,但它比转置要灵活的多。
 
-http://bsonspec.org/
+## groups
 
-从中可以看出大多数语言的BSON解析库，都是MongoDB项目提供的。
+以上这些操作都涉及了多个计算节点。执行同一操作的多个节点组成一个group。
 
-## YAML
+group里包含了相关的节点的id，如果group为null，则该操作会在整个计算集群上执行。两个group可以进行交集、并集之类的集合运算，生成新的group。
 
-YAML(Yet Another Markup Language)是JSON的超集。它没有JSON那么流行，主要被用于科学计算领域，比如OpenCV项目。它的官网为：
+## 总结
 
-http://yaml.org/
+```cpp
+ScatterGather(SrcIDRange,SrcAddr,DstIDRange,DstAddr,UnitSize,TotalSize)
+When there is only one source and UnitSize = TotalSize, it is a Broadcast
+When there is only one source and UnitSize != TotalSize, it is a Scatter
+When there is only one destination and UnitSize = TotalSize, it is a Gather
+When UnitSize = TotalSize and there are multiple sources and destinations, it is a AllGather operation
+When UnitSize != TotalSize and there are multiple sources and destinations, it is a All-to-All operation
+```
 
-这个网站很有特色，它本身就是一个YAML文件。
+从上面可以看出，除了Reduce一系的操作之外，其他的都可以总结为Scatter+Gather。
 
-YAML的python语言解析库主要有PyYAML和ruamel.yaml。前者貌似已经不再维护，所以目前主要使用后者。
+Scatter也被称为One-to-all，Gather也被称为All-to-one。
 
-ruamel.yaml官网：
+## AllReduce
 
-https://yaml.readthedocs.io/en/latest/
+AllReduce有多种具体的实现方式。
 
-这里谈一下我司在这方面的实践。我司有个项目最初脱胎于Caffe，因此，配置文件沿用了Protocol Buffers格式。然而PB格式在发布时，还需要相应的proto文件配套，才能解析。此外，PB文件是二进制，不便修改。因此，我们很快就改用json了。
+Ring AllReduce：
 
-用了两年之后，发现json对于客户的修改，还是不够友好。因此又换用了YAML。
+![](/images/img4/Ring_AllReduce.jpg)
 
-参考：
+Having-Doubling AllReduce：
 
-https://zhuanlan.zhihu.com/p/33477002
+![](/images/img4/Having-Doubling_AllReduce.jpg)
 
-读写yaml文件
+该算法每次选择节点距离倍增的节点相互通信，每次通信量倍减（或倍增）。
 
-## Protocol Buffers
+该算法的优点是通信步骤较少，只有$$2 * log_2N$$次（其中N表示参与通信的节点数）通信即可完成，所以其有更低的延迟。相比之下Ring算法的通信步骤是$$2 ∗ (N−1)$$次；缺点是每一个步骤相互通信的节点均不相同，链接来回切换会带来额外开销。
 
-Protocol Buffers是Google公司开发的一种数据描述语言。它的官网为：
+ring all-reduce具有理论上最优的传输带宽，而没有考虑每次传输都包含的延迟（latency）。当数据量V比较大时，延迟项可以忽略。当V特别小，或者设备数p特别大时，带宽就变得不重要了，反而是延迟比较关键。
 
-https://github.com/google/protobuf
+这也是为什么英伟达NCCL里既实现了ring all-reduce，也实现了double-tree all-reduce算法。
 
-文档：
+https://www.zhihu.com/question/57799212
 
-https://developers.google.com/protocol-buffers/
+ring allreduce和tree allreduce的具体区别是什么？
 
-Tutorials：
+https://andrew.gibiansky.com/blog/machine-learning/baidu-allreduce/
 
-https://developers.google.com/protocol-buffers/docs/tutorials
+Bringing HPC Techniques to Deep Learning
 
-安装：
+https://zhuanlan.zhihu.com/p/79030485
 
-`sudo apt install protobuf-compiler python-protobuf`
+AllReduce算法的前世今生
 
-这是一种注重效率，而可阅读性几乎为零的二进制格式。其效率超过BSON，但除非有相关格式文件，否则完全无法阅读。而BSON作为JSON的扩展，只有扩展的那部分不可读，其余部分仍保留JSON的可读性。
+https://mp.weixin.qq.com/s/4XMVYXnzpYZ4DrIabuTUig
 
-格式文件是Protocol Buffers中的重要概念，也是和JSON等格式在使用思路上最大的区别。
+Ring All-reduce: 分布式深度学习的巧妙同步
 
-JSON采用的是，不同的语言提供不同的库来解析的方式。
+https://zhuanlan.zhihu.com/p/504957661
 
-而Protocol Buffers使用同一个格式文件，为不同语言生成相应的代码。这和CORBA的做法很类似。
+手把手推导Ring All-reduce的数学性质
 
-与Protocol Buffers类似的方案，还有Facebook提出的Thrift、ZeroC提出的Slice和Hadoop Avro。
+https://developer.nvidia.com/blog/massively-scale-deep-learning-training-nccl-2-4/
 
-### 简易示例
+Massively Scale Your Deep Learning Training with NCCL 2.4
 
-test.proto:
+## 其他概念
 
-{% highlight text %}
-message TestMsg
-{
-    required int32 id=1;
-    required int32 time=2;
-    optional string note=3;
-}
-{% endhighlight %}
+这里的有些概念并非MPI的内容，但在分布式计算中，应用的比较广，所以就放在这里了。
 
-`protoc --python_out=./python/ test.proto`
+rank：进程号，在多进程上下文中，我们通常假定rank 0是第一个进程或者主进程，也被称为coordinator（master）。其余的进程为worker。由Rank0来协调所有Rank的进度。
 
-test.py:
+node：物理节点，可以是一个容器也可以是一台机器，节点内部可以有多个GPU。
 
-{% highlight python %}
-import google.protobuf
-from test_pb2 import TestMsg
-import time
+local_rank：指在一个node上进程的相对序号，local_rank在node之间相互独立。
 
-test = TestMsg()
-test.id=1
-test.time=int(time.time())
-test.string="asdftest"
-print test
-test_str = test.SerializeToString()
-print test_str
+![](/images/img4/rank.png)
 
-test1 = TestMsg()
-test1.ParseFromString(test_str)
-print test1
-{% endhighlight %}
+rank与GPU之间没有必然的对应关系，一个rank可以包含多个GPU；一个GPU也可以为多个rank服务（多进程共享GPU），只是习惯上默认一个rank对应着一个GPU。
 
-示例代码下载：
+---
 
-https://github.com/antkillerfarm/antkillerfarm_crazy/tree/master/helloworld/protobuf
+stencil计算：
 
-参考：
+![](/images/img5/stencil.jpg)
 
-http://www.cnblogs.com/o87481299/p/4199892.html
+## 参考
 
-python google protobuf使用
+https://zhuanlan.zhihu.com/p/69497154
 
-https://mp.weixin.qq.com/s/D1bjGRCFH6Ag9_xIfQ34SA
+高性能计算--mpi
 
-Google Protocol Buffers浅析
+https://mpitutorial.com/tutorials/
 
-https://mp.weixin.qq.com/s/dYV_O2WiiGeDHMbejt8vqg
+MPI Tutorials
 
-高德地图数据序列化的探索与实践
+https://zhuanlan.zhihu.com/p/363710263
 
-### proto3
+集体通信
 
-Protocol Buffers本身也有若干版本，且互不兼容。目前用的比较多的是proto2和proto3。
+https://downey.io/notes/omscs/cse6220/distributed-memory-model-mpi-collectives/
 
-值得注意的是，proto3生成的python文件，仍然叫xxxx_pb2.py。
+distributed memory model and mpi collectives
 
-proto3最大的改进在于支持如下形式的proto文件的嵌套：
+https://blog.csdn.net/q19149/article/details/102594031
 
-`import "tensorflow/core/framework/node_def.proto";`
+集合通信函数图解
 
-参考：
+https://zhuanlan.zhihu.com/p/465967735
 
-http://www.cnblogs.com/ghj1976/p/4565846.html
+分布式训练硬核技术——通讯原语
 
-proto3笔记
+https://zhuanlan.zhihu.com/p/276122469
 
-https://blog.csdn.net/menghaocheng/article/details/80176763
+分布式训练常用技术简介
 
-Python3-如何使用protobuf 3
+https://zhuanlan.zhihu.com/p/425830285
 
-## HDF5
-
-HDF是用于存储和分发科学数据的一种自我描述、多对象文件格式。HDF是由美国国家超级计算应用中心（NCSA）创建的，以满足不同群体的科学家在不同工程项目领域之需要。
-
-官网：
-
-https://support.hdfgroup.org/HDF5/
-
-它的python接口：
-
-http://www.h5py.org/
-
-HDF5 for Python
-
-参考：
-
-https://www.phodal.com/blog/try-hdf5-in-mac-os-with-shell/
-
-HDF5小试——高大上的多对象文件格式
-
-## PMML
-
-PMML(Predictive Model Markup Language) 是一个开放的工业标准，它以XML为载体将上述数据挖掘任务标准化，可以把某一产品所创建的数据挖掘方案应用于任何其它遵从PMML标准的产品或平台中，而不需考虑分析和预测过程中的具体实现细节。使得模型的部署摆脱了模型开发和产品整合的束缚，为商业智能产品、数据仓库和云计算中的数据挖掘模型的应用环境开拓了新的篇章。
-
-官网：
-
-http://dmg.org/
-
-参考：
-
-https://www.ibm.com/developerworks/cn/xml/x-1107xuj/
-
-PMML标准介绍及其在数据挖掘任务中的应用
-
-## FlatBuffers
-
-FlatBuffers是Google为嵌入式平台打造的二进制格式，执行效率优于Protocol Buffers。但它的出名，却是由于Facebook最早在其Android App上使用。因此，有的文章也将之称为是Facebook发明的，但其实这是不正确的。
-
-官网：
-
-https://google.github.io/flatbuffers/
-
-参考：
-
-http://www.cnblogs.com/wingyip/p/5185593.html
-
-FlatBuffers初探
+最理想的点到点通信库究竟是怎样的？

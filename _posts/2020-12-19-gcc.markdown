@@ -1,0 +1,365 @@
+---
+layout: post
+title:  gcc, LLVM
+category: toolchain 
+---
+
+* toc
+{:toc}
+
+# gcc
+
+GNU C Compiler在1987年3月22日发布了第一个beta版本，Richard Stallman原本想利用Free University Compiler Kit，但作者Andy Tanenbaum不想免费提供，RMS因此决定GNU的首个项目将是编译器。GCC是基于一个现有的Pastel编译器，使其扩展支持编译C，后用C进行重写。
+
+代码：
+
+`git clone git://gcc.gnu.org/git/gcc.git`
+
+## 资料
+
+http://www.hellogcc.org/
+
+一个有关GCC和GDB的博客。其中的大牛teawater（朱辉）开发了一个Linux动态跟踪器KGTP，他的blog：
+
+http://teawater.github.io/
+
+https://www.cnblogs.com/kuoAT/p/9590606.html
+
+深入分析GCC（王亚刚 著）
+
+## GNU Binutils
+
+GNU Binutils是一系列二进制工具的集合。
+
+- ld：GNU链接器
+- as：GNU汇编器
+- addr2line：从目标文件的虚拟地址获取文件的行号或符号。
+- ar：可以对静态库做创建、修改和提取的操作。
+- c++filt：反编译（反混淆，demangle）C++符号的工具。
+- dlltool：创建创建Windows动态库。
+- gold：另一种新的、更快的仅支持ELF的链接器。
+- gprof：性能分析（profiling）工具程序。
+- nlmconv：可以转换成NetWare Loadable Module(NLM)目标文件格式。
+- nm：显示目标文件内的符号信息。
+- objcopy：复制和转译目标文件。
+- objdump：显示目标文件的相关信息，亦可反汇编。
+- ranlib：产生静态库的索引。（和nm -s功能类似）
+- readelf： 显示ELF文件的内容。
+- size：列出目标文件或库文件的section大小。
+- strings：列出文件中可打印的字符串。
+
+https://www.zhihu.com/answer/2258430030
+
+GNU Binutils工具集介绍
+
+## 基本流程
+
+1、预处理，生成.i的文件（预处理器cpp）
+
+2、将预处理后的文件转换成汇编语言，生成文件.s（编译器egcs）
+
+3、有汇编变为目标代码(机器代码)生成.o的文件（汇编器as）
+
+4、连接目标代码，生成可执行程序（链接器ld）
+
+## Linker
+
+常见的Linker主要有：GNU的Gold、LLVM的LLD，以及最新的Mold。
+
+mold（A Modern Linker）大大改进了相关算法的并行性，因此性能要比前两者快得多。
+
+### gcc和ld的差异
+
+理论上gcc做链接和ld做链接，应该是一样的效果，然而实际情况要复杂一些。有的厂商的工具链会给gcc添加一些环境变量之类的私货，所以两者的行为就变的很有差异了。遇到这种问题，互换是一种好的解决问题的思路。
+
+### 链接顺序
+
+有的链接器对链接顺序有要求，一般按照c代码、自定义库、标准库的顺序来链接，也就是越基础底层的库，越在后面。（这个顺序正好和声明的顺序相反）
+
+`gcc -c ./sparse_matrix.c -o sparse_matrix.o -luserlib -lm`
+
+但是如果有一系列很底层的库，他们太底层了，以至于会出现相互依赖的情况(circular dependence)，那gcc提供了一个option很好的解决了这个情况：
+
+`-Wl,--start-group -lmy_lib -lyour_lib -lhis_lib -Wl,--end-group`
+
+再比如下面的例子：
+
+https://github.com/antkillerfarm/antkillerfarm_crazy/tree/master/helloworld/linux_so
+
+`gcc -o main_link main_link.c -L. -lhello`
+
+这条命令中的main_link.c如果放到`-lhello`之后就会出问题。也考虑使用`--start-group`和`--end-group`之类的链接选项解决链接顺序问题。
+
+### 参考
+
+https://stackoverflow.com/questions/27475977/c-undefined-reference-to-sqrt-even-with-lm
+
+C - undefined reference to “sqrt” even with '-lm'
+
+https://mp.weixin.qq.com/s/TnqAqpmuXsGFfpcSUqZ9GQ
+
+今日头条优化实践：iOS包大小二进制优化，一行代码减少60MB下载大小
+
+https://zhuanlan.zhihu.com/p/145263213
+
+谈谈程序链接及分段那些事
+
+## -Werror
+
+有的时候会遇到`-Werror=XXXX`这样的编译错误，如果确实不想改代码的话，可以用`-Wno-error=XXXX`或者`-Wno-XXXX`来回避之。
+
+## nm和readelf
+
+这两个命令都可以查看可执行文件的符号表。
+
+示例：
+
+`nm XXX.so`
+
+`readelf -h XXX.so`
+
+这两个命令虽然很早就在gcc工具链中了，但是早期版本只能查看本工具链编译的可执行文件。现在的话，主流的CPU指令集都可以支持了，不必采用`arm-readelf`这样的特殊前缀版本了。
+
+## 切换gcc版本
+
+`sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-9 40`
+
+`sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-7 50`
+
+`sudo update-alternatives --config gcc`
+
+## 编译加速
+
+- 并行编译
+
+`make -j 4`
+
+可用`nproc`命令动态获取编译机的CPU核数。
+
+- 分布式编译
+
+利用Distcc和Dmucs构建大规模、分布式C++编译环境。
+
+- 预编译头文件
+
+PCH（Precompiled Header）
+
+- CCache
+
+CCache（Compiler Cache）是一个编译缓存工具，其原理是将cpp的编译结果保存在文件缓存中，以后编译时若对应文件无变动可直接从缓存中获取编译结果。需要注意的是，Make本身也有一定缓存功能，当目标文件已编译（且依赖无变化）时，若源文件时间戳无变化也不会再次编译；但CCache是按文件内容做的缓存，且同一机器的多个项目可以共享缓存，因此适用面更大。
+
+- Module编译
+
+C++20之前的版本会把每一个cpp当做一个编译单元处理，会存在引入的头文件被多次解析编译的问题。而Module的出现就是解决这一问题。
+
+- 自动依赖分析
+
+Google推出了开源的Include-What-You-Use工具（简称IWYU），使用该工具可以扫描出文件依赖问题，同时该工具还提供脚本解决头文件依赖问题。
+
+https://mp.weixin.qq.com/s/yITNjo_UQi8-OKQNOfGrPw
+
+C++服务编译耗时优化原理及实践
+
+## gdb
+
+设置参数：
+
+启动时：
+
+`gdb --args <exe> <arg1> ...`
+
+>这里把可执行程序当作arg0，参数当作arg1...
+
+运行时：
+
+`set args -l`
+
+---
+
+INT3指令—又叫断点指令，是软件断点的实现基础。
+
+标志寄存器FLAGS的TF标志—陷阱标志位。是单步执行的实现基础。
+
+断点地址寄存器DR0一DR3—用于设置断点地址(线性内存地址或l/O地址)，是硬件断点的实现基础。
+
+断点控制寄存器DR7—用来控制和进一步描述四个调试地址寄存器(DR0一DR3)的断点条件。
+
+断点状态寄存器DR6—当断点发生时，向调试器报告该断点的具体情况，以便调试器区分发生的是哪个断点。
+
+断点异常(#BP)一当INT3指令执行时，会导致此异常，CPU转到该异常的处理程序。
+
+调试异常(#DB)一当除INT3指令以外的调试事件发生时会导致此异常。
+
+任务状态段(TS)S的T标志任务陷阱标志，当切换到设置了T标志的任务时，中断到调试器。
+
+分支记录机制用来记录上一个分支、中断和异常的地址等信息。
+
+https://zhuanlan.zhihu.com/p/608919072
+
+为脚本开发调试器
+
+---
+
+参考：
+
+https://mp.weixin.qq.com/s/30Zh_8H6QfDgJuG9e9ORSQ
+
+使用gdb调试多进程程序
+
+https://zhuanlan.zhihu.com/p/254879649
+
+GDB的那些奇淫技巧
+
+https://mp.weixin.qq.com/s/y3c07Hk7g3P-rd0oDzszlA
+
+GDB底层实现原理
+
+## rr
+
+逆向调试，不是逆向工程的逆向，而是在debug的时候，需要退回到过去，比如还想再看看这个函数是如何计算的，但是又不想重新启动程序，或者重新复现。这里的退回到过去，就是逆向。
+
+gdb提供的reverse debugging比较原始，需要长时间使用才能熟练。rr: record, Replay就是一大杀器，它由 Mozilla开发。
+
+官网：
+
+https://rr-project.org/
+
+参考：
+
+https://zhuanlan.zhihu.com/p/364075104
+
+又一debug装逼技能：record, replay
+
+## 白手起家
+
+- Stage0 部分
+
+Hex0：起点，Binary不超过1KB，用来从带注释的hex dump生成binary。
+
+Hex1、Hex2：Hex0+偏移量计算，用来简化后续过程；每一级由上一级实现和编译。
+
+M0：宏汇编器，由Hex2实现和编译。
+
+cc_*：用汇编写的C子集编译器（支持x86、x644、ARMv7和v8）；由M0编译。
+
+M2-Planet + mescc-tools：用先前的C子集制作的用于生成Mes的基础工具。
+
+- Mes部分
+
+Mes + MesCC -> 一个修改过的TCC -> GCC 4.7 -> 现代的GCC
+
+https://www.zhihu.com/question/441129390
+
+假如有某种力量使得世界上所有编译器都被删除了，人类是否需要从打孔卡开始写第一个编译器?
+
+## glibc
+
+查看glibc版本：
+
+`ldd --version`
+
+代码中获得glibc版本：
+
+```cpp
+#if defined(__GLIBC__) && __GLIBC_MINOR__ >= 33 // for glibc 2.33+
+...
+#endif
+```
+
+## 测试
+
+社区用例主要是编译器开发过程中出错小程序的积累，因此也称之为regressiontest，回归测试用例，gcc社区的dejagnu有将近8万个用例。
+
+https://zhuanlan.zhihu.com/p/37594930
+
+编译器是如何做测试的
+
+## 参考
+
+https://zhuanlan.zhihu.com/p/372526494
+
+GCC的整体架构
+
+https://www.zhihu.com/question/478761697
+
+`gcc -O3`具体做了些什么事情？
+
+# LLVM
+
+## 概述
+
+LLVM最初设计时，主要做优化方面的研究，所以当时的全称叫Low Level Virtual Machine。后来因为成为了编译器，官方放弃了这个称呼，但保留了LLVM的简称。
+
+官网：
+
+http://llvm.org/
+
+代码：
+
+https://github.com/llvm/llvm-project
+
+LLVM的主要作者是Chris Lattner。
+
+他的个人主页：
+
+http://nondot.org/sabre/
+
+>Chris Lattner，1978年生，美国人。University of Portland本科（2000）+UIUC博士（2005）。LLVM、Swift、MLIR的作者。先后任职于Apple、Tesla、Google、SiFive。
+
+架构设计：
+
+http://www.aosabook.org/en/llvm.html
+
+>顺便提一下，这个网站本身就是个宝库。
+
+官方教程：
+
+https://llvm.org/docs/tutorial/MyFirstLanguageFrontend/index.html
+
+中文版：
+
+https://zhuanlan.zhihu.com/p/446800631
+
+## 常用命令
+
+C源码转换为LLVM IR:
+
+`clang -emit-llvm -S test.c -o test.ll`
+
+LLVM IR转换为LLVM字节码：
+
+`llvm-as test.ll -o test.bc`
+
+链接LLVM字节码文件：
+
+`llvm-link test1.bc test2.bc -o output.bc`
+
+LLVM字节码转换为机器汇编码：
+
+`llc test.bc -o test.s`
+
+优化器opt，优化LLVM IR：
+
+`opt --passname input.ll -o output.ll`
+
+.c --frontend--> AST --frontend--> LLVM IR --LLVM opt--> LLVM IR --LLVM llc--> .s Assembly --OS Assembler--> .o --OS Linker--> executable
+
+https://zhuanlan.zhihu.com/p/161626997
+
+LLVM架构简介
+
+https://blog.csdn.net/weixin_46222091/article/details/104501879
+
+llvm常用工具的使用详解
+
+## tablegen
+
+LLVM tablegen，文件名后缀为`.td`。
+
+https://zhuanlan.zhihu.com/p/447318642
+
+TableGen_Overview
+
+https://zhuanlan.zhihu.com/p/447728683
+
+TableGen Language Reference

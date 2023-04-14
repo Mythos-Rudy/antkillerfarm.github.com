@@ -1,8 +1,11 @@
 ---
 layout: post
-title:  深度学习（五十）——深度推理, CNN进阶
+title:  深度学习（五十）——深度推理, CNN进阶, AI前沿
 category: DL 
 ---
+
+* toc
+{:toc}
 
 # 深度推理
 
@@ -275,3 +278,105 @@ Matrix Nets: A New Deep Architecture论文阅读
 https://zhuanlan.zhihu.com/p/84205427
 
 Adaptively Connected Neural Networks
+
+https://www.zhihu.com/question/270245936
+
+卷积层和分类层，哪个更重要？
+
+https://mp.weixin.qq.com/s/UlEQ845-siCEIJ6JyBqkdw
+
+CNN为什么要用3x3卷积？偶数卷积核其实表现更强！
+
+https://zhuanlan.zhihu.com/p/62532887
+
+双线性池化（Bilinear Pooling）详解、改进及应用
+
+https://mp.weixin.qq.com/s/vQkb2-5D9T2ejUa2qrPlow
+
+卷积神经网络中的即插即用模块
+
+https://mp.weixin.qq.com/s/glQSmbuvRI6CV8EyfYLezw
+
+盘点11种CNN网络设计中精巧通用的“小”插件
+
+https://mp.weixin.qq.com/s/3-NEbE6aZHR6dgW6GCmldw
+
+在频域中学习的DCTNet
+
+https://mp.weixin.qq.com/s/a7GEOdPRWYCBh6XQslxX8w
+
+CNN骨干网络新选择HS-ResNet
+
+https://mp.weixin.qq.com/s/S5rNebrB8zpILZ1j_d-29Q
+
+深度视觉模型设计，还有哪些新思路？
+
+https://mp.weixin.qq.com/s/Yx0kc_Xy8Hb_2NZGBpkjEg
+
+VoVNet：实时目标检测的新backbone网络
+
+https://zhuanlan.zhihu.com/p/358183591
+
+involution：超越convolution和self-attention的神经网络新算子
+
+# AI前沿
+
+人工智能前沿7大热点：
+
+1.强化学习
+
+2.元学习
+
+3.模仿学习
+
+4.机器人
+
+5.概念与抽象
+
+6.感知与意识
+
+7.因果推理
+
+最前沿 = good new idea
+
+工业界 = proven idea in practice
+
+---
+
+从简单的样本到困难的样本，以一种有意义的顺序，使用课程学习可以提供比基于随机数据变换的标准训练方法更好的性能，而不需要额外的计算成本。
+
+https://mp.weixin.qq.com/s/sG9qvElHchydNs1Wt6FJwg
+
+课程学习（Curriculum Learning)2021综述论文
+
+---
+
+在传统的数学优化中，以目标和约束作为输入来生成最优决策。在逆优化中，决策是作为输入给出的，目标和/或约束是输出。具体地说，逆优化的目标是确定优化模型的参数，即“正演”模型，使一组决策相对于正演模型近似或确切地最优。
+
+https://mp.weixin.qq.com/s/CTQEX4uyyrqVrHeCaC2SYg
+
+反向优化？多伦多大学首篇《逆优化: 理论与应用》综述论文
+
+---
+
+参考：
+
+https://mp.weixin.qq.com/s/QtO-4ARpAQf0kXfALqMKSQ
+
+DeepMind-深度学习: AI革命及其前沿进展
+
+https://mp.weixin.qq.com/s/sji2HVli-Y7am37YjTbq3w
+
+谷歌Jeff Dean 64页 PPT 讲述《用深度学习解决挑战性问题》
+
+https://mp.weixin.qq.com/s/AQrgvjFPXUpqfqQQgOFN9A
+
+36页最新深度学习综述论文：算法、技术、应用，181篇参考文献
+
+https://mp.weixin.qq.com/s/cGKsZYxrVP7hVnv7Jli9Zg
+
+MIT课程全面解读2019深度学习最前沿
+
+https://mp.weixin.qq.com/s/ugdF-Q-d8ngKTrHF2vPA3A
+
+DeepMind科学家总结2021年的15个高能研究

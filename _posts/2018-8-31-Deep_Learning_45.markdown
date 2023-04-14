@@ -1,102 +1,13 @@
 ---
 layout: post
-title:  深度学习（四十五）——AutoDL
+title:  深度学习（四十五）——AutoDL（2）
 category: DL 
 ---
 
+* toc
+{:toc}
+
 # AutoDL
-
-DL领域目前存在的主要问题之一是：如何设计网络结构和调整超参数。目前的做法，通常依赖于作者的直觉，属于典型的拍脑袋想点子。
-
-既然AI已经能够做很多事了，那么有没有可能，使用AI自动生成网络结构呢？
-
-Google的这两篇论文在这里做了一些尝试：
-
-《Neural Architecture Search With Reinforcement Learning》
-
-《Learning Transferable Architectures for Scalable Image Recognition》
-
-这里主要采用强化学习的方法，在一个广阔的搜索空间中，寻找最合适的网络结构。但对于计算能力提出了很高的要求。论文中提到，他们使用了500块GPU。**有钱真的是可以为所欲为的。**
-
-这里学到的模型，一般被称为NASNet。
-
-AutoDL常用的套路主要有：
-
-- random search/gird search。这是最古老的办法。
-
-- reinforcement learning
-
-- gradient-based
-
-- weight-sharing
-
-- evolutionary
-
-- random graph
-
-## 工具
-
-https://mp.weixin.qq.com/s/9OZiFgziY8fMn-lkmdtiqQ
-
-终结谷歌AutoML的真正杀手！Saleforce开源TransmogrifAI
-
-https://mp.weixin.qq.com/s/GFjYzxf6IdKPvkij8-i_Dg
-
-调参工要凉？微软重磅开源AutoML工具包NNI
-
-https://mp.weixin.qq.com/s/L1nkhc4I6VX2s6S5Tiv0Zw
-
-小白也能搭建深度模型，百度EasyDL的背后你知多少
-
-![](/images/img2/AdaNet.gif)
-
-https://mp.weixin.qq.com/s/HiD-OqAz67cwwchjSyIjWA
-
-AutoML又一利器来了，谷歌宣布开源AdaNet
-
-https://mp.weixin.qq.com/s/o3WqVIxlsukt3_JcY-10LA
-
-AdaNet简介：快速灵活的AutoML，提供学习保证
-
-https://mp.weixin.qq.com/s/2ehni5O__XnPaLjBRmAiIQ
-
-利用AdaNet将多个TensorFlow Hub模块组合成一个集成网络
-
-https://mp.weixin.qq.com/s/mEYFnP1q131-4hdgjOQ2cQ
-
-“超参数”与“网络结构”自动化设置方法---DeepHyper
-
-## 书籍
-
-https://mp.weixin.qq.com/s/wTwjbripELzqdCjs64Dzzw
-
-告别调参，AutoML新书发布
-
-## ENAS
-
-https://mp.weixin.qq.com/s/SwJs0OUzBlhiIOyFHFBK_g
-
-一文看懂Jeff Dean等提出的ENAS到底好在哪？
-
-https://mp.weixin.qq.com/s/Jw2kzCf2uFibhIpREnjO_A
-
-图解高效神经网络结构搜索（ENAS）
-
-## DARTS
-
-论文：
-
-《DARTS: Differentiable Architecture Search》
-
-代码：
-
-https://github.com/quark0/darts
-
-参考：
-
-https://mp.weixin.qq.com/s/bjVTpdaKFx4fFtT8BjMNew
-
-指数级加速架构搜索：CMU提出基于梯度下降的可微架构搜索方法（DARTS）
 
 ## 参考
 
@@ -112,6 +23,14 @@ https://www.automl.org/automl/literature-on-neural-architecture-search/
 
 最新246篇自动化神经网络搜索（NAS）论文
 
+https://mp.weixin.qq.com/s/UB39kvBGXZxGsRjv451tew
+
+百度AutoDL“自动深度学习: 理论、算法、平台和应用”132PPT
+
+https://zhuanlan.zhihu.com/p/94252445
+
+神经网络架构搜索(NAS)中的milestones
+
 https://mp.weixin.qq.com/s/Ia-8qFLAyY65Nai5PGAw0w
 
 人人都能用的深度学习：当前三大自动化深度学习平台简介
@@ -119,6 +38,10 @@ https://mp.weixin.qq.com/s/Ia-8qFLAyY65Nai5PGAw0w
 https://mp.weixin.qq.com/s/tFzbJdW-L342tMNXDiacCg
 
 AutoML研究综述：让AI学习设计AI
+
+https://mp.weixin.qq.com/s/k27p9X58tvwptp7ZIBt6TQ
+
+用AI构建AI-AutoML综述
 
 https://mp.weixin.qq.com/s/62cqtwslax_cvA57252zYA
 
@@ -131,10 +54,6 @@ https://mp.weixin.qq.com/s/qVVeKZ1DNLbxqOGm2cKriQ
 https://mp.weixin.qq.com/s/nCyj-OGWXC0pntJJj91xrA
 
 深度学习的未来——神经架构搜索
-
-https://mp.weixin.qq.com/s/3DxOb4HOeT0E0-bjP6TiSg
-
-一文读懂神经架构搜索
 
 https://mp.weixin.qq.com/s/m5b9QZl6Axd1iYWeTADZzA
 
@@ -156,6 +75,26 @@ http://blog.csdn.net/u014380165/article/details/78525500
 
 自学网络结构（一）：Neural Architecture Search With Reinforcement Learning
 
+https://mp.weixin.qq.com/s/zAHbuwOyUbvii8u6GdK9uA
+
+AutoML&NAS综述（上）
+
+https://mp.weixin.qq.com/s/PWhzZzs0kkFWci6Lhm4R3Q
+
+AutoML&NAS综述（下）
+
+https://mp.weixin.qq.com/s/9fueXYvv8MuP_0gn6587dg
+
+NAS: One-Shot方法总结
+
+https://mp.weixin.qq.com/s/j3oZ-Y953U4aX0nXeWuZlg
+
+西北大学最新《神经架构搜索NAS》2020综述综述论文
+
+https://mp.weixin.qq.com/s/O6ZnVMFXqEdoRiXhxa2r8A
+
+《神经架构搜索NAS》最新进展综述，25页pdf
+
 https://mp.weixin.qq.com/s/FdKcWsynTpfD6rbABPTEOQ
 
 神经架构搜索研究指南，只看这一篇就够了
@@ -171,6 +110,10 @@ https://mp.weixin.qq.com/s/Yh8Zj7Jhliy7a9h6mW8FxQ
 https://mp.weixin.qq.com/s/OMzx3nKqn1un2fCZseID2Q
 
 怎样设计最优的卷积神经网络架构？NAS原理剖析
+
+https://mp.weixin.qq.com/s/x_DcgxVLbCGsac2cjdmjeg
+
+神经架构搜索（NAS）简要介绍
 
 https://mp.weixin.qq.com/s/D0HngY-U7_fP4vqDIjvaew
 
@@ -196,9 +139,17 @@ https://mp.weixin.qq.com/s/0te0JUKYZlSLs3kzsFV-NA
 
 神经网络架构搜索（NAS）综述
 
+https://mp.weixin.qq.com/s/kfq_SOjhD8X-DKPeVeI3-A
+
+2020神经网络架构搜索（NAS）最新技术综述
+
+https://mp.weixin.qq.com/s/W9bdVJI6Jesm9-wE5pQ-mw
+
+神经网络架构搜索（NAS）基础入门
+
 https://zhuanlan.zhihu.com/p/44576620
 
-让算法解放算法工程师----NAS综述
+让算法解放算法工程师---NAS综述
 
 https://mp.weixin.qq.com/s/3njCAKQsQ8UhL3gqDDHZGQ
 
@@ -216,25 +167,21 @@ https://mp.weixin.qq.com/s/Kg1HHzXutTCaaxH83rLgiQ
 
 神经网络结构搜索NAS，41页ppt了解最新进展
 
-https://mp.weixin.qq.com/s/MkXBtGq4xt5YOh1-uhMBbg
-
-循环神经网络自动生成程序：谷歌大脑提出“优先级队列训练”
-
-https://mp.weixin.qq.com/s/vctbsYk4LRwrQ7_Hs7fqkg
-
-谷歌大脑发布神经架构搜索新方法：提速1000倍
-
-https://mp.weixin.qq.com/s/9qpZUVoEzWaY8zILc3Pl1A
-
-进化算法+AutoML，谷歌提出新型神经网络架构搜索方法
-
-https://mp.weixin.qq.com/s/HJ5caV1bQi7qVDeNXZ21qg
-
-手把手教你用Cloud AutoML做毒蜘蛛分类器
-
 https://zhuanlan.zhihu.com/p/35050923
 
 跬步至千里：揭秘谷歌AutoML背后的渐进式搜索技术
+
+https://mp.weixin.qq.com/s/z360mTVRqeDFMBiJ0Q_9SQ
+
+调参心得：超参数优化之旅
+
+https://mp.weixin.qq.com/s/2u3_ky2hFe3cldvF74gLDA
+
+机器学习模型的超参数优化
+
+https://mp.weixin.qq.com/s/ODMUcqid2ALPsno0PDuBCQ
+
+详解高效模型设计的自动机器学习流水线
 
 https://mp.weixin.qq.com/s/wGt3Xk_ARqHei-ddU9iXNg
 
@@ -280,7 +227,7 @@ https://mp.weixin.qq.com/s/Y8i25dZmj41dr8nz2WyNbQ
 
 搜索一次就够了：中科院&图森提出通过稀疏优化进行一次神经架构搜索
 
-https://mp.weixin.qq.com/s/45QCGUXJ2VM96PNj-LEFxg
+https://mp.weixin.qq.com/s/lB3oGZ8qxpUMSpyHLySzBw
 
 麻省理工HAN Lab提出ProxylessNAS自动为目标任务和硬件定制高效CNN结构
 
@@ -320,6 +267,22 @@ https://mp.weixin.qq.com/s/rgbHJ_95tDf-kYMTO1YYcw
 
 谷歌大脑提出NAS-FPN：这是一种学会自动架构搜索的特征金字塔网络
 
+https://mp.weixin.qq.com/s/j_QHRCa_eNJ_IMRPpqc76w
+
+NAS-FPN：基于自动架构搜索的特征金字塔网络
+
+https://zhuanlan.zhihu.com/p/97230695
+
+NAS+Det第一弹：NAS-FPN
+
+https://zhuanlan.zhihu.com/p/98373780
+
+NAS+Det第二弹：EfficientDet
+
+https://zhuanlan.zhihu.com/p/100590305
+
+NAS+Det第三弹：SpineNet
+
 https://mp.weixin.qq.com/s/j-EA1ha1lcLtqJQJO8y0ZA
 
 Google Brain新作：网络结构搜索NAS在物体检测金字塔FPN框架大放异彩
@@ -348,10 +311,6 @@ https://mp.weixin.qq.com/s/iEzfaIGwcm8UaPJzedkjnw
 
 谷歌将AutoML应用于Transformer架构，翻译结果飙升
 
-https://mp.weixin.qq.com/s/j_QHRCa_eNJ_IMRPpqc76w
-
-NAS-FPN：基于自动架构搜索的特征金字塔网络
-
 https://mp.weixin.qq.com/s/6PtBqWmqIm76jhfSNGPHYA
 
 超越MnasNet、Proxyless：小米开源全新神经架构搜索算法FairNAS
@@ -375,3 +334,47 @@ https://mp.weixin.qq.com/s/pToK-DfUVqWaAznJND__Ag
 https://mp.weixin.qq.com/s/H30A9cBFkAu4o7amO8SEwg
 
 网络搜索之DARTS, GDAS, DenseNAS, P-DARTS, PC-DARTS
+
+https://mp.weixin.qq.com/s/_31zbbQ5dHf2UaI8GhXozw
+
+4 GPU hours搜索到一个鲁棒的网络结构
+
+https://mp.weixin.qq.com/s/slrRXgD49I7ZG24ialVxPw
+
+第四范式涂威威：自动机器学习求解三要素与发展趋势
+
+https://mp.weixin.qq.com/s/X5Oi8gKyT5Tmh7ljon3MzQ
+
+谷歌引入自动网络设计，高效解决大规模深度推荐模型的特征嵌入问题
+
+https://mp.weixin.qq.com/s/rllQLPPYxxLCK9-dgOjLDg
+
+另一种可微架构搜索：商汤提出在反传中学习架构参数的SNAS
+
+https://mp.weixin.qq.com/s/AV8fD5Vf6uzhLeW9nfMASg
+
+一文详解随机神经网络结构搜索(SNAS)
+
+https://mp.weixin.qq.com/s/s10z5pkYf5Sha0V58T8fBw
+
+单路径NAS: 在四小时内设计出给定硬件内最有效的网
+
+https://www.zhihu.com/question/339002300
+
+One-Shot 神经网络搜索(NAS)的searching阶段到底在做什么？
+
+https://mp.weixin.qq.com/s/vq4HrSxhkN6gNIrb0BCxuQ
+
+SMASH：经典One-Shot神经网络搜索，仅需单卡
+
+https://mp.weixin.qq.com/s/323RA6UtnyTySoXVXcJ2vA
+
+华人团队打造：AutoML+GAN=AutoGAN！AI设计GAN模型比人类更好
+
+https://mp.weixin.qq.com/s/nN7tgkvvkv8B8N-z4yAgcQ
+
+四小时搜索NN结构，厦大提出快速NAS检索方法
+
+https://mp.weixin.qq.com/s/rgUTcuH2mfIFBDoOfd26Cw
+
+NASNet：神经架构搜索网络在图像分类中的表现

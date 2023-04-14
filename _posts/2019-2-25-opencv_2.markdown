@@ -4,7 +4,26 @@ title:  OpenCV（二）, Dlib, OpenVINO
 category: AI 
 ---
 
+* toc
+{:toc}
+
 # OpenCV
+
+https://mp.weixin.qq.com/s/PibBxTkVJNM0n_wXHS99KQ
+
+OpenCV基于Landmark实现人脸交换
+
+https://mp.weixin.qq.com/s/DN2bl429DjVB3HWp-2HTTg
+
+OpenCV图像噪声与去噪函数方法对比使用介绍
+
+https://mp.weixin.qq.com/s/V-msRCrMDUD5nwp6y0tiPQ
+
+OpenCV人脸检测与三角剖分绘制
+
+https://mp.weixin.qq.com/s/mqgKVvZWnrNlImbTmay5PA
+
+OpenCV实现图像连通组件标记与分析
 
 https://mp.weixin.qq.com/s/II76kX7khztkHtDIvKvHqw
 
@@ -182,10 +201,6 @@ https://mp.weixin.qq.com/s/-G6XW0vUlFsGFSyEBNnjQQ
 
 OpenCV实现年龄与性别预测
 
-https://mp.weixin.qq.com/s/ZqFtDQ4OLHL94QTr-GXKnQ
-
-OpenCV实现边缘模板匹配算法
-
 https://zhuanlan.zhihu.com/p/60155753
 
 基于图像处理的自动报靶算法商用化系统设计
@@ -193,10 +208,6 @@ https://zhuanlan.zhihu.com/p/60155753
 https://mp.weixin.qq.com/s/tITsD0XAZq25PSPX2G5k0Q
 
 OpenCV 4.0实现人脸识别
-
-https://mp.weixin.qq.com/s/jNa4JTefasFDWoGJDBL6-Q
-
-PyQt编写GUI界面
 
 https://mp.weixin.qq.com/s/lelQq4y-LIog3kNAS0kBVw
 
@@ -225,6 +236,10 @@ https://mp.weixin.qq.com/s/C9LG-5vFHWhR_Fl94LJYTw
 https://mp.weixin.qq.com/s/nxvYmQPRUQKEQg2wzEXBSQ
 
 二值图像案例分析精选（2）
+
+https://mp.weixin.qq.com/s/3Ehdm4uSHz5ctWzXmC_Qpw
+
+OpenCV中图像二值化函数调用几个关键点详解
 
 https://mp.weixin.qq.com/s/-b1wfvv1jdtnlXzy9BEpJA
 
@@ -293,6 +308,38 @@ https://mp.weixin.qq.com/s/U7m6rDgHePsfWicmMn19wg
 https://mp.weixin.qq.com/s/QPXVLleQgW2oZHbhuoJLww
 
 Mat基本元素的表达与读写
+
+https://mp.weixin.qq.com/s/MiHz2zLBif_s1lksQXLBbw
+
+OpenCV中如何提取不规则ROI区域
+
+https://mp.weixin.qq.com/s/cwFkMZS2Mk-qbFF2FF4v0Q
+
+OpenCV二值图像分析之形态学应用技巧
+
+https://mp.weixin.qq.com/s/4zfi1UGhhyadU8kD65CVAA
+
+使用OpenCV4的统一向量指令实现硬件级别加速
+
+https://mp.weixin.qq.com/s/lBPDuLSBk44lK1_YA1yaeQ
+
+基于灰度共生矩阵(GLCM)的图像纹理分析与提取
+
+https://mp.weixin.qq.com/s/LDwWseZqxpvuwE6X1jtvxQ
+
+机器视觉之尺寸测量基础
+
+https://mp.weixin.qq.com/s/DhvQ4gqeGZYzQLH3iqxqrQ
+
+OpenCV鼠标事件详解
+
+https://mp.weixin.qq.com/s/2HIE0iNOgmTP7Eo3AY_CHg
+
+20行代码搞定色块提取与定位……
+
+https://zhuanlan.zhihu.com/p/136891320
+
+CardOCR
 
 # Dlib
 
@@ -395,3 +442,7 @@ https://mp.weixin.qq.com/s/2FfSGcsRjESwUA3OunHsfQ
 https://mp.weixin.qq.com/s/R3sSM3tel7VMRxeZ_tzxug
 
 OpenVINO场景文字检测与识别
+
+https://mp.weixin.qq.com/s/x_sUVg-6euWfQO9aZwzMkw
+
+树莓派4B搭建OpenVINO环境

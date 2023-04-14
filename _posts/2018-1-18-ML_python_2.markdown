@@ -4,9 +4,236 @@ title:  Machine Learning之Python篇（二）
 category: AI 
 ---
 
+* toc
+{:toc}
+
 # Machine Learning之Python篇
 
-## Pandas（续）
+## Matplotlib
+
+Matplotlib是一个高阶的图形库，主要提供生成图表等数据可视化方面的功能。
+
+官网：
+
+http://matplotlib.org/
+
+API参考：
+
+http://matplotlib.org/1.5.3/api/index.html
+
+示例：
+
+https://github.com/antkillerfarm/antkillerfarm_crazy/blob/master/python/ml/plot/matplotlib_helloworld.py
+
+参考：
+
+https://mp.weixin.qq.com/s/mpj1QpWpnGm8117p3cEWZw
+
+如何优雅而高效地使用Matplotlib实现数据可视化
+
+https://mp.weixin.qq.com/s/LBrlXEhGYOx1aPFZzQcyTQ
+
+5种快速易用的Python Matplotlib数据可视化方法
+
+https://mp.weixin.qq.com/s/aBi1PTEumRs0frUpb_uYrA
+
+用Python做图像处理（2）
+
+https://mp.weixin.qq.com/s/3VgFKiUOFvtWmqg1BO9xGw
+
+matplotlib--python的数据可视化
+
+https://mp.weixin.qq.com/s/LuXyUBkaJUfg4WteFxStrg
+
+Matplotlib可视化最有价值的50个图表
+
+https://mp.weixin.qq.com/s/hlJFoh0jfduPswr7WrDikQ
+
+当年为什么不好好学“数据可视化”！
+
+https://mp.weixin.qq.com/s/Oh2ma7UjQhklE6YBo0EQBA
+
+快速入门Matplotlib教程
+
+https://mp.weixin.qq.com/s/fmoUGFjqlJf46r_iOrg9fA
+
+高效使用Python可视化工具Matplotlib
+
+https://mp.weixin.qq.com/s/MYqPHzzoWfaV2N7c4ZgfPQ
+
+Python绘图，我只用Matplotlib
+
+https://mp.weixin.qq.com/s/y4W7zK2-nFF-y_hSmB8j2g
+
+超火动态排序图：代码不到40行，手把手教你！
+
+https://zhuanlan.zhihu.com/p/82910169
+
+Matplotlib输出动画实现K-means聚类过程可视化
+
+https://mp.weixin.qq.com/s/6h-1k_D7QIFpknagnA8FZA
+
+Python绘图，我只用Matplotlib
+
+https://mp.weixin.qq.com/s/pBTsByIftGbMMUumSKCvFw
+
+数据分析最有用的Top 50 Matplotlib图(上)
+
+https://zhuanlan.zhihu.com/p/113842270
+
+Matplotlib优雅作图笔记
+
+https://mp.weixin.qq.com/s/s50WdxzmtLEixvBMhEaX7w
+
+完成这50个Matplotlib代码，你也能画出优秀的图表
+
+https://mp.weixin.qq.com/s/VB55yiKJu-0Mw94qiZBmcw
+
+11类Matplotlib图表
+
+https://mp.weixin.qq.com/s/RctPwneKUIUZCcLr1Ry_8g
+
+数据分析最有用的Top 50 Matplotlib图(下)
+
+https://mp.weixin.qq.com/s/bD9XDg2kMtXDb45xMvY5tA
+
+Python绘图还在用Matplotlib？发现一款手绘可视化神器！
+
+https://mp.weixin.qq.com/s/PvK1acmL1D3byEylmhtEaQ
+
+数据可视化简易入门（Matplotlib和Seaborn）
+
+https://mp.weixin.qq.com/s/A15Oqa0yVSvLnh5h_SvtOQ
+
+那些不为人知的优秀python可视化库
+
+https://mp.weixin.qq.com/s/smXMxhHrkZpZSNvUM1DeCg
+
+五分钟学会C++高效图表绘制神器调用
+
+https://mp.weixin.qq.com/s/SJRVgBy94E3UWeVAf3TliA
+
+​16个matplotlib绘图实用小技巧
+
+https://mp.weixin.qq.com/s/fSt27Vk29LoSDPv8KfPHjQ
+
+什么是折线图？怎样用Python绘制？
+
+https://mp.weixin.qq.com/s/E7pk7CNQmF_6Qsjj1_2nRw
+
+Matplotlib绘制漫威英雄战力图，带你飞起来！
+
+https://mp.weixin.qq.com/s/2byfIo7Q8f9MShDZUMBiYA
+
+Matplotlib Animation
+
+https://mp.weixin.qq.com/s/VXjqm-FH-c46l44edIbnpw
+
+是时候考虑使用Plotly作图了
+
+https://mp.weixin.qq.com/s/s9hU3TIFmIMc9jMvqGSm5g
+
+用Python绘制一套“会跳舞”的动态图形给你看看
+
+https://zhuanlan.zhihu.com/p/152221261
+
+一行代码画出美丽且专业的论文图（SciencePlots）
+
+https://mp.weixin.qq.com/s/jg4B5zKGajR3IX85altEMA
+
+如何在科研论文中画出漂亮的插图？
+
+https://mp.weixin.qq.com/s/gyu_w_AHenwUT6cAqtGC0w
+
+一行代码实现数据分析与可视化！
+
+https://mp.weixin.qq.com/s/vSSSaMtRtkfPcJF6LUFqRQ
+
+Matplotlib实操干货
+
+https://mp.weixin.qq.com/s/y8d5TzEQeOg78HLWJJzanA
+
+使用Matplotlib可视化数据的5个强大技巧
+
+https://mp.weixin.qq.com/s/Q1_WPem79r9B64n7xfhZ5g
+
+matplotlib字体设置
+
+https://mp.weixin.qq.com/s/1uJX1BG1vbI9VsR7wjSQhg
+
+Matplotlib可视化三大步骤，教你轻松制图
+
+https://mp.weixin.qq.com/s/8JqgJXFjqmSNJH0cQKHkhg
+
+25个常用Matplotlib图的Python代码
+
+https://mp.weixin.qq.com/s/4YiOErETXRD4kQc7wTX3Bw
+
+用Matplotlib轻松复刻分析图，看看哪个城市买房最自由
+
+https://mp.weixin.qq.com/s/C6Vx5wc47aAufVrHVXDGaQ
+
+人人都能看懂的Matplotlib绘图原理
+
+https://mp.weixin.qq.com/s/lUzqR5eEcW7vb3vehuSzWQ
+
+Matplotlib 3D图
+
+https://mp.weixin.qq.com/s/OcA0SSWWihdqQerZXH8pdw
+
+使用NumPy和Matplotlib进行数据可视化
+
+## Streamlit
+
+https://mp.weixin.qq.com/s/sZvawmQ1KH3b_hozAbeX9w
+
+如何用简单的Python为数据科学家编写Web应用程序？
+
+https://mp.weixin.qq.com/s/gVIVDR1pXdDArrZO56B86w
+
+如何用纯Python写Web应用？
+
+https://mp.weixin.qq.com/s/TV1MJfaOq27y2DVCGMuqhA
+
+用Pandas和Streamlit对时间序列数据集进行可视化过滤
+
+## Pandas
+
+Pandas是一个数据分析方面的工具库。它提供的Series(1-dimensional)和DataFrame(2-dimensional)数据结构，可以提供类似sql的数据操作和查询的功能。
+
+官网：
+
+http://pandas.pydata.org/
+
+文档：
+
+http://pandas.pydata.org/pandas-docs/stable/
+
+API参考：
+
+http://pandas.pydata.org/pandas-docs/stable/api.html
+
+参考：
+
+http://www.cnblogs.com/chaosimple/p/4153083.html
+
+十分钟搞定pandas
+
+https://mp.weixin.qq.com/s/MFwdjMrPVQESMJjQw__rXw
+
+一张图就能彻底搞定Pandas！
+
+http://pandas.pydata.org/pandas-docs/stable/comparison_with_sql.html
+
+Pandas和SQL的比较
+
+https://mp.weixin.qq.com/s/yXgFLUj6W2ZyR6fmHPlOZA
+
+Pandas与SQL的数据操作语句对照
+
+https://mp.weixin.qq.com/s/fXI5suCVna6fBxPnVyKevw
+
+浅谈NumPy和Pandas库
 
 https://mp.weixin.qq.com/s/1xHeXs9gM3LzEzCUz0jhXA
 
@@ -40,7 +267,123 @@ https://mp.weixin.qq.com/s/zdGOyD9wdgT3NGlH5ttADQ
 
 pandas数据导入与导出
 
-## 并行Pandas
+https://mp.weixin.qq.com/s/oZkPkzUfM4IT9SdKmDL8VQ
+
+一场pandas与SQL的巅峰大战
+
+https://mp.weixin.qq.com/s/-DbRgjgbzqit-XoG-mIntQ
+
+一场pandas与SQL的巅峰大战（二）
+
+https://mp.weixin.qq.com/s/mjDk9aog8wydNIGQKUHiBQ
+
+一文详解pandas中的map、apply、applymap、groupby、agg...
+
+https://mp.weixin.qq.com/s/NGXQK8xaSPfahzW9XDfXxg
+
+Pandas技巧：万能转格式、轻松合并、压缩数据，让数据分析更高效
+
+https://blog.csdn.net/Tw6cy6uKyDea86Z/article/details/105548468
+
+Pandas实用手册（PART I）
+
+https://blog.csdn.net/Tw6cy6uKyDea86Z/article/details/105629891
+
+Pandas实用手册（PART II）
+
+https://mp.weixin.qq.com/s/7T4BVm2fyYw4nZQKV4sJlA
+
+DataFrame的真正含义正在被杀死，什么才是真正的DataFrame？
+
+https://mp.weixin.qq.com/s/Go7ZUEiItrdc_KOWEAc3sg
+
+如何用Pandas处理文本数据？
+
+https://mp.weixin.qq.com/s/E-5JHJn5Mq883Tx3nXxRVQ
+
+Pandas进阶修炼120题
+
+https://mp.weixin.qq.com/s/biIjn9qPPDyX_tdvmdyRLA
+
+Pandas处理时序数据
+
+https://mp.weixin.qq.com/s/rVqzgyV-oCJNbY_49iAPnA
+
+array, list, tensor，Dataframe，Series之间互相转换总结
+
+https://mp.weixin.qq.com/s/ksCNIKyrwEJyPfGQMtmIkA
+
+pandas参数设置小技巧
+
+https://mp.weixin.qq.com/s/zrMtCvsBfqiHEtzdwH4JsA
+
+你可能不知道的pandas的5个基本技巧
+
+https://mp.weixin.qq.com/s/ttYIWPKnNs46TfAbEZaHig
+
+PandaSQL：一个让你能够通过SQL语句进行pandas的操作的python包
+
+https://mp.weixin.qq.com/s/AO6VwMklnRQFqKMMv2NwYA
+
+Pandas处理时间序列数据的20个关键知识点
+
+https://mp.weixin.qq.com/s/DT5OqgzXGlvao4O2c_J74w
+
+再见，可视化！你好，Pandas！
+
+https://mp.weixin.qq.com/s/37FucjQldvIs33lxkhWpcQ
+
+在pandas中使用数据透视表（pivot_table）
+
+https://mp.weixin.qq.com/s/Zv1r8Svnydwxy8oB_Xz78Q
+
+使用PandasGUI进行探索性数据分析
+
+https://mp.weixin.qq.com/s/iAUpBmG7w3TBg1ymOnu7bw
+
+如何使用Pandas处理超过内存容量的大规模数据
+
+https://mp.weixin.qq.com/s/x3VNA_SfInegHs2iftY5tA
+
+多快好省地使用pandas分析大型数据集
+
+https://mp.weixin.qq.com/s/OnErgeEvXjVWEC-V9CW5eg
+
+数据清洗指南完整分享
+
+https://mp.weixin.qq.com/s/Stk7U44trzqGjnXKsVd_3g
+
+掌握pandas中的时序数据分组运算
+
+https://mp.weixin.qq.com/s/KBTBj5L0GNBOn0_YBYYx0w
+
+pandas数据处理
+
+https://mp.weixin.qq.com/s/SNZLFdvk_IhtDHl8MTv7aw
+
+这个Pandas函数可以自动爬取Web图表
+
+https://mp.weixin.qq.com/s/zdnRGkrVEf5nvd8L_bML8w
+
+5个例子介绍Pandas的merge并对比SQL中join
+
+https://mp.weixin.qq.com/s/NSzAdL-v3J8jDbfck2f5lQ
+
+浅谈Python/Pandas中管道的用法
+
+https://mp.weixin.qq.com/s/CJwgM-PZVMrUpco26ygtUA
+
+5分钟掌握Pandas GroupBy
+
+https://mp.weixin.qq.com/s/bCDXpr5yW5WFWyJSrOZpTw
+
+五种Pandas图表美化样式汇总
+
+https://www.zhihu.com/answer/2526455583
+
+为什么很多人宁愿excel贼6，也不愿意去用python？
+
+## Super Pandas
 
 https://mp.weixin.qq.com/s/2-Ayzmzo8tydDLoKpz1Ezw
 
@@ -52,7 +395,19 @@ https://mp.weixin.qq.com/s/XIQ5EpQcYLxmRBuaTCZFzg
 
 https://mp.weixin.qq.com/s/Jkx1K7d1ufD2S6s2cOA7Hw
 
-如何只用一行代码让Pandas加速四倍？
+如何只用一行代码让Pandas加速四倍？（Modin）
+
+https://mp.weixin.qq.com/s/UJ7P6nrBijidW3U2ApMGEQ
+
+Vaex：突破pandas，快速分析100GB大数据集
+
+https://mp.weixin.qq.com/s/CurxDz9DcJhyj-kbnuhXJA
+
+0.052秒打开100GB数据，这个Python开源库火爆了！
+
+https://mp.weixin.qq.com/s/iBCYfvSJeRyKLmnKgwnTRg
+
+有比Pandas更好的替代吗?对比Vaex, Dask, PySpark, Modin和Julia
 
 ## datatable
 
@@ -74,428 +429,24 @@ https://mp.weixin.qq.com/s/oVHxYRMzJtD5t79uJ5jgWw
 
 媲美Pandas？一文入门Python的Datatable操作
 
+## DASK
+
+Dask是一款用于分析计算的灵活并行计算库。
+
+官网：
+
+https://dask.org/
+
 ## mysql
 
 http://www.runoob.com/python/python-mysql.html
 
 python操作mysql数据库
 
-## chainer
-
-chainer是一个日本公司Preferred Networks写的基于python的深度学习框架。
-
-官网：
-
-https://chainer.org/
-
-代码：
-
-https://github.com/chainer/chainer
-
-Preferred Networks是日本目前最强的AI创业公司，估值已经超过20亿美元。在工业机器人领域具有很强的实力。
-
-它推出的PaintsChainer是一个给黑白线稿上色的App。
-
-官网：
-
-https://github.com/pfnet/PaintsChainer
-
 ## TuShare
 
-TuShare是一个免费、开源的python财经数据接口包。主要实现对股票等金融数据从数据采集、清洗加工 到 数据存储的过程，能够为金融分析人员提供快速、整洁、和多样的便于分析的数据，为他们在数据获取方面极大地减轻工作量，使他们更加专注于策略和模型的研究与实现上。
+TuShare是一个免费、开源的python财经数据接口包。主要实现对股票等金融数据从数据采集、清洗加工到数据存储的过程，能够为金融分析人员提供快速、整洁、和多样的便于分析的数据，为他们在数据获取方面极大地减轻工作量，使他们更加专注于策略和模型的研究与实现上。
 
 官网：
 
 http://tushare.org/
-
-## skimage
-
-skimage相当于python版本的OpenCV。
-
-官网：
-
-http://scikit-image.org/
-
-参考：
-
-https://buptldy.github.io/2016/03/31/2016-03-31-Skimage%20hog/
-
-Compute the HOG descriptor by skimage
-
-https://mp.weixin.qq.com/s/WL8jfxB-xukP_MkN2aMb0w
-
-OpenCV，PIL，Skimage你pick谁
-
-https://mp.weixin.qq.com/s/JszkK3geKXfebH4xLoerYQ
-
-scikit-image图像处理入门
-
-## Numba
-
-NumPy的一个高速版本，能完成前者大部分的功能。
-
-官网：
-
-http://numba.pydata.org/
-
-参考：
-
-https://mp.weixin.qq.com/s/5peMiGXNnviAjMP76tV3pw
-
-Python高性能计算库——Numba
-
-## SymPy
-
-SymPy是一个符号计算的Python库。
-
-官网：
-
-https://www.sympy.org/en/index.html
-
-参考：
-
-https://zhuanlan.zhihu.com/p/96738286
-
-用Python来研究数学---SymPy符号工具包介绍
-
-## iPython
-
-ipython是一个python的交互式 shell，比默认的python shell 好用得多，支持变量自动补全，自动缩进，支持 bash shell 命令，内置了许多很有用的功能和函数。
-
-在较新的ipython版本中，添加了ipython notebook的功能，弥补了ipython shell下代码不易保存等缺点，并且在使用--pylab inline选项后，可以在代码执行后立即显示运行结果（包括图片，数据表格等），因此在数据分析中运用十分广泛。
-
-`sudo apt-get install ipython ipython-notebook`
-
-## Jupyter
-
-Jupyter是iPython的后继项目，它不仅支持python语言，还支持其他50多种交互式语言。成为目前最流行的交互式shell和数据文本交换格式。
-
-官网：
-
-https://jupyter.org/
-
-安装：
-
-`pip install jupyter`
-
-运行：
-
-`jupyter notebook`
-
-参见：
-
-https://mp.weixin.qq.com/s/UXlPhX3Vb2yqocpUH_3W5w
-
-Jupyter项目的前世今生
-
-https://mp.weixin.qq.com/s/aJRVh7BWOMq4KCoBMtLGGw
-
-快速学习Jupyter Notebook
-
-https://blog.csdn.net/u011493486/article/details/55001477
-
-Jupyter中显示matplotlib的图片
-
-https://www.cnblogs.com/nxld/p/6566380.html
-
-Jupyter Notebook快速入门
-
-https://mp.weixin.qq.com/s/u-e66SgesPjmpKEihHHr8g
-
-Jupyter Notebook超实用的5个插件，值得一试！
-
-## Autograd
-
-一个基于numpy的自动求导库。它是由Harvard Intelligent Probabilistic Systems Group开发的。
-
-官网：
-
-https://github.com/HIPS/autograd
-
-## Face Recognition
-
-这是一个人脸识别的软件包。
-
-代码：
-
-https://github.com/ageitgey/face_recognition
-
-参考：
-
-https://mp.weixin.qq.com/s/QcMsSsZY7TcNQ3G57p8eyQ
-
-3行Python代码完成人脸识别
-
-## Luminoth
-
-Luminoth是一个开源的计算机视觉工具包，目前支持目标探测和图像分类，但以后会有更多的扩展。该工具包在TensorFlow和Sonnet上用Python搭建而成。
-
-代码：
-
-https://github.com/tryolabs/luminoth
-
-## Tangent
-
-Tangent是一个用于自动微分的源到源Python库。
-
-官网：
-
-https://github.com/google/tangent
-
-参考：
-
-https://mp.weixin.qq.com/s/CExdIdtUxZi4c2B39xdYJA
-
-谷歌开源Tangent
-
-## VisPy
-
-VisPy可以算的上是Matplotlib的威力加强版，它添加了对GPU、3D和大数据的支持。
-
-官网：
-
-http://vispy.org/
-
-参考：
-
-https://mp.weixin.qq.com/s/yduK_XKQ-qhiYTNl-YZMFg
-
-利用Python实现卷积神经网络的可视化
-
-## PIL
-
-PIL：Python Imaging Library，已经是Python平台事实上的图像处理标准库了。
-
-官网：
-
-http://pythonware.com/products/pil/
-
-安装：
-
-`sudo apt install python-imaging`
-
-或
-
-`pip install pillow`
-
-文档：
-
-http://www.effbot.org/imagingbook/pil-index.htm
-
-参考：
-
-https://mp.weixin.qq.com/s/lJYzxehwo3K2APB2l_WeTA
-
-用Python做图像处理（1）
-
-https://mp.weixin.qq.com/s/yc_-PyR1qM-3_oKcH9PztQ
-
-Python PIL图像处理开发极简教程
-
-## Seaborn
-
-Seaborn是另一个非常棒的Matplotlib的威力加强版，专注于统计绘图，并可无缝对接Pandas库。
-
-官网：
-
-https://seaborn.pydata.org
-
-参考：
-
-https://mp.weixin.qq.com/s/hPbTZHR2iDH4t1eQghNvUQ
-
-数据可视化详解+代码演练
-
-## Bokeh
-
-Bokeh是一个数据可视化的库。它不仅提供了和Matplotlib类似的静态图功能，还提供了生成交互动态图的功能。
-
-官网：
-
-http://bokeh.pydata.org/en/latest/
-
-## Chartify
-
-Chartify在Bokeh的基础上又封装了一层，提供了更友好的API。
-
-官网：
-
-https://github.com/spotify/chartify
-
-## Plotly
-
-Plotly也是Matplotlib的威力加强版，主打交互式绘图。
-
-官网：
-
-https://plot.ly/python/
-
-它还有一个高级封装叫做Plotly Express。
-
-官网：
-
-https://www.plotly.express/
-
-参考：
-
-https://www.jianshu.com/p/57bad75139ca
-
-python plotly使用教程
-
-https://mp.weixin.qq.com/s/RkuLhwj_to_B01RJDQsGcA
-
-强烈推荐一款Python可视化神器！
-
-## ImageAI
-
-ImageAI是一个CV方面的库，集成了大量的DL模型，其目标是使用数十行代码完成一个CV任务。
-
-代码：
-
-https://github.com/OlafenwaMoses/ImageAI
-
-## Pyecharts
-
-py是一个用于生成Echarts图表的类库。Echarts是百度开源的一个数据可视化JS库。
-
-官网：
-
-http://pyecharts.org/
-
-参考：
-
-https://mp.weixin.qq.com/s/3T594c4DzuRmPW5A4zu8Dg
-
-Pyecharts：极其强大的Python数据可视化模块
-
-https://mp.weixin.qq.com/s/20cxuC_tAVmofA7lvquEMQ
-
-Python可视化神器——pyecharts的超详细使用指南！
-
-https://mp.weixin.qq.com/s/5GJKIt5OkMh7C3xqoTJsTA
-
-PyEcharts
-
-https://mp.weixin.qq.com/s/6rusBFuLGw4gpDt6tSQTIw
-
-PyEcharts TreeMap
-
-## Yellowbrick
-
-Yellowbrick是和Scikit-Learn配套的ML可视化库。
-
-官网：
-
-https://www.scikit-yb.org/en/latest/
-
-## mlpy
-
-mlpy是一个开源的ML库。只是它最近的一次更新，已经是2012年的事情了。
-
-官网：
-
-http://mlpy.sourceforge.net
-
-## JAX
-
-一款由谷歌团队打造（非官方发布），用于从纯Python和Numpy机器学习程序中生成高性能加速器（accelerator）代码，且特定于域的跟踪JIT编译器。
-
-代码：
-
-https://github.com/google/jax
-
-参考：
-
-https://mp.weixin.qq.com/s/IMMdbF33ZHEz7N_XwgIhHA
-
-试试谷歌这个新工具：说不定比TensorFlow还好用！
-
-https://mp.weixin.qq.com/s/tZ3yWQ9--l9e81UqoUoWIQ
-
-要替代TensorFlow？谷歌开源机器学习库JAX
-
-## PyFlux
-
-PyFlux是Python中为处理时间序列问题而创建的开源库。该库有一系列极好的时间序列模型，包括但不限于ARIMA、GARCH和VAR模型。
-
-官网：
-
-https://pyflux.readthedocs.io/en/latest/index.html
-
-## ImagePy
-
-ImagePy是国人写的一个图像处理工具。
-
-官网：
-
-https://github.com/Image-Py/imagepy
-
-## imgaug
-
-imgaug是一个图像数据增强方面的库，可用于扩充机器学习训练时所用的图片数据集。
-
-官网：
-
-https://imgaug.readthedocs.io/en/latest/
-
-参考：
-
-https://www.cnblogs.com/vincentcheng/p/9186540.html
-
-Augmentor和imgaug——python图像数据增强库
-
-## 可视化
-
-https://github.com/neozhaoliang/pywonderland/tree/master/
-
-如何用Python画各种著名数学图案
-
-https://mp.weixin.qq.com/s/p69x5YyWxMulxx_OwX3nzQ
-
-TuChart：基于Tushare和Echarts的股票数据视觉化应用
-
-https://mp.weixin.qq.com/s/D_e8lxO3cx-dshEQ_zhfzQ
-
-如何利用散点图矩阵进行数据可视化
-
-https://mp.weixin.qq.com/s/dARWbR1ghho0yX02lNA-gw
-
-Python绘制histogram直方图
-
-https://mp.weixin.qq.com/s/j07zF72UyDXpKNnvQli5NQ
-
-简单几步教你用Python生成词云图
-
-https://mp.weixin.qq.com/s/tHNd6y2v7GXN2mSIv0qXlg
-
-手把手：一张图看清编程语言发展史，你也能用Python画出来！
-
-https://mp.weixin.qq.com/s/7M_xbmDQIlSEB1TKN3fbQw
-
-4种更快更简单实现Python数据可视化的方法
-
-https://mp.weixin.qq.com/s/wsa-HxJRCzhBF8E6yrLCQg
-
-如何用Python画一个中国地图？
-
-https://mp.weixin.qq.com/s/c7Sry6FaGv3ZgkKLekxc2g
-
-用Python画中国地图（下）
-
-https://mp.weixin.qq.com/s/ty5xy6s0z3rvMYZptdTdBQ
-
-Python热图进阶
-
-https://github.com/lutzroeder/netron
-
-一个DL模型的可视化工具，支持几乎所有类型的模型。
-
-## 参考
-
-https://mp.weixin.qq.com/s/S7gnAdekPFcyd4ni1m9phg
-
-GitHub最著名的20个Python机器学习项目，值得收藏！
-
-http://old.sebug.net/paper/books/scipydoc/index.html
-
-用Python做科学计算

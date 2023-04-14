@@ -4,6 +4,9 @@ title:  OpenWrt配置篇
 category: linux 
 ---
 
+* toc
+{:toc}
+
 # OpenWrt编译
 
 1.下载代码
@@ -12,7 +15,7 @@ category: linux
 
 2.安装必要的包
 
-`sudo apt-get install libtool autoconf automake gcc-multilib bison screen gcc g++ binutils patch bzip2 flex make gettext unzip libc6 git-core git build-essential libncurses5-dev zlib1g-dev gawk quilt asciidoc libz-dev zlib-bin lib32z1-dev`
+`sudo apt install libtool autoconf automake gcc-multilib bison screen gcc g++ binutils patch bzip2 flex make gettext unzip libc6 git-core git build-essential libncurses5-dev zlib1g-dev gawk quilt asciidoc libz-dev zlib-bin lib32z1-dev`
 
 包的内容根据OpenWRT和Ubuntu的版本的不同，而略有差异。比如最新的版本可能还需要libssl-dev包。不过这个比较简单，看出错信息就知道还需要什么包了。
 
@@ -178,7 +181,7 @@ WAN: eth1 Bridge（Host有两个网卡：eth0和wlan0。这一步的时候,界�
 
 修改文件/etc/config/network
 
-{% highlight bash %}
+```bash
 config interface 'lan'
         option ifname 'eth0'
         option proto 'dhcp'
@@ -186,7 +189,7 @@ config interface 'lan'
 config interface 'wan'
         option ifname 'eth1'
         option proto 'dhcp'
-{% endhighlight %}
+```
 
 修改完成后，运行`/etc/init.d/network restart`，即可使脚本生效。
 
@@ -272,7 +275,7 @@ http://www.cnblogs.com/zmkeil/archive/2013/04/17/3027385.html
 
 feeds文件夹的作用就是指明如何下载并编译这些软件源代码包。feeds的更新由专门的版本库来维护，这些版本库也被称为“软件源”。可修改feeds.conf.default来更换不同的或者是非官方的源。
 
-一个feeds通常会包含一个patch文件夹（也可以没有），这里需要注意的是修改patch文件夹内的patch文件时，需要把生成的临时文件.patch~删除掉，不然会出错。
+一个feeds通常会包含一个patch文件夹（也可以没有），这里需要注意的是修改patch文件夹内的patch文件时，需要把生成的临时文件`.patch~`删除掉，不然会出错。
 
 ## dl
 

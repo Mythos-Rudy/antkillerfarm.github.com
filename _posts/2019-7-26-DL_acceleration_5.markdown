@@ -1,351 +1,322 @@
 ---
 layout: post
-title:  深度加速（五）——模型压缩与加速（2）
+title:  深度加速（五）——模型压缩与加速
 category: DL acceleration 
 ---
 
+* toc
+{:toc}
+
+# NN Quantization（续）
+
+## 量化技巧
+
+1.设计模型时，需要对输入进行归一化，缩小输入值的值域范围，以减小量化带来的精度损失。
+
+2.tensor中各分量的值域范围最好相近。这个的原理和第1条一致。比如YOLO的结果中，同时包含分类和bbox，而且分类的值域范围远大于bbox，导致量化效果不佳。
+
+3.最好不要使用ReluN这样的激活函数，死的神经元太多。神经元一旦“死亡”，相应的权值就不再更新，而这些值往往不在正常范围内。
+
+4.对于sigmoid、tanh这样的S形函数，其输入在$$\mid x \mid > \sigma$$范围的值，最终的结果都在sigmoid、tanh的上下限附近。因此，可以直接将这些x值量化为$$\sigma$$。这里的$$\sigma$$的取值，对于sigmoid来说是6，而对于tanh来说是3。
+
+## NN硬件的指标术语
+
+MACC：multiply-accumulate，乘法累加。
+
+FLOPS：Floating-point Operations Per Second，每秒所执行的浮点运算次数。
+
+显然NN的INT8计算主要以MACC为单位。
+
+## gemmlowp
+
+gemmlowp是Google提出的一个支持低精度数据的GEMM（General Matrix Multiply）库。
+
+代码：
+
+https://github.com/google/gemmlowp
+
+## 论文
+
+《Quantizing deep convolutional networks for efficient inference: A whitepaper》
+
+## 二值神经网络
+
+二值神经网络的主要缺点在于，它们无法实现与完全精度的深层网络一样高的精度。但这一直在缓慢地变化，已经有了很多进步。
+
+http://blog.csdn.net/tangwei2014/article/details/55077172
+
+二值化神经网络介绍
+
+https://mp.weixin.qq.com/s/0twiT2mrVdnwyS-mqgrjVA
+
+低比特量化之XNOR-Net
+
+https://mp.weixin.qq.com/s/oumf8l28ijYLxc9fge0FMQ
+
+嵌入式深度学习之神经网络二值化（1）
+
+https://mp.weixin.qq.com/s/tbRj5Wd69n9gvSzW4oKStg
+
+嵌入式深度学习之神经网络二值化（2）
+
+https://mp.weixin.qq.com/s/RsZCTqCKwpnjATUFC8da7g
+
+嵌入式深度学习之神经网络二值化（3）
+
+https://blog.csdn.net/stdcoutzyx/article/details/50926174
+
+二值神经网络（Binary Neural Network，BNN）
+
+https://mp.weixin.qq.com/s/Q54AdQmqa5JD0v9CEeFtSQ
+
+二值化神经网络(BNN)综述
+
+https://zhuanlan.zhihu.com/p/431680710
+
+谈谈BNN二值化神经网络的设计，以及几代学界工作的演进 -（1）架构与原理
+
+https://zhuanlan.zhihu.com/p/433429767
+
+谈谈BNN二值化神经网络的设计，以及几代学界工作的演进 -（2）二值训练
+
+https://zhuanlan.zhihu.com/p/435285316
+
+谈谈BNN二值化神经网络的设计，以及几代学界工作的演进 -（3）二值化设计法则、推理框架与发展潜力
+
+https://mp.weixin.qq.com/s/lVja7woyFWpmr9sH0CitAA
+
+BMXNet：基于MXNet的开源二值神经网络实现
+
+https://mp.weixin.qq.com/s/naDk0mmxd08dNl9LawLUnw
+
+不使用先验知识与复杂训练策略，从头训练二值神经网络！
+
+## 参考
+
+https://mp.weixin.qq.com/s/Xvlxs-Os2meduHrEQFc7vg
+
+第一次胜过MobileNet的二值神经网络，-1与+1的三年艰苦跋涉
+
+https://mp.weixin.qq.com/s/Ak9Yh_MBDR6i7J2rDR99eQ
+
+低成本的二值神经网络介绍以及它能代替全精度网络吗?
+
+https://mp.weixin.qq.com/s/tbRj5Wd69n9gvSzW4oKStg
+
+异或神经网络
+
+https://mp.weixin.qq.com/s/XzLJzfvpP93cDYplf6-LXA
+
+港科腾讯等提出Bi-Real net：超XNOR-net 10%的ImageNet分类精度
+
+https://mp.weixin.qq.com/s/wCx7rQFwC2mW45FMR77tGQ
+
+二值网络，围绕STE的那些事儿
+
+https://mp.weixin.qq.com/s/7L26ghhDqdMU6LRV0iD6vQ
+
+模型量化从1bit到8bit，二值到三值
+
+https://mp.weixin.qq.com/s/M79xGWWtJUB6wBVlHXw8ig
+
+低精度神经网络：从数值计算角度优化模型效率
+
+https://www.chiphell.com/thread-1620755-1-1.html
+
+新Titan X的INT8计算到底是什么鬼
+
+https://mp.weixin.qq.com/s/5LhLbzyWTlP2R_zGAIKuiA
+
+INT8量化训练
+
+https://mp.weixin.qq.com/s/S9VcoS_59nbZWe_P3ye2Tw
+
+减少模型半数内存用量：百度&英伟达提出混合精度训练法
+
+https://zhuanlan.zhihu.com/p/35700882
+
+CNN量化技术
+
+https://mp.weixin.qq.com/s/9DXMqiPIK5P5wzUMT7_Vfw
+
+基于交替方向法的循环神经网络多比特量化
+
+https://mp.weixin.qq.com/s/PDeChj1hQqUrZiepxXODJg
+
+ICLR oral：清华提出离散化架构WAGE，神经网络训练推理合二为一
+
+https://mp.weixin.qq.com/s/KgM1k1bziLTCec67hQ8hlQ
+
+超全总结：神经网络加速之量化模型
+
+https://mp.weixin.qq.com/s/7dzQhgblEm-kzRnpddweSw
+
+嵌入式端CNN网络计算的量化-动态定点法（1）
+
+https://mp.weixin.qq.com/s/M3NcH30zY5Wlj76BDPQlMA
+
+模型压缩一半，精度几乎无损，TensorFlow推出半精度浮点量化工具包，还有在线Demo
+
+https://www.zhihu.com/question/498135156
+
+如何看待FAIR提出的8-bit optimizer：效果和32-bit optimizer相当？
+
+https://mp.weixin.qq.com/s/D3ZKidCV7OhAeqWqWg521w
+
+如何训练和部署FP16/Int8等低精度机器学习模型?
+
+https://jackwish.net/neural-network-quantization-introduction-chn.html
+
+神经网络量化简介
+
+https://mp.weixin.qq.com/s/70GuFnJGhtIZEA-PECHjaA
+
+混合精度对模型训练和推理的影响
+
+https://mp.weixin.qq.com/s/xIbF3rNv2mC2G4RBDhIvJQ
+
+哈佛大学在读博士：模型量化——更小更快更强
+
+https://zhuanlan.zhihu.com/p/128018221
+
+8比特数值也能训练模型？商汤提出训练加速新算法
+
+https://zhuanlan.zhihu.com/p/132561405
+
+模型量化了解一下？
+
+https://mp.weixin.qq.com/s/xnszH9WSKGBwqtHUuYua1g
+
+混合精度训练，提速，减内存
+
+https://mp.weixin.qq.com/s/YImszcJDsvw5ygo2wCj3Hw
+
+模型量化的核心技术点有哪些，如何对其进行长期深入学习
+
+https://mp.weixin.qq.com/s/bK0n9u6DIl4SY7mxS8CVRw
+
+模型量化技术原理及其发展现状和展望
+
+https://zhuanlan.zhihu.com/p/223018242
+
+NNIE量化算法及实现
+
+https://zhuanlan.zhihu.com/p/79744430
+
+Tensorflow模型量化(Quantization)原理及其实现方法
+
+https://mp.weixin.qq.com/s/du3hb2oM5X6bMocdOab4dg
+
+模型量化: 只有整数计算的高效推理
+
+https://mp.weixin.qq.com/s/7Si6GQlj8IvYajoVnwm5DQ
+
+INT4量化用于目标检测
+
+https://mp.weixin.qq.com/s/7VEiQ0y8kB4nODtLCx1UQA
+
+模型量化打怪升级之路
+
+https://mp.weixin.qq.com/s/TXWdx3bbBNfaG3yp2G56ew
+
+提速还能不掉点！深度解析MegEngine 4 bits量化开源实现
+
 # 模型压缩与加速
 
-https://zhuanlan.zhihu.com/p/38046989
+对于AI应用端而言，由于设备普遍没有模型训练端的性能那么给力，因此如何压缩模型，节省计算的时间和空间就成为一个重要的课题。
 
-从ISCA论文看AI硬件加速的新技巧
+此外，对于一些较大的模型（如VGG），即使机器再给力，单位时间内能处理的图像数量，往往也无法达到实际应用的要求。这点在自动驾驶和视频处理领域显得尤为突出。
 
-https://mp.weixin.qq.com/s/jqRBrs9Y_-3qvemL0RTflA
+## 课程
 
-支付宝如何优化移动端深度学习引擎？
+https://cs217.github.io/
 
-https://mp.weixin.qq.com/s/-V6hlZAKp1vuARSibZDBQQ
+CS 217: Hardware Accelerators for Machine
 
-深度学习高效计算与处理器设计
+https://mp.weixin.qq.com/s/RcEPWRxQXv6B4wqLHGyQHg
 
-https://mp.weixin.qq.com/s/NJzGR-tY_WWeccbdshHckA
+深度神经网络的高效处理:从算法到硬件架构，140页ppt
 
-基于交错组卷积的高效深度神经网络
+https://mp.weixin.qq.com/s/yp5gExPzpDiXaGk9oXEMVA
 
-https://mp.weixin.qq.com/s/ccFccLb2UTyFyMwFPjsDaA
+最新综述：模型压缩与加速
 
-让CNN跑得更快，腾讯优图提出全局和动态过滤器剪枝
+https://mp.weixin.qq.com/s/PraNMo4skR-VjEYIIqt1Cw
 
-https://mp.weixin.qq.com/s/vswtn3D1-VZZlyKLJmHc7A
+深度学习模型压缩与加速综述
 
-纪荣嵘：深度神经网络压缩及应用
+https://mp.weixin.qq.com/s/Xqc4UgcfCUWYOeGhjNpidA
 
-https://mp.weixin.qq.com/s/cSYCT1I1asaSCIc5Hgu0Jw
+CNN模型压缩与加速算法综述
 
-计算成本降低35倍！谷歌发布手机端自动设计神经网络MnasNet
+## 复杂度分析
 
-https://zhuanlan.zhihu.com/p/42474017
+https://zhuanlan.zhihu.com/p/31575074
 
-MnasNet：终端轻量化模型新思路
+卷积神经网络的复杂度分析
 
-https://mp.weixin.qq.com/s/p_qdKcQwQ8y_JUw3gQUEnA
+## Network Pruning
 
-谷歌大脑用强化学习为移动设备量身定做最好最快的CNN模型
+首先是韩松的两篇论文：
 
-https://mp.weixin.qq.com/s/OyEIcS5o6kWUu2UzuWZi3g
+《Deep Compression: Compressing Deep Neural Networks with Pruning, Trained Quantization and Huffman Coding》
 
-这么Deep且又轻量的Network，实时目标检测
+《Learning both Weights and Connections for Efficient Neural Networks》
 
-https://mp.weixin.qq.com/s/mWfZ4jfuby4myGfi6TW3wQ
+>韩松，清华本科（2012）+Stanford博士（2017）。MIT AP（from 2018）。   
+>个人主页：   
+>https://stanford.edu/~songhan/
 
-从超参数到架构，一文简述模型优化策略
+韩松也是SqueezeNet的二作。
 
-https://mp.weixin.qq.com/s/8NDOf_8qxMMpcuXIZGJCGg
+![](/images/article/nn_compression.png)
 
-Google又发大招：高效实时实现视频目标检测
+韩松论文的中心思想如上图所示。简单来说，就是去掉原有模型的一些不重要的参数、结点和层。
 
-https://mp.weixin.qq.com/s/IxVMMu_7UL5zFsDCcYfzYA
+参数的选择，相对比较简单。参数的绝对值越接近零，它对结果的贡献就越小。这一点和稀疏矩阵有些类似。这种方法一般被称为Weight Pruning。
 
-AutoML自动模型压缩再升级，MIT韩松团队利用强化学习全面超越手工调参
+结点和层的选择，相对麻烦一些，需要通过算法得到不重要的层。删除结点一般被称为Filter Pruning，而删除层则相应的被称作Layer Pruning。
 
-https://mp.weixin.qq.com/s/fU-AeaPz-lHlg0CBgqnpZQ
+比如可以逐个将每一层50%的参数置零，查看模型性能。对性能影响不大的层就是不重要的。
 
-轻量化神经网络综述
+Weight Pruning需要相关硬件支持跳零操作才能真正加速运算，而Filter/Layer Pruning则无需特殊硬件支持。
 
-https://mp.weixin.qq.com/s/BMsvhXytSy2nWIsGOSOSBQ
+虽然这些参数、结点和层相对不重要，但是去掉之后，仍然会对准确度有所影响。这时可以对精简之后的模型，用训练样本进行re-train，通过残差对模型进行一定程度的修正，以提高准确度。
 
-自动生成高效DNN，适用于边缘设备的生成合成工具FermiNets
+![](/images/img4/Pruning.png)
 
-https://mp.weixin.qq.com/s/nEMvoiqImd0RxrskIH7c9A
+此外还有Stripe-Wise Pruning：
 
-仅17KB、一万个权重的微型风格迁移网络！
+https://mp.weixin.qq.com/s/HohsD57cQtTR5SvuykEDuA
 
-https://mp.weixin.qq.com/s/pc8fJx5StxnX9it2AVU5NA
+优图NeurIPS 2020论文，刷新滤波器剪枝的SOTA效果
 
-基于手机系统的实时目标检测
+还可以看看图森科技的论文：
 
-https://mp.weixin.qq.com/s/6wzmyhIvUVeAN4Xjfhb1Yw
+https://www.zhihu.com/question/62068158
 
-论文解读：Channel pruning for Accelerating Very Deep Neural Networks
+如何评价图森科技连发的三篇关于深度模型压缩的文章？
 
-https://mp.weixin.qq.com/s/-X7NYTzOzljzOaQL7_jOkw
+图森的思路比较有意思。其中的方法之一，是利用L1规则化会导致结果的稀疏化的特性，制造出一批接近0的参数。从而达到去除不重要的参数的目的。
 
-惊呆了！速度高达15000fps的人脸检测算法！
+除此之外，矩阵量化、Kronecker内积、霍夫曼编码、模型剪枝等也是常见的模型压缩方法。
 
-https://mp.weixin.qq.com/s/6eyEMW9dVBR5cZrHxn8iqA
+---
 
-腾讯AI Lab详解3大热点：模型压缩、自动机器学习及最优化算法
+彩票假说（ICLR2019会议的best paper）：随机初始化的密集神经网络包含一个初始化的子网，当经过隔离训练时，它可以匹配训练后最多相同迭代次数的原始网络的测试精度。
 
-https://xmfbit.github.io/2018/02/24/paper-ssl-dnn/
+https://mp.weixin.qq.com/s/wOaCjSifZqkndaGbst1-aw
 
-论文-Learning Structured Sparsity in Deep Neural Networks
+一文带你了解NeurlPS2020的模型剪枝研究
 
-https://mp.weixin.qq.com/s/d6HFVbbHwkxPGdnbyVuMyQ
+## 权值稀疏化实战
 
-密歇根州立大学提出NestDNN：动态分配多任务资源的移动端深度学习框架
+这里讲一下韩松论文提到的裁剪方法中，最简单的一种——“权值稀疏化“的工程实现细节。以darknet框架为例。
 
-https://mp.weixin.qq.com/s/lUTusig94Htf7_4Z3X1fTQ
+1.在src/parser.c中找到save_XXX_weights函数。判断权值是否接近0，如果是，则强制设为0。
 
-清华&伯克利ICLR论文：重新思考6大剪枝方法
+2.使用修改后的weights进行re-train。训练好之后，重复第1、2步。
 
-https://mp.weixin.qq.com/s/g3y9mRhkFtzSuSMAornnDQ
+3.反复多次之后，进入最终prune阶段。修改src/network.c:update_network，令其不更新0权值。
 
-韩松博士论文：面向深度学习的高效方法与硬件
-
-https://mp.weixin.qq.com/s/aH1zQ7we8OE59-O9n4IXhw
-
-应对未来物联网大潮：如何在内存有限的情况下部署深度学习？
-
-https://mp.weixin.qq.com/s/IfvXrsUq8-cBDC4_3O5v_w
-
-Facebook新研究优化硬件浮点运算，强化AI模型运行速率
-
-https://mp.weixin.qq.com/s/Jsxiha_BFtWVLvO4HMwJ3Q
-
-工业界第一手实战经验：深度学习高效网络结构设计
-
-https://mp.weixin.qq.com/s/uXbLb5ITHOU0dZRSWNobVg
-
-算力限制场景下的目标检测实战浅谈
-
-https://mp.weixin.qq.com/s/DoeoPGnS88HQmxagKJWLlg
-
-小米开源FALSR算法：快速精确轻量级的超分辨率模型
-
-https://mp.weixin.qq.com/s/wT39oUWfrQK-dg7hGXRynQ
-
-实时单人姿态估计，在自己手机上就能实现
-
-https://mp.weixin.qq.com/s/GJ7JMtWiKBku7dVJWOfLOA
-
-CNN能同时兼顾速度与准确度吗？CMU提出AdaScale
-
-https://mp.weixin.qq.com/s/pmel2k2J159zQi87ib3q8A
-
-如何让CNN高效地在移动端运行
-
-https://mp.weixin.qq.com/s/m-wQRm3VpfQkEOoUAxEdoA
-
-论文解读: Quantized Convolutional Neural Networks for Mobile Devices
-
-https://mp.weixin.qq.com/s/w7O2JxDH2ECqPn50sLfxpg
-
-不用重新训练，直接将现有模型转换为MobileNet
-
-https://mp.weixin.qq.com/s/EW6jvf98ifBucVz74SfSIA
-
-文档扫描：深度神经网络在移动端的实践
-
-https://mp.weixin.qq.com/s/FvR6loJ8KUxm7qwclestcQ
-
-专门为卷积神经网络设计的训练方法：RePr
-
-https://mp.weixin.qq.com/s/67GSnZnJySFrCESvmwhO9A
-
-论文解读Channel pruning for Accelerating Very Deep Neural Networks
-
-https://mp.weixin.qq.com/s/Lkxc_9sbRY157sMWaD5c7g
-
-视频分割在移动端的算法进展综述
-
-https://mp.weixin.qq.com/s/F0ykoKv027ycinsAZZjbWQ
-
-ThunderNet：国防科大、旷视提出首个在ARM上实时运行的通用目标检测算法
-
-https://mp.weixin.qq.com/s/J3ftOKDPBY5YYD4jkS5-aQ
-
-ThunderNet：Two-stage形式的目标检测也可很快而且精度很高
-
-https://mp.weixin.qq.com/s/ie2O5BPT-QxTRhK3S0Oa0Q
-
-剪枝需有的放矢，快手&罗切斯特大学提出基于能耗建模的模型压缩
-
-https://mp.weixin.qq.com/s/NsvjADgQZrYkUGNN6fzXVg
-
-驭势科技推出“东风网络”：如何找到速度-精度的最优解？
-
-https://mp.weixin.qq.com/s/HzgRHtVwdmW6_m7OJwK-ew
-
-SysML 2019论文解读：Accurate and Efficient 2-Bit Quantized Neural Netowrks
-
-https://mp.weixin.qq.com/s/5NM9M1oY8bwsEqdBRVYpMg
-
-网络规模更小、速度更快，这是谷歌提出的MorphNet
-
-https://mp.weixin.qq.com/s/SC3ebx-C4N4H8B_R6K09cg
-
-分段的人脸检测在移动端的应用
-
-https://mp.weixin.qq.com/s/_C5AvD3YmRH2dmBjbEZFrQ
-
-神经网络子网络压缩10倍，精确度保持不变
-
-https://zhuanlan.zhihu.com/p/65348860
-
-南邮提出实时语义分割的轻量级网络：LEDNET
-
-https://zhuanlan.zhihu.com/p/67272163
-
-百度提出关于网络压缩和加速的新剪枝算法
-
-https://mp.weixin.qq.com/s/on1YdDexq5ICZL70mvikyw
-
-谷歌大脑提出EfficientNet平衡模型扩展三个维度，取得精度-效率的最大化！
-
-https://mp.weixin.qq.com/s/tCdG9gvpav1SvEzyAyBZXA
-
-谷歌EfficientNet缩放模型，PyTorch实现出炉，登上GitHub热榜
-
-https://mp.weixin.qq.com/s/jHv3Amti1YZq51Df2mNFtg
-
-network sliming:加快模型速度同时不损失精度
-
-https://mp.weixin.qq.com/s/8jyQ_7DYn7lHMcAWokKbcA
-
-超Mask RCNN速度4倍，仅在单个GPU训练的实时实例分割算法
-
-https://mp.weixin.qq.com/s/TC_Ju2vuKDP6d538v2F8CQ
-
-剪枝需有的放矢，快手&罗切斯特大学提出基于能耗建模的模型压缩
-
-https://mp.weixin.qq.com/s/UkqwPBYgYQuIB9_jGMt2QQ
-
-Rocket Training: 一种提升轻量网络性能的训练方法
-
-https://mp.weixin.qq.com/s/xCzS7sYMFmk5K4ClB1I2YQ
-
-Uber提出SBNet：利用激活的稀疏性加速卷积网络
-
-https://mp.weixin.qq.com/s/6Wj0Y4y30BVA75WrU4oZbQ
-
-SBNet: 提高自动驾驶系统的感知效率
-
-https://mp.weixin.qq.com/s/HXxnhMjAchxKSidu45kOeg
-
-网络压缩最新进展：2019年最新文章概览
-
-https://mp.weixin.qq.com/s/Bl7-hGIxZMsHxscqb7DnMA
-
-200～1000+fps！谷歌公布亚毫秒级人脸检测算法BlazeFace，面向移动GPU
-
-https://mp.weixin.qq.com/s/l2_N-PXjDMCqSRwYxU4BEA
-
-模型加速概述与模型裁剪算法技术解析
-
-https://mp.weixin.qq.com/s/af-z73asc-PmpEsI_yEulA
-
-北邮提出新AI模型压缩算法，显著降低计算复杂度
-
-https://mp.weixin.qq.com/s/AOI2LUjiKPUJFE0D7zX0Hw
-
-谷歌新研究：基于数据共享的神经网络快速训练方法
-
-https://mp.weixin.qq.com/s/m9I5TM9uJcgZvMusO667OA
-
-5MB的神经网络也高效，Facebook新压缩算法造福嵌入式设备
-
-https://mp.weixin.qq.com/s/FFs0-ROvbXSAIOspW_rMbw
-
-超越MobileNetV3！谷歌大脑提出MixNet轻量级网络
-
-https://mp.weixin.qq.com/s/nys9R6xCJXt0vG06gnQzFQ
-
-模型剪枝，不可忽视的推断效率提升方法
-
-https://mp.weixin.qq.com/s/EuT-4_eEtIVKh6QdLDbohg
-
-解读小米MoGA：超过MobileNetV3的移动端GPU敏感型搜索
-
-https://mp.weixin.qq.com/s/L49cqZ2PXP-x4Y6xBJG5cQ
-
-旷视研究院提出MetaPruning：基于元学习和AutoML的模型压缩新方法
-
-https://mp.weixin.qq.com/s/F_p414ezQ0RDhPnZj36SUA
-
-网络剪枝中的AutoML方法
-
-https://zhuanlan.zhihu.com/c_151876233
-
-如何Finetune一个小网络到移动端（时空性能分析篇）
-
-https://mp.weixin.qq.com/s/kU0_BuQW8VQihUwBuZ90cA
-
-发布可伸缩超网SCARLET，小米AutoML团队NAS三部曲杀青
-
-https://mp.weixin.qq.com/s/oah61YozMB2fMfpDqPwHjw
-
-Deep Compression神经网络压缩经典之作
-
-https://mp.weixin.qq.com/s/ulrPhfsPunKAWYohBhkh9w
-
-寻找最佳的神经网络架构，韩松组两篇论文解读
-
-https://mp.weixin.qq.com/s/gwXXkWumGWy24oWuZKSyAQ
-
-MIT韩松组推出升级版AutoML方法，一个网络适配所有硬件
-
-https://zhuanlan.zhihu.com/p/76909380
-
-轻量型网络：MoGA简介
-
-https://mp.weixin.qq.com/s/n7neAptKozRz5p5ctvKZrQ
-
-模型压缩——结构篇
-
-https://mp.weixin.qq.com/s/kgl7mz4bK7SywkbViY_qhQ
-
-利用LSTM思想来做CNN剪枝，北大提出Gate Decorator
-
-https://mp.weixin.qq.com/s/3_famaAmkAN-4xVEupSXSA
-
-华为、北大等首创GAN剪枝算法，线上加速3倍以上
-
-https://mp.weixin.qq.com/s/DLNyb-GtzmSYuXcn6VQz4Q
-
-高效轻量级深度模型的研究和实践
-
-https://mp.weixin.qq.com/s/3SWtxtV9b0dFpvqfTNlqIg
-
-Slimmable Neural Networks
-
-https://mp.weixin.qq.com/s/lc7IoOV6S2Uz5xi7cPQUqg
-
-基于元学习和AutoML的模型压缩新方法
-
-https://zhuanlan.zhihu.com/p/64400678
-
-轻量卷积神经网络的设计
-
-https://mp.weixin.qq.com/s/pJk84bNzRn7LZZfQfSjs5A
-
-VarGFaceNet：地平线提出轻量级、有效可变组卷积的人脸识别网络
-
-https://mp.weixin.qq.com/s/cYimAphdyFO_XqKfT2Hbeg
-
-如何使用强化学习进行模型剪枝
-
-https://mp.weixin.qq.com/s/SgELZgoHzIvbg2-jzJw6Tw
-
-港科大、清华与旷视提出基于元学习的自动化神经网络通道剪枝网络
-
-https://mp.weixin.qq.com/s/q5-91AAKwBiYzTMmqadEcg
-
-RefineDetLite：腾讯提出轻量级高精度目标检测网络
-
-https://mp.weixin.qq.com/s/oDwvMtET0moHVGgtQLfCow
-
-5个可以让你的模型在边缘设备上高效推理的算法
-
-https://mp.weixin.qq.com/s/nbEa0csbaMvEM3TCI3fn0Q
-
-当前模型剪枝有哪些可用的开源工具？
+>re-train时的learning rate一般不宜太大。如果出现re-train的效果，还不如直接prune的好，则多半是learning rate设置的问题。

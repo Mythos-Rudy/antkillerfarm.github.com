@@ -1,8 +1,11 @@
 ---
 layout: post
-title:  音频常识, 区块链, Sikuli
+title:  音频常识, Kannel, ZeroC ICE, 分布式ID生成器, BBR
 category: technology 
 ---
+
+* toc
+{:toc}
 
 # 音频常识
 
@@ -133,114 +136,162 @@ http://www.itu.int/rec/T-REC-G.191-201003-I/en
 
 ITU官网上的工具包，包含了G.711和G.726算法。
 
-# 区块链
+# Kannel
 
-比特币闻名已久，大概2009年时，我就听说过，然而一直没有研究它的原理。直到最近比特币大火，方才有所研究。不过这个东西，不太合我的研究兴趣，所以也就简单写一些吧。
-
-## 结构
-
-![](/images/img2/blockchain.png)
-
-上图是区块链的结构图。它是由若干个Block链接而成的单向链表。
-
-## Block的生成
-
-以比特币为例，Block由特殊算法计算生成。每个Block包含一定数量的比特币。为了得到比特币，人们就需要计算，这个行为被称为“挖矿”。
-
-“挖矿”得到的Block需要添加到现有Block chain的末端。这实际上导致了以下问题：
-
-1.同一时间只有一个Block能够添加到Block chain。这导致比特币的交易速度不可能很快。这也是一些新的区块链协议所要改进的方向。
-
-2.所有的历史交易记录都保存在Block chain中。比如可用以下网址查询历史记录：
-
-https://blockchain.info/zh-cn/block-height/254642
-
-可以想象随着交易的进行，这个链会越来越大。由于每个钱包都有特定的秘钥，虽然我们不能直接知道它的主人，但是通过对历史数据的分析，还是很有可能找到蛛丝马迹的。因此，一些山寨币开始使用更高端的加密算法，提供更好的匿名性。
-
-## 比特币的交易
-
-Block的绝大多数空间都用于保存交易记录。因此，矿工除了挖出新Block之外，还要负责将新的交易数据写进Block，这个行为被称为“打包”。
-
-打包可以收取手续费，以获得更高的打包优先级。在中本聪的设想中，这是在挖矿越来越难的时候，保证比特币运作的一种方式。
-
-## 区块链的安全性
-
-1.块中有用于检验数据完整性的字段，这个完整性不仅包括本Block的完整性，还包括之前Block数据的完整性。因此，篡改者必须对被修改的Block之后的所有Block都进行修改才行。
-
-2.修改需要得到多数结点确认才可以生效。理论来说，如果有组织掌握全网51%的算力，那么他们就可以为所欲为了。
-
-## 各种数字货币
-
-![](/images/article/bit_coin.png)
-
-## 以太坊
-
-虽然，比特币一直是区块链技术的主角，但毕竟创建的年代已经久远，技术局限较多。以太坊不仅是数字货币，而且还是很多其它数字货币的发行平台，提供了一系列完善的数字货币发行和流通服务，当然服务的费用需要通过购买以太坊币来支付。目前，很多山寨币都是利用以太坊进行发布的。
+Kannel是一个开源的WAP&SMS网关项目。
 
 官网：
 
-https://www.ethereum.org/
+http://www.kannel.org/
 
-以太坊的API是一个叫做Solidity的项目。代码会被编译运行在所谓的Ethereum Virtual Machine (EVM)上。
+这里提到这个项目，并非它有多么重要——实际上它从2010年之后就几乎没有更新了，最新的版本定格在2014年。它所代表的WAP已经无人问津，至于SMS吧，似乎又用不到这么复杂的框架。
 
-Solidity文档：
+但我之所以要提它，主要在于情怀。2007年底的时候，公司给我安排了一个在App中集成彩信发送功能的任务。当时由于能力尚浅，虽然努力了一个月，最终却没有实际成果，很是让领导质疑了一阵，幸好接手的哥们同样做不出来，而我的下一个任务——使用jpeglib，获得了成功，才算将事情平息下来。
 
-https://solidity.readthedocs.io/
+过了一年，闲暇无聊之际，旧事重提，于是发现了Kannel，并做了一个demo。可惜公司时局变化，这一切都变得无足轻重了。
+
+# ZeroC ICE
+
+我在研究生时代，研究过CORBA、EJB、COM这样的中间件技术。然而工作以后，再没有机会使用。平时偶尔关注，也只是晓得CORBA从来没有流行过，EJB在Struts、Hibernate、Spring等框架的围攻下，用者寥寥。直到最近，因为项目需要接触到ZeroC的ICE框架。
+
+ICE框架的官网地址：
+
+https://zeroc.com/downloads/ice
+
+安装：
+
+```bash
+wget https://zeroc.com/download/GPG-KEY-zeroc-release
+sudo apt-key add GPG-KEY-zeroc-release
+sudo apt-add-repository "deb http://zeroc.com/download/apt/ubuntu16.04 stable main"
+sudo apt update
+sudo apt install zeroc-ice-all-runtime zeroc-ice-all-dev
+sudo apt install libssl-dev
+pip install zeroc-ice
+```
+
+多语言demo：
+
+https://github.com/zeroc-ice/ice-demos
+
+注意demo的master分支是开发分支，好多代码都是有问题的，请切换到正在使用版本的分支，例如：
+
+`git checkout 3.6`
+
+---
+
+2022.7
+
+和CORBA竞争的MS的DCOM也好不到哪里去。唯一用的多的，主要在工控领域。
+
+OPC DA在其发展时，建立在当时的Windows技术：OLE、ActiveX、COM/DCOM 之上。但此后行业发生了变化，其他操作系统和技术也开始流行。
+
+COM是微软投入C++门下后给C++打的一个超大补丁用来解决C++的ABI没有标准的问题。
+
+https://zhuanlan.zhihu.com/p/426818530
+
+聊聊越来越火的OPC DA OPC UA的标准
+
+https://www.zhihu.com/question/19998748
+
+COM过时了吗？它的应用前景究竟如何？
+
+https://www.zhihu.com/question/49433640
+
+怎么通俗的解释COM组件？
+
+# Hprose
+
+Hprose是ZeroC ICE的一个竞争者，由国内某高手打造，支持的语言超过20种，堪称最全。不过貌似没什么大公司用啊。。。
+
+其标榜的无需生成桩代码的优点，相比ZeroC ICE的老版本来说，的确是个进步。但目前的ZeroC ICE 3.6版本，也同样提供了类似的功能。这或者也是Hprose一直火不起来的原因。
+
+官网：
+
+http://hprose.com/
+
+Github：
+
+https://github.com/hprose
+
+# 分布式ID生成器
+
+![](/images/img3/Snow.png)
+
+这种结构是雪花算法提出者Twitter的分法。百度的UidGenerator、美团的Leaf等，都是基于雪花算法做一些适合自身业务的变化。
 
 参考：
 
-https://zhuanlan.zhihu.com/p/32796998
+http://mp.weixin.qq.com/s/Bk5k6vRG4Rq4iCtmtYDEGQ
 
-10分钟搞定ICO
+Leaf——美团点评分布式ID生成系统
 
-## 矿机江湖
+https://mp.weixin.qq.com/s/6J7n3udEyQvUHRHwvALNYw
 
-### 2018.9
+Leaf：美团分布式ID生成服务开源
 
-https://mp.weixin.qq.com/s/yyoUoIUBUPV5zkeE88P7Iw
+https://mp.weixin.qq.com/s/_z0-90xbsCd4Pdi6UlEvnA
 
-矿机芯片：转型背后的江湖纷争与隐忧
+分布式ID生成器
 
-这篇文章把中国矿机界的几个主角的恩恩怨怨基本都讲了一遍，不错的江湖文章。
+https://mp.weixin.qq.com/s/Yk2ZlGCEINGrsTfHI6zpsw
 
-只是比特币这东西价格起起落落，2018年第一季度，比特大陆豪赚20亿美元，利润甚至超过了近年风头甚高的NVIDIA，岂料第二季度，形势急转直下，坊间甚至有比特大陆亏损6、7亿美元的传闻。
+分布式id生成器
 
-至于比特大陆的AI芯片，似乎对标的是NVIDIA的云服务领域。不是我小看比特大陆，AI芯片这东西光有钱，没有时间积累，是做不好的。
+https://mp.weixin.qq.com/s/E3PGP6FDBFUcghYfpe6vsg
 
-### 2018.11
+唯一ID生成算法剖析
 
-http://finance.sina.com.cn/blockchain/roll/2018-11-16/doc-ihnvukff8764739.shtml
+https://mp.weixin.qq.com/s/ZbZRMFjbl5oG8yncv8hCtQ
 
-算力之战：告诉你吴忌寒是怎么赢的 CSW是怎么输的
+认识“雪花ID”：如何在分布式环境中大规模生成唯一ID？  
 
-### 2019.1
+https://mp.weixin.qq.com/s/F7WTNeC3OUr76sZARtqRjw
 
-http://tech.sina.com.cn/i/2018-10-10/doc-ihkvrhpt4844011.shtml
+分布式架构系统生成全局唯一序列号的一个思路
 
-矿机围城里的比特大陆：研发持续落后 公司四面楚歌
+# BBR
 
-詹克团、吴忌寒、杨作兴
+**B**ottleneck **B**andwidth and **R**ound-trip propagation time是Google于2016年10月提出的TCP拥塞控制算法，其相关代码目前已经加入Linux内核中。
 
-### 2019.11
+经典的拥塞控制算法设计于1980年代，当时将丢包作为拥塞的信号，这是符合当时落后的实际情况的。
 
-http://finance.ifeng.com/c/7rSObfR7d0p
+但是网络丢包存在两种情况：第一为拥塞丢包，第二为错误丢包。因此丢包通常并不等同于拥塞。
 
-币圈风云：比特大陆詹克团被踢下台 战争或许才刚刚开始
+随着带宽的增加，第一类丢包已经大为减少。目前广域网普遍属于高带宽，高延迟的情况。这种情况术语叫做**长肥管道**（**long-fat pipe**，即延迟高、带宽大的链路）。
 
-https://mp.weixin.qq.com/s/RgH3std9f5f6sMq8fHSGjQ
-
-36岁北航校友打造中国自主AI芯片第一股！挖矿起家，6年IPO，市值百亿（嘉楠创始人及CEO张楠赓）
-
-# Sikuli
-
-Sikuli是一种新颖的图形脚本语言，或者说是一种另类的自动化测试技术。它采用图像识别的方式进行自动检测。
+BBR就是针对长肥管道而设计的新式算法。
 
 参考：
 
-https://mp.weixin.qq.com/s/MYA6l9V4BYIZO8Jgtds6GA
+http://netdevconf.org/1.2/slides/oct5/04_Making_Linux_TCP_Fast_netdev_1.2_final.pdf
 
-图像识别在测试中的应用
+Making Linux TCP Fast
 
-http://www.cnblogs.com/fnng/archive/2012/12/15/2819367.html
+https://www.zhihu.com/question/53559433
 
-图形脚本语言sikuli
+Linux Kernel 4.9 中的BBR算法与之前的TCP拥塞控制相比有什么优势？
+
+https://zhuanlan.zhihu.com/p/144273871
+
+TCP拥塞控制详解
+
+http://blog.csdn.net/dog250/article/details/52895080
+
+Google's BBR拥塞控制算法模型解析
+
+https://zhuanlan.zhihu.com/p/24431669
+
+BBR是个什么鬼？-1 带宽与RTT探测
+
+https://zhuanlan.zhihu.com/p/26321951
+
+BBR是个什么鬼？-2 外皮后的真相
+
+https://mp.weixin.qq.com/s/NWNMfykpJQ-LD9oV1X6zTw
+
+基于bbr拥塞控制的云盘提速实践
+
+https://mp.weixin.qq.com/s/P3zAW3lxj8aowXtxXCOwqA
+
+Google BBR拥塞控制算法背后的数学解释

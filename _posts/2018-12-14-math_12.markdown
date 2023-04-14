@@ -1,10 +1,133 @@
 ---
 layout: post
-title:  数学狂想曲（十二）——数学杂谈
+title:  数学狂想曲（十二）——数学杂谈（2）
 category: math 
 ---
 
+* toc
+{:toc}
+
+# PID算法（续）
+
+针对这个场景，我们可以设计如下算法：
+
+水箱液位离预定高度远的时候开关开大点，离的近的时候开关就开小点，随着液位逐步接近预定高度逐渐关掉水龙头。用数学表示就是：
+
+$$u(t) = K_\text{p} e(t)\tag{1}$$
+
+上式中的$$u(t)$$表示需要控制的量，在这里就是水龙头的开合度。$$K_\text{p}$$被称为比例系数。
+
+**场景2**：假设这个水箱不仅仅是装水的容器了，还需要持续稳定的给用户供水。
+
+以下用c表示给用户供水的量($$c\ge 0$$)。显然如果使用公式1，则系统稳定时，$$u(t)-c=0$$，即$$K_\text{p} e(t)=c$$。
+
+由于c和$$K_\text{p}$$都不为0，因此$$e(t)$$也不为0，这就导致始终无法加注到指定水位。这种稳态误差被称为**静差**。
+
+为了平衡c，我们修改算法为：
+
+$$u(t) = K_\text{p} e(t) + K_\text{i} \int_0^t e(\tau) \,d\tau\tag{2}$$
+
+$$K_\text{i}$$被称为积分系数。积分环节的意义就相当于你增加了一个水龙头，这个水龙头的开关规则是水位比预定高度低就一直往大了拧，比预定高度高就往小了拧。如果漏水速度不变，那么总有一天这个水龙头出水的速度恰好跟漏水的速度相等了，系统就和第一小节的那个一样了。那时，静差就没有了。这就是所谓的**积分环节可以消除系统静差**。
+
+**场景3**：假设用户的用水量是变化的，即$$c(t)$$。
+
+这时，如果仍采用公式2，则由于$$c(t)$$的变化，导致$$e(t)$$不恒为0。为了减小$$c(t)$$的变化，对$$e(t)$$的影响，我们继续修改算法：
+
+$$u(t) = K_\text{p} e(t) + K_\text{i} \int_0^t e(\tau) \,d\tau + K_\text{d} \frac{de(t)}{dt}\tag{3}$$
+
+$$K_\text{d}$$被称为微分系数。由于$$c(t)$$的变化不可能事先得知，因此，微分环节只能减小$$c(t)$$的变化所造成的影响，而不能消除。
+
+公式3在Laplace域可写做：
+
+$$L(s) = K_\text{p} + K_\text{i}/s + K_\text{d} s\tag{4}$$
+
+从公式4可以看出，PID controller的数学原理和锁相环（Phase-locked loop）非常类似，它们实际上都是Feedback Control系统。
+
+![](/images/article/PLL.png)
+
+---
+
+反馈控制最重要的就是两点：
+
+一是反馈；
+
+二是测量的大方向。
+
+只要有反馈的结构在，只要测量的反馈值正负号不搞错，那其他的都只是细枝末节的问题了。
+
+https://www.zhihu.com/question/47755808
+
+常用控制算法（包括PID和卡尔曼滤波等）各有什么天然的局限乃至缺陷？
+
+## 串级PID控制
+
+实际使用中，为了改善PID控制的效果，一般还会用到串级PID控制。
+
+参考：
+
+https://blog.csdn.net/qq_25005909/article/details/77941243
+
+串级PID控制四轴飞行状态-分析
+
+https://blog.csdn.net/nemol1990/article/details/45131603
+
+四轴PID讲解
+
+https://www.zhihu.com/question/293450508
+
+飞控算法中双环串级PID如何理解?
+
+## 参考
+
+https://en.wikipedia.org/wiki/PID_controller
+
+《Feedback Control of Dynamic Systems》，Gene F. Franklin，J David Powell，Abbas Emami-Naeini著。
+
+>注：Gene F. Franklin，1927~2012，美国控制论学家。哥伦比亚大学博士，斯坦福大学教授。
+
+>J David Powell，美国航空航天学家。斯坦福大学博士和教授。
+
+>Abbas Emami-Naeini，斯坦福大学博士和讲师，SC Solutions公司总监。
+
+https://www.zhihu.com/answer/23942834
+
+如何通俗地解释PID参数整定？
+
+https://zhuanlan.zhihu.com/p/35473808
+
+PID控制器的贝叶斯理解
+
+https://zhuanlan.zhihu.com/p/139244173
+
+广告出价--如何使用PID控制广告投放成本
+
+https://zhuanlan.zhihu.com/p/39573490
+
+PID控制算法原理
+
+https://mp.weixin.qq.com/s/4iX1hB_f8zQYrG0EQ2u3wA
+
+PID算法在广告成本控制领域的应用
+
+https://mp.weixin.qq.com/s/__xvATWhggYXLy92dz9L5Q
+
+广告成本控制-PID算法
+
+https://mp.weixin.qq.com/s/fswZL2qhgErccYB1GuXZ8g
+
+PID微分器与滤波器的爱恨情仇
+
+https://mp.weixin.qq.com/s/vsyEM7z7-tKrXwRPjE5-EA
+
+浅谈PID控制对无人车/船的自动驾驶影响及水信无人船PID调试结果展示
+
 # 数学杂谈
+
+https://mathworld.wolfram.com/
+
+一个数学宝库
+
+---
 
 有一次正在做穿过欧洲的旅行，他与一个陌生人聊天，他很谦虚的自我介绍：“我是Daniel Bernoullis。”
 
@@ -12,17 +135,17 @@ category: math
 
 Daniel从此之后在很多的场合深情的回忆起这一次经历把他当作他曾经听过的最衷心的赞扬。
 
-----
+---
 
 Klein和Poincare都在研究自守函数什么的，对于2维的情况，Poincare把自己的结果用Fuchs的名字来命名，因为这个人的东西他曾经看过，并且有很大的影响，Klein感到特别的不爽，他也得到了这样的结果。然而，Fuchs本人对此却一无所知，如此冠名，他自然觉得很不妥。
 
 后来，他和Poincare分别做3维的情况，无奈自己不是Poincare那样的天才，用功过度，体力不支，身体都垮了，从此结束了自己创造性的数学生涯。Poincare自己也不在乎这个东西，于是把3维自己得到的群命名为Klein群。
 
-----
+---
 
 高斯给出了正十七边形可以尺规作图的理论可能性，然而他并不会做。第一个真正的正十七边形尺规作图法直到1825年才由约翰尼斯·厄钦格（Johannes Erchinger）给出。现在比较通行的做法是1893年Herbert William Richmond给出的。距离高斯给出证明（1801年），差不多过了100年。
 
-----
+---
 
 https://mp.weixin.qq.com/s/zozViMoimcL6nJvyBnTQtQ
 
@@ -30,7 +153,7 @@ https://mp.weixin.qq.com/s/zozViMoimcL6nJvyBnTQtQ
 
 这里讲的是拓扑学中的欧拉公式：V−E+R=2，然而成年人的世界里没有Easy这个词，V−E+R会不会等于其他数呢？于是就有了Euler characteristic。
 
-----
+---
 
 《素数之恋》这本书不错，黎曼猜想的最佳科普读本。
 
@@ -40,7 +163,7 @@ Atiyah的高中在埃及读的（1941～1945），当时欧洲很多人为了躲
 
 >2019.1.11 Atiyah去世。
 
-----
+---
 
 有种素数叫做“工业级素数（Industrial-grade primes）”，定义是没有经过严格数学证明、但是通过了“可能素数判定法”（比如米勒-拉宾判定法）的整数。用这种方法判定大整数是否是素数不是完全准确，但速度非常快，而且不会漏掉任何素数。RSA加密法所需的大素数生成方式就很明显了：随机生成大整数，如果判断这个数可能是素数，再用精确但速度慢的素数判定法来判断这个数是否真的是素数。
 
@@ -48,228 +171,76 @@ https://www.zhihu.com/question/54779059
 
 RSA生成公私钥时质数是怎么选的？
 
-https://mp.weixin.qq.com/s/9mDvyrQY3o_a6RFlNil0-w
-
-世界上迄今为止最安全的加密算法（RSA算法）
-
-----
+---
 
 https://mp.weixin.qq.com/s/6hs0pqHqqg46wWL0rlgKJQ
 
 数学家轶闻录
 
-----
+---
 
 https://mp.weixin.qq.com/s/QSG9UEQu7hxwbqI_FgWhqA
 
 理科生不需要爱情：一道数学题，挽救为情自杀少年（费马定理）
 
-----
+https://mp.weixin.qq.com/s/zO9Za2tF7bYM0al9tIbdww
 
-当我在32岁成为哈佛大学终身教授的时候，终于有时间学习如何运算了——是如坐针毡地和一群年龄仅仅是我的一半多点的大学小鬼们一起上课。他们中的一些人还在上我执教的进化生物学。我将自尊搁置一边，来学习微积分。当在追赶中学习时，成绩拿C都费劲。----By Edward Osborne Wilson
+费马最终定理
 
->Edward Osborne Wilson，1929年生，美国生物学家，以研究蚂蚁著称，被称为生物社会学之父。同时也是一名杰出的科普作家，两获Pulitzer Prize。
-
-----
-
-https://site.douban.com/204378/widget/forum/12552814/discussion/53108568/
-
-2010年以来烟花不堪剪（李吟）关于数学的文章和言论汇集
-
-----
+---
 
 https://mp.weixin.qq.com/s/rwKi8bKeGKiJg5WcZwRhlA
 
 听说这家粉笔厂倒闭，世界顶级数学家们开始疯狂囤货
 
-----
+---
 
 一小学数学老师布置作业，让学生抛硬币200次，记录它们的正反面，第二天以书面的形式交给老师检查，很多同学偷懒故意制造“随机性”，但是老师看一眼就知道哪个同学是认真记录，哪个是自己胡乱编的。
 
 因为随机丢200次硬币，连续出现6次连续为相同一面的概率，可通过计算得到高达99.8%，抛200次硬币出现6次连续为相同一面的事件极大可能发生。
 
-----
+---
 
 当初举办数学家大会前一年，陈省身希望国家领导能接见下当时在南开的几位国际数学家。报告打上去，中央办公厅的回复说领导那段时间有很多重要会议参加，没空接见。陈等人不死心，拖关系传信儿，领导知道后立刻同意亲自接见，并答应出席国际数学家大会。
 
-----
+---
 
-https://mp.weixin.qq.com/s/1jLcPIS0bgcDyp9tejGInw
+Boris Pavlovich Demidovich，1906～1971，苏联数学家。Moscow State University教授。代表作品：《Problems in Mathematical Analysis》。
 
-拿破仑时代的炮兵究竟数学要多好？
+Vladimir A. Zorich，1936年生，苏联数学家。Moscow State University教授。代表作品：《Mathematical analysis》。
 
-https://mp.weixin.qq.com/s/_wEKKLg_zYOrDmGjkVGVRw
+---
 
-美国高校风靡一时的数学游戏，比黎曼猜想更硬核，至今仍是未解之谜（冰雹猜想）
+http://www.matrix67.com/
 
-https://mp.weixin.qq.com/s/9gflokoja0sA70B29nEHLA
+一个数学blog
 
-谁是世界上最孤独的数？
+---
 
-https://mp.weixin.qq.com/s/S7OmcrLO21PVMyuWin-6Bw
+卡尔.皮尔逊在皇家科学院宣读过的获奖文章，由于数学过多，被生物学家们认为不适合在生物杂志发表。于是，1901年，由高尔顿成立的生物统计信托基金慷慨资助，高尔顿、威尔登以及皮尔逊三人共同担任编委，统计学界最具有影响力的杂志之一——《生物统计》（Biometrika）就此诞生了。
 
-数学上最有趣的数，装得了逼，撩得了妹！（走马灯数）
+费希尔早期写的一类文章数学性非常强——使用大量的数学符号，一页里有一多半都是数学公式。这样的文章对大众几乎是“令人生畏”的，就是数学基础不弱的同时代统计界大拿前辈们（戈塞特、皮尔逊）也在通信中直接表示：**看不懂**。
 
-https://mp.weixin.qq.com/s/sa7ppdn-KotIz6dB-ZuITA
+费希尔的成功，与新的写作风格大有关系。他1925年出版的在农业和生物领域影响深远的名作《研究工作者的统计方法》完全没有公式推导和证明！他显然预估了读者群，觉得最省力的方法就是“不证明”，结果也确实非常成功。这些工作很快在科学界流行，且需求量非常大。你只需要对一个实验室技术员进行最低限度的数学培训，他就可以使用这些书中提供的方法。
 
-柏拉图：我参透了爱情，却搞不懂为什么只有五种正多面体！
+好用归好用，成功归成功，但费希尔的工作（特别是其背后的原理和思想）几乎是公认的难于理解。1945年，瑞典数学家克拉默写了一本书《统计学的数学方法》，对费希尔很多说法提供了具体证明过程。此书一经发表就成为人们解读费希尔的范本和经典。
 
-https://mp.weixin.qq.com/s/-pnk_O7cOn5KNrqC89Ydsg
+1970年，耶鲁大学的萨维奇又重新研究了费希尔的原始论文，发现了克拉默遗漏的许多东西；他甚至惊奇地发现，费希尔早已完成了人们后来做的一些工作，而且解决了20世纪70年代许多仍然没有解决的问题。
 
-在数学奥林匹克的125年里，这25个逆天解法称霸江湖！
+漫谈现代统计“四大天王”：
 
-https://mp.weixin.qq.com/s/C83eMExh4Zi3TWD2QhVWsQ
+https://mp.weixin.qq.com/s/fuHLVyjt2iRYBEjRH8u8ig
 
-夹逼准则
+卡尔.皮尔逊
 
-https://mp.weixin.qq.com/s/K1fJ1wI9T46i7qW1xjMY_w
+https://mp.weixin.qq.com/s/pgD1Jh-DHdpT3lgBUrg1hg
 
-比圆周率更神秘的“混沌”常数：4.669201609102...（费根鲍姆常数）
+费希尔
 
-https://mp.weixin.qq.com/s/i076Bk9i0kJOP5kGmneBRw
+https://mp.weixin.qq.com/s/tfEcWGp0BjIid-b2EqvrkA
 
-有趣的海盗问题
+埃贡.皮尔逊（Egon Pearson）
 
-https://mp.weixin.qq.com/s/EJj7gonRv2607QnYTZWKqQ
+https://mp.weixin.qq.com/s/tmkqSxkk4mGjkJIKwtov7g
 
-笛卡尔！！你……你……你这样泡妞真的好吗？！
-
-http://web.stanford.edu/~tonyfeng/notes
-
-某牛的数学笔记
-
-https://zhuanlan.zhihu.com/p/50206917
-
-数学笔记（Chapter 1-3. 代数和几何的基础）
-
-https://zhuanlan.zhihu.com/p/50311527
-
-数学笔记（Chapter 4-5. 代数几何和分析的基础）
-
-https://zhuanlan.zhihu.com/p/50524005
-
-数学笔记（Chapter 6. L-函数，第1课）
-
-http://www.moe.gov.cn/s78/A16/A16_ztzl/ztzl_kxnt/kxnt_sgxz/201512/t20151218_225337.html
-
-10000个科学难题数学卷
-
-https://mp.weixin.qq.com/s/imqoo3WWgdWtfah2HYYb6Q
-
-糟糕，我学了假的微积分！
-
-https://mp.weixin.qq.com/s/H_4vuzYcvnZwLZrAxIwgDg
-
-3.14特别纪念：π的第100000000000000···
-
-https://mp.weixin.qq.com/s/xin9VUuIVCZqP-KPn_xAlw
-
-没想到，用极坐标画素数时竟然出现了这神奇的一幕！
-
-https://mp.weixin.qq.com/s/GFO84scpniELyqLdf8HzOQ
-
-一个10*10的正方形里，最多可以放多少个直径为1的圆？为啥不是100个？
-
-https://zhuanlan.zhihu.com/p/36297534
-
-x=cos(x)的解析形式
-
-https://mp.weixin.qq.com/s/5PR4OUubguj0WLB85aa9Mg
-
-2018年菲尔兹奖候选人分析
-
-http://www.matrix67.com/blog/archives/6750
-
-趣题：两个方阵是怎样互相穿过对方的？
-
-https://mp.weixin.qq.com/s/r95iMIKMctgjko1GRn9-5A
-
-史上最贱的数学题
-
-https://mp.weixin.qq.com/s/JSnAK22gohPDCGZ_BipHqg
-
-sin1°是否为超越数？
-
-https://mp.weixin.qq.com/s/qhqCqHo9xGr_Tc-2bnS4mw
-
-用数学方程和不等式创作艺术
-
-https://mp.weixin.qq.com/s/CM7WLc7iSp877WrkH8R_7g
-
-如何用数学方法估算一个女生前男友的数量？
-
-https://mp.weixin.qq.com/s/QJQnRCrBu9j94-VhNq_4tA
-
-群论的创立：两个少年天才的接力
-
-https://mp.weixin.qq.com/s/H6QV5L-Ewdb1NkMKZrNK9w
-
-一杯咖啡背后的拓扑
-
-https://mp.weixin.qq.com/s/rZwqxyBmQg07Pq1ihTjNMg
-
-动图解释泰勒级数（一）
-
-https://mp.weixin.qq.com/s/yqAnIjGmXpubgSsGDx6O8w
-
-动图解释泰勒级数（二）
-
-https://zhuanlan.zhihu.com/p/36230460
-
-黑盒函数的探索
-
-http://www.matrix67.com/blog/archives/4570
-
-再谈Julia集与Mandelbrot集
-
-https://mp.weixin.qq.com/s/gnPiCmsua0ByO5UwWqxuag
-
-史上最牛逼的文科生：学历史成为物理学家，却获得了数学界的最高荣誉，出了350部书，外号火星人！（Edward Witten）
-
-https://mp.weixin.qq.com/s/5p5ai_HKZMvbQ9Inu6ASbA
-
-史上最硬核老师：17年间，拿着菜刀把400个混混送进了哈佛耶鲁麻省！（Jaime Escalante）
-
-https://mp.weixin.qq.com/s/vLqJIaTXOkz0kYJzKguQaQ
-
-99%的数学家都算不出这道题（亲和数）
-
-https://mp.weixin.qq.com/s/ULzU9gwU-X6oSMM4mv5xhA
-
-两次入狱，数次移民，从罗马尼亚地下党到卡耐基梅隆教授—整数规划奠基者Egon Balas的彪悍人生
-
-https://mp.weixin.qq.com/s/NX0j_CgBqalBMVVdRkG59g
-
-数学界再出变态神人！竟用一个比基尼方程，暴力吊打美国数学家！（沙发问题）
-
-https://mp.weixin.qq.com/s?__biz=MjM5MDE3OTk2Ng==&mid=2657461772&idx=1&sn=fa141219528ace2a22b2f109c71bfa74
-
-麻省理工牛人解说数学体系
-
-https://mp.weixin.qq.com/s/GHIFsFleS7aGMP0ye_SCCQ
-
-我居然从一只猫身上学到了斐波那契数列
-
-https://mp.weixin.qq.com/s/y6H1YV7FUkBlqznoNbTLng
-
-太震撼了！2600年数学文明画在了一张图上
-
-https://mp.weixin.qq.com/s/JZKSzd97Og9YHPaHWNTWKQ
-
-史上最能忽悠的数学家，哲学出身竟引发数学千年危机，最终却惨遭处死（芝诺）
-
-https://mp.weixin.qq.com/s/ZRMmByhNkjcfbaOcwxQ5dg
-
-日本数学界惊现神操作！偷偷研究飞刀方程致使厕所爆炸，连美国总统特朗普都忍不住发文怒怼
-
-https://blog.csdn.net/ChangHengyi/article/details/80577318
-
-一片文章带你理解再生核希尔伯特空间（RKHS）以及各种空间
-
-https://mp.weixin.qq.com/s/AQgFded7GWp1yPE_voT0QQ
-
-看完这45组酷炫数学动图，原来数学这么有意思！
-
-https://mp.weixin.qq.com/s/SlbWkTrO3UlWd15jrKYvdg
-
-史上最强律师，用代数暴力破解军事密码，无情吊打荷兰数学家，被誉为“代数学之父”（弗朗索瓦·韦达）
+内曼（Jerzy Neyman）

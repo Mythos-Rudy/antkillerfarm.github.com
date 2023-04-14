@@ -1,10 +1,15 @@
 ---
 layout: post
-title:  数字成像, 编译原理, 边缘计算, Autoware
+title:  数字成像
 category: resource 
 ---
 
+* toc
+{:toc}
+
 # 数字成像
+
+计算摄影学（Computational Photography）是计算机图形学，计算机视觉，光学和传感器等领域的交叉学科。
 
 ## 教程
 
@@ -46,6 +51,17 @@ http://science.china.com.cn/2016-09/26/content_9058067.htm
 
 睹物思人--索尼历史档案馆的另类发现
 
+---
+
+>笔者曾经问过Sony图像传感器部门的大佬，CCD的画质更好，到底是什么因素导致相机市场最终倒向cmos image sensor，是因为对高像素的需求？低功耗的需求？容易集成后处理电路？还是因为cmos sensor成本低？   
+>大佬给出了一个出乎我预料的答案：最主要是‘产能’。手机相机的迅速普及，图像传感器的需求暴增，当时采用CCD工艺的工厂数远远少于cmos工艺的工厂数，cmos工艺的工厂迅速转过去生产图像传感器满足了市场需求，同时cmos image sensor的设计者逐渐改进cmos sensor设计，融合CCD和Cmos的设计方法，逐渐提高了cmos image sensor的图像质量。
+
+参考：
+
+https://mp.weixin.qq.com/s/cAN1Qbe_sRfPdjlLy0ig1A
+
+一亿像素的是与非
+
 ## 深度相机
 
 深度相机按照深度测量原理不同，一般分为：飞行时间法、结构光法、双目立体视觉法。
@@ -70,9 +86,21 @@ https://zhuanlan.zhihu.com/p/32199990
 
 深度相机原理揭秘--双目立体视觉
 
+https://mp.weixin.qq.com/s/veFDawkUJFidUFLFaykmGg
+
+双目立体视觉原理及应用
+
+https://mp.weixin.qq.com/s/8YRosO_wuE7Nx-IowldloQ
+
+关于双目立体视觉的三大基本算法及发展现状的总结
+
 http://mp.weixin.qq.com/s/MWQDwMoRc0c1ofkENzn3Ew
 
 结构光，TOF，双目视觉的异同
+
+https://zhuanlan.zhihu.com/p/98492961
+
+深度相机(TOF)的工作原理
 
 https://mp.weixin.qq.com/s/uT_jrFzfttnG_VYiJIsRbQ
 
@@ -81,6 +109,44 @@ https://mp.weixin.qq.com/s/uT_jrFzfttnG_VYiJIsRbQ
 https://mp.weixin.qq.com/s/H85oyZh5SzJh6SyF49Pzmg
 
 一文看懂TOF
+
+https://mp.weixin.qq.com/s/jEwrEkAp1-UqSuNAASEwCA
+
+清华创业团队发布3D视觉技术白皮书，万字长文详述ToF
+
+https://zhuanlan.zhihu.com/p/112131317
+
+多视角立体视觉简介
+
+https://zhuanlan.zhihu.com/p/73748124
+
+多视角立体视觉MVS简介
+
+https://mp.weixin.qq.com/s/xEOSica0kYxOgwmGFQKbRA
+
+​多视图立体视觉: CVPR 2019 与 AAAI 2020 上的ACMH、ACMM及ACMP算法介绍
+
+https://mp.weixin.qq.com/s/WEbdO1F_Fz84_-Go7Fgm2Q
+
+计算机视觉中的双目立体视觉和体积度量
+
+https://mp.weixin.qq.com/s/9RUnWSSlEiwfoBB19faTcg
+
+双目立体视觉I：标定和校正
+
+## 全向视图
+
+在需要大视野的场景，如虚拟现实应用程序或自动机器人，全向（Omnidirectional）摄像机比传统摄像机具有巨大优势。不幸的是，标准的卷积神经网络不适用于这种情况，因为自然投影表面是一个球体，尤其是在两极地区（polar regions），如果不引入明显的畸变（distortions），无法将其展开（unwrapped）到一个平面。
+
+将球面图像映射为平面图像的过程，一般被称为dewarp。
+
+https://zhuanlan.zhihu.com/p/88675419
+
+在鱼眼和全向视图图像的深度学习方法（上）
+
+https://zhuanlan.zhihu.com/p/88675790
+
+在鱼眼和全向视图图像的深度学习方法（下）
 
 ## 结构光
 
@@ -148,6 +214,44 @@ https://mp.weixin.qq.com/s/j4jfTKkbdQ9bHD7IZFdkbA
 
 国防科大提出双目超分辨算法，效果优异代码已开源
 
+https://mp.weixin.qq.com/s/QDMMP05hUqj6tqUWyCDiTQ
+
+来聊聊双目视觉的基础知识
+
+## HDR
+
+多媒体软硬件的快速发展使得广播电视和互联网平台上的视频质量变得越来越高。我们最直观的感受是，视频变得更清晰，也更真实了。但与此同时，视频的动态范围（可以简单地理解为对比度）并没有太大提升。这就造成视频画面中的像素很多，但每个像素点质量并不高，不能展现场景丰富的层次和细节。
+
+高动态范围（High Dynamic Range，HDR）这一概念的提出，正是为了从画面动态范围这个维度，进一步提升视频质量。相对地，我们称传统视频为标准动态范围（Standard Dynamic Range，SDR）视频。
+
+https://mp.weixin.qq.com/s/sXC263Lq25tKp2AK2Tsb-A
+
+Omnivision HDR sensor简介
+
+https://mp.weixin.qq.com/s/NuJYejYJ1kKdD2pRo5Wxlw
+
+HDR Imaging(2)--Digital Overlap
+
+https://mp.weixin.qq.com/s/_znyQAPeGt_IiZ8C5Rv6zw
+
+HDR imaging(3)---split/sub pixel技术
+
+https://mp.weixin.qq.com/s/X1GcQywkM-hZUu-1koP_VA
+
+视频增强之“动态范围扩展”HDR技术漫谈
+
+https://mp.weixin.qq.com/s/zPHNtK4wUQnVLkIXcjqd_A
+
+韩国科技院Lin Wang最新TPAMI《深度学习HDR成像》综述论文阐述深度学习高动态范围成像方法
+
+## Noise Reduce
+
+2D降噪：只在2维空间域上进行降噪处理。基本方法：对一个像素将其与周围像素平均，平均后噪声降低，但缺点是会造成画面模糊，特别是物体边缘部分。因此对这种算法的改进主要是进行边缘检测，边缘部分的像素不用来进行模糊。
+
+3D降噪：增添了时域处理，因此变为3维。和2d降噪的不同在于，2d降噪只考虑一帧图像，而3d降噪进一步考虑帧与帧之间的时域关系，对每个像素进行时域上的平均。例如，假设场景静止，那么连续两帧图像内容没变，他们的差值就是2倍的噪声。通过减少时域上的改变降低噪声。
+
+相比2d降噪，3d降噪效果更好，且不会造成边缘的模糊，但存在的主要问题是：画面不会是完全静止的，如果对不属于同一物体的两个点进行降噪处理会造成错误。因此该方法需要运动估计，其效果好坏也与运动估计相关。而运动估计计算量大，耗时长，是制约3d降噪的主要瓶颈。
+
 ## 参考
 
 https://mp.weixin.qq.com/s/od9uDZdRU4QaBKPHb0tLag
@@ -158,9 +262,17 @@ https://mp.weixin.qq.com/s/lVS3CgZGItUkWG-OtolbSA
 
 数字成像书籍推荐与资料分享
 
+https://mp.weixin.qq.com/s/v6OzcLvjLetSBspNI_NtSA
+
+图像传感器的演进与创新
+
 https://mp.weixin.qq.com/s/1IHHo4sV79sXdtXNzKNhMA
 
 计算摄影--google相机的王者之道
+
+https://mp.weixin.qq.com/s/CDeatCRZ1utgx2X20H_4Lg
+
+CMOS图像传感器科普
 
 https://mp.weixin.qq.com/s/T4XULnykHANEetmDIhZdaw
 
@@ -198,6 +310,14 @@ https://blog.csdn.net/weixin_38285131/article/details/80457068
 
 光场相机重聚焦原理介绍及代码解析
 
+https://blog.csdn.net/weixin_38490884/article/details/83009344
+
+光场的可视化与重聚焦原理
+
+https://mp.weixin.qq.com/s/pzfZcfytXMyGSz3kc6Jm9A
+
+空间-角度信息交互的光场图像超分辨
+
 https://mp.weixin.qq.com/s/ofoh7xH9MB0ifORi-ZQbcA
 
 苹果iphone Xs/Xr camera有哪些改进
@@ -229,211 +349,3 @@ AI camera时代对成像带来了哪些影响
 https://mp.weixin.qq.com/s/YW3anc5S9_BDrXiyVro5fQ
 
 从光学成像到计算光学成像
-
-https://mp.weixin.qq.com/s/Fpy3_kljryrjEqoZz4IlNg
-
-电子后视镜（一）——相关标准汇总
-
-https://mp.weixin.qq.com/s/aUAD-SWJ6PEplrFRb5SHZg
-
-消除摩尔纹的光学方法
-
-https://mp.weixin.qq.com/s/yBd9qcmMHKIGx88voovFgw
-
-有趣的偏振相机
-
-https://mp.weixin.qq.com/s/eVtbmy8rJ6V2j-6XJ0JJCA
-
-夜景拍照之技术创新
-
-https://mp.weixin.qq.com/s/DH3mZgh4YbnceaFGs03kOQ
-
-曹汛：计算摄像学研究
-
-https://mp.weixin.qq.com/s/f2BIrZ8if7_rX__J9hMHog
-
-广色域----iphone X/8 camera的色彩进化
-
-https://mp.weixin.qq.com/s/VjzXYgkzAGloczaaPXni2A
-
-PDAF进化史
-
-https://mp.weixin.qq.com/s/vg64EpcCVsk7gQAoEozSRQ
-
-PDAF进阶
-
-https://mp.weixin.qq.com/s/m7q6jHbdnb7fw4lKIDfVWw
-
-camera接口之MIPI联盟浅谈
-
-https://mp.weixin.qq.com/s/DbDrDhbQAhXOsfxQ8UJVZg
-
-三星S9凝时摄影背后的sensor技术
-
-https://mp.weixin.qq.com/s/gOikxUxWpqdDRr6_KT2jxQ
-
-图像处理，计算机视觉与machine learning的区别与联系
-
-https://mp.weixin.qq.com/s/7fvVmmpPSldwa3TZ3dVb2g
-
-3D LUT--色彩校正的利器
-
-https://mp.weixin.qq.com/s/sXC263Lq25tKp2AK2Tsb-A
-
-Omnivision HDR sensor简介
-
-https://mp.weixin.qq.com/s/m_EKOLjWjTyx4RBxsAAAGg
-
-4x4阵列摄/“深感”摄
-
-https://mp.weixin.qq.com/s/dX_thGA2V_-AMjDGTUgWrg
-
-计算摄影技术：身怀绝技的扫地僧
-
-https://mp.weixin.qq.com/s/ZSczU1_J_exb2oreiHtK3g
-
-夜景拍照之sensor篇
-
-https://mp.weixin.qq.com/s/eyIeLaBZ0f_EsxglsUuH8A
-
-深度学习自动构图研究报告
-
-https://mp.weixin.qq.com/s/k2JLF_aM3j68GjEByCZF-g
-
-模拟/数字增益对图像噪声的影响
-
-https://mp.weixin.qq.com/s/QmEQuEk2B_fAleewTuNClg
-
-3D成像技术和CMOS传感器的发展方向简析
-
-https://mp.weixin.qq.com/s/R7wnyHT6M-KF3ZMz0bPrVg
-
-这台相机没镜头！美国教授新发明，一块玻璃可成像，拍照给计算机看
-
-https://mp.weixin.qq.com/s/j970Qp8Cz2fpbImujkS2Xg
-
-自动驾驶应用中的LED flicker问题
-
-https://mp.weixin.qq.com/s/Yy-XEyM0YGTRFUX2uWgNKw
-
-夜景拍照之算法篇
-
-https://mp.weixin.qq.com/s/h7MQhZjnP3lLkLD0cKNixA
-
-高动态范围成像的理论基础
-
-https://mp.weixin.qq.com/s/Wd6LD8Rme8XJwtYWU-ALtQ
-
-动态范围压缩（DRC）的四种方法
-
-https://mp.weixin.qq.com/s/7_mDPCEq3S-843PwUQSwXA
-
-车载相机image sensor选型
-
-https://zhuanlan.zhihu.com/p/73748124
-
-多视角立体视觉MVS简介
-
-https://zhuanlan.zhihu.com/p/74085115
-
-深度学习在3-D环境重建中的应用
-
-https://mp.weixin.qq.com/s/k9gff0Ote_V9qtN7HAruBA
-
-工业相机的sensor
-
-https://mp.weixin.qq.com/s/kvINl4pL4_wD71e33jaUSg
-
-下一代cmos image sensor----有机光导薄膜图像传感器
-
-# 编译原理
-
-https://zhuanlan.zhihu.com/frozengene
-
-一个编译器方面的专栏
-
-http://frozengene.github.io/
-
-一个LLVM方面的blog
-
-https://zhuanlan.zhihu.com/p/28637279
-
-使用LLVM + PLY实现一个C语言子集的玩具编译器
-
-![](/images/img3/ART.png)
-
-https://mp.weixin.qq.com/s/vnaI8FwB4Ot46weAgq18Eg
-
-华为新贵！方舟编译器的荣光和使命
-
-https://www.zhihu.com/question/344231876/answer/812481811
-
-周志德（Fred Chow)
-
-https://mp.weixin.qq.com/s/7wmBsJgPnOtPXcYaoQd1qA
-
-基于LLVM的源码级依赖分析方案的设计与实现
-
-https://mp.weixin.qq.com/s/vOJPxzH_1SUyXzNeE85zHQ
-
-编译器入门：没有siri的那些年，我们如何实现人机对话？
-
-https://zhuanlan.zhihu.com/p/66793637
-
-A Tour to LLVM IR（上）
-
-https://zhuanlan.zhihu.com/p/66909226
-
-A Tour to LLVM IR（下）
-
-# 边缘计算
-
-![](/images/img2/edge_computing.png)
-
-https://mp.weixin.qq.com/s/TXZh-bn9VhwGxJRNjzecRw
-
-重新认识“边缘计算”
-
-https://mp.weixin.qq.com/s/6Nr7LF9VxYQ4NlLlk8bCVw
-
-不了解边缘计算，你可能就要被“边缘”了
-
-https://mp.weixin.qq.com/s/3d7CEQ0iQzwnJ_tE7eB9Yg
-
-边缘计算芯片格局分析
-
-https://mp.weixin.qq.com/s/U9vnEzumNgGlYFR-lEPfhw
-
-智能边缘计算：计算模式的再次轮回
-
-# Autoware
-
-Autoware是另一个开源的无人驾驶平台。不像Apollo，没有百度这样的强势公司的介入，社区氛围更浓一些，相对的，功能也要弱一些。
-
-官网：
-
-https://www.autoware.org/
-
-主要由一下组件构成：
-
-- autoware.ai
-
-https://www.autoware.ai/
-
-这个组件基于ROS 1.0，是目前的方案。
-
-- autoware.auto
-
-https://www.autoware.auto/
-
-这个组件基于ROS 2.0，是面向未来的方案。
-
-- autoware.io
-
-https://www.autoware.io/
-
-autoware提供的模拟器。
-
-代码仓库：
-
-https://gitlab.com/autowarefoundation/autoware.ai

@@ -1,10 +1,29 @@
 ---
 layout: post
-title:  深度学习（四十二）——深度ISP, Spiking Neuron Networks, 深度时间序列, AI可解释性, 手势识别
+title:  深度学习（四十二）——深度ISP, Spiking Neural Network
 category: DL 
 ---
 
+* toc
+{:toc}
+
 # 迁移学习（续）
+
+https://mp.weixin.qq.com/s/U45X5kKMw_E4vfHfVmWZTA
+
+FSAF：来自CMU的Single-Shot目标检测算法
+
+https://mp.weixin.qq.com/s/45CLHvP1cumzcwMV0myj_g
+
+微软-少标签样本构建高性能文本分类器
+
+https://zhuanlan.zhihu.com/p/60420771
+
+领域自适应：利用DIRT-T模型提高性能
+
+https://mp.weixin.qq.com/s/duJK5y9ZeFkYsFkAg4E2Jw
+
+IBM-小样本学习（Few-shot Learning）State of the art方法及论文讲解
 
 https://mp.weixin.qq.com/s/Hok9D8dAzYrBz7XoFmGE2A
 
@@ -86,6 +105,74 @@ https://mp.weixin.qq.com/s/V-4d-3yMmQpZUVY-h1eaoA
 
 Barbara Plank-NLP模型的跨语言/跨领域迁移-经验分享
 
+https://mp.weixin.qq.com/s/TUrH7qiZBpmqWN4VL5dhlw
+
+清华大学：用于少次关系学习的神经网络雪球机制
+
+https://mp.weixin.qq.com/s/VlxF7BVk7hUQ9HDiGYpzGA
+
+基于Co-Attention和Co-Excitation的少样本目标检测
+
+https://mp.weixin.qq.com/s/xaKqAhuxaHDPV-VwHE7H2A
+
+零样本学习研究进展综述中文版
+
+https://mp.weixin.qq.com/s/YWzHnN5mQQtM9M3Uao8iGQ
+
+伯克利-滴滴出行：深度学习多源领域自适应综述论文
+
+https://mp.weixin.qq.com/s/WwA_IP4rIpZ6GgFkzQ3sNA
+
+增量学习不只有finetune，三星AI提出增量式少样本目标检测算法ONCE
+
+https://mp.weixin.qq.com/s/lUkydJaClqCoZIZ6THTRBA
+
+增量学习(Incremental Learning)小综述
+
+https://mp.weixin.qq.com/s/rTP3-IdQk7iDz058SyOpIQ
+
+零样本图像识别综述论文
+
+https://mp.weixin.qq.com/s/DLcyMGTVfRoA58VHc6z6eg
+
+最新《迁移学习:域自适应理论》综述论文，128页ppt讲解迁移学习与最优传输
+
+https://mp.weixin.qq.com/s/MCJcHhB2g-wDPqnhp7f6Xw
+
+仅需少量视频观看数据，即可精准推断用户习惯：腾讯、谷歌、中科大团队提出迁移学习架构PeterRec
+
+https://mp.weixin.qq.com/s/s0Kxv0-v6OY1ziAiSDth3g
+
+小样本分割综述
+
+https://mp.weixin.qq.com/s/wtY66E0zMGzmdnPGWL3aQw
+
+迁移学习了解下
+
+https://mp.weixin.qq.com/s/6aBzR0O3pwA8-btsuDX82g
+
+现代NLP中的零样本学习
+
+https://mp.weixin.qq.com/s/jYdeaCCaQJwqxK9h6MzJuA
+
+基于深度神经网络的少样本学习综述
+
+https://mp.weixin.qq.com/s/fhTfNXjPeM5wMeLK2Y-yHA
+
+适用于少量数据的深度学习结构
+
+https://mp.weixin.qq.com/s/zQuLpzIptpFQC_f2Xx26og
+
+迁移学习在新闻推荐中的应用
+
+https://mp.weixin.qq.com/s/sKVCFScJq7ql1T6BmTFLow
+
+少标签数据学习，61页ppt，宾夕法尼亚大学
+
+https://mp.weixin.qq.com/s/EPafCEIg7LYqsnwYq3-nvg
+
+从Few-shot Learning再次认识机器学习
+
 # 深度ISP
 
 ## 数据集
@@ -120,11 +207,25 @@ https://groups.csail.mit.edu/graphics/hdrnet/
 
 这篇论文虽然不是综述，但有很多内容讲解ISP的流程。
 
+《Deep Learning for Image Denoising: A Survey》
+
+《Deep Learning on Image Denoising: An overview》
+
+这两篇综述都是哈工大深圳分院的作品。
+
 ## 参考
 
 https://mp.weixin.qq.com/s/wA85XFQXeypuoqFnmN2P4g
 
 降噪的新时代
+
+https://mp.weixin.qq.com/s/KZcNmoGtuPUjoNzEaBb8UA
+
+AI ISP的黎明
+
+https://mp.weixin.qq.com/s/rxHoE4f5e6Kv2xIqJLIKdA
+
+哪些功能更适合AI
 
 https://mp.weixin.qq.com/s/919VEvennHEG3iXKkMZoQQ
 
@@ -137,10 +238,6 @@ https://zhuanlan.zhihu.com/p/27902193
 https://zhuanlan.zhihu.com/p/39512000
 
 Noise2Noise：图像降噪，无需干净样本
-
-https://mp.weixin.qq.com/s/_tvOQPvybqmvLF19kHcbFg
-
-北大开源ECCV2018深度去雨算法：RESCAN
 
 https://mp.weixin.qq.com/s/Wdxkvlz4nLbJS_gWqHwMjw
 
@@ -182,35 +279,61 @@ https://mp.weixin.qq.com/s/qbPAQeJr7OWOwysa4_iDIw
 
 基于深度学习的低光照图像增强方法总结（2017-2019）
 
-# LSM
+https://zhuanlan.zhihu.com/p/82352961
 
-liquid state machine (LSM)
+基于深度学习的图像增强综述
 
-http://www.docin.com/p-390935406.html
+https://zhuanlan.zhihu.com/p/56263560
 
-基于液体状态机的脑运动神经系统的建模研究
+单目视觉深度估计测距的前生今世
 
-# DNC
+https://mp.weixin.qq.com/s/xdV3VHbSrgQa3G51KMHamA
 
-https://zhuanlan.zhihu.com/p/27773709
+神经网络如何进行深度估计？
 
-浅析至强RNN可微分神经计算机(DNC)
+https://mp.weixin.qq.com/s/0K_NF84wvPJttEARVUGPWA
 
-https://zhuanlan.zhihu.com/p/27964341
+DeOccNet：国防科大提出阵列相机去除前景遮挡成像新方法
 
-浅析至强RNN可微分神经计算机(DNC)-2
+https://mp.weixin.qq.com/s/HxYckWC7rKEq8L6bUMKHTg
 
-https://zhuanlan.zhihu.com/p/28209628
+手机拍出单反照片，苏黎世理工单个深度卷积模型取代ISP
 
-DNC-3滚动分类的模式识别
+https://zhuanlan.zhihu.com/p/107840206
 
-https://zhuanlan.zhihu.com/p/28433712
+深度学习替代手机ISP可行吗？
 
-DNC4广义线性回归
+https://zhuanlan.zhihu.com/p/140926754
 
-# Spiking Neuron Networks
+低光图像处理方案
 
-除了基于BP算法的NN之外，Spiking Neuron Networks也是一大类NN。Spiking NN和人脑结构更相似，功耗也更小，但是相关训练和数据量化的算法尚不成熟，属于潜力股。
+https://mp.weixin.qq.com/s/uT4eln61NNCdHYWLeTNsbQ
+
+对数字屏幕拍照时的摩尔纹怎么去除？
+
+https://zhuanlan.zhihu.com/p/161806533
+
+论文阅读：神经形态视觉传感器（事件相机）的研究进展及应用综述
+
+https://mp.weixin.qq.com/s/yIMaptbjV71cdC-GauGtDg
+
+先拍照后对焦，浅析基于深度估计的景深编辑与背景虚化
+
+https://mp.weixin.qq.com/s/RA8rYI5z_18ybKQaVYWOxw
+
+浅析多重曝光与自动图像融合技术
+
+https://mp.weixin.qq.com/s/ry7DFwnhttXghEndfeZ-VA
+
+提高照片清晰度的黑魔法竟然是..
+
+https://mp.weixin.qq.com/s/BczYuj1xaG097gq3t8XLkQ
+
+深度解析爱芯元智AI ISP技术
+
+# Spiking Neural Network
+
+除了基于BP算法的NN之外，Spiking Neural Network也是一大类NN。Spiking NN和人脑结构更相似，功耗也更小，但是相关训练和数据量化的算法尚不成熟，属于潜力股。
 
 ![](/images/img2/BrainChip_Fig2.gif)
 
@@ -262,158 +385,18 @@ https://mp.weixin.qq.com/s/skA3NZIAzTrsnSsNCxCYSA
 
 类脑计算背后的计算神经科学框架
 
-# 深度时间序列
+https://mp.weixin.qq.com/s/ku78_exDM-OUwWPBCNahCg
 
-https://mp.weixin.qq.com/s/cChJO6YrE_XAgeInS7J1Vw
+Spiking-YOLO：前沿性研究，脉冲神经网络在目标检测的首次尝试
 
-130页序列推荐系统教程重磅发布
+https://blog.csdn.net/u011853479/article/details/61414913
 
-https://www.intechopen.com/books/time-series-analysis-data-methods-and-applications
+脉冲神经网络的五脏六腑
 
-开源新书《时间序列分析，数据/方法/应用》，6章110页pdf带你了解最新进展
+https://blog.csdn.net/Yannan_Strath/article/details/105761023
 
-https://mp.weixin.qq.com/s/zv264-dqDQYRkYmjX_QZpQ
+脉冲神经网络（Spiking Neural Network）叙述
 
-郑宇解读地理传感器时间序列预测问题
+https://blog.csdn.net/Yannan_Strath/article/details/108190281
 
-https://mp.weixin.qq.com/s/JwRXBNmXBaQM2GK6BDRqMw
-
-Kaggle网站流量预测任务第一名解决方案：从模型到代码详解时序预测
-
-https://mp.weixin.qq.com/s/caXnseARUwLIXdsZ7BXOUw
-
-用于金融时序预测的神经网络：可改善移动平均线经典策略
-
-http://mp.weixin.qq.com/s/9fJT0dMLvYQdfMVvSEiG4A
-
-深度学习的时间序列模型评价
-
-https://mp.weixin.qq.com/s/1Gdx-U3DRZtSJoFyCLnD0w
-
-深度学习之Sequence Learning
-
-https://mp.weixin.qq.com/s/SWKWI7BADnX43e-sCBxRPg
-
-神经网络在算法交易上的应用系列——简单时序预测
-
-https://mp.weixin.qq.com/s/Ux7XjLHzlaGFtM1uSMu2gQ
-
-神经网络在算法交易上的应用系列——时序预测+回测
-
-https://mp.weixin.qq.com/s/fUqQo0m7nMLZO85YG-duRw
-
-神经网络在算法交易上的应用系列——多元时间序列
-
-https://mp.weixin.qq.com/s/PS1SqSWckuHuyZP6d5ZUFw
-
-“深度学习”信号处理和时序分析的最后选择？
-
-https://zhuanlan.zhihu.com/p/54471673
-
-基于前馈神经网络的时间序列异常检测算法
-
-https://mp.weixin.qq.com/s/g9upS70qFOCFBMm-T5nI1A
-
-利用深度学习最新前沿预测股价走势
-
-https://mp.weixin.qq.com/s/otwmDtiDfVVID65RQgT4Uw
-
-教你如何鉴别那些用深度学习预测股价的花哨模型？
-
-https://mp.weixin.qq.com/s/xGUcqs3q3yNpVsJ8P7ag_g
-
-以机器学习的视角来看时序点过程的最新进展
-
-https://mp.weixin.qq.com/s/F0z5aEaigQLtlLfDoFIJXQ
-
-时间序列预测：理论与实践教程，300多页PPT带你了解领域最新动态
-
-https://zhuanlan.zhihu.com/p/83130649
-
-深度学习在时间序列分类中的应用
-
-https://mp.weixin.qq.com/s/09KFXwQLJ-HUJsrTd0B1HA
-
-金融时序预测中的深度学习方法综述: 从2005到2019
-
-https://mp.weixin.qq.com/s/iPpVT2iY4Ec6oYdsRpPeTQ
-
-淘宝推荐系统中的深度序列匹配模型SDM
-
-# AI可解释性
-
-XAI(Explainable Artificial Intelligence)
-
-https://github.com/pbiecek/xai_resources
-
-AI可解释性资源汇总
-
-https://mp.weixin.qq.com/s/XVl6voP5cwdC7DcvTMQvVQ
-
-机器学习可解释性工具箱XAI
-
-https://github.com/jphall663/awesome-machine-learning-interpretability
-
-最全的机器学习可解释性资料
-
-https://mp.weixin.qq.com/s/OV4vXu7TAuyV7qU9BAMF6g
-
-机器学习模型的“可解释性”到底有多重要？
-
-https://mp.weixin.qq.com/s/33VQNVvb7JGlk10Jc3mmeg
-
-从可视化到新模型：纵览深度学习的视觉可解释性
-
-https://github.com/ModelOriented/DrWhy
-
-可解释AI(XAI)工具集—DrWhy
-
-https://mp.weixin.qq.com/s/1OODeAFaRLFK3elECyZcng
-
-机器学习模型可解释性的详尽介绍
-
-# 手势识别
-
-https://zhuanlan.zhihu.com/p/26630215
-
-浅谈手势识别在直播中的运用
-
-https://zhuanlan.zhihu.com/p/30561160
-
-2017-最全手势识别/跟踪相关资源大列表分享
-
-http://www.sohu.com/a/203306961_465975
-
-浙江大学CSPS最佳论文：使用卷积神经网络的多普勒雷达手势识别
-
-https://www.zhihu.com/question/20131478
-
-我打算只根据手的形状来识别手势。用哪种机器学习算法比较好？
-
-https://www.leiphone.com/news/201502/QM7LdSN874dWXFLo.html
-
-带你了解世界最先进的手势识别技术
-
-https://mp.weixin.qq.com/s/DbvH6jM1VV47xKylbW-pug
-
-掌纹识别近十年进展综述
-
-https://mp.weixin.qq.com/s/mnPh8w3VuG9apprOkugbLA
-
-中科大提出新型连续手语识别框架LS-HAN，帮助“听”懂听障人士
-
-https://mp.weixin.qq.com/s/pUciYFjOKL3ea91fLCy0Yw
-
-基于OpenCV与tensorflow实现实时手势识别
-
-https://mp.weixin.qq.com/s/xtTmPtjCk4FQuQ3RnPZxEg
-
-UC伯克利黑科技：用语音数据预测说话人手势
-
-https://blog.csdn.net/wangyaninglm/article/details/87296595
-
-指纹的对比分析系统概述
-
-https://mp.weixin.qq.com/s/ji8sEzJXp1UNgBHVOui0ng
-
-谷歌开源手势识别器，手机能用，还有现成的 App，但是被我们玩坏了
+脉冲神经网络（Spiking Neural Network）发展现状

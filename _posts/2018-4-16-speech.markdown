@@ -4,6 +4,9 @@ title:  语音识别（一）——概述
 category: speech 
 ---
 
+* toc
+{:toc}
+
 # 概述
 
 虽然现在的语音识别中，DL已经应用的非常广泛了，但是语音识别终究还是有一些领域知识的，将之归类为DL或者ML，似乎都不妥当。特形成本系列文章，用以描述automatic speech recognition的领域知识和传统方法。
@@ -26,9 +29,29 @@ https://zhuanlan.zhihu.com/p/82872145
 
 语音识别技术简史
 
+https://mp.weixin.qq.com/s/0yZ_8uGDXyxZKAEEdmkebA
+
+完整声学极简史
+
+## 相关任务
+
+语音相关的任务主要有：
+
+- Automatic speech recognition(ASR)：将一个**speech**序列映射为一个**character**序列。
+
+- Speech to text translation (ST)：将**source**语言上的一个**speech**序列映射为**target**语言上的一个**character**序列。
+
+- Text to speech (TTS)：将一个**character**序列映射为一个**speech**序列。
+
+- Speech enhancement (SE)：将一个**noisy**的speech序列映射为一个**clean**的speech序列。
+
+- Speech separation (SS)：分离不同说话人的speech，或者分离人声和背景声音。
+
+- Speech-to-speech translation (S2ST)
+
 ## 学校
 
-SR领域最牛的高校主要是美国的CMU、Johns Hopkins University、英国的Cambridge University和日本的东京大学。
+ASR领域最牛的高校主要是美国的CMU、Johns Hopkins University、英国的Cambridge University和日本的东京大学。
 
 ## 书籍
 
@@ -277,7 +300,7 @@ http://www.speech.cs.cmu.edu/databases/an4/
 
 The CMU Audio Databases。这个数据集非常老了（1991年），只有64M。
 
-----
+---
 
 http://download.tensorflow.org/data/speech_commands_v0.01.tar.gz
 
@@ -293,24 +316,14 @@ https://www.kaggle.com/davids1992/speech-representation-and-data-exploration/not
 
 包含对Speech Commands Datasets的数据处理过程的blog
 
-----
+---
 
-http://pan.baidu.com/s/1dEhUghz
+Google的声音理解团队发布了由200万个人标记的10秒YouTube视频音轨组成的数据集，标签来自600多个音频事件类，数据集命名为Audioset。
 
-清华大学语音和语言技术研究中心（CSLT）公开的数据集。这个数据集除了包含thchs30之外，还包含了其他几个小语种的数据集。
+https://zhuanlan.zhihu.com/p/157842463
 
-http://cn-mirror.openslr.org/18/
+深入解读VGGish
 
-单独的thchs30数据集
+https://mp.weixin.qq.com/s/6D3y-cNT_rJUesCbSW0snw
 
-http://blog.csdn.net/sut_wj/article/details/70662181
-
-THCHS-30：一个免费的中文语料库
-
-----
-
-http://cn-mirror.openslr.org/33/
-
-AISHELL数据库是THCHS-30之后，目前中文语音数据开源最大的数据库。
-
-它是由北京希尔贝壳科技有限公司(http://www.aishelltech.com)录制的中文普通话数据。由400名来自不同方言区的发音人录制，男女比例均衡。按照设计好的文本，在相对安静环境中使用手机（Android和IOS系统）录制格式为16kHz、16bit单声道数据和高保真麦克风录制格式为44.1kHz、16bit单声道数据同时采集。
+基于VGGish的声音类别分类在语音机器人的应用实践

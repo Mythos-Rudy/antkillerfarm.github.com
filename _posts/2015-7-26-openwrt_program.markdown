@@ -4,6 +4,9 @@ title:  OpenWrt编程篇
 category: linux 
 ---
 
+* toc
+{:toc}
+
 # 编译OpenWrt模块--Hello World
 
 1）SDK
@@ -35,6 +38,8 @@ https://github.com/antkillerfarm/antkillerfarm_crazy/tree/master/hiOpenWRT
 参考文献：
 
 http://blog.chinaunix.net/uid-29418452-id-4071751.html
+
+OpenWRT之HelloWorld
 
 # 编译OpenWrt模块--进阶篇
 
@@ -70,7 +75,7 @@ http://www.ccs.neu.edu/home/noubir/Courses/CS6710/S12/material/OpenWrt_Dev_Tutor
 
 以luasocket为例，在feeds中的makefile中有如下片段：
 
-{% highlight bash %}
+```bash
 define Build/Compile
 	$(MAKE) -C $(PKG_BUILD_DIR)/ \
 		LIBDIR="$(TARGET_LDFLAGS)" \
@@ -78,7 +83,7 @@ define Build/Compile
 		LD="$(TARGET_CROSS)ld -shared" \
 		all
 endef
-{% endhighlight %}
+```
 
 将其中的ld，改为gcc即可。
 
@@ -108,12 +113,12 @@ ip命令是linux网络管理方面的命令，它的代码在iproute2包中。
 
 2)如果ncurses已经安装了，需要查看TERM, TERMINFO两个环境变量是否已经设置正确。如果没有设置正确，需要设置为正确的值。
 
-{% highlight bash %}
+```bash
 $ echo $TERM
 xterm
 $ echo $TERMINFO
 /lib/terminfo/
-{% endhighlight %}
+```
 
 # procd
 
@@ -124,6 +129,16 @@ procd是OpenWrt中很重要的一个守护进程。它的作用主要有：
 2)硬件热插拔事件处理、看门狗。相当于普通linux的udev和watchdog。
 
 3)日志系统。相当于普通linux的rsyslog。
+
+---
+
+https://blog.csdn.net/bingqingsuimeng/article/details/7924625
+
+linux热插拔之udev的使用方法
+
+https://www.cnblogs.com/xuyh/p/4212575.html
+
+openwrt实现hotplug-button
 
 ## procd的引导过程
 
@@ -163,7 +178,7 @@ procd本身已经有很多debug信息，只是一般不打印而已。启动时�
 
 这个文件的格式，大致如下：
 
-{% highlight text %}
+```text
 [
 	[ "case", "ACTION", {
 		"add": [
@@ -197,7 +212,7 @@ procd本身已经有很多debug信息，只是一般不打印而已。启动时�
 		[ "exec", "/sbin/hotplug-call", "tty" ]
 	],
 ]
-{% endhighlight %}
+```
 
 从代码可以看出，这个文件是个披着json外皮的程序文件，其关键字和C语言类似，而结构风格则类似Lisp语言：在表达式的组合上，广泛使用了逆波兰表达式。
 
@@ -219,7 +234,7 @@ U盘驱动可分为两个层次：
 
 以下是U盘插入时，生成的事件的procd日志：
 
-{% highlight c %}
+```c
 {"ACTION":"add","DEVPATH":"/devices/platform/rtl819x-ehci/usb1/1-1/1-1.1","SUBSYSTEM":"usb","MAJOR":"189","MINOR":"3","DEVNAME":"bus/usb/001/004","DEVTYPE":"usb_device","PRODUCT":"c76/5/100","TYPE":"0/0/0","BUSNUM":"001","DEVNUM":"004","SEQNUM":"466"}
 {"ACTION":"add","DEVPATH":"/devices/platform/rtl819x-ehci/usb1/1-1/1-1.1/1-1.1:1.0","SUBSYSTEM":"usb","DEVTYPE":"usb_interface","PRODUCT":"c76/5/100","TYPE":"0/0/0","INTERFACE":"8/6/80","MODALIAS":"usb:v0C76p0005d0100dc00dsc00dp00ic08isc06ip50in00","SEQNUM":"467"}
 {"ACTION":"add","DEVPATH":"/devices/platform/rtl819x-ehci/usb1/1-1/1-1.1/1-1.1:1.0/host0","SUBSYSTEM":"scsi","DEVTYPE":"scsi_host","SEQNUM":"468"}
@@ -232,7 +247,7 @@ U盘驱动可分为两个层次：
 {"ACTION":"add","DEVPATH":"/devices/virtual/bdi/8:0","SUBSYSTEM":"bdi","SEQNUM":"474"}
 {"ACTION":"add","DEVPATH":"/devices/platform/rtl819x-ehci/usb1/1-1/1-1.1/1-1.1:1.0/host0/target0:0:0/0:0:0:0/block/sda","SUBSYSTEM":"block","MAJOR":"8","MINOR":"0","DEVNAME":"sda","DEVTYPE":"disk","SEQNUM":"475"}
 {"ACTION":"add","DEVPATH":"/devices/platform/rtl819x-ehci/usb1/1-1/1-1.1/1-1.1:1.0/host0/target0:0:0/0:0:0:0/block/sda/sda1","SUBSYSTEM":"block","MAJOR":"8","MINOR":"1","DEVNAME":"sda1","DEVTYPE":"partition","SEQNUM":"476"}
-{% endhighlight %}
+```
 
 从上面的内容可以看出：
 
@@ -244,17 +259,11 @@ U盘驱动可分为两个层次：
 
 IP地址被改变事件示例：
 
-{% highlight c %}
+```c
 [ "$INTERFACE" = "lan" ] && [ "$ACTION" = "ifup" ] && {
 	/etc/init.d/gmediarender restart
 }
-{% endhighlight %}
-
-# Openwrt 3G拨号上网
-
-参见：
-
-http://blog.csdn.net/yicao821/article/details/45370669
+```
 
 # hotplug-button
 
@@ -264,15 +273,9 @@ kmod-button-hotplug          Button Hotplug driver
 
 这两个内核模块不在内核主线中，需要在`make menuconfig`中单独勾选。
 
-# 组建N2N VPN网络实现内网设备之间的相互访问
+# Openwrt对autotools、CMake的支持
 
-参见：
-
-http://www.shuyz.com/n2n-vpn-network-introduction-and-config.html
-
-# Openwrt对autotools、Cmake的支持
-
-autotools和Cmake是目前应用最广的两套编译配置系统。Openwrt对它们支持的代码在/include/autotools.mk和/include/cmake.mk中。
+autotools和CMake是目前应用最广的两套编译配置系统。Openwrt对它们支持的代码在/include/autotools.mk和/include/cmake.mk中。
 
 # libubox
 
@@ -280,25 +283,12 @@ libubox是Openwrt平台的一个工具库。详见：
 
 http://www.w2bc.com/article/91056
 
-# 使用GDB调试
+# 参考
 
-由于完整的GDB尺寸太大（~1.5MB），因此通常使用GDBServer进行调试。两者的代码都在gdb软件包中。
+http://www.shuyz.com/n2n-vpn-network-introduction-and-config.html
 
-参考文档：
+组建N2N VPN网络实现内网设备之间的相互访问
 
-http://wiki.openwrt.org/doc/devel/gdb
+http://blog.csdn.net/yicao821/article/details/45370669
 
-http://h4x3rotab.github.io/blog/2014/02/27/openwrtxia-de-gdbyuan-cheng-diao-shi/
-
-除了上面列出的内容之外，我还遇到了一个问题：我所用平台的SDK将`-Os`作为全局的编译选项。这在平时自然没什么，但调试的时候就有问题了。如何将`-Os`换成`-O0`呢？可参见以下示例：
-
-{% highlight c %}
-TARGET0_CFLAGS:=$(filter-out -Os,$(TARGET_CFLAGS))
-TARGET_CFLAGS:= -O0 $(TARGET0_CFLAGS) -ggdb3
-{% endhighlight %}
-
-这里解释一下：
-
-1.filter-out是make提供的过滤函数，可去除字符串A中包含的特定字符串B。
-
-2.定义TARGET0_CFLAGS的原因在于：make不支持变量的递归定义，需要中间变量暂存之。
+Openwrt 3G拨号上网

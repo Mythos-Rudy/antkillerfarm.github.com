@@ -1,56 +1,135 @@
 ---
 layout: post
-title:  深度学习（十四）——Normalization进阶, Regularization
+title:  深度学习（十四）——seq2seq, Normalization进阶
 category: DL 
 ---
 
-# 花式池化
+* toc
+{:toc}
 
-## UnPooling（续）
+# seq2seq
 
-从上面的描述可以看出，UnPooling不完全是Pooling的逆运算：
+seq2seq最早用于Neural Machine Translation领域（与之相对应的有Statistical Machine Translation）。训练后的seq2seq模型，可以根据输入语句，自动生成翻译后的输出语句。
 
-1.Pooling之后的feature map，要经过若干运算，才会进行UnPooling操作。
+![](/images/article/seq2seq.png)
 
-2.对于非Max Location的地方以零填充。然而这样并不能完全还原信息。
+上图是seq2seq的结构图。可以看出seq2seq实际上是一种Encoder-Decoder结构。
 
-参考：
+在Encoder阶段，RNN依次读入输入序列。但由于这时，没有输出序列与之对应，因此这仅仅相当于一个对隐层的编码过程，即将句子的语义编码为隐层的状态向量。
 
-http://blog.csdn.net/u012938704/article/details/52831532
+从中发现一个问题：状态向量的维数决定了存储的语义的内容上限（显然不能指望，一个200维的向量，能够表示一部百科全书。）因此，seq2seq通常只用于短文本的翻译。
 
-caffe反卷积
+在Decoder阶段，我们根据输出序列，反向修正RNN的参数，以达到训练神经网络的目的。
 
-## K-max Pooling
+## Beam Search Decoder
 
-![](/images/article/kmax_pooling.png)
+https://guillaumegenthial.github.io/sequence-to-sequence.html
+
+Seq2Seq with Attention and Beam Search
+
+https://blog.csdn.net/mr_tyting/article/details/78604721
+
+Seq2Seq Learning(Encoder-Decoder,Beam Search,Attention)
 
 ## 参考
 
-http://www.cnblogs.com/tornadomeet/p/3432093.html
+https://github.com/ematvey/tensorflow-seq2seq-tutorials
 
-Stochastic Pooling简单理解
+一步步的seq2seq教程
 
-http://mp.weixin.qq.com/s/XzOri12hwyOCdI1TgGQV3w
+http://blog.csdn.net/sunlylorn/article/details/50607376
 
-新型池化层sort_pool2d实现更快更好的收敛：表现优于最大池化层
+seq2seq模型
 
-http://blog.csdn.net/liuchonge/article/details/67638232
+http://datartisan.com/article/detail/120.html
 
-CNN与句子分类之动态池化方法DCNN--模型介绍篇
+Seq2Seq的DIY简介
 
-https://mp.weixin.qq.com/s/K1RBux3AfxVFT8_uezYHFA
+https://mp.weixin.qq.com/s/U5yqXBHFD9LgIQJrqOlXFw
 
-被Hinton，DeepMind和斯坦福嫌弃的池化，到底是什么？
+机器翻译不可不知的Seq2Seq模型
 
-https://mp.weixin.qq.com/s/J4opJ6NvbTxbHWAWNHEltw
+http://www.cnblogs.com/Determined22/p/6650373.html
 
-自然语言处理中CNN模型几种常见的Max Pooling操作
+DL4NLP——seq2seq+attention机制的应用：文档自动摘要（Automatic Text Summarization）
+
+https://mp.weixin.qq.com/s/m-Z0UBgmFQ4CE0yLKYoHZw
+
+seq2seq和attention如何应用到文档自动摘要
+
+http://blog.csdn.net/young_gy/article/details/73412285
+
+基于RNN的语言模型与机器翻译NMT
+
+http://karpathy.github.io/2015/05/21/rnn-effectiveness/
+
+The Unreasonable Effectiveness of Recurrent Neural Networks
+
+https://mp.weixin.qq.com/s/8u3v9XzECkwcNn5Ay-kYQQ
+
+基于Depthwise Separable Convolutions的Seq2Seq模型_SliceNet原理解析
+
+https://mp.weixin.qq.com/s/H6eYxS7rXGDH_B8Znrxqsg
+
+seq2seq中的beam search算法过程
+
+https://mp.weixin.qq.com/s/U1yHIc5Zq0yKCezRm185VA
+
+Attentive Sequence to Sequence Networks
+
+https://mp.weixin.qq.com/s/cGXANj7BB2ktTdPAL4ZEWA
+
+图解神经网络机器翻译原理：LSTM、seq2seq到Zero-Shot
+
+https://mp.weixin.qq.com/s/jYUAKyTpm69J6Q34A06E-w
+
+百度提出冷聚变方法：使用语言模型训练Seq2Seq模型
+
+https://mp.weixin.qq.com/s/Fp6G1aI_utDd_kTbdHvEVQ
+
+完全基于卷积神经网络的seq2seq
+
+http://localhost:4500/theory/2017/06/21/Deep_Learning_6.html
+
+从2017年顶会论文看Attention Model
+
+https://mp.weixin.qq.com/s/Op_oYiNvaTXvsvAnl8Heew
+
+基于Self-attention的文本向量表示方法，悉尼科技大学和华盛顿大学最新工作
+
+https://mp.weixin.qq.com/s/fBrt4g_Kjmt1tGVZw5KgrQ
+
+从LSTM到Seq2Seq
+
+https://mp.weixin.qq.com/s/riIC6ybvqAJx9mzb-AQIOw
+
+Facebook AI发布新版本FairSeq序列到序列(Seq2Seq)学习工具，可生成故事与快速推断
+
+https://mp.weixin.qq.com/s/DIqjVxF_kACkivzez4_Hog
+
+编码器-解码器网络：神经翻译模型详解
+
+https://mp.weixin.qq.com/s/Alg4rOXNvb4GA8N4Joy-Jg
+
+Seq2seq强化，Pointer Network简介
+
+https://mp.weixin.qq.com/s/kdmmgVdWxz2nJPmjcprvqg
+
+机器学习中的编码器-解码器结构哲学
+
+https://mp.weixin.qq.com/s/OcrT2-sAWJg-ILdHwi4t5Q
+
+seq2seq最新变体，稀疏序列模型
+
+https://mp.weixin.qq.com/s/_1lr612F3x8ld9gvXj9L2A
+
+推断速度达seq2seq模型的100倍，谷歌开源文本生成新方法LaserTagger
 
 # Normalization进阶
 
 ## Batch Normalization
 
-在《深度学习（二）》中，我们已经简单的介绍了Batch Normalization的基本概念。这里主要讲述一下它的实现细节。
+在[《深度学习（三）》](/dl/2017/05/27/Deep_Learning_3.html#BN)中，我们已经简单的介绍了Batch Normalization的基本概念。这里主要讲述一下它的实现细节。
 
 我们知道在神经网络训练开始前，都要对输入数据做一个归一化处理，那么具体为什么需要归一化呢？归一化后有什么好处呢？
 
@@ -62,13 +141,13 @@ https://mp.weixin.qq.com/s/J4opJ6NvbTxbHWAWNHEltw
 
 首先，我们回顾一下归一化的一般做法：
 
-$$\hat x^{(k)} = \frac{x^{(k)} - E[x^{(k)}]}{\sqrt{Var[x^{(k)}]}}$$
+$$\hat x^{(k)} = \frac{x^{(k)} - E[x^{(k)}]}{\sqrt{Var[x^{(k)}]}}\tag{1}$$
 
 其中，$$x = (x^{(0)},x^{(1)},…x^{(d)})$$表示d维的输入向量。
 
 接着，定义归一化变换函数：
 
-$$y^{(k)}=\gamma^{(k)}\hat x^{(k)}+\beta^{(k)}$$
+$$y^{(k)}=\gamma^{(k)}\hat x^{(k)}+\beta^{(k)}\tag{2}$$
 
 这里的$$\gamma^{(k)},\beta^{(k)}$$是待学习的参数。
 
@@ -78,33 +157,57 @@ BN的主要思想是用同一batch的样本分布来近似整体的样本分布�
 
 **Step 1**.计算mini-batch mean。
 
-$$\mu_\mathcal{B}\leftarrow \frac{1}{m}\sum_{i=1}^mx_i\tag{1}$$
+$$\mu_\mathcal{B}\leftarrow \frac{1}{m}\sum_{i=1}^mx_i\tag{3}$$
 
 **Step 2**.计算mini-batch variance。
 
-$$\sigma_\mathcal{B}^2\leftarrow \frac{1}{m}\sum_{i=1}^m(x_i-\mu_\mathcal{B})^2\tag{2}$$
+$$\sigma_\mathcal{B}^2\leftarrow \frac{1}{m}\sum_{i=1}^m(x_i-\mu_\mathcal{B})^2\tag{4}$$
 
 **Step 3**.normalize。
 
-$$\hat x_i\leftarrow \frac{x_i-\mu_\mathcal{B}}{\sqrt{\sigma_\mathcal{B}^2+\epsilon}}\tag{3}$$
+$$\hat x_i\leftarrow \frac{x_i-\mu_\mathcal{B}}{\sqrt{\sigma_\mathcal{B}^2+\epsilon}}\tag{5}$$
 
 这里的$$\epsilon$$是为了数值的稳定性而添加的常数。
 
 **Step 4**.scale and shift。
 
-$$y_i=\gamma\hat x_i+\beta\equiv BN_{\gamma,\beta}(x_i)\tag{4}$$
+$$y_i=\gamma\hat x_i+\beta\equiv BN_{\gamma,\beta}(x_i)\tag{6}$$
 
 在实际使用中，BN计算和卷积计算一样，都被当作神经网络的其中一层。即：
 
-$$z=g(Wx+b)\rightarrow z=g(BN(Wx+b))=g(BN(Wx))\tag{5}$$
+$$z=g(Wx+b)\rightarrow z=g(BN(Wx+b))=g(BN(Wx))\tag{7}$$
 
 从另一个角度来看，BN的均值、方差操作，相当于去除一阶和二阶信息，而只保留网络的高阶信息，即非线性部分。因此，上式最后一步中b被忽略，也就不难理解了。
 
 BN的误差反向算法相对复杂，这里不再赘述。
 
-在inference阶段，BN网络忽略Step 1和Step 2，只计算后两步。其中,$$\beta,\gamma$$由之前的训练得到。而$$\mu,\sigma$$原则上要求使用全体样本的均值和方差，但样本量过大的情况下，也可使用训练时的若干个mini batch的均值和方差的FIR滤波值。
+在inference阶段，BN网络忽略Step 1和Step 2，只计算后两步。
 
-由公式5可以看出，BN不是针对x（输入的），而是针对Wx+b的。而W每个channel都不同，因此在`batch*channel*height*width`这么大的一层中，对总共`batch*height*width`个像素点统计得到一个均值和一个标准差，共得到channel组参数。
+- $$\beta,\gamma$$由之前的训练得到。
+
+- $$\mu,\sigma$$原则上要求使用全体样本的均值和方差，但样本量过大的情况下，也可使用训练时的若干个mini batch的均值和方差的FIR滤波值。因此，**这两个参数也是训练得到的**。
+
+由公式7可以看出，BN不是针对x（输入的），而是针对Wx+b的。而W每个channel都不同。因此，对于Layer: `batch*channel*height*width`来说，对`batch*height*width`个像素点统计得到一个均值和一个标准差，这样总共会得到channel组参数。
+
+前面章节曾指出：
+
+- relu得用Kaiming初始化。
+
+- tanh得用Xavier初始化。
+
+而在网络层的激活函数前加上BN的话，采用什么初始化都无所谓。
+
+BN的缺点参见：
+
+https://mp.weixin.qq.com/s/l2N_cQAzy_mubCeok1qfnA
+
+Batch Normalization的诅咒
+
+BN推理加速参见：
+
+https://mp.weixin.qq.com/s/fAiIGJnciAi3pf8MQ7UqKg
+
+使用Batch Normalization折叠来加速模型推理
 
 ## Instance Normalization
 
@@ -132,6 +235,10 @@ http://www.jianshu.com/p/d77b6273b990
 
 论文中文版
 
+https://mp.weixin.qq.com/s/EOuuW5R1_4RU-mabSJeKWQ
+
+Instance Norm梯度公式推导
+
 ## 再看Batch Normalization
 
 ![](/images/img2/BN.jpg)
@@ -148,6 +255,8 @@ BN的特点：
 
 ## Layer Normalization
 
+Layer Normalization的计算比较简单，直接使用公式1即可。由于它是针对x的，因此对每个样本都要统计它的均值和方差，这对于inference来说，计算量是偏大的。
+
 LN的特点：
 
 不依赖于batch size的大小，即使对于batch size为1的在线学习，也可以完美适应；
@@ -156,7 +265,21 @@ LN的特点：
 
 适用于RNN或LSTM，而在CNN上表现一般。
 
-### Weight Normalization
+和BN一样，LN通常也忽略公式7中的b。
+
+从实践来看，LN在NLP任务上的表现比BN好。
+
+参考：
+
+https://mp.weixin.qq.com/s/-QzsVs6V2pwvFQlRVYVx2Q
+
+LayerNorm是Transformer的最优解吗？
+
+https://www.zhihu.com/question/395811291
+
+transformer为什么使用layer normalization，而不是其他的归一化方法？
+
+## Weight Normalization
 
 WN的公式如下：
 
@@ -184,114 +307,6 @@ http://mlexplained.com/2018/01/13/weight-normalization-and-layer-normalization-e
 
 Weight Normalization and Layer Normalization Explained
 
-## Cosine Normalization
+https://zhuanlan.zhihu.com/p/114314389
 
-Normalization还能怎么做？
-
-我们再来看看神经元的经典变换$$f_w(x)=w\cdot x$$。
-
-对输入数据x的变换已经做过了，横着来是LN，纵着来是BN。
-
-对模型参数w的变换也已经做过了，就是WN。
-
-好像没啥可做的了。然而天才的研究员们盯上了中间的那个点，对，就是$$\cdot$$。
-
-$$f_w(x)=\cos \theta=\frac{w\cdot x}{\|w\|\cdot\|x\|}$$
-
-参考：
-
-https://mp.weixin.qq.com/s/EBRYlCoj9rwf0NQY0B4nhQ
-
-Layer Normalization原理及其TensorFlow实现
-
-http://mlexplained.com/2018/01/10/an-intuitive-explanation-of-why-batch-normalization-really-works-normalization-in-deep-learning-part-1/
-
-An Intuitive Explanation of Why Batch Normalization Really Works
-
-https://mp.weixin.qq.com/s/KnmQTKneSimuOGqGSPy58w
-
-详解深度学习中的Normalization，不只是BN（1）
-
-https://mp.weixin.qq.com/s/nSQvjBRMaBeoOjdHbyrbuw
-
-详解深度学习中的Normalization，不只是BN（2）
-
-https://mp.weixin.qq.com/s/Z119_EpLKDz1TiLXGbygJQ
-
-MIT新研究参透批归一化原理
-
-https://mp.weixin.qq.com/s/Lp2pq95woQ5-E3RemdRnyw
-
-动态层归一化（Dynamic Layer Normalization）
-
-https://zhuanlan.zhihu.com/p/43200897
-
-深度学习中的Normalization模型
-
-## IBN-Net
-
-IBN-Net是汤晓鸥小组的新作（2018.7）。
-
-![](/images/img2/IBN-Net.png)
-
-与BN相比，IN有两个主要的特点：第一，它不是用训练批次来将图像特征标准化，而是用单个样本的统计信息；第二，IN能将同样的标准化步骤既用于训练，又用于推断。
-
-潘新钢等发现，IN和BN的核心区别在于，IN学习到的是不随着颜色、风格、虚拟性/现实性等外观变化而改变的特征，而要保留与内容相关的信息，就要用到BN。
-
-论文：
-
-《Two at Once: Enhancing Learning and Generalization Capacities via IBN-Net》
-
-参考：
-
-https://mp.weixin.qq.com/s/LVL90n4--WPgFLMQ-Gnf6g
-
-汤晓鸥为CNN搓了一颗大力丸
-
-https://mp.weixin.qq.com/s/6hNpgffEnUTkNAfrPgKHkA
-
-IBN-Net：打开Domain Generalization的新方式
-
-## Group Normalization
-
-论文：
-
-《Group Normalization》
-
-![](/images/img2/Group_Normalization.png)
-
-参考：
-
-https://mp.weixin.qq.com/s/H2GmqloNumttFlaSArjgUg
-
-FAIR何恺明等人提出组归一化：替代批归一化，不受批量大小限制
-
-https://mp.weixin.qq.com/s/44RvXEYYc5lebsHs_ooswg
-
-全面解读Group Normalization
-
-## 参考
-
-https://zhuanlan.zhihu.com/p/69659844
-
-如何区分并记住常见的几种Normalization算法
-
-https://mp.weixin.qq.com/s/KYGqSOftm8FWDXk_C13iCQ
-
-Conditional Batch Normalization详解
-
-# Regularization
-
-DL中的Regularization除了常见的$$l_1$$-norm、$$l_2$$-norm和squared $$l_2$$-norm之外，还有Group Regularization。它的定义如下：
-
-$$loss(W;x;y) = loss_D(W;x;y) + \lambda_R R(W) + \lambda_g \sum_{l=1}^{L} R_g(W_l^{(G)})$$
-
-$$R_g(w^{(g)}) = \sum_{g=1}^{G} \lVert w^{(g)} \rVert_g = \sum_{g=1}^{G} \sum_{i=1}^{|w^{(g)}|} {(w_i^{(g)})}^2$$
-
-Group Regularization也叫做Block Regularization或Structured Regularization。
-
-# fine-tuning
-
-fine-tuning和迁移学习虽然是两个不同的概念。但局限到CNN的训练领域，基本可以将fine-tuning看作是一种迁移学习的方法。
-
-举个例子，假设今天老板给你一个新的数据集，让你做一下图片分类，这个数据集是关于Flowers的。问题是，数据集中flower的类别很少，数据集中的数据也不多，你发现从零训练开始训练CNN的效果很差，很容易过拟合。怎么办呢，于是你想到了使用Transfer Learning，用别人已经训练好的Imagenet的模型来做。
+weight normalization原理和实现

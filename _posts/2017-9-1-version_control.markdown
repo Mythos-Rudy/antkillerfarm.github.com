@@ -1,8 +1,11 @@
 ---
 layout: post
-title:  版本管理工具的前世今生, Kannel, Win10历险记, 运维工具集, Android研究（二）, ANTLR
-category: technology 
+title:  版本管理工具的前世今生, 运维工具集, OA办公软件, CMake, Ninja
+category: toolchain 
 ---
+
+* toc
+{:toc}
 
 # 版本管理工具的前世今生
 
@@ -46,27 +49,15 @@ SVN是这一代的集大成者，使用简单的同时，仍保有相当强度�
 
 后Git时代的工具，如Fossil和Veracity，相比Git来说，对权限、BUG跟踪之类的功能做了进一步的扩展。
 
-# Kannel
+参考：
 
-Kannel是一个开源的WAP&SMS网关项目。
+https://blog.51cto.com/panzhengming/1607175
 
-官网：
+git版本控制器
 
-http://www.kannel.org/
+https://zhuanlan.zhihu.com/p/95179354
 
-这里提到这个项目，并非它有多么重要——实际上它从2010年之后就几乎没有更新了，最新的版本定格在2014年。它所代表的WAP已经无人问津，至于SMS吧，似乎又用不到这么复杂的框架。
-
-但我之所以要提它，主要在于情怀。2007年底的时候，公司给我安排了一个在App中集成彩信发送功能的任务。当时由于能力尚浅，虽然努力了一个月，最终却没有实际成果，很是让领导质疑了一阵，幸好接手的哥们同样做不出来，而我的下一个任务——使用jpeglib，获得了成功，才算将事情平息下来。
-
-过了一年，闲暇无聊之际，旧事重提，于是发现了Kannel，并做了一个demo。可惜公司时局变化，这一切都变得无足轻重了。
-
-# Win10历险记
-
-我大概在2015年4、5月间，听说了Win10免费升级的消息。于是一直很期待7月29日的到来。果然到了29日当天下午的时候，公司电脑就收到了升级的通知。然而由于网速不给力，当天并未对公司电脑进行升级。倒是晚上在家里的电脑上，虽然耗时2小时，但却一路顺利的升级成功。
-
-Win10给人的第一感觉，其实和Win8差不多，只不过加了个更像Win7的开始菜单而已。不过既来之则安之，一段时间用下来，总算还是要比Win7强不少的。
-
-又过了几天，公司的电脑也升级成功。正得意间，忽然发现VirtualBox在Win10下工作不正常。查了VirtualBox官网方知，其目前尚不支持Win10 Host。于是不得不重新降级到Win7。看来尝鲜也是有得有失的。对于工作用的电脑，有的时候够用就好，没必要什么都求新的。
+VCS发展简史：SCCS->RCS->CVS->SVN->Git
 
 # 运维工具集
 
@@ -75,6 +66,12 @@ Win10给人的第一感觉，其实和Win8差不多，只不过加了个更像Wi
 zabbix是一个基于WEB界面的提供分布式系统监视以及网络监视功能的企业级的开源解决方案。
 
 http://www.zabbix.com/
+
+参考：
+
+https://mp.weixin.qq.com/s/donTVjZFrkUFleswiJr-Bg
+
+监控系统选型解析
 
 ## Cacti
 
@@ -88,7 +85,7 @@ Nagios是一款开源的免费网络监视工具，能有效监控Windows、Linu
 
 https://www.nagios.org/
 
-# Ganglia
+## Ganglia
 
 Ganglia是伯克利开发的一个集群监控软件。可以监视和显示集群中的节点的各种状态信息，比如如：cpu 、mem、硬盘利用率， I/O负载、网络流量情况等，同时可以将历史数据以曲线方式通过php页面呈现。
 
@@ -98,6 +95,12 @@ http://ganglia.sourceforge.net/
 
 ## Jenkins
 
+Continuous Integration（CI）：持续集成
+
+Continuous Delivery（CD）：持续交付
+
+Continuous Deployment（CD）：持续部署
+
 Jenkins是一个开源软件项目，旨在提供一个开放易用的软件平台，使软件的持续集成变成可能。
 
 https://jenkins.io/index.html
@@ -106,7 +109,7 @@ https://jenkins.io/index.html
 
 gitlab管理代码版本，触发jenkins自动构建+测试，然后走迭代或者发布，全部环境都在docker内。
 
-和Jenkins同类型的工具还有Travis CI。
+和Jenkins同类型的工具还有Travis、Codeship、Strider等。
 
 参考：
 
@@ -117,6 +120,18 @@ https://mp.weixin.qq.com/s/jcpynCa6CToITUGD9hRylw
 www.ruanyifeng.com/blog/2017/12/travis_ci_tutorial.html
 
 持续集成服务Travis CI教程
+
+https://mp.weixin.qq.com/s/wmpbdj2GMb10xRtjRUpesw
+
+携程旅行App iOS工程编译优化实践
+
+https://mp.weixin.qq.com/s/Tvmcwg8g85pompnyI3rPtg
+
+用GitLab做CI/CD是什么感觉，太强了
+
+https://mp.weixin.qq.com/s/2Yt1YS3QcVb_pxYqaKrxKA
+
+蚂蚁构建服务演进史
 
 ## Walle
 
@@ -130,132 +145,174 @@ Apache JMeter是Apache组织开发的基于Java的压力测试工具。用于对
 
 http://jmeter.apache.org/
 
-## boilerpipe
+## H5ai
 
-各个网站的HTML版面样式多种多样，如何从中提取正文，是一个很有挑战性的课题。
-
-传统的html解析或者正则式，虽能完成任务，但需要给每个网站单独提供一个模板，通用性不佳，而且一旦网站改版，相应的解析模板也需要修改，这导致后期的维护成本也很高。
-
-boilerpipe是一个用于提取HTML正文的库。它采用机器学习的思想，通过提取DOM树的特征，学习得到正文的内容。
+H5ai是一款功能强大php文件目录列表程序，由德国开发者Lars Jung主导开发，它提供多种文件目录列表呈现方式。
 
 官网：
 
-https://github.com/kohlschutter/boilerpipe
+https://larsjung.de/h5ai/
 
 参考：
 
-http://xiaoxinzhou.blog.163.com/blog/static/207045386201332381015146/
+https://www.tok9.com/archives/374/
 
-Boilerpipe简介
+H5ai完整安装及使用教程
 
-http://baojie.org/blog/2014/06/23/python-text-extraction/
+## Sikuli
 
-总结Python正文提取的工具包
-
-# 如何在HTTPS里调用HTTP资源
-
-浏览器默认是不允许在HTTPS里面引用HTTP资源的，一般都会弹出提示框，用户确认后才会继续加载，用户体验非常差。
-
-对于同时支持HTTPS和HTTP的资源，引用的时候要把引用资源的URL里的协议头去掉，例如：//www.example.com/scirpt.js，这样相当于相对路径，即浏览器会自动根据当前是HTTPS还是HTTP来给资源URL补上协议头的，可以达到无缝切换。
-
-# Android研究
-
-## Flutter
-
-Flutter是Google用以帮助开发者在Ios和Android两个平台开发高质量原生应用的全新移动UI框架。Beta1版本于2018年2月27日在2018世界移动大会上公布。
-
-官网：
-
-https://flutter.io/
+Sikuli是一种新颖的图形脚本语言，或者说是一种另类的自动化测试技术。它采用图像识别的方式进行自动检测。
 
 参考：
 
-https://mp.weixin.qq.com/s/pU75twMDry4VUYtTHeV_IQ
+https://mp.weixin.qq.com/s/MYA6l9V4BYIZO8Jgtds6GA
 
-一文深入了解Flutter界面开发
+图像识别在测试中的应用
 
-https://mp.weixin.qq.com/s/yPvaB7sLuJoGfsjj7x7wcg
+http://www.cnblogs.com/fnng/archive/2012/12/15/2819367.html
 
-深入理解Flutter的编译原理与优化
+图形脚本语言sikuli
 
-https://mp.weixin.qq.com/s/SWP7Nu9DEUhvAyvdIG-Ixw
+## Ansible
 
-聊一聊Flutter Engine线程管理与Dart Isolate机制
-
-https://mp.weixin.qq.com/s/cJjKZCqc8UuzvEtxK1BJCw
-
-Flutter的原理及美团的实践
-
-https://mp.weixin.qq.com/s/l6xvmnLE6HfRtw6upo6yUA
-
-高效开发与高性能并存的UI框架——携程Flutter实践
-
-https://mp.weixin.qq.com/s/vcbHMtaJEkZhSgiRBST1YA
-
-移动开发这十年
-
-https://mp.weixin.qq.com/s/VlleaiIzsZHZDkDrGgYi1g
-
-如何用Flutter实现混合开发？闲鱼公开源代码实例
-
-https://mp.weixin.qq.com/s/n2avWVS0FAFIEB4w0W0Xsw
-
-学习Dart的10大理由
-
-https://mp.weixin.qq.com/s/CBp1pneBa_t8bkVlh1RGVg
-
-2019年五大跨平台移动应用开发工具
-
-https://mp.weixin.qq.com/s/ygPRdtRMlNW3-nfo0PonAA
-
-揭秘！如何用Flutter设计一个100%准确的埋点框架？
-
-## Litho
-
-Litho是Facebook推出的一套高效构建Android UI的声明式框架，主要目的是提升RecyclerView复杂列表的滑动性能和降低内存占用。
+Ansible is Simple IT Automation——简单的自动化IT工具。这个工具的目标有这么几项：让我们自动化部署APP；自动化管理配置项；自动化的持续交付；自动化的（AWS）云服务管理。简单的说就是：**批量的在远程服务器上执行命令。**
 
 官网：
 
-https://fblitho.com/
+https://www.ansible.com/
 
 参考：
 
-https://mp.weixin.qq.com/s/RS7O7prvkCvKyxkK3YQxtA
+http://www.ansible.com.cn/
 
-Litho的使用及原理剖析
+Ansible中文权威指南
 
-## 参考
+https://mp.weixin.qq.com/s/ojpAOOnK5fEW12gG1zocBA
 
-https://mp.weixin.qq.com/s/twfpUMf9CfXcgwtFFkJ4Ig
+干货：一文详解Ansible的自动化运维
 
-Android整体设计及背后意义
+# OA办公软件
 
-https://mp.weixin.qq.com/s/eEuNPtTaPwJ7hSghgeU32g
+2016.6
 
-Android Hook技术防范漫谈
+工作9年，先后服务于4家公司，OA软件也算见识了一些。
 
-# ANTLR
+第一家公司，用了一套作坊OA。说它作坊，是因为这是老板的一个朋友的作坊做出来的东西。代码极度差劲，以至于我这样的网站外行，都能改出不少问题来。
 
-ANTLR—Another Tool for Language Recognition，其前身是PCCTS，它为包括Java，C++，C#,python在内的语言提供了一个通过语法描述来自动构造自定义语言的识别器（recognizer），编译器（parser）和解释器（translator）的框架。
+第二家公司是外企，用他们国外的OA系统。除了文字是英语之外，其他的中规中矩。
 
-官网：
+第三家公司，用的是用友致远OA系统。也是中规中矩，语言换成了中文，好用了一些。
 
-http://www.antlr.org/
+第四家公司，使用企明岛的OA平台。上手感觉很惊艳，UI甩开之前的产品一条街。
+
+详细了解之后，才知道：
+
+1.yammer是OA 2.0的鼻祖。
+
+2.国内的同类产品还有：明道，纷享，伙伴，企明岛，tita，UU社区，云之家等。
+
+# CMake
+
+添加头文件目录
+
+`include_directories(../../../thirdparty/comm/include)`
+
+添加需要链接的库文件目录
+
+`link_directories("/home/server/third/lib")`
+
+查找库所在目录
+
+`find_library(RUNTIME_LIB rt /usr/lib  /usr/local/lib NO_DEFAULT_PATH)`
+
+添加需要链接的库文件路径
+
+`link_libraries(“/home/server/third/lib/libcommon.a”)`
+
+设置要链接的库文件的名称
+
+`target_link_libraries(myProject libcomm.so)`
+
+为工程生成目标文件
+
+`add_executable(demo main.cpp)`
+
+下载文件
+
+`file(DOWNLOAD url file)`
 
 参考：
 
-http://yuzhouwan.com/posts/55501/
+https://www.cnblogs.com/binbinjx/p/5626916.html
 
-Antlr
+cmake添加头文件目录，链接动态、静态库
 
-https://www.ibm.com/developerworks/cn/java/j-lo-antlr/index.html
+https://mp.weixin.qq.com/s/67lPVyWUXG0SPJm4AOHmBA
 
-使用Antlr开发领域语言
+一份CMAKE中文实战教程
 
-# MPS
+https://blog.csdn.net/lianshaohua/article/details/107904367
 
-MPS是jetbrains推出的用于构建DSL的工具。
+CMakeLists多目录通用模板
+
+https://mp.weixin.qq.com/s/4iUTsx_rSjRI93b71YOyLg
+
+万字长文带你从C++案例一步一步实操cmake
+
+---
+
+FetchContent如果网络不好的话，也可使用`FETCHCONTENT_SOURCE_DIR_<uppercaseName>`引用已经下载好的外部路径。
+
+https://zhuanlan.zhihu.com/p/102050750
+
+CMake之引入外部项目的三种方法
+
+## cross compile
+
+需要用`-DCMAKE_TOOLCHAIN_FILE=XXXX`来指定toolchain file。后者的示例如下：
+
+https://github.com/antkillerfarm/antkillerfarm_crazy/blob/master/other/toolchain-arm-imx8qm.cmake
+
+官方文档：
+
+https://cmake.org/cmake/help/latest/manual/cmake-toolchains.7.html
+
+# Ninja
+
+Ninja是Make的替代品，它和后者的区别在于：
+
+1.Ninja只实现了Make的常用功能，能力上没有后者强。
+
+2.Ninja脚本易于人阅读（方便调试），但不易于人直接书写（方便机器解析）。需要借助CMake之类的高级构建系统生成Ninja脚本。
+
+3.Make中有些功能虽然能实现，但需要复杂脚本，执行也很慢。Ninja将这些功能直接集成进程序，无需写脚本。
+
+正因为这些设计上的不同，Ninja的执行速度远超Make。
 
 官网：
 
-https://www.jetbrains.com/mps/
+https://ninja-build.org/
+
+安装：
+
+`sudo apt install ninja-build`
+
+Cmake生成Ninja脚本：
+
+`cmake .. -G Ninja`
+
+Cmake这样的高级构建系统，也被称为meta-build software。
+
+https://github.com/ninja-build/ninja/wiki/List-of-generators-producing-ninja-build-files
+
+上面的网页列出了能生成Ninja脚本的构建系统，比较值得关注的有：
+
+GN：Chromium项目的构建工具。
+
+xmake：一个Lua编写的构建工具。
+
+参考：
+
+https://blog.codingnow.com/2021/05/make_to_ninja.html
+
+构建工具从Make到Ninja

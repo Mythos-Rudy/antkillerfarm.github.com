@@ -1,12 +1,43 @@
 ---
 layout: post
-title:  数学狂想曲（十）——复变函数, 平稳离散时间随机过程, 功率谱
+title:  数学狂想曲（十）——复变函数
 category: math 
 ---
 
-# 熵
+* toc
+{:toc}
 
-## 统计热力学定义（续）
+# 熵（续）
+
+## 统计热力学定义
+
+Entropy的统计热力学定义，相对就比较复杂了。这里仅列出推导的要点，不细讲了。
+
+首先是两个假设：
+
+1.**统计物理量的加和性**。（刘维尔定理）
+
+2.**概率分布的乘积性**。（不相关变量的概率分布公式）
+
+设系统有两部分，其熵为$$S_1,S_2$$，其概率分布为$$\Omega_1,\Omega_2$$，则根据上述假设可得：
+
+$$S=S_1+S_2$$
+
+$$\Omega=\Omega_1\times \Omega_2$$
+
+令$$S=f(\Omega)$$，则：
+
+$$S_1=f(\Omega_1),S_2=f(\Omega_2),S=f(\Omega_1)+f(\Omega_1)=f(\Omega_1\times \Omega_2)$$
+
+$$\begin{cases}
+\frac{\mathrm{d}f(\Omega)}{\mathrm{d}\Omega_1} = \frac{\mathrm{d}f(\Omega_1\times\Omega_2)}{\mathrm{d}(\Omega_1\times\Omega_2)}\mathrm{d}\Omega_2 \\
+\frac{\mathrm{d}f(\Omega)}{\mathrm{d}\Omega_2} = \frac{\mathrm{d}f(\Omega_1\times\Omega_2)}{\mathrm{d}(\Omega_1\times\Omega_2)}\mathrm{d}\Omega_1 \\
+\end{cases}
+\Rightarrow
+\begin{cases}
+\Omega_1\frac{\mathrm{d}f(\Omega)}{\mathrm{d}\Omega_1} = \frac{\mathrm{d}f(\Omega)}{\mathrm{d}\Omega}\Omega \\
+\Omega_2\frac{\mathrm{d}f(\Omega)}{\mathrm{d}\Omega_2} = \frac{\mathrm{d}f(\Omega)}{\mathrm{d}\Omega}\Omega \\
+\end{cases}$$
 
 $$\Omega_1\frac{\mathrm{d}f(\Omega)}{\mathrm{d}\Omega_1} =\Omega_2\frac{\mathrm{d}f(\Omega)}{\mathrm{d}\Omega_2}=\frac{\mathrm{d}f(\Omega)}{\mathrm{d}\Omega}\Omega = K$$
 
@@ -50,15 +81,85 @@ https://www.zhihu.com/question/41252833
 
 如何通俗的解释交叉熵与相对熵?
 
+https://zhuanlan.zhihu.com/p/74075915
+
+交叉熵、相对熵（KL散度）、JS散度和Wasserstein距离（推土机距离）
+
+https://mp.weixin.qq.com/s/sglAI17L5NvZLvPg1P2ZSA
+
+熵、交叉熵和KL散度的基本概念和交叉熵损失函数的通俗介绍
+
+https://mp.weixin.qq.com/s/V8yeWoVM_HU1OnhgXOk6Vg
+
+听说你还不知道条件熵是什么?
+
+http://blog.csdn.net/luo123n/article/details/48574123
+
+PMI（Pointwise Mutual Information）
+
+## Landauer’s Erasure Principle
+
+在量子力学中，如同电荷、质量、时间有最小单位一样，热力学熵也有最小单位。Landauer’s Erasure Principle指出这个单位为$$K_B\ln(2)$$，其中$$K_B$$为玻尔兹曼常数。
+
+>Rolf Landauer，1927～1999，美国物理学家。出身于一个德国的犹太人家庭，1938年为躲避纳粹，全家移民美国。Harvard University本科（1945）+博士（1950）。IBM研究员。美国科学院、美国工程院院士。
+
+需要指出的是：Landauer原理中虽有“信息”一词，但仍是物理学的概念，对应了物质/能量的转移。而信息熵是数学概念，对应的是抽象的对象。因此，前者的公式中还有一个$$K_B$$的存在。
+
+参考：
+
+https://mp.weixin.qq.com/s/Gmfu9iLC71XmfQ5qyraIpQ
+
+信息的物理性：从麦克斯韦妖到兰道尔擦除
+
+https://mp.weixin.qq.com/s/vlhgdxjVJaiD6VbX1u3how
+
+新·麦克斯韦妖
+
+https://mp.weixin.qq.com/s/G-PCyPVqoH77-4Gt_BhS8Q
+
+一个经典热力学思想实验的量子版本（吉布斯佯谬）
+
 ## 焓
 
-焓（enthalpy）是一个和熵经常一起出现的概念。由于和信息论关系不大，这里仅作简要通俗的介绍，而非严格定义。
+焓（hán，enthalpy）是一个和熵经常一起出现的概念。由于和信息论关系不大，这里仅作简要通俗的介绍，而非严格定义。
 
 上面提到的热力学过程，只涉及气体的PVT变换，气体本身的其他状态并没有改变。而实际情况要复杂的多，比如气体会发生化学反应，也会发生相变（变成液态/固态），而这些变化本身，会吸收/释放热量，这时系统的内能就不再守恒了。焓就是用来度量这种变换的。
 
 例如：
 
 对于等温下的化学反应，若反应吸热，产物的焓高于反应物的焓；若反应放热，产物的焓应低于反应物的焓。
+
+类似“焓”这样生造出的汉字还有：
+
+㶲，yòng，Exergy，可以全部转换为任何其他能量形式的那部分能量。
+
+㷻，wú，Anergy，不能够转化和利用的能量。
+
+## 朗肯循环
+
+![](/images/img4/Rankine.gif)
+
+上图是核电站的原理结构图。可以看到，其中有一个冷却蒸汽的过程。
+
+好容易被加热的蒸汽，为什么要冷却呢？
+
+术语：释放出热势能的蒸汽从汽轮机下部的排汽口排出，被称为**乏汽**。
+
+单纯的热蒸汽膨胀做功，是可以将热能完全转换为机械能的。然而，如果没有循环的话，这就成了一次性的买卖。而一个能够循环做功的热机，才是有实际用处的。这也是卡诺和朗肯为什么都要研究循环的原因。
+
+乏汽的温度和蒸汽差不多，但气压却低的多，如果不加压的话，根本进不了锅炉加热。然而，压缩空气是一个耗费机械能的过程，由卡诺循环可知，它耗费的能量要大于蒸汽对汽轮机做的功，两者的差值就是所谓的熵。
+
+而乏汽冷却之后变成了水，由于液体的不可压缩特性，它可以很方便的被压入锅炉，从而进入下一轮的循环。
+
+朗肯循环就是用来研究以水为热机工质的循环的。这中间由于水发生了相变，因此是一个焓变过程。
+
+和卡诺循环与热力学第二定律等价不同，朗肯循环的损耗并无定数，使用更优良的工质（比如低沸点有机物）可以提升热机的效率。
+
+>William John Macquorn Rankine，1820~1872，英国科学家。University of Edinburgh肄业（读了两年，家里没钱了）。University of Glasgow教授。
+
+https://www.zhihu.com/question/26163433
+
+为什么不能将乏汽直接送入锅炉，而要经过冷却后再送入锅炉？效率不是下降了吗？
 
 # 复变函数
 
@@ -83,6 +184,12 @@ https://www.zhihu.com/question/41252833
 $$\frac{\partial u}{\partial x} = \frac{\partial v}{\partial y},\frac{\partial u}{\partial y} = -\frac{\partial v}{\partial x}$$
 
 4.复数在场论描述中的应用。
+
+参考：
+
+https://zhuanlan.zhihu.com/p/74528525
+
+一个复变函数的专栏
 
 ## 复数求导
 
@@ -112,7 +219,7 @@ https://mp.weixin.qq.com/s/SUWUAMQjSuB5Gs06SPliTQ
 
 ## Hermite矩阵
 
-复数矩阵通常不能直接转置，而必须进行共轭转置。共轭转置也叫做Hermite转置，用$$A^H$$表示。
+复数矩阵通常不能直接转置，而必须进行共轭转置。共轭转置（Conjugate transpose）也叫做Hermite转置，用$$A^H$$表示。
 
 如果$$A=A^H$$，则A被称为Hermite矩阵。
 
@@ -125,151 +232,48 @@ https://mp.weixin.qq.com/s/MXHCVFW2mMw7PqMuHB_5Tw
 
 他擅长解决数学难题，却视考试成为终生噩梦
 
-# 平稳离散时间随机过程
+## 复变积分
 
-## Toeplitz矩阵
+**反常积分（Improper Integral）又叫广义积分**，是对普通定积分的推广，指含有无穷上限/下限，或者被积函数含有瑕点的积分，前者称为**无穷限广义积分（简称无穷积分）**，后者称为**瑕积分（Singular Integral，又称无界函数的反常积分）**。两者兼有的则被称为**混合广义积分**。
 
-Toeplitz矩阵（diagonal-constant matrix），指矩阵中每条自左上至右下的斜线上的元素相同。
+如果存在正数$$\theta$$，使得任意$$\theta>\delta>0$$，都有函数$$f(x)$$在$$x_0$$的左领域$$(x_0-\delta,x_0)$$内无界或函数$$f(x)$$在$$x_0$$的右邻域$$(x_0,x_0+\delta)$$内无界，则称点$$x_0$$为$$f(x)$$的一个**瑕点（Singular Point）**。
 
->Otto Toeplitz，1881～1940，德国犹太裔数学家。University of Breslau博士（1905），先后执教于Göttingen University（在David Hilbert手下供职）、University of Kiel和Bonn University。1939年，为了躲避元首的迫害，逃亡耶路撒冷，次年去世。
+无穷积分定义：
 
-广义平稳离散时间随机过程的相关矩阵是Hermite矩阵，也是Toeplitz矩阵。反之，如果相关矩阵是Toeplitz矩阵，则该离散时间随机过程，一定是广义平稳的。
+$$\int_{-\infty}^{+\infty}f(x)\mathrm{d}x=\lim_{N\to +\infty,M\to -\infty}\int_{M}^{N}f(x)\mathrm{d}x$$
 
-离散时间随机过程的相关矩阵是非负定的，并且几乎总是正定的。（等于零，只有在无噪声且观测向量线性相关的情况下，才会出现。）
+对应的**Cauchy Principal Value**的定义为：
 
-## 白噪声
+$$\int_{-\infty}^{+\infty}f(x)\mathrm{d}x=\lim_{M\to +\infty}\int_{-M}^{M}f(x)\mathrm{d}x$$
 
-$$E[v(n)v^*(n-k)]=\begin{cases}
-\sigma_v^2, & k = 0 \\
-0, & k \neq 0 \\
-\end{cases}$$
+类似的，瑕积分的Cauchy Principal Value定义为：
 
-## 线性差分方程
+$$\int_{a}^{b}f(x)\mathrm{d}x=\lim_{\delta\to 0+}\left(\int_{a}^{c-\delta}f(x)\mathrm{d}x+\int_{c+\delta}^{b}f(x)\mathrm{d}x\right)$$
 
-时间随机过程本身是由时间序列组成的，因此也可以使用《机器学习（二十四）》中提到的ARIMA模型。该模型的关键是求解线性差分方程。这通常要使用“信号与系统”课程中的z变换（离散域的拉普拉斯变换）求解。考虑到“信号与系统”是一个很大的课程。这里仅对本人关心的要点，做一个简要记录。
+其中，c为瑕点。
 
-绝对可积->收敛域
+Cauchy Principal Value有什么用呢？
 
-z变换：$$f(z)\to F(z)$$
+以$$f(x)=\sin(x)$$为例，无穷积分
 
-z逆变换：$$F(z)\to f(z)$$
+$$\lim_{N\to +\infty,M\to -\infty}\int_{M}^{N}\sin(x)\mathrm{d}x$$
 
-系统函数：$$H(z)=\frac{R(z)}{E(z)}$$。其中，E是激励信号，R是系统响应。
+发散。
 
-E的收敛域：$$\mid z\mid >1$$
+而Cauchy Principal Value：
 
-差分算子->特征方程->特征根
-
-H的平稳条件：H的特征根满足$$\mid z\mid \le 1$$
-
-特征根是正实数，且$$\mid z \mid<1$$：自相关函数为阻尼曲线，仅有幅变。
-
-特征根是负实数或者复数，且$$\mid z \mid<1$$：自相关函数为正弦阻尼曲线，不仅有幅变，还有相变。
-
-## 选择ARIMA的阶数
-
-如前所述，ARIMA(p,d,q)除了一些参数之外，还包括p，d，p这三个阶数的超参数。
-
-AIC信息准则即Akaike information criterion，是衡量统计模型拟合优良性(Goodness of fit)的一种标准，由于它为日本统计学家赤池弘次创立和发展的，因此又称赤池信息量准则。AIC方法主要使用了KL散度。
-
-MDL(minimum description length,最小描述长度) 原理是Rissane在研究通用编码时提出的。其基本原理是选择总描述长度最小的模型。
+$$\lim_{M\to +\infty}\int_{-M}^{M}\sin(x)\mathrm{d}x=0$$
 
 参考：
 
-https://mp.weixin.qq.com/s/66lY17sOO83Q-xhvQi72dw
+https://www.zhihu.com/question/419790453s
 
-周期性时间序列的预测
+一道积分题
 
-# 功率谱
+https://blog.csdn.net/qq_45011547/article/details/90147363
 
-随机过程（设时间序列为$$u(n)$$）二阶统计：
+反常积分的性质与收敛判别
 
-时域——**自相关函数**：
+https://mp.weixin.qq.com/s/JGhAp4FPmEjwOpI4EsXe0A
 
-$$r_N(n-k)=E[u_N(n)u_N^*(k)]\tag{1}$$
-
-其中，$$u_N^*(k)$$是$$u_N(k)$$的复共轭。
-
-频域：
-
-$$U_N(\omega)=\sum_{n=-N}^Nu_N(n)e^{-j\omega n}\tag{2}$$
-
-$$S(\omega)=\lim_{N\to\infty}\frac{1}{N}E[\mid U_N(\omega)\mid^2]=\sum_{l=-\infty}^{+\infty}r(l)e^{-j\omega l}\tag{3}$$
-
-其中，$$S(\omega)$$就是**功率谱密度（power spectral density, PSD）**，也称为功率谱（power spectrum）。
-
-自相关函数和功率谱密度组成了傅立叶变换对，这种关系又被称为**EWK（Einstein-Wiener-Khintchine）关系**。
-
->Einstein最早提出idea，Wiener证明了一个特例，Khintchine做了扩展证明。
-
->Aleksandr Yakovlevich Khinchin，1894～1959，苏联数学家。莫斯科州立大学毕业，并留校任教，直到去世。苏联概率学派的重要人物。苏联科学院院士。概率论中，著名的Khintchine inequality就是他的成果。
-
-在频域上，我们有Nyquist频率，相应的在时域上，我们也有**Nyquist间隔**：在这个间隔之外，$$S(\omega)$$是周期性的。
-
-**离散时间随机过程的功率谱密度是非负实函数。**
-
-$$S_o(\omega)=\mid H(e^{j\omega})\mid S(\omega)\tag{4}$$
-
-其中，H为系统函数，$$S_o$$输出信号的功率谱密度。
-
-功率谱密度的Cramér表示：
-
-$$u(n)=\frac{1}{2\pi}\int_{-\pi}^{\pi}e^{j\omega n}\mathrm{d}Z(\omega)\tag{5}$$
-
-其中，$$\mathrm{d}Z(\omega)$$被称为**增量过程（increment process）**。
-
->Harald Cramér，1893～1985，瑞典数学家、统计学家。Stockholm University博士（1917）、教授、校长、瑞典高等教育系统大臣。被誉为“统计理论的巨人”。
-
-由公式2和5，可得：
-
-$$U_N(\omega)=\frac{1}{2\pi}\int_{-\pi}^{\pi}\sum_{n=-N}^N e^{(-j(\omega-v) n)}\mathrm{d}Z(v)\tag{6}$$
-
-我们定义：
-
-$$K_N(\omega)=\sum_{n=-N}^N e^{j\omega n}=\frac{\sin((2N+1)\omega/2)}{\sin(\omega/2)}\tag{7}$$
-
-则公式6可改写为：
-
-$$U_N(\omega)=\frac{1}{2\pi}\int_{-\pi}^{\pi}K_N(\omega-v)\mathrm{d}Z(v)\tag{8}$$
-
-这里的K被称作Dirichlet Kernel。参见《数学狂想曲（一）》的相关章节。
-
-一般来说，在公式8中，$$U_N(\omega)$$是已知的，而$$\mathrm{d}Z(\omega)$$是未知的。从数学上来说，这个积分方程可看做第一类Fredholm积分方程的一个例子。
-
->Erik Ivar Fredholm，1866～1927，瑞典数学家。Uppsala University博士（1898）+Stockholm University教授。不知道是不是瑞典的保险业比较发达，他和Cramér居然都当过兼职的精算师。。。瑞典皇家科学院院士。
-
->Uppsala University是瑞典，也是北欧最古老的大学，始建于1477年。
-
-功率谱密度的估计方法主要包括参数法和非参数法两大类。
-
-参数法包括：
-
-1.模型辨识法。基本就是上面提到的ARIMA或者其变种。
-
-2.最小方差无失真响应法（MVDR）。
-
-3.特征分解法。将相关矩阵R分解为两个子空间：信号子空间和噪声子空间。
-
-非参数法包括：
-
-1.周期图法。
-
-2.多窗口法。
-
-一般来说，随机过程的功率谱包含两个分量：确定性分量和连续分量。前者是增量过程$$\mathrm{d}Z(\omega)$$的一阶矩，后者是$$\mathrm{d}Z(\omega)$$的二阶中心矩。
-
-参数法一般在知道相关物理规律时使用，它具有较高的精确度。而非参数法由于只依赖增量过程的一阶矩和二阶中心矩，因此适用范围更广泛，即使不知道系统的物理规律也可以使用。（有些类似万能拟合的GMM）
-
-参考：
-
-https://www.zhihu.com/question/29520851
-
-功率谱密度如何理解？
-
-https://mp.weixin.qq.com/s/i84yW8L7qGVpPtwpaJhhgw
-
-深入浅出聊抖动（Jitter）
-
-https://mp.weixin.qq.com/s/XZHh7O-aiTA4Z-jnz20HgA
-
-功率谱密度
+留数定理与积分

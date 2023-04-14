@@ -4,6 +4,9 @@ title:  GStreamer（一）
 category: technology 
 ---
 
+* toc
+{:toc}
+
 # 概况
 
 当前GStreamer主要有两个大的版本分支：
@@ -32,7 +35,7 @@ http://gstreamer.freedesktop.org/documentation/plugins.html
 
 插件安装方法，以gst-plugins-base为例。
 
-`sudo apt-get install gstreamer1.0-plugins-base`
+`sudo apt install gstreamer1.0-plugins-base`
 
 除了上面列出的插件之外，目前的做法，更倾向于使用ffmpeg作为后端编解码库，尤其是编解码更复杂的视频文件。因此在0.10.x时代，提供了gstreamer0.10-ffmpeg插件，而1.x时代，则有gstreamer1.0-libav提供对avcodec、avformat等ffmpeg库的支持。
 
@@ -68,7 +71,7 @@ autovideosink：视频播放插件
 
 GStreamer提供了一个工具软件集——gstreamer-tools。其安装方法如下：
 
-`sudo apt-get install gstreamer-tools gstreamer1.0-tools`
+`sudo apt install gstreamer-tools gstreamer1.0-tools`
 
 它包括以下工具：
 
@@ -152,7 +155,7 @@ https://en.wikipedia.org/wiki/Playlist
 
 这里推荐EasyTag，但它只支持生成.m3u文件。它的安装方法：
 
-`sudo apt-get install easytag`
+`sudo apt install easytag`
 
 GStreamer本身不能处理播放列表文件。官方的插件库中也没有处理播放列表文件的插件。
 
@@ -174,7 +177,7 @@ https://developer.gnome.org/totem-pl-parser
 
 安装方法：
 
-`sudo apt-get install libtotem-plparser-dev`
+`sudo apt install libtotem-plparser-dev`
 
 代码示例参见：
 
@@ -192,14 +195,14 @@ Totem Playlist Parser除了依赖常见的glib2、libxml、libsoup之外，还�
 
 Totem Playlist Parser最重要的函数是plparse/totem-pl-parser.c: totem_pl_parser_parse_internal。这个函数的主要思路是在special_types和dual_types数组中，根据MIME查找相关的处理函数。其代码片段如下：
 
-{% highlight c %}
+```c
 static PlaylistTypes special_types[] = {
 	PLAYLIST_TYPE ("audio/x-mpegurl", totem_pl_parser_add_m3u, NULL, FALSE),
 	PLAYLIST_TYPE ("video/vnd.mpegurl", totem_pl_parser_add_m4u, NULL, FALSE),
 	PLAYLIST_TYPE ("audio/x-scpls", totem_pl_parser_add_pls, NULL, FALSE),
 	...
 };
-{% endhighlight %}
+```
 
 从这里可以看出，找到正确的MIME才是开始解析的关键。这里使用了glib提供的g_content_type_guess函数判断文件的MIME。
 
@@ -232,5 +235,3 @@ static PlaylistTypes special_types[] = {
 3）cache型。二进制文件，不可阅读，空间最小，效率最高。
 
 我这里采用glob2文件，既方便修改，其占用空间也在可接受的范围内。
-
-

@@ -4,7 +4,32 @@ title:  GAN（五）——InfoGAN, ProGAN, GAN参考资源（1）
 category: GAN & VAE 
 ---
 
+* toc
+{:toc}
+
 # StarGAN（续）
+
+StarGAN给出的办法是：所有的Domain共享一个G网络。如上图右半部分所示。
+
+具体的操作如下图所示：
+
+![](/images/img3/StarGAN_2.png)
+
+1.D网络除了常规的Real/Fake判别器之外，还有一个Domain分类器。
+
+2.G网络的结构和CycleGAN类似，也包括了两部分：$$G_{X\to Y}$$和$$G_{Y\to X}$$。区别在于：后者的两个G网络是不同的网络，而前者是同一个网络。
+
+3.既然G网络只有一个，那么如何完成Domain变换呢？答案就是：把目标Domain的信息也输进G网络中。
+
+![](/images/img3/StarGAN_3.png)
+
+StarGAN不仅可在同一数据集中进行Domain变换，还可在不同数据集之间进行Domain变换。上图展示的是StarGAN在CelebA和RaFD数据集上的训练过程：
+
+1.两个数据集的标签不是完全相同的。（实际上是完全不同，囧）
+
+2.对标签进行编码。例如图中使用的Onehot编码。
+
+3.**利用Mask区分是哪个数据集。**这一步是关键。
 
 ![](/images/img3/GAN_5.png)
 
@@ -15,6 +40,10 @@ category: GAN & VAE
 https://mp.weixin.qq.com/s/rPDvLnG4MBDRUMCWs2fjcQ
 
 最新StarGAN对抗生成网络实现多领域图像变换
+
+https://mp.weixin.qq.com/s/CsIKES2APuxTP33RfX81fg
+
+升级版StarGAN来袭！你想要的多目标域多风格图像变换它都有
 
 # InfoGAN
 
@@ -37,6 +66,10 @@ CGAN虽然已经有了些user control的能力，然而还不够强。比如人�
 https://mp.weixin.qq.com/s?__biz=MzIwMTc4ODE0Mw==&mid=2247492415&idx=1&sn=a359e72ee99555f7a2fb4e21b2ad51db
 
 InfoGAN：一种无监督生成方法
+
+https://zhuanlan.zhihu.com/p/140544756
+
+InfoGAN与betaVAE
 
 # ProGAN
 
@@ -82,6 +115,22 @@ https://mp.weixin.qq.com/s/e1g1B-6bLe0IjNAHMJtGOw
 
 英伟达发布最强图像生成器StyleGAN2，生成图像逼真到吓人
 
+https://zhuanlan.zhihu.com/p/136392096
+
+看GAN如何一步步控制图像生成风格？详解StyleGAN进化过程
+
+https://mp.weixin.qq.com/s/cQAl7k7D6P-wG75VM_KyGw
+
+StyleGAN2玩出新高度！从华盛顿到特朗普，无缝切换生成历届美国总统
+
+https://mp.weixin.qq.com/s/P1cfC7smeTSBy_6LYn_HOA
+
+看GAN如何一步步控制图像生成风格？详解StyleGAN进化过程
+
+https://mp.weixin.qq.com/s/2G9JAWmXig0o8WR1J7dfkg
+
+终于有人把各路StyleGAN做了个大汇总
+
 # BigGAN
 
 论文：
@@ -106,19 +155,33 @@ https://mp.weixin.qq.com/s/jglebP4Zb9rZtb2EhWiQDA
 
 BigGAN被干了！DeepMind发布LOGAN：FID提升32%，华人一作领衔
 
-# S2GAN
-
-论文：
-
-《》
-
 # SAGAN
 
 论文：
 
-《》
+《Self-Attention Generative Adversarial Networks》
+
+# S3GAN
+
+论文：
+
+《High-Fidelity Image Generation With Fewer Labels》
+
+# DAGAN
+
+论文：
+
+《Data Augmentation Generative Adversarial Networks》
+
+这是一篇用GAN来进行数据增强的论文。
+
+![](/images/img3/DAGAN.png)
 
 # FUNIT
+
+https://mp.weixin.qq.com/s/KupmZpMi1A46f5_NKbTU2A
+
+深入理解风格迁移三部曲(一)--UNIT
 
 https://mp.weixin.qq.com/s/3hv44bkXYHn2wN_2OZmhxA
 
@@ -136,7 +199,25 @@ https://mp.weixin.qq.com/s/nAaKnI1ADKfeQ8UA_VP0Fw
 
 FUNIT
 
+# GauGAN
+
+https://mp.weixin.qq.com/s/sTLDG0rmFZv20G5veNYS9g
+
+英伟达再出黑魔法GauGAN：凭借几根线条，草图秒变风景照
+
+https://mp.weixin.qq.com/s/nKME65tCeNOlY4SiPv-fWA
+
+逼真照片随手画，马良神笔已上线--点击收获这份英伟达GauGAN开源代码
+
+https://mp.weixin.qq.com/s/0gEmZRocv_49ngVvaa4LNg
+
+装逼一步到位！GauGAN代码解读来了
+
 # GAN参考资源
+
+https://mp.weixin.qq.com/s/mUOSA387465ws0l9Fp-ebQ
+
+生成对抗网络GAN在各领域应用研究进展(中文版)，37页pdf
 
 https://mp.weixin.qq.com/s/Gjb-PkMqUIIV81Na6Za_BQ
 
@@ -269,79 +350,3 @@ https://mp.weixin.qq.com/s?__biz=MzIwMTc4ODE0Mw==&mid=2247491630&idx=1&sn=394ffe
 https://mp.weixin.qq.com/s/BEuA5icaQwRJGsJJLnAFVg
 
 用机器学习生成图片：GAN的局限性以及如何GAN的更爽
-
-https://zhuanlan.zhihu.com/p/41114883
-
-手机照片脑补成超大画幅，这个GAN想象力惊人
-
-https://mp.weixin.qq.com/s?__biz=MzA3MzI4MjgzMw==&mid=2650749368&idx=3&sn=fc20d9e6682c74227282df3133cea06c
-
-基于IR-transformer、IRGAN模型，解读搜狗语义匹配技术
-
-https://mp.weixin.qq.com/s/bKve_tZi9usz4oX0T3S15A
-
-悉尼大学陶大程：遗传对抗生成网络有效解决GAN两大痛点
-
-https://zhuanlan.zhihu.com/p/46629127
-
-生成对抗网络-GAN---一个好老师的重要性
-
-https://mp.weixin.qq.com/s/Sp0EYvaq-1u0mtnrrmFNCQ
-
-为什么说GANs是一个绝妙的艺术创作工具？
-
-https://mp.weixin.qq.com/s/uHEAtuY1_KZdUAdDAwFi_A
-
-以为GAN只能“炮制假图”？它还有这7种另类用途
-
-https://mp.weixin.qq.com/s/Yf5quOXmzJAy0GnJnvam5g
-
-台湾学者研发新型二元神经元GAN！有望用于AI作曲
-
-https://mp.weixin.qq.com/s/8aL7COItG7lS4q5-3IZCmQ
-
-定制人脸图像没那么难！使用TL-GAN模型轻松变脸
-
-https://mp.weixin.qq.com/s/9t0GvQW-cmakM0E9dWxBcg
-
-旧照片着色修复神器！自注意力GAN效果惊艳
-
-https://mp.weixin.qq.com/s/cUFQ6EADa39h2eFoa_Dh0A
-
-最高76%破解成功率！GAN已经能造出“万能指纹”，你的手机还安全吗？
-
-https://mp.weixin.qq.com/s/_tABIMkWX8L5xQFmvPI7rw
-
-有效稳定对抗模型训练过程，伯克利提出变分判别器瓶颈
-
-https://zhuanlan.zhihu.com/p/50790727
-
-SeqGAN: Sequence GAN with Policy Gradient
-
-https://mp.weixin.qq.com/s/bH5yYbwq6NGQJ84xUDhoxg
-
-生成对抗网络在图像翻译上的应用
-
-https://mp.weixin.qq.com/s/3Gsmrl4HbcnXpje0nyAq2w
-
-中国西北大学和北京大学的研究结果是否将终结CAPTCHA验证码时代？
-
-https://zhuanlan.zhihu.com/p/53260242
-
-抛开复杂证明，我们从直觉上理解W-GAN为啥这么好训
-
-https://mp.weixin.qq.com/s/FJA8Tctq_p4Mj-KgNn_OGg
-
-为什么让GAN一家独大？Facebook提出非对抗式生成方法GLANN
-
-https://mp.weixin.qq.com/s/xr9fDv9DFkwi2ImV4RZAHg
-
-换个角度看GAN：另一种损失函数
-
-https://mp.weixin.qq.com/s/U1rrPfJDLgXHRj__XwrMZw
-
-只有条件GAN才能稳定训练？对抗+自监督的无监督方法了解一下
-
-https://mp.weixin.qq.com/s/xHKQlFFkBQLBg2GdZuGPSw
-
-提升GAN训练的技巧汇总

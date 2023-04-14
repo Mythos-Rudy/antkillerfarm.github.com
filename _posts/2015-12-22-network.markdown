@@ -1,8 +1,11 @@
 ---
 layout: post
-title:  网络杂谈, Docker
+title:  网络杂谈, ZeroMQ, ActiveMQ
 category: technology 
 ---
+
+* toc
+{:toc}
 
 # 网络杂谈
 
@@ -202,6 +205,8 @@ Network Time Protocol，是用来让计算机之间实现时间同步的协议�
 
 http://www.pool.ntp.org/en/
 
+`ntpdate cn.pool.ntp.org`
+
 NTP的Client有很多，这里使用ntpclient软件。它的官网：
 
 http://doolittle.icarus.com/ntpclient/
@@ -214,32 +219,50 @@ http://doolittle.icarus.com/ntpclient/
 
 ntpd是NTP的另一个实现，既可以当Server，也可以当Client，已经被集成进busybox。
 
+https://mp.weixin.qq.com/s/OEbhKBBbo-eo4NWmLYmGDg
+
+有关部分北京市民“穿越”的科学解读
+
+https://mp.weixin.qq.com/s/wX-BXGDAZGm8FYc6-FbUhg
+
+用NTS保证NTP的安全
+
 ## socket通信基本流程
 
-### TCP
+- TCP
 
-{% highlight text %}
-服务器端                           客户端
-1.创建socket                       1.创建socket
-2.bind                             2.listen
-4.accept
-----等待客户端连接----              3.connect
-5.读数据（recv）                    4.写数据（send）
-6.写数据（send）                    5.读数据（recv）
-7.关闭socket（closesocket）         6.关闭socket（closesocket）
-{% endhighlight %}
+| 服务器端 | 客户端 |
+|:--:|:--:|
+| 1.创建socket | 1.创建socket |
+| 2.bind | 2.listen |
+| 4.accept |  |
+| 等待客户端连接 | 3.connect |
+| 5.读数据（recv） | 4.写数据（send） |
+| 6.写数据（send） | 5.读数据（recv） |
+| 7.关闭socket（closesocket） | 6.关闭socket（closesocket） |
 
-### UDP
+- UDP
 
-{% highlight text %}
-服务器端：                          客户端
-1.创建socket                       1.创建socket
-2.bind                             2.bind
-3.recvfrom                         
-----等待连接----                    3.sendto
-4.sendto                           4.recvfrom
-5.关闭socket（closesocket）         5.关闭socket（closesocket）
-{% endhighlight %}
+| 服务器端 | 客户端 |
+|:--:|:--:|
+| 1.创建socket | 1.创建socket |
+| 2.bind | 2.bind |
+| 3.recvfrom |  |
+| 等待连接 | 3.sendto |
+| 4.sendto | 4.recvfrom |
+| 5.关闭socket（closesocket） | 5.关闭socket（closesocket） |
+
+---
+
+在linux当中，socket包括两类：使用网络的socket，称为Berkeley socket；不使用网络的socket，称为Unix domain socket。两者API结构很像，所以容易被混淆，但是其实不是一个东西。
+
+Unix domain socket是为单机上跨进程通信，也就是IPC设计的。通信数据直接通过kernel在进程间交换，与网卡毫无关联。
+
+本机Socket通信不走网卡，不走物理设备，但是走虚拟设备，loopback device环回。
+
+https://www.zhihu.com/question/43590414
+
+Linux中本机和本机Socket通信会走网卡吗？
 
 ## WIFI WPS
 
@@ -273,102 +296,22 @@ WPS分为PBC(BUTTON)和PIN两种方式
 
 输入完PIN码后,点下一步,一会儿后,WPS安全连接成功建立。
 
-# Zookeeper
+# ZeroMQ
 
-http://zookeeper.apache.org/
+ZeroMQ是个在Socket之上，而在MQ之下的网络通信库。正如名称所言，它实际上并不是一个完整的MQ，而仅仅只有MQ的一些子功能罢了。
 
-bin/zkServer.sh status
-
-http://www.cnblogs.com/lpshou/archive/2013/06/14/3136904.html
-
-zookeeper原理
-
-http://www.ibm.com/developerworks/cn/opensource/os-cn-zookeeper/index.html
-
-分布式服务框架 Zookeeper--管理分布式环境中的数据
-
-https://mp.weixin.qq.com/s/uMj3JEhgyYw4CaIhP1-GTQ
-
-阿里巴巴为什么不用ZooKeeper做服务发现？
-
-https://mp.weixin.qq.com/s/KFzJAxL_xvrrjhubd7zH-Q
-
-Facebook为何放弃ZooKeeper转用自研配置管理系统？
-
-# Docker
-
-Docker是一个开源的应用容器引擎，让开发者可以打包他们的应用以及依赖包到一个可移植的容器中，然后发布到任何流行的Linux机器上，也可以实现虚拟化。容器是完全使用沙箱机制，相互之间不会有任何接口。
-
-官网：
-
-https://www.docker.com/
-
-下图显示了Docker和VM之间的差别：
-
-![](/images/article/docker_vs_vm.png)
+http://zeromq.org
 
 参考：
 
-http://blog.csdn.net/colorant/article/details/20608157
+https://blog.csdn.net/w174504744/article/details/73187697
 
-快速理解Docker
+ZeroMQ
 
-http://www.cnblogs.com/zhangmingcheng/p/5730070.html
+# ActiveMQ
 
-Docker数据管理
+ActiveMQ 是Apache出品，最流行的，能力强劲的开源消息总线。
 
-https://mp.weixin.qq.com/s/E4wKaIddq8_jRVx9q08qtg
+http://blog.csdn.net/jiuqiyuliang/article/details/46701559
 
-Docker入门
-
-https://mp.weixin.qq.com/s/S8OXlhRf90nobJtc3TgIpg
-
-基于docker构建hadoop集群
-
-https://mp.weixin.qq.com/s/VfC41XiVmpdWUy3VXgDLuw
-
-Docker基本概念和安装
-
-https://mp.weixin.qq.com/s/LeaYn-CUeu3wognse1fSzw
-
-理解、使用Docker（上）
-
-https://mp.weixin.qq.com/s/YPLnTF_jh8xahZ-uLffSkw
-
-理解、使用Docker（下）
-
-https://mp.weixin.qq.com/s/0jD_Ek2-AOsefjcdr9-A7g
-
-Docker容器介绍
-
-https://mp.weixin.qq.com/s/KBNFQA_4KG0LLadzRtvPPw
-
-如何用两个小时入门Docker？
-
-https://mp.weixin.qq.com/s/2w_63cwNOZ4pzOmarKIk-w
-
-最全的30+个开源免费的Docker工具
-
-https://mp.weixin.qq.com/s/iRCnShcbcL8cUMe0MT1mZQ
-
-用Docker玩转PHP环境配置
-
-https://mp.weixin.qq.com/s/XgCmAi1sgu1iA4cW-Zjcbw
-
-Docker完全指南
-
-https://mp.weixin.qq.com/s/e51KpBltxRd8Qk-VRj6EhQ
-
-让Docker更强大的9个安全开源工具
-
-https://mp.weixin.qq.com/s/DQESB4tB1G43JJQImKsvqg
-
-docker系列学习（一）：整体认识
-
-https://mp.weixin.qq.com/s/Ex1AOKGlp2ag6CQTc3rSkA
-
-您想要的docker环境来了！
-
-https://mp.weixin.qq.com/s/HFW3oiGIcYJdaKGjIahXjA
-
-不要把大型JAR包放进Docker镜像
+深入浅出JMS(一)--JMS基本概念

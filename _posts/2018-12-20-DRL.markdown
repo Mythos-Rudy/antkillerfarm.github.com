@@ -1,8 +1,11 @@
 ---
 layout: post
-title:  深度强化学习（一）——教程, 概述
+title:  深度强化学习（一）——教程, 工具/框架
 category: DRL 
 ---
+
+* toc
+{:toc}
 
 # 教程
 
@@ -46,11 +49,17 @@ CS234: Reinforcement Learning
 
 http://rail.eecs.berkeley.edu/deeprlcourse/
 
-CS 294: Deep Reinforcement Learning
+CS 285/294: Deep Reinforcement Learning
 
 >以上1本书+4个课程，基本就是目前RL领域的黄金搭档了。Stanford的课程内容比较新，但是很浅。UCB的课程通常都是给入门以后的人准备的，无论DL还是RL，都是这样。Sutton和Silver的课程内容比较老，但是很有深度。和CV领域只需要学习DL，而不需要学习传统方法不同，按照Sutton的说法，基本算法原理远比神经网络更重要。
 
 此外，还是老惯例，推荐一下李宏毅DL课程中的DRL部分。
+
+https://zhuanlan.zhihu.com/p/186093914
+
+深度强化学习工程师/研究员面试指南
+
+这个指南包含了DRL的绝大多数的研究方向，适合入门之后，选择若干深入方向之用。
 
 https://inst.eecs.berkeley.edu/~cs188/fa18/index.html
 
@@ -78,9 +87,23 @@ https://course.ie.cuhk.edu.hk/~ierg6130/schedule.html
 
 香港中文大学：Reinforcement Learning
 
+http://nanjiang.cs.illinois.edu/cs498/
+
+CS 498 Reinforcement Learning
+
+http://nanjiang.cs.illinois.edu/cs598/
+
+CS 598 Statistical Reinforcement Learning
+
+>姜楠，清华本科（2011）+University of Michigan博士（2017）。UIUC AP。
+
 https://github.com/aikorea/awesome-rl
 
 提供了RL方面的资源网页。aikorea还提供了同类的资源收集网页：awesome-rnn, awesome-deep-vision, awesome-random-forest。
+
+https://www.distributional-rl.org/
+
+Distributional Reinforcement Learning
 
 https://mp.weixin.qq.com/s/dS0oQbGtrdd4rS25cBNyoQ
 
@@ -202,6 +225,74 @@ https://paperswithcode.com/area/playing-games
 
 从Paper到Coding, 一览深度强化学习挑战34类游戏
 
+https://mp.weixin.qq.com/s/-vqX0PHOsDNbj2NX_cR2qg
+
+微软首席研究员Katja Hofmann-强化学习：过去、现在和未来展望，附97页ppt
+
+https://mp.weixin.qq.com/s/Yg_bFykE8zsG2--mBGYS5A
+
+DeepMind出品：深度学习与强化学习教程 850页ppt
+
+https://mp.weixin.qq.com/s/fLeHW6Asem4f2aP1ARHNZg
+
+FaceBook280页PPT解决DeepRL的"探索-利用(Exploration-Exploitation)"难题
+
+https://mp.weixin.qq.com/s/R2FTKZvebR0gbxM8h60oog
+
+《强化学习—使用Open AI、TensorFlow和Keras实现》174页pdf
+
+https://mp.weixin.qq.com/s/mZSOmlHRrowPcTKjnlB4wA
+
+深度强化学习实战，351页pdf，Deep Reinforcement Learning
+
+https://github.com/zhoubolei/introRL
+
+港中文周博磊：强化学习纲要
+
+https://mp.weixin.qq.com/s/e-xGWG1qWb_zuyorvhZpJA
+
+John Schulman总结深度强化学习理论、模型及编码调参技巧
+
+https://mp.weixin.qq.com/s/YTiNTQzRs7VkhEfiER5C3g
+
+最新《深度强化学习》教程，165页ppt与视频，Mila Doina Precup
+
+https://mp.weixin.qq.com/s/vHFLhlftGstuMcN8fswO5w
+
+基于模型的强化学习方法教程，279页ppt
+
+https://mp.weixin.qq.com/s/heFN7QU5uFTDLZytXgUrkw
+
+强化学习教程，83页ppt
+
+https://mp.weixin.qq.com/s/1b9rTD6wEgA0U54WNr7YAQ
+
+机器人深度强化学习，128页pdf
+
+https://mp.weixin.qq.com/s/1oy21VNupI1mZADY9KoyKQ
+
+强化学习中基于模型的方法，279页ppt
+
+https://mp.weixin.qq.com/s/2h_0gZBXMUWS3JG7lrfUNQ
+
+MIT科学家Dimitri P. Bertsekas最新《强化学习与最优控制》2021ASU课程
+
+https://amfarahmand.github.io/IntroRL/
+
+强化学习导论：多伦多大学2021课程
+
+https://datawhalechina.github.io/easy-rl/
+
+Easy-RL
+
+https://mp.weixin.qq.com/s/I2lnd1x3iYoFYgxTJn7bYQ
+
+清华大学李升波老师《强化学习与控制》，附课件
+
+https://deepreinforcementlearningbook.org/
+
+《深度强化学习：基础、研究与应用（Deep Reinforcement Learning: Foundamentals, Research and Applications）》北京大学董豪博士等著。
+
 # 论文
 
 《A Brief Survey of Deep Reinforcement Learning》
@@ -244,6 +335,14 @@ https://zhuanlan.zhihu.com/mlexplained
 
 一个RL的专栏
 
+https://github.com/Skylark0924/Reinforcement-Learning-in-Robotics
+
+一个机器人RL的专栏
+
+https://www.zhihu.com/column/c_1264765462367621120
+
+一个RL的专栏
+
 # 比赛
 
 https://github.com/seungjaeryanlee/awesome-rl-competitions
@@ -251,6 +350,10 @@ https://github.com/seungjaeryanlee/awesome-rl-competitions
 深度强化学习赛事汇总
 
 # 工具/框架
+
+https://www.zhihu.com/question/377263715
+
+目前最好用的大规模强化学习算法训练库是什么？
 
 https://mp.weixin.qq.com/s/5ScRIl2MHNGaUyIEJJKnKw
 
@@ -271,79 +374,3 @@ https://mp.weixin.qq.com/s/ew7vmvskp_q4aM7cJM-CXg
 https://github.com/danaugrs/huskarl
 
 基于TF2.0的深度强化学习平台：Huskarl
-
-https://mp.weixin.qq.com/s/ApP0zNuG5OP_-HzJC1v95Q
-
-谷歌发布开源Dopamine 2.0，让强化学习变得更灵活
-
-https://mp.weixin.qq.com/s/Hod37LQ-eEe0EVtLfyXLGQ
-
-DeepMind重磅开源强化学习框架！覆盖28款游戏，24多个算法(OpenSpiel)
-
-https://mp.weixin.qq.com/s/OIxgL4tLXNnapwHk4lDU4g
-
-DeepMind悄咪咪开源三大新框架，深度强化学习落地希望再现（OpenSpiel、SpriteWorld、bsuite）
-
-https://zhuanlan.zhihu.com/p/68462431
-
-谷歌开源RL足球环境
-
-https://mp.weixin.qq.com/s/BhTX4KQnLxUQLvPUfY3q6Q
-
-物理实验成本为零！南大LAMDA开源虚拟RL训练环境
-
-https://mp.weixin.qq.com/s/La43IWrxuDLoppnfRAYtbA
-
-ReinforceJS库（动态展示DP、TD、DQN算法运行过程）
-
-https://mp.weixin.qq.com/s/HUf41-OBAwZm7zlISkIx0w
-
-DRL在Unity自行车环境中配置与实践
-
-https://mp.weixin.qq.com/s?__biz=MzA3MzI4MjgzMw==&mid=2650771231&idx=3&sn=09410e8fd9f34cacfac7df6abf4d9973
-
-集合三大类无模型强化学习算法，BAIR开源RL代码库rlpyt
-
-https://mp.weixin.qq.com/s/PYrE6vUCivusWuFvdiUbNQ
-
-几行代码轻松实现，Tensorlayer 2.0推出深度强化学习基准库
-
-https://mp.weixin.qq.com/s/AUKMBRFMifcgZmdXBjDl3Q
-
-从“小”培养AI安全意识：OpenAI开源最新强化学习训练工具，安全约束自由定制，开箱即用
-
-# 概述
-
-![](/images/img2/RL_intro.png)
-
-上图是深度强化学习的脉络图，参考文献中还有该领域的关键论文列表。
-
-![](/images/img3/RL_methods.png)
-
-![](/images/img3/RL_challenges.png)
-
-原图地址：
-
-http://louiskirsch.com/maps/reinforcement-learning
-
-参考：
-
-https://mp.weixin.qq.com/s/781fVvKr4yuq4q2GI1Y1gA
-
-从Zero到Hero，OpenAI重磅发布深度强化学习资源
-
-https://spinningup.openai.com/en/latest/spinningup/keypapers.html
-
-深度强化学习关键论文列表
-
-## DeepMind vs OpenAI
-
-DeepMind和OpenAI算是DRL的两大重镇。
-
-DeepMind主要是David Silver和他导师Richard Sutton一脉，最初来源于control theory，代表作是Deep Q-learning, DDPG。
-
-OpenAI背后的派别是Berkeley帮，主要工作是围绕Pieter Abbeel以及他的两位superstar博士生Sergey Levine和John Schulman，最初来源于Robotics，代表作是TRPO以及后来的PPO。
-
-某牛的点评：
-
->现在的研究发现policy gradient的方法效果比Q-learning这种单纯基于value的方法好，所以选择policy gradient，事实上是把两者结合起来的actor-critic效果最好！只是说actor-critic的关键在于policy gradient。   

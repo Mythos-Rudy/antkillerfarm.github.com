@@ -4,7 +4,34 @@ title:  数学狂想曲（九）——Bézier curve, 熵
 category: math 
 ---
 
+* toc
+{:toc}
+
 # 随机过程（续）
+
+## 平稳过程
+
+严平稳过程：有限维分布。
+
+宽平稳过程：二阶矩。
+
+不要被名字迷惑了，由于两者关注的东西不同，一般情况下，严平稳过程不一定是宽平稳过程，宽平稳过程也不一定是严平稳过程。
+
+只有以下特例：
+
+1.对于二阶矩过程，严平稳过程一定是宽平稳过程。
+
+2.对于正态过程，严平稳过程和宽平稳过程是等价的。
+
+## 大数定律与中心极限定理
+
+### 大数定律
+
+切比雪夫大数定律：用统计方法来估计**期望**的理论依据。
+
+$$E(X)\approx \frac{1}{n}\sum_{k=1}^{n}x_k$$
+
+贝努利大数定律：事件A发生的频率$$\frac{n_A}{n}$$依概率收敛于事件A的概率p。当n很大时，事件发生的频率与概率有较大偏差的可能性很小：$$p\approx \frac{n_A}{n}$$
 
 ### 中心极限定理
 
@@ -61,6 +88,10 @@ https://mp.weixin.qq.com/s/Prfc7biv2VJBcgNIMbn7Ow
 
 如果数据分布是非正态的怎么办？用切比雪夫不等式呀！
 
+https://mp.weixin.qq.com/s/SEXU8_SXXZ6OZkwK77OjQQ
+
+随机矩阵的中心极限定理
+
 # Bézier curve
 
 Bézier curve在数学界发现的时间很早——它是1912年由Sergei Natanovich Bernstein提出的。然而，真正将之发扬广大的，却是法国工程师Pierre Étienne Bézier。
@@ -99,9 +130,9 @@ Bézier curve也可用于超参数的search。
 
 1803年，Lazare Carnot发现热机不能将所有的热量转换为机械能。1824年，其子Sadi Carnot在此基础上提出了理想热机的Carnot cycle。
 
->Lazare Nicolas Marguerite, Count Carnot，1753～1823，法国政治家、数学家和物理学家。虽然他在热机方面作出了重大贡献，但他的名声主要还是在政治领域。他当过国民会议主席（法国大革命期间的国家元首），曾力排众议启用拿破仑作为远征意大利的主帅，算是拿破仑政治上的恩师。他是法国大革命和拿破仑时期的一位重要政治人物。
+>Lazare Nicolas Marguerite, Count Carnot，1753～1823，法国政治家、数学家和物理学家。虽然他在热机方面作出了重大贡献，但他的名声主要还是在政治领域。他当过国民会议主席（法国大革命期间的国家元首），曾力排众议启用拿破仑作为远征意大利的主帅，算是拿破仑政治上的恩师。1793年法国共和政府推行征兵法之后，由Carnot一手组训出来的77万新军，开始投入战场并频获捷报，他因此被称为“**胜利的组织者**”，是极其优秀而成功的军备与后勤天才。在他的魔术棒下，无数平民出身的将才如群星一样喷涌而出。
 
->Nicolas Léonard Sadi Carnot，1796～1832，法国工程师和物理学家，被誉为“热力学之父”。Lazare Carnot之子。
+>Nicolas Léonard Sadi Carnot，1796～1832，法国工程师和物理学家，被誉为“热力学之父”。Lazare Carnot之子。他的侄子Marie François Sadi Carnot后来成为了法国总统。
 
 ![](/images/img2/Carnot_heat_engine.png)
 
@@ -110,6 +141,8 @@ Bézier curve也可用于超参数的search。
 ![](/images/img2/Carnot_cycle_p-V_diagram.png)
 
 上图是Carnot cycle的PV图，其中，1->2（吸热）和3->4（放热）是等温过程，而2->3和4->1是绝热过程。
+
+>P-V图，是由James Watt发明的。
 
 由热力学第一定律可得：
 
@@ -204,33 +237,3 @@ $$dS = \frac{Q}{T}\tag{14}$$
 http://galileo.phys.virginia.edu/classes/152.mf1i.spring02/CarnotEngine.htm
 
 Heat Engines: the Carnot Cycle
-
-## 统计热力学定义
-
-Entropy的统计热力学定义，相对就比较复杂了。这里仅列出推导的要点，不细讲了。
-
-首先是两个假设：
-
-1.**统计物理量的加和性**。（刘维尔定理）
-
-2.**概率分布的乘积性**。（不相关变量的概率分布公式）
-
-设系统有两部分，其熵为$$S_1,S_2$$，其概率分布为$$\Omega_1,\Omega_2$$，则根据上述假设可得：
-
-$$S=S_1+S_2$$
-
-$$\Omega=\Omega_1\times \Omega_2$$
-
-令$$S=f(\Omega)$$，则：
-
-$$S_1=f(\Omega_1),S_2=f(\Omega_2),S=f(\Omega_1)+f(\Omega_1)=f(\Omega_1\times \Omega_2)$$
-
-$$\begin{cases}
-\frac{\mathrm{d}f(\Omega)}{\mathrm{d}\Omega_1} = \frac{\mathrm{d}f(\Omega_1\times\Omega_2)}{\mathrm{d}(\Omega_1\times\Omega_2)}\mathrm{d}\Omega_2 \\
-\frac{\mathrm{d}f(\Omega)}{\mathrm{d}\Omega_2} = \frac{\mathrm{d}f(\Omega_1\times\Omega_2)}{\mathrm{d}(\Omega_1\times\Omega_2)}\mathrm{d}\Omega_1 \\
-\end{cases}
-\Rightarrow
-\begin{cases}
-\Omega_1\frac{\mathrm{d}f(\Omega)}{\mathrm{d}\Omega_1} = \frac{\mathrm{d}f(\Omega)}{\mathrm{d}\Omega}\Omega \\
-\Omega_2\frac{\mathrm{d}f(\Omega)}{\mathrm{d}\Omega_2} = \frac{\mathrm{d}f(\Omega)}{\mathrm{d}\Omega}\Omega \\
-\end{cases}$$

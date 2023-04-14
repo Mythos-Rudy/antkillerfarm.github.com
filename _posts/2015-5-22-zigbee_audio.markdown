@@ -1,8 +1,11 @@
 ---
 layout: post
-title:  Zigbee音频, 6LowPAN, IEEE 802, 各种智能家居通信技术比较
+title:  Zigbee音频, 6LowPAN, 物联网通信技术, 边缘计算
 category: technology 
 ---
+
+* toc
+{:toc}
 
 # Zigbee音频
 
@@ -132,83 +135,9 @@ https://github.com/xukai871105/contiki_cc2530_iar/
 
 无线图像回传技术采用COFDM调制方式，频段一般为300MHZ,实现视频高清图像实时回传到地面，比如NV301等。
 
-# IEEE 802
+# 物联网通信技术
 
-IEEE 802是一系列关于局域网和城域网的标准。
-
-其中，最重要的有：
-
-802.1 802系列协议的网络层管理。
-
-802.3 Ethernet
-
-802.11 Wi-Fi
-
-802.15.1 Bluetooth
-
-802.15.4 Zigbee
-
-802.16 WiMax
-
-http://www.ieee802.org/
-
-可以在这个网址下载相关的标准文件。
-
-## 无线网状网
-
-Wireless mesh network（WMN），也叫wireless ad hoc network。
-
-Ad Hoc源自于拉丁语，意思是“for this”引申为“for this purpose only”，即“为某种目的设置的，特别的”意思，即Ad hoc网络是一种有特殊用途的网络。IEEE802.11标准委员会采用了“Ad hoc网络”一词来描述这种特殊的自组织对等式多跳移动通信网络
-
-它具有以下特点：
-
-### 无中心
-
-Ad hoc网络没有严格的控制中心。所有结点的地位平等，即是一个对等式网络。结点可以随时加入和离开网络。任何结点的故障不会影响整个网络的运行，具有很强的抗毁性。
-
-### 自组织
-
-网络的布设或展开无需依赖于任何预设的网络设施。结点通过分层协议和分布式算法协调各自的行为，结点开机后就可以快速、自动地组成一个独立的网络。
-
-### 多跳路由
-
-当结点要与其覆盖范围之外的结点进行通信时，需要中间结点的多跳转发。与固定网络的多跳不同，Ad hoc网络中的多跳路由是由普通的网络结点完成的，而不是由专用的路由设备（如路由器）完成的。
-
-### 动态拓扑
-
-Ad hoc网络是一个动态的网络。网络结点可以随处移动，也可以随时开机和关机，这些都会使网络的拓扑结构随时发生变化。　这些特点使得Ad hoc网络在体系结构、网络组织、协议设计等方面都与普通的蜂窝移动通信网络和固定通信网络有着显著的区别。
-
-无线网状网可以基于802.11、802.15或802.16。具体到802.11就是Wi-Fi Mash。
-
-## Wi-Fi Mash
-
-和普通Wi-Fi相比，Wi-Fi Mash主要增加了路由协议。而这一块目前尚无标准，有70多个相互竞争的路由协议。其中主要有：
-
-AODV (Ad hoc On-Demand Distance Vector)
-
-B.A.T.M.A.N. (Better Approach To Mobile Adhoc Networking)
-
-HWMP (Hybrid Wireless Mesh Protocol)
-
-OLSR (Optimized Link State Routing protocol)
-
-IEEE为了统一标准，提出了802.11s。目前该标准默认使用HWMP。
-
-## 消息发送的类型
-
-![](/images/article/cast.png)
-
-## 参考
-
-https://mp.weixin.qq.com/s/GgwehPL4r-Y1pEd2k60Y_Q
-
-一文看懂蓝牙Mesh技术
-
-https://mp.weixin.qq.com/s/Mvq9UNEnHoUbmxocb-rqmQ
-
-LPWAN、LoRa、LoRaWAN的区别与联系
-
-# 各种智能家居通信技术比较
+2015.12
 
 <table>
   <tr>
@@ -278,3 +207,95 @@ LPWAN、LoRa、LoRaWAN的区别与联系
     <td></td>
   </tr>
 </table>
+
+![](/images/img4/Wifi.png)
+
+---
+
+![](/images/img4/LTE.jpg)
+
+![](/images/img4/LTE_2.jpg)
+
+https://mp.weixin.qq.com/s/J700Ifq5FfJqtgmO2VVn6g
+
+Cat 1大热背后，NB-IoT该何去何从？
+
+# 边缘计算
+
+![](/images/img2/edge_computing.png)
+
+![](/images/img4/edge_computing.png)
+
+https://mp.weixin.qq.com/s/i5KkUVaEULrlxeNtU_PDtQ
+
+天津大学最新“边缘计算与深度学习的融合”综述论文
+
+https://mp.weixin.qq.com/s/TXZh-bn9VhwGxJRNjzecRw
+
+重新认识“边缘计算”
+
+https://mp.weixin.qq.com/s/6Nr7LF9VxYQ4NlLlk8bCVw
+
+不了解边缘计算，你可能就要被“边缘”了
+
+https://mp.weixin.qq.com/s/3d7CEQ0iQzwnJ_tE7eB9Yg
+
+边缘计算芯片格局分析
+
+https://mp.weixin.qq.com/s/U9vnEzumNgGlYFR-lEPfhw
+
+智能边缘计算：计算模式的再次轮回
+
+https://mp.weixin.qq.com/s/x6MWXZAFgyv2HDaVll9S6A
+
+一文读懂边缘计算和业务场景
+
+https://mp.weixin.qq.com/s/eXRy9kZqDlph96BdWwWwXQ
+
+49页ppt，Edge Computing for Infrastructure
+
+# Raspberry Pi+
+
+https://mp.weixin.qq.com/s/1wxA7jnCgmXt5j9DXxH1UA
+
+超有趣！手把手教你使用树莓派实现实时人脸检测
+
+https://mp.weixin.qq.com/s/tW54lcv9aRz9xXC9V-DsWw
+
+Keras+树莓派，130行代码找到圣诞老人
+
+https://mp.weixin.qq.com/s/8zD3GqbQrQnZmuD59OoFuQ
+
+让树莓派记下你的笑颜
+
+https://mp.weixin.qq.com/s?__biz=MzU1OTMyNDcxMQ==&mid=2247484969&idx=1&sn=29d04fbb56a4464b08407eb87d26325e
+
+基于源代码为Raspberry Pi设备构建TensorFlow
+
+https://mp.weixin.qq.com/s/onN61A13xuJzNk9zE0hM-w
+
+你有特斯拉，我有树莓派，纯手工打造车载车牌识别检测系统，家用车秒变智能车
+
+https://mp.weixin.qq.com/s/rqIZSX-zRNQ3uyae3LlnZQ
+
+树莓派也能实时训练agent玩Atari
+
+https://mp.weixin.qq.com/s/pPTaxiCOTL_Y89TuKGHQmg
+
+微软放弃的游戏被他们复活了：Windows经典“三维弹球”现实版，CAD建模、Arduino编程、数控机床打造，硬核致敬童年
+
+https://mp.weixin.qq.com/s/mgdDjjIJX4y1-DXzazDhPA
+
+不会编程的外国小姐姐，3天、850块，徒手用树莓派DIY了个数码相机
+
+https://mp.weixin.qq.com/s/rM3SkUiQIxsGz9MNIg1skQ
+
+用树莓派DIY波士顿机器狗，帮你省下50万：教程开源，人人皆可上手
+
+https://zhuanlan.zhihu.com/p/301860804
+
+如何把树莓派400打造成小霸王游戏机，Retropie包含上万经典老游戏
+
+https://www.zhihu.com/question/339388119
+
+树莓派做网站靠谱不？

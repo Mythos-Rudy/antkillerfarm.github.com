@@ -1,10 +1,55 @@
 ---
 layout: post
-title:  图像处理理论（七）——LBP, Fisherface, Viola-Jones
+title:  图像处理理论（七）——LBP, Fisherface
 category: graphics 
 ---
 
-# Eigenface（续）
+* toc
+{:toc}
+
+# Eigenface
+
+## 计算Eigenface（续）
+
+**Step 5**：计算的$$AA^T$$特征向量$$u_i$$。然而，$$AA^T$$太大了，我们只能退而求其次计算$$A^TA(M\times M \text{matrix})$$的特征向量$$v_i$$。
+
+那么$$u_i$$和$$v_i$$到底有什么关系呢？我们首先根据特征向量的定义，给出下式：
+
+$$A^TAv_i=\mu_iv_i$$
+
+其中，$$\mu_i$$是$$A^TA$$的特征值。
+
+$$A^TAv_i=\mu_iv_i\Rightarrow AA^TAv_i=\mu_iAv_i\Rightarrow CAv_i=\mu_iAv_i$$
+
+令$$u_i=Av_i$$，则：
+
+$$Cu_i=\mu_iu_i$$
+
+可见$$\mu_i$$同时也是$$AA^T$$的特征值，而对应的特征向量则是$$Av_i$$。
+
+实际上，$$A^TA$$的M个特征值，就是$$AA^T$$的前M大的特征值。
+
+**Step 6**：从中选出K个最大的特征向量供后续使用。
+
+## 使用Eigenface
+
+**Step 1**：给定图片$$\Gamma$$，计算：
+
+$$\Phi=\Gamma-\Psi$$
+
+**Step 2**：将$$\Phi$$映射到K维特征向量空间：
+
+$$\Omega=[w_1,\dots,w_K]^T$$
+
+**Step 3**：计算与图片l的距离：
+
+$$e_r=\|\Omega-\Omega^l\|$$
+
+当$$e_r<T_r$$时，就认为是同一张人脸。
+
+这里的距离可以是欧氏距离，但作者指出使用马式距离效果更佳。
+
+综上，**Eigenface实际上就是PCA在人脸识别上的应用。**
 
 ## Eigenface的缺点
 
@@ -156,6 +201,10 @@ https://mp.weixin.qq.com/s/iFlnZ8z5baUdWCZxIGkq5g
 
 机器学习实战——LBP特征提取
 
+https://mp.weixin.qq.com/s/Kj1enaH_O-vVu3APDDX8sQ
+
+如何在较暗环境进行人脸检测？
+
 # Fisherface
 
 Fisherface由Peter N. Belhumeur, Joao P. Hespanha和David J. Kriegman于1997年提出。
@@ -177,37 +226,3 @@ Eigenfaces的主要原理基于PCA，而Fisherface的主要原理基于LDA（参
 http://blog.csdn.net/smartempire/article/details/23377385
 
 Fisherface（LDA）
-
-# Viola-Jones
-
-Viola-Jones方法由Paul Viola和Michael Jones于2001年提出。
-
->Paul Viola，MIT本科（1988）+博士（1995）。先后在微软、Amazon担任研究员。
-
->Michael Jones，MIT博士（1997）。现为Mitsubishi electric research laboratories研究员。
-
-论文：
-
-《Rapid Object Detection using a Boosted Cascade of Simple Features》
-
-《Robust real-time face detection》
-
-《An Extended Set of Haar-like Features for Rapid Object Detection》
-
-《Learning Multi-scale Block Local Binary Patterns for Face Recognition》
-
-《Implementing the Viola-Jones Face Detection Algorithm》
-
-## 概述
-
-和之前的方法不同，Viola-Jones不仅是一个算法，更是一个框架，前DL时代的人脸检测一般都采用该框架。其准确度也由Fisherface时代的不到70%，上升到90%以上。当然，这里所用的数据集以今天的眼光来看，只能算作玩具了——基本都是正面、无遮挡的标准照，光照也比较理想。但不管怎么说，这也是第一个进入商业实用阶段的目标检测框架，目前(2016)，大多数的商业化产品仍然基于该框架。
-
-Viola-Jones框架主要有三个要点：
-
-1.Haar-like特征，AdaBoost算法和Cascade结构。Haar-like特征利用积分图像（Integral Image）快速的计算矩形区域的差分信号；
-
-2.AdaBoost算法选择区分能力强的特征结合Stump函数做弱分类器，然后把若干这些弱分类器线性组合在一起增强分类性能；
-
-3.Cascade结构做Early decision快速抛弃明显不是人脸的扫描窗口。
-
-下面我们分别描述一下这几个要点。

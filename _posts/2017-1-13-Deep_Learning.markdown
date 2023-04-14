@@ -1,8 +1,27 @@
 ---
 layout: post
-title:  深度学习（一）——前言, MP神经元模型, BP算法
+title:  深度学习（一）——人工智能, 前言, MP神经元模型, BP算法
 category: DL 
 ---
+
+* toc
+{:toc}
+
+# 人工智能
+
+![](/images/img4/AI_ML_DL.png)
+
+经过长期研究和积累，人工智能形成了三大学派：符号主义、联结主义和行为主义。
+
+**符号主义**认为人类认知和思维的基本单元是符号，人的思维过程就是符号处理。符号主义曾经长期“统治”人工智能领域，在机器定理证明、专家系统等方面取得了不俗的成绩。
+
+**联结主义**认为人的智能是通过大脑的神经元互相联结实现的，不同的神经元对不同的输入模式具有敏感性，神经元之间的联结权重可以通过刺激和反馈进行学习。当前流行的深度学习方法就是在人工神经网络的基础上发展而来的。
+
+**行为主义**认为行为产生智能，智能是对外界复杂环境的适应，而这种适应表现为基于感知信号所采取的行动。家用扫地机器人、波士顿公司的“大狗”都是行为主义学派的代表性成果。
+
+https://mp.weixin.qq.com/s/qaGyZJjNch7OIXIBONJx0Q
+
+人工智能是大杂烩吗？
 
 # 前言
 
@@ -30,7 +49,7 @@ http://speech.ee.ntu.edu.tw/~tlkagk/courses.html
 
 >李宏毅，国立台湾大学硕士（2010年）+博士（2012年）。国立台湾大学计算机系助理教授。
 
-李宏毅的课程难度适中，且更新很快，每隔半年逛一下，必有新收获。
+李宏毅的课程难度适中，内容全面，且更新很快，每隔半年逛一下，必有新收获。
 
 https://www.csie.ntu.edu.tw/~yvchen/f106-adl/syllabus.html
 
@@ -39,6 +58,10 @@ https://www.csie.ntu.edu.tw/~yvchen/f106-adl/syllabus.html
 ![](/images/article/yvchen.jpg)
 
 >陈蕴侬，国立台湾大学本硕（2011年）+CMU博士（2015年）。国立台湾大学计算机系助理教授。
+
+http://introtodeeplearning.com/
+
+MIT 6.S191 Introduction to Deep Learning。涵盖深度学习导论、序列建模、深度视觉、生成模型、强化学习、图神经网络、对抗学习、贝叶斯模型、神经渲染、机器学习嗅觉等方面，是DL领域的综合课程。
 
 《Deep Learning》，Ian Goodfellow、Yoshua Bengio、Aaron Courville著。
 
@@ -73,7 +96,7 @@ Deep Learning圈子的主要人物：
 
 >这三个法国佬，都是好基友。只不过Yann LeCun和Yoshua Bengio研究神经网络，而Léon Bottou研究SVM，学术上分属不同派系。
 
->Geoffrey Everest Hinton，1947年生，英国出生的加拿大科学家，爱丁堡大学博士，多伦多大学教授。连接主义的代表人物，多层神经网络的宗师。英国皇家学会会员。
+>Geoffrey Everest Hinton，1947年生，英国出生的加拿大科学家，爱丁堡大学博士，多伦多大学教授。连接主义的代表人物，多层神经网络的宗师。英国皇家学会会员。Hinton的事迹参见[《对Geoffrey Everest Hinton的深度挖掘》](/essay/2019/07/30/essay_23.html)
 
 >一般将Geoffrey Hinton、Yann LeCun和Yoshua Bengio并称为深度学习的三大宗师。
 
@@ -109,7 +132,7 @@ MP神经元模型如下图所示：
 
 $$y_j=f\left(\sum _{i=1}^nw_{ij}x_i-\theta_j\right)$$
 
-上式其实就是《机器学习（一）》中提到的逻辑回归。f被称为称为激活函数(Activation Function)或转移函数(Transfer Function)，用以提供**非线性表达能力**。
+f被称为称为激活函数(Activation Function)或转移函数(Transfer Function)，用以提供**非线性表达能力**。f的参数其实就是《机器学习（一）》中提到的逻辑回归。
 
 生物神经元和MP神经元模型的对应关系如下表：
 
@@ -125,6 +148,10 @@ $$y_j=f\left(\sum _{i=1}^nw_{ij}x_i-\theta_j\right)$$
 
 从上图亦可看出，如果将阈值看作输入为-1.0的哑节点的连接权重，则权重和阈值可统一为权重。神经网络训练的过程，实际上就是根据样本调整权重和阈值的过程。
 
+![](/images/img4/FC.jpg)
+
+实际使用中，可以将多个神经元组合成一个Layer，也就是通常所说的full connect layer。
+
 参考：
 
 http://blog.csdn.net/u013007900/article/details/50066315
@@ -137,9 +164,27 @@ http://blog.csdn.net/u013007900/article/details/50066315
 
 ![](/images/article/single_layer_vs_multi_layer.png)
 
+宽度也有类似的现象：
+
+![](/images/img3/infinite_width.gif)
+
+实际上无限宽的神经网络模型等价于Gaussian Processes。
+
+参考：
+
+https://mp.weixin.qq.com/s/W0mVk_KtL2Tr_Uo-1el7Aw
+
+5行代码打造无限宽神经网络模型
+
+https://mp.weixin.qq.com/s/3C5b1cd4PwoYeAEkj5wbYw
+
+用小学数学带你感受人工智能的魅力
+
 # ANN简史
 
 ![](/images/article/ANN_history.png)
+
+![](/images/img4/brain.png)
 
 参考：
 
@@ -162,6 +207,14 @@ https://mp.weixin.qq.com/s/DkAFMDOnJKkdpV7bnkSZqQ
 https://www.visualcapitalist.com/ai-revolution-infographic/
 
 Visualizing the AI Revolution in One Infographic
+
+https://blog.csdn.net/OneFlow_Official/article/details/125013611
+
+深度学习六十年简史
+
+https://mp.weixin.qq.com/s/TfwA4x8dU_rMhC0fuE-xYw
+
+人工智能300年
 
 # BP算法
 
@@ -201,45 +254,4 @@ $$\frac{\partial E_k}{\partial w_{hj}}=\frac{\partial E_k}{\partial \hat y_j^k}\
 
 ![](/images/article/chain_rule.png)
 
-值得注意的是残差梯度实际上包括两部分：$$\Delta x$$和$$\Delta w$$。如下图所示：
-
-![](/images/img2/BP.png)
-
-其中，$$\Delta x$$和$$\Delta w$$分别是$$\Delta$$在x和w的偏导数方向上的分量。$$\Delta x$$用于向上层传递梯度，而$$\Delta w$$用于更新权值w。
-
-通常来说，我们只需要更新权值w，但少数情况下，w和x可能都需要更新，这时只要分别计算w和x的偏导，并更新即可。
-
-除了基于梯度下降的BP算法之外，还有基于GA（genetic algorithm）的BP算法，但基本只有学术界还在尝试。
-
-## 随机初始化
-
-神经网络的参数的**随机初始化**的目的是使对称失效。否则的话，所有对称结点的权重都一致，也就无法区分并学习了。
-
-随机初始化的方法有如下几种：
-
-1.Gaussian。用给定均值和方差的Gaussian分布设定随机值。这也是最常用的方法。
-
-2.Xavier。该方法基于Gaussian分布或均匀分布产生随机数。其中分布W的均值为零，方差公式如下：
-
-$$\text{Var}(W)=\frac{1}{n_{in}}\tag{1}$$
-
-其中，$$n_{in}$$表示需要输入层的神经元的个数。也有如下变种：
-
-$$\text{Var}(W)=\frac{2}{n_{in}+n_{out}}\tag{2}$$
-
-其中，$$n_{out}$$表示需要输出层的神经元的个数。
-
-公式1也被称作LeCun initializer，公式2也被称作Glorot initializer。
-
-3.MSRA。该方法基于零均值的Gaussian分布产生随机数。Gaussian分布的标准差为：
-
-$$\sqrt{\frac{2}{n_l}}$$
-
-其中，$$n_l=k_l^2d_{l-1}$$，$$k_l$$表示l层的filter的大小，$$d_{l-1}$$表示l-1层的filter的数量。
-
-这种方法也被称作He initializer，是何恺明发明的。
-
->何恺明，清华本科+香港中文大学博士（2011）。先后在MS和Facebook担任研究员。   
->个人主页：http://kaiminghe.com/
-
-何恺明在训练ResNet的时候发现Xavier方法对于ReLU激活不是太有效，故而提出了新方法。
+![](/images/img4/chain_rule.png)

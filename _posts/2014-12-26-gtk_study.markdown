@@ -4,13 +4,16 @@ title:  GTK学习心得
 category: technology 
 ---
 
+* toc
+{:toc}
+
 # GTK
 
 ## 1）安装环境
 
-本人所使用的开发环境是Ubuntu 12.04。默认情况下已经安装了GTK+3开发所需的包。可以使用pkg-config --cflags --libs gtk+-3.0来确认安装的有效性。
+本人所使用的开发环境是Ubuntu 12.04。默认情况下已经安装了GTK+3开发所需的包。可以使用`pkg-config --cflags --libs gtk+-3.0`来确认安装的有效性。
 
-阅读示例代码是学习GTK+3的有效途径。可使用sudo apt-get install gtk-3-examples安装相关的示例代码。
+阅读示例代码是学习GTK+3的有效途径。可使用`sudo apt install gtk-3-examples`安装相关的示例代码。
 
 ## 2）Glade
 
@@ -39,7 +42,7 @@ Glade仍然是GTK+3默认的UI设计工具。与GTK+3配合的Glade版本是Glad
 
 事件回调函数只能返回一个用户数据指针，有的时候某个按键动作会同时对几个控件进行操作。这个时候就需要通过某种方式来获得各个控件的指针。
 
- 如示例（http://code.google.com/p/antkillfarm-source-pool/source/browse/tags/first_demo.7z）中的do_cmd_ipod函数所示：
+如示例（http://code.google.com/p/antkillfarm-source-pool/source/browse/tags/first_demo.7z）中的do_cmd_ipod函数所示：
 
 1--首先在Glade中，将main_box的指针设为用户数据指针。
 
@@ -53,7 +56,7 @@ g_list_next函数的参数是当前节点main_box_child，而不是链表的指�
 
 ## 5）多窗体开发
 
- 单窗口GTK+程序的编程，很快就掌握了。下一步开始实践点击一个按钮，生成一个新窗口的功能。网上的例程多数都是基于GTK+ 2的。由于GTK+和Glade的版本升级，这样的方式虽然仍然可用，但却不再是最简便的方式了。
+单窗口GTK+程序的编程，很快就掌握了。下一步开始实践点击一个按钮，生成一个新窗口的功能。网上的例程多数都是基于GTK+ 2的。由于GTK+和Glade的版本升级，这样的方式虽然仍然可用，但却不再是最简便的方式了。
 
 首先还是使用Glade编辑ui文件。一个ui文件可以包含若干个窗口定义。调用gtk_builder_add_from_file生成这些窗口的数据 结构。可以将生成的窗口结构通过user_data的方式传递给按钮的回调函数。但是需要注意的是，传递给回调函数的窗口结构必须是有效的。
 
@@ -65,7 +68,7 @@ g_list_next函数的参数是当前节点main_box_child，而不是链表的指�
 
 2)重载B窗口的关闭消息，让它只是隐藏而不是销毁窗口。
 
-对于第2种方案，网上的例子很少，有也基本都是重载窗口的destroy信号。但实际上delete-event才是关闭事件的信号，只有做完了 delete-event才会执行destroy。这一点在GTK的用户手册上有详细的说明。同时，手册还推荐使用 gtk_widget_hide_on_delete函数来实现第2种方案。
+对于第2种方案，网上的例子很少，有也基本都是重载窗口的destroy信号。但实际上delete-event才是关闭事件的信号，只有做完了delete-event才会执行destroy。这一点在GTK的用户手册上有详细的说明。同时，手册还推荐使用 gtk_widget_hide_on_delete函数来实现第2种方案。
 
 ## 6）change-value和value-changed
 
@@ -75,9 +78,27 @@ GtkScale有两个容易混淆的事件：change-value和value-changed。
 
 ## 资源
 
+GTK中最关键的GLib，是由Tim Janik设计的。
+
+---
+
 https://blog.csdn.net/taiyang1987912/article/category/5778511
 
 一个GTK的专栏
+
+## 2020.7
+
+有4年半时间没有上GTK官网了。这回GTK和Gnome的官网，都改了风格设计，不再是10年前的老样子了。
+
+GTK4已经出了4个预览版，看起来就要正式发布了。从API层面来看，加入了MVVM的设计，CSS应用的也更广了。
+
+12年前，我接触GTK，主要是为了学习Linux GUI编程。
+
+7年前，我研究GTK，开始将工作从Windows转向Linux，那时的目标是写出两个平台都能跑的软件。cygwin/makefile是这时的常客。
+
+5年前，工作全面转入Linux，Windows+Virtual Box。家用双系统。
+
+3年前，工作电脑双系统，几乎不用Windows。
 
 # 在Windows下使用GTK+3
 
@@ -89,7 +110,13 @@ https://blog.csdn.net/taiyang1987912/article/category/5778511
 
 ## 2)下载GTK+3 for Windows
 
-到http://www.tarnyko.net/下载GTK+3的包。该网站是个法国佬办的。在www.gtk.org官方的维护GTK+ for Windows的人员闪人之后，这是少数几个移植GTK+3到Windows，且成功的版本。
+到
+
+http://www.tarnyko.net/
+
+下载GTK+3的包。
+
+该网站是个法国佬办的。在www.gtk.org官方的维护GTK+ for Windows的人员闪人之后，这是少数几个移植GTK+3到Windows，且成功的版本。
 
 该网站还有一篇GTK+3 Installation Tutorial for Windows的文章，介绍如何安装他制作的GTK包。里面还附带有一个Hello World程序代码，对于初始的学习很有帮助。
 
@@ -97,10 +124,10 @@ https://blog.csdn.net/taiyang1987912/article/category/5778511
 
 在mingw文件夹下新建MinGW.bat文件，内容如下：
 
-{% highlight bat %}
+```bat
 set PATH=D:\QtSDK\mingw\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;D:\gtk+-bundle_3.6.4-20130513_win32\bin
 cmd
-{% endhighlight %}
+```
 
 除了几个Windows的系统路径之外，把MinGW和GTK的路径加进去就可以了。
 
@@ -113,36 +140,6 @@ cmd
 ## 5)找不到-lintl该怎么办？
 
 到opensuse的官网下载mingw32-libintl的rpm包。用7-zip解压安装到gtk包中即可。
-
-2015.11
-
-稍早的时候，我在安装pygtk的环境时，发现pygi-aio安装程序提供的GTK版本已经到了3.14。但GTK官方这时仍然没有进展，版本停留在3.6.4。于是我又打算使用pygtk提供的更新来进行编程，但pygtk只提供了.dll文件，而没有.h和.lib文件，实际上并不好用，因此只得放弃之。
-
-最近再上官网，发现其已经提供了更好的解决办法——MSYS2。MSYS2是Martell Malone维护的一个开源项目，旨在提供一个方便易安装的MSYS开发环境，其中也包括为各种开发包提供更新维护，GTK就是其中之一。（当前的版本为Gtk 3.18.3）
-
-现将安装步骤罗列如下：
-
-1.在http://www.msys2.org/，下载安装程序，并按照网页提示，更新pacman。
-
-2.使用pacman下载必要的开发包。
-
-`pacman -S autoconf autogen automake-wrapper pkg-config make gcc gdb`
-
-`pacman -Ss <name>`: 查询相关的软件包是否存在。
-
-`pacman -Syu`: 更新已安装的软件包。
-
-MSYS2提供的环境除了安装友好，便于更新之外，对bash的支持也优于之前的版本。现在已经不需要单独为Windows平台提供特殊的makefile文件了。
-
-还可在如下网址查询packages：
-
-https://github.com/Alexpux/MINGW-packages
-
-https://github.com/Alexpux/MSYS2-packages
-
-MSYS2提供了两套API：mingw32和mingw64。可用以下方法（以gcc为例）查询需要安装的package的名字：
-
-`pacman -Sl | grep gcc`
 
 # GTK & OpenGL
 
@@ -182,6 +179,14 @@ https://github.com/antkillerfarm/antkillerfarm_crazy/tree/master/gtkglx
 
 用户需要根据自己的实际情况，修改Makifile.w32中的相关路径，把GTK和MINGW的路径设置好。
 
+---
+
+2021.12
+
+GTK 3.16+的示例如下：
+
+https://github.com/ebassi/glarea-example
+
 # GTK与系统图标
 
 在GTK 2.x时代，用户可以通过一系列的stock API来调用GTK自带的图标，比如gtk_tool_button_new_from_stock函数。
@@ -198,7 +203,7 @@ GtkMozEmbed调用Mozilla的Gecko内核渲染网页，这个方案在2008年以�
 
 WebkitGtk调用Webkit内核渲染网页。它的安装方法：
 
-`sudo apt-get install libwebkitgtk-3.0-dev`
+`sudo apt install libwebkitgtk-3.0-dev`
 
 注意这里需要根据你的gtk环境和Webkit API的版本选择不同的包。比如Gtk 2.x选择libwebkitgtk-dev，Gtk 3.x+Webkit 2选择libwebkit2gtk-3.0-dev。
 
@@ -206,13 +211,8 @@ WebkitGtk调用Webkit内核渲染网页。它的安装方法：
 
 https://github.com/antkillerfarm/antkillerfarm_crazy/tree/master/gtk_browser
 
-这里有两个例子，一个是helloworld型的，用于确定开发环境。另一个是从http://imtx.me/archives/1124.html中摘录的，原始的版本基于Gtk 2.x，现在改用Gtk 3.x。
+这里有两个例子，一个是helloworld型的，用于确定开发环境。另一个是从
 
-# GIO网络应用开发
+http://imtx.me/archives/1124.html
 
-GIO提供了以GSocket为首的低级API，和以GSocketClient、GSocketConnection为首的高级API。
-
-高级API的使用示例如下：
-
-https://github.com/antkillerfarm/antkillerfarm_crazy/tree/master/helloworld/glib/network
-
+中摘录的，原始的版本基于Gtk 2.x，现在改用Gtk 3.x。

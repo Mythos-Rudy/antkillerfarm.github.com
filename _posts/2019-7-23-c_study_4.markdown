@@ -1,303 +1,399 @@
 ---
 layout: post
-title:  boost, C#, Objective-C, Haskell, Kotlin, Lisp
+title:  C/C++编程心得（四）
 category: language 
 ---
 
-# boost
+* toc
+{:toc}
 
-## 安装&编译
+# 虚函数
 
-boost直接安装：
+```cpp
+class Shape {
+public:
+    virtual void Draw() const = 0;    // 1) 纯虚函数
+    virtual void Error(const string& msg);  // 2) 普通虚函数
+    int ObjectID() const;  // 3) 非虚函数
+};
 
-`sudo apt install libboost-all-dev`
+class Rectangle: public Shape { ... };
+```
+- 非虚函数：
 
-编译：
+基类和派生类都有该函数：
 
-{% highlight bash %}
-./bootstrap.sh
-./b2 install link=static cxxflags=-fPIC --with-test --prefix=</path/to/install>
-{% endhighlight %}
+```cpp
+Rectangel rc; // rc is an object of type Rectangle
+Shape *pB = &rc; // get pointer to rc
+Rectangle *pD = &rc; // get pointer to rc
 
-boost的组件有很多，这里只编译了test组件。
+pB->ObjectID(); // calls Shape::ObjectID()
+pD->ObjectID(); // calls Rectagle::ObjectID()
+```
 
->注意：指定生成目录的时候，stage使用stagedir选项，而install使用prefix选项。
+如果派生类没有该函数，则无论`pB->ObjectID();`还是`pD->ObjectID();`都调用Shape::ObjectID()。
 
-## boost.test
+- 普通虚函数：
 
-boost.test是一个C++的单元测试框架。
+基类和派生类都有该函数：
 
-代码示例：
+```cpp
+Rectangel rc; // rc is an object of type Rectangle
+Shape *pB = &rc; // get pointer to rc
+Rectangle *pD = &rc; // get pointer to rc
 
-https://github.com/antkillerfarm/antkillerfarm_crazy/tree/master/cpp/boost_test
+pB->ObjectID(); // calls Rectagle::ObjectID()
+pD->ObjectID(); // calls Rectagle::ObjectID()
+```
 
-要点：
+如果派生类没有该函数，则无论`pB->ObjectID();`还是`pD->ObjectID();`都调用Shape::ObjectID()。
 
-- 测试代码无须main函数。
+- 纯虚函数虽然要求派生类必须实现该函数，但并不意味着基类就不可以实现。但需要用特殊的语法才能调用基类实现。
 
-- 编译：`-DBOOST_TEST_DYN_LINK`
+```cpp
+ps1->Shape::Draw(); // calls Shape::draw
+```
 
-- 链接：`-lboost_unit_test_framework`
+基类和派生类都有该函数的情况与普通虚函数相同。
 
-打印所有的log：
+---
 
-`unit_test --log_level=all`
+这是override的4种错误情况：
+
+```cpp
+class Base {
+public:
+    virtual void mf1() const;
+    virtual void mf2(int x);
+    virtual void mf3() &;
+    void mf4() const;// is not declared virtual in Base
+};
+
+class Derived: public Base {
+public:
+    virtual void mf1();// declared const in Base, but not in Derived.
+    virtual void mf2(unsigned int x);// takes an int in Base, but an unsigned int in Derived
+    virtual void mf3() &&;// is lvalue-qualified in Base, but rvalue-qualified in Derived.
+    void mf4() const;
+};
+```
+
+由于声明上的差异，这4种情况均无法override，且不易查找。
+
+```cpp
+class Derived: public Base {
+public:
+    virtual void mf1() const override;// adding "virtual" is OK, but not necessary
+    virtual void mf2(int x) override;
+    void mf3() & override;
+    void mf4() const override; 
+};
+```
+添加`override`关键字之后，就会去基类中查找是否有匹配成员函数，否则直接报错。
+
+---
+
+对`‘vtable for xxxx’`未定义的引用：
+
+必须吐槽一下C++的错误提示，这个错误如果改成没有实现XXX虚函数，就直观的多了。
 
 参考：
 
-https://www.ibm.com/developerworks/cn/aix/library/au-ctools1_boost/
+https://www.cnblogs.com/xinxue/p/5471708.html
 
-了解Boost单元测试框架
+C++11之override
 
-https://www.ibm.com/developerworks/cn/aix/library/au-ctools2_cppunit/index.html
+# typedef struct
 
-了解CppUnit
+在C中：
 
-https://www.ibm.com/developerworks/cn/aix/library/au-ctools3_ccptest/
+```c
+typedef struct Student
+{
+  int a;
+}Stu;
+```
 
-了解CppTest。上面这3篇算是比较权威的C++单元测试工具的教程了，作者都是Arpan Sen。
+于是在声明变量的时候就可：`Stu stu1;`
 
-https://my.oschina.net/vaero/blog/227528
+如果没有typedef就必须用`struct Student stu1;`来声明。
 
-C++单元测试：boost.test
+这里的Stu实际上就是struct Student的别名。
 
-https://remonstrate.wordpress.com/2011/07/06/boost-%e7%9a%84-unit-test/
+但是在C++中：
 
-boost的unit test
+```cpp
+struct Student
+{
+  int a;
+};
+```
 
-## googletest
+声明变量时可直接`Student stu2；`
 
-安装：
+所以当给C++的库提供C的接口时，经常可以看见如下用法：
 
-`sudo apt install libgtest-dev`
+```cpp
+typedef struct Student Student;
+```
+
+这样就可以抹平两者的差异了。
+
+参考：
+
+https://www.cnblogs.com/qyaizs/articles/2039101.html
+
+struct和typedef struct彻底明白了
+
+# cout格式化输出
+
+```c
+cout<<hex<<i<<endl; //输出十六进制数
+cout<<oct<<i<<endl; //输出八进制数
+cout<<dec<<i<<endl; //输出十进制数
+```
+
+# 小细节
+
+对于std::vector来说，begin()/end()返回iterator，而front()/back()返回的是element。此外，还有cbegin()/cend()返回const iterator。
+
+```cpp
+template< class InputIt >
+vector( InputIt first, InputIt last,
+        const Allocator& alloc = Allocator() );
+```
+
+这个构造函数很有意思，可以用于复制一个[first, last)区间的数据。
+
+---
+
+除了for循环遍历之外，C++还可以用std::for_each/std::find_if进行循环遍历，尤其是后者可以用于条件筛选。
+
+```cpp
+for(auto& item: list)
+{
+  //do sth
+}
+```
+
+还有一些方法可用于统计：
+
+std::all_of, std::any_of, std::none_of：全都是/至少有一个是/全都不是XXX。
+
+std::count, std::count_if：计数。
+
+---
+
+std::map用二叉树实现，相当于Java中的TreeMap，而std::unordered_map用hash表实现，相当于Java中的HashMap。
+
+C++11之前的一些非标准STL还实现了一种叫做hash_map的容器，原理上也是使用hash表，C++11标准为了不与之前的非标实现冲突，换了个名字而已。
+
+---
+
+map：存储key-value pair。`iterator->first`指向key，而`iterator->second`指向value。
+
+set：只有value。set也有unordered_set这样的变种。
+
+map和set都不允许重复值，如果需要重复的话，可以使用multiset和multimap。
+
+---
+
+```cpp
+template<typename T>
+struct S {
+    template<typename U> void foo(){}
+};
+ 
+template<typename T>
+void bar()
+{
+    S<T> s;
+    s.foo<T>(); // error: < parsed as less than operator
+    s.template foo<T>(); // OK
+}
+```
+
+上面是`template`的一种特殊用法，本来`s.foo<T>()`也就行了，然而编译器会把它当作`s.foo<T`，所以需要加上`template`以示区分。
+
+---
+
+数字转字符串：
+
+```cpp
+double a = 123.32;
+string res;
+stringstream ss;
+ss << a;
+ss >> res;//Or res = ss.str();
+```
+
+字符串转数字：
+
+```cpp
+string a = "123.32";
+double res;
+stringstream ss;
+ss << a;
+ss >> res;
+```
+
+---
+
+```cpp
+#define DispatchOnTensorType(tensor_type, function, ...)          \
+  switch (tensor_type->AsPrimitiveDataType()->GetDataType()) {    \
+    case ONNX_NAMESPACE::TensorProto_DataType_FLOAT:              \
+      function<float>(__VA_ARGS__);                               \
+      break;                                                      \
+    case ONNX_NAMESPACE::TensorProto_DataType_BOOL:               \
+      function<bool>(__VA_ARGS__);                                \
+      break;                                                      \
+    case ONNX_NAMESPACE::TensorProto_DataType_DOUBLE:             \
+      function<double>(__VA_ARGS__);                              \
+      break;                                                      \
+```
+
+# POD
+
+POD，全称plain old data，plain代表它是一个普通类型，old代表它可以与c兼容，可以使用比如memcpy()这类c中最原始函数进行操作。
+
+POD数据类型主要用来解决C++与C之间数据类型的兼容性，以实现C++程序与C函数的交互。
+
+参考：
+
+https://blog.csdn.net/fu_zk/article/details/17028669
+
+C++的POD数据类型
+
+https://www.cnblogs.com/DswCnblog/p/6371071.html
+
+C++11 POD类型
+
+# 命令行解析
+
+https://github.com/jarro2783/cxxopts
+
+https://github.com/tanakh/cmdline
+
+https://github.com/gflags/gflags
+
+前两个是轻量级的库，只要包含header即可。gflags是Google的产品，适合比较高端的用法。
+
+此外，boost::program_options也是一个选择。
+
+和命令行解析相对的，就是命令行输出了。
+
+https://github.com/agauniyal/rang
+
+这个项目可以设置终端输出的颜色等效果。
+
+# inl文件
+
+inl文件是内联函数的源文件。内联函数通常在C++头文件中实现，但是当C++头文件中内联函数过多的情况下，我们想使头文件看起来简洁点，能不能像普通函数那样将内联函数声明和函数定义放在头文件和实现文件中呢？
+
+当然答案是肯定的，具体做法将是：将内联函数的具体实现放在inl文件中，然后在该头文件末尾使用#include引入该inl文件。
+
+参考：
+
+https://www.cnblogs.com/findumars/p/4340936.html
+
+C++中的INL
+
+# std::any & std::variant & std::optional
+
+std::any：一个类型安全的容器，可以放置各种类型的数据。类似于`void*`。
+
+std::variant：类型安全的union。
+
+std::optional：该类型是用来表示一个值是不是存在的。std::optional有两个状态，即有值和无值。通常我们将std::optional用于函数的返回值，当函数执行成功了返回有值的状态，当函数执行失败了返回无值的状态。
+
+参考：
+
+https://www.jianshu.com/p/b2ec40c1c7c1
+
+C++17：std::any, std::variant 和 std::optional
+
+# std::transform
+
+```cpp
+std::string s("Hello");
+std::transform(s.begin(), s.end(), s.begin(),
+    [](unsigned char c) { return std::toupper(c); });
+std::cout << s << std::endl; // HELLO
+```
+
+# std::string
+
+std::string有很多实现方式，归纳起来有三类，而每类又有多种变化。
+
+1、无特殊处理（eager copy)，采用类似std::vector的数据结构。现在很少采用这种方式。
+
+2、Copy-on-write(COW)，g++的std::string一直采用这种方式，不过慢慢被SSO取代。
+
+3、短字符串优化（SSO)，利用string对象本身的空间来存储短字符串。VisualC++2010、clang libc、linux gnu5.x之后都采用的这种方式。
+
+https://www.cnblogs.com/cthon/p/9181979.html
+
+c++再探string之eager-copy、COW和SSO方案
+
+# 数组定义时的赋值方法
+
+```c
+struct mtd_partition {
+	const char *name;		/* identifier string */
+	uint64_t size;			/* partition size */
+	uint64_t offset;		/* offset within the master MTD space */
+};
+
+static struct mtd_partition parts[] = {
+      {name: "boot", offset: 0,           size:0x500000,},
+      {name: "setting", offset: 0x500000, size:0x300000,},
+      {name: "linux", offset: 0x800000,   size:0x500000,}, 
+      {name: "config", offset: 0xd00000,   size:0x100000,},	
+      {name: "rootfs", offset: 0xe00000,  size:0x3200000,},
+      {name: "app", offset: 0x4e00000, size:0x800000,},
+
+};
+
+static struct resource pxa27x_resource_ohci[] = {
+	[0] = {
+		.start  = 0x4C000000,
+		.end    = 0x4C00ff6f,
+		.flags  = IORESOURCE_MEM,
+	},
+	[1] = {
+		.start  = IRQ_USBH1,
+		.end    = IRQ_USBH1,
+		.flags  = IORESOURCE_IRQ,
+	},
+};
+```
+
+这些方法虽然不知道是C的哪个标准引入的，但是见到有代码这样用。
+
+# sanitizers
+
+sanitizers是Google推出的调试工具。已集成到各主流编译器之中，无需安装。
 
 代码：
 
-https://github.com/google/googletest
-
-`gtest_filter`是一个很有用的选项。
-
-示例：
-
-`./foo_test --gtest_filter=FooTest*.*-FooTest.Bar:FooTest2.Bar`
-
-运行所有“测试案例名称(testcase_name)”为FooTest的案例，但是除了FooTest.Bar和FooTest2.Bar。
+https://github.com/google/sanitizers
 
 参考：
 
-https://www.ibm.com/developerworks/cn/aix/library/au-googletestingframework.html
+https://zhuanlan.zhihu.com/p/257939964
 
-Google C++ Testing Framework简介
+编译器自带的调试神器sanitizers
 
-https://www.cnblogs.com/coderzh/archive/2009/04/06/1426755.html
+# 常用libc实现
 
-玩转Google开源C++单元测试框架Google Test系列(gtest)
+libc是C语言标准库的简称，它有多种实现。除了最常用的gcc自带的glibc之外，还有musl、uClibc、dietlibc等。
 
-## boost::format
+http://www.etalabs.net/compare_libcs.html
 
-{% highlight cpp %}
-cout << boost::format("%1%"
-    "%1t 十进制 = [%2$d]\n"
-    "%1t 格式化的十进制 = [%2$5d]\n"
-    "%1t 格式化十进制，前补'0' = [%2$05d]\n"
-    "%1t 十六进制 = [%2$x]\n"
-    "%1t 八进制 = [%2$o]\n"
-    "%1t 浮点 = [%3$f]\n"
-    "%1t 格式化的浮点 = [%3$3.3f]\n"
-    "%1t 科学计数 = [%3$e]\n"
-    ) % "example :\n" % 15 % 15.01 << endl;
-{% endhighlight %}
+这个网址是以上4种libc实现的比较结果。从结果来看，musl比较有投资价值。实际上，最近（2015.5）的OpenWrt项目就已经将libc由uClibc改为musl。我也是因为这个原因，才知道musl的。
 
-参考：
+当然这个表并不完整，其他的libc可以参见:
 
-https://www.cnblogs.com/WuErPIng/archive/2005/04/21/142308.html
-
-浅尝boost之format
-
-## Boost.Parameter
-
-该库可以支持命名参数，然而实现太复杂。期待新标准直接支持。
-
-## Boost.MPL
-
-元编程（Metaprogramming）是指某类计算机程序的编写，这类计算机程序编写或者操纵其他程序（或者自身）作为它们的数据，或者在运行时完成部分本应在编译时完成的工作。很多情况下与手工编写全部代码相比工作效率更高。编写元程序的语言称之为元语言，被操作的语言称之为目标语言。一门语言同时也是自身的元语言的能力称之为反射。
-
-MPL可以看成是STL的编译期版本，或者说元编程版本。它同样也提供了各种容器，只不过容纳的对象不是数据，而是类型。
-
-参考：
-
-www.cppblog.com/jack-wang/archive/2010/10/04/128589.html
-
-模板元编程---用MPL解决实际问题
-
-# C#
-
-## XmlReader
-
-XmlReader是.NET中处理XML的类。之前的W3C已经提出了DOM和SAX两种模型。作为最早的模型，这两种模型在各种语言中都有相应的实现，关于它们的讨论也有很多，在此不再赘述。
-
-XmlReader是一种快速、无缓冲、向前并只读的轻量级XML引擎，在这一点上它和SAX是相同的。它和SAX的主要区别在于它们的设计模式是不同的。SAX是push模式的XML引擎，它会在读到相应的节点时，触发消息并将之发送给调用程序。而XmlReader则是pull式的XML引擎，它更符合人们的通常的对文件顺序处理的习惯。当然除此之外，它还有其他的好处。参看MSDN的相关章节。
-
-通常情况下，pull模型比push模型的效率高，但push模型的灵活性要高些。例如，Dos下的编程主要是一种顺序执行的pull模型结构，而Windows下的编程则是一种基于消息的push模型结构。所以，读取特定标签内容的XML文档，采用XmlReader比较好，而对于那些结构不固定或需要遍历的XML文档用SAX较好。
-
-PS: XmlReader提出的pull方案，后来被libxml2采用，成为了GTK+的一部分。
-
-## Microsoft.WindowsCE.Forms
-
-这是一个Wince的类。由于.NET CF中的System.Windows.Forms.Form没有DefWndProc参数，所以要想接收窗体消息就要用到它。不过它的dll需要自己添（在.NET CF的安装路径下可以找到这个Microsoft.WindowsCE.Forms.dll），接收C++编程时的那些WM_开头的消息时需要用到这个模块中的MessageWindow类。
-
-代码示例如下:
-
-{% highlight c# %}
-    public class MsgWindow : MessageWindow
-    {
-
-        public const int WM_CUSTOMMSG = 0x0400+3333;
-        
-        private Form1 msgform;//Form1是用于接收消息的那个窗体Form。
-
-        public MsgWindow(Form1 msgform)
-        {
-            this.msgform = msgform;
-        }
-
-        protected override void WndProc(ref Message msg)
-        {
-            switch (msg.Msg)
-            {
-                case WM_CUSTOMMSG:
-                    //do sth
-                    break;
-            }
-            base.WndProc(ref msg);
-        }
-    }
-{% endhighlight %}
-
-## C#中的发布功能
-
-C#项目属性中有个publish标签是关于发布程序的功能的。用过Java的人都知道，Java的可移植性是很不错的，但Java程序的部署相对于一般 的本地程序来说就显得比较麻烦了。至少在本人的程序生涯中，就多次经历拿着JAR文件兴冲冲的跑去，却发现目标机没有JRE的情况。
-
-C#中的发布功能除了能打包程序和.NET Framework之外，还有网络发布的功能。这里我主要讨论单机程序的打包。如果只有程序文件的话，情况比较简单，没什么难度。如果还有数据文件的话就 要注意了。在程序文件（Application Files）对话框中，每个文件有一个发布状态（Publish Status）的属性，如果你希望数据文件和程序文件在同一个文件夹下的话，最好选择包含（Include）而不是数据文件（Data File），后者会把你的数据文件部署到一个专门的数据文件夹下，这个文件夹可用 System.Deployment.Application.DataDirectory获得。
-
-## Mono
-
-.NET的跨平台一直不咋样，直到2014年MS推出的.NET core才有所改观。虽然.NET core可以开发C#应用，然而仅仅局限于非GUI的应用，所以目前更推荐使用Mono方案。
-
-Mono早先是Xamarin推出的跨平台.NET替代项目，目前已经被MS收购，按照MS的路线图，Mono将作为非Windows平台的.NET方案而存在。它将和Windows平台的.NET方案共用.NET core的代码。
-
-官网：
-
-https://www.mono-project.com/
-
-Mono有个IDE，叫做MonoDevelop。
-
-官网：
-
-https://www.monodevelop.com/
-
-安装方面，尽管ubuntu的仓库已经有了Mono，但是却没有MonoDevelop，且该Mono版本与最新的MonoDevelop不兼容，因此还是老老实实采用官网的方案安装吧。
-
-参考：
-
-https://www.cnblogs.com/shanyou/p/4295163.html
-
-.NET Core与.NET Framework、Mono之间的关系
-
-https://www.cnblogs.com/wer-ltm/p/8776846.html#!comments
-
-.NET：持续进化的统一开发平台
-
-https://mp.weixin.qq.com/s/j5PFEkWd49SNKVdlWoqHiw
-
-.NET Core很酷，你不得不知！
-
-# Objective-C
-
-## 环境搭建
-
-PC上搭建Objective-C（以下简称OC）开发环境，主要借助GNUstep开源项目的成果。
-
-以Ubuntu为例，步骤如下：
-
-1.安装软件包。
-
-`sudo apt-get install gnustep-devel libjpeg-dev libtiff5-dev gobjc-4.9`
-
-2.设置环境变量。
-
-`GNUSTEP_MAKEFILES=/usr/share/GNUstep/Makefiles`
-
-# Haskell
-
-官网：
-
-https://www.haskell.org/
-
-Haskell主要有两套包管理系统cabal和stack，它们的仓库都是一样的，只是前端语法不同。stack相对比较新，也是目前的首选。
-
-Haskell的官方仓库：
-
-http://hackage.haskell.org/
-
-清华镜像：
-
-https://mirrors.tuna.tsinghua.edu.cn/help/hackage/
-
-Haskell的安装有多种模式，推荐Stack模式，直接使用Stack安装所需要的依赖。
-
-Stack的官网：
-
-https://www.haskellstack.org/
-
-然而国内访问不了，幸好有github：
-
-https://github.com/commercialhaskell/stack/releases/
-
-# Kotlin
-
-Kotlin是一门编程语言，由JetBrains公司开发，与Java 100%互通。
-
-官网：
-
-http://kotlinlang.org/
-
-官网文档：
-
-http://kotlinlang.org/docs/reference/android-overview.html
-
-国内中文文档：
-
-https://huanglizhuo.gitbooks.io/kotlin-in-chinese/content/
-
-国内中文文档2：
-
-http://www.liying-cn.net/kotlin/docs/reference/
-
-国内中文文档3：
-
-https://www.kotlincn.net/
-
-官方示例：
-
-https://github.com/Kotlin/kotlin-examples
-
-# Lisp & GUI
-
-客观的说，目前开源领域并没有很好用的和Lisp配套的GUI工具集，几个开源实现要么完工度不高，要么过于古老，好几个的样式都是90年代中期的风格。
-
-更有人指出，GUI基本上是OO语言的天下了，Lisp根本不适合干这个事。
-
-不过事实的真相是：
-
-1.最早的交互式GUI生成工具是用Lisp写的。没错，就是苹果乔教主旗下的Interface Builder，时间是1986年。
-
-2.PTC公司的CAD系统是用Lisp和C++写的。
-
-3.苹果公司早期使用MCL作为GUI开发语言（from 1984），因此那个时代有大量的程序是用Lisp写的。包括Mac上最早的MS Word。Objective-C是乔教主到NextStep之后的事，最初和苹果并无交集。
-
-4.由于Mac在艺术家群体的流行。很多音乐软件是用Lisp写的，包括Open Music, PWGL, ScoreCleaner, Igor Engraver和Symbolic Composer等。
-
-5.有家叫做LispWorks（From 1989）的公司提供对Lisp GUI的商业支持，而且提供的界面并不逊色于GTK、Qt等当代GUI工具集。上面提到的音乐软件基本上都是基于LispWorks的。
-
-综上可见，Lisp开发GUI不是可能性的问题，而是一个有待重新发掘的问题。
+https://en.wikipedia.org/wiki/C_standard_library

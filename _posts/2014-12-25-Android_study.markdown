@@ -4,7 +4,14 @@ title:  Android研究（一）
 category: technology 
 ---
 
+* toc
+{:toc}
+
 # Android研究
+
+Android代码在线查看网站：
+
+https://cs.android.com/
 
 ## JNI
 
@@ -16,7 +23,7 @@ http://blog.csdn.net/believefym/archive/2007/06/08/1644635.aspx
 
 eclipse下jni初试
 
- 这里需要注意的是javah命令处理的是.class文件，而不是.java文件。你需要指定package的路径和package名。javap命令也有类似的要求。
+这里需要注意的是javah命令处理的是.class文件，而不是.java文件。你需要指定package的路径和package名。javap命令也有类似的要求。
 
 (2)Native C call Java
 
@@ -68,9 +75,9 @@ Android原生(Native)C开发之一：环境搭建篇
 
 还有一点需要注意的是，风临左岸使用的交叉编译工具，所编出的程序虽然可以在模拟器中运行，但却是无法直接用于JNI的，需要使用一定的技巧，可参见以下网页：
 
-Shared library "Hello World!" for Android
-
 http://honeypod.blogspot.com/2007/12/shared-library-hello-world-for-android.html
+
+Shared library "Hello World!" for Android
 
 从这篇文章可以看出，风临左岸使用的交叉编译工具的动态库的默认格式，和Android平台的动态库的格式是不同的，这也是之前有人说Android无法使用JNI的原因。
 
@@ -144,36 +151,36 @@ onPause
 
 Froyo出来有一阵子了，一时兴起，从官网上git了代码，打算编译。不料根据出错信息得知，Froyo及其以后的版本需要64-bit的OS才能编译。所以只好重新安装64-bit的Ubuntu。
 
-按照官网上的步骤一步一步的做，然后卡在apt-get install sun-java5-jdk上了。出错信息告诉我，找不到这个包。Google了一下，找到以下解决方法：
+按照官网上的步骤一步一步的做，然后卡在`sudo apt install sun-java5-jdk`上了。出错信息告诉我，找不到这个包。Google了一下，找到以下解决方法：
 
 9.10/10.04 add ubuntu 9.04 line to you /etc/apt/sources.list
 
-{% highlight bash %}
+```bash
 deb http://us.archive.ubuntu.com/ubuntu/ jaunty multiverse
 deb http://us.archive.ubuntu.com/ubuntu/ jaunty-updates multiverse
-sudo apt-get update
-sudo apt-get install sun-java5-jdk
-{% endhighlight %}
+sudo apt update
+sudo apt install sun-java5-jdk
+```
 
 （注意安装会一直停留在阅读sun的同意书上，使劲按确定都没反应的（确定是文本不是按钮），后来按键盘Tab解决。）
 
 更改预设jdk的方法如下：同理，更改 默认的javac,方法为
 
-{% highlight bash %}
+```bash
 update-alternatives --config java
 update-alternatives --config javac
-{% endhighlight %}
+```
 
 显示如下，然后键入java-1.5.0-sun的 编号：
 
 有 2 个选项可用于替换项 java (提供 /usr/bin/java)。
 
-{% highlight bash %}
+```bash
 选择       路径                                    优先级  状态
 * 0   /usr/lib/jvm/java-6-openjdk/jre/bin/java   1061    自动模式
 1     /usr/lib/jvm/java-1.5.0-sun/jre/bin/java   53      手动模式
 2     /usr/lib/jvm/java-6-openjdk/jre/bin/java   1061    手动模式
-{% endhighlight %}
+```
 
 查看当前的java版本：
 
@@ -217,12 +224,12 @@ Google eclipse Plugin - http://dl.google.com/eclipse/plugin/3.6
 
 如果是调用系统自带的计算器，在网上搜了一下，可以使用如下代码：
 
-{% highlight java %}
+```java
 Intent mIntent = new Intent();
 mIntent.setClassName("com.android.calculator2",
      "com.android.calculator2.Calculator");
 startActivity(mIntent);
-{% endhighlight %}
+```
 
 从代码的内容来看，主要是使用Intent启动系统计算器的Activity。但是这个代码在我目前的环境下，却在运行时出现了以下错误：
 

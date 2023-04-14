@@ -1,8 +1,11 @@
 ---
 layout: post
 title:  NLP参考资源（一）
-category: resource 
+category: DL & NLP resource 
 ---
+
+* toc
+{:toc}
 
 # NLP参考资源
 
@@ -196,6 +199,26 @@ https://mp.weixin.qq.com/s/D7NqCnHsEHe7Kuv2XzRV-A
 
 《深度自然语言处理的搜索系统》教程, 211页PPT带你从入门到精通
 
+https://mp.weixin.qq.com/s/SATpFOdUsMjCX4YfbGnM5w
+
+关系提取简述
+
+https://mp.weixin.qq.com/s/knsAHKOvZ-ht7qS0tt-vvg
+
+新手入门：Kaggle NLP比赛总结
+
+https://mp.weixin.qq.com/s/yCtI7lYzMa4nJXGQihqU2Q
+
+NLP中的文本分析和特征工程
+
+https://mp.weixin.qq.com/s/KCDnacvBpsgZPodfeEpQ9g
+
+4种常见的NLP实践思路
+
+https://mp.weixin.qq.com/s/lwZQzd4B-EKWv7e91qo18w
+
+自然语言处理机器推理，124页ppt
+
 ## 分词
 
 https://mp.weixin.qq.com/s/Xy_jaOex72pLe4wwieKeUg
@@ -253,6 +276,14 @@ https://mp.weixin.qq.com/s/AV-FiiYrSn3Z-J3S4l_yIQ
 https://blog.csdn.net/choose_c/article/details/86545299
 
 论文：State-of-the-art Chinese Word Segmentation with Bi-LSTMs
+
+https://mp.weixin.qq.com/s/0NPHChBuF79ZegITOw8euw
+
+中文分词的古今中外，你想知道的都在这里
+
+https://mp.weixin.qq.com/s/a4Mmw7WNKsrkgWca8QhaYQ
+
+分词，就这？
 
 ## 机器翻译
 
@@ -363,41 +394,3 @@ Facebook开源了两个无监督翻译模型，只用单语就能训练双语
 https://mp.weixin.qq.com/s/37qri3eFwF3kOWZxGUISzw
 
 你可能不再需要Attention：这是一个贼简单的神经机器翻译架构
-
-https://mp.weixin.qq.com/s/yA_dvLZ7adBd6Xw2MufhWw
-
-程序翻译新突破：UC伯克利提出树到树的程序翻译神经网络
-
-https://mp.weixin.qq.com/s/jBjs5OKZEcfpoYesz6Pk3w
-
-杨振：低资源神经机器翻译
-
-https://mp.weixin.qq.com/s/KG_X-wFPgWupb0FOWL9LIw
-
-三种提升多语言翻译模型的高效策略
-
-https://mp.weixin.qq.com/s/r9WRkmApBaHvlCQ5F5ypjg
-
-神奇的神经机器翻译：从发展脉络到未来前景
-
-https://mp.weixin.qq.com/s/8xGPwxLZX0ZJ586fZogkpg
-
-NAACL2019-使用感知句法词表示的句法增强神经机器翻译
-
-## 文本分类
-
-http://www.jianshu.com/p/0273c377c34e
-
-机器学习算法在文本分类中的应用综述
-
-https://mp.weixin.qq.com/s/xIkYLncxmLKqLQqeq-XxAw
-
-深度学习文本分类方法综述
-
-https://mp.weixin.qq.com/s/sJnDrGe7U_1XtJ8sYIcWiw
-
-深度文本分类综述
-
-https://mp.weixin.qq.com/s/ylRJrP-wnnelX5uUR0fukw
-
-一文综述经典的深度文本分类方法

@@ -1,8 +1,43 @@
 ---
 layout: post
-title:  Ubuntu使用技巧（三）, Mac OS X
+title:  Ubuntu使用技巧（三）
 category: linux 
 ---
+
+* toc
+{:toc}
+
+# Chrome
+
+```bash
+wget -O- https://dl.google.com/linux/linux_signing_key.pub | gpg --dearmor | sudo tee /usr/share/keyrings/google-chrome-archive-keyring.gpg
+echo deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome-archive-keyring.gpg] http://dl.google.com/linux/chrome/deb/ stable main | sudo tee /etc/apt/sources.list.d/google-chrome.list
+sudo apt update
+sudo apt install google-chrome-stable
+google-chrome-stable
+```
+
+安装flash：
+
+1、首先在adobe官网下载tar.gz格式的linux安装包，之后将其解压。
+
+2.`sudo gedit /usr/share/applications/google-chrome.desktop`
+
+3.将`Exec=/usr/bin/google-chrome-stable %U`后，添加`--ppapi-flash-path=path/libpepflashplayer.so --ppapi-flash-version=<version>`
+
+---
+
+https://ping.chinaz.com/
+
+# 常用快捷键
+
+Ctrl+Alt+T：启动Terminal
+
+Ctrl+Shift+T：在terminal中打开多个标签
+
+alt+1 alt+2 alt+3...：切换标签
+
+Ctrl+Super+D：最小化所有窗口
 
 # Ubuntu 18.04使用手记
 
@@ -22,21 +57,138 @@ LibreOffice：6.0
 
 Emacs：25.2
 
+# VNC
+
+## vino & remmina
+
+ubuntu不同于一般的发行版，它对桌面做了很大的改动，因此通常的VNC手段对其并不好使。
+
+但其实它已经自带了相关的应用：
+
+- 服务端：vino
+
+设置->共享->屏幕共享，设置密码并打开。
+
+`ss -lnt`查看5900端口是否开启。
+
+设置防火墙规则：
+
+`sudo ufw allow from any to any port 5900 proto tcp`
+
+- 客户端：remmina
+
+该方法可将物理桌面共享给VNC，但是无法创建新的虚拟桌面。
+
+参考：
+
+https://linuxconfig.org/ubuntu-remote-desktop-18-04-bionic-beaver-linux
+
+Ubuntu Remote Desktop - 18.04 Bionic Beaver Linux
+
+## xfce4
+
+如果非要使用传统的vncserver的话，只能选择其他桌面，例如xfce4。
+
+`sudo apt install xfce4 xfce4-goodies vnc4server`
+
+修改`~/.vnc/xstartup`：
+
+```bash
+#!/bin/sh
+unset SESSION_MANAGER
+unset DBUS_SESSION_BUS_ADDRESS
+
+[ -x /etc/vnc/xstartup ] && exec /etc/vnc/xstartup
+[ -r $HOME/.Xresources ] && xrdb $HOME/.Xresources
+xsetroot -solid grey
+startxfce4 &
+```
+
+启动服务：
+
+
+```bash
+vnc4server -kill :2
+vnc4server -geometry 1920x1080 :2
+```
+
+参考：
+
+https://www.jianshu.com/p/f58fe5cdeb5f
+
+Ubuntu 18.04搭建VNC服务器
+
+https://linuxconfig.org/ubuntu-remote-desktop-18-04-bionic-beaver-linux
+
+VNC server on Ubuntu 18.04 Bionic Beaver Linux
+
+## xrdp
+
+RDP是和VNC齐名的远程桌面协议，也是Windows平台的标配。RDP对于网络带宽的要求比VNC低。
+
+Ubuntu下一般使用xrdp作为服务端。至于客户端，仍然可以使用remmina。
+
+```bash
+sudo apt install xrdp
+sudo adduser xrdp ssl-cert
+sudo ufw allow from 192.168.1.0/24 to any port 3389
+```
+
+/etc/xrdp/startwm.sh:
+
+```bash
+# add 2 lines below
+unset DBUS_SESSION_BUS_ADDRESS
+unset XDG_RUNTIME_DIR
+
+if test -r /etc/profile; then
+	. /etc/profile
+fi
+```
+
+~/.xsessionrc:
+
+```bash
+export GNOME_SHELL_SESSION_MODE=ubuntu
+export XDG_CURRENT_DESKTOP=ubuntu:GNOME
+export XDG_CONFIG_DIRS=/etc/xdg/xdg-ubuntu:/etc/xdg
+```
+
+`sudo systemctl restart xrdp`
+
+打开remmina，用+号按钮新建会话，设置分辨率为“使用客户机的分辨率”。
+
+这里得到的是一个新建的虚拟桌面。
+
+## 远程桌面客户端
+
+Linux下的远程桌面客户端软件主要有RealVNC和rdesktop。前者支持VNC协议，而后者支持MS RDP协议，可连接Windows系统。
+
+### rdesktop
+
+安装方法：
+
+`sudo apt install rdesktop`
+
+使用方法：
+
+`rdesktop -u administrator -p ****** -a 16 192.168.1.1`
+
 # 桌面主题
 
 用腻了系统自带的桌面主题之后，我打算换个新鲜一些的桌面主题，比如Mac OS X风格的。
 
 1.安装主题修改工具
 
-`sudo apt-get install unity-tweak-tool`
+`sudo apt install unity-tweak-tool`
 
 2.安装Mac OS X主题
 
-{% highlight bash %}
+```bash
 sudo add-apt-repository ppa:noobslab/themes
-sudo apt-get update
-sudo apt-get install mac-ithemes-v3 mac-icons-v3
-{% endhighlight %}
+sudo apt update
+sudo apt install mac-ithemes-v3 mac-icons-v3
+```
 
 3.Cairo Dock
 
@@ -44,7 +196,7 @@ sudo apt-get install mac-ithemes-v3 mac-icons-v3
 
 安装方法：
 
-`sudo apt-get install cairo-dock`
+`sudo apt install cairo-dock`
 
 Cairo Dock不仅具有类似Mac OS X的风格，还有其他的风格可供选择下载。比如我使用的是Chrome风格。
 
@@ -72,290 +224,148 @@ http://distrowatch.com/
 
 3.GOffice。Gnome项目的成果，和前两个相比，GOffice的组件比较独立，没有什么协同能力。
 
-# 常用英语缩写
+# 电子书
 
-FYI：for your information
+电子书的格式很多，除了TXT/PDF/WORD这样的大路货之外，我接触的比较多的主要是CHM和PDG。前者主要在Windows上用，而后者主要是破解版看论文。当然这都是十几年前的事情了（2005年左右）。
 
-IFF：if and only if
+最近，下载小说，发现有EPUB格式比较流行。本来以为是类似PDG这样的专有格式，后来转念一想，这类下载站本来就是盗版生意，哪有版权保护的说法。然后才发现EPUB大约是现在最流行的电子书通用格式了。
 
-eta：estimated time of arrival
+其他相对主流的电子书还有：亚马逊Kandle专用的AZW3和MOBI等。
 
-w/o：without
+电子书阅读制作首推Calibre：
 
-N.B.:nota bene 注意,留心
+`sudo apt install calibre`
 
-# Mac OS X
+Calibre支持的格式：
 
-最近对iOS开发产生了兴趣，于是准备在PC上搭建一个iOS的开发环境。
+Input Formats: AZW, AZW3, AZW4, CBZ, CBR, CB7, CBC, CHM, DJVU, DOCX, EPUB, FB2, FBZ, HTML, HTMLZ, LIT, LRF, MOBI, ODT, PDF, PRC, PDB, PML, RB, RTF, SNB, TCR, TXT, TXTZ
 
-首先，我搜了一下在Linux上搭建相关环境的方法，搜到了一些结果。但历史比较老，基本都是3、4年前的东西，就算搭好，也不见得有什么用。
+Output Formats: AZW3, EPUB, DOCX, FB2, HTMLZ, OEB, LIT, LRF, MOBI, PDB, PMLZ, RB, PDF, RTF, SNB, TCR, TXT, TXTZ, ZIP
 
-于是，目标改为在PC上使用Virtual Box搭建Mac OS X虚拟机。目标版本为Mac OS X 10.10。
+参考：
 
-1.下载镜像文件。
+https://zhuanlan.zhihu.com/p/53298578
 
-镜像文件主要有dmg和iso两种。前者必须在Mac OS X中才能执行，而后者和其他OS镜像差别不大。
+7个最佳Linux电子书阅读器
 
-2.boot
+# pdf
 
-原版镜像由于Apple的硬件检测机制，并不能在PC上运行。这时就需要破解，这一步一般是在boot中做的。
+Evince：GNOME的PDF阅读器。
 
-可用的boot工具，早期有empireEFI、HackBoot。较新的有chameleon、Niresh。
+Okular：KDE 4中的PDF阅读器。
 
-# DRL参考资源
+KPDF：Okular的前身。KDE 3使用的PDF阅读器。
 
-https://mp.weixin.qq.com/s/S2eGPTON3XmfN830m4vaaA
+上述软件都基于Poppler渲染引擎：
 
-腾讯AI Lab：可自适应于不同环境和任务的强化学习方法
+https://poppler.freedesktop.org/
 
-https://mp.weixin.qq.com/s/Rvc5fXnbDPMJftp13xF4hg
+# tftp
 
-强化学习应用金融投资组合优化
+tftp可提供不复杂、开销不大的文件传输服务。可以理解为是简化版的FTP。
 
-https://mp.weixin.qq.com/s/dlOFM7LuOF2npDP_EaITvg
+Ubuntu下面关于TFTP的程序，有三套：
 
-效率提高50倍！谷歌提出从图像中学习世界的强化学习新方法（PlaNet）
+1.tftp和tftpd
 
-https://mp.weixin.qq.com/s/Maoy2feVWj5hpn4Ysh_47A
+2.atftp和atftpd
 
-你追踪，我逃跑：一种用于主动视觉跟踪的对抗博弈机制
+3.tftp-hpa和tftpd-hpa
 
-https://mp.weixin.qq.com/s/4w3wIyy4H0UGeqOGhNcIbA
+目前以tftp-hpa和tftpd-hpa最为流行。
 
-强化学习落地！京东等发布综述《深度强化学习在搜索，推荐和在线广告中的应用》
+安装命令：
 
-https://mp.weixin.qq.com/s/F_GsfAJRFJ_o8PETqUL35g
+`sudo apt install tftp-hpa tftpd-hpa`
 
-谷歌大脑AI飞速解锁雅达利，训练不用两小时：预测能力“前所未有”
+# Ubuntu 20.04使用手记
 
-https://mp.weixin.qq.com/s/6wPtb9Qdhr9FiMk15xrUsQ
+Ubuntu 20.04是2020.4.24发布的。我第一时间上手体验了一番。
 
-强化跨模态匹配和自监督模仿学习
+UI方面最大的特点是：菜单栏变成了菜单按钮。这种风格最早来自Chrome的设计，后来部分系统应用也采用了该风格，这次算是收尾阶段了吧。
 
-https://mp.weixin.qq.com/s/lU3_ONAIGDUv_AVv2Xn14w
+内核：5.4
 
-仅需2小时学习，基于模型的强化学习方法可以在Atari上实现人类水平
+LibreOffice：6.4
 
-https://mp.weixin.qq.com/s/w0_g5FlC6vx2MRAhADPq2g
+---
 
-深度强化学习在智能对话上的应用
+这里必须吐槽一下近期这几个版本的安装过程。不知道从18.04的哪一个版本开始，离线安装OS这样的正常需求，就成了一件不可能的事情。无论你选择什么选项，都要从网上下载一堆文件（170M+）才能安装成功。
 
-https://mp.weixin.qq.com/s/4SZ1NN5hUUcO_dSe4Bv0NQ
+众所周知，ubuntu官方的网速，在国内一直不快，即便是安装镜像已经换用`cn.archive.ubuntu.com`，也同样快不了多少。速度飞快的aliyun，不好意思，至少在安装阶段是无法换用的。
 
-利用鲁棒控制实现深度强化学习驾驶策略的迁移
+碰巧我是尝鲜的，正赶上大家都在尝鲜的时候，那个下载速度实在太感人了。。。囧
 
-https://mp.weixin.qq.com/s/rwqtw5b2Nap5UPU9DWBXqg
+但是我也意外发现，3点以后，网速就飞快了（8+M/s）。这点数据也就是1分钟的事情。
 
-强化学习与文本生成
+虽然有1个月之前安装18.04的经验，然而这次还是遇到了新的麻烦：
 
-https://mp.weixin.qq.com/s/VPCtsv2Q73qVcNAa4Xufag
+离线安装，grub是坏的。好容易在线装，安装成功，但是grub没有Ubuntu的选项。
 
-从虚拟到现实，北大等提出基于强化学习的端到端主动目标跟踪方法
+解决办法：使用boot-repair修理grub。
 
-https://mp.weixin.qq.com/s/6Sj2QIELQvI28Rpp7A39Fg
+然而boot-repair既然号称修理，自然是把EFI分区里的`.efi`文件一网打尽，每个文件都是一个启动项。众所周知，一个OS往往不止一个`.efi`，于是那个条目数简直多的没法看。。。
 
-如何通过结构化智能体完成物理构造任务？
+解决办法：修改`/boot/grub/grub.cfg`，去掉多余的条目。
 
-https://mp.weixin.qq.com/s/lR6BSa_pJzcinkSaSWsM2A
+>不要直接修改该文件本身，否则系统一旦更新之后，又要再来一遍。该文件开头的注释中介绍了该文件是如何生成的。
 
-伯克利提出强化学习新方法，可让智能体同时学习多个解决方案
+这里主要参考的是以下文章：
 
-https://mp.weixin.qq.com/s/P-iSI80IVmb5s-Q15Re2HQ
+https://www.cnblogs.com/schips/p/10141278.html
 
-All In!我学会了用强化学习打德州扑克
+使用boot-repair对Windows+Ubuntu双系统引导修复
 
-https://zhuanlan.zhihu.com/p/36322095
+# Ubuntu字体相关
 
-最前沿：从虚拟到现实，DRL让小狗机器人跑起来了！
+最近gitk中文显示不正常，明明系统的字体是很多的，但可以设置的却甚少。后来发现这里能够设置的并非系统字体，而只是X11字体。
 
-https://mp.weixin.qq.com/s/xr-2cNoSYpCftLI3dV6zEw
+列出字体：
 
-如何使用深度强化学习帮助自动驾驶汽车通过交叉路口？
+`xlsfonts`
 
-https://mp.weixin.qq.com/s/R_pfTXDMaLHmiCaSV2t_YA
+找到系统字体文件夹，生成`fonts.dir`文件：
 
-英特尔Nervana发布强化学习库Coach：支持多种价值与策略优化算法
+`sudo mkfontscale -o fonts.dir .`
 
-https://mp.weixin.qq.com/s/AyW7oOC7yxVtmswaMT1DGQ
+加载`fonts.dir`文件：
 
-腾讯AI Lab获得计算机视觉权威赛事MSCOCO Captions冠军
+`xset +fp /usr/share/fonts/X11/misc`
 
-https://mp.weixin.qq.com/s/4aENmxUMEEPVPnexLKrg7Q
+文泉驿字体是最知名的中文免费字体：
 
-新型强化学习算法ACKTR
+`sudo apt install ttf-wqy-microhei ttf-wqy-zenhei`
 
-https://mp.weixin.qq.com/s/5PzTiPoXPC1gH3xszzT2dQ
+# 手机上网
 
-邓力等人提出BBQ网络：将深度强化学习用于对话系统
+最近公司网络有问题，只好使用手机连接互联网，也就是所谓WLAN热点。
 
-https://mp.weixin.qq.com/s/pM8oykHmtu5O5jYJBZjO_w
+除了Wifi之外，现在的手机还有USB网络共享的功能，该功能基于RNDIS（Remote NDIS）技术，实际上就是TCP/IP over USB，就是在USB设备上跑TCP/IP，让USB设备看上去像一块网卡。
 
-伯克利研究人员使用内在激励，教AI学会好奇
+# Ubuntu 22.04使用手记
 
-https://mp.weixin.qq.com/s/3WI3QgfHXcrCPbvmHWOEkg
+Ubuntu 20.04是2022.4.21发布的。
 
-强化学习在生成对抗网络文本生成中的作用
+内核：5.15
 
-https://mp.weixin.qq.com/s/IvR0O6dpz2GJCG7UQb5kUQ
+LibreOffice：7.3
 
-清华大学冯珺：基于强化学习的关系抽取和文本分类
+---
 
-https://zhuanlan.zhihu.com/p/31579144
+RTL8821CE网卡驱动已经集成到内核中，所以这次安装的网络体验满分。
 
-让我们从零开始做一个机械手臂(强化学习)
+而且我还发现，其实离线安装并非不可以，只要你选择安装英文版就行了。
 
-https://mp.weixin.qq.com/s/FiR_GRYqJYpJRO-2p44-Cg
+---
 
-伯克利强化学习新研究：机器人只用几分钟随机数据就能学会轨迹跟踪
+华硕笔记本安装ubuntu，麦克风无声音。
 
-https://mp.weixin.qq.com/s/_dHjZQ_7_7H34PHhV_lC3w
+解决办法：
 
-全新强化学习算法详解，看贝叶斯神经网络如何进行策略搜索
+1.在Windows中开启麦克风，因为默认是关闭的。
 
-https://mp.weixin.qq.com/s/YCPXkFzYdC1gMfnprZsVXg
+2.在Windows中选择关机退出，而不是重启。
 
-如何让机器人多技能？通过最大熵强化学习
+3.开机进入Ubuntu，问题解决。后续进Windows，还是必须选择关机退出，而不是重启。
 
-https://mp.weixin.qq.com/s/dbtdNsT3nvLt4UKsrNsn_Q
-
-量化深度强化学习算法的泛化能力
-
-https://mp.weixin.qq.com/s/K-z_dX2-NepkEHbr45QlvQ
-
-微软研究院开源项目TextWorld：可用于强化学习训练的文本游戏
-
-https://mp.weixin.qq.com/s/K2DW_ntSWrlySpxgorF9dA
-
-Python强化学习实战，Anaconda公司的高级数据科学家讲解
-
-https://zhuanlan.zhihu.com/p/32089849
-
-概要：NIPS 2017 Deep Learning for Robotics Keynote
-
-https://mp.weixin.qq.com/s/CCQOHRCAolsorm8FEPdjoQ
-
-什么时候强化学习未必好用？
-
-https://mp.weixin.qq.com/s/Ctn1Wr68lph1UK_wjfCY1Q
-
-策略梯度搜索：不使用搜索树的在线规划和专家迭代
-
-https://mp.weixin.qq.com/s/78ir-Z4ch8_aVpjC6aCPGg
-
-DeepMind综述深度强化学习中的快与慢，智能体应该像人一样学习
-
-https://mp.weixin.qq.com/s/ij3bf61Pu7lrX0WijhbDeA
-
-骑驴找马：利用深度强化学习模型定位新物体
-
-https://mp.weixin.qq.com/s/iYxijHlE3sLJgKnwwd8Tgg
-
-使用深度强化学习和贝叶斯优化获得巨额利润
-
-https://mp.weixin.qq.com/s/_QkxCrQlyRM10eZK8aNCKA
-
-强化学习在携程酒店推荐排序中的应用探索
-
-https://mp.weixin.qq.com/s/fWySZWsYEKBRwYaFL3J2Xg
-
-强化学习大规模应用还远吗？Youtube推荐已强势上线
-
-https://mp.weixin.qq.com/s/nHBczPlffhZrJy4G4oJ1Ag
-
-让神经网络懂得黄金法则
-
-https://mp.weixin.qq.com/s/0dUlVC9I8qmv3f2BB0IFew
-
-强化学习介绍及自动驾驶汽车应用
-
-https://mp.weixin.qq.com/s/_Di73PkEWJV1-OLLHfz7yQ
-
-组合在线学习：实时反馈玩转组合优化
-
-https://mp.weixin.qq.com/s/aVWHlwOmNIqOlu3025_RXQ
-
-DeepMind提出多任务强化学习新方法Distral
-
-https://mp.weixin.qq.com/s/gFHbLF-q91sddMAX1CRbEQ
-
-俞扬：“审时度势”的高效强化学习
-
-https://mp.weixin.qq.com/s/lstCIiNs_qA6k7GCYUBv2w
-
-阿尔伯塔大学提出新型多步强化学习方法，结合已有TD算法实现更好性能
-
-https://mp.weixin.qq.com/s/ybyZpaHr-JJg7CCdXGOl5A
-
-Seq2seq强化学习实战
-
-https://mp.weixin.qq.com/s/TUk1PWT9CfPGEW77UKxpjw
-
-三招武林绝学带你玩转“强化学习”
-
-https://mp.weixin.qq.com/s/W9yhj7_frLYWJocoBR1TMQ
-
-避免AI错把黑人识别为大猩猩：伯克利大学提出协同反向强化学习
-
-https://mp.weixin.qq.com/s/p2hlc2PsLgrvxOF8wBZANg
-
-李飞飞高徒范麟熙解析强化学习在游戏和现实中的应用
-
-http://mp.weixin.qq.com/s/EPbKE-TAnAPugJDhXHEyNA
-
-DeepMind开源Psychlab平台——搭建AI和认知心理学的桥梁
-
-https://mp.weixin.qq.com/s/xJ_g3BvbM-WaIyLthHdhEw
-
-DeepMind发布通用强化学习新范式，自主机器人可学会任何任务
-
-https://mp.weixin.qq.com/s/U0K79ELLj4wsOR4sd5G4Vw
-
-Vicarious详解新型图式网络：赋予强化学习泛化能力
-
-https://mp.weixin.qq.com/s/C8hsGkHGtoaS9Vzm6Ub4tw
-
-Berkeley提出“随机搜索”训练线性策略，提高RL的性能
-
-https://mp.weixin.qq.com/s/vYDb1rTdPxO1sIS38VX5xA
-
-DeepMind的AI学会了画画，利用强化学习完全不需人教：SPIRAL
-
-https://mp.weixin.qq.com/s/rpPN2rgru6krRz2fr1RhsQ
-
-模拟世界的模型：谷歌大脑与Jürgen Schmidhuber提出“人工智能梦境”
-
-https://mp.weixin.qq.com/s/AelAD57G4GOh7qm-_rvYsg
-
-伯克利提出DeepMimic：使用强化学习练就18般武艺
-
-https://mp.weixin.qq.com/s/0AM4eASolsPZ7GtPYVBqDQ
-
-伯克利今年大热的DeepMimic开源了~
-
-https://zhuanlan.zhihu.com/p/35567591
-
-强化学习在关系抽取、QA场景的应用
-
-https://mp.weixin.qq.com/s/zWo2iSiJBEBwnFF478xxfQ
-
-DeepMind：探索人类行为中的强化学习机制
-
-https://mp.weixin.qq.com/s/oOslkEklaZSbRb8eDDCRBw
-
-天津大学、东京大学等研究：用深度强化学习检测模型缺陷
-
-https://mp.weixin.qq.com/s/DNT9rMynbN4Th0AVDHeY_w
-
-BAIR提出人机合作新范式：教你如何高效安全地在月球着陆
-
-https://mp.weixin.qq.com/s/KqLCTSYk1C0wYpJw-hpc1g
-
-论强化学习和概率推断的等价性：一种全新概率模型
-
-https://mp.weixin.qq.com/s/AI3i3ZLZ-fynavbeNAMKgA
-
-强化学习应用介绍，41页报告带你快速了解RL的最新应用价值
-
-https://mp.weixin.qq.com/s/JtUuFdTK4Q5YwnVj3BFU2w
-
-全参数化分布，提升强化学习中的收益分布拟合能力
+>Windows关机还是重启，对于挂载的Windows分区的写权限也有影响。必须重启才有写权限，这和麦克刚好相反。。。

@@ -4,6 +4,9 @@ title:  C/C++编程心得（一）
 category: language 
 ---
 
+* toc
+{:toc}
+
 # 参考资料
 
 https://en.cppreference.com/
@@ -32,7 +35,45 @@ https://en.cppreference.com/w/cpp/compiler_support
 
 https://www.edg.com/
 
-这是EDG的官网。它是一家专门做C++前端的公司。因此，他们的更新和开源项目gcc/Clang一样勤，也就不足为奇了。
+这是EDG的官网。它是一家专门做C++前端的公司。因此，他们的更新和开源项目gcc/Clang一样勤，也就不足为奇了。事实上它的商业模式就是：如果硬件公司没有实力或财力做编译器，那么就购买我的前端好了。
+
+---
+
+Compiler Explorer是Matt Godbolt创建的一个在线编译网站。支持不同版本的gcc生成不同平台的汇编代码。
+
+官网：
+
+https://godbolt.org/
+
+代码：
+
+https://github.com/compiler-explorer/compiler-explorer
+
+---
+
+https://lgtm.com/
+
+这是一个代码缺陷检测工具
+
+---
+
+https://www.fluentcpp.com/
+
+一个教你cpp技巧的网站
+
+# 历史
+
+https://mp.weixin.qq.com/s/cfBT0wsqzZRwedMO7Qz_vA
+
+“任性”的C语言之父：因拒付论文装订费错失博士学位，论文52年后重见天日（Dennis Ritchie）
+
+https://zhuanlan.zhihu.com/p/257089138
+
+C语言发展史的点点滴滴
+
+https://mp.weixin.qq.com/s/_HG19EqrEQiiRRx2SxB19g
+
+图灵老友写下1000条指令程序，锤炼70年，化身350万行代码飞向火星(Christopher Strachey)
 
 # 头文件被多个源文件引用
 
@@ -40,14 +81,14 @@ https://www.edg.com/
 
 使用诸如
 
-{% highlight c %}
+```c
 #ifndef _COMMON_STRING_
 #define _COMMON_STRING_
 ...
 ...
 ...
 #endif
-{% endhighlight %}
+```
 
 解决不了这个问题。因为这段代码解决的是同一个源文件重复包含某个头文件的问题。而这里的问题是不同的源文件包含同一头文件时，产生的重复定义的问题。const关键字保证了同一标识符只会定义一次。
 
@@ -59,11 +100,11 @@ https://www.edg.com/
 
 引申一下
 
-{% highlight c %}
+```c
     int a[10];
     printf("%x\n",&a);
     printf("%x\n",a);
-{% endhighlight %}
+```
 
 可以看到&a和a的值是相等的，但含义不同。a相当于`int *p`，而&a相当于`int (*p)[10]`。
 
@@ -77,58 +118,48 @@ https://www.edg.com/
 
 `int *(*a())()`这是一个函数，它没有参数，它的返回值是一个函数指针，这个指针指向的函数，也没有参数，且返回值是int型的指针。
 
-# 嵌入式程序员应知道的几个基本问题
-
-http://linux.chinaitlab.com/c/713810.html
-
-# 深入理解C++中的mutable关键字
-
-http://dev.yesky.com/393/3007393.shtml
-
-# UNREFERENCED_PARAMETER的作用
-
-http://blog.csdn.net/apunix/archive/2008/01/14/2043945.aspx
-
-# sizeof进行结构体大小的判断
+# sizeof
 
 http://blog.csdn.net/van150/archive/2005/12/05/544454.aspx
+
+sizeof进行结构体大小的判断
 
 VC的默认规则基本如上所示，gcc的默认规则就是4字节对齐。
 
 可以比较一下
 
-{% highlight c %}
+```c
 struct s
 {
   char a;
   double b;
   int c;
 }
-{% endhighlight %}
+```
 
 与
 
-{% highlight c %}
+```c
 struct s
 {
   char a;
   int b;
   double c;
 }
-{% endhighlight %}
+```
 
 在各个平台上的sizeof值。
 
 附带说一下如果看到以下的代码片段，也就不要觉得惊奇了。
 
-{% highlight c %}
+```c
 typedef enum _XXX
 {
     XXX_0        = 0,
     XXX_1        = 1,
     XXX_FORCE_DWORD    = 0x7FFFFFFF/* 编译器对齐 */
 }XXX;
-{% endhighlight %}
+```
 
 # 字节对齐的设定
 
@@ -144,10 +175,6 @@ VC和gcc都可以用`#pragma pack(4)`
 
 gcc还可以用`__attribute__((packed))`
 
-# Java中创建对象的时候代码执行顺序(这个问题C++应该也存在)
-
-https://blog.csdn.net/hahahacff/article/details/39504699
-
 # 宏展开函数的小技巧
 
 有的时候，会使用宏展开的方式定义“伪”函数。
@@ -160,30 +187,30 @@ https://blog.csdn.net/hahahacff/article/details/39504699
 
 为了实现这个功能，教科书上给出的做法是这样的：
 
-{% highlight c %}
+```c
 #define st(x)      do { x } while (0)
 #define HAL_DMA_SET_SOURCE( pDesc, src ) \
   st( \
     pDesc->srcAddrH = (uint8)((uint16)(src) >> 8); \
     pDesc->srcAddrL = (uint8)( (uint16)(src) & 0xFF ); \
   )
-{% endhighlight %}
+```
 
 但是`do { x } while (0)`在有些编译器上会报warning。最近看Ti的代码的时候，看到了一种更好的办法：
 
-{% highlight c %}
+```c
 #define st(x)      do { x } while (__LINE__ == -1)
-{% endhighlight %}
+```
 
-# C++ 11/14/17的新特性
+# C++ 11/14/17/20的新特性
 
-我是在2003年以后学习C++的，后来直到2009年以前，C++都是我的主要工作语言。但由于本人先学的C语言，所以编程的思想一直是函数式的。完成一项任务，无论用C、C++、Java、C#，还是Matlab、Python，风格都是差不多的。这也是后来我对GTK情有独钟的一个重要的原因。
+我是在2003年左右学习C++的，后来直到2009年以前，C++都是我的主要工作语言。但由于本人先学的C语言，所以编程的思想一直是函数式的。完成一项任务，无论用C、C++、Java、C#，还是Matlab、Python，风格都是差不多的。这也是后来我对GTK情有独钟的一个重要的原因。
 
-总的来说，我对C++用的多，但理解的却不深。只对单继承、成员函数的封装、访问之类的概念有一定的认识和使用。多重继承、模板会看不会写。更不必提C++ 03和C++ 11的新特性了。最近因为研究Cocos2d-x，而接触到这些新特性，颇有些感觉到自己已经是老古董了.
+总的来说，我对C++用的多，但理解的却不深。只对单继承、成员函数的封装、访问之类的概念有一定的认识和使用。多重继承、模板会看不会写。更不必提C++ 03和C++ 11的新特性了。最近因为研究Cocos2d-x，而接触到这些新特性，颇有些感觉到自己已经是老古董了。
 
 不过好在Java语言用的还可以，大部分的C++新特性，学起来倒也难不倒我。
 
-----
+---
 
 2019.6
 
@@ -191,15 +218,43 @@ https://blog.csdn.net/hahahacff/article/details/39504699
 
 以后真的不敢在简历里写会C++了。。。囧
 
-----
+---
 
-C++ 98标准到C++ 11标准之间长达13年的间隙，给了其他语言赶超并诟病C++的机会。一些厂商为了解决C++的问题，也加了不少私活，从而导致了版本兼容性的分裂。
+C++语言为了保持与C语言的兼容性，在语法层面上曾经尽力保持C-like。但随着越来越多内容被加入到C++中，这一要求也越来越难以实现。最终，C++11标准的发布彻底改变了C++语言的面貌，其改变之大甚至让C++11看起来像一门全新的语言。因此，多把C++11后的C++称为“Modern C++”。
+
+---
+
+C++ 03标准到C++ 11标准之间长达8年的间隙，给了其他语言赶超并诟病C++的机会。一些厂商为了解决C++的问题，也加了不少私货，从而导致了版本兼容性的分裂。
 
 为了解决这个问题，C++标准委员会提出了新的版本发布策略：不再等待某项重要特性的成熟，再集体打包发布。而是成熟一项，发布一项。
 
 所以，可以预见的是，即使没有什么重要新特性，也一定会有C++ 20标准。
 
-----
+当然了，从另一个角度来说，C++ 11有改天换地之效，而之后的升级则有些无足轻重了。
+
+---
+
+https://mp.weixin.qq.com/s/lTu8OCecwe9iHIn82bWQaA
+
+现代C++教程：高速上手C++11/14/17/20，82页pdf
+
+https://zhuanlan.zhihu.com/p/139515439
+
+c++11新特性，所有知识点都在这了！
+
+https://zhuanlan.zhihu.com/p/165389083
+
+C++14新特性的所有知识点全在这儿啦！
+
+https://zhuanlan.zhihu.com/p/165640868
+
+C++17新特性
+
+https://www.zhihu.com/answer/1813428455
+
+C++20有哪些值得注意的新特性？
+
+---
 
 1.auto
 
@@ -235,7 +290,42 @@ C#
 
 `Func<int, int, int> towParams = (x, y) => x * y`
 
+```cpp
+// before 
+int8_t (*CreateLonglink)(const std::string& name, const std::string& host,
+ const std::vector<uint16_t> ports, const std::string& debugip)
+ = +[](const std::string& name,
+                         const std::string& host,
+                         const std::vector<uint16_t> ports,
+                         const std::string& debugip)->int8_t{
+   
+    ...
+    return 0;
+};
+// after
+auto CreateLonglink= +[](const std::string& name,
+                         const std::string& host,
+                         const std::vector<uint16_t> ports,
+                         const std::string& debugip)->int8_t{
+   
+    ...
+    return 0;
+};
+```
+
 5.using，extern
+
+```cpp
+//before
+struct Derive : public Base{
+    Derive(int a,char b,double c, std::string d,float f):Base(a,b,c,d,f){}
+};
+
+//after
+struct Derive : public Base{
+    using Base::Base;
+};
+```
 
 http://blog.csdn.net/cnsword/article/details/8034947
 
@@ -243,7 +333,7 @@ C++11老关键字的新含义(auto, using，extern)
 
 6.列表初始化
 
-{% highlight cpp %}
+```cpp
 struct Studnet
 {
     char* name;
@@ -253,7 +343,7 @@ Studnet s={"dablelv",18};
 
 std::vector<int> nVec(10, 1); // 包含10个元素，且值为1 
 std::vector<int> nVec{10, 1}; // 包含2个元素，值分别为10,1
-{% endhighlight %}
+```
 
 https://blog.csdn.net/sevenjoin/article/details/81779221
 
@@ -267,7 +357,7 @@ C++11列表初始化-花括号的使用
 
 宏定义：
 
-{% highlight c %}
+```c
 #if defined(__GNUC__) && ((__GNUC__ >= 4) || ((__GNUC__ == 3) && (__GNUC_MINOR__ >= 1)))
 #define CC_DEPRECATED_ATTRIBUTE __attribute__((deprecated))
 #elif _MSC_VER >= 1400 //vs 2005 or higher
@@ -275,7 +365,7 @@ C++11列表初始化-花括号的使用
 #else
 #define CC_DEPRECATED_ATTRIBUTE
 #endif
-{% endhighlight %}
+```
 
 宏使用：
 
@@ -283,7 +373,7 @@ C++11列表初始化-花括号的使用
 
 # 关于引用的一个常见错误
 
-{% highlight c %}
+```c
 class Base
 {
   public:
@@ -296,16 +386,16 @@ int main()
   b.something(Base());
   return 0;           
 }
-{% endhighlight %}
+```
 
 上面的代码在编译时，会出现如下错误信息：
 
-{% highlight text %}
+```text
 abc.cpp:12:20: error: no matching function for call to ‘Base::something(Base)’
 abc.cpp:12:20: note: candidate is:
 abc.cpp:6:7: note: void Base::something(Base&)
 abc.cpp:6:7: note: no known conversion for argument 1 from ‘Base’ to ‘Base&’
-{% endhighlight %}
+```
 
 这是由于`Base()`生成的是临时变量，将之赋值给一个non-const的引用是不行的。
 
@@ -316,72 +406,3 @@ abc.cpp:6:7: note: no known conversion for argument 1 from ‘Base’ to ‘Base
 可以参看下文：
 
 http://stackoverflow.com/questions/20247525/about-c-conversion-no-known-conversion-for-argument-1-from-some-class-to
-
-# 常用libc实现
-
-libc是C语言标准库的简称，它有多种实现。除了最常用的gcc自带的glibc之外，还有musl、uClibc、dietlibc等。
-
-http://www.etalabs.net/compare_libcs.html
-
-这个网址是以上4种libc实现的比较结果。从结果来看，musl比较有投资价值。实际上，最近（2015.5）的OpenWrt项目就已经将libc由uClibc改为musl。我也是因为这个原因，才知道musl的。
-
-当然这个表并不完整，其他的libc可以参见:
-
-https://en.wikipedia.org/wiki/C_standard_library
-
-# 数组定义时的赋值方法
-
-{% highlight c %}
-struct mtd_partition {
-	const char *name;		/* identifier string */
-	uint64_t size;			/* partition size */
-	uint64_t offset;		/* offset within the master MTD space */
-};
-
-static struct mtd_partition parts[] = {
-      {name: "boot", offset: 0,           size:0x500000,},
-      {name: "setting", offset: 0x500000, size:0x300000,},
-      {name: "linux", offset: 0x800000,   size:0x500000,}, 
-      {name: "config", offset: 0xd00000,   size:0x100000,},	
-      {name: "rootfs", offset: 0xe00000,  size:0x3200000,},
-      {name: "app", offset: 0x4e00000, size:0x800000,},
-
-};
-
-static struct resource pxa27x_resource_ohci[] = {
-	[0] = {
-		.start  = 0x4C000000,
-		.end    = 0x4C00ff6f,
-		.flags  = IORESOURCE_MEM,
-	},
-	[1] = {
-		.start  = IRQ_USBH1,
-		.end    = IRQ_USBH1,
-		.flags  = IORESOURCE_IRQ,
-	},
-};
-{% endhighlight %}
-
-这些方法虽然不知道是C的哪个标准引入的，但是见到有代码这样用。
-
-# switch...case
-
-{% highlight c %}
-switch (reg) {
-       case TAS5086_CLOCK_CONTROL ... TAS5086_BKNDERR:
-       return 1;
-       case TAS5086_INPUT_MUX:
-       case TAS5086_PWM_OUTPUT_MUX:
-       return 4;
-}
-{% endhighlight %}
-
-可以用上面的办法，少写一些case语句。
-
-# cout格式化输出
-
-{% highlight c %}
-cout<<hex<<i<<endl; //输出十六进制数
-cout<<oct<<i<<endl; //输出八进制数
-cout<<dec<<i<<endl; //输出十进制数
-{% endhighlight %}

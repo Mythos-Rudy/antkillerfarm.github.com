@@ -1,8 +1,11 @@
 ---
 layout: post
-title:  Jpeglib使用指南, 各种压缩包的压缩和解压方法, 开源社区分裂史
+title:  Jpeglib使用指南, 各种压缩包的压缩和解压方法, WireShark
 category: technology 
 ---
+
+* toc
+{:toc}
 
 # Jpeglib使用指南
 
@@ -46,6 +49,8 @@ JpegLib库源代码的组成
 
 http://blog.csdn.net/axlrosek/archive/2007/03/29/1545496.aspx
 
+ijg jpeg函数库：文件列表
+
 VC:不同版本的VC、EVC都差不多，参照文献A的步骤修改相关文件，然后新建一个空工程，然后打开JpegLib中的makefile.vc文件,将2）和3）、5）、7）中的文件添加到工程中。将生成文件的类型定为lib就行了。此外，还需要针对调用的情况选择适当的运行时库，否则可能会出LNK2005错误。
 
 ## 3.使用JpegLib库
@@ -68,7 +73,35 @@ jpeg_read_scanlines(&cinfo, pBuffer, 1)执行之后，扫描线的内容被放�
 
 http://blog.china.com/u/060803/5544/200608/15355.html
 
+# stb_image
+
+stb_image是一个C语言的图像解码库，支持JPG, PNG, TGA, BMP, PSD, GIF, HDR, PIC等格式。
+
+代码：
+
+https://github.com/nothings/stb
+
+参考：
+
+https://www.jianshu.com/p/5e4b99586282
+
+简单易用的图像解码库介绍——stb_image
+
 # 各种压缩包的压缩和解压方法
+
+## 安装
+
+安装 7zip：
+
+`sudo apt install p7zip`
+
+安装 rar:
+
+`sudo apt install rar unrar`
+
+rar比较奇怪，压缩和解压是使用不同的包，这点和7zip是不一样的。
+
+常按Win键，会弹出Unity所用的键盘快捷键。
 
 ## .tar.gz和.tgz
 
@@ -122,6 +155,12 @@ PS:tar命令对于长选项和短选项的顺序有要求，例如，不覆盖�
 
 解压：`tar jxvf FileName.tar.bz`
 
+## .tar.xz
+
+解压：`tar xvJf FileName.tar.xz`
+
+压缩：`tar cvJf FileName.tar.xz DirName`
+
 ## .Z
 
 解压：`uncompress FileName.Z`
@@ -168,70 +207,146 @@ PS:tar命令对于长选项和短选项的顺序有要求，例如，不覆盖�
 
 sEx只是调用相关程序，本身并无压缩、解压功能，请注意！
 
-sEx请到： http://sourceforge.net/projects/sex下载！
+sEx官网：
 
-## betty
+http://sourceforge.net/projects/sex
 
-betty是Jeff Pickhardt开发的人工智能助手，可以将英文转换成Linux命令。
+## 7zip
 
-安装方法如下：
-
-{% highlight bash %}
-sudo apt-get install git curl ruby
-cd ~
-git clone https://github.com/pickhardt/betty
-sudo nano ~/.bashrc
-{% endhighlight %}
-
-在.bashrc末尾添加以下内容：
-
-`alias betty="/home/sk/betty/main.rb"`
-
-重启终端即可。
-
-使用方法：
-
-`betty compress test/ test.tar.gz`
-
-## Hubot
-
-Hubot是个和betty类似的开源聊天机器人，可以用来做一些自动化任务，如部署网站，翻译语言等等。
+7-Zip是Igor Pavlov于1999年开发的压缩软件。
 
 官网：
 
-https://hubot.github.com/
+https://sparanoid.com/lab/7z/
+
+它虽然支持多种压缩算法，但最重要的还是LZMA（Lempel-Ziv-Markov chain-Algorithm）算法。
+
+该算法的SDK：
+
+https://sparanoid.com/lab/7z/sdk.html
 
 参考：
 
-https://segmentfault.com/a/1190000004855149
+https://mp.weixin.qq.com/s/NB12KQOHjso9wH8Ju1ueSA
 
-Hubot 的简单用法
+ZIP也能边下载边解压？流式解压技术揭秘！
 
-# 开源社区分裂史
+## 参考
 
-有人的地方，就有江湖，开源社区也同样如此。本来一个战壕的弟兄，因为种种原因，而分道扬镳（或者专业一点叫做fork），从而导致社区的分裂，这并不是什么稀罕事。比如最知名的开源软件Linux，在早期的时候，就有所谓的ac分支，也就是Alan Cox发布的分支。只不过Alan Cox没有另起山头，因此这个只算分支，而不算分裂。但本文下面所要讲述的，可就不是这么小打小闹了。
+主流的压缩格式（zip、7z等）不支持保留Unix风格的文件访问权限，一旦在Linux系统里解压，解压出来的文件可能会出现“拒绝访问”的现象，而tar支持保留文件的访问权限。
 
-## ffmpeg vs libav
+https://www.zhihu.com/question/335911358
 
-2011年的时候，一群ffmpeg开发者，由于对项目管理者（肯定不是Fabrice Bellard，从log可以看出，这位老兄当时已经不管这个项目很多年了。）不满，而另立山头，创建了libav项目。这从两个项目的图标就可以看出来。话说libav的图标其实是ffmpeg早先的图标，只不过图标的创建者加入了libav项目，因此ffmpeg不得不换了一个类似的图标。
+为什么Linux要用tar.gz，很少用7Z或ZIP？
 
-应该说libav项目开局时的思路还是比较好的。但ffmpeg毕竟是个老项目，即使因为惯性，也足以继续吸引开发者开发并使用。这从提交的次数就可以看的很明显，从2011年8月（也就是libav起义时）到2012年底，libav提交6600次，而ffmpeg同期提交了16600次！
+---
 
-当然，ffmpeg项目提交的内容实际上有很多都来自libav。Libav开发者指责FFmpeg项目负责人Michael Niedermayer盗用了他们的成果。据说Michael将Libav的代码合并到FFmpeg，让他成为了FFmpeg最大的贡献者，他递交的代码一度占了新增代码的80%。但正是因为有这样的搬运工的存在，使得ffmpeg最终赢得了这场竞争。
+https://mp.weixin.qq.com/s/9kdeSj0RwUvlIi4oBEF_Wg
 
-2011年的时候，由于Debian的一个维护者，本身加入了libav项目的缘故，导致Debian/Ubuntu这个linux最大的发行版采用了libav。（典型的以权谋私，哈哈）但最终到了2015年，Debian社区在历时一年的讨论之后，还是放弃了libav项目。
+速度与压缩比如何兼得？压缩算法在构建部署中的优化
 
-结论：ffmpeg胜。一般来说，后来者需要付出更大的努力，才能夺取先行者的领先地位。而ffmpeg在市场领先的情况下，仍采取虚心接纳的策略，基本杜绝了libav胜出的可能性。
+# WireShark
 
-## OpenOffice vs LibreOffice
+WireShark是一个网络协议包分析工具，最初名叫Ethereal。它的官网是：
 
-同样是2011年，LibreOffice从OpenOffice中fork出来。fork的原因是由于Oracle收购Sun。众所周知，Oracle是仅次于MS的开源社区二号公敌。因此当Google挑头发起LibreOffice项目之后，开发者几乎一边倒的投向LibreOffice，基本没花什么功夫就打垮了OpenOffice。
+https://www.wireshark.org/
 
-结论：LibreOffice胜。开源软件的生命力和魅力都在于开源，人心向背是开源软件胜负的根本。
+## 在ubuntu上的安装
 
-## DivX vs Xvid
+`sudo apt install wireshark`
 
-DivX本来是个开源项目。但有一天，几个项目管理者建立了一个商业公司，出于商业目的，而将其变成了闭源项目。这样一来，就激怒了为该项目无偿贡献代码的开源社区。作为回应，开源社区发起了Xvid项目。
+安装好了之后，还不能立即使用。需要给/usr/bin/dumpcap提升权限，才能使用WireShark的抓包功能。否则会出`no interfaces`的错误。
 
-事情的结局有点童话色彩：开源的Xvid最终战胜了不厚道的DivX。但背后的逻辑并没有那么童话。开源软件由于拥有成本为0，天生就是商业软件，尤其是收费商业软件的克星，这其实是经济规律在起作用。一般来说，如果以100分为满分，免费软件只要拿80分，收费软件就没有什么戏了。而开源软件只要拿70分，闭源软件也同样没戏了。
+提升权限的方法有：
 
+1.root方式。
+
+命令行：`sudo wireshark`
+
+桌面图标：`gksudo wireshark`
+
+2.非root方式，这也是官方推荐的方式。
+
+`sudo dpkg-reconfigure wireshark-common`
+
+`sudo usermod -a -G wireshark <your user name>`
+
+`sudo chgrp wireshark /usr/bin/dumpcap`
+
+`sudo chmod 4750 /usr/bin/dumpcap`
+
+`sudo setcap cap_net_raw,cap_net_admin=eip /usr/bin/dumpcap`
+
+最后注销当前用户，重新登陆即可。
+
+## 过滤器规则
+
+WireShark以丰富的过滤器著称，现将我使用到的过滤器规则摘录如下：
+
+`ip.src == 10.3.9.234 || ip.dst == 10.3.9.234`
+
+过滤源地址和目标地址。
+
+`tcp matches Bob`
+
+匹配特定字符串。
+
+`tcp.stream eq id`
+
+将一次TCP交互的包过滤出来，id表示是第几次交互。
+
+---
+
+这套规则实际上就是所谓的BPF(Berkeley Packet Filter）。1992年由Steven McCanne和Van Jacobson提出，1997年引入Linux Kernel 2.1，3.0中增加了即时编译器，应用在网络过滤领域。
+
+2014年Alexei Starovoitov实现了eBPF并扩展到用户空间，威力更大。
+
+https://mp.weixin.qq.com/s/SQ-3fO5ZInqB5aeKCPpluw
+
+Linux中基于eBPF的恶意利用与检测机制
+
+## 参考
+
+https://mp.weixin.qq.com/s/y89cPgaIBWeudJnsFRR-Ow
+
+我用“大白鲨”让你看见TCP
+
+## Fiddler
+
+Fiddler是另一个常用的抓包工具。
+
+fiddler相当于一个中间商，当浏览器发送请求，会先经过fiddler，然后在转给服务器；当服务器有返回数据给浏览器显示时，也会先经过fiddler，然后再把数据返沪给客户端，在这样一个过程，fiddler就可以截取请求和响应。
+
+Wireshark跟fiddler的主要区别就是，Wireshark主要用来帮助用户对网络行为有一个了解，而不能对网络内容做更改或是提示，也就是说只能查看不能修改或转发。
+
+官网：
+
+https://www.telerik.com/fiddler
+
+参考：
+
+https://www.cnblogs.com/Adam-Ye/p/15265899.html
+
+抓包：Fiddler和Wireshark的简单使用
+
+## Whistle
+
+Whistle是腾讯推出的Fiddler替代品。
+
+官网：
+
+https://wproxy.org/whistle/
+
+代码：
+
+https://github.com/avwo/whistle
+
+参考：
+
+https://www.cnblogs.com/zhihuilai/p/9992533.html
+
+Whistle，web抓包与debug利器
+
+https://zhuanlan.zhihu.com/p/441818328
+
+Whistle实现原理——从0开始实现一个抓包工具

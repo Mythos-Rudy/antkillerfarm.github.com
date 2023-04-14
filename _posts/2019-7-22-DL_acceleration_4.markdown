@@ -1,313 +1,278 @@
 ---
 layout: post
-title:  深度加速（四）——模型压缩与加速（1）
+title:  深度加速（四）——NN Quantization（2）
 category: DL acceleration 
 ---
 
-# NN Quantization
+* toc
+{:toc}
 
-## 参考（续）
+# NN Quantization（续）
 
-https://mp.weixin.qq.com/s/tbRj5Wd69n9gvSzW4oKStg
-
-嵌入式深度学习之神经网络二值化（2）
-
-https://mp.weixin.qq.com/s/RsZCTqCKwpnjATUFC8da7g
-
-嵌入式深度学习之神经网络二值化（3）
-
-https://blog.csdn.net/stdcoutzyx/article/details/50926174
-
-二值神经网络（Binary Neural Network，BNN）
-
-https://mp.weixin.qq.com/s/lVja7woyFWpmr9sH0CitAA
-
-BMXNet：基于MXNet的开源二值神经网络实现
-
-https://mp.weixin.qq.com/s/naDk0mmxd08dNl9LawLUnw
-
-不使用先验知识与复杂训练策略，从头训练二值神经网络！
-
-https://mp.weixin.qq.com/s/tbRj5Wd69n9gvSzW4oKStg
-
-异或神经网络
-
-https://mp.weixin.qq.com/s/KgM1k1bziLTCec67hQ8hlQ
-
-超全总结：神经网络加速之量化模型
-
-https://mp.weixin.qq.com/s/7dzQhgblEm-kzRnpddweSw
-
-嵌入式端CNN网络计算的量化-动态定点法（1）
-
-https://mp.weixin.qq.com/s/XzLJzfvpP93cDYplf6-LXA
-
-港科腾讯等提出Bi-Real net：超XNOR-net 10%的ImageNet分类精度
-
-https://mp.weixin.qq.com/s/wCx7rQFwC2mW45FMR77tGQ
-
-二值网络，围绕STE的那些事儿
-
-https://mp.weixin.qq.com/s/M3NcH30zY5Wlj76BDPQlMA
-
-模型压缩一半，精度几乎无损，TensorFlow推出半精度浮点量化工具包，还有在线Demo
-
-https://mp.weixin.qq.com/s/7L26ghhDqdMU6LRV0iD6vQ
-
-模型量化从1bit到8bit，二值到三值
-
-https://mp.weixin.qq.com/s/D3ZKidCV7OhAeqWqWg521w
-
-如何训练和部署FP16/Int8等低精度机器学习模型?
-
-https://jackwish.net/neural-network-quantization-introduction-chn.html
-
-神经网络量化简介
-
-https://mp.weixin.qq.com/s/70GuFnJGhtIZEA-PECHjaA
-
-混合精度对模型训练和推理的影响
-
-# 模型压缩与加速
-
-对于AI应用端而言，由于设备普遍没有模型训练端的性能那么给力，因此如何压缩模型，节省计算的时间和空间就成为一个重要的课题。
-
-此外，对于一些较大的模型（如VGG），即使机器再给力，单位时间内能处理的图像数量，往往也无法达到实际应用的要求。这点在自动驾驶和视频处理领域显得尤为突出。
-
-## 课程
-
-https://cs217.github.io/
-
-CS 217: Hardware Accelerators for Machine
-
-https://mp.weixin.qq.com/s/RcEPWRxQXv6B4wqLHGyQHg
-
-深度神经网络的高效处理:从算法到硬件架构，140页ppt
-
-https://mp.weixin.qq.com/s/yp5gExPzpDiXaGk9oXEMVA
-
-最新综述：模型压缩与加速
-
-https://mp.weixin.qq.com/s/PraNMo4skR-VjEYIIqt1Cw
-
-深度学习模型压缩与加速综述
-
-https://mp.weixin.qq.com/s/Xqc4UgcfCUWYOeGhjNpidA
-
-CNN模型压缩与加速算法综述
-
-## 复杂度分析
-
-https://zhuanlan.zhihu.com/p/31575074
-
-卷积神经网络的复杂度分析
-
-## Network Pruning
-
-首先是韩松的两篇论文：
-
-《Deep Compression: Compressing Deep Neural Networks with Pruning, Trained Quantization and Huffman Coding》
-
-《Learning both Weights and Connections for Efficient Neural Networks》
-
->韩松，清华本科（2012）+Stanford博士（2017）。MIT AP（from 2018）。   
->个人主页：   
->https://stanford.edu/~songhan/
-
-韩松也是SqueezeNet的二作。
-
-![](/images/article/nn_compression.png)
-
-韩松论文的中心思想如上图所示。简单来说，就是去掉原有模型的一些不重要的参数、结点和层。
-
-参数的选择，相对比较简单。参数的绝对值越接近零，它对结果的贡献就越小。这一点和稀疏矩阵有些类似。这种方法一般被称为Weight Pruning。
-
-结点和层的选择，相对麻烦一些，需要通过算法得到不重要的层。删除结点一般被称为Filter Pruning，而删除层则相应的被称作Layer Pruning。
-
-比如可以逐个将每一层50%的参数置零，查看模型性能。对性能影响不大的层就是不重要的。
-
-Weight Pruning需要相关硬件支持跳零操作才能真正加速运算，而Filter/Layer Pruning则无需特殊硬件支持。
-
-虽然这些参数、结点和层相对不重要，但是去掉之后，仍然会对准确度有所影响。这时可以对精简之后的模型，用训练样本进行re-train，通过残差对模型进行一定程度的修正，以提高准确度。
-
-还可以看看图森科技的论文：
-
-https://www.zhihu.com/question/62068158
-
-如何评价图森科技连发的三篇关于深度模型压缩的文章？
-
-图森的思路比较有意思。其中的方法之一，是利用L1规则化会导致结果的稀疏化的特性，制造出一批接近0的参数。从而达到去除不重要的参数的目的。
-
-除此之外，矩阵量化、Kronecker内积、霍夫曼编码、模型剪枝等也是常见的模型压缩方法。
-
-## 权值稀疏化实战
-
-这里讲一下韩松论文提到的裁剪方法中，最简单的一种——“权值稀疏化“的工程实现细节。以darknet框架为例。
-
-1.在src/parser.c中找到save_XXX_weights函数。判断权值是否接近0，如果是，则强制设为0。
-
-2.使用修改后的weights进行re-train。训练好之后，重复第1、2步。
-
-3.反复多次之后，进入最终prune阶段。修改src/network.c:update_network，令其不更新0权值。
-
->re-train时的learning rate一般不宜太大。如果出现re-train的效果，还不如直接prune的好，则多半是learning rate设置的问题。
-
-一般采用稀疏化率来描述权值的稀疏化程度。每层的稀疏化率可以相同，也可以不同。前者被称作Magnitude Pruner，而后者被称作Sensitivity Pruner。
-
-权值稀疏化的设置也和网络结构有关。比如分类网络，由于输入图片是高维数据，而分类结果是低维数据，因此在稀疏化处理的时候，**越靠近输出结果的Layer，其稀疏化程度就可以越高。**而最初的几层，即使只加少量稀疏化，也会导致精度的大幅下降，这时往往就不做或者少做稀疏化处理了。
-
-上述方法的问题在于，分类网络的计算量主要集中在最初几层，所以这种triangle prune mode对于压缩计算量的效果一般。
-
-除了训练后的权值稀疏化之外，权值稀疏化训练也是一种方法。
+## UINT量化
 
 论文：
 
-《FLOPs as a Direct Optimization Objective for Learning Sparse Neural Networks》
+《Quantization and Training of Neural Networks for Efficient Integer-Arithmetic-Only Inference》
 
-这篇论文，将计算量也就是FLOPs作为Loss function设计的一部分，由于稀疏化的权值没有运算量，因此，采用这种Loss训练出的网络，天生就是稀疏化的。
+![](/images/img2/INT8_2.png)
 
-## AutoML
+UINT量化使用bias将数据搬移到均值为0的区间。
 
-由于模型压缩，本质上是一个精益求精的优化问题，因此采用AutoML技术对于各个超参数进行优化，就成为了一件很有必要的事情。
+$$r=S(q-Z)$$
 
-这里主要的问题在于超参数数量众多，导致状态空间过大。
+r为fp32表示；q则是low-bit(如int8)表示；S是自low-bit（int8）到fp32的scale；Z为零点shift，用于使q的某数值对应于r中的0.0。
+
+一般情况下，一个Tensor共享同一个S。有的时候为了提升精度，也可以一个channel共享同一个S，这也被称为per channel quantization。如果不共享S，则退化为普通的浮点数表示。
+
+对于矩阵乘法来说：
+
+$$q_3^{(i,k)}=Z_3+M\sum_{j=1}^N(q_1^{(i,j)}-Z_1)(q_2^{(j,k)}-Z_2)$$
+
+则：
+
+$$S_3(q_3^{(i,k)}-Z_3)=\sum_{j=1}^N S_1(q_1^{(i,j)}-Z_1)S_2(q_2^{(j,k)}-Z_2)$$
+
+其中，$$M=\frac{S_1S_2}{S_3}$$。如果令$$S_3=S_1S_2$$，则上述运算将全部转为整数运算。
+
+这篇论文的另一个贡献在于：原先的INT8量化是针对已经训练好的模型。而现在还可以在训练的时候就进行量化——前向计算进行量化，而反向的误差修正不做量化。这也就是所谓的训练中量化(Quantization Aware Training)。
+
+与之相对的则是训练后量化(Post training quantization)。
+
+![](/images/img4/quantize.jpg)
+
+`tf.quantization.fake_quant_XXXX`系列API可用于前向计算时的量化。
+
+Fake quant之所以叫伪量化，是因为虽然可量化weights/activations，但不是真正意义上的量化，即变量类型还是floating point，而不是integer。
+
+## bfloat16
+
+bfloat16是Google针对AI领域的特殊情况提出的浮点格式。目前已有Intel的AI processors和Google的TPU，提供对该格式的原生支持。
+
+![](/images/img3/bfloat16.png)
+
+上图比较了bfloat16和IEEE fp32/fp16的差异。可以看出bfloat16有如下特点：
+
+1.bfloat16可以直接截取float32的前16位得到，所以在float32和bfloat16之间进行转换时非常容易。
+
+2.bfloat16的Dynamic Range比float16大，不容易下溢。这点在training阶段更为重要，梯度一般都挺小的，一旦下溢变成0，就传递不了了。
+
+3.bfloat16既可以用于训练又可以用于推断。Amazon也证明Deep Speech模型使用BFloat的训练和推断的效果都足够好。Uint8在大部分情况下不能用于训练，只能用于推断。
 
 论文：
 
-《AMC: AutoML for Model Compression and Acceleration on Mobile Devices》
+《Mixed Precision Training》
 
-这是韩松组的何宜晖的作品。该论文采用深度强化学习的DDPG网络来优化目标网络，从而大大减少了需要搜索的状态空间。
+参考：
 
-## 参考
+https://www.zhihu.com/question/275682777
 
-https://github.com/memoiry/Awesome-model-compression-and-acceleration
+如何评价Google在TensorFlow中引入的bfloat16数据类型？
 
-模型压缩与加速相关资源汇总
+https://zhuanlan.zhihu.com/p/56114254
 
-https://mp.weixin.qq.com/s/bndECrtEcNCkCF5EG0wO-A
+PAI自动混合精度训练---TensorCore硬件加速单元在阿里PAI平台落地应用实践
 
-移动端机器学习资源合集
+https://mp.weixin.qq.com/s/zBtpwrQ5HtI6uzYOx5VsCQ
 
-https://blog.csdn.net/hw5226349/article/details/84888416
+模型训练太慢？显存不够用？这个算法让你的GPU老树开新花
 
-Deep Compression/Acceleration：模型压缩加速论文汇总
+https://mp.weixin.qq.com/s/cYGMZuY7jSrjhUAXlDwD_w
 
-https://zhuanlan.zhihu.com/p/58805980
+Mixed Precision Training
 
-深度学习的模型加速与模型裁剪方法
+https://zhuanlan.zhihu.com/p/441591808
 
-https://mp.weixin.qq.com/s/pAEoVs8xu0SY9tfBqOJHHA
+混合精度训练原理
 
-Google DeepMind最新报告—深度神经网络压缩进展
+## Flexpoint
 
-http://blog.csdn.net/shuzfan/article/details/51383809
+Flexpoint是Nervana的作品。
 
-神经网络压缩：Deep Compression
+论文：
 
-https://mp.weixin.qq.com/s/2NOFyu_twx1EciDeDPBLKw
+《Flexpoint: An Adaptive Numerical Format for Efficient Training of Deep Neural Networks》
 
-深度神经网络加速与压缩
+讲了Google的成功案例，这里来讲一个**反面教材**。
 
-https://www.zhihu.com/question/50519680
+![](/images/img3/flex.png)
 
-如何理解soft target这一做法？
+这实际上就是INT16的量化，用在inference上应该还是可以的，然而Nervana的目标还有training。
 
-https://mp.weixin.qq.com/s/0KlnQ8UUxpyhBRdeo0EOAA
+和bfloat16相比，它至少有如下问题：
 
-用于网络压缩的滤波器级别剪枝算法ThiNet
+- 格式转换比bfloat16复杂。
 
-https://mp.weixin.qq.com/s/lO2UM04PfSM5VJYh6vINhw
+- Dynamic Range小，容易梯度消失，从而造成模型很难收敛。
 
-为模型减减肥：谈谈移动／嵌入式端的深度学习
+从指数位宽来看，Flexpoint和float16相同，都是5位。然而由于Flexpoint是共享指数，因此它真正的Dynamic Range是不如float16的。
 
-https://mp.weixin.qq.com/s/cIGuJvYr4lZW01TdINBJnA
+![](/images/img4/scale.png)
 
-深度压缩网络：较大程度减少了网络参数存储问题
+上图是模型训练过程中，相关值的典型范围。
 
-https://mp.weixin.qq.com/s/1JwLP0FmV1AGJ65iDgLWQw
+![](/images/img4/FP16.png)
 
-神经网络模型压缩技术
+float16已经被证明是不适合training的，更遑论Flexpoint了。
 
-https://mp.weixin.qq.com/s/rzv8VCAxBQi0HsUcnLqqUA
+事实上，Intel内部已有人评价道：
 
-处理移动端传感器时序数据的深度学习框架：DeepSense
+>Flexpoint16三个月converge不了一个网络，而BF16一天就可以converge三个。
 
-https://mp.weixin.qq.com/s/UYk3YQmFW7-44RUojUqfGg
+- 指数保存在Host上，会造成反复通信的带宽问题。
 
-上交大ICCV：精度保证下的新型深度网络压缩框架
+总的来说，这个方案虽然精巧，但是由于没有对数据特点做充分分析，没有意识到**Dynamic Range比底数精度更重要**，从而导致了最终的失败。
 
-https://mp.weixin.qq.com/s/ZuEi32ZBSjruvtyUimBgxQ
+目前，整个芯片行业，已经由过去芯片专家根据以往经验（比如摩尔定律），定义下一代产品的规格，逐渐过渡到根据实际应用定义芯片的阶段，即所谓的“**软件定义硬件**”。
 
-揭秘支付宝中的深度学习引擎：xNN
+BF16的成功经验表明，算法专家在AI芯片中的重要程度，甚至超过了IC专家。
 
-http://mp.weixin.qq.com/s/iapih9Mme-VKCfsFCmO7hQ
+需要注意的是Flexpoint的失败，主要在于Dynamic Range和底数的位宽取舍上。他的设计思路本身还是有可取之处的。采用同样思路的MSFP就获得了成功。
 
-简单聊聊压缩网络
+MSFP由微软提出，在微软Project Brainwave产品上得到了广泛的应用。
 
-https://mp.weixin.qq.com/s/3qstz-KoRuxwpmfE4XDI-Q
+参考：
 
-面向卷积神经网络的卷积核冗余消除策略
+https://www.intel.ai/flexpoint-numerical-innovation-underlying-intel-nervana-neural-network-processor/
 
-https://mp.weixin.qq.com/s/dEdWz4bovmk65fwLknHBhg
+Flexpoint: Numerical Innovation Underlying the Intel Nervana Neural Network Processor
 
-韩松毕业论文：面向深度学习的高效方法与硬件
+https://zhuanlan.zhihu.com/p/33580205
 
-https://mp.weixin.qq.com/s/GFE2XYHZXPP0doQ5nd0JNQ
+Flexpoint——利用一种自适应的数据类型加速神经网络训练
 
-当前深度神经网络模型压缩和加速方法速览
+https://mp.weixin.qq.com/s/z4OEPrAAtaNmBQoyvEd7Nw
 
-https://mp.weixin.qq.com/s/Faej1LKqurtwEIreUVJ0cw
+从春秋到战国—论Nervana的倒掉
 
-普林斯顿新算法自动生成高性能神经网络，同时超高效压缩
+## TF32
 
-https://mp.weixin.qq.com/s/uK-HasmiavM3jv6hNRY11A
+![](/images/img3/tf32.png)
 
-深度梯度压缩：降低分布式训练的通信带宽
+这是Nvidia推出的格式，相当于把FP32的指数和FP16的底数拼到了一起。有BF16珠玉在前，这个的设计只能说中规中矩了。
 
-https://mp.weixin.qq.com/s/_MDbbGzDOGHk5TBgbu_-oA
+优点：底数精度虽然不如Dynamic Range重要，但对于运算结果还是有一定的影响的。这点在CNN中不太显著，但在RNN/Transformer中还是有所体现的。
 
-中大商汤等提出深度网络加速新方法，具有强大兼容能力
+缺点：毕竟不是16位，运算速度只有FP16/BF16的一半，但比FP32快一些。
 
-https://mp.weixin.qq.com/s/gbOmpP7XO1Hz_ld4iSEsrw
+BF16和TF32的先例一开，各种格式如火山爆发一般涌现。例如AMD的fp24，Pixar的pxr24，Enflame的ef32。
 
-三星提出移动端神经网络模型加速框架DeepRebirth
+壁仞原创定义了TF32+，相较于TF32，在满足同样动态表示范围的前提下，增加了5位尾数。实际上就是pxr24。。。
 
-https://mp.weixin.qq.com/s/rTFLiZ7DCo6vzD5O64UnMQ
+参考：
 
-阿里提出新神经网络算法，压缩掉最后一个比特
+https://zhuanlan.zhihu.com/p/143499632
 
-https://mp.weixin.qq.com/s/f1SCK0J5oTWNJvtld3UAHQ
+NVIDIA A100 GPU中的TF32将AI训练与HPC速度提升20倍
 
-神经网络修剪最新研究进展
+https://www.cnblogs.com/zhouronghua/p/15170247.html
 
-https://mp.weixin.qq.com/s/3oL0Bso3mwbsfaG8X5-xoA
+AI中各种浮点精度概念集合：fp16，fp32，bf16，tf32，fp24，pxr24，ef32
 
-英特尔提出新型压缩技术DeepThin，适合移动端设备深度神经网络
+https://zhuanlan.zhihu.com/p/449857213
 
-https://mp.weixin.qq.com/s/JnW7RnOQKG-dPOOAQeOmSA
+那些年，AI芯片里的浮点(FloatPoint)格式
 
-当前深度神经网络模型压缩和加速都有哪些方法？
+## x86 Extended Precision Format
 
-https://mp.weixin.qq.com/s/YUg2dZZhDSsRpSftdNfiIQ
+Intel在早期的8087芯片上引入了一种80bit的浮点格式：1 Sign + 15 Exponent + 80 Significand
 
-极致的优化：智能手机是如何处理大型神经网络的
+这个格式设计不知道是否启发了BF16，因为它采用了和IEEE 754中128bit相同的Exponent，正如BF16使用FP32的Exponent一样，都是高一个档次的Exponent搭配低档次的Significand。
 
-https://mp.weixin.qq.com/s/Ck_GDv1Xo-YMZcu-00gTOA
+## BF8 and Tesla CFloat
 
-中星微夺冠国际人工智能算法竞赛，目标检测一步法精度速度双赢
+当我们将浮点的继续降低到8-bit的时候，BF8遇到的挑战越来越大。
 
-https://mp.weixin.qq.com/s/qWJarPrjOrwxSX77xQ9rCw
+在论文HFP8中，模型inference的时候，FP8(1-4-3)在mobilenet和transformer任务上明显的精度降低。
 
-面向卷积神经网络的卷积核冗余消除策略
+对于training来说，遇到的挑战进一步增大，weight/gradients/activation的范围相差更大，没有办法选择一个合适的格式来满足所有数值的要求。
 
-https://mp.weixin.qq.com/s/QSGgvhkMUj3cXVlQwlzTFQ
+HFP8就提出了一种Hybrid的方式：forward的时候用FP-1-4-3，backward的时候用 FP-1-5-2。forward的时候，更关注精度，backward的时候更注重范围。这样的话，HFP8就能够在训练的过程中获得接近FP32的表现。
 
-深度神经网络加速和压缩新进展年度报告
+在工业界Tesla DoJo 提出了一种可配置的CFloat，exponent和mantissa的位数可以动态的调整，只要满足总共的bit数就可以了。这样，由软件来选择合适的浮点类型CFormat，来最大化的利用硬件的性能。
 
-https://zhuanlan.zhihu.com/p/37074222
+《8-BIT NUMERICAL FORMATS FOR DEEP NEURAL NETWORKS》
 
-CVPR 2018 高效小网络探密（上）
+## Posit
 
-https://zhuanlan.zhihu.com/p/37919669
+![](/images/img4/Posit.png)
 
-CVPR 2018 高效小网络探密（下）
+上图是Posit格式的示意图，除了符号位、指数和底数之外，它还包括了regime bits。
+
+regime bits不知道怎么翻译，这里不妨意译为**超指数**。它的公式是：
+
+$$useed^k$$
+
+其中，
+
+$$useed=2^{2^{es}}$$
+
+es表示指数位的宽度，这里是3，所以$$useed=2^{2^{3}}=2^8=256$$
+
+k的表示没有采用补码，而是一种特殊的方法：
+
+![](/images/img4/Posit_2.png)
+
+k=从左面开始数0或者1的个数。
+
+需要注意的是，同样总位宽的Posit格式，其每个部分（符号位除外，固定占1位）的宽度是不定的。除了regime bits是必须有的（但宽度不定）之外，指数和底数都是可选项。
+
+Posit的设计思路其实是很自然的：
+
+- 底数增加1位，Dynamic Range增加2倍。
+
+- 指数增加1位，Dynamic Range增加$$2^2$$倍。
+
+- 如果还想增加Dynamic Range，自然就需要引入超指数了。
+
+https://www.sigarch.org/posit-a-potential-replacement-for-ieee-754
+
+Posit: A Potential Replacement for IEEE 754
+
+常见的软件实现：
+
+https://github.com/cjdelisle/libposit
+
+https://github.com/stillwater-sc/universal
+
+## Saturate Quantization
+
+上述各种量化方法都是在保证数值表示范围的情况下，尽可能提高fl或者scale。这种方法也叫做Non-saturation Quantization。
+
+NVIDIA在如下文章中提出了一种新方法：
+
+http://on-demand.gputechconf.com/gtc/2017/presentation/s7310-8-bit-inference-with-tensorrt.pdf
+
+8-bit Inference with TensorRT
+
+![](/images/img2/INT8_3.png)
+
+Saturate Quantization的做法是：将超出上限或下限的值，设置为上限值或下限值。
+
+如何设置合理的Saturate threshold呢？
+
+可以设置一组门限，然后计算每个门限的分布和原分布的相似度，即KL散度，选择最相似分布的门限即可。
+
+参考：
+
+https://blog.csdn.net/u013010889/article/details/90295078
+
+int8量化和tvm实现
+
+## Block-wise Quantization
+
+经过观察，在正态分布下，绝对值很大的参数的比例会很少，所以一起归一会使得大多数参数变得很小，从而使得量化过程中的一些数字范围对应的int8没有被充分利用，导致更多的信息丢失。
+
+把参数划分为了小Block，在进行量化的时候，按照block内绝对值最大的数对这个block进行归一化，使得所有参数都落在 [-1, 1] 这个范围，这就是Block-wise Quantization。
+
+## Trainning Quantization
+
+除了上面这些无条件Quantization之外，训练中的Quantization也是一大类算法。
+
+比如下面提到的PACT量化，不仅对weight进行量化，还通过不断训练，限制每一层tensor的数值范围。
+
+参考：
+
+https://mp.weixin.qq.com/s/7rMnzbvp1hjDLuw_oifbng
+
+我们是这样改进PACT量化算法的

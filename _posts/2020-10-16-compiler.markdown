@@ -1,0 +1,289 @@
+---
+layout: post
+title:  lex&yacc, 编译原理, Polyhedral Model
+category: toolchain 
+---
+
+* toc
+{:toc}
+
+# lex&yacc
+
+2014.2
+
+* 前言
+
+春节期间，空闲时间较多，于是研究了一下lex和yacc的用法。知道lex和yacc，那还是大四学习编译原理那门课时候的事情了。转眼之间，那已经是十年前的事情了。
+
+编译原理在整个大学期间的专业课中，属于难度比较高的课程。而且如果不是计算机专业的话，基本没有可能学到这门课。当时的课程作业是完成一个支持脚本绘图的软件。其难度即使以我现在的眼光来看，也颇不容易。当时只有少数人能够做出来，但基本上是参考教这门课的老师出的一本教辅书来写的。
+
+这个课程作业之所以复杂，主要在于老师要求词法和语法的分析器都必须要自己编码实现。如果退一步，可以使用lex和yacc的话，就没有那么困难了。当然这也与大学里以传授理论为主的思想有关，我还是相当认同这一点的。
+
+再顺便说一句，lex的作者之一是google的前CEO Eric Schmidt，这是他20岁时，在贝尔实验室的作品。当然，不全是他的功劳。实际上lex和yacc都是贝尔实验室的作品，这从lex效仿yacc的书写风格就能略见一斑。相比而言，yacc的地位和复杂度更为重要些。
+
+* 前置条件
+
+要想研究lex和yacc，除了需要有C语言的基础之外。还需要对正则式和BNF（Backus-Naur Form）有所了解。
+
+* 教材
+
+LEX & YACC TUTORIAL by Tom Niemann——这本书比较简练，且附有代码，入门级的极品
+
+* 心得
+
+lex生成的代码中，最重要的是yylex函数，该函数每匹配一个词，就返回一次。yacc生成的代码中，最重要的是yyparse函数，这个函数调用yylex函数以获得所需要的语法词汇。
+
+lex的词法分析，依据用法的不同，可分为三类：
+
+1）需要匹配识别的词汇。
+
+2）需要过滤的词汇。一般是空白、TAB之类的分隔符。
+
+3）直译的词汇。就是那些lex不处理，也不吃掉，而是直接交给yacc分析的词汇。
+
+这三类词汇必须仔细规划，因为被解析的文本中，一旦出现不在上述三类的任何一类中的词汇时，程序就会报错。
+
+yacc的BNF中一般都要包括类似下面的语句：
+
+```c
+stmt_list:
+          stmt                  { }
+        | stmt_list stmt        { }
+        ;
+```
+
+其中stmt表示单个语句的语法目标，而stmt_list则是一系列语句的集合。
+
+为什么要添加这一句呢？因为yacc在处理被解析的文本时，如果文本不能最终归结为一个单一的语法目标的时候，程序也会报错。
+
+代码示例参见：
+
+https://github.com/antkillerfarm/antkillerfarm_crazy/tree/master/mylex
+
+这里使用的是lex/yacc在linux上现代版本——flex/bison。
+
+# 编译原理
+
+## 教程
+
+《Principles of Compiler Design Compilers: Principles, Techniques, and Tools》。该书由于封面上有龙的图案，又被称为“龙书”。下面的虎书、鲸书也是一样的。
+
+《Modern Compiler Implementation in C》，虎书。
+
+《Advanced Compiler Design and Implementation》，鲸书。
+
+以上三本书，被称为编译器领域的圣经。
+
+---
+
+龙书的作者Alfred Vaino Aho和Jeffrey David Ullman获得了2020年图灵奖。
+
+https://mp.weixin.qq.com/s/UGhHM1jCN0S7TX9jwLcMmQ
+
+2020图灵奖重磅出炉！龙书作者、编程语言先驱共获大奖，是他们解放了一代又一代程序员
+
+---
+
+https://www.zhihu.com/question/315313590
+
+学习编译原理有什么好的书籍?
+
+https://parsing-techniques.duguying.net/
+
+《Parsing Techniques》的中文译本
+
+## blog
+
+https://zhuanlan.zhihu.com/frozengene
+
+一个编译器方面的专栏
+
+http://frozengene.github.io/
+
+一个LLVM方面的blog
+
+https://zhuanlan.zhihu.com/c_1250484713606819840
+
+一个LLVM方面的专栏
+
+## 术语
+
+AST：abstract syntax tree
+
+FFI：Foreign Function Interface
+
+ABI：Application Binary Interface
+
+API：Application Programming Interface
+
+比如，`int register_netdevice(struct net_device *dev)`这个内核函数，原型基本上是不会变的，所以保持这个API稳定是很简单的，但它的ABI就未必了，就算是这个函数定义本身没变，即API没变，而struct net_device的定义变了，里面多了或者少了某一个字段，它的ABI就变了，你之前编译好的二进制模块就很可能会出错了，必须重新编译才行。
+
+SSA：static single assignment form
+
+CSE: Common subexpression elimination
+
+DCE: Dead code elimination
+
+peephole optimization
+
+https://blog.csdn.net/liumf2005/article/details/8690377
+
+说说静态单赋值（SSA,Static Single-Assignment)
+
+## Transpiler
+
+Transpiler是一个经常用来和Compiler比较的术语。它用于将一种语言编写的源代码转换为另一种具有**相同抽象层次**的语言。
+
+当你编译C#时，编译器将函数体转换为中间语言（IL）。这不能称为Transpiler，因为这两种语言的抽象层次完全不同。
+
+而当你编译TypeScript时，编译器将它转换为JavaScript。二者的抽象层次相同，所以你可以称之为Transpiler。
+
+可以看出transpiler和compiler的区别，主要在于两种语言的抽象层次是否相同。因此，transpiler也被称为source-to-source compiler。
+
+## DSL
+
+tf实现了神经网络的计算图语义模型，但由于其镶嵌于python中，所以是内部DSL编译器。
+
+外部DSL编译器，典型的如verilog、systemverilog，他们是硬件描述语言，应用的领域是数字IC设计，目标代码不是汇编代码，而是逻辑网表文件。
+
+## Pass
+
+![](/images/img3/single_pass.jpg)
+
+![](/images/img3/multi_pass.jpg)
+
+以上两图展示了One pass/Single pass与Two pass/Multi pass之间的差异。所谓Pass，就是将代码/AST扫描并处理一遍。
+
+早期的编译器一般是Single pass的，它虽然结构简单，但是不便于扩展。所以后来又出现了Multi pass。与之对应的编译器流程，亦被分为前端和后端两部分。
+
+前端：source code -> AST
+
+后端：AST -> target code
+
+而编译流程的每一步，则被抽象为Pass，这个称呼最早为LLVM采用，进而扩展到整个编译原理领域。
+
+pass分为两类，一类是分析(analysis)pass，负责收集信息共其它pass使用，辅助调试或使程序可视化；另一类是变换(transform)pass，改变程序的dataflow/controlflow。
+
+https://www.geeksforgeeks.org/single-pass-two-pass-and-multi-pass-compilers/
+
+Single pass, Two pass, and Multi pass Compilers
+
+https://xz.aliyun.com/t/7257
+
+初探LLVM&clang&pass
+
+http://llvm.org/docs/WritingAnLLVMPass.html
+
+Writing an LLVM Pass
+
+## Python Language Services
+
+Python Language Services提供了一系列接口用于观察Python程序的运行。比如：
+
+ast：分析abstract syntax tree。
+
+symtable：访问符号表。
+
+官网：
+
+https://docs.python.org/3/library/language.html
+
+## Android编译
+
+![](/images/img3/ART.png)
+
+AOT：Ahead Of Time，指在运行前编译，比如普通的静态编译。
+
+JIT：Just In Time，指在运行时编译，边运行边编译，比如java虚拟机在运行时就用到JIT技术。
+
+![](/images/img3/aot_jit.jpg)
+
+https://mp.weixin.qq.com/s/vnaI8FwB4Ot46weAgq18Eg
+
+华为新贵！方舟编译器的荣光和使命
+
+https://www.zhihu.com/answer/812481811
+
+周志德（Fred Chow)
+
+---
+
+JIT编译最大的优势就是可以通过FDO（feedback-directed optimization）或者叫PGO（profile-guided optimization）来做优化，这样可以以少量的初始运行时开销，换取一些本来要通过重量级静态分析才可以得到、或者静态分析根本无法得到的一些运行时信息，然后基于它来做优化就可以事半功倍。
+
+因此，JIT并不一定不如AOT。
+
+AOT主要为了性能，大多数脚本都是动态类型，即使加了AOT，由于没编译期针对类型的优化，性能也比不上带静态类型的语言的AOT。这种场景提升性能最好的办法还是JIT。
+
+https://zhuanlan.zhihu.com/p/19977592
+
+JIT编译，动态编译与自适应动态编译
+
+https://zhuanlan.zhihu.com/p/48236683
+
+使用Profile Guided Optimization提升Application的性能
+
+https://www.zhihu.com/question/484961291
+
+怎么看现在java等语言纷纷编译成机器码（aot）的趋势？脚本为什么没有出现该趋势？
+
+---
+
+为了在Android中支持新的Java7-8-9的新特性，Google又开发了D8和R8。
+
+https://juejin.im/post/5d70fb2ce51d4557ca7fddaa
+
+Android CPU, Compilers, D8 & R8
+
+# Polyhedral Model
+
+## 教程
+
+Polyhedral Model的内容主要在《编译原理》（龙书）第十一章——并行和局部优化。
+
+《多面体编译理论与深度学习实践》 赵捷 李宝亮著
+
+https://www.cs.colostate.edu/~pouchet/
+
+888.11-Polyhedral Compilation Foundations
+
+https://polyhedral.info/
+
+一个Polyhedral方面的社区，有大量资料
+
+## 笔记
+
+基于多面体模型的编译优化技术代表了程序自动并行化领域众多方向最先进的水平,成为国际上多个编译研发团队的研究热点。
+
+![](/images/img4/Polyhedral.png)
+
+多面体模型(Polyhedral)主要关注的是程序设计中的循环优化，两层循环的循环变量的取值范围可以构成一个平面，三层循环的循环变量可以组成一个长方体，如上图所示，因此得名多面体模型。
+
+![](/images/img4/Polyhedral_2.png)
+
+多面体编译优化关注的是在确保程序执行正确的前提下重组循环的结构，实现性能最佳。上图左边表示的原始的二维迭代空间，蓝色箭头表示数据（黑点）之间存在依赖关系，对角线的绿色表示数据没有依赖关系，经过变基操作之后变为右图的表达式及迭代空间，从形状看像是把多面体进行了变形，形象地体现出多面体优化的过程。
+
+---
+
+Polyhedral Model在传统的CPU/GPU编译器领域已经有非常多的实践。
+
+比如gcc中的Graphite：
+
+http://gcc.gnu.org/wiki/Graphite
+
+论文：
+
+GRAPHITE: Polyhedral Analyses and Optimizations for GCC
+
+还有LLVM中的polly：
+
+https://polly.llvm.org/
+
+LLVM Framework for High-Level Loop and Data-Locality Optimizations
+
+---
+
+计算图优化
+
+算子优化
+
+指令优化

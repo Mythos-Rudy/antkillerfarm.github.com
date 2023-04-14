@@ -1,8 +1,11 @@
 ---
 layout: post
-title:  机器学习（三十五）——Probabilistic Robotics, 推荐算法中的常用排序算法, 运筹学
+title:  机器学习（三十五）——Probabilistic Robotics, Kalman filters
 category: ML 
 ---
+
+* toc
+{:toc}
 
 # Probabilistic Robotics
 
@@ -22,8 +25,12 @@ http://robots.stanford.edu/probabilistic-robotics/ppt/
 
 针对多相关测量值问题，这里有一个和朴素贝叶斯假设相仿的**Markov assumption**——假设$$z_n$$独立于$$z_1,\dots,z_{n-1}$$（即“现在”不依赖于“过去”），则：
 
-$$P(x\mid z_1,\dots,z_n)=\frac{P(z_n\mid x)P(x\mid z_1,\dots,z_{n-1})}{P(z_n\mid z_1,\dots,z_{n-1})}(\text{Bayes})
-\\=\eta P(z_n\mid x)P(x\mid z_1,\dots,z_{n-1})=\eta_{1,\dots,n}\prod_{i=1}^nP(z_i\mid x)P(x)(\text{Markov})$$
+$$
+\begin{array}\\
+P(x\mid z_1,\dots,z_n)=\frac{P(z_n\mid x)P(x\mid z_1,\dots,z_{n-1})}{P(z_n\mid z_1,\dots,z_{n-1})}(\text{Bayes})\\
+=\eta P(z_n\mid x)P(x\mid z_1,\dots,z_{n-1})=\eta_{1,\dots,n}\prod_{i=1}^nP(z_i\mid x)P(x)(\text{Markov})
+\end{array}
+$$
 
 >注：以下的推导过程注释中，如无特别说明。均以Bayes指代Bayes' theorem，以Markov指代Markov assumption。
 
@@ -89,7 +96,17 @@ https://blog.csdn.net/HJ199404182515/article/details/52504150
 
 浅谈自适应滤波器
 
-## 卡尔曼滤波
+## 零点 & 极点
+
+John Doyle举过一个很直观的例子: 把一根杆立在手上，保持不倒。
+
+杆越长就越容易。杆的长度会影响极点的位置，杆越短的话极点越不稳定。
+
+一般人做这个实验的时候是眼睛看杆的顶端。如果眼睛只盯着杆的中心，这个任务也会变得非常难。原因是因为零点的位置，导致杆的状态变得不可观。
+
+控制系统中的零极点有什么物理意义么？
+
+# Kalman filters
 
 >注：Rudolf (Rudi) Emil Kálmán，1930～2016，匈牙利出生的美国科学家。哥伦比亚大学博士（1957），先后执教于斯坦福大学和佛罗里达大学。现代控制理论的里程碑人物，美国科学院院士。   
 >卡尔曼滤波从纯数学的角度讲，并没有多大意义。因此，主流数学家们在很长一段时间内，并不承认Kálmán是数学家。只是由于卡尔曼滤波在工程界的巨大影响力，才不得不于2012年，授予其美国数学协会院士。
@@ -129,6 +146,14 @@ http://www.docin.com/p-976961701.html
 《自适应动态导航定位》，杨元喜著。
 
 >注：杨元喜，1956年生，大地测量学家。中国科学院院士。
+
+https://zhuanlan.zhihu.com/c_1131936304564453376
+
+专栏：现代控制理论
+
+https://zhuanlan.zhihu.com/ClassicControl
+
+专栏：经典控制理论
 
 https://blog.csdn.net/tiandijun/article/details/72469471
 
@@ -190,170 +215,90 @@ https://mp.weixin.qq.com/s/v460ql4RnJGbzbV0iZH4kA
 
 深度解读卡尔曼滤波原理
 
-# 推荐算法中的常用排序算法
+https://mp.weixin.qq.com/s/Jlux3pZ4keVzkwWzgoPrEQ
 
-## Pointwise方法
+深入浅出讲解卡尔曼滤波
 
-Pranking (NIPS 2002), OAP-BPM (EMCL 2003), Ranking with Large Margin Principles (NIPS 2002), Constraint Ordinal Regression (ICML 2005)。
+https://mp.weixin.qq.com/s/BeIEjASATt3Qpef_Ag-cSw
 
-## Pairwise方法
+卡尔曼滤波系列——经典卡尔曼滤波推导
 
-Learning to Retrieve Information (SCC 1995), Learning to Order Things (NIPS 1998), Ranking SVM (ICANN 1999), RankBoost (JMLR 2003), LDM (SIGIR 2005), RankNet (ICML 2005), Frank (SIGIR 2007), MHR(SIGIR 2007), Round Robin Ranking (ECML 2003), GBRank (SIGIR 2007), QBRank (NIPS 2007), MPRank (ICML 2007), IRSVM (SIGIR 2006)。
+https://mp.weixin.qq.com/s/t4GIPMB-6Vq7i8Q5PN6L-w
 
-## Listwise方法
+追狗，从入门到精通
 
-LambdaRank (NIPS 2006), AdaRank (SIGIR 2007), SVM-MAP (SIGIR 2007), SoftRank (LR4IR 2007), GPRank (LR4IR 2007), CCA (SIGIR 2007), RankCosine (IP&M 2007), ListNet (ICML 2007), ListMLE (ICML 2008) 。
+https://mp.weixin.qq.com/s/EZ4JQM2vynTevUjFpW1h_w
 
-## LambdaMART
+追狗，从入门到精通2.0
 
-https://www.zhihu.com/question/41418093
+https://zhuanlan.zhihu.com/p/128520715
 
-求解LambdaMART的疑惑？
+自动驾驶定位技术-马尔科夫定位
 
-https://liam0205.me/2016/07/10/a-not-so-simple-introduction-to-lambdamart/
+https://zhuanlan.zhihu.com/p/138684962
 
-LambdaMART不太简短之介绍
+自动驾驶感知融合-卡尔曼及扩展卡尔曼滤波(Lidar&Radar)
 
-http://blog.csdn.net/huagong_adu/article/details/40710305
+https://zhuanlan.zhihu.com/p/141059329
 
-Learning To Rank之LambdaMART的前世今生
+自动驾驶感知融合-无迹卡尔曼滤波(Lidar&Radar)
 
-## 参考
+https://zhuanlan.zhihu.com/p/134595781
 
-https://mp.weixin.qq.com/s/YjYVE6jzySVsZmXSPivB5w
+卡尔曼滤波(Kalman filter)含详细数学推导
 
-达观数据搜索引擎排序实践（上篇）
+https://zhuanlan.zhihu.com/p/166342719
 
-https://mp.weixin.qq.com/s/UpN7tAMjbFLSPcDYsWaykg
+卡尔曼滤波器详解——从零开始(1)
 
-达观数据搜索引擎排序实践（下篇）
+https://zhuanlan.zhihu.com/p/179480833
 
-https://mp.weixin.qq.com/s/xigME-griWFwEvvPNqWuvg
+卡尔曼滤波器详解——从零开始(2)
 
-美团点评联盟广告的场景化定向排序机制
+https://mp.weixin.qq.com/s/3K9qdH9FXnYABpJoJkFcqw
 
-https://blog.csdn.net/stdcoutzyx/article/details/50879219
+使用卡尔曼滤波平滑时间序列，提高时序预测的准确率
 
-Learning to Rank简介
+https://zhuanlan.zhihu.com/p/35978617
 
-http://www.cnblogs.com/wentingtu/archive/2012/03/13/2393993.html
+线性动态系统与卡尔曼滤波
 
-Learning to Rank入门小结
+https://mp.weixin.qq.com/s/2rX6iRTYBk47V29fSTAMQQ
 
-https://mp.weixin.qq.com/s/dRaiYPIdh_oJcQD-UxAlkA
+图解卡尔曼滤波(Kalman Filter)
 
-优秀的排序算法如何成就了伟大的机器学习技术
+https://mp.weixin.qq.com/s/PuvTkDhwbYv8TK8t-Zhcug
 
-https://mp.weixin.qq.com/s/XT4_E2d2gr1T8jCo82ix4A
+基于卡尔曼滤波的注意力机制—广告点击率预估中的用户行为建模   
 
-深入浅出排序学习：写给程序员的算法系统开发实践
+https://longaspire.github.io/blog/%E5%8D%A1%E5%B0%94%E6%9B%BC%E6%BB%A4%E6%B3%A2/
 
-https://zhuanlan.zhihu.com/p/64952093
+卡尔曼滤波器
 
-排序评价指标
+https://zhuanlan.zhihu.com/p/36745755
 
-https://zhuanlan.zhihu.com/p/64970393
+卡尔曼滤波：从入门到精通
 
-PointwiseRank
+https://zhuanlan.zhihu.com/p/338269917
 
-https://zhuanlan.zhihu.com/p/65224450
+从全状态观测器到卡尔曼滤波器
 
-PairwiseRank
+https://mp.weixin.qq.com/s/gb7CX8mbQNkMFVe3DIDT6Q
 
-https://zhuanlan.zhihu.com/p/66514492
+卡尔曼滤波最完整公式推导
 
-ListwiseRank
+https://mp.weixin.qq.com/s/vChWpG_2m53n8Bz-yfCohg
 
-https://zhuanlan.zhihu.com/p/69246361
+实操教程：用一维卡尔曼滤波器来估计运动物体的位置和速度
 
-基于query的排序
+https://zhuanlan.zhihu.com/p/408783183
 
-# 运筹学
+卡尔曼滤波的基本原理（也许是我写过最详细的推导）
 
-http://www.cnblogs.com/6DAN_HUST/archive/2010/11/11/1874681.html
+https://www.zhihu.com/column/c_1303778703026126848
 
-运筹学——线性规划及单纯形法求解
+一个多传感器信息融合的专栏
 
-https://mp.weixin.qq.com/s/2qOjE0B6x9xuyoBw94NqQA
+https://www.zhihu.com/question/41823401
 
-线性规划基础
-
-https://mp.weixin.qq.com/s/zV6zi79c1Q2dfCaywuK6Pw
-
-内点法六十年再回首
-
-https://mp.weixin.qq.com/s/aryMyP0r6vov0pUvkoFYng
-
-过去，现在和未来：运筹学为航空业保驾护航
-
-https://mp.weixin.qq.com/s?__biz=MzUxMTYwMzI0OQ==&mid=2247486937&idx=1&sn=6be69679390f59516ee5f077adb8ccfa
-
-运筹优化的剖析与应用
-
-https://mp.weixin.qq.com/s/Ofn-p8NnnO4kLYqTlL0bJg
-
-二次规划（QP）样条路径
-
-https://mp.weixin.qq.com/s/zqesjLOeWIkiq68tLVVmJQ
-
-混合整数规划模型在页岩气开采中的应用：EQT公司的案例
-
-https://mp.weixin.qq.com/s/Ve_Gvp1Y0nIX4DV9_w0S3g
-
-半正定规划(SDP)的形象理解和基本原理
-
-https://mp.weixin.qq.com/s/wspfngdFNq-GeCTUJAse0A
-
-在单纯形法之前
-
-https://mp.weixin.qq.com/s/sGRNiAl7tvPc1tl0Xk2Idw
-
-深度学习和强化学习在组合优化方面有哪些应用？
-
-https://mp.weixin.qq.com/s/MuODCRWqolnh62D4t-hRvQ
-
-临(邻)近增量累积梯度法(PIAG)
-
-https://mp.weixin.qq.com/s/AHM60k3_Th3HD-VPBaXhuw
-
-线性规划和整数规划的若干建模技巧
-
-https://mp.weixin.qq.com/s/Pvu7JAHvsGJdL0mJIhVwng
-
-多工序、多机台(产线)环境下的排程要点
-
-https://mp.weixin.qq.com/s/oMiNGJOCqjEHoTmfBQv6EA
-
-使用神经网络为A*搜索算法赋能：以个性化路径推荐为例
-
-https://mp.weixin.qq.com/s/D_CQIw1372RTYBeSqPEl9A
-
-鲁棒优化基础
-
-https://mp.weixin.qq.com/s/7x2LS94i7te7JAeWo-d5kA
-
-什么样的整数规划模型是一个好的模型
-
-https://mp.weixin.qq.com/s/hzpnHvqaP9sxQQlLq-_3wg
-
-Robust Optimization in 3D Vision
-
-https://mp.weixin.qq.com/s/T20YMbTBbn1GC3fvInhkkA
-
-深度学习如何影响运筹学？
-
-https://mp.weixin.qq.com/s/VcA1SZNS4LvMny_9dCUByQ
-
-混合整数规划/离散优化的精确算法--分支定界法及优化求解器
-
-https://mp.weixin.qq.com/s/Ol69W-T67eGJW6RDjQJQ6w
-
-胡武华博士：运筹优化理论在物流行业中的应用实践
-
-https://mp.weixin.qq.com/s/cd08Lk4LcxV-qAVLq7-Kjg
-
-整数规划经典方法--割平面法（Cutting Plane Method）
-
-https://mp.weixin.qq.com/s/NlxZQv8Z-AzIlz6mG8cCxQ
-
-离散/整数/组合/非凸优化概述及其在AI的应用
+有什么将卡尔曼滤波讲得透彻的书籍或资料？

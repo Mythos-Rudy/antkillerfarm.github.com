@@ -1,8 +1,119 @@
 ---
 layout: post
-title:  数学狂想曲（五）——玻尔兹曼分布, 概率分布（2）
+title:  数学狂想曲（五）——肺炎版《黄冈密卷》, 玻尔兹曼分布
 category: math 
 ---
+
+* toc
+{:toc}
+
+# 抛物线（续）
+
+那么抛物线呢？实际上抛物线是椭圆和双曲线的临界状态，它的另一个焦点在无穷远的地方。对于绕恒星的抛物线轨道来说，取的是那个通常说的焦点位置作为恒星位置；对于地面上的斜抛运动来说，取的是无穷远处的那个焦点位置作为恒星位置。
+
+![](/images/img3/ellipse.gif)
+
+我们从斜面的上方和下方分别塞进一个球，它们与圆柱、截面均相切，然后，两个球与截面相切的点就是椭圆的两个焦点。
+
+![](/images/img4/ball.gif)
+
+![](/images/img4/man.gif)
+
+![](/images/img4/rect.gif)
+
+https://mp.weixin.qq.com/s/BmSdlLTZ8PxD_b27TzFWlw
+
+如何让8岁表妹了解数学到底是什么
+
+https://mp.weixin.qq.com/s/p-EVuaPfLusq01Jw8KcQdQ
+
+六一礼物：这些有趣的动图送给孩子们！了解数学能做什么？电路如何工作？
+
+# 肺炎版《黄冈密卷》
+
+问题由来：
+
+https://mp.weixin.qq.com/s/dR7fg6PTCVAnezlW6gTY2w
+
+新冠病毒最“强”管控，《黄冈密卷》数学题到底有多难
+
+---
+
+1.设$$\sqrt{3+\sqrt{2}+\sqrt{3}+\sqrt{6}}=\sqrt{x}+\sqrt{y}+\sqrt{z}$$，且x、y、z为有理数，则$$xyz$$=?
+
+解：
+
+$$3+\sqrt{2}+\sqrt{3}+\sqrt{6} = x+y+z+2\sqrt{xy}+2\sqrt{xz}+2\sqrt{yz}$$
+
+由x、y、z为有理数可得：
+
+$$4xy=2, 4xz=3, 4yz=6$$
+
+由于x、y、z在原式中是对称的，所以上式中选择哪个等于2、3、6，都是无所谓的。
+
+三式相乘可得：
+
+$$4^3 \cdot (xyz)^2 = 36$$
+
+$$(xyz)^2 = 9/16$$
+
+$$xyz = 3/4$$
+
+---
+
+2.设二次函数$$f(x)=ax^2+ax+1$$的图像开口向下，且满足$$f(f(1))=f(3)$$，则$$2a=?$$
+
+解：
+
+令$$y=2a$$，则$$f(1)=2a+1=y+1$$
+
+$$f(f(1))=f(y+1)=f(3)$$
+
+$$a(y+1)^2+a(y+1)+1=9a+3a+1$$
+
+$$(y+1)^2+(y+1)=12$$
+
+$$y^2+3y-10=0$$
+
+$$(y+5)(y-2)=0$$
+
+因为图像开口向下，所以$$2a=-5$$。
+
+---
+
+最近，黄冈再次因数学题而火爆网络。
+
+以下是2020黄冈中考数学第16题：
+
+![](/images/img4/huanggang.gif)
+
+求上图扇形一边的中点P，在扇形滚动一周的过程中，所经历的路径的长度。
+
+显然，第1，3，4段都是圆弧，难就难在第2段（绿色）了。这条曲线可不是那么好求的，普通的本科高数都搞不定它。必须出动椭圆积分才行。
+
+https://www.zhihu.com/question/408523403
+
+如何解答2020黄冈中考数学第16题？
+
+>小学能接受1/3这种无限循环小数，初中能接受根号，高中能接受ln(2)，那大学的精确解为什么不能接受椭圆函数。
+
+https://mathworld.wolfram.com/EllipticIntegraloftheSecondKind.html
+
+Elliptic Integral of the Second Kind
+
+这里有个上面动图的GeoGebra版本：
+
+https://github.com/antkillerfarm/antkillerfarm_crazy/blob/master/geogebra/huanggang.ggb
+
+《椭圆函数及其应用》 高本庆 著
+
+---
+
+https://mp.weixin.qq.com/s/FdHstCxJqQ4wYXSRDyqm5A
+
+不敢相信！这份民国时期大学入学考试试卷，竟让170位院士头疼！
+
+<a name="Boltzmann"/>
 
 # 玻尔兹曼分布
 
@@ -20,7 +131,7 @@ $$H_n=-k\sum_{i=1}^{n}p_i\ln p_i\tag{1}$$
 
 以下我们主要从信息熵的角度出发研究玻尔兹曼分布。但不能忽视的是，玻尔兹曼分布最早脱胎于热力学，而信息熵与热力学统计物理中的熵，虽然数学形式一致，但本质是不同的。两者相差一个玻尔兹曼常数。参见：
 
-https://www.zhihu.com/question/20992022/answer/50458123
+https://www.zhihu.com/answer/50458123
 
 信息熵与热力学统计物理中的熵有什么区别和联系？
 
@@ -59,8 +170,11 @@ $$\sum_{i=1}^{n}p_i=1\tag{3}$$
 
 将公式2和公式3所述的两个约束，代入公式1，可得如下Lagrange乘子：
 
-$$J(p_i)=H_n/k-\alpha(\sum_{i=1}^{n}p_i-1)-\sum_{j=1}^{M}\beta_j(\sum_{i=1}^{n}f_i^{(j)}p_i-F_j)
-\\=-\sum_{i=1}^{n}p_i\ln p_i-\alpha\sum_{i=1}^{n}p_i+\alpha-\sum_{j=1}^{M}\sum_{i=1}^{n}\beta_jf_i^{(j)}p_i+\sum_{j=1}^{M}\beta_jF_j$$
+$$\begin{array}\\
+J(p_i)=H_n/k-\alpha(\sum_{i=1}^{n}p_i-1)-\sum_{j=1}^{M}\beta_j(\sum_{i=1}^{n}f_i^{(j)}p_i-F_j)\\
+=-\sum_{i=1}^{n}p_i\ln p_i-\alpha\sum_{i=1}^{n}p_i+\alpha-\sum_{j=1}^{M}\sum_{i=1}^{n}\beta_jf_i^{(j)}p_i+\sum_{j=1}^{M}\beta_jF_j
+\end{array}
+$$
 
 对$$p_i$$求导，可得：
 
@@ -168,93 +282,3 @@ https://mp.weixin.qq.com/s/2_ZkKrwPhaS31JnyYXyfrQ
 http://blog.csdn.net/shijing_0214/article/details/51116046
 
 理解最大熵模型
-
-https://mp.weixin.qq.com/s/yUJDMSU1Fmf36vN2Q2y1TA
-
-最大熵模型原理小结
-
-https://mp.weixin.qq.com/s/a3TlUFwSm9aIptfhy6MnGA
-
-机器学习是如何借鉴物理学思想的？从伊辛模型谈起
-
-https://zhuanlan.zhihu.com/p/39241895
-
-深度学习与物理，有效场论，重整化群
-
-https://mp.weixin.qq.com/s/7NrB0UtmELXD3UNO3C6jGA
-
-我就不信看完这篇你还搞不懂信息熵
-
-https://mp.weixin.qq.com/s/_s8kxlzcL5Nt2ILUIfAuNQ
-
-不要把所有的鸡蛋放在一个篮子里--谈谈最大熵模型
-
-# 概率分布（2）
-
-上一篇《概率分布（1）》写的意犹未尽，这里继续写。本篇主要关注$$\chi^2$$分布、t分布和F分布，也就是统计学的三大祖师爷各自的看家本领。
-
-## $$\chi^2$$分布
-
-设$$X_1,\dots,X_n$$是来自总体$$N(0,1)$$的样本，则称统计量
-
-$$\chi^2=X_1^2+\dots+X_n^2\tag{1}$$
-
-服从自由度为n的$$\chi^2$$分布（chi-squared distribution），记作$$\chi^2\sim \chi^2(n)$$。其PDF为：
-
-$$f(x;\,n) =
-\begin{cases}
-  \dfrac{x^{(n/2-1)} e^{-x/2}}{2^{n/2} \Gamma\left(\frac n 2 \right)},  & x > 0; \\ 0, & \text{otherwise}.
-\end{cases}$$
-
-## t分布
-
-设$$X\sim N(0,1),Y\sim\chi^2(n)$$，并且X、Y独立，则称随机变量
-
-$$t=\frac{X}{\sqrt{Y/n}}\tag{2}$$
-
-服从自由度为n的t分布（t distribution），记作$$t\sim t(n)$$。其PDF为：
-
-$$f(t) = \frac{\Gamma(\frac{n+1}{2})} {\sqrt{n\pi}\,\Gamma(\frac{n}{2})} \left(1+\frac{t^2}{n} \right)^{\!-\frac{n+1}{2}}$$
-
-## F分布
-
-设$$U\sim \chi^2(d_1),V\sim\chi^2(d_2)$$，并且U、V独立，则称随机变量
-
-$$F=\frac{U/d_1}{V/d_2}\tag{3}$$
-
-服从自由度为$$(d_1,d_2)$$的F分布（F distribution），记作$$F\sim F(d_1,d_2)$$。其PDF为：
-
-$$\begin{align}
-f(x; d_1,d_2) &= \frac{\sqrt{\frac{(d_1\,x)^{d_1}\,\,d_2^{d_2}} {(d_1\,x+d_2)^{d_1+d_2}}}} {x\,\mathrm{B}\!\left(\frac{d_1}{2},\frac{d_2}{2}\right)} \\
-&=\frac{1}{\mathrm{B}\!\left(\frac{d_1}{2},\frac{d_2}{2}\right)} \left(\frac{d_1}{d_2}\right)^{\frac{d_1}{2}} x^{\frac{d_1}{2} - 1} \left(1+\frac{d_1}{d_2}\,x\right)^{-\frac{d_1+d_2}{2}}
-\end{align}$$
-
-显然：
-
-$$\frac{1}{F}\sim F(d_2,d_1)$$
-
-参考：
-
-https://mp.weixin.qq.com/s/X0nSqiQoJpEur7PM1tM-0A
-
-每个数据科学专家都应该知道的六个概率分布
-
-https://www.zhihu.com/question/26991510
-
-卡方独立性检验和卡方齐性检验的区别是什么？
-
-https://mp.weixin.qq.com/s/vcgZ2ncZDlXp4SAExyptnQ
-
-Distribution is all you need：这里有12种做ML不可不知的分布
-
-## 假设检验
-
-假设检验就是根据样本对所提出的假设$$H_0$$作判断。
-
-如果$$P\{拒绝H_0\mid H_0为真\}\le \alpha$$，则接受$$H_0$$。
-
-这里的$$\alpha$$被称作**显著性水平**。假设检验$$H_0$$所涉及的统计量被称作**检验统计量**。
-
->在英国的Rothamsted实验站，Fisher给一位名叫Muriel Bristol的女士倒了一杯茶，但是Bristol表示，自己更喜欢先将牛奶倒入杯中，再倒入茶。这位女士号称能够分辨先倒茶和先倒牛奶的区别。   
->作为实验设计的鼻祖，Fisher当然想用实验检验一下：这位女士的味觉是否有这么敏锐？Fisher倒了8杯奶茶：其中4杯“先奶后茶”，其余4杯“先茶后奶”。随机打乱次序后，Fisher请Bristol品尝，并选出“先奶后茶”的4杯，看她是否能分辨奶和茶的顺序。   
->Bristol完全答对了。这是一个小概率事件，概率小于0.05（通常的统计显著性水平）。所以，她“没有任何分辨能力”这个假设就和数据不太相容，可以拒绝这个假设。

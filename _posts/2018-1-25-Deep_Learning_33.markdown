@@ -4,6 +4,9 @@ title:  深度学习（三十三）——Capsule
 category: DL 
 ---
 
+* toc
+{:toc}
+
 # Capsule
 
 Capsule是深度学习先驱Hinton于2017年提出的概念。
@@ -13,6 +16,8 @@ Capsule是深度学习先驱Hinton于2017年提出的概念。
 《Dynamic Routing Between Capsules》
 
 《Matrix capsules with EM Routing》
+
+《Stacked Capsule AutoEncoder》
 
 官方代码：
 
@@ -145,9 +150,17 @@ Capsule的可解释性有很大提升，下图是Hinton论文中给出的示例�
 
 ## 参考
 
+https://mp.weixin.qq.com/s/MEfcdttm73oCxsJKWz6fnw
+
+Capsule Networks，胶囊网络，57页ppt，布法罗大学
+
 https://mp.weixin.qq.com/s/c5gxaOY2ITN-Q-U0mCYNgA
 
 《胶囊网络（Capsule Networks）综述》
+
+https://mp.weixin.qq.com/s/gzCDE6PR8rEs8QEy8Mj00g
+
+胶囊网络与计算机视觉教程
 
 https://www.zhihu.com/question/67287444
 
@@ -240,15 +253,3 @@ https://mp.weixin.qq.com/s/HbqmdaxIQrQc7vDgiExtrw
 https://mp.weixin.qq.com/s/VcZSHw98w6nvgz4Hzjto3A
 
 深度学习之CapsuleNets理论与Python实践
-
-https://jhui.github.io/2017/11/14/Matrix-Capsules-with-EM-routing-Capsule-Network/
-
-“Understanding Matrix capsules with EM Routing (Based on Hinton's Capsule Networks)”
-
-https://zhuanlan.zhihu.com/p/42864711
-
-胶囊网络到底是什么东东？
-
-https://zhuanlan.zhihu.com/p/32106577
-
-酉变换与递归神经网络

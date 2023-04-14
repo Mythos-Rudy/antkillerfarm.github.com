@@ -1,108 +1,11 @@
 ---
 layout: post
-title:  深度学习（二十）——Ultra Deep Network
+title:  深度学习（二十）——Ultra Deep Network, 数据增强
 category: DL 
 ---
 
-# Mask R-CNN（续）
-
-参考：
-
-https://zhuanlan.zhihu.com/p/25954683
-
-Mask R-CNN个人理解
-
-https://mp.weixin.qq.com/s/E0P2B798pukbtRarWooUkg
-
-Mask R-CNN的Keras/TensorFlow/Pytorch代码实现
-
-https://zhuanlan.zhihu.com/p/30967656
-
-从R-CNN到Mask R-CNN
-
-https://www.zhihu.com/question/57403701
-
-如何评价Kaiming He最新的Mask R-CNN?
-
-http://zh.gluon.ai/chapter_computer-vision/object-detection.html
-
-使用卷积神经网络的物体检测
-
-https://mp.weixin.qq.com/s/4BRwMEr6rFYvkmKXM7rYLg
-
-效果惊艳！FAIR提出人体姿势估计新模型，升级版Mask-RCNN
-
-https://mp.weixin.qq.com/s/UXzhMkGIwqek4zHVNPgRbA
-
-Mask-RCNN论文解读
-
-https://mp.weixin.qq.com/s/_ohsx7kzgU-szP-K9_Yv1w
-
-优于Mask R-CNN，港中文&腾讯优图提出PANet实例分割框架
-
-https://mp.weixin.qq.com/s/uJpVqRpWWaK2cY8fYGlRag
-
-先理解Mask R-CNN的工作原理，然后构建颜色填充器应用
-
-https://mp.weixin.qq.com/s/x_9klKK_hIiFV1fGhxZIVA
-
-Mask R-CNN神应用：像英剧《黑镜》一样屏蔽人像
-
-https://mp.weixin.qq.com/s/V6m1xBS2vZQ6VRlAg5zOSA
-
-干掉照片中那些讨厌的家伙！Mask R-CNN助你一键“除”人！
-
-https://mp.weixin.qq.com/s/48eIhnBdYzgEiV_wESHsJA
-
-如何使用Mask RCNN模型进行图像实体分割？
-
-https://mp.weixin.qq.com/s/G_2tuZlaxX5w-2c1DO8FwQ
-
-利用边缘监督信息加速Mask R-CNN实例分割训练
-
-https://mp.weixin.qq.com/s/Ug4ZEQWVF5UjhqWw4Kwb8A
-
-Mask R-CNN抢车位，快人一步！
-
-https://zhuanlan.zhihu.com/p/47579399
-
-R-CNN、Fast/Faster/Mask R-CNN、FCN、RFCN、SSD原理简析
-
-https://mp.weixin.qq.com/s/CsEHuGz_fAq8eWpHRq7d6g
-
-性能超越何恺明Mask R-CNN！华科硕士生开源图像分割新方法
-
-https://zhuanlan.zhihu.com/p/57629509
-
-实例分割的进阶三级跳：从Mask R-CNN到Hybrid Task Cascade
-
-https://mp.weixin.qq.com/s/7Z8unW7Gsu0cf1hAwvjAxw
-
-何恺明等人提TensorMask框架：比肩Mask R-CNN，4D张量预测新突破
-
-https://mp.weixin.qq.com/s/SUZcgq6wOqct_CrWB0j1gA
-
-CVPR2019-实例分割Mask Scoring R-CNN
-
-https://mp.weixin.qq.com/s/Uc0VFMmYoOFvH0c7IExKIg
-
-何恺明团队计算机视觉最新进展：从特征金字塔网络、Mask R-CNN到学习分割一切
-
-https://mp.weixin.qq.com/s/sRU9_M9LsP-j46kNdcI0QQ
-
-Cascade R-CNN升级！目标检测制霸COCO，实例分割超越Mask R-CNN
-
-https://www.cnblogs.com/fydeblog/p/10145805.html
-
-MaskRCNN-Keypoints
-
-https://zhuanlan.zhihu.com/p/65893018
-
-玩转Facebook的maskrcnn-benchmark项目
-
-https://mp.weixin.qq.com/s/A9WkTGHLsaUE11NiQKT2vw
-
-1小时上手MaskRCNN·Keras开源实战
+* toc
+{:toc}
 
 # Ultra Deep Network
 
@@ -182,15 +85,15 @@ DenseNet的想法很大程度上源于我们去年发表在ECCV上的一个叫�
 
 >其次，我们在训练的过程中随机扔掉很多层也不会破坏算法的收敛，说明了ResNet具有比较明显的冗余性，网络中的每一层都只提取了很少的特征（即所谓的残差）。实际上，我们将训练好的ResNet随机的去掉几层，对网络的预测结果也不会产生太大的影响。既然每一层学习的特征这么少，能不能降低它的计算量来减小冗余呢？
 
-DenseNet 的设计正是基于以上两点观察。我们让网络中的每一层都直接与其前面层相连，实现特征的重复利用；同时把网络的每一层设计得特别“窄”，即只学习非常少的特征图（最极端情况就是每一层只学习一个特征图），达到降低冗余性的目的。这两点也是DenseNet与其他网络最主要的不同。需要强调的是，第一点是第二点的前提，没有密集连接，我们是不可能把网络设计得太窄的，否则训练会出现欠拟合（under-fitting）现象，即使 ResNet 也是如此。
+DenseNet的设计正是基于以上两点观察。我们让网络中的每一层都直接与其前面层相连，实现特征的重复利用；同时把网络的每一层设计得特别“窄”，即只学习非常少的特征图（最极端情况就是每一层只学习一个特征图），达到降低冗余性的目的。这两点也是DenseNet与其他网络最主要的不同。需要强调的是，第一点是第二点的前提，没有密集连接，我们是不可能把网络设计得太窄的，否则训练会出现欠拟合（under-fitting）现象，即使ResNet也是如此。
 
 ### DenseNet的优点
 
-**省参数。**在 ImageNet 分类数据集上达到同样的准确率，DenseNet 所需的参数量不到 ResNet 的一半。对于工业界而言，小模型可以显著地节省带宽，降低存储开销。
+**省参数。**在ImageNet分类数据集上达到同样的准确率，DenseNet所需的参数量不到ResNet的一半。对于工业界而言，小模型可以显著地节省带宽，降低存储开销。
 
-**省计算。**达到与 ResNet 相当的精度，DenseNet 所需的计算量也只有 ResNet 的一半左右。
+**省计算。**达到与ResNet相当的精度，DenseNet所需的计算量也只有ResNet的一半左右。
 
-**抗过拟合。**DenseNet 具有非常好的抗过拟合性能，尤其适合于训练数据相对匮乏的应用。这一点从论文中 DenseNet 在不做数据增强（data augmentation）的 CIFAR 数据集上的表现就能看出来。
+**抗过拟合。**DenseNet具有非常好的抗过拟合性能，尤其适合于训练数据相对匮乏的应用。这一点从论文中DenseNet在不做数据增强的CIFAR数据集上的表现就能看出来。
 
 由于DenseNet不容易过拟合，在数据集不是很大的时候表现尤其突出。在一些图像分割和物体检测的任务上，基于DenseNet的模型往往可以省略在ImageNet上的预训练，直接从随机初始化的模型开始训练，最终达到相同甚至更好的效果。由于在很多应用中实际数据跟预训练的ImageNet自然图像存在明显的差别，这种不需要预训练的方法在医学图像，卫星图像等任务上都具有非常广阔的应用前景。
 
@@ -221,3 +124,145 @@ https://mp.weixin.qq.com/s/okx0jZR6PmFm3ikCCUbNkg
 https://mp.weixin.qq.com/s/geANIVbd4C0qpSig0IB2zA
 
 梯形DenseNets结构实现语义分割新高度！
+
+## Dual Path Networks
+
+DPN是冯佳时和颜水成团队的Yunpeng Chen的作品。
+
+>冯佳时，中国科学技术大学自动化系学士，新加坡国立大学电子与计算机工程系博士。现任新加坡国立大学电子与计算机工程系助理教授。
+
+论文：
+
+《Dual Path Networks》
+
+代码：
+
+https://github.com/cypw/DPNs
+
+这篇论文首先从拓扑关系的角度分析了ResNet、DenseNet和HORNN（Higher Order RNN）之间的联系。
+
+![](/images/img2/DPN_3.png)
+
+如上所示，RNN相当于共享权值的串联的ResNet，而DenseNet则相当于并联的RNN。
+
+更进一步的，上述三者都可表述为以下通式：
+
+$$h^k=g^k\left[\sum_{t=0}^{k-1}f_t^k(h^t)\right]$$
+
+其中，$$h^t$$表示t时刻的隐层状态；索引k表示当前时刻；$$x^t$$表示t时刻的输入；$$f_t^k(⋅)$$表示特征提取；$$g^k$$表示对提取特征做输出前的变换。
+
+## CSPNet
+
+![](/images/img5/CSPNet.jpg)
+
+![](/images/img5/CSPNet_2.jpg)
+
+https://zhuanlan.zhihu.com/p/124838243
+
+CSPNet论文笔记
+
+# 数据增强
+
+数据增强：Data Augmentation
+
+Mosaic：
+
+![](/images/img5/Mosaic.jpg)
+
+MixUp：
+
+![](/images/img5/MixUp.webp)
+
+---
+
+https://mp.weixin.qq.com/s/GqPfvWwH1T0XFwiZ86cW8A
+
+SamplePairing：针对图像处理领域的高效数据增强方式
+
+https://mp.weixin.qq.com/s/cQtXvOjSXFc4YKn7ANBc_w
+
+谷歌大脑提出自动数据增强方法AutoAugment：可迁移至不同数据集
+
+https://mp.weixin.qq.com/s/ojFo7-gUh73iK3uImFS2-Q
+
+一文道尽主流开源框架中的数据增强
+
+https://mp.weixin.qq.com/s/xJhWu-1FyhIWbFBC5oHMkw
+
+一文道尽深度学习中的数据增强方法（上）
+
+https://mp.weixin.qq.com/s/OctAGrcBB0a6TOGWMmVKUw
+
+深度学习中的数据增强（下）
+
+https://mp.weixin.qq.com/s/lMU6_ywQqneyunqEV6uDiA
+
+如何改善你的训练数据集？
+
+https://mp.weixin.qq.com/s/ooX9Hj5ejO6po6Ghb4zOug
+
+一文解读合成数据在机器学习技术下的表现
+
+https://zhuanlan.zhihu.com/p/33485388
+
+mixup与paring samples ，ICLR2018投稿论文的数据增广两种方式
+
+https://mp.weixin.qq.com/s/_7xFBLPGT0VRTJ22toHJ3g
+
+深度学习中常用的图像数据增强方法
+
+https://mp.weixin.qq.com/s/sXV9epWguGbJEZYo4yNp5Q
+
+如何正确使用样本扩充改进目标检测性能
+
+https://zhuanlan.zhihu.com/p/46833956
+
+图像数据增强之弹性形变（Elastic Distortions）
+
+https://mp.weixin.qq.com/s/ws1R-VPyJY6J18OttBDYog
+
+超少量数据训练神经网络：IEEE论文提出径向变换实现图像增强
+
+https://mp.weixin.qq.com/s/g4022Rc1RNvr3IOC_bWuaQ
+
+深度学习中的数据增强方法都有哪些？
+
+https://mp.weixin.qq.com/s/YuFVEhO3wzCN5dIM_YqA7A
+
+EDA：最简单的自然语言处理数据增广方法
+
+https://mp.weixin.qq.com/s/IeqSfjt4x8HquXBeQN2gdQ
+
+深度学习中的数据增强方法总结
+
+https://zhuanlan.zhihu.com/p/76044027
+
+A survey on Image Data Augmentation数据增强文献综述
+
+https://mp.weixin.qq.com/s/2B0NBY39noikPEO1dB06Sg
+
+CV领域中数据增强相关的论文推荐
+
+https://www.zhihu.com/question/35339639
+
+使用深度学习(CNN)算法进行图像识别工作时，有哪些data augmentation的奇技淫巧？
+
+https://mp.weixin.qq.com/s/YtL7GeIGYm9xtdofnabu1g
+
+如何选择最合适的数据增强操作
+
+https://zhuanlan.zhihu.com/p/43665254
+
+数据增广之详细理解
+
+https://mp.weixin.qq.com/s/g65jpWaf3Oo31zYCyquH1Q
+
+基于深度学习的数据增广技术一览
+
+https://mp.weixin.qq.com/s/r3pGr3FD1dGDzw2zgQdK9g
+
+简易快速数据增强库使用手册
+
+https://mp.weixin.qq.com/s/pny699UC-YzBIzxWRvPasw
+
+全方位支持图文和音视频、100+增强功能，Facebook开源数据增强库AugLy

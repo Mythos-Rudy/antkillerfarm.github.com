@@ -4,6 +4,9 @@ title:  GAN（二）——GAN进阶
 category: GAN & VAE 
 ---
 
+* toc
+{:toc}
+
 # 概况（续）
 
 ## 小结
@@ -286,6 +289,14 @@ https://github.com/hwalsuklee/tensorflow-generative-model-collections
 
 ![](/images/img3/GAN.jpg)
 
+论文：
+
+《The Six Fronts of the Generative Adversarial Networks》
+
+这篇论文把GAN的改进分为了6个方向：
+
+![](/images/img3/GAN_1.png)
+
 ## 参考
 
 https://machinelearningmindset.com/generative-adversarial-networks-roadmap/
@@ -376,18 +387,14 @@ https://zhuanlan.zhihu.com/p/96025520
 
 9102年入门GAN的补习
 
-## GAN的理论解释
+https://mp.weixin.qq.com/s/iLAE_WR-rQrqd4dtYWB_gA
 
-顾险峰教授对GAN提出了自己的理论解释。
+史上最全GAN综述2020版：算法、理论及应用
 
->顾险峰，1989年考入清华大学计算机科学与技术系。1992年获得清华大学特等奖学金。后于美国哈佛大学获得计算机博士学位，师从国际著名微分几何大师丘成桐先生。目前为美国纽约州立大学石溪分校计算机系终身教授。
+https://mp.weixin.qq.com/s/4CPfejPrAhJuYMgSj6aGsw
 
-参考：
+生成式对抗网络(GANs)最新2020综述，41页pdf阐述GAN训练、挑战、解决方案和未来方向
 
-https://mp.weixin.qq.com/s/7O0AKIUVYK7HRyvdRbUVkg
+https://mp.weixin.qq.com/s/qtSyLcNOcIgORPvk6_juww
 
-虚构的对抗，GAN with the wind
-
-https://mp.weixin.qq.com/s/trvMOTXNs7L6fSmTkZXwsA
-
-看穿机器学习（W-GAN模型）的黑箱
+CV视觉中GAN的调研和分类

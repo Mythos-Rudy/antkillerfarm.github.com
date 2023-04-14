@@ -1,12 +1,61 @@
 ---
 layout: post
 title:  NLP参考资源（二）
-category: resource 
+category: DL & NLP resource 
 ---
+
+* toc
+{:toc}
 
 # NLP参考资源
 
-## 文本分类（续）
+## 机器翻译（续）
+
+https://mp.weixin.qq.com/s/yA_dvLZ7adBd6Xw2MufhWw
+
+程序翻译新突破：UC伯克利提出树到树的程序翻译神经网络
+
+https://mp.weixin.qq.com/s/jBjs5OKZEcfpoYesz6Pk3w
+
+杨振：低资源神经机器翻译
+
+https://mp.weixin.qq.com/s/KG_X-wFPgWupb0FOWL9LIw
+
+三种提升多语言翻译模型的高效策略
+
+https://mp.weixin.qq.com/s/r9WRkmApBaHvlCQ5F5ypjg
+
+神奇的神经机器翻译：从发展脉络到未来前景
+
+https://mp.weixin.qq.com/s/8xGPwxLZX0ZJ586fZogkpg
+
+NAACL2019-使用感知句法词表示的句法增强神经机器翻译
+
+https://mp.weixin.qq.com/s/OkjYWxWB0C3qnWTe6vSQVA
+
+ST-NMT：软目标模板助力神经机器翻译
+
+https://mp.weixin.qq.com/s/48Mx3A67FuBO0dqFRhBMbA
+
+字幕组时代落幕，翻译的未来可能是？
+
+## 文本分类
+
+http://www.jianshu.com/p/0273c377c34e
+
+机器学习算法在文本分类中的应用综述
+
+https://mp.weixin.qq.com/s/xIkYLncxmLKqLQqeq-XxAw
+
+深度学习文本分类方法综述
+
+https://mp.weixin.qq.com/s/sJnDrGe7U_1XtJ8sYIcWiw
+
+深度文本分类综述
+
+https://mp.weixin.qq.com/s/ylRJrP-wnnelX5uUR0fukw
+
+一文综述经典的深度文本分类方法
 
 https://mp.weixin.qq.com/s/0wMTL7x87YXiin3xkf8eJA
 
@@ -102,11 +151,63 @@ https://github.com/RandolphVI/Multi-Label-Text-Classification
 
 NLP多标签文本分类代码实现工具包
 
+https://zhuanlan.zhihu.com/p/101688082
+
+Topic Memory Networks(Short Text Classification)
+
+https://mp.weixin.qq.com/s/JMFuav4zeF-ZkilsZWSUWw
+
+用深度学习（CNN RNN Attention）解决大规模文本分类问题-综述和实践
+
+https://mp.weixin.qq.com/s/sulXy1iIlU8nVJTqSEbU8w
+
+手把手带你fastText文本分类
+
+https://mp.weixin.qq.com/s/MIsk9pRFFf6jottIe8HmUA
+
+手把手带你RNN文本分类
+
+https://mp.weixin.qq.com/s/ZPAuObtLD6Ahw17NTJefQQ
+
+手把手带你CNN文本分类
+
+https://mp.weixin.qq.com/s/o92IySelNvUjDPtdDT77PA
+
+手把手带你RCNN文本分类
+
+https://mp.weixin.qq.com/s/mbkj5mi2HSWTDsBbZ-vcMA
+
+手把手带你HAN文本分类
+
+https://zhuanlan.zhihu.com/p/107721682
+
+TextClf：简单易上手的基于pytorch/sklearn的文本分类工具
+
+https://mp.weixin.qq.com/s/ZmnP321nq_7wX4_HHskv_w
+
+文本分类冷启动和低资源？文本增强了解一下！
+
+https://mp.weixin.qq.com/s/2Ylw8WVjsZ5WXw2H3_cFMg
+
+NLP集大成之文本分类
+
+https://mp.weixin.qq.com/s/3ClTiucQEGD06MYrxRrJLQ
+
+文本分类综述：迈向NLP大师的第一步（上）
+
+https://mp.weixin.qq.com/s/6CzRKpO88BainkJ_XffWmg
+
+文本分类综述：迈向NLP大师的第一步（中）
+
+https://mp.weixin.qq.com/s/k7jHxSmdEoG6sO_Z5dO36g
+
+文本分类综述：迈向NLP大师的第一步（下）
+
+https://mp.weixin.qq.com/s/gfDr4CNKapyinWKZtswZxg
+
+一份最新的、全面的NLP文本分类综述
+
 ## 情感分析
-
-https://mp.weixin.qq.com/s/mWOhh9rJru_YDwQEB34GNg
-
-深度学习在金融文本情感分类中的应用
 
 https://mp.weixin.qq.com/s/5VrZTMlNxbgZmaeOxBps_w
 
@@ -115,6 +216,14 @@ Sentiment Analysis情感分析
 https://mp.weixin.qq.com/s/iYChUH4VQMjkKa697GMIBg
 
 一文搞懂现代情感分析方法
+
+https://mp.weixin.qq.com/s/JZR752tWBPG5-9gwxZ4K0A
+
+情感分析方法入门上
+
+https://mp.weixin.qq.com/s/bAXm6QECWAel0ec6LTpdww
+
+情感分析方法入门下
 
 https://mp.weixin.qq.com/s/MHxxBgfiQt1Fzkpco3Uoig
 
@@ -144,11 +253,43 @@ https://mp.weixin.qq.com/s/d_uHHH3UCBFa77O1Gw6Bdw
 
 既然文字表你心，如何用深度学习读懂你的情？
 
+https://mp.weixin.qq.com/s/KWWbaE2em4fEBInPoWTq8A
+
+Python实现多种模型(Naive Bayes, SVM, CNN, LSTM, etc)用于推文情感分析
+
+https://mp.weixin.qq.com/s/Cq7ivDYurS3CidvoemFfqA
+
+Twitter是怎么做情感分析的？长文解读！
+
+https://mp.weixin.qq.com/s/X8s0_C22xTNqjVWMLZzAUA
+
+情感分析: ABSA模型总结（PART I）
+
+https://mp.weixin.qq.com/s/Fm4HQeN_0Iasd2jqKsPGOw
+
+情感分析: ABSA模型总结（PART II）
+
+https://mp.weixin.qq.com/s/hZQxz5u-Z0_SEmtLL7T4Hg
+
+基于Aspect的情感分析模型总结
+
+https://mp.weixin.qq.com/s/k-gS6k3-hy-ZI_r901IGvg
+
+情感分析算法在阿里小蜜的应用实践
+
+https://www.zhihu.com/question/31471793
+
+大数据舆情情感分析，如何提取情感并使用什么样的工具？
+
 ## 命名实体识别
 
 https://mp.weixin.qq.com/s/LrrqGCNBncDr3ZacoIHHBg
 
 一文读懂命名实体识别
+
+https://mp.weixin.qq.com/s/Cpn87G1JBFYWVHmY5Mqp5A
+
+序列标注的方法中有多种标注方式BIO、BIOSE、IOB、BILOU、BMEWO的异同
 
 https://mp.weixin.qq.com/s/PSs0H237ldauSZhlMlNHXA
 
@@ -194,6 +335,10 @@ https://mp.weixin.qq.com/s/rA6oTLlFWmIvGUq_XPLOKQ
 
 利用Lattice LSTM的最优中文命名实体识别方法
 
+https://zhuanlan.zhihu.com/p/142615620
+
+中文NER的正确打开方式: 词汇增强方法总结 (从Lattice LSTM到FLAT)
+
 https://mp.weixin.qq.com/s/Xe-T7EKvGDSR5GOeL4nvKg
 
 从Chatbot到NER
@@ -226,184 +371,46 @@ https://mp.weixin.qq.com/s/btU7ulbWV0FPZpnIymie4g
 
 如何使用BERT来做命名实体识别
 
-## 文本摘要
+https://zhuanlan.zhihu.com/p/100969186
 
-https://mp.weixin.qq.com/s/jk1XgnuydrsTg3HvV0CVvw
+代码实现中文命名实体识别（包括多种模型：HMM，CRF，BiLSTM，BiLSTM+CRF）
 
-当深度学习遇见自动文本摘要
+https://mp.weixin.qq.com/s/qir6_Kl-7kqDtgHj7e9STw
 
-https://mp.weixin.qq.com/s/NGpDrYilAeuH6pQji0ujaA
+基于Hugging Face的Transformer库，300行实现命名实体识别
 
-文本摘要简述
+https://zhuanlan.zhihu.com/p/112340282
 
-https://mp.weixin.qq.com/s/bcpjkuRtErSRfJPsAnAWWQ
+深度学习方法在中文命名实体识别的应用
 
-用深度学习做文本摘要
+https://mp.weixin.qq.com/s/1Osd-pSp2PQak39-AWkqYw
 
-https://mp.weixin.qq.com/s/z7BlFHfStYEtNzl1EorokA
+一次实体识别和实体消歧的积极尝试
 
-文章太长不想看？ML文本自动摘要了解一下
+https://mp.weixin.qq.com/s/tJHXrqFMMLwHq7QKFP2Jpg
 
-https://mp.weixin.qq.com/s/gDZyTbM1nw3fbEnU--y3nQ
+南洋理工：深度学习命名实体识别最新版综述
 
-Python利用深度学习进行文本摘要的综合指南
+https://mp.weixin.qq.com/s/gbGZDbi7XcExgHcUqiI94w
 
-https://mp.weixin.qq.com/s/byKEY726MfEtKwsip-go1Q
+NLP中的实体关系抽取方法总结
 
-AI攒论文指日可待？Transformer生成论文摘要方法已出
+https://mp.weixin.qq.com/s/EmACAfXwJnkUh3jYNWA-Dg
 
-https://zhuanlan.zhihu.com/p/83596443
+如何使用深度学习执行文本实体提取
 
-文本自动摘要任务的“不完全”心得总结
+http://www.cnblogs.com/qcloud1001/p/8074771.html
 
-https://blog.csdn.net/zhangxb35/article/details/78626799
+神经张量网络（NTN）：探索文本实体之间的关系
 
-Text Summarization综述
+https://mp.weixin.qq.com/s/iB-gaxIygWLjS1mKwKUGog
 
-https://zhuanlan.zhihu.com/p/84730122
+浅谈嵌套命名实体识别（Nested NER）
 
-BottleSum——文本摘要论文系列解读
+https://mp.weixin.qq.com/s/Yr8CrCtJquKQ38tt2T0VCQ
 
-https://mp.weixin.qq.com/s/vjnENPxXzrjKW2ACD3HDkA
+采用BERT的无监督NER
 
-抽取式摘要之SUMO
+https://zhuanlan.zhihu.com/p/135453456
 
-## 句法分析
-
-传统方法主要是PCFG （Probabilistic Context-Free Grammar）。
-
-https://blog.csdn.net/continueOo/article/details/72851724
-
-统计自然语言处理（概率上下文无关文法）
-
-http://mp.weixin.qq.com/s?__biz=MzI4MDYzNzg4Mw==&mid=2247483922&idx=1&sn=cffbaf797cc58e303a65a8a2ae370b86
-
-句法分析（syntactic parsing）在NLP领域的应用是怎样的？
-
-http://www.cnblogs.com/CheeseZH/p/5768389.html
-
-依存句法分析与语义依存分析的区别
-
-https://mp.weixin.qq.com/s/r-mndw2BKHdVq-jKLinYZQ
-
-别说还不懂依存句法分析
-
-https://mp.weixin.qq.com/s/XP0V6v__O4wxpjPSC5O7vw
-
-一文了解成分句法分析
-
-https://mp.weixin.qq.com/s/DN_PeqF1JUZfIl0kNCwFng
-
-联合汉语分词和依存句法分析的统一模型：当前效果最佳
-
-https://mp.weixin.qq.com/s/Vy7OxAojvgndgGkvmFrBKw
-
-61页slides理解句法分析过程
-
-https://mp.weixin.qq.com/s/CxpyMUPnKFCTpw6WgG0kqg
-
-依存句法分析的任务以及形式化定义
-
-## 阅读理解
-
-https://mp.weixin.qq.com/s/kdbaMyDLC5YaOMqTAOyLAg
-
-斯坦福陈丹琦博士论文：神经网络阅读理解与更多（附156页pdf）
-
-https://chendq-thesis-zh.readthedocs.io/en/latest/
-
-陈丹琦博士论文翻译：Neural Reading Comprehension and Beyond
-
-https://mp.weixin.qq.com/s/7UnUedr8tapwFeRnHVOkjA
-
-阿里巴巴人工智能机器阅读理解能力创新纪录
-
-https://mp.weixin.qq.com/s/Su7tGSWX2bG1UKQU-nGC5A
-
-解读R-Net：微软“超越人类”的阅读理解人工智能
-
-https://mp.weixin.qq.com/s/41mynm-vB5mpLPcR-ByOdA
-
-北大与百度提出多文章验证方法：让机器验证阅读理解候选答案
-
-https://mp.weixin.qq.com/s/mgeQXkEWu5JlZxyAM0yiaQ
-
-充分利用候选项的选择型机器阅读理解模型
-
-https://mp.weixin.qq.com/s/TnG2iYwQpJ4ugdWf-ORP-Q
-
-一览微软在机器阅读理解、推荐系统、人机对话等最新研究进展
-
-https://mp.weixin.qq.com/s/ONmwKV6VyYVt2S6lOBrE5g
-
-神经机器阅读理解：方法与趋势，附39页最新综述下载
-
-## 聊天机器人
-
-http://www.shareditor.com/bloglistbytag/?tagname=%E8%87%AA%E5%B7%B1%E5%8A%A8%E6%89%8B%E5%81%9A%E8%81%8A%E5%A4%A9%E6%9C%BA%E5%99%A8%E4%BA%BA
-
-实战课程：自己动手做聊天机器人
-
-https://mp.weixin.qq.com/s/ZL6T-8M-KfA5wSHcao_PDw
-
-152页基于深度学习的聊天机器人全面总结
-
-https://mp.weixin.qq.com/s/mekBRtHcXqbMJiN1CgbgQg
-
-聊天机器人是如何工作的：基于深度学习的对话系统教程 152页PPT
-
-https://mp.weixin.qq.com/s/LoIrR-0roO1FO7BRuiVu9A
-
-能干活的聊天机器人-对话系统概述
-
-https://mp.weixin.qq.com/s/8KxHKWwhKAsi8c3kvlm6sw
-
-能闲聊的端到端生成型聊天机器人背后都有哪些技术？
-
-https://mp.weixin.qq.com/s/Vh3bCO-ZYoBJLqCTPCpggg
-
-论如何为聊天机器人定义一个固定的人格
-
-https://mp.weixin.qq.com/s/sM72a52wz6eXSkcgnd4JJw
-
-人类与机器人，如何能像朋友一样愉快聊天？
-
-https://mp.weixin.qq.com/s/vt25TVX-tcurtAC63dYYNA
-
-让聊天机器人同你聊得更带劲-对话策略学习
-
-http://blog.csdn.net/malefactor/article/details/52166235
-
-聊天机器人中对话模板的高效匹配方法
-
-https://mp.weixin.qq.com/s/ouNxUvWC_mxap6P5z6_dFA
-
-教聊天机器人进行多轮对话
-
-http://www.jianshu.com/p/43db6425ad33
-
-如何为聊天机器人设计数据通道
-
-https://mp.weixin.qq.com/s?__biz=MzU2OTA0NzE2NA==&mid=2247484926&idx=1&sn=4e34a442c126c46bba27a7f17df3e61e
-
-聊天机器人Chatbot知识资料全集
-
-https://mp.weixin.qq.com/s/bzjRlFfh7tz4OWVpGnNPwQ
-
-揭秘阿里小蜜：基于检索模型和生成模型相结合的聊天引擎
-
-https://mp.weixin.qq.com/s/h6BjW1nrV4z30eWfny7Wzw
-
-聊天机器人落地及进阶实战
-
-https://mp.weixin.qq.com/s/ziM0U-KEePjZLNMhK5PVXA
-
-基于金融-司法领域(兼有闲聊性质)的聊天机器人
-
-https://mp.weixin.qq.com/s/Tk-WWuYp-CBx0p-mBWm5Jg
-
-开发聊天机器人必读的重要论文
-
-https://mp.weixin.qq.com/s/ZexnTKHEFKPso5fhZNQfQQ
-
-聊天机器人中用户出行消费意图识别方法研究
+命名实体识别NER论文综述：那些年，我们一起追过的却仍未知道的花名（一）

@@ -1,276 +1,13 @@
 ---
 layout: post
-title:  深度学习（四十六）——OCR
+title:  深度学习（四十六）——OCR（2）, AI可解释性, 第四范式
 category: DL 
 ---
 
-# OCR
+* toc
+{:toc}
 
-## 概述
-
-光学字符识别（Optical Character Recognition, OCR），是指对文本资料的图像文件进行分析识别处理，获取文字及版面信息的过程。
-
-华中科大白翔教授的实验室算是目前国内OCR做的比较好的了。
-
-白翔的个人主页：
-
-http://cloud.eic.hust.edu.cn:8071/~xbai/
-
-该主页上有一个OCR方面的综述，是入门的最好资料。
-
-http://www.cnblogs.com/lillylin/
-
-这是一个OCR方面的blog。对白翔的论文，几乎都有阅读笔记。
-
-https://github.com/hwalsuklee/awesome-deep-text-detection-recognition
-
-Github：深度学习文本检测识别（OCR）精选资源汇总
-
-## tesseract
-
-linux下可以使用tesseract作为OCR工具。当然这个工具目前使用的还是传统算法。
-
-安装方法：
-
-`sudo apt install tesseract-ocr libtesseract-dev`
-
-使用方法：
-
-`tesseract ./111.png 1 -l chi_sim+eng`
-
-## 车牌识别
-
-https://github.com/liuruoze/EasyPR
-
-一个开源的中文车牌识别系统。（使用传统算法）
-
-https://blog.csdn.net/Relocy/article/details/78629441
-
-HyperLPR：一个基于深度学习的支持多种车牌的中文开源车牌识别框架
-
-https://blog.csdn.net/yang_daxia/article/details/90408160
-
-车牌识别论文survey
-
-https://mp.weixin.qq.com/s/6dsufEVsuEILa1gSOBt32w
-
-用于提高车牌识别的单幅噪声图像去噪和校正
-
-https://mp.weixin.qq.com/s/ynpqG7Vfu5b8lYNW6Y-TpA
-
-快准狠！Intel论文揭示自家车牌识别算法:LPRNet
-
-https://mp.weixin.qq.com/s/JIoTsadw4JBkr0e40RwVQQ
-
-这篇论文开源的车牌识别系统打败了目前最先进的商业软件
-
-https://mp.weixin.qq.com/s/e-vNkSlIpa8Qbsre9kjOkg
-
-用于提高车牌识别的单幅噪声图像去噪和校正
-
-https://mp.weixin.qq.com/s/fqpZ8EHgiNupXumvTMSecw
-
-北大团队研发“车脸”识别系统，不看车牌看外观特征实现精确识别
-
-https://mp.weixin.qq.com/s/Shz6BmsOrtbEFtoJRSkl9A
-
-简单车牌检测
-
-https://mp.weixin.qq.com/s/iwPI8g2JwabwiCO8kfw8Hw
-
-用开源工具DIY车牌识别系统
-
-## CRNN
-
-CRNN是白翔小组的作品。
-
-论文：
-
-《An End-to-End Trainable Neural Network for Image-based Sequence Recognition and Its Application to Scene Text Recognition》
-
-代码：
-
-https://github.com/bgshih/crnn
-
-## ASTER
-
-ASTER也是白翔小组的作品。
-
-《ASTER: An Attentional Scene Text Recognizer with Flexible Rectification》
-
-代码：
-
-https://github.com/bgshih/aster
-
-参考：
-
-https://www.cnblogs.com/lillylin/p/9315180.html
-
-论文阅读笔记
-
-https://mp.weixin.qq.com/s/Ai43GvLsEtFrfArHUvqLXg
-
-Aster:具有柔性矫正功能的注意力机制场景文本识别方法
-
-## CTPN
-
-https://zhuanlan.zhihu.com/p/34757009
-
-场景文字检测—CTPN原理与实现
-
-https://mp.weixin.qq.com/s/lV2yjhvnRLDfNbZXOSjofg
-
-ctpn：图像文字检测方法
-
-## 参考
-
-https://mp.weixin.qq.com/s/h7HVyGbmtLmNVJp4p0rCRQ
-
-字符识别(OCR)相关工具/库/教材/论文等资源整理
-
-https://mp.weixin.qq.com/s/XvtmPUbS2KV0zNXTPgtgDA
-
-史上最全端到端场景文本检测识别资源合集（14篇重要论文 + 5个开源代码 + 49个实验结果 + 222个统计信息）
-
-https://mp.weixin.qq.com/s/qLPfs5nHCVn5J-q3CbeECg
-
-史上最全场景文字识别资源汇集（56篇重要论文 + 20 个开源代码 + 330 个实验结果 + 1882个统计信息）
-
-https://mp.weixin.qq.com/s/rsJZ3R71gSAC4T501-LSQA
-
-史上最全场景文字检测资源合集（70篇重要论文 + 15个开源代码 + 176个实验结果 + 
-
-https://mp.weixin.qq.com/s/k_pYPq4QO1aR7DImLSCgoQ
-
-OCR100篇相关论文与代码，从文本识别到验证码识别
-
-https://mp.weixin.qq.com/s/KFgC8zHWS7ysb9GfbkfLRA
-
-OCR技术简介
-
-https://zhuanlan.zhihu.com/p/65707543
-
-文字OCR方法整理
-
-https://mp.weixin.qq.com/s/0ysaJGNslckesv21o752FA
-
-图像OCR年度进展
-
-https://mp.weixin.qq.com/s/VIEsfc4qKAGsi-O9LD4mng
-
-深度学习在OCR中的应用
-
-https://blog.csdn.net/linolzhang/article/details/82780071
-
-OCR文字识别
-
-https://www.cnblogs.com/skyfsm/category/1123384.html
-
-一个OCR方面的blog
-
-https://mp.weixin.qq.com/s/WmsHrTIMJhSt8MtFO7-yXA
-
-证件全文本OCR技术，了解一下
-
-https://zhuanlan.zhihu.com/p/21344595
-
-端到端的OCR：验证码识别(LSTM+CTC)
-
-http://www.jianshu.com/p/86489f1afd36
-
-端到端的OCR：基于CNN的实现
-
-http://www.jianshu.com/p/4fadf629895b
-
-端到端的OCR：LSTM＋CTC的实现
-
-https://mp.weixin.qq.com/s/axpA7Y_Rhiols5bDIdc6jg
-
-Tesseract-OCR 3.0.1训练自己的语言库之图像文字识别
-
-http://mp.weixin.qq.com/s/n8C80a3B54FhrCe-GhhcDA
-
-文档扫描：深度神经网络在移动端的实践
-
-https://mp.weixin.qq.com/s/MYhQt9uC16BadiZKWjPTzA
-
-华中科技大学提出多向文本检测方法：基于角定位与区域分割
-
-http://ilovin.me/2017-04-23/tensorflow-lstm-ctc-input-output/
-
-tensorflow LSTM+CTC/warpCTC使用详解
-
-https://mp.weixin.qq.com/s/k0dRu1wx49HTi_oJYJEGPw
-
-阿里提出IncepText：全新多向场景文本检测模块
-
-https://mp.weixin.qq.com/s/h3VaKs0Pc44n-hXYNlkALA
-
-开源OCR文字识别软件Calamari
-
-https://mp.weixin.qq.com/s/FjoJA0gF4LgsB8hw24I0EQ
-
-华科白翔老师团队ECCV2018 OCR论文：Mask TextSpotter
-
-https://mp.weixin.qq.com/s/x-_fuVPgDYnle23IDsYCTw
-
-百度深度学习图像识别决赛代码分享
-
-https://mp.weixin.qq.com/s/r7GaYsdKLELXPmW5u2ysPw
-
-OpenCV深度学习文本检测示例程序（EAST text detector）
-
-https://mp.weixin.qq.com/s/Twki3TeNWwj_SqP9chXuxw
-
-AdvancedEAST高效场景文本检测
-
-https://mp.weixin.qq.com/s/PyV0Ml9ppTx0HZvz5VTe-Q
-
-ICPR图像识别与检测挑战赛冠军方案出炉，基于偏旁部首来识别Duang字
-
-https://mp.weixin.qq.com/s/gxpDyd5Lf0fmNZwFrJJZzg
-
-OCR大突破：Facebook推出大规模图像文字检测识别系统——Rosetta
-
-https://mp.weixin.qq.com/s/zeN-QYXBZzVtWUH10DXjVw
-
-Facebook的新AI“Rosetta”会识别表情包，还会删帖
-
-https://mp.weixin.qq.com/s/lVRIy6DdwfRxdoVW3qFiNg
-
-OCR如何读取皱巴巴的文件？深度学习在文档图像形变矫正的应用详解
-
-https://mp.weixin.qq.com/s/-KdR3buxFOrPE-w-IMLQ9A
-
-最强开源OCR！印刷体古籍文字识别超越著名商业软件ABBYY
-
-http://mp.weixin.qq.com/s/rS4xCsytYGqBLMUzlyA12A
-
-构建多层感知器神经网络对数字图片进行文本识别
-
-https://mp.weixin.qq.com/s/qTnFQK0CkvdJfZaKj2wUtQ
-
-海康威视联合提出注意力聚焦网络FAN：提升场景文本识别精确度
-
-https://zhuanlan.zhihu.com/p/50521715
-
-云从科技在自然场景OCR任务取得技术突破
-
-https://zhuanlan.zhihu.com/p/51397423
-
-SPCNet
-
-https://mp.weixin.qq.com/s/9f158VM_FoNVuODNER-BUw
-
-端到端的弯曲文本检测与识别
-
-https://mp.weixin.qq.com/s/J5DGF3JRZxk1-fAQSQNvkQ
-
-MORAN文本识别算法开源，刷新多个OCR数据集state-of-the-art
-
-https://mp.weixin.qq.com/s/cLB2CPjLVJAuDVVmHRKHEA
-
-弯曲文字检测之SPCNet
+# OCR（续）
 
 https://mp.weixin.qq.com/s/_znXs8pkfgmWsb26HIfhLQ
 
@@ -308,49 +45,13 @@ https://mp.weixin.qq.com/s/Buv6m66kj3RjKq0LjqNAiA
 
 mathAI手写拍照自动能解高数题，还不快试试？
 
-https://mp.weixin.qq.com/s/gKsfsRxsbfXGOsSqeQEDbw
+https://mp.weixin.qq.com/s/bmJCLUlOA364AvK90sXE3Q
 
-CVPR2019：文本检测算法综述
+用于算术习题自动批改的结构文本精确识别方法
 
-https://zhuanlan.zhihu.com/p/68058851
+https://zhuanlan.zhihu.com/p/130855699
 
-自然场景下的文字检测：从多方向迈向任意形状
-
-https://mp.weixin.qq.com/s/jO2xc7Ri6TvrHyXHH0uX4w
-
-金山WPS：基于本地TensorFlow Lite和AI云服务的文档矫正功能
-
-https://mp.weixin.qq.com/s/3t8yzjMXiZwgqBb8izVfFg
-
-场景文字检测模型PixelLink详解与使用
-
-https://zhuanlan.zhihu.com/p/68356509
-
-TensorFlow 2.0中文手写字识别（汉字OCR）
-
-https://mp.weixin.qq.com/s/F0bPat3KUEVnej77OdfYAg
-
-文本检测大满贯！自适应文本区域表示改进形状任意的文本检测
-
-https://mp.weixin.qq.com/s/QwkKqybzW0tYcGojQg9r2w
-
-深度学习场景文字检测识别，20页综述带你了解领域最新动态
-
-https://mp.weixin.qq.com/s/j8Xvj7OSoFZp-zIrd3Xjow
-
-华科提出对称性约束的校正网络ScRN，显著改进场景文本识别
-
-https://github.com/ctripcorp/C-OCR
-
-携程自研的OCR项目
-
-https://mp.weixin.qq.com/s/fZN8mtZdB4Fd6gj2dAKURw
-
-金连文：“文字检测与识别：现状及展望”
-
-https://mp.weixin.qq.com/s/_GU5y7v8HNDOjEGvWh8Fkw
-
-旷视研究院提出文字检测新方法：像素聚合网络PAN
+怎样构建一个端到端的文字识别系统（CTC Loss）
 
 https://mp.weixin.qq.com/s/5eTugA70myKxDTZUby87Pw
 
@@ -400,10 +101,254 @@ https://mp.weixin.qq.com/s/H8ECjqEcIjcm5YNFu6ONdw
 
 开源OCR文本检测器，基于TextBoxes++和RetinaNet
 
-https://mp.weixin.qq.com/s/YoqFYLFSRcCXvbrpCsyImA
+https://mp.weixin.qq.com/s/CwLN2SRyN7RTEFtNx3u8Pg
 
-基于形状匹配对抗式生成网络的可控艺术字体风格迁移
+基于图卷积网络的视觉富文本数据中文档图像信息抽取
 
-https://mp.weixin.qq.com/s/I5WfG2aCMakao3IF30rLGg
+https://mp.weixin.qq.com/s/2wxZSWCfwl_z502MjisdzQ
 
-TET-GAN: 文字效果迁移与文字风格化和去风格化
+ICDAR 2019表格识别论文与竞赛综述（上）
+
+https://mp.weixin.qq.com/s/wD7UNeLfCOaOzrSdzMB5qA
+
+ICDAR 2019表格识别论文与竞赛综述（下）
+
+https://mp.weixin.qq.com/s/L_Rz1yHR0Q3L3y32WAYjkg
+
+从边界到文本—一种任意形状文本的检测方法
+
+https://mp.weixin.qq.com/s/CcPhmxCFWYddaQgfJmO9UQ
+
+最新图文识别技术综述
+
+https://mp.weixin.qq.com/s/-XPlEnszjBc_NCCIvD9zHg
+
+手写签名认证的逆鉴别网络
+
+https://mp.weixin.qq.com/s/LS_8424jn_3ksemKBgg88w
+
+SegLink++：基于实例感知与组件组合的任意形状密集场景文本检测方法
+
+https://mp.weixin.qq.com/s/vuRRcnlTugsUcfW5D5uYyA
+
+旷视研究院提出TextScanner：确保字符阅读顺序，实现文字识别新突破
+
+https://mp.weixin.qq.com/s/huvQszaBcVOxUEz0tJ_Psg
+
+基于OCR的身份证要素提取​​
+
+https://mp.weixin.qq.com/s/hVjTz3ofg3NsvZwAB53_eQ
+
+PRN：面向不规则文字识别的渐进矫正网络
+
+https://mp.weixin.qq.com/s/T6GlweGUguUAYIjfsabPHQ
+
+徒手素描的深度学习:综述论文，Deep Learning for Free-Hand Sketch
+
+https://mp.weixin.qq.com/s/QR53KZwIpQbCqX4TJAhAlQ
+
+面向场景文本识别的带聚焦注意力机制的convLSTM
+
+https://mp.weixin.qq.com/s/dg3ydVozTN1wJB-SnjkPGQ
+
+GNN手绘草图识别新架构：Multi-Graph Transformer网络
+
+https://mp.weixin.qq.com/s/enVx8sLoxmaSM8NlUL5IMQ
+
+实测超轻量中文OCR开源项目，总模型仅17M
+
+https://mp.weixin.qq.com/s/vNYG6vq_LAotj_21PG_P9w
+
+扫描式SSD用于公式检测，代码已开源
+
+https://mp.weixin.qq.com/s/5M9AIjEs6i1tPMVXA2a2Zg
+
+TE141K：用于文字风格转换的大规模艺术文字数据库
+
+https://mp.weixin.qq.com/s/nsZ64_7jgugvDlBZoiJ1ZA
+
+UnrealText：基于虚拟场景的真实场景文本图像合成
+
+https://mp.weixin.qq.com/s/Fku4chvC9VX0p7NI8yYc0Q
+
+OCR光学字符识别方法汇总
+
+https://mp.weixin.qq.com/s/cKR3B6Av_C4nBzMeAoDYEA
+
+截屏、文字提取一气呵成，超实用OCR开源小工具
+
+https://mp.weixin.qq.com/s/t5LdXMHW3SyBzMST-3ZtgQ
+
+比OCR更强大的PPT图片一键转文档重建技术
+
+https://mp.weixin.qq.com/s/rm7G6MqMjSyy8oGjSOWk3A
+
+CV赛题总结：人民币面值与编码识别
+
+https://mp.weixin.qq.com/s/5rny9_oF2-urF2JUp13fUw
+
+OpenCV实现银行卡号识别，字符识别算法你知多少？
+
+https://mp.weixin.qq.com/s/P8TiEk482o2Mye76_YC0rg
+
+EasyOCR: 支持40+语言的OCR模块
+
+https://mp.weixin.qq.com/s/i1Dm18qp93jzWnMoqRU2gA
+
+8.6M超轻量中英文OCR模型开源，训练部署一条龙
+
+https://mp.weixin.qq.com/s/RqsjyYwvbj41cMCXkFj6sg
+
+B站UP主自制的开源OCR翻译器走红Github
+
+https://mp.weixin.qq.com/s/K_qAWYTA9fBTAeNRR7s82A
+
+文字识别在高德地图数据生产中的演进
+
+https://mp.weixin.qq.com/s/x-HE-86T5SK6Y_SVX_ZJBA
+
+使用神经网络提取PDF表格工具来了，支持图片
+
+https://mp.weixin.qq.com/s/4lRwiR-3devARVX1rQLzEQ
+
+文档智能：通用文档预训练模型与数据集，推动NLP落地升级
+
+https://mp.weixin.qq.com/s/xuJxpJ970uoFNva-45y2eA
+
+微信OCR(1)——公众号图文识别中的文本检测
+
+https://mp.weixin.qq.com/s/KpEJYs6ANLqUbVz1CazF6Q
+
+微信OCR(2)——深度序列学习助力文字识别
+
+https://mp.weixin.qq.com/s/6IGXof3KWVnN8z1i2YOqJA
+
+三年磨一剑——微信OCR图片文字提取
+
+https://mp.weixin.qq.com/s/6STRTuKdrM0OP3qrVArfCg
+
+OCR in the Wild：文本检测和识别的SOTA
+
+https://mp.weixin.qq.com/s/TcjaK7dzU44_EA6Hp1oc0g
+
+日漫迷有福了！这个系统可以全自动翻译日漫，再也不用啃生肉了
+
+https://mp.weixin.qq.com/s/gd86GgUxsWCKn6NihuHzZw
+
+58安全-证件识别之版面分析实践
+
+https://mp.weixin.qq.com/s/749JZKSrQnlvrcbbS23Njw
+
+MMOCR：OpenMMLab全流程的文字检测识别理解工具箱
+
+https://mp.weixin.qq.com/s/HvOn8SZ2uPjekkDd4VB-9A
+
+一行代码从PDF提取Excel文件
+
+https://zhuanlan.zhihu.com/p/453513716
+
+大白话Benchmarking Chinese Text Recognition
+
+# AI可解释性
+
+XAI(Explainable Artificial Intelligence)
+
+https://github.com/pbiecek/xai_resources
+
+AI可解释性资源汇总
+
+https://mp.weixin.qq.com/s/XVl6voP5cwdC7DcvTMQvVQ
+
+机器学习可解释性工具箱XAI
+
+https://github.com/jphall663/awesome-machine-learning-interpretability
+
+最全的机器学习可解释性资料
+
+https://mp.weixin.qq.com/s/OV4vXu7TAuyV7qU9BAMF6g
+
+机器学习模型的“可解释性”到底有多重要？
+
+https://mp.weixin.qq.com/s/33VQNVvb7JGlk10Jc3mmeg
+
+从可视化到新模型：纵览深度学习的视觉可解释性
+
+https://github.com/ModelOriented/DrWhy
+
+可解释AI(XAI)工具集—DrWhy
+
+https://mp.weixin.qq.com/s/1OODeAFaRLFK3elECyZcng
+
+机器学习模型可解释性的详尽介绍
+
+https://mp.weixin.qq.com/s/Ax_Iv8IbDWid7EIO5usTbw
+
+可解释人工智能(XAI): 工业界挑战与经验教训，180页ppt
+
+https://mp.weixin.qq.com/s/-ZhYXTIiEFHd-G-NZEqlcA
+
+深度学习可解释性！深度taylor分解
+
+https://mp.weixin.qq.com/s/yzCTQvjeyyF2IFORzrTBVg
+
+黑盒模型实际上比逻辑回归更具可解释性
+
+https://mp.weixin.qq.com/s/gAidXX4YrezZcSa6Jpl8nQ
+
+万字长文概览深度学习的可解释性研究
+
+https://mp.weixin.qq.com/s/OpnDHf5r2j-D962eMurx9w
+
+SHAP值：用博弈论的概念解释一个模型
+
+https://zhuanlan.zhihu.com/p/238202269
+
+初探Explainable AI
+
+# 第四范式
+
+第一范式，是指以实验为基础的科学研究模式。例如以伽利略为代表的文艺复兴时期的科学发展初级阶段。
+
+第二范式，即理论研究为基础的科学研究模式。在这个阶段，科学家们会将无法用实验模拟的科学原理用模型简化，去掉一些复杂的因素，只留下关键因素，然后通过演算得到结论。例如，牛顿三大定律和爱因斯坦相对论。
+
+第三范式，即利用电子计算机对科学实验进行模拟仿真的模式。
+
+第四范式，数据密集型科学发现（Data-Intensive Scientific Discovery）。由James Gray于2007年提出。
+
+>James Gray，1944～2007，美国数据库专家。UCB博士（1969）。图灵奖得主（1998）。先后供职于IBM、Tandem Computers、DEC、MS等公司。提出了ACID、Two-tier transaction commit semantics、OLAP等概念。2007年独自驾船出海后失踪。
+
+参考：
+
+https://mp.weixin.qq.com/s/5U4iH1n3kqUCAodUVKGTNQ
+
+从经验到理论、从数据到网络——脑科学研究的四次范式转移
+
+https://zhuanlan.zhihu.com/p/30608976
+
+第四范式：大数据对于科研的意义
+
+# 多任务学习+
+
+https://blog.csdn.net/CoderPai/article/details/80087188
+
+利用TensorFlow一步一步构建一个多任务学习模型
+
+https://mp.weixin.qq.com/s/mm9bXXTEzd8DwyYlMgGMZg
+
+NLP多任务学习：一种层次增长的神经网络结构
+
+https://mp.weixin.qq.com/s/fcFb6WkJVP8TYpoxkQgiWQ
+
+CMU提出“十字绣网络”，自动决定多任务学习的最佳共享层
+
+https://mp.weixin.qq.com/s/i7WAFjQHK1NGVACR8x3v0A
+
+自然语言十项全能：转化为问答的多任务学习
+
+https://zhuanlan.zhihu.com/p/362330594
+
+深度学习多目标优化的多个loss应该如何权衡
+
+https://mp.weixin.qq.com/s/ZyokVuCLHNbt7aXWzoJTFA
+
+多任务学习在推荐系统和自然语言处理领域的总结

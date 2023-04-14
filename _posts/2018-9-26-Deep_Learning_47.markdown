@@ -1,36 +1,17 @@
 ---
 layout: post
-title:  深度学习（四十七）——三维处理, AutoDL进阶
+title:  深度学习（四十七）——3D处理, NetVLAD, Spatial Transformer Networks
 category: DL 
 ---
 
-# OCR（续）
+* toc
+{:toc}
 
-https://mp.weixin.qq.com/s/CwLN2SRyN7RTEFtNx3u8Pg
+# 3D处理
 
-基于图卷积网络的视觉富文本数据中文档图像信息抽取
+https://mp.weixin.qq.com/s/19-ggA8nPEmXgMMivI7lLQ
 
-https://mp.weixin.qq.com/s/2wxZSWCfwl_z502MjisdzQ
-
-ICDAR 2019表格识别论文与竞赛综述（上）
-
-https://mp.weixin.qq.com/s/wD7UNeLfCOaOzrSdzMB5qA
-
-ICDAR 2019表格识别论文与竞赛综述（下）
-
-https://mp.weixin.qq.com/s/L_Rz1yHR0Q3L3y32WAYjkg
-
-从边界到文本—一种任意形状文本的检测方法
-
-https://mp.weixin.qq.com/s/CcPhmxCFWYddaQgfJmO9UQ
-
-最新图文识别技术综述
-
-https://mp.weixin.qq.com/s/-XPlEnszjBc_NCCIvD9zHg
-
-手写签名认证的逆鉴别网络
-
-# 三维处理
+最新“三维深度学习(3D DL):过去与未来”教程，156页ppt
 
 https://github.com/timzhang642/3D-Machine-Learning
 
@@ -44,9 +25,21 @@ https://mp.weixin.qq.com/s/CGF-6P4RDtzQnc2XClu5zw
 
 3D计算机视觉简介
 
-https://mp.weixin.qq.com/s/WDInIzWa9_SYSaXXPhdQuw
+https://mp.weixin.qq.com/s/tTdKqRZqBFxFFiZaDD9AJw
 
-基于深度学习的视觉三维重建研究总结
+三维深度学习中的目标分类与语义分割
+
+https://mp.weixin.qq.com/s/SBWGvu84oPKZkY5d8gz-oQ
+
+3D实例分割
+
+https://mp.weixin.qq.com/s/BVP7vJ1RxwyRoU0purj0Xw
+
+3D数据分类深度学习方法综述，25页论文带你全面了解最新进展
+
+https://zhuanlan.zhihu.com/p/59865273
+
+三维语义分割概述及总结
 
 https://mp.weixin.qq.com/s/wHIT2pm_5O4MOR_QLpHVLQ
 
@@ -56,9 +49,9 @@ https://mp.weixin.qq.com/s/rxP9PlTJJdw5VmGbwRPMog
 
 解决3D重建难题，伯克利大学根据单张平面彩图重建高精度3D结构
 
-https://mp.weixin.qq.com/s/Uj2gYOS2TZGVSCka57M0zA
+https://mp.weixin.qq.com/s/xIx3TJGoXsjPPDQVQMBdqA
 
-MVSNet: 非结构化多视点三维重建网络
+悉尼大学发布首篇《基于图像的自动驾驶三维目标检测》研究进展，阐述3D检测数据、方法与挑战
 
 https://mp.weixin.qq.com/s/RwofVKhBFqo3dYJzy9mlJw
 
@@ -99,10 +92,6 @@ MIT新算法骗过神经网络3D物体分类，成功率超90%
 https://mp.weixin.qq.com/s/1R9ttaKnXso_quIGTY1nfA
 
 海康、UCLA、北理联合提出3D DescriptorNet：可按条件生成3D形状，克服模式崩溃
-
-https://blog.csdn.net/savant_ning/article/details/69950588
-
-多视图3D目标检测学习笔记
 
 https://mp.weixin.qq.com/s/wIdcZh3EkUIm6-91pT2oSQ
 
@@ -160,10 +149,6 @@ https://mp.weixin.qq.com/s/pK8zt6UFXtSIS9GAQNgICw
 
 超越像素平面：聚焦3D深度学习的现在和未来
 
-https://mp.weixin.qq.com/s/gRFq44pnhRScO9p3M15Gfw
-
-基于三维重建的全新相机姿态估计方法
-
 https://mp.weixin.qq.com/s/7P6iMcZUNNVAefrUz-dAsQ
 
 MIT谷歌伯克利三强联手，AI创造超现实主义3D运动雕塑
@@ -171,10 +156,6 @@ MIT谷歌伯克利三强联手，AI创造超现实主义3D运动雕塑
 https://mp.weixin.qq.com/s/bmtZ_-NaRtFitoJumukQSw
 
 通过端到端几何推理发现潜在3D关键点
-
-https://mp.weixin.qq.com/s/tTdKqRZqBFxFFiZaDD9AJw
-
-三维深度学习中的目标分类与语义分割
 
 https://mp.weixin.qq.com/s/ZdzPDb8NWmWkgAufeylYLg
 
@@ -192,25 +173,9 @@ https://mp.weixin.qq.com/s/adSbAAV7POblqE_jaOGZhg
 
 深度学习新应用：在PyTorch中用单个2D图像创建3D模型
 
-https://mp.weixin.qq.com/s/ihrExTygb-Pnnh4o4tAYnQ
-
-基于单目视觉的三维重建算法综述
-
-https://mp.weixin.qq.com/s/3JzwA2HAzoWtE_j2UhZCSw
-
-Stereo R-CNN 3D目标检测
-
-https://zhuanlan.zhihu.com/p/58734240
-
-3D Object Detection Overview - 2019
-
 https://mp.weixin.qq.com/s/l7RNfRB-KvxRHRKNYx1oeQ
 
 云从3D人体重建登顶三项榜单，一张照片就能生成3D形象
-
-https://mp.weixin.qq.com/s/GyE86DG7VqW0n4p0IP-lmQ
-
-R-MVSNet:一个高精度高效率的三维重建网络
 
 https://mp.weixin.qq.com/s/SnvXvijf5gBMNsnVW1-KMA
 
@@ -224,10 +189,6 @@ https://mp.weixin.qq.com/s/h8tk28IEuqB7g1e-vsyN5g
 
 2DASL：目前最好的开源人脸3D重建与密集对齐算法
 
-https://zhuanlan.zhihu.com/p/59865273
-
-三维语义分割概述及总结
-
 https://zhuanlan.zhihu.com/p/62964002
 
 AM3D:高精度单目三维检测器
@@ -240,41 +201,9 @@ https://mp.weixin.qq.com/s/pPgjBmct11POKqeVv8ymIA
 
 3D重建：硬派几何求解vs深度学习打天下？
 
-https://mp.weixin.qq.com/s/8an3eBrOZ5d6_PdNp6QkyA
-
-一文教你读懂3D目标检测
-
-https://mp.weixin.qq.com/s/BVP7vJ1RxwyRoU0purj0Xw
-
-3D数据分类深度学习方法综述，25页论文带你全面了解最新进展
-
-https://mp.weixin.qq.com/s/DxDkYfzW5BqhidPlqT772Q
-
-从单幅图像到双目立体视觉的3D目标检测算法
-
-https://mp.weixin.qq.com/s/n3ZUsq2I0CaJ5pIl2nZUFQ
-
-3D目标检测：MonoDIS
-
 https://mp.weixin.qq.com/s/uKCQVpkN6Va8jZisAyAfNA
 
 3D人脸技术漫游指南
-
-https://mp.weixin.qq.com/s/WBiDyIBV9OaKbxUhBml2AA
-
-GS3D(monocular 3D detection)
-
-https://mp.weixin.qq.com/s/G7YNTR8FAsCtkCxLQv1-dQ
-
-Facebook开源3D目标检测框架VoteNet，曾刷新两大数据集最高精度
-
-https://mp.weixin.qq.com/s/SBWGvu84oPKZkY5d8gz-oQ
-
-3D实例分割
-
-https://zhuanlan.zhihu.com/p/85686290
-
-MLOD：基于鲁棒特征融合方法的多视点三维目标检测
 
 https://mp.weixin.qq.com/s/S6cf_d6CxPblRS-hnM-jSg
 
@@ -292,92 +221,174 @@ https://mp.weixin.qq.com/s/HQLgiRfJ0KzstPfGatKHOA
 
 基于Siamese网络的多视角三维人脸重建
 
-# AutoDL进阶
+https://mp.weixin.qq.com/s/CA7_70Y5EZkULOYQ2g9O-A
 
-https://mp.weixin.qq.com/s/_31zbbQ5dHf2UaI8GhXozw
+Hinton最新研究NASA：一种更好地学习三维模型动作的方法
 
-4 GPU hours搜索到一个鲁棒的网络结构
+https://mp.weixin.qq.com/s/_59iRdLATm2n99M89JBqQA
 
-https://mp.weixin.qq.com/s/slrRXgD49I7ZG24ialVxPw
+KITTI立体匹配霸榜论文算法详解
 
-第四范式涂威威：自动机器学习求解三要素与发展趋势
+https://mp.weixin.qq.com/s/npKNDrlXZ6oIlE0NG80BpQ
 
-https://mp.weixin.qq.com/s/X5Oi8gKyT5Tmh7ljon3MzQ
+Geoffrey Hinton再出神作：通过神经网络估计有关节可变形的三维模型
 
-谷歌引入自动网络设计，高效解决大规模深度推荐模型的特征嵌入问题
+https://zhuanlan.zhihu.com/p/112103579
 
-https://mp.weixin.qq.com/s/rllQLPPYxxLCK9-dgOjLDg
+深度学习在三维环境重建中的应用
 
-另一种可微架构搜索：商汤提出在反传中学习架构参数的SNAS
+https://mp.weixin.qq.com/s/cBbDCE4kQrahT8vLo3uMOw
 
-https://mp.weixin.qq.com/s/AV8fD5Vf6uzhLeW9nfMASg
+你们还在做2D的物体检测吗？谷歌已经开始玩转3D了
 
-一文详解随机神经网络结构搜索(SNAS)
+https://mp.weixin.qq.com/s/SMDzPAJCpgjELsKHeQvW-A
 
-https://mp.weixin.qq.com/s/s10z5pkYf5Sha0V58T8fBw
+序列化的三维形状生成网络PQ-NET
 
-单路径NAS: 在四小时内设计出给定硬件内最有效的网
+https://mp.weixin.qq.com/s/qZOCUuLt98fTpstGpC1ilg
 
-https://www.zhihu.com/question/339002300
+Variational DropPath：提高3D CNN时空融合分析效率的秘诀
 
-One-Shot 神经网络搜索(NAS)的searching阶段到底在做什么？
+https://mp.weixin.qq.com/s/BNYUkocbKzqTjTNbGuNBzg
 
-https://mp.weixin.qq.com/s/323RA6UtnyTySoXVXcJ2vA
+基于3DMM的三维人脸重建技术总结
 
-华人团队打造：AutoML+GAN=AutoGAN！AI设计GAN模型比人类更好
+https://mp.weixin.qq.com/s/-9e86JF7VyHbqTyn2whOzg
 
-https://mp.weixin.qq.com/s/nN7tgkvvkv8B8N-z4yAgcQ
+如何入门多视角人脸正面化生成？不得不看的超详细最新综述！
 
-四小时搜索NN结构，厦大提出快速NAS检索方法
+## 三维重建
 
-https://mp.weixin.qq.com/s/rgUTcuH2mfIFBDoOfd26Cw
+三维重建是计算机视觉和深度学习的重要任务。目前三维重建按照其表达方式主要分为两大类：一类是显式表达，以点云为代表（也有生成网格和体素），由神经网络直接回归生成三维空间中的几何元素；另一类是隐式表达（如NeRF），神经网络只是建模三维物体的空间占用，需要后续的渲染或表面提取获得显式三维形状。
 
-NASNet：神经架构搜索网络在图像分类中的表现
+https://www.cnblogs.com/wuyida/p/6301262.html
 
-https://mp.weixin.qq.com/s/VdjHp5Tb1fSyV3CQblPQmw
+三维重建技术概述
 
-利用NAS寻找最佳GAN：AutoGAN架构搜索方案专为GAN打造
+https://blog.csdn.net/wishchin/article/category/5723249
 
-https://mp.weixin.qq.com/s/d60EKUJjYfYfcfhMnaCpPA
+一个三维重建/SLAM的blog
 
-基于强化学习的自动搜索
+https://zhuanlan.zhihu.com/p/79628068
 
-https://mp.weixin.qq.com/s/ClqOWx1RJGzoS0akI2s93w
+基于深度学习的视觉三维重建研究总结
 
-多媒体的AutoML与元学习，清华大学朱文武教授等
+https://mp.weixin.qq.com/s/C2h0xvcHCrnEYcDgHse5xA
 
-https://mp.weixin.qq.com/s/QtYNb1bVnWghNFK6fbynLw
+从NeRF -> GRAF -> GIRAFFE，2021 CVPR Best Paper诞生记
 
-激活函数如何进行自动学习和配置
+https://mp.weixin.qq.com/s/ihrExTygb-Pnnh4o4tAYnQ
 
-https://mp.weixin.qq.com/s/smAlLm-JZn_s2utSCVk7ig
+基于单目视觉的三维重建算法综述
 
-归一化(Normalization)方法如何进行自动学习和配置
+https://mp.weixin.qq.com/s/Uj2gYOS2TZGVSCka57M0zA
 
-https://mp.weixin.qq.com/s/E0ULyXGz3UEcD0cIg-XkNA
+MVSNet: 非结构化多视点三维重建网络
 
-优化方法可以进行自动搜索学习吗？
+https://mp.weixin.qq.com/s/gRFq44pnhRScO9p3M15Gfw
 
-https://mp.weixin.qq.com/s/Nmkcy2nBczUccwIdMJiH_A
+基于三维重建的全新相机姿态估计方法
 
-MaskConnect: 探究网络结构搜索中的Module间更好的连接
+https://mp.weixin.qq.com/s/GyE86DG7VqW0n4p0IP-lmQ
 
-https://mp.weixin.qq.com/s/of9C3l2cmzAVEt9opIgfKw
+R-MVSNet:一个高精度高效率的三维重建网络
 
-损失函数也可以进行自动搜索学习吗？
+https://www.zhihu.com/column/c_1451693094165516288
 
-https://mp.weixin.qq.com/s/OX0C9h5l6xffcQt6HOe_tQ
+人体三维重建与虚拟试衣
 
-DetNAS：首个搜索物体检测Backbone的方法
+## NetVLAD
 
-https://mp.weixin.qq.com/s/c7S_hV_8iRhR4ZoFxQYGYQ
+NetVLAD算的上是CNN+传统算子的一个范例。
 
-CVPR 2019神经网络架构搜索进展综述
+论文：
 
-https://mp.weixin.qq.com/s/hWRStNp0Gu_ZO7J1Sjr6-w
+《NetVLAD: CNN architecture for weakly supervised place recognition》
 
-视频架构搜索的研究
+《GhostVLAD for set-based face recognition》
 
-https://mp.weixin.qq.com/s/ABNPCpgyk_2EeYwnJFFehg
+数据集：
 
-自动优化架构，这个算法能帮工程师设计神经网络
+http://places.csail.mit.edu/
+
+## VLAD
+
+Vector of Locally Aggregated Descriptors
+
+https://www.cnblogs.com/minemine/p/7364950.html
+
+场景分类(scene classification)摘录
+
+http://www.cnblogs.com/mafuqiang/p/6909556.html
+
+图像检索——VLAD
+
+## 参考
+
+https://www.oukohou.wang/2018/11/27/NetVLAD/
+
+论文阅读-NetVLAD
+
+https://www.oukohou.wang/2018/12/26/GhostVLAD/
+
+论文阅读-GhostVLAD
+
+https://mp.weixin.qq.com/s/cfUl0Eym0mu7rSJJL7Zt1A
+
+基于深度学习的视觉实例搜索研究进展
+
+https://zhuanlan.zhihu.com/p/25013378
+
+深度纹理编码网络 (Deep TEN: Texture Encoding Network)
+
+https://blog.csdn.net/LiGuang923/article/details/85416407
+
+图像检索与降维（一）：VLAD
+
+https://blog.csdn.net/LiGuang923/article/details/85470289
+
+图像检索与降维（二）：NetVLAD
+
+https://zhuanlan.zhihu.com/p/96718053
+
+从VLAD到NetVLAD，再到NeXtVlad
+
+https://mp.weixin.qq.com/s/HkaG9KeJ5w6FqZmo15n9JA
+
+短视频潜力预测及其在微视推荐冷启动中的应用
+
+https://mp.weixin.qq.com/s/WUP4C4XBHfVKI_xgHXUXiA
+
+动作识别时序汇合（Temporal Pooling）方法介绍
+
+# Spatial Transformer Networks
+
+论文：
+
+《Spatial Transformer Networks》
+
+参考：
+
+http://www.cnblogs.com/neopenx/p/4851806.html
+
+Spatial Transformer Networks(空间变换神经网络)
+
+http://blog.csdn.net/shaoxiaohu1/article/details/51809605
+
+论文笔记：Spatial Transformer Networks
+
+http://blog.csdn.net/shaoxiaohu1/article/details/51809605
+
+Spatial Transformer Networks
+
+https://mp.weixin.qq.com/s/ciqQMezcB-oM24X8eQqTNg
+
+花式玩耍Spatial Transformation Networks
+
+https://mp.weixin.qq.com/s/4VE2lZeFf05AyLp_s3nTFQ
+
+理解Spatial Transformer Networks
+
+https://mp.weixin.qq.com/s/AI_QC8IgnjMSOAZJNbQjfQ
+
+空间变换网络简单介绍

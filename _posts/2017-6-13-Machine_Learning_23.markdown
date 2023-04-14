@@ -1,80 +1,51 @@
 ---
 layout: post
-title:  机器学习（二十三）——压缩感知, Optimizer
+title:  机器学习（二十三）——训练集、验证集和测试集, Optimizer
 category: ML 
 ---
 
-# 时间序列分析+
+* toc
+{:toc}
 
-https://mp.weixin.qq.com/s/FRSe1mJTvk9U66ta-r9iCQ
+# 训练集、验证集和测试集
 
-手把手教你用Python玩转时序数据，从采样、预测到聚类
+对于一个模型来说，其参数可以分为**普通参数**和**超参数**。在不引入强化学习的前提下，那么普通参数就是可以被梯度下降所更新的，也就是训练集所更新的参数。另外，还有超参数的概念，比如网络层数、网络节点数、迭代次数、学习率等等，这些参数不在梯度下降的更新范围内。尽管现在已经有一些算法可以用来搜索模型的超参数，但多数情况下我们还是自己人工根据验证集来调。
 
-https://mp.weixin.qq.com/s/Q82YzANWDMkKWm5k2XmPkA
+从狭义来讲，验证集没有参与梯度下降的过程，也就是说是没有经过训练的；但从广义上来看，验证集却参与了一个“人工调参”的过程，我们根据验证集的结果调节了迭代数、调节了学习率等等，使得结果在验证集上最优。因此，我们也可以认为，验证集也参与了训练。
 
-严谨解决5种机器学习算法在预测股价的应用
+那么就很明显了，我们还需要一个完全没有经过训练的集合，那就是测试集。
 
-https://mp.weixin.qq.com/s/iKM6zMSm1F2icjy79F9Hcg
+参考：
 
-季节性的分析才不简单，小心不要在随机数据中也分析出季节性
+http://kexue.fm/archives/4638/
 
-https://mp.weixin.qq.com/s/avLWHXj2JkjXOomCipj8kA
+训练集、验证集和测试集的意义
 
-使用希尔伯特-黄变换（HHT）进行时间序列分析
+https://zhuanlan.zhihu.com/p/48976706
 
-https://mp.weixin.qq.com/s/p8oN4xh-FHnay2eTsk6Gng
+训练集、验证集和测试集
 
-基于高阶模糊认知图与小波变换的时间序列预测
+https://mp.weixin.qq.com/s/idS2l7u_OBxWi5UBexlK4w
 
-https://mp.weixin.qq.com/s/lmJk-iIzxxPmnZa6D8i_nw
+如何正确使用机器学习中的训练集、验证集和测试集？
 
-一文简述如何使用嵌套交叉验证方法处理时序数据
+https://mp.weixin.qq.com/s/ubpRPQ7-1nvY5CzICWi1Cg
 
-https://mp.weixin.qq.com/s/05WAZcklXnL_hFPLZW9t7Q
-
-时间序列模型之相空间重构模型
-
-https://mp.weixin.qq.com/s/rIgjtILF7EtuBS5UWCEFcQ
-
-重大事件后，股价将何去何从？
-
-# 压缩感知
-
-https://blog.csdn.net/jbb0523
-
-一个压缩感知+贝叶斯网络方面的blog
-
-http://blog.csdn.net/abcjennifer/article/details/7721834
-
-初识压缩感知Compressive Sensing
-
-http://blog.csdn.net/abcjennifer/article/details/7724360
-
-中国压缩传感资源（China Compressive Sensing Resources）
-
-http://blog.csdn.net/xiahouzuoxin/article/details/38820925
-
-白话压缩感知（含Matlab代码）
-
-http://blog.csdn.net/abcjennifer/article/details/7748833
-
-压缩感知进阶——有关稀疏矩阵
-
-https://zhuanlan.zhihu.com/p/85558304
-
-深度学习压缩感知（DCS）历史最全资源汇总分享
-
-# 金融模型
-
-Capital asset pricing model
-
-Fama–French three-factor model
-
-Carhart four-factor model
+似乎没区别，但你混淆过验证集和测试集吗？
 
 # Optimizer
 
 在《机器学习（一）》中，我们已经指出梯度下降是解决凸优化问题的一般方法。而如何更有效率的梯度下降，就是本节中Optimizer的责任了。
+
+## 教程
+
+http://www.stat.cmu.edu/~ryantibs/convexopt/
+
+Machine Learning 10-725: Convex Optimization
+
+https://mp.weixin.qq.com/s/9BRhZd6x-JCNNVzt2ndYKQ
+
+最新《深度学习优化问题》教程，78页ppt，台大林智仁教授讲解
 
 ## 原始版本
 
@@ -180,9 +151,13 @@ $$\hat{v}_t = \dfrac{v_t}{1 - \beta^t_2}$$
 
 $$\theta_{t+1} = \theta_{t} - \dfrac{\eta}{\sqrt{\hat{v}_t} + \epsilon} \hat{m}_t$$
 
+https://blog.csdn.net/nyist_yangguang/article/details/121603917
+
+Adam各个参数分析
+
 ## AdamW
 
-Adam自动调整学习率，大幅提高了训练速度，也很少需要调整学习率，但是有相当多的资料报告Adam优化的最终精度略低于SGD。问题出在哪呢，其实Adam本身没有问题，问题在于目前大多数DL框架的L2 loss实现用的是weight decay的方式，而weight decay在与Adam共同使用的时候有互相耦合。
+Adam自动调整学习率，大幅提高了训练速度，但是有相当多的资料报告Adam优化的最终精度略低于SGD。问题出在哪呢，其实Adam本身没有问题，问题在于目前大多数DL框架的L2 loss实现用的是weight decay的方式，而weight decay在与Adam共同使用的时候有互相耦合。
 
 为了解决这个问题，人们又提出了AdamW。
 
@@ -208,13 +183,37 @@ ncorporating Nesterov Momentum into Adam
 
 ![](/images/img3/Cycle.jpg)
 
-cycle参数的初衷是为了防止网络后期lr十分小导致一直在某个局部最小值中振荡，突然调大lr可以跳出注定不会继续增长的区域探索其他区域。
+cycle参数的初衷是为了防止训练后期LR十分小，导致结果一直在某个局部最小值附近振荡。突然调大LR可以跳出注定不会继续增长的区域探索其他区域。
+
+![](/images/img4/cyclic_lr.jpg)
+
+上图展示了Cyclic LR的另一种用法：
+
+每隔一段时间重启学习率，这样在单位时间内能收敛到多个局部最小值，从而得到很多个模型做集成。
 
 ## 二阶Optimizer
 
 虽然二阶Optimizer的收敛效果优于一阶Optimizer，但由于计算量较大，通常用的较少。
 
 常用的算法有BGFS和L-BFGS。
+
+---
+
+第一个拟牛顿法是由Bill Davidon、Roger Fletcher和Michael James David Powell于1959年提出的DFP算法。
+
+到了60年代末期，作为DFP算法的改进，出现了BFGS算法。（Charles Broyden、Roger Fletcher、Donald Goldfarb、David Shanno）。
+
+以下是部分作者的简历：
+
+https://mp.weixin.qq.com/s/2ZfdPKo9HMjBe2QSuwWRzg
+
+数学优化方法中的F——Roger Fletcher
+
+https://mp.weixin.qq.com/s/dZ7TlqbgsK3RU8prJ3o-oA
+
+宝藏数学家的优化人生（M.J.D. Powell）
+
+---
 
 参考：
 
@@ -229,6 +228,52 @@ L-BFGS算法
 https://mp.weixin.qq.com/s/lGrTUYALmKOQkO70DZpbPQ
 
 小改进，大飞跃：深度学习中的最小牛顿求解器
+
+https://mp.weixin.qq.com/s/uHrRBS3Ju9MAWbaukiGnOA
+
+二阶梯度优化新崛起，超越Adam，Transformer只需一半迭代量
+
+https://mp.weixin.qq.com/s/JOyHFbtO7v0DgCKVNmhyYQ
+
+拟牛顿法：BFGS，DFP，DM条件
+
+## 非梯度优化/非凸优化
+
+对于深度学习模型的优化问题来说，随机梯度下降（SGD）是一种被广为使用方法。然而，实际上SGD并非我们唯一的选择。当我们使用一个“黑盒算法”时，即使不知道目标函数f(x):Rn→R的精确解析形式（因此不能计算梯度或Hessian矩阵）你也可以对f(x)进行评估。经典的黑盒优化方法包括“模拟退火算法”、“爬山法”以及“单纯形法”。演化策略（ES）是一类诞生于演化算法（EA）黑盒优化算法。
+
+参考：
+
+https://mp.weixin.qq.com/s/USHad8UvhsqWTI4MJmif5g
+
+在深度学习模型的优化上，梯度下降并非唯一的选择
+
+https://mp.weixin.qq.com/s/9G_7Ax9cPcQcYVqEfc-pyw
+
+从基础知识到实际应用，一文了解“机器学习非凸优化技术”
+
+https://zhuanlan.zhihu.com/p/27554191
+
+非凸优化基石：Lipschitz Condition
+
+https://mp.weixin.qq.com/s/LY1-F5hEyM40DrvobYRexA
+
+腾讯AI Lab&北大提出基于随机路径积分的差分估计子非凸优化方法
+
+https://mp.weixin.qq.com/s/P0qzzyVQke_c-RUF0Faitw
+
+怎么判断一个优化问题是凸优化还是非凸优化？
+
+https://mp.weixin.qq.com/s/NlxZQv8Z-AzIlz6mG8cCxQ
+
+离散/整数/组合/非凸优化概述及其在AI的应用
+
+https://www.zhihu.com/question/38677354
+
+梯度下降法是万能的模型训练算法吗？
+
+https://github.com/eyounx/ZOOpt
+
+一个非梯度优化的工具
 
 ## 参考
 
@@ -275,83 +320,3 @@ https://mp.weixin.qq.com/s/vt7BEHbwJrAzlL2Pc-6QFg
 https://mp.weixin.qq.com/s/6NBLLLa-S625iaehR8zDfQ
 
 掌握机器学习数学基础之优化（下）
-
-https://mp.weixin.qq.com/s/o10Fp2VCwoLqgzirbGL9LQ
-
-如何估算深度神经网络的最优学习率
-
-https://mp.weixin.qq.com/s/T4f4W0V6YNBbjWqWBF19mA
-
-目标函数的经典优化算法介绍
-
-https://mp.weixin.qq.com/s/R_0_E5Ieaj9KiWgg1prxeg
-
-为什么梯度的方向与等高线切线方向垂直？
-
-https://mp.weixin.qq.com/s/0gdGNv98DytB8KxwVu_M0A
-
-通俗易懂讲解Deep Learning最优化方法之AdaGrad
-
-https://mp.weixin.qq.com/s/VVHe2msyeUTGiC7f_f0FFA
-
-一文概览深度学习中的五大正则化方法和七大优化策略
-
-https://mp.weixin.qq.com/s/qp5tJynA2uZIgv-IzJ_lrA
-
-从基础知识到实际应用，一文了解“机器学习非凸优化技术”
-
-https://mp.weixin.qq.com/s/zFGQzC_uQdAwlr9BzA-CYg
-
-深度学习需要了解的四种神经网络优化算法
-
-https://mp.weixin.qq.com/s/rUqIfKWmEBVjajlAn2HXfg
-
-理解深度学习中的学习率及多种选择策略
-
-https://mp.weixin.qq.com/s/UfplwSgyWnLNiCdIrconhA
-
-SGD的那些变种，真的比SGD强吗
-
-https://zhuanlan.zhihu.com/p/73441350
-
-从物理角度理解加速梯度下降
-
-https://mp.weixin.qq.com/s/n1Ks8I3Ldgb-u-kVbGBZ5Q
-
-机器学习中的优化方法
-
-https://mp.weixin.qq.com/s/4XOI8Dq6fqe8rhtJjeyxeA
-
-超级收敛：使用超大学习率超快速训练残差网络
-
-http://mp.weixin.qq.com/s/Q5kBCNZs3a6oiznC9-2bVg
-
-Michael Jordan新研究官方解读：如何有效地避开鞍点
-
-https://mp.weixin.qq.com/s/idmt0F49tOCh-ghWdHLdUw
-
-吴恩达导师Michael I.Jordan学术演讲：如何有效避开鞍点。这是Jordan半年后的另一个演讲，有些新内容。
-
-https://mp.weixin.qq.com/s/jVjemfcLzIWOdWdxMgoxsA
-
-超越Adam，从适应性学习率家族出发解读ICLR 2018高分论文
-
-https://mp.weixin.qq.com/s/B9nUwPtgpsLkEyCOlSAO5A
-
-1cycle策略：实践中的学习率设定应该是先增再降
-
-https://mp.weixin.qq.com/s/dseeCB-CRtZnzC3d4_8pYw
-
-AMSGrad能够取代Adam吗
-
-https://zhuanlan.zhihu.com/p/81020717
-
-从SGD到NadaMax，十种优化算法原理及实现
-
-https://zhuanlan.zhihu.com/p/22252270
-
-深度学习最全优化方法总结比较（SGD，Adagrad，Adadelta，Adam，Adamax，Nadam）
-
-https://www.zhihu.com/question/64134994
-
-如何理解深度学习分布式训练中的large batch size与learning rate的关系？

@@ -4,7 +4,18 @@ title:  AI安全
 category: resource 
 ---
 
+* toc
+{:toc}
+
 # AI安全
+
+一台自动化机器意外刺穿了一个9盎司重的驱熊喷雾罐，释放出浓缩的喷雾，致使24名亚马逊员工受伤。
+
+https://mp.weixin.qq.com/s/eR3orsvIDVn7kRSmATTJbg
+
+这个网站收集AI‘翻车’案例，所有‘罪证’都不放过
+
+---
 
 https://mp.weixin.qq.com/s/jBE4gP3O0qVJ50G49Q_xmQ
 
@@ -170,10 +181,6 @@ https://mp.weixin.qq.com/s/mOYgJhEaouL7Ebi0502_Uw
 
 DeepFakes天敌来了！伯克利紧急研发“火眼金睛”防伪克星
 
-https://mp.weixin.qq.com/s/6r8y7tMqo53lnACWG1K4xA
-
-深度树学习用于Zero-shot人脸的反欺诈
-
 https://mp.weixin.qq.com/s/ww2A-SJGj_F7KmkjHfN5tg
 
 SemanticAdv：基于语义属性的对抗样本生成方法
@@ -201,3 +208,125 @@ https://zhuanlan.zhihu.com/p/77788568
 https://mp.weixin.qq.com/s/dCJzqA5FoVtfU0zkn6xH6w
 
 全球“黑客大赛”冠军霸气讲述：我是如何让50个文件一起骗过AI安防系统的？
+
+https://mp.weixin.qq.com/s/GcT2-rVm432re7SbCf3Dcg
+
+一个模型击溃12种AI造假，各种GAN与Deepfake都阵亡
+
+https://mp.weixin.qq.com/s/aqoFRrAEtkCkLbKxAVOfCg
+
+中山大学发布最新《图对抗机器学习》2020综述论文，带你全面了解40+种攻防对抗学习方法
+
+https://mp.weixin.qq.com/s/WZGS9NR4jDko0cHqeiuJfA
+
+视觉对抗样本生成技术概述
+
+https://mp.weixin.qq.com/s/MQITI9QVhgnDKj--94B3fg
+
+视听觉深度伪造检测技术研究综述
+
+https://mp.weixin.qq.com/s/0OiEzrALzCkUEdJz87hPwQ
+
+RIPPLES：BERT控制术
+
+https://mp.weixin.qq.com/s/kmxRXvURSsRnIKRNVQkmmg
+
+同态加密技术及其在机器学习中的应用详解
+
+https://mp.weixin.qq.com/s/r6zm2VMOehP7EbxU5R39uA
+
+GAN生成对抗样本的方法解析
+
+https://mp.weixin.qq.com/s/qdVEVzXhHbOSOpnNmfbpsg
+
+图像篡改被动检测技术一览：基于特征提取和卷积神经网络的篡改检测
+
+https://mp.weixin.qq.com/s/pZH6ZZSCqDR3BCY6zopV4Q
+
+最新综述：图像分类中的对抗机器学习
+
+https://mp.weixin.qq.com/s/cnYnSfeH4uyOwGDPLOpDOA
+
+如何系统地欺骗图像识别神经网络
+
+https://mp.weixin.qq.com/s/tk5ZNriQremKNzCIl0jJVQ
+
+一文读懂机器学习“数据中毒”
+
+https://mp.weixin.qq.com/s/rhjrR8liq9R0J3AjvjqpNQ
+
+对抗图像和攻击在Keras和TensorFlow上的实现
+
+https://mp.weixin.qq.com/s/OG0oJlzFj4Urlz-_W1cC9g
+
+谷歌、OpenAI等警告：BERT、GPT-3等大型语言模型都有一个重大缺陷（泄露训练数据）
+
+https://mp.weixin.qq.com/s/VXfqI5CJKhWJKi6EK_1Q_A
+
+互联网广告黑产盛行，如何反作弊？
+
+https://mp.weixin.qq.com/s/rAxQhqFLUJn2gNAaFYqyTg
+
+基于一种改进的Wide&Deep文本分类在用户身份识别上的实践
+
+https://mp.weixin.qq.com/s/r609z6-jhyJIk8EwcEWmEg
+
+文本预训练模型在信息安全场景的探索和实践
+
+https://mp.weixin.qq.com/s/sZ7VQz26c5mrWAsnMKx8Hw
+
+图算法在网络黑产挖掘中的思考
+
+https://mp.weixin.qq.com/s/h0Hdf7ehFrp_-0-Auk8NFg
+
+人工智能模型水印研究综述
+
+https://mp.weixin.qq.com/s/LZdSQAOOiQtzRo-pSw61SA
+
+《计算机视觉对抗攻击与防御》最新综述论文
+
+https://mp.weixin.qq.com/s/QuA52cfwvrkHtiuR6JieWg
+
+一张照片攻破人脸识别系统：能点头摇头张嘴，网友：太可怕！
+
+https://mp.weixin.qq.com/s/QZWBPgpro9RAsczOh-qQnQ
+
+清华OpenAttack文本对抗工具包重大更新：支持中文、多进程、兼容HuggingFace
+
+# 安全+
+
+https://mp.weixin.qq.com/s/E6eYBob3WzuLFEuGJZSNtQ
+
+怎么知道谁动了我的Linux主机?
+
+https://mp.weixin.qq.com/s/0NvbRK41BT4yinFUuVxa3A
+
+发现一个木马，竟然偷传我珍藏几十G的视频！
+
+https://j00ru.vexillium.org/syscalls/nt/64/
+
+Windows X86-64 System Call Table
+
+https://www.zhihu.com/question/356008082
+
+电脑软件（例如 Adobe、Autodesk）为什么那么容易被破解？
+
+https://mp.weixin.qq.com/s/yCB2R8QPWNp2lJrQD4l_hw
+
+聊聊移动端安全加固
+
+https://zhuanlan.zhihu.com/p/28528257
+
+美国人写了一个只靠U盘传播的病毒，毁了伊朗的核计划
+
+https://www.sohu.com/a/250882983_355019
+
+一个42KB的文件，解压完其实是个4.5PB的“炸弹”
+
+https://www.zhihu.com/question/24215752
+
+svchost.exe为什么会占用那么多CPU？
+
+https://pcedu.pconline.com.cn/softnews/yejie/1012/2311892.html
+
+最大隐私泄露事件QA 金山是如何发现？

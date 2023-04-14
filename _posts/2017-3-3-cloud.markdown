@@ -1,8 +1,11 @@
 ---
 layout: post
-title:  云计算论文集, Spark, 多维数组的行优先和列优先
+title:  云计算论文集, Spark
 category: AI 
 ---
+
+* toc
+{:toc}
 
 # 云计算论文集
 
@@ -78,6 +81,26 @@ Dremel是Google的“交互式”数据分析系统。可以组建成规模上�
 
 >作者：Mike Burrows，1963年生，英国计算机学家。剑桥大学博士。2013年当选皇家学会会员。
 
+# IaaS，PaaS，SaaS
+
+IaaS：基础设施服务，Infrastructure-as-a-service
+
+PaaS：平台服务，Platform-as-a-service
+
+SaaS：软件服务，Software-as-a-service
+
+![](/images/img3/aaS.jpg)
+
+Openstack属于IaaS。代表厂商是华为云。
+
+而Hadoop属于PaaS。代表厂商是阿里云。
+
+参考：
+
+http://www.ruanyifeng.com/blog/2017/07/iaas-paas-saas.html
+
+IaaS，PaaS，SaaS的区别
+
 # Spark
 
 官网：
@@ -132,6 +155,8 @@ Spark没有服务程序，因此无须部署，只需要在集群中的某台机
 
 http://blog.csdn.net/book_mmicky/article/details/25714287
 
+Spark1.0.0 on YARN模式部署
+
 Spark虽然对Hadoop的版本有一定的要求，但是并不是太严重的问题。比如，目前最新的Spark 2.0.1（2016.10）仍然支持Hadoop 2.3，而后者是2014年2月出的版本。
 
 ## shuffle
@@ -142,16 +167,26 @@ Spark虽然对Hadoop的版本有一定的要求，但是并不是太严重的问
 
 参考：
 
-http://jerryshao.me/architecture/2014/01/04/spark-shuffle-detail-investigation/
+https://blog.csdn.net/SA14023053/article/details/52024378
+
+详细探究Spark的shuffle实现
+
+https://www.cnblogs.com/ahu-lichang/p/6645074.html
+
+MapReduce的原理及执行过程
+
+https://mp.weixin.qq.com/s/WoqBdKyZzO7Y_hp73z58DA
+
+百花齐放的大数据计算平台演进史
 
 ## 控制日志输出等级
 
 有的时候为了防止控制台的日志输出过多，淹没了程序的正常输出，可以采用如下方法：
 
-{% highlight java %}
+```java
 SparkContext sc = SparkContext.getOrCreate(conf);
 sc.setLogLevel("WARN");
-{% endhighlight %}
+```
 
 ## 基本统计操作
 
@@ -176,6 +211,28 @@ MLlib是Spark的机器学习库。官网：
 https://spark.apache.org/mllib/
 
 和Spark的其他部分一样，MLlib也存在RDD API和DataFrame API两套API。其中前者已经停止开发，而后者的设计思想显然来自R语言。RDD API在spark.mllib包中，而DataFrame API在spark.ml包中。
+
+## Hive
+
+http://www.cnblogs.com/bluejoe/p/5115845.html
+
+Hive体系结构介绍
+
+https://mp.weixin.qq.com/s/XDqe6iqayJWxJGLUt_9QKA
+
+Hive的基本认识
+
+https://mp.weixin.qq.com/s/qSiYQFgaqaoEgmZUJhbqHw
+
+DDL与DML操作
+
+## 弹性计算
+
+云计算最初有两个方向，一个是弹性计算，一个是分布式计算，后来成功验证了商业模式的是弹性计算。
+
+但是国内外产业界，包括阿里在内，也就是王坚领导的团队，最初都在分布式计算上使劲。就这样空耗了几年时光和资源。
+
+一直到亚马逊验证了弹性计算才是可行的商业模式，阿里云立刻复制，从分布式计算转型，才有了今天的局面。
 
 ## 参考
 
@@ -202,10 +259,6 @@ http://www.csdn.net/article/1970-01-01/2825748
 http://www.cnblogs.com/bluejoe/p/5115846.html
 
 学习GraphX
-
-http://www.cnblogs.com/bluejoe/p/5115845.html
-
-Hive体系结构介绍
 
 https://mp.weixin.qq.com/s/vM5DM6CEVuKjcWBxZZSbhA
 
@@ -267,55 +320,38 @@ https://mp.weixin.qq.com/s/S1Gr18If9Htq-kE89cCa9w
 
 Uber最强机器学习平台是如何使用Spark模型的？
 
-# 多维数组的行优先和列优先
+https://mp.weixin.qq.com/s/vTHRSFg15SDYL3qH3dGCvA
 
-这里以numpy为工具，介绍一下多维数组的行优先和列优先的概念。
+关于Spark NLP学习，你需要掌握的LightPipeline
 
-首先我们生成一个3x4的数组：
+https://mp.weixin.qq.com/s/a6o04KzpkwiIpS7ycP5khw
 
-`arr = np.arange(12).reshape(3,4)`
+Spark源码和调优简介Spark Core
 
-它的形状是这样的：
+https://mp.weixin.qq.com/s/X4nrtI6WODRHYiZ66xRshQ
 
-![](/images/article/arr_3x4.png)
+PySpark和SparkSQL基础：如何利用Python编程执行Spark
 
-如果我们按照C语言的方式存储它，也就是行优先存储的话，那么在内存中，它的形状是这样的：
+https://zhuanlan.zhihu.com/p/108454557
 
-![](/images/article/arr_3x4_C.png)
+超全spark性能优化总结
 
-这种存储方式又被称作C contiguous array。
+https://mp.weixin.qq.com/s/vytVTAgU-6_iRG-drf9eYQ
 
-另一派存储方式，也就是列优先存储，它的代表是Fortran语言。上面的数组在内存中的形状就是这样的了：
+使用Spark进行大规模图形挖掘
 
-![](/images/article/arr_3x4_Fortran.png)
+https://mp.weixin.qq.com/s/Nyb9qTYn5_XFhQPa8KZojw
 
-这种存储方式又被称作Fortran contiguous array。
+最新Apache Spark平台的NLP库,助你轻松搞定自然语言处理任务
 
-上述描述也可用下图表示：
+https://mp.weixin.qq.com/s/ExbwHCFavFZhmWnWIK6wlQ
 
-![](/images/img2/Row_and_column_major_order.png)
+深入浅出Spark：存储系统
 
-numpy对这两种方式都支持，而且还巧妙的利用了两者之间的差异，对运算进行了简化。
+https://mp.weixin.qq.com/s/yiqgPqM7nnNlJ1zCp6blTQ
 
-`arr2 = arr.T`
+Hive SQL迁移Spark SQL在滴滴的实践
 
-比如上述转置操作，你以为numpy真的做了转置运算吗？其实不然。
+https://mp.weixin.qq.com/s/r-EcujFHXpZwy83o7l3YlA
 
-{% highlight python %}
->>>arr.flags.f_contiguous
-False
->>>arr2.flags.f_contiguous
-True
-{% endhighlight %}
-
-看到没，这里仅仅设置了一个标志而已。
-
-C和Fortran的这种差异，实际上是上世纪60年代，两大IT巨头AT&T和IBM之间战争的结果，并深远的影响了后来的软件。比如在通用计算领域，主要采用C格式，而数值计算领域，则多采用Fortran格式。
-
-典型的例子是Matlab。它最早是作为一些Fortran数学库的封装而存在的，因此很自然的采用了Fortran格式。OpenGL、OpenVX之类的接口，实际上也沿袭了这种路径依赖。
-
-Fortran作为最早的高级语言（1957年），至今仍有很强的生命力，这主要归功于：
-
-1.对数组、复数等数值计算的原生支持。这些语法糖，对于非程序员的科技人员很友好。
-
-2.没有指针等复杂特性。这一点既降低了上手的门槛，又对于编译器优化（尤其是现在比较流行的并行计算优化）很有好处。普通科技人员即使没有经过特殊的程序训练，也可以写出非常高效的程序。
+如何从Pandas迁移到Spark？

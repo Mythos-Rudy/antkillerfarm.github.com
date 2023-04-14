@@ -1,8 +1,11 @@
 ---
 layout: post
-title:  OpenGL研究, GUI框架分析, 虚拟机比较, uboot, WireShark
+title:  OpenGL研究, GUI框架分析, 游戏开发
 category: technology 
 ---
+
+* toc
+{:toc}
 
 # OpenGL研究
 
@@ -24,6 +27,34 @@ http://user.xmission.com/~nate/opengl.html
 
 教程中示例程序的操作非常简单，基本没什么好说的。唯一需要注意的是，点击鼠标右键会弹出菜单。而且右边屏幕的菜单不可点击，否则程序会退出，但可以用菜单上标注的键盘快捷键选中。这些都是看源代码之后，才发现的。
 
+---
+
+https://learnopengl.com/
+
+https://learnopengl-cn.github.io/
+
+---
+
+https://zhuanlan.zhihu.com/p/447324756
+
+OpenGL笔记
+
+## Tool Kit
+
+![](/images/img4/opengl.png)
+
+GLAD：Multi-Language GL/GLES/EGL/GLX/WGL Loader-Generator
+
+简单说glad是glew的升级版。
+
+---
+
+OpenTK提供了OpenGL, OpenGL ES, OpenAL, OpenCL等库的C#语言的绑定。
+
+官网：
+
+https://opentk.net/
+
 ## 环境准备
 
 ### Ubuntu
@@ -40,11 +71,49 @@ http://user.xmission.com/~nate/opengl.html
 
 ## OpenGL vs Direct X
 
+2015.2
+
 这两者的争斗已经有近20年的历史了。我最初知道它们，还是在2003年，跟随同学W学习VC的时候。当时我的判断是由于Direct X集成了开发游戏所需的一系列工具，因此它在PC上将超越OpenGL。后来的情况也差不多是这样的。
 
 不过坦率的说，我对Direct X的了解，仅限于DirectDraw和DirectSound，基本上只够开发一些2D应用。
 
 去年底由于想实现一些特殊的Android特效，才接触到OpenGL。按照我的估计，今后随着移动应用越来越重要，OpenGL的应用前景要好于Direct X。而且这个要不了多久，估计也就是这两年的事情。特此备忘。
+
+---
+
+2022.6
+
+以dx9为代表的端游末期时代。
+
+以gles2为代表的漫长的手游时代。
+
+近几年metal与vulkan崛起的AAA手游时代。
+
+## 概述
+
+![](/images/img4/RenderingPipeline.png)
+
+MVP：Model View project matrices
+
+VBO即vertex buffer object，顶点缓存对象负责实际数据的存储；而VAO即 vertex array object，记录数据的存储和如何使用的细节信息。
+
+## 参考
+
+https://blog.csdn.net/wangdingqiaoit/article/details/51318793
+
+OpenGL学习脚印: 绘制一个三角形
+
+https://zhuanlan.zhihu.com/p/97457249
+
+OpenGL + Qt: 三角形绘制
+
+https://mp.weixin.qq.com/s/APVu9agDJN4VJT8u18N1rQ
+
+移动应用中使用OpenGL生成转场特效
+
+https://zhuanlan.zhihu.com/p/22679966
+
+OpenGL实现贝塞尔曲线变幻屏保效果
 
 # GUI框架分析
 
@@ -102,184 +171,110 @@ GUI框架主要是个实践派的作品，然而也涉及到了少量的设计�
 
 https://martinfowler.com/eaaDev/uiArchs.html
 
+---
+
+MVVM最早由微软提出来，它借鉴了桌面应用程序的MVC思想，在前端页面中，把Model用纯JavaScript对象表示，View负责显示，两者做到了最大限度的分离。
+
+把Model和View关联起来的就是ViewModel。ViewModel负责把Model的数据同步到View显示出来，还负责把View的修改同步回Model。
+
+---
+
 参考：
 
 https://segmentfault.com/a/1190000006016817
 
 GUI应用程序架构的十年变迁:MVC,MVP,MVVM,Unidirectional,Clean
 
-# 虚拟机
+## Immediate Mode GUI
 
-早期如Bochs之类的没用过，现在估计也没什么人用了吧。
+2002年的秋天，在一次分享会上，一位叫CASEY MURATORI的开发者，借用了游戏引擎里常用的"Immediate Mode Rendering"的概念，第一次提出了“Immediate Mode GUI“，传统的GUI则统一称为“Retained Mode GUI“。
 
-现在主要是以下三个选择：
+IMGUI跟RMGUI最大的区别在于，不存储“额外的“，“重复的”状态。比如TextView的Text属性就是一个“额外的”、“重复的”状态。IMGUI不存储Text信息，而是在需要绘制Text的时候，从原始对象中直接获取。这么做的好处是，TextView显示的文本跟原始对象的Text属性永远是一致的。在RMGUI，原始对象的Text变更之后，需要调用TextView::SetText更新TextView的Text属性，否则就产生了不一致。
 
-1.VMware。商业收费软件。有免费版本的VMware Player，但该版本不可创建虚拟机，只可使用别人已经建好的虚拟机。
+缺点：不利于布局/动画/Style配置。造成这些问题的原因是：因为imgui是没有状态的，通常布局算法都需要两遍遍历所有UI组件（第一遍计算大小第二遍计算布局)，但是imgui只会运行一遍这样就会对布局造成困难。同样实现动画和Style都需要额外的状态维护，需要在imgui上添加额外的状态层才能实现动画/Style。
 
-2.VirtualBox。开源免费软件。
+参考：
 
-3.Qemu。Qemu的易用性不佳，作为使用的话，能不用就不用了。但其不仅开源，而且支持的架构也很多，有的时候往往是唯一之选。作为研究学习来说，这个是首选。
+https://www.zhihu.com/answer/1463984603
 
-这里主要讨论前两者的选择。
+玄铁匠的回答
 
-VMware由于是收费软件之故，因此用户的软件升级是个大问题。（土豪除外，有钱的话，这个就不是事了。）而旧的软件，往往对新的Linux发行版的支持较差。很多情况下，VMware Tool因为这个原因总是无法完美运行。严重影响了软件的易用性。
+https://www.zhihu.com/question/267602287
 
-反之，VirtualBox就没有这些问题。虽然比较同期的VMware来说，VirtualBox的性能略逊。但是一般来说，科技行业里领先半年就已经是巨大的优势了。我相信现在的VirtualBox，无论如何也不会弱于两年前的VMware。
+如何评价imgui？
 
-因此与其守着过时的VMware 8.0，还不如换用VirtualBox，这就是我的选择。
+http://iki.fi/sol/imgui/
 
-# uboot
+Sol on Immediate Mode GUIs (IMGUI)
 
-## 从uboot到Linux
+https://zhuanlan.zhihu.com/p/36588396
 
-这里以uboot 2014年11月的主线代码为例分析从uboot到linux的全过程。之所以写这篇文章，是由于网上的资料多数都很陈旧，诸如start_armboot之类的函数在新的代码里根本找不到了。由于uboot支持的CPU以及Board非常的多，所以本文仅以Samsung exynos为例来介绍这个过程。
+关于Korok的GUI系统
 
-从上电到uboot启动:
+https://blog.codingnow.com/2020/07/game_ui.html
 
-1./arch/arm/cpu/armv7/start.S: reset——uboot的汇编入口
+游戏UI模块的选择
 
-2./arch/arm/lib/crt0.S: _main
+## 其他
 
-3./arch/arm/lib/board.c: board_init_f——初始化第一阶段
+Single Document Interface（SDI）
 
-4./arch/arm/lib/board.c: board_init_r——初始化第二阶段
+Multiple Document Interface（MDI）
 
-5./common/main.c: main_loop——uboot主循环
+Tab Document Interface（TDI）
 
-uboot启动Linux
+https://www.zhihu.com/question/21143701
 
-1.uboot中有个bootd的命令选项,执行该命令会进入/common/cmd_bootm.c: do_bootd
+在macOS中关闭应用窗口，为什么默认设定不是完全退出？
 
-2.common/cli.c: run_command，传入bootcmd命令作为参数。
+# 游戏开发
 
-3.common/cmd_bootm.c: do_bootm
+https://www.cnblogs.com/AMzz/p/12597808.html
 
-4.arch/arm/lib/bootm.c: do_bootm_linux
+Havok物理引擎不完全指南--从入门到放弃
 
-5.arch/arm/lib/bootm.c: do_jump_linux——跳转到Linux内核的入口地址
+https://www.zhihu.com/question/43616312
 
-uImage格式是专为uboot开发的格式，主要解决了uboot和linux在嵌入式设备的存储上共存的问题。
+为什么很少有游戏支持场景破坏？是因为技术问题吗？
 
-## uboot命令处理流程
+---
 
-从main_loop到命令处理：
+securom是一个过时的保护软件，可以被欺骗注册、脱壳、虚拟机等方法轻易绕过，早已经被放弃开发。
 
-1./common/main.c: main_loop
+https://zhuanlan.zhihu.com/p/20519697
 
-2./common/cli.c: cli_loop
+让“三大妈”头疼的Denuvo是一种怎样的技术？
 
-3./common/cli_simple.c: cli_simple_loop
+---
 
-4./common/cli.c: run_command_repeatable
+所谓的Voxel Space引擎，说白了就是高度图+Raycast的伪3D方案，适用于描绘起伏不定的山野开阔地形。野外大场景的一个特点是超级扁平化（水平尺度能大到几公里，垂直高度差却只有几十米、百十米）这种情况，BSP很不擅长去负担，树会超级不平衡，效力底下，遮挡关系很少，基于BSP的PVS会很可怜。Voxel在当时可以说是效果惊人，处理野外场景的能力，得到的表现力可以说甩开多边形3D引擎几条街。
 
-5./common/cli_simple.c: cli_simple_run_command
+杯具的是后面行业的发展是GPU和相关的图形硬件突飞猛进。DF即使是野外场景也毫无优势，能支持的表现力和性能大幅度落后当时主流走多边形路线的FPS。
 
-6./common/cli_simple.c: cmd_process
+参考：
 
-7./common/command.c: cmd_call
+https://s-macke.github.io/VoxelSpace/
 
-上面的流程仅是主循环如何调用命令回调函数的过程。下面介绍一下命令是如何声明、存储和查询的。
+Voxel Space
 
-首先查看链接脚本，uboot使用的链接脚本文件名为u-boot.lds。根据cpu和board的不同，u-boot.lds也有所差异。例如Samsung exynos所用的u-boot.lds在arch\arm\cpu下。
+https://www.zhihu.com/question/51667350
 
-其中有个`.u_boot_list`段就是用来存储命令数据的。它的表述如下所示：
+曾经赫赫有名的FPS射击游戏《Delta Force 三角洲特种部队》为什么没落了？
 
-{% highlight bash %}
-.u_boot_list : {
-		KEEP(*(SORT(.u_boot_list*)));
-	}
-{% endhighlight %}
+https://www.zhihu.com/answer/2154627154
 
-命令的声明，通常使用U_BOOT_CMD宏。这个宏最终展开为：
+上古游戏引擎
 
-{% highlight bash %}
-_type _u_boot_list_2_##_list##_2_##_name __aligned(4)		\
-		__attribute__((unused,				\
-		section(".u_boot_list_2_"#_list"_2_"#_name)))
-{% endhighlight %}
+---
 
-这也就是`.u_boot_list*`的来历了。
+https://zhuanlan.zhihu.com/p/32462890
 
-可以使用/common/command.c: find_cmd函数在命令列表中，根据名称查找命令数据。
+学习编程的好方法——控制台游戏
 
-## 环境变量
+https://zhuanlan.zhihu.com/p/529694839
 
-/common/cmd_nvedit.c: setenv--这个函数用于设置环境变量的值。它的原理是：
+来，我们用Unity做一个大炮
 
-1.首先在环境变量数组default_environment中，更改相应内容的值。
+https://zhuanlan.zhihu.com/p/562570278
 
-2.然后调用saveenv，保存default_environment的值，到具体的硬件中。例如NAND设备的代码在/common/env_nand.c中。
-
-在linux内核层面也可以修改uboot的环境变量。通常的做法步骤如下：
-
-1.uboot代码中有个tools/env文件夹。编译改代码可以得到fw_printenv文件。编译的命令是：
-
-`make env`
-
-2.将fw_printenv放到linux系统的/usr/sbin路径下，并创建符号链接fw_setenv。此处的符号链接并不是可有可无的，这里有个编程小技巧：如何用同一个可执行文件执行不同的功能呢？
-
-除了最常用的使用参数区分的方法之外，还可以采用如下方法：
-
-`int main(int argc, char *argv[])`
-
-这是main函数的声明，其中argv是参数数组，而argv[0]是输入的命令本身，因此可以使用这个作为判断依据，来区分不同的用途。这时候符号链接也就派上用场了。
-
-## tftpsrv
-
-有些uboot提供了tftpsrv的功能，用于从网口传输文件（主要是烧写用的镜像文件）。
-
-该tftpsrv默认监听的ip地址保存在uboot的ip环境变量中。如果需要的话，可进行必要的修改并重启。
-
-客户端传输镜像文件时，需要采用二进制模式。命令如下：
-
-`tftp 10.3.9.161 -m binary -c put <file name>`
-
-# WireShark
-
-WireShark是一个网络协议包分析工具，最初名叫Ethereal。它的官网是：
-
-www.wireshark.org
-
-## 在ubuntu上的安装
-
-`sudo apt-get install wireshark`
-
-安装好了之后，还不能立即使用。需要给/usr/bin/dumpcap提升权限，才能使用WireShark的抓包功能。否则会出`no interfaces`的错误。
-
-提升权限的方法有：
-
-1.root方式。
-
-命令行：`sudo wireshark`
-
-桌面图标：`gksudo wireshark`
-
-2.非root方式，这也是官方推荐的方式。
-
-`sudo dpkg-reconfigure wireshark-common`
-
-`sudo usermod -a -G wireshark <your user name>`
-
-`sudo chgrp wireshark /usr/bin/dumpcap`
-
-`sudo chmod 4750 /usr/bin/dumpcap`
-
-`sudo setcap cap_net_raw,cap_net_admin=eip /usr/bin/dumpcap`
-
-最后注销当前用户，重新登陆即可。
-
-## 过滤器规则
-
-WireShark以丰富的过滤器著称，现将我使用到的过滤器规则摘录如下：
-
-`ip.src == 10.3.9.234 || ip.dst == 10.3.9.234`
-
-过滤源地址和目标地址。
-
-`tcp matches Bob`
-
-匹配特定字符串。
-
-`tcp.stream eq id`
-
-将一次TCP交互的包过滤出来，id表示是第几次交互。
+像《红警》里的大兵那样找路（上）——全局向量场寻路

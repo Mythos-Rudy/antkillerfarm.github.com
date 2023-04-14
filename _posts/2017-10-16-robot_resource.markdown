@@ -4,6 +4,9 @@ title:  机器人/无人驾驶参考资源（一）
 category: resource 
 ---
 
+* toc
+{:toc}
+
 # 机器人/无人驾驶参考资源
 
 由于已经有了强化学习系列blog和资源，因此本资源中不再包含强化学习的内容。但毫无疑问，强化学习才是这方面的主角。
@@ -12,7 +15,7 @@ category: resource
 
 ## 前言
 
-2004年，DARPA举办了第一届 “DARPA”挑战赛（无人车挑战赛）。根本没有一支参赛队伍完成这次比赛任务，这件事对来自斯坦福大学的Sebastian Thrun刺激很大。
+2004年，DARPA举办了第一届“DARPA”挑战赛（无人车挑战赛）。根本没有一支参赛队伍完成这次比赛任务，这件事对来自斯坦福大学的Sebastian Thrun刺激很大。
 
 于是，他在2005年组建了自己的无人车队，并且成为这项挑战赛上的第一支完赛队伍，获得奖金200万美元。这笔奖金虽然巨额，但事实上Sebastian Thrun在这个项目的投入远远大于200万美金。
 
@@ -22,11 +25,65 @@ Sebastian团队另外一大贡献就是在完成挑战赛后，发表了一篇�
 
 ## 行业
 
+在那个马车盛行的年代里，汽车经常遭到人们的嘲笑，甚至认为它是马路上的怪物。面对众人的嘲笑和羞辱，本茨竟然不敢在实验室外公开测试自己发明的汽车。
+
+1888年8月5日清晨，他的夫人贝尔塔·本茨为了回击社会舆论的讥讽，带领两个儿子驾驶着本茨的最新作品——奔驰3号，从曼海姆出发，途经维斯洛赫添油加水，直驶普福尔茨海姆，总共花费了12个小时才完成了这段长达106公里的旅行。
+
+---
+
+1894年，法国人举办了一次汽车比赛，130公里的总路程，102辆车参赛，其中7辆酒精车，30辆汽油车，4辆电动车，28辆蒸汽车，其他车辆33辆，最后只有9辆车跑完全程，轻松夺冠的是蒸汽汽车。
+
+然而到了1899年，电动车的性能就稳稳超过了其他车辆，跑出了105码的惊人速度。操作简单无需换挡，没有噪音震动废气。同时代蒸汽车要不停加水，更夸张的是启动时，有45分钟的预热时间。而汽油车，虽没有预热时间但是要人力启动。这10年间电动车是一家独大的。
+
+一直到1912年，内燃机车迎来自己的技术飞跃。震动和噪音大幅减少，动力足续航强，而电池技术却限于瓶颈，没有大的进步，辉煌十年匆匆退场。
+
+---
+
+第一辆无人地面车辆是西班牙发明家莱昂纳多·托雷斯·奎韦多（Leonardo Torres-Quevedo）于1904年制造的无线电遥控三轮车。在第一次世界大战期间，军队使用了各种小型，无线电控制的车辆来运送和引爆火药。
+
+1912年，美国无线电控制设备专家小约翰·哈蒙德(John Hammond Jr.)和本杰明·密斯纳(Benjamin Miessner)利用一个电子回路和一对光感性硒光电管设计了一款简单的自动引导小车，并给它起了一个凶悍的名字——“战争狗”。战争狗的设计原理很简单，左右光感电管感知环境的光强差异，电子回路构成的底层控制系统根据光强信号控制小车转向，如果两侧感光存在差异，小车将向光强一侧转向；如果两侧感光均衡，小车保持直行。
+
+1925年，Houdina无线电控制公司的创始人前美国陆军前工程师Francis P. Houdina发明了一种无线电操纵的汽车。Houdina将他发明的汽车命名为“美国奇迹”(American Wonder)，他在纽约繁忙的街道上公开展示了他的无线遥控无人驾驶汽车，当天碰巧赶上一个示威游行，他操纵汽车穿越拥挤的交通，从百老汇开到了第五大道，引起了巨大的轰动。
+
+1958年，通用汽车公司和美国无线电公司(RCA)的研究团队合作组装出一套车辆侦测与引导系统，在内布拉斯加州林肯市郊区一条长400英尺、专门改造过的高速公路上，利用两辆1958年款雪佛兰进行了测试。测试车辆基于侦测与引导系统实现了前后车距保持以及自动转向的功能。
+
+测试车辆前端配备有两个等距分置的金属“传感线圈”，与每个传感器线圈匹配的是一套测量设备，用于测量其中通过的电流强度。当汽车从道路上方驶过时，埋在地下的矩形回路会产生磁场，而这个磁场又会引发车载传感线圈产生电流。如果车辆正确地行驶在道路中央，两个传感线圈中产生的电流将会大致相当。
+
+然而当汽车危险地偏向了道路的一侧，这侧的传感线圈就会产生更强的电流，对应的传感器也会记录下相较于另一侧较高的数值，接收到较强信号的传感器就会向汽车的方向盘操控系统发送指令，要求车辆轻微转向，直到两侧的传感器测量数值再次平衡。
+
+70年代以后自动化高速公路的研究逐渐停止了，自动化高速公路的美梦破灭的主要原因之一就是——成本，安装必备的电缆和路边控制系统是一项耗资巨大却又见效缓慢的工程，装配一条短小的测试跑道所需的成本还算合理，但是对于美国或欧洲那些横跨各州的浩大公路网而言，方案就显得不切实际了。
+
+1966年到1972年间，美国斯坦福国际研究所(SRI)成功研制了世界上第一个真正可移动和感知的机器人Shakey。研究人员为Shakey装备了电视摄像机、三角法测距仪、碰撞传感器、驱动电机以及编码器，并通过无线通讯系统由二台计算机控制。Shakey具备一定人工智能，能够自主进行感知、环境建模、行为规划和控制，这也成了后来机器人和无人驾驶的通用框架。
+
+1977年，日本筑波工程研究实验室的S.Tsugawa和他的同事们开发出了第一个基于摄像头来检测导航信息的自动驾驶汽车。这辆车内配备了两个摄像头，并用模拟计算机技术进行信号处理。时速能达到30公里，但需要高架轨道的辅助。
+
+1961年斯坦福大学的博士候选人詹姆斯·亚当斯制造了一个原型车，这辆车后来被称为斯坦福推车，用于测试火星探测车的可行性。他的试验失败了，因为测试车的延迟竟然达到了2.5秒。
+
+1977 年，还在斯坦福大学人工智能实验室(Stanford AI Laboratory)读博士的汉斯·摩拉维克（Hans Moravec）为斯坦福推车研制了一台配备立体视觉和电脑远程控制系统，电视摄像机安装在车顶栏杆上，从几个不同的角度拍摄照片，并将其传送到电脑，电脑计算小车和它周围的障碍物之间的距离，并操纵小车绕过障碍物。1979年，推车在没有人干预的情况下，花了大约5个小时成功地穿过了一个放满椅子的房间。
+
+https://mp.weixin.qq.com/s/7rz8QXPNda4PVs3KcweQMg
+
+自动驾驶往事（一）：从无线电控制到机器视觉
+
+---
+
 ![](/images/img2/ADAS.jpg)
 
 https://mp.weixin.qq.com/s/Okolok3ZLZhgw0TQ_TROKA
 
 一文看尽国内智能驾驶格局：三条技术路线和玩家鏖战2020年
+
+---
+
+![](/images/img4/car.png)
+
+![](/images/img4/car_2.png)
+
+https://mp.weixin.qq.com/s/9huDW1RH1gjJpMkATEguug
+
+汽车芯片分析（应用 · 规模 ·趋势）
+
+---
 
 https://mp.weixin.qq.com/s/Jz-VqWCyNc6nUi-2PuB8rg
 
@@ -43,16 +100,6 @@ https://mp.weixin.qq.com/s/BUwu6R83klL3E5tI7TEX9A
 https://mp.weixin.qq.com/s/4PPiwJJWPi4qn5mBwX6wDw
 
 ADAS处理器、芯片主流企业及相应技术梳理
-
-https://mp.weixin.qq.com/s/y0HnpWRUBLyEyqzWfOhkCw
-
-博世集团百年启示录
-
-Never forget your humanity, and respect human dignity in your dealings with others.---Robert Bosch
-
-https://mp.weixin.qq.com/s/GtAZa5veVKFpQdJgdlMDBg
-
-你不一定知道的博世！
 
 https://mp.weixin.qq.com/s/xgxsmcMAqstzmhTJZFZIyw
 
@@ -77,6 +124,10 @@ https://mp.weixin.qq.com/s/iQ9vnGX7TjtMP_UOmvVjlA
 https://mp.weixin.qq.com/s?__biz=MzI1ODYwOTkzNg==&mid=2247497740&idx=3&sn=eedfb5f889b80fde545d89f5fb29238d
 
 中国汽车工业沉浮70年
+
+https://mp.weixin.qq.com/s/myAUMq4hknEcZ7X2Xx455g
+
+万字长文回顾智能驾驶进化史
 
 ## 课程
 
@@ -114,7 +165,7 @@ https://mp.weixin.qq.com/s/9jS7T51kMDhmzaOp9SI0oA
 
 从Brain.js到Mind，一文收录11个移动端Javascript机器学习库
 
-----
+---
 
 http://www.eecs.wsu.edu/~taylorm/16_483F/index.html
 
@@ -144,6 +195,10 @@ http://abcinstitute.baidu.com/pages/index.html#/specialInfo?specialId=4008
 
 百度的自动驾驶课程
 
+https://mp.weixin.qq.com/s/O-xV6fXtSnF0Y8Z2lxKa1g
+
+自主机器人导论:运动学，感知，定位和规划，241页pdf
+
 ## 自动驾驶入门课程
 
 https://mp.weixin.qq.com/s/yO_Lc5Fo-8fBC9PwVCQBqA
@@ -157,289 +212,3 @@ https://mp.weixin.qq.com/s/IVD0aq8V-qZoB0tcLMigYw
 https://mp.weixin.qq.com/s/KJbm4wfsTLxT5LGR7GV_SA
 
 自动驾驶入门课程第③讲 — 定位
-
-https://mp.weixin.qq.com/s/BCNrsuoThJt031jCnbAjAA
-
-自动驾驶入门课程第④讲 — 感知（上）
-
-https://mp.weixin.qq.com/s/FqW2X9LJZvNe9efllAYhTQ
-
-自动驾驶入门课程第⑤讲 — 感知（下）
-
-https://mp.weixin.qq.com/s/6ro9y69h-6yHZ7MfodxUHQ
-
-自动驾驶入门课程第⑥讲 — 预测
-
-https://mp.weixin.qq.com/s/ZBHKDtnaEI9sVCfEfeeUlQ
-
-自动驾驶入门课程第⑦讲 — 规划（上）
-
-https://mp.weixin.qq.com/s/1yA-kgS_rL4o9I4OWeI4-A
-
-自动驾驶入门课程第⑧讲 — 规划（下）
-
-https://mp.weixin.qq.com/s/8hLVHuv635fyHRNftXJQ4w
-
-自动驾驶入门课程第⑨讲 — 控制（上）
-
-https://mp.weixin.qq.com/s/AnWWnD3ScSW6GhrwRGpRDw
-
-自动驾驶入门课程第⑩讲 — 控制（下）
-
-## 术语
-
-LIDAR：LIght Detection And Ranging
-
-LDW：Lane Departure Warning System，车道偏离警告系统
-
-LKS：lane keeping system，车道保持系统
-
-LKA：Lane Keeping Assist，车道保持辅助
-
-LCA：lane centering assist
-
-FCW：Forward Collision Warning，前向碰撞预警
-
-AEB：Automatic emergency braking，自动紧急刹车
-
-V2X：vehicle to everything
-
-TMC：Traffic Message Channel，实时交通系统
-
-ISA：Intelligent Speed Adaptation，电子警察系统
-
-VCS：Vehicular Communication Systems，车联网系统
-
-VD：Vihicle Detection，车辆检测
-
-ACC：Adaptive Cruise Control，自适应巡航控制
-
-HMW：Headway Monitoring & Warning，车距检测及警告
-
-CAS：Collision Avoidance System，碰撞避免或预碰撞系统
-
-PED：Pedestrian Detection，行人检测
-
-TSR：Traffic Sign Recognition，道路交通标志识别系统
-
-TLR：Traffic Light Recognition，交通信号灯识别系统
-
-Night Vision，夜视系统
-
-Adaptivelight Control，自适应灯光控制
-
-Pedestrian Protection System，行人保护系统
-
-Automatic Parking，自动泊车
-
-Blind Spot Detection，盲点探测
-
-Driver Drowsiness Detection，驾驶员疲劳探测
-
-Hill Descentcontrol，下坡控制系统
-
-Electric Vehicle Warningsounds，电动汽车报警
-
-Surround View Monitor，全景影像系统
-
-Intelligent Headlight Control，远光自动控制
-
-Augmented Reality Navigation，增强现实导航
-
-High Beam Assist，远近光灯辅助系统
-
-## blog
-
-http://www.cnblogs.com/yhlx125/
-
-一个Robot+GIS的blog
-
-https://www.cnblogs.com/21207-iHome/
-
-一个Robot方面比较全面的blog
-
-http://vision.ia.ac.cn/
-
-中国科学院自动化研究所模式识别国家重点实验室机器视觉课题组，主要研究领域包括场景三维重建、视觉定位与姿态估计、机器人视觉导航、视觉伺服、目标检测与跟踪等。
-
-http://blog.exbot.net/
-
-一个机器人技术方面的网站。
-
-https://blog.csdn.net/yuxuan20062007/
-
-一个无人驾驶的blog
-
-https://blog.csdn.net/AdamShan
-
-一个无人驾驶的blog
-
-## 软件
-
-https://mp.weixin.qq.com/s/yNr4_tEyYg_VBmNjIrjYug
-
-自动驾驶车辆仿真模拟软件盘点
-
-https://zhuanlan.zhihu.com/p/66961439
-
-交通模型仿真工具SUMO介绍
-
-https://mp.weixin.qq.com/s/eQJ8dgNNd3iE2fXXUcXG2A
-
-一贴集齐86种交通建模与仿真软件综述
-
-## ROS
-
-http://www.ros.org/
-
-ROS(Robot Operating System）是一个机器人软件平台，前身是斯坦福人工智能实验室为了支持斯坦福智能机器人STAIR而建立的项目。
-
-https://mp.weixin.qq.com/s/Rmvksy54iKgcyd7bqy_oxQ
-
-机器人开源操作系统ROS入门
-
-https://zhuanlan.zhihu.com/p/51353579
-
-Matlab/Simulink与ROS的通讯
-
-https://mp.weixin.qq.com/s/lUhLd8HXz_HG_mCnDwURNg
-
-ROS概述
-
-https://mp.weixin.qq.com/s/zGIHo97bFii1_z8u9_QiUA
-
-ROS原理—1
-
-https://mp.weixin.qq.com/s/EQGI0l_Zw08QsbU22w4IDg
-
-ROS原理—2
-
-https://mp.weixin.qq.com/s/VHtv4yEx77TbZRh2sMhLRw
-
-ROS原理—3
-
-https://mp.weixin.qq.com/s/bZqsV0tbnyf9to5jD0OlLg
-
-ROS原理—4
-
-https://mp.weixin.qq.com/s/Yzt8L-p_aN-Ukm_DdcBn1w
-
-ROS深入介绍
-
-https://mp.weixin.qq.com/s/7tffKpKWqFYNcOmHJ7T3Zw
-
-汽车操作系统的前世今生
-
-## PythonRobotics
-
-PythonRobotics是一个机器人算法方面的代码示例库。
-
-官网：
-
-https://atsushisakai.github.io/PythonRobotics/
-
-## OpenDRIVE
-
-OpenDRIVE是一种用于导航和自动驾驶的数据格式。
-
-官网：
-
-http://opendrive.org/
-
-参考：
-
-http://blog.csdn.net/lewif/article/details/78575840
-
-OpenDrive格式地图数据解析
-
-## ArUco
-
-ArUco是一个开源的微型的现实增强库，可用于视觉定位。
-
-官网：
-
-http://www.uco.es/investiga/grupos/ava/node/26
-
-参考：
-
-https://blog.csdn.net/lixujie666/article/details/80246909
-
-基于ArUco的视觉定位
-
-https://blog.csdn.net/Shawn_Zhangguang/article/details/78737686
-
-ArUco--一个微型现实增强库的介绍及视觉应用
-
-## AUTOSAR
-
-AUTOSAR是AUTOmotive Open System Architecture（汽车开放系统架构）的首字母缩写，由汽车制造商，供应商以及工具开发商联合开发的一个开放的、标准化的软件架构。
-
-参考：
-
-https://zhuanlan.zhihu.com/p/41602815
-
-AUTOSAR概述 & 基于AUTOSAR的时间同步
-
-https://zhuanlan.zhihu.com/p/57459276
-
-软件架构--基于AUTOSAR的多模块任务分配策略
-
-## openpilot
-
-openpilot是一个开源的自动驾驶（驾驶代理）。
-
-官网：
-
-https://github.com/commaai/openpilot
-
-## 电气&机械
-
-电气&机械虽然不是控制系统算法的一部分，但却是控制系统的物理基础。
-
-https://mp.weixin.qq.com/s/tSrb5wljrCvy3TgfbsyjOQ
-
-汽车电源为何抛弃12V选择48V？
-
-https://mp.weixin.qq.com/s/XJVyoQTDljO8F6GVthsxKw
-
-汽车安全气囊结构原理
-
-## CAN
-
-https://mp.weixin.qq.com/s/8jZKgSeRw7k0F9JOigFJcw
-
-自动驾驶之——CAN总线简介
-
-https://mp.weixin.qq.com/s/U-Nzj3NM3acjkprVuyComg
-
-汽车CAN总线技术详解
-
-https://mp.weixin.qq.com/s/yDQ4zQpo4BVrnnnV_J6dlg
-
-一文看懂四大汽车总线：LIN、CAN、FlexRay、MOST
-
-https://mp.weixin.qq.com/s/u6gibvshU4KI3fEE6h9KeQ
-
-上海大众内训资料：CAN总线讲解
-
-https://mp.weixin.qq.com/s/tjn6Fob1L9aWnl2b35rjgA
-
-一文读懂总线技术
-
-## 路径规划
-
-https://mp.weixin.qq.com/s/Rt6Gem1kgWK2ACqiIGiDiw
-
-无人驾驶汽车路径规划概述
-
-https://mp.weixin.qq.com/s/U3qlIsSLJ6E1eNzQ-ZZ6zQ
-
-世界冠军之路：菜鸟车辆路径规划求解引擎研发历程
-
-https://mp.weixin.qq.com/s/ArreA2g24n-jqU7vfIE_rA
-
-自动驾驶核心技术之——路径规划
-
-https://mp.weixin.qq.com/s/1dOFsRCuTbm6UI1Pd5MNjw
-
-快速扩展随机树路径规划算法

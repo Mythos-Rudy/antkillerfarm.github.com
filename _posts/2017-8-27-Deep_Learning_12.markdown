@@ -1,8 +1,197 @@
 ---
 layout: post
-title:  深度学习（十二）——Siamese network, SENet, 姿态/行为检测, Recursive NN
+title:  深度学习（十二）——Siamese network, SENet
 category: DL 
 ---
+
+* toc
+{:toc}
+
+# 花式卷积
+
+## 3D卷积
+
+3D卷积一般用于视频（2D图像+1D时序）和医学影像（3D立体图像）的分析处理中。
+
+![](/images/article/conv_3d.png)
+
+![](/images/img2/conv3d.gif)
+
+如上两图所示，3D卷积的kernel不再是2D的，而是3D的。
+
+它和多通道卷积的区别在于：
+
+多通道卷积不同的通道上的卷积核的参数是不同的，而3D卷积则由于卷积核本身是3D的，所以这个由于“深度”造成的看似不同通道上用的就是同一个卷积。
+
+3D卷积可以转化为2D卷积，方法如下图：
+
+Prepare Input：
+
+![](/images/img4/conv3d.png)
+
+Prepare Kernel：
+
+![](/images/img4/conv3d_2.png)
+
+Compute Output：
+
+![](/images/img4/conv3d_3.png)
+
+论文：
+
+《A two-stage 3D Unet framework for multi-class segmentation on full resolution image》
+
+![](/images/img2/UNet-3D.jpg)
+
+上图是一个用于CT图像的语义分割网络。其结构仿照UNet，故被称作UNet-3D。
+
+处理大型高分辨率3D数据时的一个常见问题是，由于计算设备的存储容量有限，输入深度CNN的体积必须进行裁剪（crop）或降采样（downsample）。这些操作会导致输入数据 batches 中分辨率的降低和类不平衡的增加，从而降低分割算法的性能。
+
+受到图像超分辨率CNN（SRCNN）和self-normalization（SNN）的架构的启发，我们开发了一个两阶段修改的Unet框架，它可以同时学习检测整个体积内的ROI并对体素进行分类而不会丢失原始图像解析度。对各种多模式音量的实验表明，当用简单加权的模子系数和我们定制的学习程序进行训练时，该框架显示比具有高级相似性度量标准的最先进的深CNN更好的分割性能。
+
+除了方形的3D卷积之外，还有球形的3D卷积：
+
+![](/images/img3/sph3d.png)
+
+上图是球卷积在点云处理中的应用。论文：
+
+《Spherical Kernel for Efficient Graph Convolution on 3D Point Clouds》
+
+参考：
+
+https://zhuanlan.zhihu.com/p/21325913
+
+3D卷积神经网络Note01
+
+https://zhuanlan.zhihu.com/p/21331911
+
+3D卷积神经网络Note02
+
+https://zhuanlan.zhihu.com/p/31841353
+
+3D CNN阅读笔记
+
+https://mp.weixin.qq.com/s/tcuyp4SK_9zXZKZtUu8h9Q
+
+从2D卷积到3D卷积，都有什么不一样
+
+https://zhuanlan.zhihu.com/p/25912625
+
+C3D network: 用于视频特征提取的3维卷积网络
+
+https://zhuanlan.zhihu.com/p/26350774
+
+SCNN-用于时序动作定位的多阶段3D卷积网络
+
+https://www.jiqizhixin.com/articles/2016-08-03
+
+FusionNet融合三个卷积网络：识别对象从二维升级到三维
+
+http://blog.csdn.net/zouxy09/article/details/9002508
+
+基于3D卷积神经网络的人体行为理解
+
+https://mp.weixin.qq.com/s/YdON6Yzddq2f_QGbQsOY8w
+
+深度三维残差神经网络：视频理解新突破
+
+https://mp.weixin.qq.com/s/MfDQXTSoe0GnaEFfyLJQ1w
+
+点云处理不得劲？球卷积了解一下
+
+https://paddlepedia.readthedocs.io/en/latest/tutorials/CNN/convolution_operator/3D_Convolution.html
+
+3D卷积
+
+## 参考
+
+https://github.com/vdumoulin/conv_arithmetic
+
+Convolution arithmetic
+
+http://deeplearning.net/software/theano_versions/dev/tutorial/conv_arithmetic.html
+
+Convolution arithmetic
+
+https://www.jarvis73.com/2019/06/06/Convolution-Guide/
+
+Convolution Arithmetic for Deep Learning
+
+https://mp.weixin.qq.com/s/dR2nhGqpz7OdmxKPYSaaxw
+
+如何理解空洞卷积（dilated convolution）？
+
+https://mp.weixin.qq.com/s/CLFbhWMcat4rN8YS_7q25g
+
+这12张图生动的告诉你，深度学习中的卷积网络是怎么一回事？
+
+https://mp.weixin.qq.com/s/kJEeKzC9pC375EjIJpTuzg
+
+一文全解深度学习中的卷积
+
+http://cs.nyu.edu/~fergus/drafts/utexas2.pdf
+
+Deconvolutional Networks
+
+https://zhuanlan.zhihu.com/p/22245268
+
+CNN-反卷积
+
+http://buptldy.github.io/2016/10/29/2016-10-29-deconv/
+
+Transposed Convolution, Fractionally Strided Convolution or Deconvolution（中文blog）
+
+https://mp.weixin.qq.com/s/ybI8kJPRn7sH-hJbc5uqnw
+
+CMU研究者探索新卷积方法：在实验中可媲美基准CNN
+
+https://zhuanlan.zhihu.com/p/46633171
+
+深度卷积神经网络中的降采样
+
+https://mp.weixin.qq.com/s/1gBC-bp4Q4dPr0XMYPStXA
+
+万字长文带你看尽深度学习中的各种卷积网络
+
+https://mp.weixin.qq.com/s/qReN6z8s45870HSMCMNatw
+
+微软亚洲研究院：逐层集中Attention的卷积模型
+
+http://blog.csdn.net/shuzfan/article/details/77964370
+
+不规则卷积神经网络
+
+https://mp.weixin.qq.com/s/rXr_XBc2Psh3NSA0pj4ptQ
+
+常建龙：深度卷积网络中的卷积算子研究进展
+
+https://mp.weixin.qq.com/s/i8vOeAVEYX-hRAvPSe6DEA
+
+一文看尽神经网络中不同种类的卷积层
+
+https://mp.weixin.qq.com/s/hZc8MgHoE010hnzLU-trIA
+
+高性能涨点的动态卷积DyNet与CondConv、DynamicConv有什么区别联系？
+
+https://www.yuque.com/yahei/hey-yahei/condconv
+
+CondConv：按需定制的卷积权重
+
+https://mp.weixin.qq.com/s/eRZ3jNuceMYKE3lEj-g1aw
+
+动态卷积：自适应调整卷积参数，显著提升模型表达能力
+
+https://mp.weixin.qq.com/s/_GOXBYyyYnridILemNRDqA
+
+ChannelNets: 省力又讨好的channel-wise卷积，在channel维度进行卷积滑动 
+
+https://mp.weixin.qq.com/s/HMLKUL3_3MhWmJ8ub-Yfcg
+
+一文速览Deep Learning中的11种卷积
+
+https://zhuanlan.zhihu.com/p/540426043
+
+51x51的kernelsize暴力美学：SLaK论文解读
 
 # Siamese network
 
@@ -34,6 +223,8 @@ Siamese network也可进一步细分：
 
 Siamese network由于输入是一对样本，因此它更能理解样本间的差异，使得数据量相对较小的数据集也能用深度网络训练出不错的效果。
 
+对Siamese network的进一步发展，引出了2020年比较火的对比学习。
+
 参考：
 
 https://blog.csdn.net/shenziheng1/article/details/81213668
@@ -63,6 +254,14 @@ https://mp.weixin.qq.com/s/GlS2VJdX7Y_nfBOEnUt2NQ
 https://mp.weixin.qq.com/s/lDlijjIUGmzNzcP89IzJnw
 
 张志鹏:基于siamese网络的单目标跟踪
+
+https://mp.weixin.qq.com/s/WYL43CEhVmsvjZDY7afMrA
+
+孪生网络：使用双头神经网络进行元学习
+
+https://mp.weixin.qq.com/s/bgZbIi4BvAFmVoAakciYGQ
+
+如何训练孪生神经网络
 
 # SENet
 
@@ -122,160 +321,6 @@ https://mp.weixin.qq.com/s/ao7gOfMYDJDPsNMVV9-Dlg
 
 后ResNet时代：SENet与SKNet
 
-https://mp.weixin.qq.com/s/Tox7jEFNHFHZQ-KdojMIpA
+https://mp.weixin.qq.com/s/_7Iir2DZ_lROyR-BxScbnA
 
-GCNet：当Non-local遇见SENet
-
-# 姿态/行为检测
-
-基于CNN的2D多人姿态估计方法，通常有2个思路（Bottom-Up Approaches和Top-Down Approaches）：
-
-- Top-Down framework，就是先进行行人检测，得到边界框，然后在每一个边界框中检测人体关键点，连接成每个人的姿态，缺点是受人体检测框影响较大，代表算法有RMPE。
-
-- Bottom-Up framework，就是先对整个图片进行每个人体关键点部件的检测，再将检测到的人体部位拼接成每个人的姿态，代表方法就是openpose。
-
-## OpenPose
-
-OpenPose是一个实时多人关键点检测的库，基于OpenCV和Caffe编写。它是CMU的Yaser Sheikh小组的作品。
-
->Yaser Ajmal Sheikh，巴基斯坦信德省易司哈克工程科学与技术学院本科（2001年）+中佛罗里达大学博士（2006年）。现为CMU副教授。
-
-![](/images/article/openpose.png)
-
-OpenPose的使用效果如上图所示。
-
-论文：
-
-《Realtime Multi-Person 2D Pose Estimation using Part Affinity Fields》
-
-《Hand Keypoint Detection in Single Images using Multiview Bootstrapping》
-
-《Convolutional pose machines》
-
-官方代码（caffe）：
-
-https://github.com/CMU-Perceptual-Computing-Lab/openpose
-
-Tensorflow版本：
-
-https://github.com/ildoonet/tf-pose-estimation
-
-参考：
-
-https://zhuanlan.zhihu.com/p/37526892
-
-OpenPose：实时多人2D姿态估计
-
-https://mp.weixin.qq.com/s?__biz=MzIwMTE1NjQxMQ==&mid=2247488741&idx=2&sn=93f05747f3a94a2cbfa2431901d2d97f
-
-OpenPose升级，CMU提出首个单网络全人体姿态估计网络，速度大幅提高
-
-https://mp.weixin.qq.com/s/jAmUscrMZ8EmG3th-3Yx3w
-
-实战：基于OpenPose的卡通人物可视化
-
-## DensePose
-
-与OpenPose类似的还有Facebook提出的DensePose。
-
-论文：
-
-《DensePose: Dense Human Pose Estimation In The Wild》
-
-数据集：
-
-http://densepose.org/
-
-这里包含了一个名为DensePose-COCO的姿态数据集。
-
-参考：
-
-https://mp.weixin.qq.com/s/sFd9hrMrKDl5UJwlY6N7mw
-
-Facebook提出DensePose数据集和网络架构：可实现实时的人体姿态估计
-
-https://mp.weixin.qq.com/s/t29ITfRPD3yCmRD5wJyq7g
-
-ICCV2017 PoseTrack challenge优异方法：基于检测和跟踪的视频中人体姿态估计
-
-https://mp.weixin.qq.com/s/mGcKpu3BXlAGO-t2FUCxAg
-
-基于深度模型的人脸对齐和姿态标准化
-
-https://mp.weixin.qq.com/s/gwRD3SzTof349V8W0_lRfg
-
-实时评估世界杯球员的正确姿势：FAIR开源DensePose
-
-https://zhuanlan.zhihu.com/p/39219404
-
-Dense Pose
-
-https://blog.csdn.net/sinat_26917383/article/details/79704097
-
-关键点定位：四款人体姿势关键点估计论文笔记
-
-https://mp.weixin.qq.com/s/-A87-z5inWBsF1-5UYagTA
-
-Facebook实时人体姿态估计：Dense Pose及其应用展望
-
-## Hourglass networks
-
-Hourglass networks是University of Michigan的Alejandro Newell的作品。（2016年3月）
-
-论文：
-
-《Stacked hourglass networks for human pose estimation》
-
-![](/images/img3/Hourglass_Networks.png)
-
-上图是Stacked Hourglass networks的网络结构图，其中的每个沙漏形状的结构，都是一个hourglass module，其结构如下图所示：
-
-![](/images/img3/Hourglass_Networks_2.png)
-
-hourglass module基本可以看作是把concat换成add之后的U-NET，或者也可以看作是resnet版的U-NET。上图中一个module包含了4次add，因此也被叫做4阶hourglass module。
-
-参考：
-
-https://blog.csdn.net/shenxiaolu1984/article/details/51428392
-
-Stacked Hourglass算法详解
-
-## 评价度量
-
-Object Keypoint Similarity(OKS)：
-
-$$\mathbf{OKS} = \frac{\sum_i exp(-\frac{d_i^2}{2s^2k_i^2}) \delta (v_i >0)}{\sum_i \delta (v_i >0)}$$
-
-其中，$$d_i$$是检测的关键点与groundtruth关键点之间的欧氏距离；$$v_i$$是groundtruth关键点的可见性标志；s是目标的尺度；$$k_i$$是控制衰减(falloff)的per-keypoint常数。
-
-## 步态识别
-
-https://mp.weixin.qq.com/s/g6032xTGEtvbsfwXboMJ4A
-
-大阪大学副校长Yasushi Yagi：步态分析
-
-http://mp.weixin.qq.com/s/Y-PvMz_Vz8nBGRZo9dwUCA
-
-中科院步态识别技术：不看脸50米内在人群中认出你！
-
-https://mp.weixin.qq.com/s/3Pe5wJ0VomzwKMF84OqcMg
-
-步态识别的深度学习综述
-
-https://mp.weixin.qq.com/s/afX8Y84nTS20q4Y36uOWqQ
-
-复旦提出GaitSet算法，步态识别的重大突破！
-
-# Recursive NN
-
-http://blog.csdn.net/qq_26609915/article/details/52119512
-
-递归神经网络（recursive NN）结合自编码（Autoencode）实现句子建模
-
-http://blog.csdn.net/mengmengz07/article/details/51348554
-
-recursive neural network梳理
-
-https://mp.weixin.qq.com/s/DwaSF76uvqFKkybaTUpl3w
-
-空间序列递归神经网络用于高光谱图像分类
+SANet：视觉注意力SE模块的改进，并用于语义分割

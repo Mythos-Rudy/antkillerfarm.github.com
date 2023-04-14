@@ -1,10 +1,41 @@
 ---
 layout: post
 title:  NLP参考资源（五）
-category: resource 
+category: DL & NLP resource 
 ---
 
+* toc
+{:toc}
+
 # NLP参考资源
+
+https://mp.weixin.qq.com/s/QFDHxI2Yuezc7ypZ5MURHw
+
+神经语义解析的结构化表示学习
+
+https://mp.weixin.qq.com/s/TUTAZe_Bw7SsPkja9i7Drg
+
+基于叙事事理图谱和可扩展图神经⽹络的脚本事件预测模型
+
+https://mp.weixin.qq.com/s/Kj39qXVgaIN9BsxRNlXvvQ
+
+百度提出交互式语言学习新方法：让智能体具备单次概念学习能力
+
+https://mp.weixin.qq.com/s/1bCw7m8YVLVA0g_jhw9HCg
+
+在消费意图识别任务上的基于树核最大平均差异的领域自适应
+
+https://mp.weixin.qq.com/s/x8GwNyd9y7xqyi2KeIcqTw
+
+5篇AAAI 2018论文看“应答生成”
+
+https://mp.weixin.qq.com/s/12RA4Bd86SJS6Q4CAvOEWw
+
+深度学习技术如何应用于文本智能处理？
+
+https://mp.weixin.qq.com/s/PJQgrAzwefmFgSBF39_yIA
+
+Gmail新功能：结合BoW模型和RNN-LM，帮助用户快速写邮件
 
 https://mp.weixin.qq.com/s/wU3sZKQ6gkYHeTEEClB4Gw
 
@@ -78,6 +109,10 @@ https://mp.weixin.qq.com/s/ZlfxZMWz5lSVLxkAf9isJQ
 
 斯坦福李纪为博士毕业论文：让机器像人一样交流
 
+https://github.com/dimil6666/shannon.ai-breaking-news/
+
+李纪为博士的人品看来不咋样啊，这里有一个声讨合集。。。江湖名言：做人别太ljw
+
 https://mp.weixin.qq.com/s/bNB7EFj1QgSNb9as1YfgJw
 
 Reddit热门话题：你是否也对NLP的现状感到失望？
@@ -93,6 +128,10 @@ https://mp.weixin.qq.com/s/2cbzD1UFW66-3zwsZk9Bxg
 https://mp.weixin.qq.com/s/AqzdRoXthrUFUOqSNwgfqQ
 
 新的一年，想发有关对话系统的paper？快关注时下最大热点：智能化与个性化
+
+https://mp.weixin.qq.com/s/IVrg0tP2YH1AQB6Qm-kHoA
+
+哈工大张伟男：任务型对话系统
 
 https://mp.weixin.qq.com/s/HWqFpDhvhGrJtNTSLsO3Eg
 
@@ -110,10 +149,6 @@ https://mp.weixin.qq.com/s/9NFkd-8tRUI6GaPefhEf-Q
 
 斯坦福新模型刷新纪录：自然语言理解GLUE排行榜最高分！
 
-https://mp.weixin.qq.com/s/AhoEzujMVUU-P7j5z_8sVQ
-
-基于神经网络的实体识别和关系抽取联合学习
-
 https://mp.weixin.qq.com/s/RlarTDziwkGGM_CUa40XAw
 
 机器之心线上分享：用于序列生成的推敲网络
@@ -121,6 +156,10 @@ https://mp.weixin.qq.com/s/RlarTDziwkGGM_CUa40XAw
 https://mp.weixin.qq.com/s/QYG0l1fk35C1evM2FSHgsw
 
 多轮对话之对话管理：Dialog Management
+
+https://mp.weixin.qq.com/s/auqlefDTGhGIIM3Kp7JqPQ
+
+DST（Dialog State Tracking）模型介绍
 
 https://mp.weixin.qq.com/s/FJtMDoNksSZLYdoEzixJTQ
 
@@ -162,14 +201,6 @@ https://mp.weixin.qq.com/s/dfobYDv-98W9NAmAbzwQKw
 
 字符级NLP优劣分析：在某些场景中比词向量更好用
 
-https://mp.weixin.qq.com/s/PPAIARqkYqaIYRD7SFOtBg
-
-基于分层强化学习的关系抽取
-
-https://mp.weixin.qq.com/s/r1uXn2jGsHZcZ8Nk7GnGFA
-
-语义表征的无监督对比学习：一个新理论框架
-
 https://mp.weixin.qq.com/s/-YmB6QSQ01EsHfXB40MMcQ
 
 Generative QA: Learning to Answer the Whole Question
@@ -189,10 +220,6 @@ LinkedIn文本分析平台：主题挖掘的四大技术步骤
 http://mp.weixin.qq.com/s/Or6oDt0aZFlnlMr8EBr-xQ
 
 三角兽首席科学家王宝勋：热度之下的对话生成
-
-https://mp.weixin.qq.com/s/Xnea50Eisq9rzhGFa1iTFA
-
-DRr-Net：基于动态重读机制的句子语义匹配方法
 
 https://mp.weixin.qq.com/s/M_UE4yI-ZDXhGtWXprGYjA
 
@@ -306,10 +333,6 @@ https://mp.weixin.qq.com/s/7KBtbip4JS0jQfOy_BWb3Q
 
 语义分析的一些方法(二)
 
-https://mp.weixin.qq.com/s/Cq7ivDYurS3CidvoemFfqA
-
-Twitter是怎么做情感分析的？长文解读！
-
 https://zhuanlan.zhihu.com/p/30268946
 
 从CNN视角看在自然语言处理上的应用
@@ -329,10 +352,6 @@ NLP技术也能帮助程序分析？
 https://mp.weixin.qq.com/s/eb0GcjdwO18-_0T9z3KdlA
 
 最新综述：对话系统之用户模拟器
-
-https://mp.weixin.qq.com/s/HaJtc7XlCPh0KdGnUehkcg
-
-万字长文详解文本抽取：从算法理论到实践
 
 https://mp.weixin.qq.com/s/-bAeg91e3F8hsZAGGmRswQ
 
@@ -362,14 +381,6 @@ https://mp.weixin.qq.com/s/62b7kK0StmwTP_DGusE0MA
 
 MIT自然语言处理数据集和语料库
 
-https://mp.weixin.qq.com/s/GSHk-otPeyGZN5xRNehAyw
-
-KBQA从入门到放弃—入门篇
-
-https://mp.weixin.qq.com/s/-Zz5Cv4QJaRHdBFrGyBuLg
-
-KBQA从入门到放弃-Part 2
-
 https://mp.weixin.qq.com/s/efID_R9ajL34P95eGKkrQA
 
 华为推出AI诗人“乐府”：唐诗宋词都不在话下，我竟一时分不出真假
@@ -378,18 +389,14 @@ https://github.com/THUNLP-MT/TG-Reading-List
 
 文本生成公开数据集/开源工具/经典论文详细列表分享
 
-https://mp.weixin.qq.com/s/tREtbGpoLR-kc-1DnC8wWg
+https://mp.weixin.qq.com/s/21bhPa4ECNFmUcF0GOQSkw
 
-对话系统的设计艺术
+从字符级的语言建模开始，了解语言模型与序列建模的基本概念
 
-https://mp.weixin.qq.com/s?__biz=MzIyNjM2MzQyNg==&mid=2247486300&idx=1&sn=dd681216da626c73531fc17ffbccf22a
+https://speechlab.sjtu.edu.cn/pages/sz128/homepage/year/10/27/survey-on-grammar-retrieval/
 
-清华刘知远：知识指导的自然语言处理
+论文调研：基于“规则、槽值”检索的口语语义理解
 
-https://zhuanlan.zhihu.com/p/69069509
+https://mp.weixin.qq.com/s/mZ6AA7s140Kxo3C2u06g4w
 
-渐入佳境，基于主题感知的Coarse-to-Fine机制的在线评论生成
-
-https://mp.weixin.qq.com/s/w9CbbZ6vr6qV7DafctIf-g
-
-人机语音对话技术在58同城的应用实践
+自然语言处理模型可解释性预测，182页ppt

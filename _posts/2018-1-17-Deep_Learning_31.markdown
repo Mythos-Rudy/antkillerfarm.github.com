@@ -1,8 +1,11 @@
 ---
 layout: post
-title:  深度学习（三十一）——依存分析, Image Caption Generation
+title:  深度学习（三十一）——依存分析, MobileNet
 category: DL 
 ---
+
+* toc
+{:toc}
 
 # NLP历史
 
@@ -33,6 +36,14 @@ https://mp.weixin.qq.com/s/krW1eUFu7iz9YyYFGbFVeQ
 https://mp.weixin.qq.com/s/VtEM6paUPH28GFrwVNmz4w
 
 自然语言处理起源：马尔科夫和香农的语言建模实验
+
+https://mp.weixin.qq.com/s/qlKGgWq_FTYonMXEkhRwpw
+
+中国境内语言概览
+
+https://www.zhihu.com/question/30873035
+
+Unicode字符集中有哪些神奇的字符？
 
 # 依存分析
 
@@ -124,7 +135,7 @@ http://mp.weixin.qq.com/s/IWagHP0MSQFAJ50NeoyOjw
 
 基于神经网络的高性能依存句法分析器
 
-## NLP的女学霸们
+## 陈丹琦
 
 https://www.cs.princeton.edu/~danqic/
 
@@ -134,9 +145,9 @@ http://theory.stanford.edu/~yuhch123/
 
 陈丹琦的老公俞华程也是个学霸。而且从高中就和陈丹琦同校，直到博士毕业。
 
-https://homes.cs.washington.edu/~luheng/
+![](/images/img3/cdq.png)
 
-何律恒，上海交大本科（2010）+宾夕法尼亚大学硕士（2012）+华盛顿大学博士生。
+左二陈丹琦，右一俞华程。两者同为IOI2008金牌得主。
 
 ## CNN在NLP中的应用
 
@@ -192,6 +203,8 @@ https://zmlarry.github.io
 
 ## Subword
 
+对于英文来说，文字的粒度从细到粗依次是character, subword, word。character和word都很好理解，分别是字母和单词。而subword相当于英文中的词根、前缀、后缀等。
+
 之前的Neural Machine Translation基本上都是基于word单词作为基本单位的，但是其缺点是不能很好的解决out-of-vocabulary即单词不在词汇库里的情况，且对于单词的一些词法上的修饰(morphology)处理的也不是很好。一个自然的想法就是能够利用比word更基本的组成来建立模型，以更好的解决这些问题。
 
 参考：
@@ -208,9 +221,21 @@ https://zhuanlan.zhihu.com/p/86965595
 
 深入理解NLP Subword算法：BPE、WordPiece、ULM
 
+https://mp.weixin.qq.com/s/la3nZNFDviRcSFNVso29oQ
+
+NLP三大Subword模型详解：BPE、WordPiece、ULM
+
 https://mp.weixin.qq.com/s/TPRqDyGpkVuJcgomTu774A
 
 子词技巧：The Tricks of Subword
+
+https://mp.weixin.qq.com/s/fe7-wimFCAtp3ohB3TVywg
+
+通俗讲解Subword Models
+
+https://mp.weixin.qq.com/s/5z3CMmIR0U9-p2BwJnsYKg
+
+神经机器翻译的Subword技术
 
 ## BPE
 
@@ -224,110 +249,70 @@ Byte Pair Encoding(BPE)本来是一种数据压缩算法，后来被用于分词
 
 https://github.com/rsennrich/subword-nmt
 
-# Image Caption Generation
+参考：
 
-Image Caption Generation的目标是：给定一张图片，让计算机用一句话来描述这张图片。如果将这里的Image换成Video，那就是Video Caption Generation了。
+https://www.cnblogs.com/huangyc/p/10223075.html
 
-当然，它也有反操作：Generating Image/Videos from Captions。
+一文读懂BERT中的WordPiece
+
+https://mp.weixin.qq.com/s/OGBk_ZptFzbjKdnv2RVZFA
+
+机器如何认识文本？NLP中的Tokenization方法总结
+
+# ESN
+
+Echo State Network
+
+https://blog.csdn.net/zwqhehe/article/details/77025035
+
+回声状态网络(ESN)原理详解
+
+https://mp.weixin.qq.com/s/tjawT2-bhPrit0Fd4knSgA
+
+基于回声状态网络预测股票价格
+
+# MobileNet
+
+论文：
+
+《MobileNets: Efficient Convolutional Neural Networks for Mobile Vision Applications》
+
+代码：
+
+https://github.com/Zehaos/MobileNet
+
+![](/images/article/dwl_pwl.png)
 
 参考：
 
-http://geek.csdn.net/news/detail/97193
+https://mp.weixin.qq.com/s/f3bmtbCY5BfA4v3movwLVg
 
-李理：从Image Caption Generation理解深度学习（part I）
+向手机端神经网络进发：MobileNet压缩指南
 
-http://geek.csdn.net/news/detail/98776
+https://mp.weixin.qq.com/s/mcK8M6pnHiZZRAkYVdaYGQ
 
-李理：从Image Caption Generation理解深度学习（part II）
+MobileNet在手机端上的速度评测：iPhone 8 Plus竟不如iPhone 7 Plus
 
-https://mp.weixin.qq.com/s/i4zL-bPaPXUlwpKZzlRtcg
+https://mp.weixin.qq.com/s/2XqBeq3N4mvu05S1Jo2UwA
 
-Image Captioning36页最新综述
+CNN模型之MobileNet
 
-https://zhuanlan.zhihu.com/p/30893160
+https://mp.weixin.qq.com/s/fdgaDoYm2sfjqO2esv7jyA
 
-CVPR2017 Image Caption有关论文总结
+Google论文解读：轻量化卷积神经网络MobileNetV2
 
-https://mp.weixin.qq.com/s/3l4mYVSVfjFS_06j3OvX8g
+https://mp.weixin.qq.com/s/7vFxmvRZuM2DqSYN7C88SA
 
-阿里提出新图像描述框架，解决梯度消失难题
+谷歌发布MobileNetV2：可做语义分割的下一代移动端计算机视觉架构
 
-https://mp.weixin.qq.com/s/O1LqJftEezBuuA8JHeqMzw
+https://mp.weixin.qq.com/s/lu0GHCpWCmogkmHRKnJ8zQ
 
-基于对比学习的Image Captioning
+浅析两代MobileNet
 
-https://mp.weixin.qq.com/s/-K3WIo64_wJb9p6C49Z5fA
+https://mp.weixin.qq.com/s/T6S1_cFXPEuhRAkJo2m8Ig
 
-基于属性学习和额外知识库的图像描述生成和视觉问答
+轻量级CNN网络之MobileNetv2
 
-https://mp.weixin.qq.com/s/CBqDR7JEPfhIwTc8BDdeoQ
+https://mp.weixin.qq.com/s/RRu3r_dokORhpSq3eyrPDQ
 
-“诗画合一”的跨媒体理解与检索
-
-https://mp.weixin.qq.com/s/vRHA3Hf1ivsgKBB2XuECNg
-
-李飞飞论文：神经网络是怎样给一幅图增加文字描述，实现“看图说话”的？
-
-https://mp.weixin.qq.com/s/DXRiGSI0p8u7yA9uW1hHxA
-
-最新四篇CVPR2018 视频描述生成相关论文—双向注意力、Transformer、重构网络、层次强化学习
-
-https://mp.weixin.qq.com/s/bDLVD_8LscgWSNp0ZNc0Pg
-
-图像和文本的融合表示学习——Text2Image和Image2Text
-
-https://mp.weixin.qq.com/s/oV8gcKqmp43EBYzQhr5S6w
-
-逆视觉问答任务：一种根据回答与图像想问题的模型
-
-https://mp.weixin.qq.com/s/YgYod-gcFZruEGtE4wF87w
-
-牛津大学提出全新生成式模型“SQAIR”，用于移动目标的视频理解
-
-https://mp.weixin.qq.com/s/eBNoTDOMLlVymiU3LUqSgQ
-
-用Attention模型自动生成图像字幕
-
-https://mp.weixin.qq.com/s/4wuYNYGDesNgsJ13y65XQA
-
-AI都可以将文字轻松转成图像
-
-https://mp.weixin.qq.com/s/TtU0R8P-YIq8JOJrgHP07w
-
-Facobook开源视觉问答VQA框架：Pythia
-
-https://mp.weixin.qq.com/s/a0Xt_hkcW2OVlEzhQFWugg
-
-由浅及深，细致解读图像问答 VQA 2018 Challenge冠军模型Pythia
-
-https://zhuanlan.zhihu.com/p/35305264
-
-一文看懂深度学习中的VQA(视觉问答)技术
-
-https://mp.weixin.qq.com/s/shBHKh2emSIL5uWV7po8cw
-
-梅涛：“看图说话”
-
-https://mp.weixin.qq.com/s/BQy3qpmQqeQquhf92hwcvQ
-
-2017 VQA Challenge第一名技术报告
-
-https://mp.weixin.qq.com/s/0yb-YRGe-q4-vpKpuE4D_w
-
-多种注意力机制互补完成VQA（视觉问答）
-
-https://mp.weixin.qq.com/s/YBaELQlBHOZTGEqc2WI9NQ
-
-MIT等提出NS-VQA：结合深度学习与符号推理的视觉问答
-
-https://mp.weixin.qq.com/s/gaNSQ_8JGqX4a3lGuf-9fA
-
-如何让电脑成为看图说话的高手？
-
-https://mp.weixin.qq.com/s/-b8FuEQlpEb5G0L0QAxVEA
-
-如何使用深度学习为照片自动生成文本描述
-
-https://zhuanlan.zhihu.com/p/50784504
-
-《Reconstruction Network for Video Captioning》阅读笔记
+为什么MobileNet及其变体如此之快？

@@ -1,355 +1,371 @@
 ---
 layout: post
-title:  机器学习（三十七）——推荐系统进阶, 数据不平衡问题
+title:  机器学习（三十七）——时间序列分析（1）, 辛普森悖论
 category: ML 
 ---
 
-# 推荐系统进阶
+* toc
+{:toc}
 
-除了《机器学习（十六～十七）》提及的ALS和PCA之外，相关的算法还包括：
+# 时间序列分析
 
-## FM：Factorization Machines
+## 书籍和教程
 
-Factorization Machines是Steffen Rendle于2010年提出的算法。
+http://www.stat.berkeley.edu/~bartlett/courses/153-fall2010/
 
->注：Steffen Rendle，弗赖堡大学博士，现为Google研究员。libFM的作者，被誉为推荐系统的新星。
+berkeley的时间序列分析课程
 
-FM算法实际上是一大类与矩阵分解有关的算法的广义模型。
+http://people.duke.edu/%7Ernau/411home.htm
 
-参考文献1是Rendle本人的论文，其中有章节证明了SVD++、PITF、FPMC等算法，都是FM算法的特例。《机器学习（十四）》中提到的ALS算法，也是FM的特例。
+回归和时间序列分析
 
-参考文献2是国人写的中文说明，相对浅显一些。
+《应用时间序列分析》，王燕著。
+
+https://mp.weixin.qq.com/s/w_u6_lG-_b0t4m4YubjeRQ
+
+最新《时间序列分析》课程笔记，477页pdf
+
+https://mp.weixin.qq.com/s/8Ua7wYfRdv0fu8I-M3sdHg
+
+统计学习与序列预测，261页pdf
+
+https://mp.weixin.qq.com/s/J3RdKXZs7Wb976E512TJjw
+
+最新《时序数据分析》书稿，512页pdf
+
+## 概述
+
+时间序列，就是按时间顺序排列的，随时间变化的数据序列。
+
+生活中各领域各行业太多时间序列的数据了，销售额，顾客数，访问量，股价，油价，GDP，气温...
+
+随机过程的特征有均值、方差、协方差等。
+
+如果随机过程的特征随着时间变化，则此过程是非平稳的；相反，如果随机过程的特征不随时间而变化，就称此过程是平稳的。
+
+下图所示，左边非稳定，右边稳定。
+
+![](/images/article/time_series.png)
+
+非平稳时间序列分析时，若导致非平稳的原因是确定的，可以用的方法主要有趋势拟合模型、季节调整模型、移动平均、指数平滑等方法。
+
+若导致非平稳的原因是随机的，方法主要有ARIMA及自回归条件异方差模型等。
+
+## ARIMA
+
+ARIMA模型全称为差分自回归移动平均模型(Autoregressive Integrated Moving Average Model,简记ARIMA)，也叫求和自回归移动平均模型，是由George Edward Pelham Box和Gwilym Meirion Jenkins于70年代初提出的一著名时间序列预测方法，所以又称为box-jenkins模型、博克思-詹金斯法。
+
+>注：Gwilym Meirion Jenkins，1932～1982，英国统计学家。伦敦大学学院博士，兰卡斯特大学教授。
+
+同《数学狂想曲（十一）》中的PID算法一样，ARIMA模型实际上是三个简单模型的组合。
+
+### AR模型
+
+$$X_t = c + \sum_{i=1}^p \varphi_i X_{t-i}+ \varepsilon_t$$
+
+其中，p为阶数，$$\varepsilon_t$$为白噪声。上式又记作**AR(p)**。显然，AR模型是一个系统状态模型。
+
+### MA模型
+
+$$X_t = \mu + \varepsilon_t + \sum_{i=1}^q \theta_i \varepsilon_{t-i}$$
+
+上式记作**MA(q)**，其中q和$$\varepsilon_t$$的含义与上同。MA模型是一个噪声模型。
+
+### ARMA模型
+
+AR模型和MA模型合起来，就是ARMA模型：
+
+$$X_t = c + \varepsilon_t +  \sum_{i=1}^p \varphi_i X_{t-i} + \sum_{i=1}^q \theta_i \varepsilon_{t-i}$$
+
+同理，上式也被记作**ARMA(p,q)**。
+
+### Lag operator
+
+在继续下面的描述之前，我们先来定义一下Lag operator--L。
+
+$$L X_t = X_{t-1} \; \text{or} \; X_t = L X_{t+1}$$
+
+### I模型
+
+$$(1-L)^d X_t$$
+
+上式中d为阶数，因此上式也记作**I(d)**。显然$$I(0)=X_t$$。
+
+I模型有什么用呢？我们观察一下I(1)：
+
+$$(1-L) X_t = X_t - X_{t-1} = \Delta X$$
+
+有的时候，虽然I(0)不是平稳序列，但I(1)是平稳序列，这时我们称该序列是**1阶平稳序列**。n阶的情况，可依此类推。
+
+### ARIMA模型
+
+ARIMA模型可以看作是两个随机过程的组合。
+
+首先是非平稳过程：
+
+$$Y_t = (1-L)^d X_t$$
+
+接着是一个广义平稳过程：
+
+$$\left( 1 - \sum_{i=1}^p \phi_i L^i \right) Y_t = \left( 1 + \sum_{i=1}^q \theta_i L^i \right) \varepsilon_t$$
+
+最后得到ARIMA模型的公式：
+
+$$\left( 1 - \sum_{i=1}^p \phi_i L^i\right)
+(1-L)^d X_t = \delta + \left( 1 + \sum_{i=1}^q \theta_i L^i \right) \varepsilon_t$$
+
+上式也被记作**ARIMA(p,d,q)**。从上式可以看出，ARIMA模型实际上就是利用I模型，将时间序列转化为平稳序列之后的ARMA模型。
+
+>注：上面的内容只是对ARIMA模型给出一个简单的定义。实际的假设检验、参数估计的步骤，还是比较复杂的，完全可以写本书来说。
+
+## 其它
+
+除了ARIMA系列模型之外，ARCH系列模型也用的比较多：
+
+autoregressive conditional heteroskedasticity, ARCH
+
+generalized autoregressive conditional heteroskedasticity, GARCH
+
+上面介绍的序列建模方法主要针对的是：预测未来节点，即所谓的走势分析问题。
+
+时间序列的常见问题还包括：
+
+- 判断不同序列类别，即序列分类问题。
+
+- 不同时序对应的状态的分析，即序列标注问题。
+
+这些问题的常见工具包括HMM、CRF、RNN等，可参见其他相关章节。
 
 参考：
 
-https://www.ismll.uni-hildesheim.de/pub/pdfs/Rendle2010FM.pdf
+https://mp.weixin.qq.com/s/LAn9h6_WkxlZ_IsrhnzZCw
 
-http://blog.csdn.net/itplus/article/details/40534885
+波动率建模之ARCH模型
 
-Factorization Machines 学习笔记（一）预测任务
+## 工具
 
-https://tech.meituan.com/deep-understanding-of-ffm-principles-and-practices.html
+http://mp.weixin.qq.com/s/ioaS7RQ6bsJs4_X0G4ZHyQ
 
-深入FFM原理与实践
+如何优雅地用TensorFlow预测时间序列：TFTS库详细教程
 
-https://github.com/aksnzhy/xlearn
+https://mp.weixin.qq.com/s/7WuB0uvGSAek9b4TP_0r9g
 
-这是一个集成了FM和FFM等算法的库
+内置降维、聚类等算法，时间序列数据分析Python库Deeptime
 
-https://mp.weixin.qq.com/s/MEjhJycDwssvzXm7DaSp7Q
+https://zhuanlan.zhihu.com/p/391897734
 
-推荐系统召回模型之全能的FM模型
+FaceBook开源全网第一个时序王器Kats
 
-https://mp.weixin.qq.com/s/zIvzGpHNnm7WRgDmtdFd-w
+https://mp.weixin.qq.com/s/XCHSulXn1hzgLqLJjXkSGg
 
-Factorization Machines因子分解机详解
+TODS：从时间序列数据中检测不同类型的异常值
 
-https://mp.weixin.qq.com/s/SlflfdqSIZGR59ch50DIAA
+## Prophet
 
-因子分解机
+Prophet是FaceBook提出的时间序列算法。同时，也是该算法的工具包的名字。
 
-https://mp.weixin.qq.com/s/qynApDntA9xiGRBQpoIsjQ
+官网：
 
-FFM：Field-aware Factorization Machines
+https://facebook.github.io/prophet/
 
-## PITF
+参考：
 
-配对互动张量分解（Pairwise Interaction Tensor Factorization）算法，也是最早由Rendle引入推荐系统领域的。
+https://mp.weixin.qq.com/s/ven_4JbWYFswIkGyhjTcww
 
-论文：
+Prophet：教你如何用加法模型探索时间序列数据
 
-http://www.wsdm-conference.org/2010/proceedings/docs/p81.pdf
+https://mp.weixin.qq.com/s/PMsAjk7WbGRu2n3s6Q8prQ
 
-## 其他
+Facebook时间序列预测算法Prophet的研究
 
-https://mp.weixin.qq.com/s/7yjA3_oCI5nSH4tv04BIhQ
+https://mp.weixin.qq.com/s/bf_CHcoZMjqP6Is4ebD58g
 
-HFT
+使用Prophet预测股价并进行多策略交易
 
-https://mp.weixin.qq.com/s/gHKOArFzUM9Zn8hEsA-1wQ
+https://mp.weixin.qq.com/s/pJTDJrMCfv5y4LQ2itt1tQ
 
-FISM
+Facebook的Prophet算法简介与使用
 
-https://mp.weixin.qq.com/s/VymwTuKq86JP2PL4v8LyyQ
+https://mp.weixin.qq.com/s/675ASxDSVH_8BX6W8WRRqg
 
-POI by Friends
+基于Prophet的时间序列预测
 
-https://mp.weixin.qq.com/s/LnV-Oq3pCCeMk9RRhha-Aw
+https://mp.weixin.qq.com/s/4rJL3cccsjVqgrNDjcMIJw
 
-GLSLIM
+Prophet：Facebook创造的先知
 
-https://mp.weixin.qq.com/s/xnJq-aBAZW22tP7RQylKLw
+https://mp.weixin.qq.com/s/Ylvk3IqSWRD2K_AXMZwnoA
 
-iCD
+手把手教你用Python的Prophet库进行时间序列预测
 
-https://mp.weixin.qq.com/s/-IPwfrBz1dtYDupuGv4IjQ
+https://mp.weixin.qq.com/s/fMkxWLGSKQm_3fyfLgbQew
 
-Ensemble
+详解Prophet模型以及代码示例
 
-https://mp.weixin.qq.com/s/SC8kNYvexetmDuxfQvwSDw
+https://mp.weixin.qq.com/s/s3R-_cuTYR7Z8w9DhlxifQ
 
-CKE
+NeuralProphet：基于神经网络的时间序列建模库
 
-https://mp.weixin.qq.com/s/bu9rSno_WmHHisE3lzYnqg
+## Lebesgue积分
 
-ConvMF
+![](/images/img3/Riemann_Lebesgue.jpg)
 
-https://mp.weixin.qq.com/s/opJtn5mPVjnfRwr5UZ4aJg
+蓝色的是Riemann积分，红色的是Lebesgue积分。
 
-FTRL原理与工程实践
+>Henri Léon Lebesgue，1875～1941，法国数学家。
 
-http://www.cnblogs.com/EE-NovRain/p/3810737.html
+参考：
 
-各大公司广泛使用的在线学习算法FTRL详解
+https://zhuanlan.zhihu.com/p/34407471
 
-## 冷启动
+如何理解时间序列？—从Riemann积分和Lebesgue积分谈起
 
-https://mp.weixin.qq.com/s/ll2Nx7_1Sg7XfuiH-OQnWA
+https://zhuanlan.zhihu.com/p/49262150
 
-推荐系统如何冷启动？
+从Riemann积分到Lebesgue积分
 
-https://mp.weixin.qq.com/s/ecAA43az0-6UIEPR_maNAw
+https://zhuanlan.zhihu.com/p/90607361
 
-推荐系统之冷启动问题
+Quadrature求积法
 
-https://mp.weixin.qq.com/s/ycxigg0HbiOTRUBPAWk21Q
+https://zhuanlan.zhihu.com/p/91709767
 
-推荐系统中的冷启动问题和探索利用问题
-
-https://mp.weixin.qq.com/s/82REVmDV5cfeQP766qOZmw
-
-推荐系统冷启动
+ODE's Initial value problem (IVP)
 
 ## 参考
 
-https://zhuanlan.zhihu.com/p/95350982
+https://en.wikipedia.org/wiki/Autoregressive_integrated_moving_average
 
-推荐算法三视角:矩阵，图，时间线
+https://en.wikipedia.org/wiki/Autoregressive%E2%80%93moving-average_model
 
-https://mp.weixin.qq.com/s/q9FU19Hpw2eWLLhsY5lYJQ
+https://zhuanlan.zhihu.com/p/23534595
 
-parameter-free contextual bandits
+时间序列分析：结合ARMA的卡尔曼滤波算法（该文的参考文献中有不少好文）
 
-https://mp.weixin.qq.com/s/T-yCjebTzc_t6D4o5gyQLQ
+https://www.zhihu.com/question/337447961
 
-Collaborative Metric Learning
+时间序列和回归分析有什么本质区别？
 
-https://mp.weixin.qq.com/s/9xxLU51eqhc6C81jzHQijQ
+http://blog.csdn.net/aliceyangxi1987/article/details/71079522
 
-简述推荐系统中的矩阵分解
+用ARIMA模型做需求预测
 
-https://mp.weixin.qq.com/s/qmkMJJkMqumbtynM4cLatw
+http://blog.csdn.net/kicilove/article/details/78315335
 
-计算广告CTR预估系列
+时间序列初级理论篇
 
-https://zhuanlan.zhihu.com/p/38117606
+https://mp.weixin.qq.com/s/Y342U71oicbpJbWl4E0ZEQ
 
-早期购买行为的分析和预测建模
+时间序列基本概念
 
-https://mp.weixin.qq.com/s/nQAqEZW_TJSsbVp-kVcKGA
+https://mp.weixin.qq.com/s/K-XGuaWTcF6BDPJagaJDPQ
 
-简谈马尔可夫模型在个性化推荐中的应用
+时序数据与事件的关联分析
 
-https://mp.weixin.qq.com/s/Zalby_gZsxzrmBq6ZePsiQ
+https://mp.weixin.qq.com/s/JR-GIXwHF45OysoE0qvwzw
 
-短视频如何做到千人千面？FM+GBM排序模型深度解析
+时间序列异常检测机制的研究
 
-https://mp.weixin.qq.com/s/hkXyqe6tDdgNuLgk3e90JQ
+https://mp.weixin.qq.com/s/MYwvuD85PPs3PJA5tMxvgw
 
-如何发现品牌潜客？目标人群优选算法模型及实践解析
+6种时序异常检测思路总结！（tsod）
 
-https://mp.weixin.qq.com/s/jCXfu6AHFWnQL118r38Zpw
+https://mp.weixin.qq.com/s/2hpQ_7Ih58d1RKYb1oW_Sg
 
-全球顶级算法赛事Top5选手，跟你聊聊推荐系统领域的“战斗机”
+时间序列简介（一）
 
-https://mp.weixin.qq.com/s/rzCqz2HasT5zxBQjHy13Tw
+https://zhuanlan.zhihu.com/p/35093835
 
-前深度学习时代CTR预估模型的演化之路：从LR到FFM
+时间序列的自回归模型—从线性代数的角度来看
 
-https://mp.weixin.qq.com/s/Sc6VR--Qzk1BpS638SpS9Q
+https://zhuanlan.zhihu.com/p/39105270
 
-盘点前深度学习时代阿里、谷歌、Facebook的CTR预估模型
+时间序列的表示与信息提取
 
-https://mp.weixin.qq.com/s/iEMGS1tbNPYXYIM7pKkq4A
+https://mp.weixin.qq.com/s/iah8PvIC0oZngSaNHw7gJw
 
-达观数据：计算广告系统算法与架构综述
+从上帝视角看透时间序列和数据挖掘
 
-https://mp.weixin.qq.com/s/pWcFuOecG-dZHZ365clDjg
+https://zhuanlan.zhihu.com/p/38130622
 
-阿里妈妈新突破！深度树匹配如何扛住千万级推荐系统压力
+时间序列的相似性
 
-https://mp.weixin.qq.com/s/R6-y-W0CGhlEUPXDkYdtJw
+https://mp.weixin.qq.com/s/DGGuAYsoa6DPD6FBf2Hc4g
 
-Item-Based协同过滤算法
+时间序列分析之理论篇
 
-https://mp.weixin.qq.com/s/C5cokipqnSsgg53chbi3oA
+https://zhuanlan.zhihu.com/p/50698719
 
-我是怎么走上推荐系统这条（不归）路的……
+两篇关于时间序列的论文
 
-https://mp.weixin.qq.com/s/RA6Elm6C4gnlg0wIOnvlug
+https://zhuanlan.zhihu.com/p/55129654
 
-一步步构建推荐系统
+时间序列的单调性
 
-https://mp.weixin.qq.com/s/WV0igXcxFuTNKU5MvZrl0Q
+https://zhuanlan.zhihu.com/p/55903495
 
-再谈亚马逊Item-based推荐系统
+时间序列的聚类
 
-https://mp.weixin.qq.com/s/mXE3f2ZO6wQRSURZGmyBpQ
+https://mp.weixin.qq.com/s/2teyejpbpM6x5UCiYL8s-Q
 
-产品聚类
+关于时间序列你需要了解的一切
 
-https://mp.weixin.qq.com/s/lvbXtLfa6Z4h_5lCHKn_6A
+https://mp.weixin.qq.com/s/Aqh9lZvyDncyCdXgxH1lSQ
 
-CTR点击率预估之经典模型回顾
+短小时序，如何预测？——基于特征重构的张量ARIMA
 
-https://mp.weixin.qq.com/s/GowWRaE5mZoPVAPK6_AkrA
+https://mp.weixin.qq.com/s/NHwMVzZWOU24pdbjzcchAg
 
-如何构建可解释的推荐系统？
+从AR到ARIMA
 
-https://mp.weixin.qq.com/s/7QrSSEiLjmGjNhFfU6ue0A
+https://mp.weixin.qq.com/s/QZ_AcfzuB7JQEE6cDz5G1A
 
-推荐系统产品与算法概述
+自回归模型
 
-https://mp.weixin.qq.com/s/49o_AobVNs_9Lgm4qbQcPA
+https://mp.weixin.qq.com/s/fYQwRJGrTlX4_GqMt_CYMQ
 
-一文全面了解基于内容的推荐算法
+时间序列基础教程总结
 
-https://mp.weixin.qq.com/s/uxi0OTxjmn047fE8nbYplw
+https://mp.weixin.qq.com/s/f0BwjlsEBlFVDxNlZqgf-g
 
-推荐系统：石器与青铜时代
+Python时间序列分析：一项基于案例的全面指南
 
-https://zhuanlan.zhihu.com/p/74978160
+# 辛普森悖论
 
-揭开Top-N经典算法SLIM和FISM之谜
+![](/images/img2/Simpson.png)
 
-https://mp.weixin.qq.com/s/S9-GgQTlx2c14mN_3kNQiQ
+如果分专业来看，你就会发现：在各个专业女生的录取率其实都是更高的。之所以会产生“总体录取率女生偏低”这一结果，是因为女生大部分都报考了那些本身就难以录取的学院，而男生则大部分报考了那些录取率本身就偏高的学院。
 
-基于标签的实时短视频推荐系统
+参考：
 
-https://mp.weixin.qq.com/s/sw16_sUsyYuzpqqy39RsdQ
+https://mp.weixin.qq.com/s/5jZ2dzLInLtUw7rWZF4mtg
 
-阿里妈妈深度树检索技术（TDM）及应用框架的探索实践
+张忠元：渣男受女生欢迎？当心统计陷阱
 
-https://mp.weixin.qq.com/s/_zSe_Ia4DPrFKqsqW3iQ8w
+https://mp.weixin.qq.com/s/o1a2YlYritcOrsLN2YuLmA
 
-电商推荐那点事
+神奇的霍特林法则：为什么汉堡王总是开在麦当劳旁边？
 
-https://mp.weixin.qq.com/s/frEjB8SznDzJxOL3bkHnYw
+https://mp.weixin.qq.com/s/eq4MllJta5NmaLARPpvang
 
-矩阵分解推荐算法
+公交车总迟到？你大概掉进了“等待时间悖论”
 
-http://www.infoq.com/cn/articles/we-are-bringing-learning-to-rank-to-elasticsearch
+https://zhuanlan.zhihu.com/p/43934918
 
-在Elasticsearch中应用机器学习排序LTR
+诡异的布雷斯悖论：为什么越是修新路，城市反而更堵了！
 
-https://mp.weixin.qq.com/s/IrpIMNxQ4frgBKl5pbsfdg
+https://mp.weixin.qq.com/s/-0VMucGBq4Trb_9FnsW6KQ
 
-达观数据：用好学习排序(LTR),资讯信息流推荐效果翻倍
+10大反直觉的数学结论
 
-https://mp.weixin.qq.com/s/8vdl8QOJNTP6Wekm4LR3mA
+https://mp.weixin.qq.com/s/FqY19sTQd7GPdGSsB5L9eQ
 
-LTR那点事—AUC及其与线上点击率的关联详解
+数学大反例合集
 
-https://mp.weixin.qq.com/s/MtnHYmPVoDAid9SNHnlzUw
+https://mp.weixin.qq.com/s/EICefFM3dfv5A6V9kVqGWw
 
-阿里妈妈首次公开自研CTR预估核心算法MLR
+吸烟致癌的迷思是如何破除的
 
-https://mp.weixin.qq.com/s/G5a0YK39RZzgce_szbwoTA
+https://mp.weixin.qq.com/s/NlJ4-b5SjIjPGgvLUuSxFw
 
-你点一次广告，会创造多少价值？
-
-https://mp.weixin.qq.com/s/zXABOzbQRV7sfgAhr_WqZw
-
-跨领域推荐系统文献综述（上）
-
-https://mp.weixin.qq.com/s/OxUCIhoIED_Z1Cf91Va36g
-
-跨领域推荐系统文献综述（下）
-
-https://mp.weixin.qq.com/s/PwIDOeC-wPshZkGet1pE2w
-
-基于朴素ML思想的协同过滤推荐算法
-
-https://mp.weixin.qq.com/s/lScxlqHARGYbs1eD3ZuEAQ
-
-推荐系统-大规模信息网络Embedding表征学习
-
-https://blog.csdn.net/yz930618/article/details/84862751
-
-《基于行列式点过程的推荐多样性提升算法》原理详解
-
-https://mp.weixin.qq.com/s/NJIEqlW4oKfEon3YXc1U6g
-
-混合推荐系统介绍
-
-# 数据不平衡问题
-
-![](/images/img3/imbalance.png)
-
-https://mp.weixin.qq.com/s/e0jXXCIhbaZz7xaCZl-YmA
-
-如何处理不均衡数据？
-
-https://mp.weixin.qq.com/s/2j_6hdq-MhybO_B0S7DRCA
-
-如何解决机器学习中数据不平衡问题
-
-https://mp.weixin.qq.com/s/gEq7opXLukWD5MVhw_buGA
-
-七招教你处理非平衡数据
-
-http://blog.csdn.net/u013709270/article/details/72967462
-
-机器学习中的数据不平衡解决方案大全
-
-https://mlr-org.github.io/mlr-tutorial/devel/html/over_and_undersampling/index.html
-
-Imbalanced Classification Problems
-
-https://mp.weixin.qq.com/s/QEHAV_rW25E0b0N7POr6tw
-
-关于处理样本不平衡问题的Trick整理
-
-https://mp.weixin.qq.com/s/5csfnBWZ2MQsnWZnNj9b8w
-
-机器学习中样本比例不平衡的处理方法
-
-https://mp.weixin.qq.com/s/ZL6UWrBB7qr8jp2QRA1MAQ
-
-方法总结：教你处理机器学习中不平衡类问题
-
-https://mp.weixin.qq.com/s/V5d3kbpXBf4883TQ_sq37A
-
-遇到有这六大缺陷的数据集该怎么办？这有一份数据处理急救包
-
-https://mp.weixin.qq.com/s/zLgD8DjnW1DfeqL_xITisQ
-
-教你如何用python解决非平衡数据建模
-
-https://mp.weixin.qq.com/s/ElOFb0Ln4qyG1x38NRFyag
-
-如何处理数据不均衡问题
-
-https://mp.weixin.qq.com/s/DxkHjArbr5XRdEGVNjJAKA
-
-在深度学习中处理不均衡数据集
-
-https://mp.weixin.qq.com/s/x48Ctb0_Eu1kcSGTYLt5BQ
-
-机器学习中如何处理不平衡数据？
-
-https://mp.weixin.qq.com/s/a57oy26UvLFNj4T8_pddCQ
-
-关于图像分类中类别不平衡那些事
-
-https://mp.weixin.qq.com/s/rXaicHuHlWegrpeulYmduw
-
-目标检测中的不平衡问题综述
-
-https://mp.weixin.qq.com/s/7_-SSVZpxLfnwn7EmbGyZA
-
-极端类别不平衡数据下的分类问题研究综述
-
-https://mp.weixin.qq.com/s/fAHlrfchgkQ1Wuc8sfTlZg
-
-堪比Focal Loss！解决目标检测中样本不平衡的无采样方法
+孩子，有时候并不是生活欺骗了你，而是你可能还不懂概率统计……

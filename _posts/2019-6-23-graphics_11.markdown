@@ -1,10 +1,137 @@
 ---
 layout: post
-title:  图像处理理论（十一）——CV/CG参考资源
+title:  图像处理理论（十一）——CV/CG参考资源, 计算机图形学
 category: graphics 
 ---
 
+* toc
+{:toc}
+
+# 从BOW到SPM（续）
+
+## SPM
+
+http://blog.csdn.net/chlele0105/article/details/16972695
+
+SPM:Spatial Pyramid Matching for Recognizing Natural Scene Categories空间金字塔匹配
+
+http://blog.csdn.net/jwh_bupt/article/details/9625469
+
+Spatial Pyramid Matching小结
+
+# ILSVRC 2010考古
+
+ILSVRC 2010的冠军是NEC和UIUC的联合队伍。这也是DL于2012年大放光彩之前比较杰出的成果。虽然现在它通常作为反面教材，出现在与DL的对比场景中，然而不可否认的是，它仍然是一个算法的杰作。
+
+>林元庆，清华大学硕士+宾夕法尼亚大学博士（2008年）。原百度研究院院长。
+
+![](/images/article/ILSVRC_2010.png)
+
+上图是NEC算法的基本流程图。
+
+# 模板匹配
+
+https://blog.csdn.net/liyuanbhu/article/details/49837661
+
+OpenCV学习笔记（模板匹配）
+
+https://blog.csdn.net/xxboy61/article/details/38319757
+
+OpenCV实现之模板匹配（Template Matching）
+
+https://mp.weixin.qq.com/s/ZqFtDQ4OLHL94QTr-GXKnQ
+
+OpenCV实现边缘模板匹配算法
+
+https://zhuanlan.zhihu.com/p/110425960
+
+模板匹配
+
+# Superpixel
+
+论文：
+
+《Superpixels: An Evaluation of the State-of-the-Art》
+
+超像素最直观的解释，便是把一些具有相似特性的像素“聚合”起来，形成一个更具有代表性的大“元素”。
+
+而这个新的元素，将作为其他图像处理算法的基本单位。
+
+一来大大降低了维度；二来可以剔除一些异常像素点。
+
+至于根据什么特性把一个个像素点聚集起来，可以是颜色、纹理、类别等。
+
+![](/images/img3/superpixel.jpg)
+
+由于Superpixel的粒度在pixel和segmentation之间，因此又被称为over segmentation。
+
+三维的Superpixel，也被称作Supervoxel。
+
+参考：
+
+https://zhuanlan.zhihu.com/p/50996404
+
+超像素、语义分割、实例分割、全景分割 傻傻分不清？
+
+https://www.zhihu.com/question/27623988
+
+超像素(Superpixel)的大致原理以及State-of-the-art？
+
+https://zhuanlan.zhihu.com/p/41874735
+
+龙生龙，凤生凤，SLIC生超像素
+
+https://mp.weixin.qq.com/s/nPbIkKbOdR6tk_4jfXicuw
+
+1/20参数，运算速度提升四倍：北大、字节跳动等利用增量学习提出超像素分割模型LNSNet
+
+# Lanczos kernel
+
+>Cornelius (Cornel) Lanczos，1893～1974，匈牙利数学家和物理学家。曾当过爱因斯坦的助手。
+
+Lanczos kernel是一种low-pass filter：
+
+$$L(x)={\begin{cases}1 & {\text{if}}\ x=0,\\{\dfrac {a\sin(\pi x)\sin(\pi x/a)}{\pi ^{2}x^{2}}} & {\text{if}}\ -a\leq x<a\ {\text{and}}\ x\neq 0,\\0 & {\text{otherwise}}.\end{cases}}$$
+
+$$S(x)=\sum _{i=\lfloor x\rfloor -a+1}^{\lfloor x\rfloor +a}s_{i}L(x-i)$$
+
 # CV/CG参考资源
+
+![](/images/img2/l_hires.jpg)
+
+原图地址：
+
+http://www.lenna.org/full/l_hires.jpg
+
+>Lena Söderberg，1951年生，瑞典人。Playboy Playmate（1972.11）。
+
+https://mp.weixin.qq.com/s/XyKQ9sg97eh5K7vDd14DsQ
+
+一张大尺度美女图，竟然推进了图片算法的进步。。。
+
+https://mp.weixin.qq.com/s/-CF69Soq9Bdw-Wsffyv9Hw
+
+这40个冷知识，据说只有1%的人知道……颠覆你的认知！
+
+---
+
+https://www.zhihu.com/question/362979183
+
+是否有好的传统的医学图像增强方法?
+
+https://blog.csdn.net/carson2005/article/details/9502053
+
+Retinex算法详解
+
+https://www.cnblogs.com/Imageshop/archive/2013/05/19/3086388.html
+
+Unsharp Mask(USM)锐化算法的的原理及其实现
+
+---
+
+https://mp.weixin.qq.com/s/COIYp4Ao9fBPnaUZvhCxkg
+
+表情包的画质是如何越传越差甚至还变绿的？
 
 https://github.com/gzr2017/ImageProcessing100Wen
 
@@ -34,10 +161,6 @@ https://blog.csdn.net/iverson_49/article/details/38160081
 
 薄板样条函数(Thin plate splines)的讨论与分析
 
-https://mp.weixin.qq.com/s?__biz=MzI0ODcxODk5OA==&mid=2247508603&idx=2&sn=cfb091884ccc7a0ea03af38b1a629823
-
-巧解图像处理经典难题之图像配准
-
 https://blog.csdn.net/autocyz/article/details/48136473
 
 相关滤波跟踪（MOSSE）
@@ -50,126 +173,246 @@ https://mp.weixin.qq.com/s/XqFe9d72CepdfTSOq2gWJg
 
 半全局匹配SGM
 
-https://mp.weixin.qq.com/s/UKxQQx0IJGWOFikz3pncAw
+https://blog.csdn.net/wsp_1138886114/article/details/106633364
 
-最新的图像质量评价
+NLM去噪算法
 
-# Integrating Learning and Planning
+https://mp.weixin.qq.com/s/3Z7DUr6s-XGsthF8WrrXDA
 
-## Dyna-Q Algorithm（续）
+基于曲率的图像处理
 
-![](/images/img3/Dyna_4.png)
+https://mp.weixin.qq.com/s/F0KKqBjRG4w10Z16iJGkeg
 
-上面的例子模拟了某时刻（虚线所示）环境发生了改变，变得更加困难，此时使用Dyna-Q算法在经历过一段时间的平台期后又找到了最优解决方案。在平台期，模型持续的给以个体原先的策略，也就是错误的策略，但个体通过与实际的交互仍然能够找到最优方案。
+页面扭曲矫正
 
-上二个例子表明，Dyn-Q算法赋予了个体一定的应对环境变化的能力，当环境发生一定改变时，个体一方面可以利用模型，一方面也可以通过与实际环境的交互来重新构建模型。
+https://mp.weixin.qq.com/s/bq_CPJU66lx1li8lxbAFDg
 
->上2个示例图中的Q+算法与Q的差别体现在：Q+算法鼓励探索，给以探索额外的奖励。
+如何从失焦的图像中恢复景深并将图像变清晰？
 
-## Simulation-Based Search
+https://mp.weixin.qq.com/s/nAxbljcLeGWsPK6ITunzTA
 
-Planning主要有两个用途：
+深度学习对机器视觉的影响
 
-- 改善policy或value function。这种方式通常叫做background planning。它不在乎当前的状态，而在乎对于所有状态都有效的policy或value function。
+https://mp.weixin.qq.com/s/-ALThz4RR9tIhTl5cVbJ8Q
 
-- 直接根据当前状态选择动作。这种方式通常叫做decision-time planning。它更在乎于当前状态。
+生成组合仿射变换矩阵，裁剪+缩放+平移+斜切+旋转
 
-这里以最简单的前向搜索(Forward Search)算法来讨论一下decision-time planning的特点。
+https://mp.weixin.qq.com/s/mEUhBnEuGxbU6_wALt0crw
 
-![](/images/img3/FS.png)
+基于Python查找图像中最常见的颜色
 
-上图是Forward Search的示意图，图中绿色方格节点指的是终止状态。
+https://www.cnblogs.com/xyf327/category/1985244.html
 
-这种算法以当前状态$$S_t$$作为根节点构建了一个搜索树（Search Tree），使用MDP模型进行前向搜索。前向搜索不需要解决整个MDP，而仅仅需要构建一个从当前状态开始与眼前的未来相关的次级（子）MDP。这相当于一个登山运动员的登山问题，在某一个时刻，他只需要关注当前位置（状态）时应该采取什么样的行为才能更有利于登山（或者下撤），而不需要考虑第二天中饭该吃什么，那是登顶并安全撤退后才要考虑的事情。
+一个工业机器视觉的专栏
 
-从中可以看出，background planning相当于是**广度优先遍历**，虽然考虑的比较全面，但决策的深度较浅，而decision-time planning虽然只考虑当前状态的情况，但决策的深度较深（通常是一个完整的episode），相当于是**深度优先遍历**。
+https://blog.csdn.net/xiny520/article/details/51460148
 
-sample-based planning+Forward search就得到了Simulation-Based Search。
+聚合通道特征（Aggregate Channel Feature，ACF）
 
-首先，从Model中采样，形成从当前状态开始到终止状态的一系列Episode：
+# 计算机图形学
 
-$$\{s_t^k, A_t^k, R_{t+1}^k, \dots, S_T^k\}_{k=1}^K\sim M_v$$
+## 教程
 
-有了这些Episode资源，我们可以使用Model-Free的强化学习方法，如果我们使用Monte-Carlo control，那么这个算法可以称作蒙特卡罗搜索(Monte-Carlo Search)，如果使用Sarsa方法，则称为TD搜索(TD Search)。
+Fundamentals Of Computer Graphics。中文常称为“虎书”。
 
-## Monte-Carlo Search
+Physically Based Rendering: From Theory to Implemention
 
-我们首先看一下Simple Monte-Carlo Search的步骤：
+## 历史
 
-- 给定一个模型M和一个模拟的策略$$\pi$$。
+Ivan Edward Sutherland，1938年生。计算机图形学之父。图灵奖获得者（1988）。
 
-- 针对行为空间里的每一个行为$$a\in A$$：
+https://zhuanlan.zhihu.com/p/121868664
 
-从这个当前状态$$s_t$$开始模拟出K个Episodes：
+科学，艺术，天才，一篇计算科学的史诗，一场兑现的资本盛宴
 
-$$\{s_t^k, a, R_{t+1}^k, S_{t+1}^k, A_{t+1}^k,\dots, S_T^k\}_{k=1}^K\sim M_v,\pi$$
+## 参考
 
-使用平均收获（蒙特卡罗评估）来评估当前行为a的行为价值：
+https://mp.weixin.qq.com/s/hI9Z3l2eVJxkPbL8zG5uGA
 
-$$Q(s_t, a)=\frac{1}{K}\sum_{k=1}^KG_t\xrightarrow[]{P} q_\pi(s_t, a)$$
+图形学基础，427页pdf
 
-- 选择一个有最大Q值的行为作为实际要采取的行为：
+https://zhuanlan.zhihu.com/p/430541328
 
-$$a_t = \mathop{\arg\max}_{a\in A}Q(s_t, a)$$
+图形学基础篇
 
-Simple Monte-Carlo Search的主要问题在于模拟出的Episodes的质量依赖于Model的质量，如果Model不准确，就会导致一系列的偏差，最终会导致结果的不准确。
+http://15462.courses.cs.cmu.edu/fall2020/courseinfo
 
-我们可以采用优化领域常用的Evaluate/Improve方法来改进Monte-Carlo Search，于是就得到了Monte-Carlo Tree Search（MCTS）方法。
+Computer Graphics
 
-这里先看一下MCTS的Evaluation阶段的流程：
+https://www.tomlooman.com/stanford-cs193u/
 
-- 给定一个模型M。
+Stanford CS193u: Video Game Development in C++ and Unreal Engine
 
-- 从当前状态$$s_t$$开始，使用当前的模拟策略$$\pi$$,模拟生成K个Episodes：
+https://mp.weixin.qq.com/s/oFcqOPQriTgWMvcUGXHlRQ
 
-$$\{s_t^k, a, R_{t+1}^k, S_{t+1}^k, A_{t+1}^k,\dots, S_T^k\}_{k=1}^K\sim M_v,\pi$$
+计算机图形学入门总结
 
-- 构建一个包括所有个体经历过的状态和行为的**搜索树**。
+https://www.zhihu.com/column/graphicon
 
-- 对于搜索树种每一个状态行为对$$(s,a)$$，计算从该$$(s,a)$$开始的所有完整Episode收获的平均值，以此来估算该状态行为对的价值$$Q(s,a)$$:
+一个图形学方面的专栏
 
-$$Q(s_t, a)=\frac{1}{N(s,a)}\sum_{k=1}^K \sum_{u=t}^T 1(S_u,A_u=s,a) G_u\xrightarrow[]{P} q_\pi(s, a)$$
+https://github.com/KrisYu/computer-graphics-from-scratch-Notes
 
-- 选择一个有最大Q值的行为作为实际要采取的行为：
+一个图形学方面的专栏
 
-$$a_t = \mathop{\arg\max}_{a\in A}Q(s_t, a)$$
+https://mp.weixin.qq.com/s/h-vgHkzLjh9AAa6Z0lZqlg
 
-MCTS的一个特点是在构建搜索树的过程中，更新了搜索树内状态行为对的价值，积累了丰富的信息，利用这些信息可以更新模拟策略，使得模拟策略得到改进。换句话说，MCTS的策略不是一成不变的。
+基于物理渲染(PBR)的车漆技术
 
-MCTS的Simulation也是有讲究的。
+https://zhuanlan.zhihu.com/p/32095589
 
-首先，改进策略时要分情况对待：
+在《硬影像》与罗登老师/导演聊渲染技术
 
-- 树内（in-tree）确定性策略（Tree Policy）：对于在搜索树中存在的状态行为对，策略的更新倾向于最大化Q值，这部分策略随着模拟的进行是可以得到持续改进的。
+https://blog.csdn.net/jaccen2012/article/details/80328043
 
-- 树外（out-of-tree）默认策略（Default Policy）：对于搜索树中不包括的状态，可以使用固定的随机策略。
+跨平台渲染引擎简介
 
-随着不断地重复模拟，状态行为对的价值将得到持续地得到评估。同时基于$$\epsilon-greedy(Q)$$的搜索策略使得搜索树不断的扩展，策略也将不断得到改善。
+https://zhuanlan.zhihu.com/p/163305630
 
-下面我们结合实例（下围棋）和示意图，来实际了解MCTS的运作过程。
+如何判断点在三角形内部
 
-![](/images/img3/MCTS.png)
+https://www.zhihu.com/column/c_1165601616035618816
 
-**第一次迭代**：五角形表示的状态是个体第一次访问的状态，也是第一次被录入搜索树的状态。我们构建搜索树：将当前状态录入搜索树中。使用基于蒙特卡罗树搜索的策略（两个阶段），由于当前搜索树中只有当前状态，全程使用的应该是一个搜索第二阶段的默认随机策略，基于该策略产生一个直到终止状态的完整Episode。图中那些菱形表示中间状态和方格表示的终止状态，在此次迭代过程中并不录入搜索树。终止状态方框内的数字1表示（黑方）在博弈中取得了胜利。此时我们就可以更新搜索树种五角形的状态价值，以分数1/1表示从当前五角形状态开始模拟了一个Episode，其中获胜了1个Episode。
+一个图形学方面的专栏
 
-![](/images/img3/MCTS_2.png)
+https://mp.weixin.qq.com/s/MhGrLydVsbvkhZ5U820zTQ
 
-**第二次迭代**：当前状态仍然是树内的圆形图标指示的状态，从该状态开始决定下一步动作。根据目前已经访问过的状态构建搜索树，依据模拟策略产生一个行为模拟进入白色五角形表示的状态，并将该状态录入搜索树，随后继续该次模拟的对弈直到Episode结束，结果显示黑方失败，因此我们可以更新新加入搜索树的五角形节点的价值为0/1，而搜索树种的圆形节点代表的当前状态其价值估计为1/2，表示进行了2次模拟对弈，赢得了1次，输了1次。
+哈佛小哥这个github仓库从零开始教你计算机图形学
 
-经过前两次的迭代，当位于当前状态（黑色圆形节点）时，当前策略会认为选择某行为进入上图中白色五角形节点状态对黑方不利，策略将得到更新：当前状态时会个体会尝试选择其它行为。
+https://mp.weixin.qq.com/s/7SurDN5gvLCEDbxe2gR58w
 
-![](/images/img3/MCTS_3.png)
+面向工程师的图像处理，438页pdf
 
-**第三次迭代**：假设选择了一个行为进入白色五角形节点状态，将该节点录入搜索树，模拟一次完整的Episode，结果显示黑方获胜，此时更新新录入节点的状态价值为1/1，同时更新其上级节点的状态价值，这里需要更新当前状态的节点价值为2/3，表明在当前状态下已经模拟了3次对弈，黑方获胜2次。
+https://www.zhihu.com/question/49812837
 
-随着迭代次数的增加，在搜索树里录入的节点开始增多，树内每一个节点代表的状态其价值数据也越来越丰富。在搜索树内依据$$\epsilon$$-greedy策略会使得当个体出于当前状态（圆形节点）时更容易做出到达图中五角形节点代表的状态的行为。
+256字节3D程序是如何实现3D引擎的呢？
 
-![](/images/img3/MCTS_4.png)
+https://zhuanlan.zhihu.com/p/22337544
 
-**第四次迭代**：当个体位于当前（圆形节点）状态时，树内策略使其更容易进入左侧的蓝色圆形节点代表的状态，此时录入一个新的节点（五角形节点），模拟完Episode提示黑方失败，更新该节点以及其父节点的状态价值。
+不只是噪音（Perlin噪音）
 
-![](/images/img3/MCTS_5.png)
+https://mp.weixin.qq.com/s/jq4B_4kUOZE8yN5y0u-5yg
 
-**第五次迭代**：更新后的策略使得个体在当前状态时仍然有较大几率进入其左侧圆形节点表示的状态，在该节点，个体避免了进入刚才失败的那次节点，录入了一个新节点，基于模拟策略完成一个完整Episode，黑方获得了胜利，同样的更新搜索树内相关节点代表的状态价值。
+万字长文！UCLA蒋陈凡夫12年自我回顾，图形学的终极浪漫
 
-如此反复，随着迭代次数的增加，当个体处于当前状态时，其搜索树将越来越深，那些能够引导个体获胜的搜索树内的节点将会被充分的探索，其节点代表的状态价值也越来越有说服力；同时个体也忽略了那些结果不好的一些节点（上图中当前状态右下方价值估计为0/1的节点）。需要注意的是，仍然要对这部分节点进行一定程度的探索，以确保这些节点不会被完全忽视。
+## 术语
+
+Material Point Method（物质点法）
+
+## Taichi
+
+Taichi是胡渊鸣开发的一套计算机图形库。它拥有一套特有的DSL，并可将之编译为能在不同backend硬件上运行程序。
+
+>胡渊鸣，清华本科（2017）+MIT博士（2021）。
+
+官网：
+
+https://taichi.graphics/
+
+代码：
+
+https://github.com/taichi-dev/taichi
+
+胡渊鸣还开发了一个物理模拟方面的自动微分器——DiffTaichi：
+
+https://github.com/yuanming-hu/difftaichi
+
+一个卡门涡街的demo：
+
+https://github.com/hietwll/LBM_Taichi
+
+参考：
+
+https://www.bilibili.com/video/BV1aL4y1a7pv
+
+B站的太极图形课
+
+https://zhuanlan.zhihu.com/p/97700605
+
+99行代码的《冰雪奇缘》
+
+https://mp.weixin.qq.com/s/zPvvf1VptQ1M7iVEcxN-AQ
+
+计算机图形也能自动可微：MIT学神的微分太极框架开源
+
+https://zhuanlan.zhihu.com/p/507362284
+
+99行代码能干啥？造个体素小世界！
+
+https://www.zhihu.com/question/535601383
+
+Taichi和PyTorch有哪些相似和不同？
+
+https://zhuanlan.zhihu.com/p/573894977
+
+用Taichi实现GPU图像处理：从入门到入魔
+
+https://zhuanlan.zhihu.com/p/612102573
+
+Taichi NeRF（上）：不写CUDA也能开发、部署Instant NGP
+
+https://zhuanlan.zhihu.com/p/613679756
+
+Taichi NeRF (下): 关于3D AIGC的务实探讨
+
+## Halide
+
+Halide也是一个高性能的图形DSL+编译器的项目。它影响了后来的TVM、Taichi等计算引擎项目。
+
+如果你想用普通的CPU做加速，又不想去优化算法，那么halide将是非常优秀的选择。唯一要做的，就是把算法用halide重写一遍即可。
+
+Halide采用的计算和调度分离的方案，为后来的Taichi和TVM所采用。
+
+官网：
+
+https://halide-lang.org/
+
+参考：
+
+https://www.zhihu.com/question/294625837
+
+如何评价Halide？
+
+https://zhuanlan.zhihu.com/p/122217135
+
+halide编程技术指南
+
+https://www.zhihu.com/question/479548933
+
+如何学习halide?
+
+## Tiramisu
+
+官网：
+
+http://tiramisu-compiler.org/
+
+参考：
+
+https://zhuanlan.zhihu.com/p/363516429
+
+Tiramisu：一种基于Polyheral的深度学习模型编译器
+
+## Lift
+
+Lift也是一种并行编程及优化的语言。
+
+官网：
+
+http://www.lift-project.org/
+
+参考：
+
+https://www.zhihu.com/question/313697268
+
+如何评价lift编程语言?
+
+## ZENO
+
+https://mp.weixin.qq.com/s/6qtCwJpJ5zu65Wr15e08Lg
+
+皮克斯华人CG老鸟深圳创业！低代码实现好莱坞大片特效
+
+https://zhuanlan.zhihu.com/p/390717137
+
+ZENO：一份不详细的使用说明

@@ -4,13 +4,52 @@ title:  语音识别（二）——基本框架, Microphone Array
 category: speech 
 ---
 
+* toc
+{:toc}
+
 # 概述
 
 ## 数据集（续）
 
+http://pan.baidu.com/s/1dEhUghz
+
+清华大学语音和语言技术研究中心（CSLT）公开的数据集。这个数据集除了包含thchs30之外，还包含了其他几个小语种的数据集。
+
+http://cn-mirror.openslr.org/18/
+
+单独的thchs30数据集
+
+http://blog.csdn.net/sut_wj/article/details/70662181
+
+THCHS-30：一个免费的中文语料库
+
+---
+
+http://cn-mirror.openslr.org/33/
+
+AISHELL数据库是THCHS-30之后，目前中文语音数据开源最大的数据库。
+
+它是由北京希尔贝壳科技有限公司(http://www.aishelltech.com)录制的中文普通话数据。由400名来自不同方言区的发音人录制，男女比例均衡。按照设计好的文本，在相对安静环境中使用手机（Android和IOS系统）录制格式为16kHz、16bit单声道数据和高保真麦克风录制格式为44.1kHz、16bit单声道数据同时采集。
+
 http://www.aishelltech.com/aishell_2
 
 AISHELL-2的数据规模达到1000小时和更优秀的系统级recipe。数据目前以硬盘和网盘形式免费开放给高校科研教育机构。商用似乎还是要钱的。
+
+---
+
+https://keithito.com/LJ-Speech-Dataset/
+
+The LJ Speech Dataset
+
+这是由LibriVox项目的Linda Johnson制作的数据集。
+
+LibriVox项目是一个公益性质的有声电子书项目。
+
+官网：
+
+https://librivox.org/
+
+---
 
 https://mp.weixin.qq.com/s/f_oFRDuSAuqwbOAby07a5Q
 
@@ -27,6 +66,18 @@ Mozilla开源语音识别模型和世界第二大语音数据集
 http://www.voxforge.org/
 
 VoxForge是一个非常活跃的众包语音识别数据库和经过训练的模型库
+
+https://mp.weixin.qq.com/s/jvxUkwfPf3kqqdnvTQLlkA
+
+CoVoST：Facebook发布的多语种语音-文本翻译语料库
+
+https://mp.weixin.qq.com/s/opP5-gPGAKJT16nXaoOAWg
+
+Google发布的语音分离数据集与深度学习模型
+
+https://mp.weixin.qq.com/s/eogV9SPfXGgLOJYnsVFzsQ
+
+世界最大的多语言语音数据集现已开源（VoxPopuli）
 
 # 基本框架
 
@@ -80,6 +131,30 @@ https://www.zhihu.com/question/20398418
 
 语音识别的技术原理是什么？
 
+https://mp.weixin.qq.com/s/_jK4eTdboU9A-E785FUBJg
+
+语音识别基础：（一）语音是什么
+
+https://mp.weixin.qq.com/s/XRTCCcEdmQTk4XitVo8U2Q
+
+语音识别基础：（二）语音识别方法
+
+https://mp.weixin.qq.com/s/e4bO-koOmIrAfqC-zwOvwg
+
+语音识别基础：（三）完整的语音识别实验
+
+https://mp.weixin.qq.com/s/wowvIK5sspVR7ogF-3keYA
+
+语音识别基础：（四）前端处理
+
+https://mp.weixin.qq.com/s/uUCIm4YBQ0pTfzWnF_YaLQ
+
+语音识别基础：（五）训练与解码
+
+https://mp.weixin.qq.com/s/jOACb1YelVHovpe-r-fkZA
+
+语音识别概论
+
 # Microphone
 
 麦克风作为业界通俗的一种叫法，是英文Microphone的音译名称，国内的称呼乱一些，有时候也简单称作话筒，香港和台湾地区也会称作微音器、拾音器。麦克风的中文学术名称是传声器，这是一种将声音转换成电子信号的换能器，即把声信号转成电信号，这其实和光电转换的原理是完全一致的。 
@@ -93,6 +168,8 @@ https://www.zhihu.com/question/20398418
 现在麦克风阵列主要使用的是**数字MEMS麦克风**，其最长尺寸仅有3.76MM。MEMS麦克风也是手机中大量使用的传感器件，一般手机至少有2个以上这类麦克风。MEMS麦克风实际上只是工艺上的改进，其原理依然属于电容式麦克风。
 
 与MEMS麦克风直接PK的，就是**驻极体麦克风**。它的性能更优秀，但一致性不如MEMS麦克风，因此主要用在单麦上。而麦克风阵列一般都是MEMS麦克风。
+
+驻极体和MEMS原理差不多，都是空气压强变化引起振膜的振动，带动电容值发生了变化，最后产生了电压变化。这种电压变化和空气压强的变化之间有接近线性的相对关系。这样就完成了声能到电能的转换。区别在于驻极体在生产的时候就注入了一定的永久电荷，形成固定的电势，而MEMS需要电源给予电压来保证电势的恒定。
 
 被淘汰的技术：带式麦克风、碳精麦克风（老式电话）。
 
@@ -115,6 +192,14 @@ Microphone的主要厂商：
 https://zhuanlan.zhihu.com/p/27610503
 
 盘点麦克风技术及市场，远场语音交互如何选型麦克风
+
+https://mp.weixin.qq.com/s/6PI8t8uRGPk_Zy0d3uwzGw
+
+语音交互设备对麦克风选型和结构设计的要求
+
+https://mp.weixin.qq.com/s/itCYxYgQqDLjISRuXZbE_g
+
+MEMS麦克风产业现状及发展趋势
 
 # Microphone Array
 
@@ -155,39 +240,3 @@ https://www.leiphone.com/news/201610/5Ye8zxxwtlLGiW1y.html
 前端主要解决了产品是否听得准的问题，这其中有五个核心指标：**远场语音唤醒率、复杂环境 误唤醒率、远场语音识别率、总体延迟时间和总体稳定性**。这五个核心指标决定了用户的第一体验。
 
 1.**以Google为代表的纯云端技术架构。**麦克风阵列的阵元较多，产生的数据容量太大，而当前的网络上传带宽严重不足，所以只能权衡选择更少的麦克风。
-
-2.**以科胜讯为代表的纯前端技术架构。**纯前端方案的优点就是容易集成到芯片上，缺点就是很难升级以及扩展，这恰好与人工智能不断迭代的趋势不太兼容，也是当前这种方案无法流行的主要原因。
-
-这类方案能提供的功能有限，主要包括自适应回声抵消技术(AEC)、自动噪音抑制技术(ANS)和自动增益控制技术(AGC)。
-
-3.**以Amazon为代表的前端+云端方案。**这种方案是把算法分别放置到前端和云端，根据具体场景可以调配优化，更容易优化性能并扩展功能。这种方案考虑了麦克风阵列与唤醒和识别技术一体化的问题，由于唤醒和识别严重依赖麦克风阵列的算法处理效果，实际上这三种技术是无法完全分割的，特别是麦克风阵列和唤醒技术更是浑然一体。
-
-参考：
-
-https://zhuanlan.zhihu.com/p/29809882
-
-让机器听懂人类语言，主流麦克风阵列技术解读
-
-https://zhuanlan.zhihu.com/p/23420891
-
-麦克风阵列的语音信号处理技术
-
-## Microphone Array技术难点
-
-传统的阵列信号处理技术直接应用到麦克风阵列处理系统中往往效果不理想，其原因在于麦克风阵列处理有不同的处理特点：
-
-### 阵列模型的建立
-
-麦克风主要应用处理语音信号，拾音范围有限，且多用于近场模型，使得常规的阵列处理方法如雷达，声呐等平面波远场模型不再适用，在近场模型中，需要更加精准的球面波，需要考虑传播路径不同引起的幅度衰减不同。
-
-### 宽带信号处理
-
-通常的阵列信号处理多为窄带，即不同阵元在接受时延与相位差主要体现在载波频率，而语音信号未经过调制也没有载波，且高低频之比较大，不同阵元的相位延时与声源本身的特性关系很大—频率密切相关，使得传统的阵列信号处理方法不再完全适用。
-
-### 非平稳信号处理
-
-传统阵列处理中，多为平稳信号，而麦克风阵列的处理信号多是非平稳信号，或者短时平稳信号，因此麦克风阵列一般对信号做短时频域处理，每个频域均对应一个相位差，将宽带信号在频域上分成多个子带，每个子带做窄带处理，再合并成宽带谱。
-
-### 混响
-
-声音传播受空间影响较大，由于空间反射，衍射，麦克风收到的信号除了直达信号以外，还有多径信号叠加，使得信号被干扰，即为混响。在室内环境中，受房间边界或者障碍物衍射，反射导致声音延续，极大程度的影响语音的可懂度。

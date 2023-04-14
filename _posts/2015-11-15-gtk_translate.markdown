@@ -1,8 +1,11 @@
 ---
 layout: post
-title:  Transifex与GTK文档翻译, Linux镜像文件, 外设接口杂谈, 中文编码格式问题, Ansible
+title:  Transifex与GTK文档翻译, 外设接口杂谈
 category: technology 
 ---
+
+* toc
+{:toc}
 
 # Transifex与GTK文档翻译
 
@@ -10,7 +13,9 @@ category: technology
 
 最近忽然对GTK+产生了浓厚的兴趣，打算研究一下。学习一个新东西，最好的方法就是先阅读一下它的文档。应该说GTK的文档虽然比不了MSDN，但也颇为详尽。主要的问题在于文档都是英文的，阅读起来比较吃力。
 
-考虑到GTK已经有15年的历史，所以试着在网上搜了一下参考手册的中文版，结果找到了这个网址：http://code.google.com/p/gtk-doc-cn/
+考虑到GTK已经有15年的历史，所以试着在网上搜了一下参考手册的中文版，结果找到了这个网址：
+
+http://code.google.com/p/gtk-doc-cn/
 
 这是一个叫yetist的人发起的翻译项目。
 
@@ -39,6 +44,16 @@ yetist同学还同时主导了一系列的GTK文档翻译项目。有兴趣的�
 http://imtx.me/
 
 他也是ubuntu-tweak的作者。我经常用这个软件清理磁盘。
+
+---
+
+https://toshiocp.github.io/Gobject-tutorial/index.html
+
+GObject Tutorial for beginners
+
+https://www.cnblogs.com/silvermagic/p/9087883.html
+
+Glib之GObject简介
 
 ## GTK文档翻译流程
 
@@ -70,7 +85,7 @@ https://github.com/antkillerfarm/gtk-doc-cn
 
 以Ubuntu为例，可用以下命令安装依赖软件包：
 
-`sudo apt-get install python python-pip fam gtk-doc-tools gnome-doc-utils`
+`sudo apt install python python-pip fam gtk-doc-tools gnome-doc-utils`
 
 框架需要初始化：
 
@@ -116,65 +131,15 @@ http://docs.transifex.com/client/
 
 这里不知是否存在bug，有的时候这个命令需要运行两次，第1次失败，第2次就可以看到最终的文档了。
 
-# GLib的Socket操作
+# GIO网络应用开发
 
-示例如下：
+GIO提供了以GSocket为首的低级API，和以GSocketClient、GSocketConnection为首的高级API。
+
+高级API的使用示例如下：
 
 https://github.com/antkillerfarm/antkillerfarm_crazy/tree/master/helloworld/glib/network
 
 需要注意的是，此例中Server端采用的是阻塞式操作，因此会将main loop阻塞住。如果main loop需要处理其他事件的话，这里可使用GThreadedSocketService启动单独的线程，处理之。
-
-# Linux镜像文件
-
-## vmlinux
-
-这是源代码直接生成的镜像文件。以x86平台为例：
-
-arch\x86\kernel\vmlinux.lds.S--这是链接脚本的源代码，经过C语言的宏预处理之后会生成vmlinux.lds，使用这个脚本，链接即可得到vmlinux，其过程与普通应用程序并无太大区别，也就是个elf文件罢了。
-
-## image
-
-vmlinux使用objcopy处理之后，生成的不包含符号表的镜像文件。这是linux默认生成的结果。
-
-## zImage
-
-zImage = 使用gzip压缩后的image + GZip自解压代码。使用`make zImage`或者`make bzImage`创建。两者的区别是zImage只适用于大小在640KB以内的内核镜像。
-
-## uImage
-
-uImage = uImage header + zImage。使用uboot提供的mkimage工具创建。
-
-以上的这些镜像文件的关系可参见：
-
-http://www.cnblogs.com/armlinux/archive/2011/11/06/2396786.html
-
-http://www.linuxidc.com/Linux/2011-02/32096.htm
-
-## Flash镜像
-
-一般来说，一个完整的linux系统，不仅包括内核，还包括bootloader和若干分区。这些镜像文件散布，不利于批量生产的进行。这时就需要将之打包，并生成一个可直接用于生产烧写的Flash镜像。
-
-可使用mtd-utils库中的ubinize工具生成Flash镜像。
-
-mtd-utils的官网是：
-
-http://www.linux-mtd.infradead.org/
-
-安装方法：
-
-`sudo apt-get install mtd-utils`
-
-mtd-utils还可用于烧写分区。例如如下命令：
-
-`mtd write xyz.uimage linux`
-
-其中`xyz.uimage`是镜像文件名，`linux`是分区名称。
-
-参考：
-
-http://blog.csdn.net/andy205214/article/details/7390287
-
-从代码来查看板子的MTD分区方案，主要是搜索mtd_partition类型的使用定义。比如mini2440板子的分区方案可在mini2440_default_nand_part数组中查到。
 
 # 外设接口杂谈
 
@@ -216,6 +181,12 @@ UART的硬件形态分为TTL、RS232和RS485等，其中最常用的是RS232，�
 
 分为电平式和边沿式两种。前者如I2C，只允许数据在时钟信号为低电平时改变，后者如SPI，规定数据在时钟信号的边沿有效。
 
+### 参考
+
+https://www.zhihu.com/question/308406342
+
+SPI总线协议如何理解？
+
 ## I2C
 
 ![](/images/article/i2c.png)
@@ -230,33 +201,48 @@ I2C相比于UART和SPI，其优点在于一个接口可以外接多个设备（�
 
 SMBus(System Management Bus,系统管理总线)是1995年由Intel提出的，应用于移动PC和桌面PC系统中的低速率通讯总线。由于它大部分基于I2C总线规范，因此在Linux内核中，被归类为I2C总线。
 
-# 中文编码格式问题
-
-常用的中文编码格式，主要包括大陆的GB系列和台湾的BIG5系列。
-
-GB系列按照发布时间的顺序，又包括GB2312、GBK和GB18030三种格式。越晚的编码格式，其包含的字符数越多，但同时又兼容之前的编码格式。
-
-除此之外，能表示中文的还有Unicode系列。比如，Java内部使用的UTF16BE，以及网络上用的比较多的UTF8。
-
-需要指出的是，由于各种编码格式的字节数不尽相同，单独对文章中的某些字段进行转码，常会由于字节对齐的问题，而产生异常的结果。最好是在一种编码下生成整个文档之后，统一转换成另一种格式。
-
 参考：
 
-https://mp.weixin.qq.com/s/q-VmuWrsKSBMhWxjafPsng
+https://zhuanlan.zhihu.com/p/201075632
 
-Unicode与UTF-8的区别
+什么是I3C总线？它和I2C和SMBus是什么关系？
 
-# Ansible
+# 隋唐+
 
-Ansible is Simple IT Automation——简单的自动化IT工具。这个工具的目标有这么几项：让我们自动化部署APP；自动化管理配置项；自动化的持续交付；自动化的（AWS）云服务管理。简单的说就是：**批量的在远程服务器上执行命令。**
+以唐军举例，唐朝一个标准合成军包括4000骑兵+10000步兵+6000军医铁匠木匠工兵砲兵马夫厨师等非一线作战人员。
 
-官网：
+怛罗斯之战高仙芝战败，大量技术人员被俘，造纸术登技术传到了中东，促进了中东欧洲技术进步。
 
-https://www.ansible.com/
+不仅造纸术，营建巴格达也是这批唐朝俘虏，就是因为他们营建巴格达的功绩，所以被阿拉伯给予自由身，这批唐朝俘虏在东地中海地区旅游一圈（耶路撒冷到亚历山大都去过）后搭船返回唐朝，其中一个叫杜环的将经历写成《经行记》。
 
-参考：
+---
 
-http://www.ansible.com.cn/
+边塞诗人的典型代表高适是沧州人，在河西节度使哥舒翰幕府工作过，岑参是荆州人，在安西节度使高仙芝幕府工作过。
 
-Ansible中文权威指南
+他们不是不喜欢长安的繁花锦秀，实在是蹲在长安没出路，才到边塞谋前程的。
 
+这些边塞诗人是有名的，其他没名气的更多。
+
+沧州人严庄，在大唐的官职体系下没有出头之日，就去幽州投奔安禄山，三四年时间便出任主簿，成为安禄山的亲信谋士。
+
+幽州人高尚，年轻时穷困潦倒，为了出人头地也投奔安禄山，数年时间便成为安禄山的掌书记，随时可以出入安禄山的卧室，亲信程度可见一斑。
+
+---
+
+唐朝科举不是宋明清，是权贵选拔。放现在就是，不论你啥水平，先找县委书记给你开推荐信，这叫举，老百姓上哪里找推荐信去？
+
+有了推荐信直接去京城考进士，没有中间层次考试。
+
+去了京城，先拜见考官，吹自己出身：小人家庭是五百年的婆罗门……
+
+考试卷子不糊名不誊写，考官点卷子就是喊：汉东赵瑞龙公子的卷子给我找出来先……
+
+---
+
+鲁炅坚守南阳历时一年，挡住安禄山叛军南下襄、邓的道路。
+
+---
+
+https://www.zhihu.com/question/544661058
+
+为什么古代政府机构名称以及官职名称很难理解？

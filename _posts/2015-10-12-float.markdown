@@ -1,12 +1,15 @@
 ---
 layout: post
-title:  浮点运算和代码优化, 并行计算, 稀疏矩阵的存储, Optimizer软件
+title:  浮点运算和代码优化, 并行计算, 稀疏矩阵的存储, Optimizer软件, Zookeeper
 category: AI 
 ---
 
+* toc
+{:toc}
+
 # 浮点运算和代码优化
 
-## 1.浮点运算问题
+## 浮点运算问题
 
 浮点运算在工业中应用非常广泛，但嵌入式CPU通常没有对浮点运算提供直接的硬件支持。而采用标准库提供的软件计算方案，性能又很差。这时就需要使用浮点运算协处理器加速浮点运算。（486之前的PC，CPU和浮点运算协处理器FPU也是分开的，例如i486DX是有FPU的型号，而i486SX则是没有FPU的型号。）
 
@@ -14,10 +17,10 @@ category: AI
 
 最直观的做法是将所有用到浮点计算的地方都替换成FPU函数。例如如下代码：
 
-{% highlight c %}
+```c
 float a,b,c;
 a = b + c;
-{% endhighlight %}
+```
 
 假设FPU加法函数的原型为：
 
@@ -25,10 +28,10 @@ a = b + c;
 
 如果我们要使用FPU硬件加速的话，只需要将上述代码改为：
 
-{% highlight c %}
+```c
 float a,b,c;
 a = Add(b,c);
-{% endhighlight %}
+```
 
 就可以了。
 
@@ -44,18 +47,18 @@ a = Add(b,c);
 
 1.使用nm命令查看libgcc.a中的符号表，可以查到__adddf3在_addsub_df.o中。
 
-2.使用ar命令的d选项从libgcc.a中去掉_addsub_df.o。
+2.使用`ar -d`从libgcc.a中去掉_addsub_df.o。
 
 3.在链接时使用FPU函数库
 
-## 2.立即数计算量的问题
+## 立即数计算量的问题
 
 请看以下代码：
 
-{% highlight c %}
+```c
 float64 a, b,c;
-a = 2*PI * (b - c) / 365.25;
-{% endhighlight %}
+a = 2 * PI * (b - c) / 365.25;
+```
 
 机器执行这段代码会进行几次运算呢？
 
@@ -87,13 +90,13 @@ a = 2*PI * (b - c) / 365.25;
 
 -o2有什么作用呢？还是上面的例子：
 
-{% highlight c %}
+```c
 void main()
 {
   float64 a, b,c;
-  a = 2*PI * (b - c) / 365.25;
+  a = 2 * PI * (b - c) / 365.25;
 }
-{% endhighlight %}
+```
 
 如果是-o2选项的话，机器会进行几次运算呢？
 
@@ -111,7 +114,7 @@ void main()
 
 我们可以在链接脚本中合并这些段，以下是一个简单的实例：
 
-{% highlight bash %}
+```bash
 .text :
 {
   . = ALIGN(4);
@@ -120,33 +123,13 @@ void main()
   . = ALIGN(4);
   text_end = .;
 }
-{% endhighlight %}
+```
 
-## IEEE 754
+## 参考
 
-|  | Sign | Exponent | Significand |
-|:--:|:--:|:--:|:--:|
-| FP16 | 1 | 5 | 10 |
-| FP32 | 1 | 8 | 23 |
-| FP64 | 1 | 11 | 52 |
-| FP128 | 1 | 15 | 113 |
-| FP256 | 1 | 19 | 237 |
+https://zhuanlan.zhihu.com/p/482979228
 
-显然，Significand的位数决定Accuracy，而Exponent的位数决定Dynamic Range。
-
-上溢：超出所能表示的最大数（$$\to \infty$$）。
-
-下溢：超出所能表示的最小数（$$\to 0$$）。
-
-除了IEEE 754之外，还有IBM hexadecimal floating point。相比于IEEE 754，IBM格式的Significand位数多一些，而Exponent的位数少一些。
-
-参考：
-
-https://en.wikipedia.org/wiki/IEEE_754
-
-http://blog.codinglabs.org/articles/trouble-of-x86-64-platform.html
-
-x86-64体系下一个奇怪问题的定位
+看完微软大神写的求平均值代码，我意识到自己还是too young了
 
 # 并行计算
 
@@ -178,17 +161,13 @@ http://graphics.stanford.edu/projects/brookgpu/
 
 其他的并行计算框架还有：OpenACC、AMD stream、PGI。
 
-NVIDIA相关产品线：
-
-Tesla产品专为数据中心与工作站计算应用而设计。
-
-Quadro产品专为专业图形与工程应用而设计。
-
-GeForce产品专为互动游戏与消费类应用而设计。
-
 ## OpenCL vs CUDA
 
 ![](/images/article/opencl_cuda.jpg)
+
+## OpenMp
+
+https://github.com/lapesd/libgomp
 
 ## 教程
 
@@ -212,7 +191,7 @@ http://blog.csdn.net/augusdi/article/details/12833235
 
 ## Compressed sparse row (CSR, CRS or Yale format)
 
-{% highlight python %}
+```python
 [0 0 0 0
 5 8 0 0
 0 0 3 0
@@ -221,7 +200,7 @@ http://blog.csdn.net/augusdi/article/details/12833235
 A  = [ 5 8 3 6 ]
 JA = [ 0 1 2 1 ]
 IA = [ 0 0 2 3 4 ]
-{% endhighlight %}
+```
 
 其中，A是非零元素的value，JA是非零元素的column index。
 
@@ -259,36 +238,44 @@ https://mp.weixin.qq.com/s/wJAt-RqmsoyECLGgdlH6RA
 
 基于数据的分布式鲁棒优化算法及其应用
 
-# 电子科技史+
+# Zookeeper
 
-https://zhuanlan.zhihu.com/p/54493905
+http://zookeeper.apache.org/
 
-PC和BIOS的故事
+`bin/zkServer.sh status`
 
-https://mp.weixin.qq.com/s/iod5Jok3Zfcn4yrGByZQQQ
+http://www.cnblogs.com/lpshou/archive/2013/06/14/3136904.html
 
-索尼的古董
+zookeeper原理
 
-https://mp.weixin.qq.com/s/CxTr4MFVoRFxyCn-x_z8dQ
+https://mp.weixin.qq.com/s/WPyJC4nyLQGWk-OQylUHHw
 
-奇梦达的前世今生
+Zookeeper简单介绍
 
-https://mp.weixin.qq.com/s/TZcVR0wW2LM_bCvB0a88pA
+http://www.ibm.com/developerworks/cn/opensource/os-cn-zookeeper/index.html
 
-中国芯片完整发展历程
+分布式服务框架Zookeeper--管理分布式环境中的数据
 
-https://mp.weixin.qq.com/s?__biz=MzAxOTIxNTg0Mg==&mid=2651001664&idx=1&sn=d7fe10c74feb5eb84c45a0381372c1d3
+https://mp.weixin.qq.com/s/uMj3JEhgyYw4CaIhP1-GTQ
 
-国产芯片·大阅兵
+阿里巴巴为什么不用ZooKeeper做服务发现？
 
-https://mp.weixin.qq.com/s/MzQyu5uqqIEYn-DwxNU50Q
+https://mp.weixin.qq.com/s/KFzJAxL_xvrrjhubd7zH-Q
 
-珠海芯片公司江湖
+Facebook为何放弃ZooKeeper转用自研配置管理系统？
 
-https://mp.weixin.qq.com/s/O4hARQmcBDolt3THeoSwkg
+https://mp.weixin.qq.com/s/DigeE4YxuT55cSeyb1q1tQ
 
-昙花一现的“图文电视”
+ZooKeeper源码和实践揭秘
 
-https://mp.weixin.qq.com/s/OTGy5a-hfxxp19TeJWyIyQ
+https://mp.weixin.qq.com/s/Tb670Jdt4s7CKzGZZQRL_A
 
-爬取6271家死亡公司数据，看十年创业公司消亡史
+用大白话给你解释Zookeeper的选举机制
+
+https://mp.weixin.qq.com/s/BejPSfvEe98nSch81WKgAg
+
+Zookeeper九个问题
+
+https://mp.weixin.qq.com/s/03A4LnDqNhNgQ5bSRIgR_Q
+
+一举拿下高可用与分布式协调系统设计

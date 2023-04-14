@@ -4,6 +4,9 @@ title:  Python（三）
 category: language 
 ---
 
+* toc
+{:toc}
+
 # Python
 
 ## six
@@ -17,6 +20,50 @@ https://bitbucket.org/gutworth/six
 文档：
 
 https://bitbucket.org/gutworth/six
+
+## Python 2 to Python 3
+
+https://www.linuxzen.com/qian-yi-dao-python-3.html
+
+迁移到Python 3
+
+https://www.zhihu.com/question/19698598
+
+Python 2和Python 3有哪些主要区别？
+
+https://mp.weixin.qq.com/s/Q3cqLuOZDSMOdAjVrCDrtQ
+
+在Python 2.7即将停止支持时，我们为你准备了一份3.x迁移指南
+
+https://mp.weixin.qq.com/s/J4bBvu9z3BNcwMSmmL5SMQ
+
+Python 2大限来了！113天后自生自灭，官方不再维护更新
+
+文件print：
+
+```python
+Python2: print >>sys.stderr, "fatal error"
+Python3: print("fatal error", file=sys.stderr)
+```
+
+dict切片：
+
+```python
+Python2: 
+self._layers = net.blobs.keys()
+self._layers = self._layers[1:] # TypeError: 'dict_keys' object is not subscriptable
+
+Python3:
+self._layers = list(net.blobs.keys())
+self._layers = self._layers[1:]
+```
+
+检查某对象是否为字符串或Unicode对象：
+
+```python
+Python2: isinstance(anobj, basestring)
+Python3: isinstance(anobj, str)
+```
 
 ## range & xrange
 
@@ -38,27 +85,27 @@ Python的range和xrange
 
 普通Iterator：
 
-{% highlight python %}
+```python
 for item in enumerate(list):
     print(item)
-{% endhighlight %}
+```
 
 带index的Iterator：
 
-{% highlight python %}
+```python
 for index, item in enumerate(list):
     print(index, item)
-{% endhighlight %}
+```
 
 ## for - else
 
-{% highlight python %}
+```python
 for i in [1,2,3,4]:
     if i > 2:
         print(i)
 else:
     print(i, '我是else')
-{% endhighlight %}
+```
 
 ## 三元表达式
 
@@ -68,12 +115,12 @@ else:
 
 时间数据上的格式处理，主要指strftime和strptime函数。其中前者可将时间数据转换成指定格式的字符串，而后者则将字符串转换成时间数据。
 
-{% highlight python %}
+```python
 import time
 a = "2013-10-10 23:40:00"
 timeArray = time.strptime(a, "%Y-%m-%d %H:%M:%S")
 otherStyleTime = time.strftime("%Y/%m/%d %H:%M:%S", timeArray)
-{% endhighlight %}
+```
 
 日期方面也是类似的做法。
 
@@ -125,7 +172,7 @@ dill是pickle的威力加强版。
 
 Ubuntu下的安装方法是：
 
-`sudo apt-get install sqlite`
+`sudo apt install sqlite`
 
 Python自带了pysqlite包，用于调用sqlite。
 
@@ -137,11 +184,21 @@ https://github.com/antkillerfarm/antkillerfarm_crazy/blob/master/python/pysqlite
 
 `sudo pip install sqlite_bro`
 
+SQLCipher是Sqlite的一个fork，添加了AES加密和其他一些安全特性。
+
+代码：
+
+https://github.com/sqlcipher/sqlcipher
+
 参考：
 
 https://mp.weixin.qq.com/s/HcmOmwWQFBIOZs8p3nr7CQ
 
 让Python更加充分的使用Sqlite3
+
+https://mp.weixin.qq.com/s/V2wdmpb_eAGwj6DELEn2vg
+
+原来Python自带了数据库，用起来真方便！
 
 ## zip
 
@@ -149,14 +206,14 @@ Python的zip函数和数据压缩的zip算法没有任何关系。
 
 它的典型用法如下：
 
-{% highlight python %}
+```python
 >>> name=['song','ping','python']
 >>> age=[26,26,27]
 >>> zip(name,age)
 [('song', 26), ('ping', 26), ('python', 27)]
 >>> for n,a in zip(name,age):
 ...   print n,a
-{% endhighlight %}
+```
 
 zip函数属于Python的Built-in Functions，类似的函数还有：
 
@@ -174,7 +231,7 @@ signal包用于处理系统消息。
 
 代码示例：
 
-{% highlight python %}
+```python
 import signal
 
 def handler(signum, frame):
@@ -183,32 +240,14 @@ def handler(signum, frame):
 
 # Set the signal handler and a 5-second alarm
 signal.signal(signal.SIGALRM, handler)
-{% endhighlight %}
+```
 
 ## 文件名处理
 
-{% highlight python %}
+```python
 (filepath,tempfilename) = os.path.split(filename)
 (shotname,extension) = os.path.splitext(tempfilename)
-{% endhighlight %}
-
-## NetworkX
-
-NetworkX是一个用Python语言开发的图论与复杂网络建模工具，内置了常用的图与复杂网络分析算法，可以方便的进行复杂网络数据分析、仿真建模等工作。
-
-官网：
-
-https://networkx.github.io/
-
-参考：
-
-https://www.cnblogs.com/kaituorensheng/p/5423131.html
-
-python复杂网络分析库NetworkX
-
-https://mp.weixin.qq.com/s/WYM7k9gddAndlLBuQWTbSA
-
-一文读懂Python复杂网络分析库networkx
+```
 
 ## tqdm
 
@@ -220,19 +259,33 @@ https://github.com/tqdm/tqdm
 
 示例：
 
-{% highlight python %}
+```python
 from tqdm import tqdm
 for i in tqdm(range(9)):
     ...
-{% endhighlight %}
-
-效果：
-
-`76%|████████████████████            | 7641/10000 [00:34<00:10, 222.22 it/s]`
+```
 
 其实还有一个更简单的办法：
 
 `print("\r" + "xxx", end="")`：这样的话会先把console里面当前的行清除掉、再输出xxx。
+
+参考：
+
+https://mp.weixin.qq.com/s/1YZ7-i3X8Cb2LYEuWtd1KA
+
+给Python代码加上酷炫进度条的几种姿势
+
+https://mp.weixin.qq.com/s/OVb4g1KzIsxgMKjJk_hG6A
+
+在Python中妥善使用进度条
+
+https://mp.weixin.qq.com/s/_rCg_uFD07eZw4QLtD-fzA
+
+Python竟然能做这样的进度条
+
+https://mp.weixin.qq.com/s/nGOCderiyOXsHkMZwIgpoA
+
+酷炫的Python进度条开源库：alive-progress
 
 ## Captcha
 
@@ -260,6 +313,10 @@ https://mp.weixin.qq.com/s/NsaMcgufLYO3i6eG1WO_VA
 
 我不是机器人：谷歌最新版验证码系统ReCaptcha破解已开源
 
+https://mp.weixin.qq.com/s/fun7k1fDrB3BYG2DK-Z7wA
+
+如何证明你是“人”还是“机器”？ 揭秘验证码技术
+
 其他类似项目还包括：
 
 | 语言 | 名称 | 网址 |
@@ -278,7 +335,7 @@ Python内置的urllib和urllib2模块都可用于获取HTTP网页，但使用范
 
 这时可以考虑使用urllib2模块。代码如下：
 
-{% highlight python %}
+```python
 import urllib2
 l_proxy_info = {
 'user' : 'user',
@@ -292,7 +349,7 @@ l_opener = urllib2.build_opener(l_proxy_support, urllib2.HTTPHandler)
 
 urllib2.install_opener(l_opener)
 usock = urllib2.urlopen('http://www.sohu.com')
-{% endhighlight %}
+```
 
 ## Requests
 
@@ -320,6 +377,10 @@ https://zhuanlan.zhihu.com/p/22304455
 
 使用Celery
 
+https://mp.weixin.qq.com/s/jdYiqJ98PztD7Ueu_o3Z4Q
+
+任务队列神器：Celery入门到进阶指南
+
 ## Gunicorn
 
 Gunicorn是一个高效的Python WSGI Server，地位相当于Java中的Tomcat。
@@ -334,13 +395,13 @@ http://www.cnblogs.com/ArtsCrafts/p/gunicorn.html
 
 Gunicorn快速入门
 
-## 并行计算
+## 多线程 & 同步 & 异步
 
 python异步并发模块concurrent.futures，主要用来实现多线程和多进程的异步并发。
 
 代码示例：
 
-{% highlight python %}
+```python
 from concurrent import futures
 
 def test(num):
@@ -353,7 +414,7 @@ with futures.ThreadPoolExecutor(max_workers=1) as executor:
 
 >>>
 ('Tue Jan 17 15:23:10 2017', 1)
-{% endhighlight %}
+```
 
 如果是多进程的话，可使用ProcessPoolExecutor。由于python是解释语言的关系，多线程设计基本就是残废状态，因此，通常情况下，**不要使用多线程，请使用多进程**
 
@@ -367,56 +428,30 @@ https://mp.weixin.qq.com/s/QIfxxY6z7y77RDE_8gDEIg
 
 并行运算Process Pools
 
-## Cython
+http://www.cnblogs.com/Python666/p/7506546.html
 
-https://mp.weixin.qq.com/s/ODA74xgoS8X1HFxp4BfshQ
+Python单例模式
 
-如何将Python自然语言处理速度提升100倍：用spaCy/Cython加速NLP
+https://mp.weixin.qq.com/s/tJsdM-4q_RC-5AhTw3y49w
 
-https://mp.weixin.qq.com/s/1Iyhsp5-2DyTfOb0JzqLZg
+schedule使用进阶
 
-比Python快100倍，利用spaCy和Cython实现高速NLP项目
+https://mp.weixin.qq.com/s/fwa3cbDI0fIjjztA60XuUQ
 
-https://mp.weixin.qq.com/s/l-zmvQvmosw81G1wFCIDbQ
+同步与异步Python有何不同？
 
-用Cython造个轮子
+https://mp.weixin.qq.com/s/0tLI_UNhpD-UPa9o206xFA
 
-## 处理eml文件
+为什么Python多线程无法利用多核
 
-代码示例：
+https://mp.weixin.qq.com/s/6zVU6i75hZ3ZXZAmW0G5Mw
 
-https://github.com/antkillerfarm/antkillerfarm_crazy/blob/master/python/misc/hello_eml.py
+非常适合小白的Asyncio教程
 
-这个示例主要使用email包来解析eml文件。
+https://mp.weixin.qq.com/s/nHIQ5uwxZM-9DbSu_jL6DQ
 
-同时为了处理其中的html的内容，还用到了Beautiful Soup包。其网址为：
+异步Python比同步Python快在哪里？
 
-https://www.crummy.com/software/BeautifulSoup/
+https://mp.weixin.qq.com/s/0MMUTp_-JF97inzeJd4j1g
 
-参见：
-
-https://mp.weixin.qq.com/s/p86yvl3uAm3FXw4V9NlNoA
-
-一文带你上手Python网页抓取神器BeautifulSoup库
-
-https://mp.weixin.qq.com/s/3o_T7Tyrstur6jkj0gexMA
-
-BeautifulSoup的使用
-
-## PDF
-
-https://mp.weixin.qq.com/s/fBz__E2Xu4GC7w1Uqx5NAA
-
-手把手教你如何用Python从PDF文件中导出数据
-
-https://mp.weixin.qq.com/s/xCKC3cz7jUvrwl4uvMNKTA
-
-20行Python代码教你批量将PDF转为Word
-
-https://mp.weixin.qq.com/s/IznKbG3cEF6uxP0Fe_0oaQ
-
-印度小哥“神剑”：PDF提取表格so easy！
-
-https://mp.weixin.qq.com/s/1U3NqvlSvr6jL1e3yFxXgw
-
-20多行 Python 代码优雅搞定PDF转换成图片
+详解如何用Multiprocessing进行并行计算

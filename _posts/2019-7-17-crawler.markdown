@@ -1,10 +1,19 @@
 ---
 layout: post
-title:  爬虫, scrapy, 分布式ID生成器
+title:  爬虫, scrapy, UPNP（二）, IEEE 802
 category: technology 
 ---
 
+* toc
+{:toc}
+
 # 爬虫
+
+## 下载流媒体视频
+
+浏览器：开发工具->Network
+
+这里会展示所有从网络下载的数据包，至于视频当然是找数据最大的那几个包了。
 
 ## 自动解析网页的结构化数据
 
@@ -19,6 +28,24 @@ Web页面中结构化数据抽取的实现与应用
 http://www.cnblogs.com/codemind/p/smart_spider_parser.html
 
 爬虫数据采集技术趋势－智能化解析
+
+## boilerpipe
+
+各个网站的HTML版面样式多种多样，如何从中提取正文，是一个很有挑战性的课题。
+
+传统的html解析或者正则式，虽能完成任务，但需要给每个网站单独提供一个模板，通用性不佳，而且一旦网站改版，相应的解析模板也需要修改，这导致后期的维护成本也很高。
+
+boilerpipe是一个用于提取HTML正文的库。它采用机器学习的思想，通过提取DOM树的特征，学习得到正文的内容。
+
+官网：
+
+https://github.com/kohlschutter/boilerpipe
+
+参考：
+
+http://baojie.org/blog/2014/06/23/python-text-extraction/
+
+总结Python正文提取的工具包
 
 ## 参考
 
@@ -126,6 +153,18 @@ https://mp.weixin.qq.com/s/hvv2esNsyt3xpO9x1NkCTQ
 
 充气娃娃什么感觉？Python告诉你
 
+https://mp.weixin.qq.com/s/sJcgkkL0lY6v7gPv2rW-eA
+
+对比四种爬虫定位元素方法，你更爱哪个？
+
+https://github.com/CriseLYJ/awesome-python-login-model
+
+用Python登录主流网站
+
+https://mp.weixin.qq.com/s/8YaSY_yBVyctLfamACmMlg
+
+详解4种类型的爬虫技术
+
 # scrapy
 
 scrapy是一个Python写的网页抓取分析工具。网页抓取分析的学名叫做“Web scraping”，可在wiki上获得更多的相关信息。
@@ -174,20 +213,172 @@ https://mp.weixin.qq.com/s/hzl8D-AhpCwqZVSLTK56XQ
 
 Python爬虫--Scrapy入门
 
-# 分布式ID生成器
+# UPNP（二）
 
-http://mp.weixin.qq.com/s/Bk5k6vRG4Rq4iCtmtYDEGQ
+## 自制的Control Point示例（续）
 
-Leaf——美团点评分布式ID生成系统
+### Step 1
 
-https://mp.weixin.qq.com/s/6J7n3udEyQvUHRHwvALNYw
+这次，我打算从头开始搭建Control Point示例。也就是从main函数出发，逐步完善相关功能。这一步的代码在：
 
-Leaf：美团分布式ID生成服务开源
+https://github.com/antkillerfarm/antkillerfarm_crazy/tree/master/helloworld/upnp/step1
 
-https://mp.weixin.qq.com/s/_z0-90xbsCd4Pdi6UlEvnA
+该程序主要实现：
 
-分布式ID生成器
+1.基本框架。包括初始化和注册Control Point。
 
-https://mp.weixin.qq.com/s/Yk2ZlGCEINGrsTfHI6zpsw
+2.通过SSDP的搜索功能，搜索网络设备。
 
-分布式id生成器
+### Step 2
+
+这一步的代码在：
+
+https://github.com/antkillerfarm/antkillerfarm_crazy/tree/master/helloworld/upnp/step2
+
+## upnp-inspector
+
+upnp-inspector是一个局域网内的UPNP协议的嗅探分析器。可充当DMC，推送多媒体数据到相关DLNA设备。安装方法如下：
+
+`sudo apt install upnp-inspector`
+
+upnp-inspector的功能包括：
+
+1.列出局域网内的UPNP设备。
+
+2.列出UPNP设备所支持的UPNP服务。
+
+3.列出UPNP服务所支持的函数，并可发送相关函数。（左键双击树状列表中的函数名即可）
+
+upnp-inspector是coherence的一部分。后者是一个Python语言写的DLNA框架。它的官网：
+
+http://coherence-project.org/
+
+upnp-inspector的代码地址：
+
+https://github.com/coherence-project/UPnP-Inspector
+
+## libmcupnp
+
+libmcupnp是一个基于libupnp的Control Point实现，用C++写的。从代码来看，明显参考了libupnp里的demo示例。
+
+https://sourceforge.net/projects/libmcupnp/
+
+## gupnp
+
+这是GNOME项目的upnp库，使用libsoup处理HTTP，libxml处理XML。它的官网是：
+
+https://wiki.gnome.org/Projects/GUPnP
+
+# IEEE 802
+
+IEEE 802是一系列关于局域网和城域网的标准。
+
+其中，最重要的有：
+
+802.1 802系列协议的网络层管理。
+
+802.3 Ethernet
+
+802.11 Wi-Fi
+
+802.15.1 Bluetooth
+
+802.15.4 Zigbee
+
+802.16 WiMax
+
+http://www.ieee802.org/
+
+可以在这个网址下载相关的标准文件。
+
+## 无线网状网
+
+Wireless mesh network（WMN），也叫wireless ad hoc network。
+
+Ad Hoc源自于拉丁语，意思是“for this”引申为“for this purpose only”，即“为某种目的设置的，特别的”意思，即Ad hoc网络是一种有特殊用途的网络。IEEE802.11标准委员会采用了“Ad hoc网络”一词来描述这种特殊的自组织对等式多跳移动通信网络
+
+它具有以下特点：
+
+### 无中心
+
+Ad hoc网络没有严格的控制中心。所有结点的地位平等，即是一个对等式网络。结点可以随时加入和离开网络。任何结点的故障不会影响整个网络的运行，具有很强的抗毁性。
+
+### 自组织
+
+网络的布设或展开无需依赖于任何预设的网络设施。结点通过分层协议和分布式算法协调各自的行为，结点开机后就可以快速、自动地组成一个独立的网络。
+
+### 多跳路由
+
+当结点要与其覆盖范围之外的结点进行通信时，需要中间结点的多跳转发。与固定网络的多跳不同，Ad hoc网络中的多跳路由是由普通的网络结点完成的，而不是由专用的路由设备（如路由器）完成的。
+
+### 动态拓扑
+
+Ad hoc网络是一个动态的网络。网络结点可以随处移动，也可以随时开机和关机，这些都会使网络的拓扑结构随时发生变化。　这些特点使得Ad hoc网络在体系结构、网络组织、协议设计等方面都与普通的蜂窝移动通信网络和固定通信网络有着显著的区别。
+
+无线网状网可以基于802.11、802.15或802.16。具体到802.11就是Wi-Fi Mash。
+
+## Wi-Fi Mash
+
+和普通Wi-Fi相比，Wi-Fi Mash主要增加了路由协议。而这一块目前尚无标准，有70多个相互竞争的路由协议。其中主要有：
+
+AODV (Ad hoc On-Demand Distance Vector)
+
+B.A.T.M.A.N. (Better Approach To Mobile Adhoc Networking)
+
+HWMP (Hybrid Wireless Mesh Protocol)
+
+OLSR (Optimized Link State Routing protocol)
+
+IEEE为了统一标准，提出了802.11s。目前该标准默认使用HWMP。
+
+## 消息发送的类型
+
+![](/images/article/cast.png)
+
+## 参考
+
+https://mp.weixin.qq.com/s/GgwehPL4r-Y1pEd2k60Y_Q
+
+一文看懂蓝牙Mesh技术
+
+https://mp.weixin.qq.com/s/Mvq9UNEnHoUbmxocb-rqmQ
+
+LPWAN、LoRa、LoRaWAN的区别与联系
+
+https://mp.weixin.qq.com/s/ddOTd5ljC2I9IOadBbjOIA
+
+大话Wi-Fi20年
+
+https://www.zhihu.com/question/20890194
+
+大型发布会现场的Wi-Fi应该如何搭建？
+
+---
+
+802.11b — Wifi 1 (1999)
+
+802.11a — Wifi 2 (1999)
+
+802.11g — Wifi 3 (2003)
+
+802.11n — Wifi 4 (2009)
+
+802.11ac — Wifi 5 (2014)
+
+802.11ax — Wifi 6 (2018)
+
+https://mp.weixin.qq.com/s/5MjByZWThzQ4MSWRoIS1HQ
+
+为了Wi-Fi 6，华为和小米争个啥？
+
+https://mp.weixin.qq.com/s/ZHgG3NJ3oMxmz8M6VDImXg
+
+什么是WiFi 6E？它与WiFi 6有何不同？
+
+https://mp.weixin.qq.com/s/2Jo1dGu7_Lu3yC5Xwe-IMg
+
+漫画图解UWB的发展之路
+
+https://mp.weixin.qq.com/s/D_1nn0702Z1y7rKOzegs5g
+
+Wi-Fi简史

@@ -1,304 +1,397 @@
 ---
 layout: post
 title:  TensorFlow（五）
-category: AI 
+category: DL Framework 
 ---
 
-# TensorFlow
+* toc
+{:toc}
 
-https://zhuanlan.zhihu.com/p/28475975
+# TensorFlow Federated
 
-如何优雅地用TensorFlow预测时间序列：TFTS库详细教程
+TFF是一个开源框架，用于试验针对分散式数据的机器学习和其他计算。它采用的是一种名为联合学习(FL)的方法，许多参与的客户端能够训练共享的ML模型，同时将数据保存在本地。
 
-https://mp.weixin.qq.com/s/zZCEOdNQsPovn_i-C57Z9g
+这个项目感觉上和Leela Zero有些相似。
 
-如何使用最流行框架Tensorflow进行时间序列分析？
+从原理上说，TFF主要使用了Federated Machine Learning技术。
 
-https://mp.weixin.qq.com/s/CqOo7Fu6t5-yJiYhzo03oQ
+参考：
 
-利用TensorFlow和神经网络来处理文本分类问题
+https://mp.weixin.qq.com/s/K2-i3U-BCOctetMkvuvVxg
 
-https://mp.weixin.qq.com/s/VlvQmrS7Qi2qq6fTBXKTYw
+TensorFlow Federated发布
 
-从零开始用TensorFlow搭建卷积神经网络
+https://mp.weixin.qq.com/s/6QKyE3jIOwBK_2rcG-Vtiw
 
-https://mp.weixin.qq.com/s/hETnA81WlkMG3rftAHg9bw
+联邦机器学习-概念与应用
 
-PyTorch和TensorFlow哪家强：九项对比读懂各自长项短板
+# TFRecord
 
-https://mp.weixin.qq.com/s/7R-Gvegnta9XBwIaSPBL_Q
+TFRecord是TensorFlow官方定义的存放样本数据文件。
 
-基于Tensorflow的验证码识别
+参考：
 
-https://mp.weixin.qq.com/s/3QgtemxxsQmuNQVEdpiMwA
+http://www.cnblogs.com/antflow/p/7299029.html
 
-如何做准确率达98%的交通标志识别系统？
+TFRecord的使用
 
-https://mp.weixin.qq.com/s/pSE2V8wD3_KHMI71kLTXng
+https://zhuanlan.zhihu.com/p/27481108
 
-如何基于TensorFlow使用LSTM和CNN实现时序分类任务
+TensorFlow直接读取图片和读写TFRecords速度对比
 
-https://mp.weixin.qq.com/s/dHkmDvFVUGmt4Ch-gv3s1g
+# 内存布局
 
-一步一步带你用TensorFlow玩转LSTM
+Tensorflow和Caffe的内存布局存在较大差异，这是两者模型转换时，最常遇到的问题。一般认为，Caffe的内存布局对卷积硬件加速更友好一些。
 
-https://mp.weixin.qq.com/s/Bx5Djj-RE0jPJ7LjyQ7GPg
+|  | Tensorflow | Caffe |
+|:--:|:--:|:--:|
+| Tensor | NHWC | NCHW |
+| Weight | HWIO | OIHW |
 
-基于gym和tensorflow的强化学习算法实现
+# TensorSensor
 
-https://mp.weixin.qq.com/s/3URLEdhB8hs0XXekKbvsnw
+https://mp.weixin.qq.com/s/ZxmoBcWJa7luGOHQ32ru1A
 
-使用TensorFlow在卷积神经网络上实现L2约束的softmax损失函数
+推荐一个快速定位深度学习代码bug的炼丹神器
 
-https://mp.weixin.qq.com/s/FdPrRQr0LukcWh7B703MlQ
+# TensorNetwork
 
-利用tf.gradients在TensorFlow中实现梯度下降
+TensorFlow的计算图模型不仅可以用于DL领域，亦可应用于其他科学计算领域。TensorNetwork就是一个基于TensorFlow的张量运算库。现成的矩阵运算库已经很多了，这次升级为张量运算库了。
 
-https://github.com/indiejoseph/cnn-text-classification-tf-chinese
+https://github.com/google/TensorNetwork
 
-CNN for Chinese Text Classification in Tensorflow
+参考：
 
-https://mp.weixin.qq.com/s/yc1ssCzaPzI4UUsl4jl5Yw
+https://mp.weixin.qq.com/s/jdjX0jirTHOUqsGagJmGLQ
 
-用TensorFlow和TensorBoard从零开始构建ConvNet
+谷歌AI开源张量计算库TensorNetwork，计算速度暴涨100倍
 
-https://mp.weixin.qq.com/s/6cFvh0OgouY_Lg7awxv_3g
+# TensorFlow Probability
 
-快速开启你的第一个项目：TensorFlow项目架构模板
+TensorFlow Probability是一个概率编程工具包。
 
-https://mp.weixin.qq.com/s/HshYcb98QyW0rR_svFpfUg
+官网：
 
-如何在TensorFlow中高效使用数据集
+https://tensorflow.google.cn/probability/
 
-https://mp.weixin.qq.com/s/rSt6omyXe57WkBVXwp2AJg
+参考：
 
-数据载入过慢？这里有一份TensorFlow加速指南
+https://mp.weixin.qq.com/s/NPuYanaUnaX4mYbaNbNNSQ
 
-https://mp.weixin.qq.com/s/ffW21oBKTDOc4sB8POhcnw
+概率编程工具：TensorFlow Probability官方简介
 
-聊一聊TensorFlow的数据导入机制
+https://mp.weixin.qq.com/s/cV-5W4YWC9f9wsoNX5fIXA
 
-https://mp.weixin.qq.com/s/nwymOr03cqm0ifpoBjL9Eg
+使用TensorFlow Probability对金融模型中的误差进行介绍性分析
 
-TensorFlow变量保存和恢复
+https://mp.weixin.qq.com/s/cxC3SarlBBPTwIxQZ4AG_g
 
-http://www.holmesconan.me/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/2018/04/03/cifar10-vgg.html
+快速上手TensorFlow Probability内置概率编程教材
 
-CIFAR-10 Estimator之Vgg模型
+https://mp.weixin.qq.com/s/T0TsS8YwyCbCjt4J-xonOw
 
-https://mp.weixin.qq.com/s/5_oCSK6MtsK_4xNU6T76UA
+使用TensorFlow Probability Layers的变分自编码器
 
-计算机图形学遇上深度学习，针对3D图像的TensorFlow Graphics面世
+https://mp.weixin.qq.com/s/6l-NS0NbYK44JS0jnRl82w
 
-https://mp.weixin.qq.com/s/ndnbTCr51k_FSDRCLi0UOg
+使用TensorFlow Probability的概率层执行回归
 
-添加新操作
+https://mp.weixin.qq.com/s/2cbd7LBPBRqGt-QO1A7SfQ
 
-https://mp.weixin.qq.com/s/G3fbhTsHA22b02_B5WCPcg
+在TensorFlow Probability中对结构时间序列建模
 
-TensorFlow调试程序（一）
+https://mp.weixin.qq.com/s/7CjLP5SYpQ-hoC1jwxT1vQ
 
-https://mp.weixin.qq.com/s/1mSF2HKa72HgWq_q14HMtQ
+TensorFlow Probability中的联合分布变分推断
 
-TensorFlow调试程序（二）
+# TensorFlow.js
 
-https://mp.weixin.qq.com/s/L9kYXFXYmKadghAhd-51pA
+https://mp.weixin.qq.com/s/dqMS4NjmNYs7IFHm8uFM8w
 
-TensorFlow模型优化工具包—剪枝API
+TensorFlow发布面向JavaScript开发者的机器学习框架TensorFlow.js
 
-https://mp.weixin.qq.com/s/OGsvcfU1VlhNZYgEGLimsQ
+https://zhuanlan.zhihu.com/p/35181413
 
-爱奇艺基于TensorFlow Lite的移动端AR解决方案SmileAR
+TensorFlow.js人脸识别—玩转吃豆豆小游戏
 
-https://mp.weixin.qq.com/s/sm4D9TBSllAONgeOxOiWkA
+https://mp.weixin.qq.com/s/ebLHZAG8H78TsZUKSzAtIw
 
-TF.Text来啦！
+TF官方博客：基于TensorFlow.js框架的浏览器实时姿态估计
 
-https://mp.weixin.qq.com/s/9etR8QEk4UXtoLqkJFQIHA
+https://mp.weixin.qq.com/s/z6p4A4DfCuK8IBGVGwrtLQ
+
+如何利用TensorFlow.js部署简单的AI版“你画我猜”图像识别应用
+
+https://mp.weixin.qq.com/s/NO_XY-JmTpIkoC-fpkZ-qg
+
+在浏览器上也能训练神经网络？TensorFlow.js带你玩游戏~
+
+https://mp.weixin.qq.com/s/vjpMr3TsF3Lui8Q0IstQxw
+
+浏览器上跑：TensorFlow发布实时人物分割模型，秒速25帧，24个部位
+
+https://mp.weixin.qq.com/s/-BblgnvPLuqpYM8PZ7PQCQ
+
+三行代码实时追踪你的手，只要有浏览器就够了
+
+https://mp.weixin.qq.com/s/C7QdVathJ8YTXF-zXPC-Ow
+
+有人分析了7个基于JS语言的DL框架，发现还有很长的路要走
+
+# 混合精度训练
+
+https://tensorflow.google.cn/guide/mixed_precision
+
+tensorflow/python/keras/mixed_precision/loss_scale_optimizer.py
+
+# 细节
+
+执行`session.run(out)`，会在终端打印out的值，但执行`res = session.run(out)`则不会。
+
+此外，`session.run`可以接受list作为参数。返回值也是一个list，分别对应输入list的每个元素的计算结果。
+
+---
+
+tensorflow的程序中,在main函数下,都是使用tf.app.run()来启动。查看源码可知,该函数是用来处理flag解析，然后执行main函数。
+
+https://blog.csdn.net/lujiandong1/article/details/53262612
+
+tensorflow中的tf.app.run()
+
+---
+
+TF提供了一套专门的IO函数：tf.gfile。主要优点在于：对于写文件来说，open操作直到真的需要写的时候才执行。
+
+---
+
+迁移学习的时候，有的时候需要保持某几层的权值，在后续训练中不被改变。这时，可以在创建Variable时，令trainable=false。
+
+---
+
+sparse_softmax_cross_entropy_with_logits和softmax_cross_entropy_with_logits的区别在于：后者的label是一个one hot的tensor，而前者label直接用对应分类的index表示就行了。
+
+---
+
+CNN中的padding：
+
+"SAME" = with zero padding。
+
+"VALID" = without padding。
+
+---
+
+op的自定义实现可使用`tf.py_func`。
+
+---
+
+tf.dtypes.cast: 类型转换
+
+---
+
+Keras对大部分权重矩阵都采用了标准的Glorot uniform初始化，对GRU的recurrent weight采用了正交初始化，对所有偏置都采用了零初始化；而PyTorch对所有参数都一律采用了uniform初始化，但范围与Glorot不同。
+
+https://www.zhihu.com/question/268494717
+
+同一个模型用theano，tf，pytorch实现，performance可能差距较大吗？
+
+---
+
+`CUDA_VISIBLE_DEVICES`用于指定使用的显卡，因此`CUDA_VISIBLE_DEVICES=0`表示使用0号显卡。如果打算使用CPU的话，需要`CUDA_VISIBLE_DEVICES=`。
+
+# TensorFlow参考
+
+https://mp.weixin.qq.com/s/t1QFIOq-VBNOrSm0zW-PlQ
+
+深度学习TensorFlow实现集合
+
+https://mp.weixin.qq.com/s/IzijD8Sh3G2WsCz7aaxyhg
+
+TensorFlow深度学习概述
+
+https://silencezjl.coding.me/2017/05/01/%E5%81%B7%E4%B8%80%E6%B3%A2%E8%B5%84%E6%BA%90/
+
+各种TensorFlow资源
+
+https://mp.weixin.qq.com/s/haj9lS59yWtk-C75EtGIcw
+
+深度学习工程模板：简化加载数据、构建网络、训练模型和预测样本的流程
+
+https://github.com/zsdev2015/machine_learning
+
+某国内小牛写的中文入门demo，注释非常详细
+
+https://morvanzhou.github.io/tutorials/
+
+一个以python语言教学的ML、DL教程，比较通俗易懂。
+
+https://mp.weixin.qq.com/s/gJBDXf_5ViPR9dNm3eH2Hg
+
+TensorFlow初学者必须了解的55个经典案例
+
+http://mp.weixin.qq.com/s/JZ1ceGQDmQUaNW5wl6biLA
+
+TensorFlow实现流行机器学习算法教程汇集
+
+https://github.com/taki0112/Tensorflow-Cookbook
+
+1500+星标，简单易用TensorFlow代码集
+
+https://mp.weixin.qq.com/s/bjxJyOitynRtCoW0FX1gXw
+
+一文带你入门Tensorflow
+
+https://mp.weixin.qq.com/s/zmTqWNXlYcDyZb_dmEo_5Q
+
+TensorFlow/PyTorch/Sklearn实现的五十种机器学习模型
+
+https://mp.weixin.qq.com/s/O5vvGKHWkJQWzeiL7A_S_g
+
+TensorFlow简单介绍
+
+https://mp.weixin.qq.com/s/JSZwQkyxSSwfBWKJ578j3A
+
+TensorFlow最好的入门文章
+
+https://mp.weixin.qq.com/s/68vaQRqUo8u09iheKzFVEw
+
+玩转TensorFlow深度学习
+
+https://mp.weixin.qq.com/s/Es_5KUnkDzMwf_8WD8aW3g
+
+GitHub万星：适用于初学者的TensorFlow代码资源集
+
+https://mp.weixin.qq.com/s/GaK_iSTBl7B4LTdaOtiR_Q
+
+香港科技大学TensorFlow课件分享
+
+https://mp.weixin.qq.com/s/RR3EEI8vm05EZSd7dGU__A
+
+史上最全的Tensorflow学习资源汇总，速藏！
+
+https://mp.weixin.qq.com/s/MYBTWL3X_OhLZL6C4rISzw
+
+TensorFlow训练线性回归
+
+https://mp.weixin.qq.com/s/5QYlh6gV9IqdQfraK4DC8w
+
+10种深度学习算法的TensorFlow实现
+
+https://mp.weixin.qq.com/s/W1KP213Ngj-BNEyx-_nVyw
+
+利用TensorFlow实现卷积自编码器
+
+https://mp.weixin.qq.com/s/pIESRzjsmqoO46P4x5Iqhw
+
+Tensorflow卷积神经网络
+
+https://mp.weixin.qq.com/s/Cge_GY19aZ1AcMkhW93C1A
+
+TensorFlow中的那些高级API
+
+https://mp.weixin.qq.com/s/kYOwUWlTP4T0IYKDWDbCsg
+
+tensorflow object detection API训练公开数据集Oxford-IIIT Pets Dataset
+
+https://mp.weixin.qq.com/s/tVqp1Tht1P-0EQazJizQaA
+
+利用人口普查收入数据集预测收入
+
+https://mp.weixin.qq.com/s/3WleFm9S_wMIPTz_WfjKQw
+
+TensorFlow支持Unicode，中文NLP终于省心了
+
+https://mp.weixin.qq.com/s/jFEOokxfJ1Kw-P3wvw3EAg
+
+带你了解，不规则张量！
+
+https://mp.weixin.qq.com/s/tMtx4PZbpo5IrnhzLz8Lzw
+
+AutoGraph：图的简易控制流程
+
+https://mp.weixin.qq.com/s/zY7rGh-kA-36VEo9DiaKbg
+
+TensorFlow进行简单的图像处理
+
+https://mp.weixin.qq.com/s/DAV3TDI4JYr0sXqTGU6t2A
+
+分布式TensorFlow入坑指南：从实例到代码带你玩转多机器深度学习
+
+https://mp.weixin.qq.com/s/QU5NjksCEswjHnkY7WXWXQ
+
+分布式TensorFlow入门教程
+
+https://mp.weixin.qq.com/s/pBR4wMITrigbSVAvn0d6vQ
+
+利用TensorFlow实现上下文的Chat-bots
+
+https://mp.weixin.qq.com/s/8I5Nvw4t2jT1NR9vIYT5XA
 
 深入理解TensorFlow中的tf.metrics算子
 
-https://zhuanlan.zhihu.com/p/27087310
+https://mp.weixin.qq.com/s/aMarI-nyIvFqhtpJWQrNhQ
 
-《安娜卡列尼娜》文本生成——利用TensorFlow构建LSTM模型
+谷歌推强化学习新框架“多巴胺“，基于TensorFlow，已开源
 
-https://mp.weixin.qq.com/s/6y7AEGz2cs4QUP0Cikhnmw
+https://mp.weixin.qq.com/s/ntHkMIef1o2-FF-AJf_bZQ
 
-272页PPT讲述Tensorflow2.0在图形学方面的应用
+三分钟训练眼球追踪术，AI就知道你在盯着哪个妹子——TensorFlow.js代码
 
-https://mp.weixin.qq.com/s/VN2O6faf4spdD3qaqf3aiw
+https://mp.weixin.qq.com/s/7rTmEBfh613SrNnTQvfSjw
 
-使用AMD显卡加速TensorFlow
+懒人福利：不写代码调优深度模型，谷歌开源的“What-If”了解一下
 
-# Exploration & Exploitation
+https://mp.weixin.qq.com/s/eX3LWYiSH-KObH_7F_3QCA
 
-## UCB（续）
+TensorFlow 1.11.0发布，一键多GPU
 
-为了进一步刻画每个臂被探索的次数和回报之间的关系，UCB引入了**置信区间**的概念：
+https://mp.weixin.qq.com/s/316VVXLQfeIsKNk4ld-VRw
 
-- 每个item的回报均值都有个置信区间，随着试验次数增加，置信区间会变窄（逐渐确定了到底回报丰厚还是可怜）。
-- 每次选择前，都根据已经试验的结果重新估计每个item的均值及置信区间。
-- 选择置信区间上限最大的那个item。
+TensorFlow语义分割套件开源了ECCV18旷视科技BiSeNet实时分割算法
 
-显然：
+https://mp.weixin.qq.com/s/XI1J4ardEWKP4UQ4IXZGTQ
 
-- 如果item置信区间很宽（被选次数很少，还不确定），那么它会倾向于被多次选择，这个是算法冒风险的部分；
-- 如果item置信区间很窄（备选次数很多，比较确定其好坏了），那么均值大的倾向于被多次选择，这个是算法保守稳妥的部分；
+TensorFlow Hub,给您带来全新的Web体验
 
-UCB是一种乐观的算法，选择置信区间上界排序，如果是悲观保守的做法，是选择置信区间下界排序。
+http://www.jianshu.com/p/1da012a83b74
 
-置信区间的度量有很多方式，由此产生了很多UCB的变种算法。最常用的UCB1算法，采用了如下度量方式：
+利用TensorFlow实现排序和搜索算法
 
-$$I_i=\bar{x}_i+\sqrt{2\frac{\log t}{n_i}}$$
+https://mp.weixin.qq.com/s/oEqMjOTj8xpd3sg60ZUhqA
 
-其中$$x_i$$是第i个臂的奖励均值，$$n_i$$是臂i当前累积被选择的次数。
+TensorFlow的c++实践及各种坑
 
-UCB还可以应用到MCTS中，这就是UCT（Upper Confidence Bound Apply to Tree）算法了。即UCT=MCTS+UCB。
+https://mp.weixin.qq.com/s/-5RCRl9ztQ2dQmX00QvfvQ
 
-参考：
+在Python和TensorFlow上构建Word2Vec词嵌入模型
 
-https://www.cnblogs.com/Ryan0v0/p/11366578.html
+https://mp.weixin.qq.com/s/Nyjp0mZxcn04vLKjJXLSaw
 
-多臂赌博机问题(MAB)的UCB算法介绍
+如何用TensorFlow在安卓设备上实现深度学习推断
 
-https://blog.csdn.net/yw8355507/article/details/48579635
+https://mp.weixin.qq.com/s/OVWbxBNc4i0_5jgy06xS1A
 
-UCB算法
+基于Tensorflow Estimators的文本分类
 
-https://blog.csdn.net/LegenDavid/article/details/71082124
+https://mp.weixin.qq.com/s/h4Ve_UUajsdlk7PNS6J4QA
 
-LinUCB算法
+TensorFlow Estimator模型从训练到部署
 
-https://zhuanlan.zhihu.com/p/32356077
+https://mp.weixin.qq.com/s/c_2_9gvOynHaVW6pi4qQjQ
 
-Multi-Armed Bandit: UCB (Upper Bound Confidence)
+用TensorFlow让机器人唱首歌给你听
 
-# Inverse Reinforcement Learning
+https://mp.weixin.qq.com/s/hn-LqyREkusxP2TOWfTJ6g
 
-逆强化学习问题定义：
+使用TensorFlow官方Java API调用TensorFlow模型
 
-- 已知：
+https://mp.weixin.qq.com/s/kS92vYyeHLc38RGc_4CZbg
 
-智能体在变化的环境中的行为
+如何应用TFGAN快速实践生成对抗网络？
 
-（optional）智能体传感器的数据
+https://mp.weixin.qq.com/s/hquOoKeeHQXqWcHM6Bkvbw
 
-（optional）环境的模型
+如何训练一个简单的音频识别网络
 
-- 求：
+https://mp.weixin.qq.com/s/aWez5FYXXnRnDbb0zcXFXQ
 
-最优化的Reward function
-
-逆强化学习研究意义：
-
-- 对动物人类行为用强化学习建模（生物学、计量经济学...）模仿学习。
-
-- reward function在强化学习里面非常非常重要，是对行为的抽象精简的描述，因此IRL (Inverse Reinforcement Learning)可能是一种很高效的模仿学习范式。
-
-通俗的说法就是：**我们用优化控制或强化学习得到的策略能用来解释人类的行为吗？**
-
-比如让一个人去拿桌子上的一个橘子，那手的轨迹一定不是一条从起点到目标的直线，而是有一些弯曲的轨迹，也就是带有偏差的较优行为，但是这种偏差其实并不重要，只要最后拿到橘子就行了，也就是说：
-
-1.有过程中一些偏差是不重要的，但另一些偏差就比较重要了（如最后没拿到）。
-
-2.每次拿橘子的动作也是不一样的，因此人的动作带有一定的随机性。
-
-3.我们可以认为人类行为轨迹分布是以最优策略为峰的随机分布。
-
-![](/images/img3/GAN_vs_IRL.png)
-
-参考：
-
-https://zhuanlan.zhihu.com/p/61674994
-
-Algorithms for Inverse Reinforcement Learning
-
-https://zhuanlan.zhihu.com/p/32502503
-
-CS 294：IRL
-
-# 模仿学习
-
-https://zhuanlan.zhihu.com/p/27935902
-
-机器人学习Robot Learning之模仿学习Imitation Learning的发展
-
-https://zhuanlan.zhihu.com/p/25688750
-
-模仿学习（Imitation Learning）完全介绍
-
-https://mp.weixin.qq.com/s/naq73D27vsCOUBperKto8A
-
-从监督式到DAgger，综述论文描绘模仿学习全貌
-
-https://mp.weixin.qq.com/s/LNNqp2KsEAljG26hY43mUw
-
-ICML2018 模仿学习教程
-
-https://mp.weixin.qq.com/s/f9vSgH1HQwGXBDb0UGHQyQ
-
-深度学习进阶之无人车行为克隆
-
-https://mp.weixin.qq.com/s/To3pnx1hVq_4p7UnQVMw9A
-
-斯坦福大学&DeepMind联合提出机器人控制新方法，RL+IL端到端地学习视觉运动策略
-
-https://mp.weixin.qq.com/s/O0Q1XoTA-7Yshr1ZqOZ90w
-
-加州理工：什么是模仿学习, 这62页ppt带你了解进展
-
-# RL与神经科学
-
-Pavlov Model（1901）
-
-Rescorla-Wagner Model（1972）
-
-Thorndike’s Puzzle Box（1910）
-
-参考：
-
-https://zhuanlan.zhihu.com/p/24437724
-
-学习理论之Rescorla-Wagner模型
-
-# RL参考资源+
-
-https://mp.weixin.qq.com/s/Fn1s9Ia8L1ckgn6iP24FhQ
-
-如何让神经网络具有好奇心
-
-https://mp.weixin.qq.com/s/PBf-YrkhwhPYXuiOGyahxQ
-
-强化学习遭遇瓶颈！分层RL将成为突破的希望
-
-https://zhuanlan.zhihu.com/p/58815288
-
-强化学习之值函数学习
-
-https://mp.weixin.qq.com/s/8Cqknze_iosz6Z6cqnuK5w
-
-谷歌提出强化学习新算法SimPLe，模拟策略学习效率提高2倍
-
-https://mp.weixin.qq.com/s/hKGS4Ek5prwTRJoMCaxQLA
-
-强化学习Exploration漫游
-
-https://zhuanlan.zhihu.com/p/65116688
-
-值分布强化学习（01）
-
-https://zhuanlan.zhihu.com/p/65364484
-
-值分布强化学习（02）
-
-https://zhuanlan.zhihu.com/p/62363784
-
-强化学习之策略搜索
-
-https://mp.weixin.qq.com/s/j9Cs5M9gyITu2u_XDkKm-g
-
-Policy Gradient——一种不以loss来反向传播的策略梯度方法
-
-https://mp.weixin.qq.com/s/x6gKTuYIx8y25KX-fCc5bA
-
-蒙特卡洛梯度估计方法（MCGE）简述
+如何在TensorFlow中训练提升树模型

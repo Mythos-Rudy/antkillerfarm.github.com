@@ -1,54 +1,11 @@
 ---
 layout: post
-title:  深度学习（二十七）——MobileNet, 问答系统, 李飞飞, RBM & DBN & Deep Autoencoder
+title:  深度学习（二十七）——问答系统, 李飞飞, RBM & DBM & DBN & Deep Autoencoder
 category: DL 
 ---
 
-# MobileNet
-
-论文：
-
-《MobileNets: Efficient Convolutional Neural Networks for Mobile Vision Applications》
-
-代码：
-
-https://github.com/Zehaos/MobileNet
-
-![](/images/article/dwl_pwl.png)
-
-参考：
-
-https://mp.weixin.qq.com/s/f3bmtbCY5BfA4v3movwLVg
-
-向手机端神经网络进发：MobileNet压缩指南
-
-https://mp.weixin.qq.com/s/mcK8M6pnHiZZRAkYVdaYGQ
-
-MobileNet在手机端上的速度评测：iPhone 8 Plus竟不如iPhone 7 Plus
-
-https://mp.weixin.qq.com/s/2XqBeq3N4mvu05S1Jo2UwA
-
-CNN模型之MobileNet
-
-https://mp.weixin.qq.com/s/fdgaDoYm2sfjqO2esv7jyA
-
-Google论文解读：轻量化卷积神经网络MobileNetV2
-
-https://mp.weixin.qq.com/s/7vFxmvRZuM2DqSYN7C88SA
-
-谷歌发布MobileNetV2：可做语义分割的下一代移动端计算机视觉架构
-
-https://mp.weixin.qq.com/s/lu0GHCpWCmogkmHRKnJ8zQ
-
-浅析两代MobileNet
-
-https://mp.weixin.qq.com/s/T6S1_cFXPEuhRAkJo2m8Ig
-
-轻量级CNN网络之MobileNetv2
-
-https://mp.weixin.qq.com/s/RRu3r_dokORhpSq3eyrPDQ
-
-为什么MobileNet及其变体如此之快？
+* toc
+{:toc}
 
 # 问答系统
 
@@ -83,10 +40,6 @@ https://mp.weixin.qq.com/s/lB44D_RFBqbNB6YX5gEULg
 http://www.taodocs.com/p-4795349.html
 
 基于大规模问答语料的问题检索系统
-
-https://wenku.baidu.com/view/d38ab1e8856a561252d36fab.html
-
-短文本相似度计算在用户交互式问答系统中的应用
 
 https://mp.weixin.qq.com/s/5ajhhc4mpIhoqkl5VkGnaw
 
@@ -208,6 +161,10 @@ https://mp.weixin.qq.com/s/OHSqHNo7vjLGaTKyzjZjyg
 
 基于智能客服的用户日志研究
 
+https://mp.weixin.qq.com/s/Dp4rlR3Znwv_2gbYCJu8cg
+
+美团智能客服技术实践
+
 # 李飞飞
 
 ## AI大佬
@@ -258,6 +215,12 @@ http://vision.stanford.edu/lijiali/
 
 这两个人都是有机会挑战诺奖的人，而李和吴暂时还没有这个可能性。
 
+---
+
+2020.10
+
+2020年的诺贝尔化学奖给了CRISPR，但是没有给张锋。除非张再做出什么新贡献，否则诺奖估计是没戏了。
+
 ## 网红
 
 这里收录了一些非李飞飞门下的AI网红。
@@ -268,23 +231,27 @@ http://vision.stanford.edu/lijiali/
 
 http://zacklipton.com/
 
-# RBM & DBN & Deep Autoencoder
+# RBM & DBM & DBN & Deep Autoencoder
 
 ## RBM
 
 Restricted Boltzmann Machines由Hinton发明，是一种用于降维、分类、回归、协同过滤、特征学习和主题建模的算法。
 
+RBM一般分为输入和重构两个阶段。
+
 ![](/images/img2/multiple_inputs_RBM.png)
 
-在重构阶段，第一隐藏层的激活值成为反向传递中的输入。这些输入值与同样的权重相乘，每两个相连的节点之间各有一个权重，就像正向传递中输入x的加权运算一样。这些乘积的和再与每个可见层的偏差相加，所得结果就是重构值，亦即原始输入的近似值。这一过程可以用下图来表示：
+上图是输入阶段的计算流程，和一般的神经网络没有区别。
 
 ![](/images/img2/reconstruction_RBM.png)
+
+在重构阶段，第一隐藏层的激活值成为反向传递中的输入。这些输入值与同样的权重相乘，每两个相连的节点之间各有一个权重，就像正向传递中输入x的加权运算一样。这些乘积的和再与每个可见层的偏差相加，所得结果就是重构值，亦即原始输入的近似值。
 
 由于RBM权重初始值是随机决定的，重构值与原始输入之间的差别通常很大。可以将r值与输入值之差视为重构误差，此误差值随后经由反向传播来修正RBM的权重，如此不断反复，直至误差达到最小。
 
 由此可见，RBM在正向传递中使用输入值来预测节点的激活值，亦即输入为加权的x时输出的概率：$$p(a\mid x; w)$$。
 
-但在反向传递时，激活值成为输入，而输出的是对于原始数据的重构值，或者说猜测值。此时RBM则是在尝试估计激活值为a时输入为x的概率，激活值的加权系数与正向传递中的权重相同。 第二个阶段可以表示为$$p(x\mid a; w)$$。
+但在反向传递时，激活值成为输入，输出的是对于原始数据的重构值，或者说猜测值。此时RBM则是在尝试估计激活值为a时输入为x的概率，激活值的加权系数与正向传递中的权重相同。 第二个阶段可以表示为$$p(x\mid a; w)$$。
 
 上述两种预测值相结合，可以得到输入x和激活值a的联合概率分布，即$$p(x, a)$$。
 
@@ -300,3 +267,16 @@ RBM用KL散度来衡量预测的概率分布与输入值的基准分布之间的
 
 RBM有许多用途，其中最强的功能之一就是对权重进行合理的初始化，为之后的学习和分类做好准备。从某种意义上来说，RBM的作用与反向传播相似：让权重能够有效地模拟数据。可以认为预训练和反向传播是实现同一个目的的不同方法，二者可以相互替代。
 
+## DBM & DBN
+
+![](/images/img4/DBM.png)
+
+RBM不仅可以单独使用，也可以堆叠起来形成Deep Boltzmann Machine(DBM)和Deep Belief Nets(DBN)，其中每个RBM层都与其前后的层进行通信。单个层中的节点之间不会横向通信。
+
+DBM是直接是拟合一个joint分布，而DBN是RBM叠加了很多bayes net。
+
+DBN可以直接用于处理无监督学习中的未标记数据聚类问题，也可以在RBM层的堆叠结构最后加上一个Softmax层来构成分类器。
+
+除了第一个和最后一个层，DBN中的每一层都扮演着双重角色：既是前一层节点的隐藏层，也是后一层节点的输入（或“可见”）层。DBN是由多个单层网络组成的。
+
+DBN常用于图像、视频序列和动作捕捉数据的识别、聚类与生成。

@@ -1,8 +1,11 @@
 ---
 layout: post
-title:  Hadoop
+title:  Hadoop, Pulsar
 category: AI 
 ---
+
+* toc
+{:toc}
 
 # Hadoop
 
@@ -55,13 +58,31 @@ Hadoop的“生态圈”
 
 ![](/images/img3/hadoop.png)
 
+## 架构
+
+HDFS 1.0：
+
+![](/images/img4/hadoop.png)
+
+HDFS 2.0：
+
+![](/images/img4/hadoop_2.png)
+
+HDFS 3.0：
+
+![](/images/img4/hadoop_3.png)
+
+https://mp.weixin.qq.com/s/0QnxGLL66BW_BL-IBr5jDA
+
+Hadoop之HDFS架构演进之路
+
 ## 编译
 
-Hadoop目前不在Ubuntu的官方软件仓库中，无法使用apt-get安装。使用源代码编译Hadoop的相关步骤，可在源码包的BUILDING.txt中找到。这里仅作为补遗之用。总的来说，如无必要还是直接下载bin包比较好，编译还是很麻烦的。
+Hadoop目前不在Ubuntu的官方软件仓库中，无法使用apt安装。使用源代码编译Hadoop的相关步骤，可在源码包的BUILDING.txt中找到。这里仅作为补遗之用。总的来说，如无必要还是直接下载bin包比较好，编译还是很麻烦的。
 
 ### 安装FindBugs
 
-Hadoop的大部分软件依赖，都可以使用apt-get安装。BUILDING.txt里已经写的很详细了。
+Hadoop的大部分软件依赖，都可以使用apt安装。BUILDING.txt里已经写的很详细了。
 
 FindBugs是一个Java代码的静态分析检查工具。它的官网：
 
@@ -71,7 +92,7 @@ http://findbugs.sourceforge.net/index.html
 
 1.源代码安装。下载源代码之后，运行`ant build`，然后设定相关路径，以供Hadoop使用。
 
-2.apt-get安装。FindBugs目前不在Ubuntu 14.04的软件仓库中，而在Ubuntu 15.10的软件仓库中，需要设置源方可安装。这种方法也需要设定相关路径，以供Hadoop使用。
+2.apt安装。FindBugs目前不在Ubuntu 14.04的软件仓库中，而在Ubuntu 15.10的软件仓库中，需要设置源方可安装。这种方法也需要设定相关路径，以供Hadoop使用。
 
 2.maven安装。
 
@@ -173,6 +194,26 @@ jps是Java提供的虚拟机进程查看工具。
 | nimbus | Storm nimbus |
 | supervisor | Storm supervisor |
 
+其他JDK工具还有：
+
+jshell：交互式的Java命令行工具。
+
+jcmd：一个强大的工具集。
+
+jhsdb：一个可视化的Java内存调试工具。
+
+jmap：查看堆信息。
+
+jstack：查看栈信息。
+
+jstat：一个JVM监控工具
+
+参考：
+
+https://www.cnblogs.com/noKing/p/9457541.html
+
+JDK常用命令行工具
+
 ## MapReduce编程
 
 教程：
@@ -197,150 +238,94 @@ https://mp.weixin.qq.com/s/0qgaJnZjYsf0WP2z5yGgrg
 
 面试集锦：HDFS
 
-# BERT（续）
+https://mp.weixin.qq.com/s/9A0z0S9IthG6j8pZe6gCnw
 
-https://mp.weixin.qq.com/s/WzGa5XVi2Op4Lz-1uQXfxQ
+YARN在字节跳动的优化与实践
 
-SpanBERT：提出基于分词的预训练模型，多项任务性能超越现有模型！
+https://mp.weixin.qq.com/s/6rtkmwjfI_Cl-hYMrDOOyA
 
-https://zhuanlan.zhihu.com/p/76912493
+取代HDFS？Ozone在腾讯的最新研究进展
 
-nlp中的预训练语言模型总结(单向模型、BERT系列模型、XLNet)
+https://mp.weixin.qq.com/s/_AumiAx9wbpOZCGMdf0Arw
 
-https://mp.weixin.qq.com/s/pYSs6NhIAB6DuwNnKZhkZQ
+字节跳动10万节点HDFS集群多机房架构演进之路
 
-Bert改进：如何融入知识
+https://www.zhihu.com/question/303101438
 
-https://mp.weixin.qq.com/s/in5SDWlQg8ts4E8DTmHxMQ
+mapreduce为什么被淘汰了？
 
-BERT在推荐系统领域可能会有什么作为？
+# Pulsar
 
-https://mp.weixin.qq.com/s/kJhOrz0VaYc-k-6XJS02ag
+https://mp.weixin.qq.com/s/O8pj4pChyw8PK-G_4A3DWg
 
-8篇论文梳理BERT相关模型进展与反思
+发布订阅消息系统Apache Pulsar简介
 
-https://mp.weixin.qq.com/s/-eBL9gFbAGFtmqkLMAoUTw
+https://mp.weixin.qq.com/s/ToJJTBWJXlpj3LkDj5YYvw
 
-文本+视觉，多篇Visual/Video BERT论文介绍
+为什么要选择Apache Pulsar
 
-https://mp.weixin.qq.com/s/hI9XAiqKaHLq-Z9JkaWA_A
+https://mp.weixin.qq.com/s/B9zo0zThARAi11hRuJ-AqA
 
-解决自然语言歧义问题，斯坦福教授、IJCAI卓越研究奖得主提出SenseBERT模型
+开源实时数据处理系统Pulsar：一套搞定Kafka+Flink+DB
 
-https://mp.weixin.qq.com/s/55B0ToIKDusiPI5farR19w
+https://mp.weixin.qq.com/s/v4A--nGiDTt58pZyIzepeg
 
-NLP这两年：15个预训练模型对比分析与剖析
+比拼Kafka，大数据分析新秀Pulsar到底好在哪
 
-https://mp.weixin.qq.com/s/SPfa17p3QetZXCC01DwmQA
+https://mp.weixin.qq.com/s/x4GW5zvjD5Fyc-NrXDqpmA
 
-解密BERT
+Kafka不够好，智联招聘基于Pulsar打造企业级事件中心
 
-https://zhuanlan.zhihu.com/p/72805778
+https://mp.weixin.qq.com/s/sWrUlwEe4CBPQklzFWNE3A
 
-BERT的演进和应用
+选择Pulsar而不是Kafka的7大理由
 
-https://mp.weixin.qq.com/s/9YuBY0wLLVQ8ZrT9fiNICA
+https://mp.weixin.qq.com/s/L84Ll2PlJLHhQYo134bcFQ
 
-语音版BERT？滴滴提出无监督预训练模型，中文识别性能提升10%以上
+如何基于Apache Pulsar和Spark进行批流一体的弹性数据处理？
 
-https://mp.weixin.qq.com/s/OXkXjPHhaMXsKw2YevV6sw
+https://mp.weixin.qq.com/s/zqvKzJkP5LtDriuRXojn7Q
 
-邱锡鹏：从Transformer到BERT--自然语言处理中的表示学习进展
+我们为什么从Kafka迁移至Pulsar？
 
-https://mp.weixin.qq.com/s/6i9eQISKsWU0jawKzWg8nQ
+# OpenCV+
 
-超越bert，最新预训练模型ELECTRA论文阅读笔记
+https://mp.weixin.qq.com/s/HmOiQnkaqxcFPOODnOeUkw
 
-https://zhuanlan.zhihu.com/p/91052495
+使用OpenCV检测坑洼
 
-当BERT遇上知识图谱
+https://mp.weixin.qq.com/s/BTmozO6Yr-Jsfm4-YXh2Mg
 
-https://mp.weixin.qq.com/s/wQW-JT-sGMj60OtXwTssyQ
+基于OpenCV的图像梯度与边缘检测
 
-BERT模型推理加速总结
+https://mp.weixin.qq.com/s/QYnXiAMFC3k_wQIwiaeWQg
 
-https://mp.weixin.qq.com/s/HOD1Hb70NhTXXCXlopzfng
+三行代码，OpenCV轻松生成19种色彩风格图像
 
-BERT推理加速实践
+https://mp.weixin.qq.com/s/4LQBY0rMJk0tU8lF3fgHfQ
 
-https://mp.weixin.qq.com/s/0luHJsw7WWJskJWGThR5qg
+基于OpenCV的图像阴影去除
 
-使用BERT做文本摘要
+https://mp.weixin.qq.com/s/kH6K6L6-BYnYE-g46WhNCg
 
-# Attention进阶
+在OpenCV中使用色彩校正
 
-https://mp.weixin.qq.com/s/ZSzHOu6uowRSoWrqB7vOaQ
+https://mp.weixin.qq.com/s/K4P8151BuM4DQPSK-KzPFQ
 
-深度学习注意力机制-Attention in Deep learning-附101页PPT
+OpenCV图像旋转的原理与技巧
 
-https://mp.weixin.qq.com/s/_mBa-GTdILrvluJtegz8fw
+https://mp.weixin.qq.com/s/hGONFisdtwcF5CRSB9IF6g
 
-南洋理工大学：注意力神经网络，Attention Neural Networks，78页ppt
+图像处理基础：颜色空间及其OpenCV实现
 
-https://mp.weixin.qq.com/s/pKxqPB9qIGmE_PslPa6EyA
+https://mp.weixin.qq.com/s/0Z600IIGscgrREgLUqjLuA
 
-长文详解Attention的前世今生
+手把手教你用Python做一个图像融合demo
 
-https://mp.weixin.qq.com/s/y_hIhdJ1EN7D3p2PVaoZwA
+https://mp.weixin.qq.com/s/vo1v5dYGLMqzCSUG9gPvag
 
-阿里北大提出新attention建模框架，一个模型预测多种行为
+使用OpenCV进行图像编辑--绘画和素描
 
-https://mp.weixin.qq.com/s/Yq3S4WrsQRQC06GvRgGjTQ
+https://mp.weixin.qq.com/s/EkxXV7Bizf4JxG15SQb79w
 
-打入神经网络思维内部
-
-https://mp.weixin.qq.com/s/MJ1578NdTKbjU-j3Uuo9Ww
-
-基于文档级问答任务的新注意力模型
-
-https://mp.weixin.qq.com/s/C4f0N_bVWU9YPY34t-HAEA
-
-UNC&Adobe提出模块化注意力模型MAttNet，解决指示表达的理解问题
-
-https://mp.weixin.qq.com/s/V3brXuey7Gear0f_KAdq2A
-
-基于注意力机制的交易上下文感知推荐，悉尼科技大学和电子科技大学最新工作
-
-http://mp.weixin.qq.com/s/Bt6EMD4opHCnRoHKYitsUA
-
-结合人类视觉注意力进行图像分类
-
-https://mp.weixin.qq.com/s/POYTh4Jf7HttxoLhrHZQhw
-
-基于双向注意力机制视觉问答pyTorch实现
-
-https://mp.weixin.qq.com/s/2gxp7A38epQWoy7wK8Nl6A
-
-谷歌翻译最新突破，“关注机制”让机器读懂词与词的联系
-
-https://zhuanlan.zhihu.com/p/25928551
-
-用深度学习（CNN RNN Attention）解决大规模文本分类问题-综述和实践
-
-http://blog.csdn.net/leo_xu06/article/details/53491400
-
-视觉注意力的循环神经网络模型
-
-https://mp.weixin.qq.com/s/l4HN0_VzaiO-DwtNp9cLVA
-
-循环注意力区域实现图像多标签分类
-
-https://mp.weixin.qq.com/s/zhZLK4pgJzQXN49YkYnSjA
-
-自适应注意力机制在Image Caption中的应用
-
-https://mp.weixin.qq.com/s/uvr-G5-_lKpyfyn5g7ES0w
-
-基于注意力机制，机器之心带你理解与训练神经机器翻译系统
-
-https://mp.weixin.qq.com/s/ANpBFnsLXTIiW6WHzGrv2g
-
-自注意力机制学习句子embedding
-
-https://mp.weixin.qq.com/s/49fQX8yiOIwDyof3PD01rA
-
-CMU&谷歌大脑提出新型问答模型QANet：仅使用卷积和自注意力，性能大大优于RNN
-
-https://mp.weixin.qq.com/s/c64XucML13OwI26_UE9xDQ
-
-滴滴披露语音识别新进展：基于Attention显著提升中文识别率
+修改OpenCV一行代码，提升14%图像匹配效果（BEBLID(Boosted Efficient Binary Local Image Descriptor)是一个2020年才开发出来的算子）

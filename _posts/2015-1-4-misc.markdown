@@ -1,24 +1,11 @@
 ---
 layout: post
-title:  大杂烩, 硬盘安装Linux
-category: linux 
+title:  大杂烩, Graphics Framework, 同步锁
+category: technology 
 ---
 
-# SQL与数据库
-
-这几天看到了这篇文章：
-
-http://www.cnbeta.com/articles/104987.htm
-
-之前许多课本中的概念顿时浮现在眼前。曾几何时，SQL成了数据库的同义词，以至于离开SQL就没法操作数据库了。但其实SQL所代表的关系型数据库，只是数据库的一类而已。除此之外还有很多其他类型的数据库。
-
-Oracle的广告词，给当时尚在学校的我产生了这样的错觉：“只有数据库，才是处理大量数据的最好方法。”直到后来随着自己技术的进步，才知道这样的想法是如何的荒谬。
-
-一个身边的例子，有一次我们需要处理一批数据，在使用数据库的情况下，需要2天才能处理完，峰值时内存的占用接近4G。但这还不是最糟的，关键的问题是以后数据的规模会越来越大，一旦内存占用超过4G，旧的32位硬件软件就不够用了。（当时我们对硬件了解的不多，不知道Intel X86有PAE模式，以为4G就是32位PC的极限了，其实不然。）
-
-于是，有位同事说，这批数据虽然量大，但规则并不复杂，干脆用最原始的写文件来做吧。结果2天的处理时间缩短为1天，内存占用减少为300M。其实这也没有什么神奇的，一般的关系型数据库通常由三部分组成：SQL解释器、事务引擎和存储查询引擎。如果能够根据具体情况，去掉前两部分，并对第三部分进行优化，完全可能比Oracle做的更好。毕竟在软件这个领域并不存在超现实的东西，Oracle再牛也是跑在相应的硬件、软件之上的，少不了要和CPU、内存、硬盘打交道。
-
-结论：不要太过依赖数据库，有的时候没有数据库，更快，更简单。
+* toc
+{:toc}
 
 # Symbian开发
 
@@ -52,7 +39,7 @@ http://www.opda.com.cn/viewthread.php?tid=182217&page=1#pid3004888
 
 ## 2）最简单的例子
 
-{% highlight c %}
+```c
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -76,21 +63,25 @@ int main(int argc, char* argv[])
     printf("");
     return 0;
 }
-{% endhighlight %}
+```
 
 网上的例子只有输出，没有输入，其实不算好例子。用VC之类的编译器编好后，放到cgi-bin中，在浏览器中输入以下地址http://localhost/cgi-bin/cgi.exe?abc就可以看到效果了。还有`printf("Content-type: text/html\n\n");`是一定要有的，没有的会报HTTP 500的错误，有的例子中说`printf("\n");`就行了，这是不对的，至少在默认配置下，这样做的结果是你可以下载该.exe，但不能把它当做CGI来执行。
 
 从这个例子，以及Apache官方的例子（http://httpd.apache.org/docs/1.3/howto/cgi.html）
 
-{% highlight perl %}
+```perl
 #!/usr/bin/perl
 print "Content-type: text/html\r\n\r\n";
 print "Hello, World.";
-{% endhighlight %}
+```
 
 中可以看出，Apache的作用其实是重定义了这些CGI程序的标准输入输出，以及设置了一些系统变量。这才是它支持多种编程语言编写的CGI的真正原因，试想还有哪种语言不支持标准输入输出呢？
 
-可以在http://www.boutell.com/cgic/中获得CGIC的代码，这是一个C写的CGI开发库，本文的示例就是在这个库的代码的启示下写出来的。
+可以在：
+
+http://www.boutell.com/cgic/
+
+中获得CGIC的代码，这是一个C写的CGI开发库，本文的示例就是在这个库的代码的启示下写出来的。
 
 ## 3)Linux下的Apache目录结构
 Windows下Apache的各个目录都放在一起，因此使用起来比较方便，而Linux下Apache的各个目录分散在各个地方不是太好找，特记录一下，以作备忘。
@@ -103,102 +94,180 @@ bin下的文件在/usr/sbin下可以找到。
 
 modules在/usr/lib/apache2下。
 
-# 硬盘安装Linux
+参考：
 
-2013.9
+https://mp.weixin.qq.com/s/9oi-zkuUtjv0P6GyBLmatg
 
-最近重新开始研究Android和Linux，由于已经快2年没有弄过了。因此之前下载的linux发行版也不打算再继续用了，省得到了Android开发的时候还要更新一大堆的包。
+简单说明CGI和动态请求是什么
 
-看了一下Google官网上对于Android source的编译条件，再结合2年前编译Android 2.2（Froyo）的经验，在虚拟机上跑Linux的方案首先被排除。开玩笑，16G的RAM/SAWP的开销，哪是VM能搞得定的。就连Froyo在虚拟机上都编不过去，何况是4.3（Jelly Bean）了。
+https://mp.weixin.qq.com/s/vmIscEgDotR6ntiIdjGBLg
 
-2年前编译Froyo，用的是Wubi安装的Ubuntu 10.04。这次看了一下Jelly Bean的编译条件，100GB+的空间。忽然觉得做软件这么多年，还从来没有在PC上认认真真的安装个双系统用用，实在是职业生涯的一个污点。于是在下载了Ubuntu 12.04之后，老老实实的在网上搜索起如何硬盘安装的办法来。
+关于CGI和FastCGI的理解
 
-之所以选择硬盘安装，其实实在是觉得刻张盘太麻烦了。如今就连卖本本的厂商都不提供Recovery CD，而改用Recovery分区来恢复系统。想来硬盘安装Ubuntu也早无技术难度可言了。
+# Graphics Framework
 
-硬盘安装的步骤如下：
+## Linux Graphics Framework
 
-1）EasyBCD和ISO
+fbdev - video driver for framebuffer device
 
-2）
+KMS(Kernel Mode Setting）
 
-{% highlight bash %}
-title Install Ubuntu
-root (hd0,0)
-kernel (hd0,0)/vmlinuz boot=casper iso-scan/filename=/ubuntu-11.10-i386.iso ro quiet splash locale=zh_CN.UTF-8
-initrd (hd0,0)/initrd.lz
-{% endhighlight %}
+DRM(Direct Rendering Manager)
 
->现在的电脑，一般都有一个Recovery分区，用于在系统崩溃时，恢复系统之用。因此，(hd0,0)需要修改为(hd0,1)，甚至是(hd0,2)。
+GBM(Generic Buffer Management)
 
-3）
+Wayland是一套display server(Wayland compositor)与client间的通信协议，而Weston是Wayland compositor的参考实现。
 
-把准备好的iso用压缩软件或者虚拟光驱打开，找到casper文件夹，复制initrd.lz和vmlinuz到C盘,然后在把iso也拷贝到C盘。
+DirectFB则是一个针对基于Linux嵌入式系统优化的图形库，几年前在2D类的用户界面上很流行。DirectFB2尝试保留了原始的DirectFB后端、同时添加了新功能，例如Vulkan和OpenGL ES等现有的3D API。
 
-4）
+![](/images/img4/dfb-webkitgtk.png)
 
-`sudo umount -l /isodevice`
+官网：
 
-5）
+https://directfb2.github.io/
 
-安装好之后，没有GRUB开机菜单的话：
+https://www.cnblogs.com/armlinux/archive/2010/08/30/2396932.html
 
-{% highlight bash %}
-sudo -i
-mount /dev/sda7 /mnt
-grub-install --root-directory=/mnt /dev/sda
-{% endhighlight %}
+全面的framebuffer详解
 
-6)
+https://blog.csdn.net/fyh2003/article/details/49253713
 
-最近硬盘安装Ubuntu之后，出现了无法进入Windows的问题。原因是由于公司的Dell笔记本的Recovery分区是第一个主分区，因此被错误的认为是Windows分区。
+Wayland与Weston简介
 
-这种情况可用boot-repair修复之。
+https://www.cnblogs.com/lenomirei/p/11379535.html
 
-{% highlight bash %}
-sudo add-apt-repository ppa:yannubuntu/boot-repair
-sudo apt-get update
-sudo apt-get install -y boot-repair
-sudo boot-repair
-{% endhighlight %}
+渲染显示相关概念
 
-7)
+## Android Graphics Framework
 
-最近Win10升级，把我的grub弄乱了，导致开机出现了grub rescue提示符。
+SurfaceFlinger
 
-用`grub rescue> ls (hd0,msdos1)/`依次尝试每个分区，直到找到linux分区。
+VSYNC
 
-{% highlight bash %}
-grub rescue> set root=hd0,msdos1
-grub rescue> set prefix=(hd0,msdos1)/root/grub
-grub rescue> insmod normal
-grub rescue> normal
-{% endhighlight %}
+前置Buffer是当前显示在萤幕上的缓冲区，后置Buffer是尚未显示在萤幕上的缓冲区。
 
-这样就能进入linux系统了。进入之后：
+Single Buffering使用一个前置缓冲区，在着色的同时影像立即显示在萤幕上。因此当萤幕更新影像时会出现闪烁的现象。Single Buffering在目前的程序中已很少使用。
 
-{% highlight bash %}
-sudo update-grub
-sudo grub-install /dev/sda
-{% endhighlight %}
+Double Buffering则使用两个缓冲区，一个前置Buffer，一个后置Buffer。前置缓存的像素在屏幕上显示的同时，显卡正在紧张地着色后置缓存中的像素。
 
-下面针对最近几天的安装实践，做一个总结性的概括：
+Triple Buffering使用一个前置缓存和两个后置缓存。在着色完第一个后置缓冲区的数据后，立即开始处理第二个后置缓冲区，没有Vsync等待的时间。
 
-1）刚开始的时候，由于不熟悉Ubuntu 12.04的安装步骤，选择了错误的选项，发现之后中断系统安装。重启，结果不但Ubuntu没有安装好，就连Windows也进不去。这时由于之前没有刻录Live CD的原因，只好使用Recovery分区恢复Windows系统。
+Gralloc
 
-2）我的本本是ASUS的，在开机时候按住F9，即可启动一键恢复功能。由于这个功能也是第一次使用，因此当选择将Windows恢复到第一个分区，并在恢复过程中出错的时候，我选择了重启。然后选择将Windows恢复到一个硬盘。。。结果除了Recovery分区之外的所有分区都被删除了。保存在电脑中的数据也全部丢失。看来装系统始终是件危险的工作。安装之前一定要将重要数据备份到移动硬盘上。
+OpenCore：Android系统中早期内置的多媒体框架（是Google收购的PacketVideo公司的），后续Android又增加了StageFright框架。
 
-3）ASUS的一键恢复功能，会重启机器若干次，且每次的画面高度雷同，因此很让人觉得是不是机器陷入了有问题的死循环之中。在反复折腾几次之后，我也泄了气，任由它先无限重启下去。后来大概是重启到第4次之后，我发现桌面的分辨率有改变，然后才意识到这些重启估计是正常现象，并不是死循环。
+https://source.android.google.cn/devices/graphics
 
-4）Ubuntu的虚拟内存使用的是交换分区的方式，而不是Windows的交换文件。因此要单独划一个分区用于虚拟内存的数据交换。
+https://www.sohu.com/a/308763349_100093134
 
-5）Win7的压缩卷功能对于系统分区不好使，由于有不可移动的数据存在，系统盘最小也要460G（硬盘总共1T），这实在是太大了。可以使用Acronis Disk Director Suite调整系统分区的大小。但是需要注意的是，Windows下的分区工具对分区数量的调整，会影响到GRUB的执行，需要通过grub shell的命令切换到Linux下，然后执行grub update，方可恢复正常。而Linux下的分区工具（如GParted）就没有这个问题。
+深入浅出Android BufferQueue
 
-6）GParted在调整分区大小，主要是分区首地址右移方面，执行效率非常慢。Acronis Disk Director Suite没试过，没准会好些。
+https://blog.csdn.net/jinzhuojun/article/details/39698317
 
-7）分区的话题说完了，继续谈谈对Linux启动过程的心得。会提到一些名词，但是不会展开来说。首先是BIOS和UEFI。它们决定从哪个存储介质启动。
+Android中的GraphicBuffer同步机制-Fence
 
-8）MBR的结构。MBR决定了一个介质最多只有3个主分区和1个扩展分区。一个扩展分区可包含若干个逻辑分区。
+https://www.zhihu.com/question/590782271
 
-9）GRUB和LILO。
+游戏显示器中的GSYNC与FreeSync技术原理是什么？
 
-10）initrd和vmlinuz。initrd包括image-initrd和cpio-initrd。zImage和bzImage的区别和作用。
+# 同步锁
+
+read-write lock、RCU lock、spin lock
+
+对于悲观锁，开发者认为数据发送时发生并发冲突的概率很大，所以每次进行读操作前都会上锁。
+
+对于乐观锁，开发者认为数据发送时发生并发冲突的概率不大，所以读操作前不上锁。
+
+到了写操作时才会进行判断，数据在此期间是否被其他线程修改。如果发生修改，那就返回写入失败；如果没有被修改，那就执行修改操作，返回修改成功。
+
+乐观锁一般采用Compare And Swap（CAS）算法进行实现。
+
+比较并交换(compare and swap, CAS)，是原子操作的一种，可用于在多线程编程中实现不被打断的数据交换操作，从而避免多线程同时改写某一数据时由于执行顺序不确定性以及中断的不可预知性产生的数据不一致问题。
+
+RCU（Read-Copy Update）机制读取数据的时候不对链表进行耗时的加锁操作。这样在同一时间可以有多个线程同时读取该链表，并且允许一个线程对链表进行修改（修改的时候，需要加锁）。
+
+RCU适用于需要频繁的读取数据，而相应修改数据并不多的情景，例如在文件系统中，经常需要查找定位目录，而对目录的修改相对来说并不多，这就是RCU发挥作用的最佳场景。
+
+ABA问题是指在CAS操作时，其他线程将变量值A改为了B，但是又被改回了A，等到本线程使用期望值A与当前变量进行比较时，发现变量A没有变，于是CAS就将A值进行了交换操作，但是实际上该值已经被其他线程改变过。
+
+相比互斥锁，读写锁允许更高的并行性，互斥量要么锁住状态要么不加锁，而且一次只有一个线程可以加锁。
+
+读写锁可以有三种状态：
+
+- 读模式加锁状态；
+- 写模式加锁状态；
+- 不加锁状态；
+
+只有一个线程可以占有写模式的读写锁，但是可以有多个线程占有读模式的读写锁。
+
+https://mp.weixin.qq.com/s/mTOzcdjaak-z6ypL9MR2Lw
+
+小白科普：悲观锁和乐观锁
+
+https://mp.weixin.qq.com/s/t-jZ9GoqW46rU3t9ahHqCQ
+
+mysql悲观锁总结和实践
+
+https://mp.weixin.qq.com/s/6MRi_UEcMybKn4YXi6qWng
+
+操作系统中锁的实现原理
+
+https://www.zhihu.com/question/332113890
+
+互斥锁（mutex）的底层原理是什么？操作系统具体是怎么实现的？？
+
+https://mp.weixin.qq.com/s/yHSraIAYsjYWPaGXA3PijA
+
+一张图读懂非公平锁与公平锁
+
+https://mp.weixin.qq.com/s/qnZL4ENAbTvVMVcImVTtYw
+
+深入浅出CAS
+
+https://mp.weixin.qq.com/s/g6TK1QiZgqPBDCE7gDJ3dA
+
+面试必问的CAS原理你会了吗？
+
+https://mp.weixin.qq.com/s/T_z2_gsYfs6A-XjVTVV_uQ
+
+说说无锁(Lock-Free)编程那些事（上）
+
+https://mp.weixin.qq.com/s/h75n7sHnrmoLJ4DVAW5AUQ
+
+说说无锁(Lock-Free)编程那些事（下）
+
+https://blog.csdn.net/zqz_zqz/article/details/70233767
+
+java中的锁--偏向锁、轻量级锁、自旋锁、重量级锁
+
+https://mp.weixin.qq.com/s/muSUJuE1A45UTXpWTeFxOA
+
+24张图带你彻底理解Java中的21种锁
+
+https://mp.weixin.qq.com/s/gbCshU5eEn4Gefduk1zdCQ
+
+浅谈Java并发下的乐观锁
+
+https://mp.weixin.qq.com/s/czLqzt0cRwPZeQ4WDaKiJQ
+
+无锁队列的实现
+
+https://mp.weixin.qq.com/s/rpufplXGYFo3P3mdIyY6vA
+
+24张图带你彻底理解Java中的21种锁
+
+https://www.cnblogs.com/linhaostudy/p/8463529.html
+
+Linux RCU机制详解
+
+https://zhuanlan.zhihu.com/p/67520807
+
+Linux内核中的RCU
+
+https://mp.weixin.qq.com/s/azy-lYHTtqdq2OrGwkfsmQ
+
+图解多线程+1的最快操作
+
+https://blog.csdn.net/qq_47768542/article/details/109117044
+
+CAS原理分析及ABA问题详解

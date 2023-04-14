@@ -1,44 +1,13 @@
 ---
 layout: post
 title:  DL参考资源（三）
-category: resource 
+category: DL & NLP resource 
 ---
 
+* toc
+{:toc}
+
 # DL参考资源
-
-## gcForest
-
-http://mp.weixin.qq.com/s/aDKLcITA6TBZDyNmuAU4Bw
-
-周志华教授gcForest（多粒度级联森林）算法预测股指期货涨跌
-
-https://mp.weixin.qq.com/s/GU9-rH0gFan620Jhc1HTDg
-
-周志华提出的gcForest能否取代深度神经网络？
-
-https://mp.weixin.qq.com/s/dEmox_pi6KGXwFoevbv14Q
-
-周志华：首个基于森林的自编码器，性能优于DNN
-
-http://mp.weixin.qq.com/s/IfEgSOIkIPA-YtC9NQW1ng
-
-非神经网络的深度模型gcForest
-
-https://mp.weixin.qq.com/s/N80l9PZQposbIOKXbv8ayw
-
-周志华：最新实验表明gcForest已经是最好的非深度神经网络方法
-
-https://mp.weixin.qq.com/s/8QP5X9Hxi_6qyfxP4O0Gwg
-
-周志华团队和蚂蚁金服合作：用分布式深度森林算法检测套现欺诈
-
-https://mp.weixin.qq.com/s/bE9BZQ6wCICvrgomdySDuw
-
-周志华组提出可做表征学习的多层梯度提升决策树
-
-https://mp.weixin.qq.com/s/AwvSTF8j0AinS-EgmPFJTA
-
-周志华团队：深度森林挑战多标签学习，9大数据集超越传统方法
 
 ## 实战
 
@@ -262,11 +231,55 @@ https://mp.weixin.qq.com/s/cMp9UPrbYsBqL_mdnaB6wA
 
 天池布匹疵点检测大赛解决方案与Baseline
 
+https://mp.weixin.qq.com/s/C9BmYe0iK4dRtrNFmhSbAg
+
+2019腾讯广告算法大赛方案分享
+
+https://mp.weixin.qq.com/s/8J6xar1ppIOXUlcwFtAdWA
+
+合肥高新杯心电人机智能大赛—冠军比赛攻略
+
+https://mp.weixin.qq.com/s/RvwVhXYNA11Jn1fnqe0XPA
+
+多人种人脸识别
+
+https://mp.weixin.qq.com/s/wQoECc52tlWOYQ4IDfQEZQ
+
+ICRA 2020轨迹预测竞赛冠军的方法总结
+
+https://mp.weixin.qq.com/s/XRqwii0TkYO0qcyQzAIqUg
+
+竞赛总结：天池OGeek算法挑战赛
+
+https://mp.weixin.qq.com/s/gY7jrDg8qj8v_nDFOLWHWQ
+
+温度预测挑战赛初赛复盘
+
+https://mp.weixin.qq.com/s/DxoVXIuHsy07HCHlHtQZ5Q
+
+模型debug实战：算法诊断理论的应用
+
+https://mp.weixin.qq.com/s/6Rr6640cZtSsNhErr4ezXQ
+
+从0梳理1场CV大赛（Top 3%）
+
+https://mp.weixin.qq.com/s/sFFJDGQY8kgDU-lXdngzeA
+
+算法模型调优指南
+
+https://mp.weixin.qq.com/s/mzyelweVYX2S1icHIiuWFg
+
+Pawpularity比赛总结
+
 ## 连续学习
 
 https://mp.weixin.qq.com/s/v_Tr_aM2Q1AJ1XbCYCxhgA
 
 终身机器学习: 一种持续学习的范式
+
+https://mp.weixin.qq.com/s/-44YKSqsG0XtS_65s9xOag
+
+终身机器学习，145页pdf
 
 https://mp.weixin.qq.com/s/SBppyDBWqQUariiHbpaq1w
 
@@ -279,6 +292,14 @@ https://mp.weixin.qq.com/s/83HufWMDnuXIOCCfgqeDJw
 https://mp.weixin.qq.com/s/kmEFjzFIbNq0_qdjc1Wm_w
 
 DeepMind新智能体架构Unicorn：持续学习能力胜过多个基准智能体
+
+https://mp.weixin.qq.com/s/pjSsgryShDESN5Erh2XhyA
+
+一时学习一时爽，"持续学习"持续爽
+
+https://mp.weixin.qq.com/s/cPljbzan-gPmm-48H7L8SA
+
+深度架构持续学习，附150页pdf与Slides
 
 ## 鉴黄
 
@@ -294,7 +315,7 @@ http://tensorinfinity.com/paper_119.html
 
 图像内容鉴黄算法综述
 
-# AI-1000问
+## AI-1000问
 
 这个是“有三AI”微信公众号下的栏目，特辑录如下。
 
@@ -332,7 +353,7 @@ https://mp.weixin.qq.com/s/NMEDN7ayUrFPareLoQ_WmA
 
 20万、50万、100万的算法工程师，到底有什么区别？
 
-https://www.zhihu.com/question/56676679/answer/151505274
+https://www.zhihu.com/answer/151505274
 
 机器学习相关岗位面试中，有哪些加（zhuang）分（bi）项？
 
@@ -359,3 +380,41 @@ https://mp.weixin.qq.com/s/qmdfLlTfQzT0QVq_SzEPUw
 https://mp.weixin.qq.com/s/JgSTOiWZ30mIR_uiXyU2PQ
 
 硅谷高级工程师告诉你：算法工程师必须要知道的面试技能雷达图
+
+https://mp.weixin.qq.com/s/L-hF2OIcV9kbzOavjBhMqw
+
+12个不容错过的深度学习面试题
+
+https://mp.weixin.qq.com/s/k-VOcQCyvdmTnQnm8oAnKQ
+
+快2020年了，还在为深度学习调参而烦恼吗？
+
+https://mp.weixin.qq.com/s/4kWUE8ml_o6iF0F1TREyiA
+
+机器学习与深度学习习题集答案
+
+https://mp.weixin.qq.com/s/w1u1O7DRh1R0xQNEeLBUBA
+
+阿里巴巴研究型实习生面试复盘
+
+https://zhuanlan.zhihu.com/p/140936496
+
+Facebook、AWS、Google、Microsoft面试小记
+
+## 缺陷检测
+
+https://mp.weixin.qq.com/s/L-blxMT3HW-IJZBLlVakxg
+
+一文梳理缺陷检测方法
+
+https://mp.weixin.qq.com/s/Bh4zY2toTTcVdsc4ri56ZQ
+
+复杂场景下的复杂缺陷检测方法--深度学习算法综述
+
+https://mp.weixin.qq.com/s/bbFDJ6PjjDZqdnPLMqBuKA
+
+秒杀DeepLabv3+与UNet的表面缺陷检测网络
+
+https://mp.weixin.qq.com/s/UHjGE5VNoVguYMylT6SLjg
+
+基于特征的图像配准用于缺陷检测

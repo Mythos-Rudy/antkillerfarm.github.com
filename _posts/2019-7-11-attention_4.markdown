@@ -1,355 +1,350 @@
 ---
 layout: post
-title:  Attention（四）——BERT（2）
+title:  Attention（四）——BERT, ELMo, GPT, ERNIE
 category: Attention 
 ---
 
+* toc
+{:toc}
+
+# 预训练语言模型进化史（续）
+
+https://mp.weixin.qq.com/s/RKA_RxTQkIeJX3_VIKJiRQ
+
+周明：预训练模型在多语言、多模态任务的进展
+
+https://mp.weixin.qq.com/s/3fmZs1sFNW4IGmtql4KsVQ
+
+邱锡鹏：自然语言处理中的预训练模型，90页ppt
+
+https://mp.weixin.qq.com/s/irb_-T1T9sthW888hP6L4w
+
+清华、复旦、人大联合推出43页预训练模型综述
+
+## 预训练语言模型的前世今生
+
+https://mp.weixin.qq.com/s/1ixYjJN-bJPGrr7v-4d7Rw
+
+萌芽时代
+
+https://mp.weixin.qq.com/s/g4jEVU3BkRem-DYXCn5eFQ
+
+风起云涌
+
+https://mp.weixin.qq.com/s/U8f0cXoPrN32PM3944Oqkg
+
+十分钟了解文本分类通用训练技巧
+
+https://mp.weixin.qq.com/s/uAJ_05g0Zo33mgygTnow1Q
+
+银色独角兽GPT家族
+
+https://mp.weixin.qq.com/s/2_MXIEk5-JP5KwsV6al9XQ
+
+BERT，开启NLP新时代的王者
+
+https://mp.weixin.qq.com/s/sMocYFvESXoBGtX_NWmQkQ
+
+百度出品ERNIE合集，问国产预训练语言模型哪家强
+
+https://mp.weixin.qq.com/s/uOGNoePkwfeixTtI4q4t8Q
+
+MT-DNN(KD) : 预训练、多任务、知识蒸馏的结合
+
+https://mp.weixin.qq.com/s/MXZ3ygSqwyXqOH1PrWEGqg
+
+Transformer-XL超长上下文注意力模型
+
+https://mp.weixin.qq.com/s/6XX2tkp2dbIEKqumnIQWbg
+
+跨语种语言模型
+
+https://mp.weixin.qq.com/s/U1O3j4FBRdiwlRjjlzbWJQ
+
+XLNet：公平一战！多项任务效果超越BERT
+
+https://mp.weixin.qq.com/s/f6RwSHz3Nc68oipHdYDVTw
+
+RoBERTa: 捍卫BERT的尊严
+
+https://mp.weixin.qq.com/s/fneyUitoQL6ZqX3xU9WpDg
+
+跨模态语言模型
+
+https://mp.weixin.qq.com/s/vgEKI9HjWDpkeSZQT2d8Qg
+
+ENRIE(Tsinghua)：知识图谱与BERT相结合，为语言模型赋能助力
+
+https://mp.weixin.qq.com/s/hLt2SnVovrLeNpuMUH1OSg
+
+预训练模型的技术演进：乘风破浪的PTM
+
 # BERT
 
-## ERNIE（续）
+## 概述
 
-https://mp.weixin.qq.com/s/FoX2bXCJlFYjb9U6JcZCqg
+论文：
 
-超详细中文预训练模型ERNIE使用指南
+《BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding》
 
-https://mp.weixin.qq.com/s/EYQXM-1WSommj9mKJZVVzw
+代码：
 
-百度正式发布ERNIE 2.0，16项中英文任务超越BERT、XLNet，刷新SOTA
+https://github.com/google-research/bert
 
-https://mp.weixin.qq.com/s/PwiVCgN8dDWXTGZsiqM-2g
+BERT算的上是Google暴力美学的新作了（2018.10）。如果用家用显卡GTX 1080Ti的话，大概需要几个月的训练时间。幸好Google已经提供了预训练的模型：
 
-最新NLP架构的直观解释：多任务学习–ERNIE 2.0
+https://github.com/google-research/bert/blob/master/multilingual.md
 
-https://mp.weixin.qq.com/s/yZvKMaBZyodr8SLvcAn7Mg
+这里有一个使用预训练模型的参考代码：
 
-深度剖析知识增强语义表示模型——ERNIE
+https://github.com/macanv/BERT-BiLSMT-CRF-NER
 
-## XLNet
+这里有一个可视化工具：
 
-https://mp.weixin.qq.com/s/29y2bg4KE-HNwsimD3aauw
+https://github.com/jessevig/bertviz
 
-20项任务全面碾压BERT，CMU全新XLNet预训练模型屠榜
+Tool for visualizing attention in the Transformer model(BERT, GPT-2, XLNet, and RoBERTa)
 
-https://mp.weixin.qq.com/s/itNtDuQS4KF_sLnfiwdyNg
+https://github.com/thunlp/PLMpapers
 
-拆解XLNet模型设计，回顾语言表征学习的思想演进
+预训练语言模型关系图+必读论文列表，清华荣誉出品
 
-https://mp.weixin.qq.com/s/2zuR0x-Cb1NTeRHYeTjrHQ
+老规矩，最佳教程还是推荐Jay Alammar的：
 
-一文详解Google最新NLP模型XLNet
+http://jalammar.github.io/illustrated-bert/
 
-https://mp.weixin.qq.com/s/t8XDCPOYna8mZ1Iqk_g7Zw
+图解BERT
 
-最新语言表示方法XLNet
+https://jalammar.github.io/a-visual-guide-to-using-bert-for-the-first-time/
 
-https://zhuanlan.zhihu.com/p/70257427
+A Visual Guide to Using BERT for the First Time
 
-XLNet:运行机制及和Bert的异同比较
+## 基本结构
 
-https://mp.weixin.qq.com/s/SAiIIa9_-16dqRMKASsuhw
+![](/images/img3/BERT.png)
 
-追溯XLNet的前世今生：从Transformer到XLNet
+上图是BERT的网络结构图。
 
-https://mp.weixin.qq.com/s/qzAN6VlKcfqmpX9kQCJ7Gg
+BERT是Bidirectional Encoder Representations from Transformers的缩写。从这个名字可以看出它将Transformer中的encoder作为一个基本单元，然后采用了类似双向RNN的方式，做了一个双向的Transformer的结构。
 
-XLnet：GPT和BERT的合体，博采众长，所以更强
+## pre-training
 
-https://zhuanlan.zhihu.com/p/80216580
+BERT的强大，主要不在网络结构上。上面提到的GPT 1.0虽然输给了BERT，但网络更深、向量维度也更大的GPT 2.0却赢了BERT，可见单向或者双向的Transformer，并不是问题的关键。让这些模型真正强大的原因主要在于pre-training。
 
-XLnet：集合了GPT和BERT的预训练模型
+![](/images/img3/BERT_2.png)
 
-https://mp.weixin.qq.com/s/7ZTDJmsOxOwJ7fYUxK6eTw
+上图是BERT的pre-training和fine-tuning的结构图。
 
-XLNet详解
+所谓的pre-training其实就是海量文本的无监督学习。
 
-## 轻量化BERT
+如何进行无监督学习呢？
 
-| Paper | Prune | Factor | Distill | W. Sharing | Quant. | Pre-train | Downstream |
-|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|
-| Compressing BERT: Studying the Effects of Weight Pruning on Transfer Learning | Y |  |  |  |  | Y | Y |
-| Are Sixteen Heads Really Better than One? | Y |  |  |  |  |  | Y |
-| Pruning a BERT-based Question Answering Model | Y |  |  |  |  |  | Y |
-| Reducing Transformer Depth on Demand with Structured Dropout | Y |  |  |  |  | Y |  |
-| Reweighted Proximal Pruning for Large-Scale Language Representation | Y |  |  |  |  | Y |  |
-| Structured Pruning of Large Language Models |  | Y |  |  |  |  | Y |
-| ALBERT: A Lite BERT for Self-supervised Learning of Language Representations |  | Y |  | Y |  | Y |  |
-| Extreme Language Model Compression with Optimal Subwords and Shared Projections |  |  | Y |  |  | Y |  |
-| DistilBERT, a distilled version of BERT: smaller, faster, cheaper and lighter |  |  | Y |  |  | Y |  |
-| Distilling Task-Specific Knowledge from BERT into Simple Neural Networks |  |  | Y |  |  |  | Y |
-| Distilling Transformers into Simple Neural Networks with Unlabeled Transfer Data |  |  | Y |  |  |  | Y |
-| Attentive Student Meets Multi-Task Teacher: Improved Knowledge Distillation for Pretrained Models |  |  | Y |  |  | Multi-task  | Y |
-| Patient Knowledge Distillation for BERT Model Compression |  |  | Y |  |  |  | Y |
-| TinyBERT: Distilling BERT for Natural Language Understanding |  |  | Y |  |  | Y | Y |
-| MobileBERT: Task-Agnostic Compression of BERT by Progressive Knowledge Transfer |  |  | Y |  |  | Y |  |
-| Q8BERT: Quantized 8Bit BERT |  |  |  |  | Y |  | Y |
-| Q-BERT: Hessian Based Ultra Low Precision Quantization of BERT |  |  |  |  | Y |  | Y |
+BERT主要用了两个任务：
 
-https://www.zhihu.com/question/347898375
+- Masked Language Model。随机盖住一句话的某个词，让NN去预测这个被盖住的词。
 
-如何看待瘦身成功版BERT——ALBERT？
+- Next Sentence Prediction。预测下一段话。
 
-https://mp.weixin.qq.com/s/a0d0b1jSm5HxHso9Lz8MSQ
+这两个任务，算是NLP的老任务了。但在传统的NLP pipeline中，属于非常下游的任务。BERT利用它们的特点，进行无监督学习，算是一个很大的突破了。
 
-小版BERT也能出奇迹：最火的预训练语言库探索小巧之路
+## 海量文本
 
-https://mp.weixin.qq.com/s?__biz=MzA3MzI4MjgzMw==&mid=2650771134&idx=2&sn=012082a897dbf125000e38b73520c51d
+BERT以及后来的GPT 2.0取得重大突破的关键，还在于海量的训练文本。
 
-TinyBERT：模型小7倍，速度快8倍，华中科大、华为出品
+BERT拥有3.3亿个参数，训练数据包括：BooksCorpus（800M words）和English Wikipedia（2500M words）
 
-https://mp.weixin.qq.com/s/i82wGiSOlA4l4ozimrE2gg
+GPT 2.0拥有15亿个参数，训练数据除了上述之外，还包括了800M个网页的文本。
 
-加速BERT模型有多少种方法？从架构优化、模型压缩到模型蒸馏最新进展详解！
+如此海量的参数和数据，注定了这些模型的训练是一个超费算力的过程。NLP的游戏规则将变成：
 
-https://mp.weixin.qq.com/s/R2MW_5kskvXyuSOh7kfJaA
+- 土豪大科技公司靠暴力上数据规模，上GPU或者TPU集群，训练好预训练模型发布出来，不断刷出大新闻。通过暴力美学横扫一切，这是土豪端的玩法。
 
-ALBERT：更轻更快的NLP预训练模型
+- 而对于大多数人来说，你能做的是在别人放出来的预训练模型上，做小修正，或者刷应用，或者刷各种榜单，逐步走向了应用人员的方向，这是大多数NLP从业者，未来几年要面对的dilemma。
 
-https://mp.weixin.qq.com/s/dWzpqP_U8Y5DyfWHVTl5Vg
+## fine-tuning
 
-BERT瘦身之路：Distillation，Quantization，Pruning
+fine-tuning是针对实际业务数据进行的微调。下图展示了在若干任务中进行fine-tuning的网络设计。
 
-https://mp.weixin.qq.com/s/DAsY9-Dl5T6peo_71ICOtw
+![](/images/img3/BERT_3.png)
 
-基于ALBERT的文本相似度计算
+>其他NLP任务的网络设计，可以参看后面《GPT》一节的配图。
 
-http://mitchgordon.me/machine/learning/2019/11/18/all-the-ways-to-compress-BERT.html
+值得一提的是，GPT 2.0的实践表明：海量的无监督训练已经能达到很好的效果，fine-tuning只是锦上添花而已。
 
-15篇论文全面概览BERT压缩方法
+事实上，在CV领域也可以看到，通过海量图片训练出的预训练网络，比随机初始化有效率多了。
 
-https://mp.weixin.qq.com/s/5tYuP09dtkmYYGX2R-mCPQ
+## input embeddings
 
-从transformer到albert
+BERT对于input embeddings也做了改进。（如下图所示）
 
-## 参考
+![](/images/img3/BERT_4.png)
 
-https://www.zhihu.com/question/298203515
+其中，Segment Embeddings用于区分输入中的不同句子。这一方案的使用，使得输入文本不再局限于一句话之内，从而大大增加了输入文本的长度，对于获得文本的全局信息，很有好处。
 
-如何评价BERT模型？
+## NMT
 
-https://mp.weixin.qq.com/s/Fao3i99kZ1a6aa3UhAYKhA
+BERT的论文并未提到执行NMT任务时的网络结构，但从下面的论文：
 
-全面超越人类！Google称霸SQuAD，BERT横扫11大NLP测试
+《Incorporating BERT into Neural Machine Translation》
 
-https://mp.weixin.qq.com/s/INDOBcpg5p7vtPBChAIjAA
+可以看出NMT的网络结构仍然是和Transformer类似的seq2seq结构：
 
-最强预训练模型BERT的Pytorch实现
+![](/images/img3/BERT_5.png)
 
-https://mp.weixin.qq.com/s/SZMYj4rMneR3OWST007H-Q
+也就是说，仍然有decoder部分，仍然不能完全并行。
 
-解读谷歌最强NLP模型BERT：模型、数据和训练
+# ELMo
 
-https://mp.weixin.qq.com/s/8uZ2SJtzZhzQhoPY7XO9uw
+https://mp.weixin.qq.com/s/I315hYPrxV0YYryqsUysXw
 
-详细解读谷歌新模型BERT为什么嗨翻AI圈
+NLP的游戏规则从此改写？从word2vec, ELMo到BERT
 
-https://zhuanlan.zhihu.com/p/66053631
+https://mp.weixin.qq.com/s/VL09dIQE6kAUzj5-CRFoXA
 
-BERT
+ELMo的朋友圈：预训练语言模型真的一枝独秀吗？
 
-https://mp.weixin.qq.com/s/CofeiL4fImq98UeuJ4hWTg
+https://mp.weixin.qq.com/s/1nZV6wXzeIxIAAovFOageA
 
-预训练BERT，官方代码发布前他们是这样用TensorFlow解决的
+手把手教你用ELMo模型提取文本特征
 
-https://mp.weixin.qq.com/s/vFdm-UHns7Nhbmdoiu6jWg
+https://mp.weixin.qq.com/s/S3dISq03PDXPvFsL4xjzNQ
 
-谷歌终于开源BERT代码：3亿参数量，机器之心全面解读
+通俗理解ELMo
 
-https://mp.weixin.qq.com/s/dV4RkxZOC9o2BxNi0GljKQ
+https://zhuanlan.zhihu.com/p/37684922
 
-谷歌最强NLP模型BERT官方中文版来了！多语言模型支持100种语言
+ELMo
 
-https://mp.weixin.qq.com/s/fz-bQMAi5bs2_bvRhf3ERg
+https://mp.weixin.qq.com/s/i7EJSNzDsNNbK2YA_YNu8g
 
-从Word Embedding到Bert模型—自然语言处理中的预训练技术发展史
+词向量与ELMo模型
 
-https://mp.weixin.qq.com/s/k_33UK1RkMyHn6TSudU6Kg
+https://mp.weixin.qq.com/s/qbXZGiKYEuTI-2l4iYZlbQ
 
-详解谷歌最强NLP模型BERT
+图文并茂带你细致了解ELMo的各种细节
 
-https://mp.weixin.qq.com/s/d2MZQbamdo0EC_MVtf-HZA
+# GPT
 
-BERT详解：开创性自然语言处理框架的全面指南
+GPT-1论文：
 
-https://mp.weixin.qq.com/s/pD4it8vQ-aE474uSMQG0YQ
+《Improving Language Understandingby Generative Pre-Training》
 
-两行代码玩转Google BERT句向量词向量
+GPT-2论文：
 
-https://mp.weixin.qq.com/s/osmUZxAAX3x-oTHYJbzemA
+《Language Models are Unsupervised Multitask Learners》
 
-谷歌BERT模型fine-tune终极实践教程
+![](/images/img3/GPT.png)
 
-https://mp.weixin.qq.com/s/XmeDjHSFI0UsQmKeOgwnyA
+Jay Alammar的教程：
 
-小数据福音！BERT在极小数据下带来显著提升的开源实现
+https://jalammar.github.io/illustrated-gpt2/
 
-https://mp.weixin.qq.com/s/HXYDO5PM8UIoXgEPGe8p-w
+参考：
 
-图解当前最强语言模型BERT：NLP是如何攻克迁移学习的？
+https://mp.weixin.qq.com/s/E7FLbXYvE9irSpJ9Cdx5tg
 
-https://mp.weixin.qq.com/s/zz3j9HEuzw5e92MQXxSQsA
+GLUE排行榜上全面超越BERT的模型近日公布了
 
-遗珠之作？谷歌Quoc Le这篇NLP预训练模型论文值得一看
+https://mp.weixin.qq.com/s/ZitIqX-9MNk6L1mAC_AwBQ
 
-https://mp.weixin.qq.com/s/IN4YfoZnlBozwEFdhSvLZg
+OpenAI发布参数量高达15亿的通用语言模型GPT-2
 
-用可视化解构BERT，我们从上亿参数中提取出了6种直观模式
+https://mp.weixin.qq.com/s/7u_W4LTYqQBmz3geux5QNQ
 
-https://mp.weixin.qq.com/s/nIT3GIU0dUIYyGChxsiOWw
+对标Bert？刷屏的GPT 2.0意味着什么
 
-Google BERT应用之《红楼梦》对话人物提取
+https://mp.weixin.qq.com/s/1GIQGBwciP22CZvFxhmLzA
 
-https://mp.weixin.qq.com/s/dcp_ANYijRmicMYX7OpJmA
+如何构建OpenAI的GPT 2：“太危险而无法释放的人工智能”
 
-如何用最强模型BERT做NLP迁移学习？
+https://mp.weixin.qq.com/s/eJn379q9raDHY9FdWaXeKQ
 
-https://mp.weixin.qq.com/s/DR4SkgOfUT7KYiaXm5NynQ
+AI界最危险武器GPT-2使用指南：从Finetune到部署
 
-跨语言版BERT：Facebook提出跨语言预训练模型XLM
+https://mp.weixin.qq.com/s/WDFwKqNynwPtXhM8rZnOsA
 
-https://mp.weixin.qq.com/s/epjjHmlmMFhWtRO_cCUITA
+自动生成马斯克的推特几乎无破绽！MIT用GPT-2模型做了个名人发言模仿器
 
-用BERT进行多标签文本分类
+https://mp.weixin.qq.com/s/67Z_dslvwTyRl3OMrArhCg
 
-https://mp.weixin.qq.com/s/Wk6gvOS_Qnud6ib1esMFXA
+完全图解GPT-2（一）
 
-加入Transformer-XL，这个PyTorch包能调用各种NLP预训练模型！
+https://mp.weixin.qq.com/s/xk5fWrSBKErH8tvl-3pgtg
 
-https://mp.weixin.qq.com/s/GqqU3Ixht1BzMnQeRYQEqQ
+完全图解GPT-2（二）
 
-谷歌NLP深度学习模型BERT特征的可解释性表现怎么样？
+https://zhuanlan.zhihu.com/p/80215294
 
-https://mp.weixin.qq.com/s/2f91Ksj19rk_emoFpEmPfA
+GPT：第一个引入Transformer的预训练模型
 
-从BERT看大规模数据的无监督利用
+https://mp.weixin.qq.com/s/dibf3bU4hQ7nXTPGMFsKbg
 
-https://mp.weixin.qq.com/s/g6-NjoFMPpxjsh38X-wTFQ
+GPT-3王者来袭！1750亿参数少样本无需微调，网友：“调参侠”都没的当了
 
-BERT，GPT-2这些顶尖工具到底该怎么用到我的模型里?
+https://mp.weixin.qq.com/s/aPA0PEqVn509u3xbgmhIwQ
 
-https://mp.weixin.qq.com/s/N6xBFZ82dkSGCbj6vC5nLQ
+一天star量破千，300行代码，特斯拉AI总监Karpathy写了个GPT的Pytorch训练库
 
-上下文预训练模型最全整理：原理、应用、开源代码、数据分享
+https://mp.weixin.qq.com/s/FOCR-9X5LVtjxVMWoAtw4g
 
-https://mp.weixin.qq.com/s/-6XpuO7_ve_EdSPCMeWE7g
+GPT的野望
 
-Attention isn’t all you need！BERT的力量之源远不止注意力
+# ERNIE
 
-https://mp.weixin.qq.com/s/Y2bs2QegRadSR7lbiFFnWg
+ERNIE是百度2019年提出的。
 
-BERT一作Jacob Devlin斯坦福演讲PPT：BERT介绍与答疑
+论文：
 
-https://zhuanlan.zhihu.com/p/58425003
+《ERNIE: Enhanced Representation through Knowledge Integration》
 
-从Word2Vec到Bert，聊聊词向量的前世今生（一）
+《ERNIE 2.0: A continual pre-training framework for language understanding》
 
-https://mp.weixin.qq.com/s/SfMIKfF_B4agFCHN_U_mzQ
+代码：
 
-BAM！利用知识蒸馏和多任务学习构建的通用语言模型
+https://github.com/PaddlePaddle/ERNIE/
 
-https://mp.weixin.qq.com/s/6G5Mu7-1omGtQ_9Gt9lUBw
+除此之外，清华也有一篇叫ERNIE的论文：
 
-基于预训练自然语言生成的文本摘要方法
+《ERNIE: Enhanced Language Representation with Informative Entities》
 
-https://mp.weixin.qq.com/s/yysnPauB22YgprpOi1ZWSQ
+这几篇论文主要讨论了，如何将语义信息融入BERT。篇幅原因，这里只关注百度的两篇论文的做法。
 
-深入理解BERT Transformer，不仅仅是注意力机制
+![](/images/img3/ERNIE.png)
 
-https://mp.weixin.qq.com/s/kFABJJ3fBC48-4DXK8PERQ
+相较于BERT学习原始语言信号，ERNIE模型通过对词、实体等语义单元的掩码，使得模型学习完整概念的语义表示。上例中，BERT通过“哈”与“滨”的局部共现，即可判断出“尔”字，但它没有学习到与“哈尔滨”相关的知识。而ERNIE通过学习词与实体的表达，使模型能够建模出“哈尔滨”与“黑龙江”的关系，学到“哈尔滨”是“黑龙江”的省会以及“哈尔滨”是个冰雪城市。
 
-10大任务超越BERT，微软提出多任务深度神经网络MT-DNN
+![](/images/img3/ERNIE_2.png)
 
-https://mp.weixin.qq.com/s/jlGfxkT_o9sgFlUuR_x5Tw
+为了学习相关语义，ERNIE提出了如上图所示的不同级别的mask方法。
 
-微软开源用于学习通用语言嵌入的MT-DNN模型
+![](/images/img3/ERNIE_3.png)
 
-https://mp.weixin.qq.com/s/D68YzjYvpc2epGWFBP6rIQ
+还有如上图所示的语义嵌入。
 
-谷歌实习生新算法提速惊人！BERT训练从三天三夜，缩短到一个小时
+BERT已经证明了预训练模型对于多种NLP任务的有效性，因此使用多任务学习就成为一个很自然的想法。
 
-https://mp.weixin.qq.com/s/iDGofh_ycWJzfqQriPEXGQ
+![](/images/img3/ERNIE_4.png)
 
-如何用Python和BERT做中文文本二元分类？
+上图是ERNIE 2.0的多任务训练的结构图。可以认为ERNIE 2.0就是多任务版的ERNIE。
 
-https://zhuanlan.zhihu.com/p/62308732
+![](/images/img3/ERNIE_5.png)
 
-浅谈Bert：语言理解中的预训练编码器
+为了适应多任务版本的要求，ERNIE 2.0还提出了Task Embedding。
 
-https://mp.weixin.qq.com/s/1Cz6js4kYdvc8g4oKjVPeA
+参考：
 
-BERT烹饪之法：fintune的艺术
+https://mp.weixin.qq.com/s/xoQhz6ljbsbzKRBJlTQQuQ
 
-https://mp.weixin.qq.com/s/nVM2Kxc_Mn7BAC6-Pig2Uw
+百度提出ERNIE，多项中文NLP任务表现出色
 
-BERT模型的标准调优和花式调优
+https://mp.weixin.qq.com/s/rQ8ISipvV3Irrjd3MI-Idw
 
-https://mp.weixin.qq.com/s/FwmEIZ3ugeZBbLIGHmH-_g
+百度ERNIE，中文任务全面超越BERT
 
-BERT之后，GLUE基准升级为SuperGLUE：难度更大
+https://mp.weixin.qq.com/s/_ZBvq7gXvbiP2IQve9tcKg
 
-https://mp.weixin.qq.com/s/SDVxn3Ra1dKmr-XgKNg5IA
+清华等提出ERNIE：知识图谱结合BERT才是“有文化”的语言模型
 
-罗玲：From Word Representation to BERT
+https://mp.weixin.qq.com/s/QVEYQfEQV0CsklI9S4vOiA
 
-https://mp.weixin.qq.com/s/-bh8BL4LxnevS8xnW5U9ZA
-
-中科院自动化所提出BIFT模型：面向自然语言生成，同步双向推断
-
-https://mp.weixin.qq.com/s/7yCnAHk6x0ICtEwBKxXpOw
-
-序列到序列自然语言生成任务超越BERT、GPT！微软提出通用预训练模型MASS
-
-https://mp.weixin.qq.com/s/7sIUaSON53hsXUJjq8uVUA
-
-马聪：NLP中的生成式预训练模型
-
-https://mp.weixin.qq.com/s/s1bQFdA6gtoHeeQMJKQ8UQ
-
-Bert时代的创新：Bert应用模式比较及其它
-
-https://mp.weixin.qq.com/s/zqlWx3e4LOJ3_Zy2DEbCjw
-
-从语言模型看Bert的善变与GPT的坚守
-
-https://mp.weixin.qq.com/s/LngE10Hnqe9bgFzpNfUwLQ
-
-NLP中的词向量对比：word2vec/glove/fastText/elmo/GPT/bert
-
-https://mp.weixin.qq.com/s/MgLLPEY3ynJGkuTgnIXndQ
-
-站在BERT肩膀上的NLP新秀们（PART I）
-
-https://mp.weixin.qq.com/s/RjeuHXa8O3MzSpTOuOHMkQ
-
-站在BERT肩膀上的NLP新秀们：XLMs、MASS和UNILM
-
-https://mp.weixin.qq.com/s/yPq1cGnhcbaNLOjadj91pw
-
-Bert时代的创新：Bert在NLP各领域的应用进展
-
-https://mp.weixin.qq.com/s/l-de0vfx-L24g58IxK-NKQ
-
-Jeff Dean强推：可视化Bert网络，发掘其中的语言、语法树与几何学
-
-https://mp.weixin.qq.com/s/nlFXfgM5KKZXnPdwd97JYg
-
-哈工大讯飞联合实验室发布基于全词覆盖的中文BERT预训练模型
-
-https://zhuanlan.zhihu.com/p/70389596
-
-一批高质量中文BERT预训练模型请查收（上）
-
-https://mp.weixin.qq.com/s/h1VUSY7_UZF3PmjSN0DMSg
-
-从One-hot, Word embedding到Transformer，一步步教你理解Bert
-
-https://mp.weixin.qq.com/s/UJlmjFHWhnlXXJoRv4zkEQ
-
-虽被BERT碾压，但还是有必要谈谈BERT时代与后时代的NLP
-
-https://mp.weixin.qq.com/s/e4dgIdwzDzcLSkdgr1yZpg
-
-LeCun力荐：Facebook推出十亿参数超大容量存储器
-
-https://mp.weixin.qq.com/s/zXXtbuSvyMOkgrWJwB83kg
-
-预训练语言模型的最新探索
+ERNIE真有官方说的那么好？亲测告诉你答案！

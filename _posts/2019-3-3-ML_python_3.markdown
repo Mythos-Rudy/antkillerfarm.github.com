@@ -4,416 +4,479 @@ title:  Machine Learning之Python篇（三）
 category: AI 
 ---
 
+* toc
+{:toc}
+
 # Machine Learning之Python篇
 
-https://pan.baidu.com/s/1qYPUHNQ
+## skimage
 
-小抄合集
+skimage相当于python版本的OpenCV。
 
-https://github.com/FavioVazquez/ds-cheatsheets
+官网：
 
-更大的小抄合集
+http://scikit-image.org/
 
-https://mp.weixin.qq.com/s/1--i1OhxRNPvNnmP9bFo3g
+参考：
 
-全机器学习和Python的27个速查表
+https://buptldy.github.io/2016/03/31/2016-03-31-Skimage%20hog/
 
-https://mp.weixin.qq.com/s/8wI49YBAs7ckkYdc4B_WNQ
+Compute the HOG descriptor by skimage
 
-14张思维导图读懂Python编程核心知识体系
+https://mp.weixin.qq.com/s/WL8jfxB-xukP_MkN2aMb0w
 
-https://mp.weixin.qq.com/s/HKHLiCqEAtoCAqf4CHv86w
+OpenCV，PIL，Skimage你pick谁
 
-python机器学习算法代码实现
+https://mp.weixin.qq.com/s/JszkK3geKXfebH4xLoerYQ
 
-https://github.com/TheAlgorithms/Python
+scikit-image图像处理入门
 
-各种Python算法的新手入门大全
+## Numba
 
-https://mp.weixin.qq.com/s/PtZ3YvFrUgbK5y3pcAeW9A
+NumPy的一个高速版本，能完成前者大部分的功能。
 
-使用OpenCV和Python实现的机器学习
+官网：
 
-https://mp.weixin.qq.com/s/iT91pDPP49EuNA0KfY2njg
+http://numba.pydata.org/
 
-十大数据科学Python热门库推荐
+参考：
 
-https://mp.weixin.qq.com/s/wbcAIrI0eNALfKhgkZQYTQ
+https://mp.weixin.qq.com/s/5peMiGXNnviAjMP76tV3pw
 
-用Python也能进军金融领域？这有一份股票交易策略开发指南
+Python高性能计算库——Numba
 
-https://mp.weixin.qq.com/s/e--IeRTRZMqhs_DSJKpgyQ
+## iPython
 
-特征工程之Scikit-learn
+ipython是一个python的交互式 shell，比默认的python shell 好用得多，支持变量自动补全，自动缩进，支持 bash shell 命令，内置了许多很有用的功能和函数。
 
-https://mp.weixin.qq.com/s/z3N5v4H_W2sxh2XPpFbAcA
+在较新的ipython版本中，添加了ipython notebook的功能，弥补了ipython shell下代码不易保存等缺点，并且在使用--pylab inline选项后，可以在代码执行后立即显示运行结果（包括图片，数据表格等），因此在数据分析中运用十分广泛。
 
-除了Python，这些语言写的机器学习项目也很牛
+`sudo apt install ipython ipython-notebook`
 
-https://mp.weixin.qq.com/s/U2cDVRxZPVsqoL-zHn__CA
+参考：
 
-Python做机器学习之路
+https://mp.weixin.qq.com/s/e7WBxoL_00EWi5G8Mz1L-w
 
-https://mp.weixin.qq.com/s/LgVS5N80UlCeEfrPtyUF4Q
+50个关于IPython的使用技巧，get起来！
 
-深度学习矩阵运算的概念和代码实现
+## Jupyter
 
-https://mp.weixin.qq.com/s/0XteuIk71qSpxrZPGVnMbg
+Jupyter是iPython的后继项目，它不仅支持python语言，还支持其他50多种交互式语言。成为目前最流行的交互式shell和数据文本交换格式。
 
-Python3实现K-近邻算法
+官网：
 
-https://mp.weixin.qq.com/s/bGudwxu8c0LIxv1h64qZtQ
+https://jupyter.org/
 
-Python3实现决策树算法
+安装：
 
-https://mp.weixin.qq.com/s?__biz=MzA3MTM3NTA5Ng==&mid=2651056396&idx=1&sn=dabbda2c433e54a2bad506fc13bfd743
+`pip install jupyter`
 
-《战狼Ⅱ》豆瓣十二万影评浅析
+运行：
 
-https://mp.weixin.qq.com/s/hNOF6YvDjIuX4u36Wr7LCA
+`jupyter notebook`
 
-随机森林之美
+参见：
 
-https://mp.weixin.qq.com/s/AHz81u8SGyi9_k40040QVg
+https://mp.weixin.qq.com/s/UXlPhX3Vb2yqocpUH_3W5w
 
-Python机器学习入门到进阶
+Jupyter项目的前世今生
 
-https://mp.weixin.qq.com/s/hFg1TvNocrMi5CpDtvRLcQ
+https://mp.weixin.qq.com/s/aJRVh7BWOMq4KCoBMtLGGw
 
-推荐一个计算“造人”成功与否的贝叶斯模型！
+快速学习Jupyter Notebook
 
-http://www.sohu.com/a/168170785_642762
+https://blog.csdn.net/u011493486/article/details/55001477
 
-基于机器学习的Python信用卡欺诈检测
+Jupyter中显示matplotlib的图片
 
-https://mp.weixin.qq.com/s/Xl9ZT7_I8P_ZU4O8j6bS5Q
+https://www.cnblogs.com/nxld/p/6566380.html
 
-基于Python的人脸识别：识别准确率高达99.38%！
+Jupyter Notebook快速入门
 
-https://mp.weixin.qq.com/s/tN7KVBA9GqdjpAjW-_WF8Q
+https://mp.weixin.qq.com/s/u-e66SgesPjmpKEihHHr8g
 
-Python学习者最易上手的机器学习漫游指南
+Jupyter Notebook超实用的5个插件，值得一试！
 
-https://mp.weixin.qq.com/s/MmuxNA8Xm6uRiVNGhDnyFw
+https://mp.weixin.qq.com/s/nlskrbG5x6rG7Mu6qDeRxw
 
-Scikit-learn实战之数据预处理
+青出于蓝而胜于蓝，这是一款脱胎于Jupyter Notebook的新型编程环境
 
-https://mp.weixin.qq.com/s/V1EVdhX6-c1VNGNBgscFeA
+https://mp.weixin.qq.com/s/nVRFgtYsR72nJrJvy31s5A
 
-用Python统计新浪微博各种表情使用频率
+Jupyter官方神器：可视化Debug工具!
 
-https://mp.weixin.qq.com/s/UOJsoB_YwBunj0YNShF11w
+https://mp.weixin.qq.com/s/fkqnnQ3hqakPATRETahLPw
 
-深度学习+OpenCV，Python实现实时视频目标检测
+9个jupyter实用技巧
 
-https://mp.weixin.qq.com/s/YCNnfR9XAP0i-Qs-DIpOCg
+https://mp.weixin.qq.com/s/OHO3ePD3Ih3AtKv3qn2IEw
 
-6段Python代码刻画深度学习历史：从最小二乘法到深度神经网络
+9个可以提高Jupyter Notebook开发效率的魔术命令
 
-https://mp.weixin.qq.com/s/a7TLJD1-k3AlJ_ENPoJpwA
+## Autograd
 
-用Python分析《红楼梦》，后四十回是曹雪芹所写吗？
+一个基于numpy的自动求导库。它是由Harvard Intelligent Probabilistic Systems Group开发的。
 
-https://mp.weixin.qq.com/s/MUMQuZLDE5iyogLnIIBaMw
+官网：
 
-7步让你从零开始掌握Python机器学习！
+https://github.com/HIPS/autograd
 
-http://mp.weixin.qq.com/s/5vI1Ii6bd_IzrXKHlvULSQ
+## Face Recognition
 
-是学习Java还是Python？一张图告诉你！
+这是一个人脸识别的软件包。
 
-http://mp.weixin.qq.com/s/Ergq5KKM5vWLWirTf9loEw
+代码：
 
-7步让你从零开始掌握Python机器学习！
+https://github.com/ageitgey/face_recognition
 
-https://mp.weixin.qq.com/s/Ty46-s0kvr2MpbUhQPXJfQ
+参考：
 
-朴素贝叶斯实战篇之新浪新闻分类
+https://mp.weixin.qq.com/s/QcMsSsZY7TcNQ3G57p8eyQ
 
-https://mp.weixin.qq.com/s/CMxo4FNxWYyoG-gxAgtzyA
+3行Python代码完成人脸识别
 
-手把手教你安装深度学习操作系统、驱动和各种python库！
+## Luminoth
 
-https://github.com/leetmaa/KMCLib
+Luminoth是一个开源的计算机视觉工具包，目前支持目标探测和图像分类，但以后会有更多的扩展。该工具包在TensorFlow和Sonnet上用Python搭建而成。
 
-KMCLib - a general framework for lattice kinetic Monte Carlo (KMC) simulations
+代码：
 
-https://mp.weixin.qq.com/s/T7dswxqhie0riPlnjdf9_Q
+https://github.com/tryolabs/luminoth
 
-RNN入门与实践
+## PIL
 
-https://mp.weixin.qq.com/s/ZPCfnj2kLxXLpBNbxs2ggw
+PIL：Python Imaging Library，已经是Python平台事实上的图像处理标准库了。由于PIL仅支持到Python 2.7，加上年久失修，于是一群志愿者在PIL的基础上创建了兼容的版本，名字叫Pillow。
 
-Logistic回归实战篇之预测病马死亡率（一）
+官网：
 
-https://mp.weixin.qq.com/s/XpX9TPgv4a_uKAKiy8W4fg
+http://pythonware.com/products/pil/
 
-Logistic回归实战篇之预测病马死亡率（二）
+安装：
 
-https://mp.weixin.qq.com/s/0i1jKgaRu2pLPAXAvoH6qA
+`sudo apt install python-imaging`
 
-Logistic回归实战篇之预测病马死亡率（三）
+或
 
-https://mp.weixin.qq.com/s/U46HOaBP5ijghpc2myJCvA
+`pip install pillow`
 
-机器学习中，使用Scikit-Learn简单处理文本数据？
+文档：
 
-https://mp.weixin.qq.com/s/HoMr52X9O4fMs2YjtH9oFg
+http://www.effbot.org/imagingbook/pil-index.htm
 
-scikit-learn Adaboost类库的实战分析
+参考：
 
-https://mp.weixin.qq.com/s/61oY3gLEOjQjCJgGkEcABw
+https://mp.weixin.qq.com/s/lJYzxehwo3K2APB2l_WeTA
 
-支持向量机分类实战
+用Python做图像处理（1）
 
-https://mp.weixin.qq.com/s?__biz=MzIxNjA2ODUzNg==&mid=2651435914&idx=1&sn=b0b6f1cda08798dc35bf0930dc9d9096
+https://mp.weixin.qq.com/s/yc_-PyR1qM-3_oKcH9PztQ
 
-盘膝而坐--跟你聊聊APP市场的数据分析
+Python PIL图像处理开发极简教程
 
-https://mp.weixin.qq.com/s/AVSFbfikczjm7flsQQPC1g
+https://mp.weixin.qq.com/s/rQnPh_ny0APpylwoBY1Pkw
 
-2017年最受数据科学欢迎的Top15个Python库
+Python图像处理，366页pdf，Image Operators Image Processing in Python
 
-https://mp.weixin.qq.com/s/jBULfMR0_7Ms9nc5CLLIFQ
+https://mp.weixin.qq.com/s/haCH8uv3oIv9gl9BZCwwAA
 
-Python的开源人脸识别库：离线识别率高达99.38%
+Python处理图像五个有趣场景，很实用！
 
-https://zhuanlan.zhihu.com/p/30630608
+## Tangent
 
-Python和MATLAB交互的基本操作
+Tangent是一个用于自动微分的源到源Python库。
 
-https://mp.weixin.qq.com/s/drpd1O502TcL54cHSEdl_g
+官网：
 
-如何为时间序列数据优化K-均值聚类速度？
+https://github.com/google/tangent
 
-https://mp.weixin.qq.com/s/Di4xVdD1jOGGCiIB-vdkkg
+参考：
 
-Python可以被用来做哪些神奇好玩的事情
+https://mp.weixin.qq.com/s/CExdIdtUxZi4c2B39xdYJA
 
-https://mp.weixin.qq.com/s/-SHD9rXUGQ-yp21RtFhJpg
+谷歌开源Tangent
 
-Python挖掘用户评论典型意见并自动生产报告
+## VisPy
 
-https://mp.weixin.qq.com/s/ZbT5ASvnTODkodTJjBGhnw
+VisPy可以算的上是Matplotlib的威力加强版，它添加了对GPU、3D和大数据的支持。
 
-Python环境下的8种简单线性回归算法
+官网：
 
-https://mp.weixin.qq.com/s/iL53BraKspGJ1rw7LK-3bA
+http://vispy.org/
 
-Logistic回归Python实战，评估销售系统的盈利能力
+参考：
 
-https://mp.weixin.qq.com/s/JwsG0XzIGr5jiQqrOTGFGQ
+https://mp.weixin.qq.com/s/yduK_XKQ-qhiYTNl-YZMFg
 
-8种用Python实现线性回归的方法，究竟哪个方法最高效？
+利用Python实现卷积神经网络的可视化
 
-https://mp.weixin.qq.com/s/4j-DgtlxGKCx8SvLEBgjoA
+## Seaborn
 
-Python上的图模型与概率建模工具包：pomegranate
+Seaborn是另一个非常棒的Matplotlib的威力加强版，专注于统计绘图，并可无缝对接Pandas库。
 
-https://mp.weixin.qq.com/s/2Gd-2BLZy7LdvOenbM2Fsg
+官网：
 
-用hmmlearn学习隐马尔科夫模型HMM
+https://seaborn.pydata.org
 
-https://mp.weixin.qq.com/s/yY_-qJoza2xGRqrm40abkg
+参考：
 
-每个Kaggle冠军的获胜法门：揭秘Python中的模型集成
+https://mp.weixin.qq.com/s/hPbTZHR2iDH4t1eQghNvUQ
 
-https://mp.weixin.qq.com/s/xN5mKrl--7CqgQjf3VKb0A
+数据可视化详解+代码演练
 
-10分钟教你看懂K线图交易策略
+https://mp.weixin.qq.com/s/HpOx6BWM2lbgDpJcF6XncA
 
-https://mp.weixin.qq.com/s/oJdwwpV-7NOPXw0m0qmgfg
+可视化神器Seaborn的超全介绍
 
-如何在Python中快速进行语料库搜索：近似最近邻算法
+https://mp.weixin.qq.com/s/94nwkxn20ZixmcsX8oUJIw
 
-https://mp.weixin.qq.com/s/M2YvR8s2Vh-zGRP42v6txg
+Seaborn绘图
 
-极简Python带你探索分类与回归的奥秘
+https://mp.weixin.qq.com/s/GKrqAD0tud6WOFjNwQVVZw
 
-https://mp.weixin.qq.com/s/E0TsD57voXy9C8bIqFvt_g
+使用Seaborn绘制常用图表
 
-如何在Python中用scikit-learn生成测试数据集
+https://mp.weixin.qq.com/s/Lrag8Wilf4B6abVG2UcMZw
 
-https://mp.weixin.qq.com/s/HGLBPA9Ob7-3DzSNuF39Mg
+详解seaborn可视化中的kdeplot、rugplot、distplot与jointplot
 
-用Python搭建机器学习模型预测黄金价格
+https://mp.weixin.qq.com/s/-TwkUUjGdOiik835xNemfg
 
-https://mp.weixin.qq.com/s/wlUH5aavqHDXOvBTnxvAdg
+14个Seaborn数据可视化图
 
-详解中文维基百科数据处理流程及脚本代码
+https://mp.weixin.qq.com/s/AWU-ul7TQ6zWgvX8j2Ut1g
 
-https://mp.weixin.qq.com/s/Y0fcVw6KUfoM8UWvk8VoPg
+这3个Seaborn函数可以搞定90%的可视化任务
 
-Scikit-learn玩得很熟了？这些功能你都知道吗？
+## Bokeh
 
-https://mp.weixin.qq.com/s/iN-hXd6iGkFC8bxAjwxHNw
+Bokeh是一个数据可视化的库。它不仅提供了和Matplotlib类似的静态图功能，还提供了生成交互动态图的功能。
 
-一文简述多种无监督聚类算法的Python实现
+官网：
 
-https://mp.weixin.qq.com/s/rDg0mPA715zHmwpDMC_83Q
+http://bokeh.pydata.org/en/latest/
 
-用Python写一个抖音漂亮小姐姐发掘器。使用腾讯人脸API
+参考：
 
-https://mp.weixin.qq.com/s/4PyXz2p00Lf783bEUg_N2Q
+https://mp.weixin.qq.com/s/R6NclZO1MqjScRlLJ6Vefw
 
-距离产生美？k近邻算法python实现
+Python地图可视化三大秘密武器（bokeh、basemap、geopandas）
 
-https://mp.weixin.qq.com/s/E0INxsn_p-MBNA-wg-2nbQs
+https://mp.weixin.qq.com/s/XKjo5Dj7bpIlBtxkbozekA
 
-无监督学习—聚类、层次聚类、t-SNE，DBSCAN
+掌握这几点，轻松玩转Bokeh可视化
 
-https://mp.weixin.qq.com/s/EL1lST59dVibr6vIbqkdzw
+## Chartify
 
-如何用200行Python代码换张脸
+Chartify在Bokeh的基础上又封装了一层，提供了更友好的API。
 
-https://mp.weixin.qq.com/s/440osIoULBRDOHq7Bk8awA
+官网：
 
-一文带你了解Python集合与基本的集合运算
+https://github.com/spotify/chartify
 
-https://mp.weixin.qq.com/s/tJwgNXKVwoJby-WkeMeBqQ
+## Plotly
 
-40行Python代码实现“旅行者困境“演化过程
+Plotly也是Matplotlib的威力加强版，主打交互式绘图。
 
-https://mp.weixin.qq.com/s/xYNCKy36n8CoaGzABlI5Wg
+官网：
 
-从零开始用python搭建推荐引擎
+https://plot.ly/python/
 
-https://mp.weixin.qq.com/s/vAn_rnUt036-3jy7ZahF8w
+它还有一个高级封装叫做Plotly Express。
 
-文本挖掘，带你看金庸笔下不一样的恩怨情仇
+官网：
 
-https://mp.weixin.qq.com/s/84Rk5CP2uLaCBIifL465VQ
+https://www.plotly.express/
 
-从统计到概率，入门者都能用Python试验的机器学习基础
+参考：
 
-https://mp.weixin.qq.com/s/O9QDUNXftZeEohxiW6LtZw
+https://www.jianshu.com/p/57bad75139ca
 
-朴素贝叶斯详解及中文舆情分析
+python plotly使用教程
 
-https://mp.weixin.qq.com/s/wIaDAewwOBMPRDr28DqGoQ
+https://mp.weixin.qq.com/s/RkuLhwj_to_B01RJDQsGcA
 
-Feature Tools：可自动构造机器学习特征的Python库
+强烈推荐一款Python可视化神器！
 
-https://mp.weixin.qq.com/s/zfAVXJJmvHgi3JkM_ryDVA
+https://mp.weixin.qq.com/s/9mwLGsXQkTaxIohPwgDyKw
 
-Python高效数据分析的8个技巧
+使用Plotly创建带有回归趋势线的时间序列可视化图表
 
-https://mp.weixin.qq.com/s/Ke3K3i8paNlweciJepiuwQ
+https://mp.weixin.qq.com/s/R_uiw-XCDL40RVcQzfhISA
 
-复旦中文文本分类过程
+Python绘图库Plotly，手把手教你用
 
-https://mp.weixin.qq.com/s/q61G4WldzCCLO7Fzujb_LA
+## ImageAI
 
-图像去噪
+ImageAI是一个CV方面的库，集成了大量的DL模型，其目标是使用数十行代码完成一个CV任务。
 
-https://mp.weixin.qq.com/s/Ij9L-swxx6gmaEH4YQb0tQ
+代码：
 
-如何用Python检测视频真伪？
+https://github.com/OlafenwaMoses/ImageAI
 
-https://mp.weixin.qq.com/s/5YHyM7gILvCItScvYYoANQ
+## Pyecharts
 
-Python实现文字转语音功能
+py是一个用于生成Echarts图表的类库。Echarts是百度开源的一个数据可视化JS库。
 
-https://mp.weixin.qq.com/s/-s5K8gl4Xdjh_1xgTn9PZg
+官网：
 
-维基百科中的数据科学：手把手教你用Python读懂全球最大百科全书
+http://pyecharts.org/
 
-https://mp.weixin.qq.com/s/LiilfmvA5YUaY3QUQD6odA
+参考：
 
-如何用Python将数据预处理速度提升2至6倍？
+https://mp.weixin.qq.com/s/3T594c4DzuRmPW5A4zu8Dg
 
-https://mp.weixin.qq.com/s/4s7lDKlQjV1mUoVv558Y7Q
+Pyecharts：极其强大的Python数据可视化模块
 
-面向云数据库，超低延迟文件系统PolarFS诞生了
+https://mp.weixin.qq.com/s/20cxuC_tAVmofA7lvquEMQ
 
-https://mp.weixin.qq.com/s/VfmudolvWzQN4ghgnI2rZA
+Python可视化神器——pyecharts的超详细使用指南！
 
-机器学习中Python库的3个简单实践——你的图片将由你来创造
+https://mp.weixin.qq.com/s/5GJKIt5OkMh7C3xqoTJsTA
 
-https://mp.weixin.qq.com/s/goxciguoxcamTo2WyUd1Lg
+PyEcharts
 
-大吉大利，今晚如何用Python解锁“吃鸡”的正确姿势
+https://mp.weixin.qq.com/s/6rusBFuLGw4gpDt6tSQTIw
 
-https://mp.weixin.qq.com/s/dQ75O2h1orGzKcaCSDWshQ
+PyEcharts TreeMap
 
-自然语言处理是如何工作的？一步步教你构建NLP流水线
+https://mp.weixin.qq.com/s/6LhoraTo2cLtLJaXbKpt-A
 
-https://mp.weixin.qq.com/s/dwxTla5iiYKvELrpbWf1yQ
+教你用pyecharts制作交互式桑基图，赶快学起来吧！
 
-8个Python高效数据分析的技巧
+https://mp.weixin.qq.com/s/3NYEM2MsfGigRPscP-RVZQ
 
-https://mp.weixin.qq.com/s/TYiqZvY25qxHcmEXRpqO5Q
+使用pyecharts绘制词云图-淘宝商品评论展示
 
-如何用Python做自动化特征工程
+## Yellowbrick
 
-https://mp.weixin.qq.com/s/lfkTryraR22INdPzR0sidg
+Yellowbrick是和Scikit-Learn配套的ML可视化库。
 
-基于协同过滤的推荐系统实战
+官网：
 
-https://mp.weixin.qq.com/s/n3gaWuJCt945ycmliJatpA
+https://www.scikit-yb.org/en/latest/
 
-python语音识别指南终极版
+## mlpy
 
-https://mp.weixin.qq.com/s/pDTbiS8xFH0llUBaN1Mb_Q
+mlpy是一个开源的ML库。只是它最近的一次更新，已经是2012年的事情了。
 
-如何用Python写一个贪吃蛇AI
+官网：
 
-https://mp.weixin.qq.com/s/mABDO5Sxv-Wc-gAgDQAbFQ
+http://mlpy.sourceforge.net
 
-用Python实现机器学习算法——简单的神经网络
+## PyFlux
 
-https://mp.weixin.qq.com/s/6wp4rlBODJAkYf3O4O-2GA
+PyFlux是Python中为处理时间序列问题而创建的开源库。该库有一系列极好的时间序列模型，包括但不限于ARIMA、GARCH和VAR模型。
 
-SciPy库以及图像高斯模糊实战
+官网：
 
-https://mp.weixin.qq.com/s/U4ttnC9VRO39Ic5stG9pBQ
+https://pyflux.readthedocs.io/en/latest/index.html
 
-基于概率编程Pyro的金融预测，让正则化结果更有趣！
+## ImagePy
 
-https://mp.weixin.qq.com/s/8idFi0W7eJx9XDti48B9WQ
+ImagePy是国人写的一个图像处理工具。
 
-Python自动生成表情包
+官网：
 
-https://mp.weixin.qq.com/s/NJed2PbqBU8utLq8HQxctQ
+https://github.com/Image-Py/imagepy
 
-一个Python自动提取内容摘要的实践
+## imgaug
 
-https://mp.weixin.qq.com/s/yBmpdtYJ0B5iq00dKvIprw
+imgaug是一个图像数据增强方面的库，可用于扩充机器学习训练时所用的图片数据集。
 
-一文教你构建图书推荐系统
+官网：
 
-https://mp.weixin.qq.com/s/9kHXBJAXsvEi58WwqrjvBg
+https://imgaug.readthedocs.io/en/latest/
 
-Python代码和贝叶斯理论告诉你，谁是最好的棒球选手
+参考：
 
-https://mp.weixin.qq.com/s/NIOLuK8-ctvncglmpIOEhQ
+https://www.cnblogs.com/vincentcheng/p/9186540.html
 
-用Python入门不明觉厉的马尔可夫链蒙特卡罗
+Augmentor和imgaug——python图像数据增强库
 
-https://mp.weixin.qq.com/s/6x5Wmpy4Im0x3Ddua9rvFw
+## Netron
 
-用python怎样识别验证码？传统方法，非DL
+Netron是一个DL模型的可视化工具，支持几乎所有类型的模型。
 
-https://mp.weixin.qq.com/s/wD1BwpcVbzAJQqiWr1JueQ
+代码：
 
-用Scikit-Learn构建K-近邻算法，分类MNIST数据集
+https://github.com/lutzroeder/netron
 
-https://mp.weixin.qq.com/s/fb9LyEdMsfUBR6ctc1gdXA
+安装：
 
-Python模拟太阳-地球-月亮运动模型
+`snap install netron`
 
-https://mp.weixin.qq.com/s/VmLphhs8rGabdNXtvllgdQ
+## SymPy
 
-教你用Python实现简单监督学习算法
+SymPy是一个符号计算的Python库。
 
-https://mp.weixin.qq.com/s/TglQzG1iE0keEGLKZ-pGIg
+官网：
 
-Python数据处理实战——使用Scikit-Learn进行多类文本分类
+https://www.sympy.org/en/index.html
 
-https://mp.weixin.qq.com/s/WdYa7Q-yA-s_EO59YkYbqw
+参考：
 
-7个基本机器学习算法Python实现
+https://zhuanlan.zhihu.com/p/96738286
 
-https://mp.weixin.qq.com/s/EqLzNzzMcwq5SEyBoTsuug
+用Python来研究数学---SymPy符号工具包介绍
 
-11种NLP文本预处理Python代码，简洁实用
+https://mp.weixin.qq.com/s/pexY5bG0NhQL2uOJF4UHPQ
+
+符号运算他做得比Matlab更漂亮
+
+## 可视化
+
+GCJ-02是由中国国家测绘局（G表示Guojia国家，C表示Cehui测绘，J表示Ju局）制订的地理信息系统的坐标系统。又名“火星坐标系”。
+
+国内出版的各种地图系统（包括电子形式），必须至少采用GCJ-02对地理位置进行首次加密。
+
+CGCS2000坐标系是目前在测绘和地理信息以及工程建设领域主推的坐标系。
+
+粗略转换：GCJ(wgs) ≈ wgs，由此 GCJ(GCJ(wgs)) - GCJ(wgs) ≈ GCJ(wgs) - wgs。因此使用 GCJ(wgs) - (GCJ(GCJ(wgs)) - GCJ(wgs)) 去逼近 wgs。
+
+精确转换：因为GCJ(wgs1) - GCJ(wgs2) ≈ wgs1 - wgs2，所以使用 wgsGuess <- wgsGuess - (GCJ(wgsGuess) - GCJ(wgsReal)) 来迭代逼近。
+
+https://zhuanlan.zhihu.com/p/100993681
+
+利用Python进行地理坐标系统的转换
+
+https://www.zhihu.com/question/29806566
+
+如何看待“地形图非线性保密处理技术”？
+
+---
+
+https://github.com/neozhaoliang/pywonderland/tree/master/
+
+如何用Python画各种著名数学图案
+
+https://mp.weixin.qq.com/s/p69x5YyWxMulxx_OwX3nzQ
+
+TuChart：基于Tushare和Echarts的股票数据视觉化应用
+
+https://mp.weixin.qq.com/s/D_e8lxO3cx-dshEQ_zhfzQ
+
+如何利用散点图矩阵进行数据可视化
+
+https://mp.weixin.qq.com/s/dARWbR1ghho0yX02lNA-gw
+
+Python绘制histogram直方图
+
+https://github.com/minimaxir/stylecloud
+
+一款牛逼的词云工具，开箱即用
+
+https://mp.weixin.qq.com/s/tHNd6y2v7GXN2mSIv0qXlg
+
+手把手：一张图看清编程语言发展史，你也能用Python画出来！
+
+https://mp.weixin.qq.com/s/7M_xbmDQIlSEB1TKN3fbQw
+
+4种更快更简单实现Python数据可视化的方法
+
+https://mp.weixin.qq.com/s/wsa-HxJRCzhBF8E6yrLCQg
+
+如何用Python画一个中国地图？
+
+https://mp.weixin.qq.com/s/c7Sry6FaGv3ZgkKLekxc2g
+
+用Python画中国地图（下）

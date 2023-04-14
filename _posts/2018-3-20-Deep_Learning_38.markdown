@@ -1,90 +1,11 @@
 ---
 layout: post
-title:  深度学习（三十八）——RNN进阶, 细粒度分类, 显著性检测, 深度哈希
+title:  深度学习（三十八）——RNN进阶, 显著性检测
 category: DL 
 ---
 
-# 人脸检测/识别（续）
-
-https://mp.weixin.qq.com/s/ViX3kAT96aaLZ0r9SNtSWA
-
-强判别能力的深度人脸识别
-
-https://zhuanlan.zhihu.com/p/71003906
-
-开箱即用的动漫头像检测包
-
-https://zhuanlan.zhihu.com/p/75752110
-
-从自动化颜艺挑选看异常检测的实际挑战（可和上一篇配套食用）
-
-https://zhuanlan.zhihu.com/p/55479744
-
-人脸检测与对齐python实现
-
-https://mp.weixin.qq.com/s/QpOl26RzsKELGctKDskS4w
-
-2K图像90FPS，中科院开源轻量级通用人脸检测器
-
-https://mp.weixin.qq.com/s/0JX-zEQwkC_0Iq5ZBU6xsg
-
-级联卷积神经网络用于人脸检测
-
-https://mp.weixin.qq.com/s/09iDezt4pJ-7oO77juB2GQ
-
-快速准确的人脸检测、识别和验证新框架（DPSSD）
-
-https://mp.weixin.qq.com/s/45R7yxjPbm0wO4EW7RzXnQ
-
-LFFD：轻量级人脸检测器，不止是快
-
-https://mp.weixin.qq.com/s/pT2XgyvFeV2P3k5coN6ztA
-
-局部人脸识别的动态特征匹配
-
-https://mp.weixin.qq.com/s/GNYrR0NOaN42SgLXsm2KIg
-
-三维"ZAO"脸，单张图片估计人脸几何，效果堪比真实皮肤
-
-https://mp.weixin.qq.com/s/-1W4SqEX_xxxdBFMKJJ6Xg
-
-腾讯（优图）新技术的人脸检测
-
-https://zhuanlan.zhihu.com/p/81353261
-
-CVPR2019_Group Sampling
-
-https://mp.weixin.qq.com/s/QZvGiri0x5UetBp0ZoDHDQ
-
-目前最强判别能力的深度人脸识别
-
-https://mp.weixin.qq.com/s/zSawuk6vn2D6oM5d1pJyWw
-
-选择性细化网络用于高性能人脸检测
-
-https://mp.weixin.qq.com/s/RY26yEIfX4NwSlL65_6RTQ
-
-人脸检测小江湖
-
-https://mp.weixin.qq.com/s/bjOVQu0FZyTWQRlwEn8IVA
-
-基于深度树学习的Zero-shot人脸检测识别
-
-https://mp.weixin.qq.com/s/bAf5x1OOf8xqcQyMdTlWyg
-
-强判别能力的深度人脸识别
-
-https://mp.weixin.qq.com/s/zkdD0BDkB5W_j5N0emW53Q
-
-基于生成对抗网络（GAN）的人脸变形
-
-https://mp.weixin.qq.com/s/tj-ZdB83itO1nAKBGKlb_Q
-
-爱奇艺提出半监督损失函数，利用无标签数据优化人脸识别模型
-
-https://mp.weixin.qq.com/s/L1H7PXwuItuF6Vp2Uyfowg
-
-人脸识别剩下的难题：从遮挡，年龄，姿态，妆造到亲属关系，人脸攻击
+* toc
+{:toc}
 
 # RNN进阶
 
@@ -137,10 +58,6 @@ https://mp.weixin.qq.com/s/SeR_zNZTu4t7kqB6ltNrmQ
 https://mp.weixin.qq.com/s/_q69BV1r46S9X5wnLuFPSw
 
 关于序列建模，是时候抛弃RNN和LSTM了
-
-https://mp.weixin.qq.com/s/mIuAn4G9l3AKFAswpbaQdA
-
-时间卷积网络（TCN）将取代RNN成为NLP预测领域王者
 
 https://mp.weixin.qq.com/s/m5GRNp6qDfVfC0mkQ4m4Yw
 
@@ -210,91 +127,21 @@ https://mp.weixin.qq.com/s/JGZpKSF5HPCMCD061jwq9A
 
 Bengio等人提出新型循环架构，大幅提升模型泛化性能
 
-# 细粒度分类
+https://mp.weixin.qq.com/s/GN0m5nWuV6VDYsTk0XLoDA
 
-多标签分类问题，通常有两种解决方案，即转换为多个单标签分类问题，或者直接联合研究。前者，可以训练多个分类器，来判断该维度属性的是否，损失函数常使用softmax loss。后者，则直接训练一个多标签的分类器，所使用的标签为0,1,0,0…这样的向量，使用hanmming距离等作为优化目标。
+pytorch中如何处理RNN输入变长序列padding
 
+https://mp.weixin.qq.com/s/bts9mdIrGIjO8UCUxSV-xg
 
-
-参考：
-
-https://mp.weixin.qq.com/s/sdQ0rWbDDMN_P0B_RiYZmw
-
-分段映射：帮助利用少量样本习得新类别细粒度分类器
-
-https://mp.weixin.qq.com/s/zeN7rjmAnvh_7BbTmScrZw
-
-细粒度分类你懂吗？——fine-gained image classification
-
-https://mp.weixin.qq.com/s/LtWMGRBk2sbPDjeC9PmJ7g
-
-弱监督学习下的商品识别：CVPR 2018细粒度识别挑战赛获胜方案简介
-
-https://mp.weixin.qq.com/s/hcoAL1AHm_HtderWU8fSBw
-
-大连理工大学在CVPR18大规模精细粒度物种识别竞赛中获得冠军
-
-https://mp.weixin.qq.com/s/31r9FjuJn9yxrZMnfozkMQ
-
-全卷积注意网络的细粒度识别
-
-https://zhuanlan.zhihu.com/p/24738319
-
-“见微知著”——细粒度图像分析进展综述
-
-https://zhuanlan.zhihu.com/p/42067661
-
-CVPR Look Closer to See Better
-
-https://mp.weixin.qq.com/s/52hm3Cq3TFRnTMfDppivSQ
-
-中山大学等提出HSE：基于层次语义嵌入模型的精细化物体分类
-
-https://zhuanlan.zhihu.com/p/48192930
-
-Object-Part Attention Model for FGVC
-
-https://mp.weixin.qq.com/s/slmod5rW4qRhxGnbNN2J8g
-
-双线性汇合(bilinear pooling)在细粒度图像分析及其他领域的进展综述
-
-https://mp.weixin.qq.com/s/JGQdHS_yqkOMrN_Z3jEb7A
-
-基于深度学习的细粒度图像分类综述
-
-https://mp.weixin.qq.com/s/L-1gkElxsMtT369fgJl86Q
-
-旷视南京研究院魏秀参：细粒度图像分析综述
-
-https://zhuanlan.zhihu.com/p/57086099
-
-细粒度识别之Local Attention Network
-
-https://mp.weixin.qq.com/s/6K4tXPlYLaXhexh6gElP5Q
-
-多标签图像分类综述
-
-https://mp.weixin.qq.com/s/bb3ZsXtiRmPvzQ-lfSXrZQ
-
-基于Pascal VOC2012增强数据的多标签图像分类实战
-
-https://mp.weixin.qq.com/s/2pJt9hlUFhR6mo1ughKkiA
-
-超全深度学习细粒度图像分析：项目、综述、教程一网打尽
-
-https://mp.weixin.qq.com/s/jyIrREnJQv4mW-H9ghO7_A
-
-细粒度图像分类是什么，有什么方法，发展的怎么样
-
-https://mp.weixin.qq.com/s/5Y4sQlt6DvgkAYtncByjzw
-
-基于Pytorch的细粒度图像分类实战
-
-https://mp.weixin.qq.com/s/232DjhM5sqWqPTv7PCaORA
-
-ElementAI提出超复杂多尺度细粒度图像分类Attention模型
+Transformer的潜在竞争对手QRNN论文解读，训练更快的RNN
 
 # 显著性检测
+
+视觉显著性检测(Visual Saliency Detection)指通过智能算法模拟人的视觉特点，提取图像中的显著区域(即人类感兴趣的区域)。
+
+https://blog.csdn.net/dawnlooo
+
+一个显著性检测的专栏
 
 https://mp.weixin.qq.com/s/Mi62oqtXUT5If_Dj4KmVYA
 
@@ -328,36 +175,68 @@ https://mp.weixin.qq.com/s/0T1QhiT_20BrerNcTjKreQ
 
 南开提出边缘引导的显著目标检测算法EGNet，刷新主流数据集所有评价指标
 
-# 深度哈希
+https://mp.weixin.qq.com/s/p4lHnte3FYu6XtD3PnSeKw
 
-https://mp.weixin.qq.com/s/iVKnLyNJGVRsR5fWc92Rwg
+光场显著性检测研究综述
 
-深度离散哈希算法，可用于图像检索！
+https://mp.weixin.qq.com/s/8QrNvb-1zmrTWo5zThpyvg
 
-https://mp.weixin.qq.com/s/XUYJub0559wwQ9H1wA_SAg
+U²-Net：使用显著性物体检测来生成真实的铅笔肖像画
 
-机器学习时代的哈希算法，将如何更高效地索引数据
+# 秦汉+
 
-https://mp.weixin.qq.com/s/vFBlFAQLvDZP7IvwKoaPhA
+岂止是尉比校大。要是太尉，那可是碾压一切将军的存在。
 
-无问西东，只问哈希
+还有，唐朝时，十六卫的大将军是正三品。后来又增设十六卫上将军，从二品。那个年代，上将比大将还要高一级。
 
-https://mp.weixin.qq.com/s/XAxuLg2i3q5_uKDo1wU_rA
+内地警衔，督比司高，香港警衔，司比督高。
 
-从哈希到卷积神经网络：高精度&低功耗
+https://www.zhihu.com/question/544068233
 
-https://mp.weixin.qq.com/s/i8iQtCC7ahXLY1a1wOacsA
+为什么古代尉比校大，而现代军衔制度要反过来？
 
-Science：最新发现哈希可能是大脑的通用计算原理
+---
 
-https://mp.weixin.qq.com/s/ZOVWXNym5yHoo-MmpxXo0A
+麒麟阁十一功臣、云台二十八将、凌烟阁二十四功臣。
 
-自监督对抗哈希SSAH：当前最佳的跨模态检索框架
+---
 
-https://mp.weixin.qq.com/s/VldzlYg5AfDRho8bsROL_g
+当时皇宫中南宫云台发生火灾，宦官中常侍张让、赵忠劝说汉灵帝聚敛天下钱，名曰“修宫钱“，每亩十钱，用来修宫室、铸造铜人。又下诏令州郡出纳材木文石，送到京师。大郡至二三千万，余各有差，百姓呼嗟。考虑到司马直在钜鹿郡太守任上清廉的名望，于是减免三百万钱，而司马直仍然拿不出，怅然说道：“我本应该是为民父母官，却反过来剥削百姓来应付朝廷的索取，我做不到！”于是称病不就，朝廷则再三催促司马直交钱。司马直无奈出发，行至孟津，留下遗书抨击卖官鬻爵的政策，然后服药自杀。
 
-HashGAN:基于注意力机制的深度对抗哈希模型提升跨模态检索效果
+---
 
-https://mp.weixin.qq.com/s/3Z2Zc8zTq2uiPyw7ZuuZfw
+汉景帝刘启当太子的时候，有一天晚上要程姬侍寝。不巧的是，程姬来例假了，不能啪啪啪。但太子有欲望又不能憋着，她就把自己的一个姓唐的丫鬟梳妆打扮一番，给刘启送去。一夜风流之后，丫鬟竟然怀孕了，十月怀胎生下一个大胖小子，起名刘发。汉景帝即位后把丫鬟扶正，封了她做妃子，并把刘发封为长沙王。——因此后人把例假称之为“程姬之疾”。
 
-解密美图大规模多媒体数据检索技术DeepHash
+后来刘发生舂陵节侯刘买，刘买生郁林太守刘外，刘外生巨鹿都尉刘回，刘回生南顿令刘钦，刘钦生刘秀。刘秀即东汉开国皇帝，光武帝刘秀。——所以，一个女人的一场例假，阴差阳错之间，竟然创造了一个两百年的帝国。
+
+---
+
+过去朝廷的官员从汉代开始每工作五天就要休息一天，称为“休沐”。就跟咱们现在公务员和国企员工休星期天一样。五天一休这个制度一直延续到隋代。而到了唐代则变成了十日一休，也就是每旬休一次，上旬，中旬，下旬都是逢十必休。一直延续。
+
+---
+
+九锡，先秦时通假为“赐”，读音作ci，汉以后改为“锡”，读音作xi。
+
+---
+
+长安令/咸阳令，陷害虐杀了一个平民。这人育有七个女儿，膝下没有儿子。按常理，女子柔弱，平民上告无门，这冤情只能含恨了。但是我大长安县自古民风彪悍，直到现在关中都有俚语：“金周至银户县，杀人放火长安县”。这七个女儿下了狠心要让父亲安息，于是苦修武艺，隐忍不发。终于有一天，她们逮住了机会，这日长安令/咸阳令出游，七女设法将仇人的车队堵截在了渭水桥上，一番苦斗，最终手刃了对方，为父报仇。
+
+https://www.163.com/dy/article/DB1IE52K0521AU53.html
+
+杀父之仇，弗与共戴天：汉代“七女为父复仇”的故事是如何失传的？
+
+---
+
+邯郸有个自称是汉成帝之子刘子舆的人被毫不留情地揭了老底。后汉书称他原名王昌，又名王郎，因为当初发生过有人自称是刘子舆而被王莽杀害的事件，便自称是真正的刘子舆，说自己出生时母亲为了逃避汉成帝皇后赵飞燕的迫害，将其假扮成其他人的孩子得以保全，辗转蜀郡、丹阳、长安、中山等地，以待天时。估计是王莽太不得人心，很多人都信了王郎的这套说辞，但刘秀不信，骂他是个假货。
+
+https://www.zhihu.com/question/573860477
+
+刘备到处渲染自己是不可考的中山靖王之后，当时的曹孟德与诸葛亮等人怎么就轻易相信了呢？
+
+# 俄乌战争-
+
+2014年7月，瑞典新纳粹分子、前本土防卫军狙击手米尔凯·斯基尔特加入“亚速”营。但他在2015年8月公开宣布：他在乌克兰的经历改变了自己，自己将不再相信纳粹主义，因为他在乌克兰的所见所闻让自己认识到——自己过去的纳粹思想是错误而愚蠢的。
+
+https://mp.weixin.qq.com/s/wp8CBSc2cBJBddSws2ktzw
+
+乌克兰正在进一步走向分裂！这次不在东部，而是西部。

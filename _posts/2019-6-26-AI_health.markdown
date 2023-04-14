@@ -1,8 +1,11 @@
 ---
 layout: post
-title:  AI医疗, 可视化, 5G, 超算
+title:  AI医疗, AlphaFold
 category: resource 
 ---
+
+* toc
+{:toc}
 
 # AI医疗
 
@@ -114,10 +117,6 @@ https://mp.weixin.qq.com/s/ojlhC7vGB1r6scKipm0BjA
 
 小样本如何进行深度学习？西北工夏勇教授这一份54页《医学影像小数据深度学习》PPT为你讲解
 
-https://mp.weixin.qq.com/s/xi_iIr6NdC3QOpjypx3pGg
-
-AlphaGo之后，DeepMind重磅推出AlphaFold：基因序列预测蛋白质结构
-
 https://mp.weixin.qq.com/s/ggZZpBPap398yQ1asHD7aQ
 
 深度重建：基于深度学习的图像重建
@@ -178,202 +177,98 @@ https://mp.weixin.qq.com/s/Uh0EI-pTaXK46Zb08_cs0g
 
 智能医疗综述，48页论文详述医学AI最新进展
 
-# 可视化
+https://mp.weixin.qq.com/s/9dcq4rTcSvo5kQJ3GjwdTg
 
-![](/images/img2/data_visual.png)
+医学图像分割专栏之前列腺分割
 
-这里重点推荐下文：
+https://mp.weixin.qq.com/s/UHlY_-mYBLT383TP6Y7Oew
 
-https://mp.weixin.qq.com/s/QUoW4eD93_DPQ7kP_6jaZg
+生物数据挖掘中的深度学习综述论文，36页pdf
 
-定义可视化！用30分钟读懂人类感知世界的39项研究
+https://mp.weixin.qq.com/s/w_5-3ViQyBpRVyVe0sHFLw
 
-这篇文章从人类感知的角度分析了各种可视化技术。其中的一个有意思的结论是：
+深度学习生命科学：基因组学、药物发现，238页pdf
 
->3D图形虽然“炫目”和“性感”，却没有传达任何额外的信息，迫使读者“处理冗余和无关的线索”。
+https://mp.weixin.qq.com/s/5MbMdMhMvPLCEu32r5l59Q
 
-参考：
+MedMNIST：上海交大发布医学影像领域的MNIST
 
-https://mp.weixin.qq.com/s/QL9R-bAerxnWIUgJhMz1Rw
+https://mp.weixin.qq.com/s/clPpAveascHt7xwPr83HvA
 
-数据可视化怎么选择图表
+Pair，医学图像标注神器
 
-https://mp.weixin.qq.com/s/Ul6Qg2ylCgvDfJTQre4DWQ
+# AlphaFold
 
-2017年数据可视化的七大趋势
+https://mp.weixin.qq.com/s/xi_iIr6NdC3QOpjypx3pGg
 
-https://mp.weixin.qq.com/s/i2Ex8Zmu2ZzHPcoPr-1Rlw
+AlphaGo之后，DeepMind重磅推出AlphaFold：基因序列预测蛋白质结构
 
-太阳系相关图，教你优雅的打开“可视化”的大门
+https://zhuanlan.zhihu.com/p/415200429
 
-https://mp.weixin.qq.com/s/q5mPN_rt1Af5L2fnxuTdCA
+解读AlphaFold优点和不足
 
-46款数据可视化分析工具大集合
+https://www.zhihu.com/question/433443455
 
-https://mp.weixin.qq.com/s/mD732PqDtqYdFZSxZWtvvg
+alphafold2的结果对于毕生研究蛋白质折叠问题的David Baker大牛是否是一个打击？
 
-从1维到6维，一文读懂多维数据可视化策略
+https://mp.weixin.qq.com/s/ZIw8NQfE8Spv1_RWknhipA
 
-https://zhuanlan.zhihu.com/c_122608198
+为什么说AlphaFold2足以改变全人类？
 
-一个可视化方面的专栏
+---
 
-https://mp.weixin.qq.com/s/yF1XJ-_YteoZbVbdIvlbmg
+2016年秋天，许锦波在研究所召开了一个小型报告，邀请了芝加哥大学生物物理系合作者。其中有一位名叫John Jumper的年轻人，听完报告后决定转向深度学习方法。两个月后，他加入Deepmind，成为AlphaFold的团队带头人。
 
-如果伦敦地铁图是数据科学家画的……
+https://mp.weixin.qq.com/s/x0AnmUt5gRYx-ZCEAb1GAg
 
->Henry Charles Beck，1902～1974，英国制图师。其1931年绘制的伦敦地铁图成为了现代地铁图的设计范例。
+AI预测蛋白质结构第一人 许锦波：十年冷清终不渝，一个计算生物学的拓荒者
 
-https://www.zhihu.com/question/21664179
+---
 
-如何在论文中画出漂亮的插图？
+施一公从他开始评上院士，就有很多人质疑他的水平不够。他是做啥的？蛋白分子解析的，说的简单一点，就是用冷冻镜解析蛋白结构，这是个苦力活，用冷冻镜观察蛋白结构，从中分析出来一些东西，然后记录一下发篇Nature。这个东西有用吗？据说有用，但是现在还没用上。如果施一公能够把他研究的东西用上，比如说治疗某种疾病？甚至预防某种疾病？或者研发出某种药物等等，那么他当上院士就是当之无愧的，但可惜，目前还没什么用？而且这个理论也不是他提出来的，他只是应用者。
 
-https://zhuanlan.zhihu.com/p/20756711
+我记得有一个科学家说过一句话，具体是谁忘了：“中国科学家目前的状态就是，耗费大量的时间和金钱去验证国外的科学家（他们的国外导师）所提出的理论的正确性，为他们获得诺奖提供证据。”
 
-用Excel做出强大漂亮的数据地图
+施一公所做的也是这个工作，包括科大搞量子通信的潘建伟院士，他们所做的就是验证他们老师所提出的理论是否正确，并且应用这个理论做一些实验。
 
-https://mp.weixin.qq.com/s/XuoeOqGT_mJcFP08ZLq38g
+---
 
-如何选择一个合适的数据图表？
+颜宁施一公的工作 = 手工织衣服
 
-https://mp.weixin.qq.com/s/-XFbY7p8vjJV71Ar5G_5OA
+DeepMind的AlphaFold = 珍妮纺织机
 
-最有趣的机器学习可视化图集
+这么几十年，所有的几千名结构生物学家才解析19万个蛋白质，DeepMind一年直接上亿，打破了原有的行业发展。
 
-https://mp.weixin.qq.com/s/E-HBQs1-nzP1shC7Gge-7A
+AlphaFold两个主要大佬Demis Hassabis和John Jumper在2023年获得豪华版诺奖：科学突破奖。
 
-“看透”神经网络
+在ChemistryViews网站的一项调查显示，John Jumper也成为全球呼声最高的诺奖建议者名单的科学家，不过从历史来看，诺奖最短获奖时间是6年，因此AlphaFold目前只问世2年，还需要时间来验证其跨时代性。
 
-https://mp.weixin.qq.com/s/Ys8lnwLyvToumnS2NhAAHg
+DeepMind展示了工业化集团攻关的科研形式，相对于传统的一个教授（领主）带几个学生（佃农）的封建式科研形式的优越性。
 
-如何洞悉城市人群移动规律？DataV海量轨迹可视化实践解析
+至AlphaFold2问世之后，各国顶级投资人，政府机构，生物制药企业，原本拨给传统结构生物学的90%以上的经费，划拨给生物AI的实验室。
 
-https://mp.weixin.qq.com/s/ndzLKJC2Tvg2gKrr6jUNTw
+施一公自己想必也很清楚，用蛋白质结构设计药物这件事情早在半个世纪以前就被提出来了，目前市面上根据蛋白结构设计出来的药物数量为0。
 
-原来可视化能做得这么酷炫！Uber开源地理空间工具包kepler.gl
+八年前颜宁在解出葡萄糖转运蛋白GLUT1的结构以后说可以设计药物饿死癌细胞，后来又说要饿死疟原虫，八年过去了，药物在哪里呢？除了饿死被他们骗着学生物的学生，啥都饿不死吧……
 
-http://echarts.baidu.com/echarts2/doc/example.html
+施一公曾公开表示：压死骆驼的最后一根稻草，是鼓励科学家创业，后来自己却创立了一家制药公司。。。
 
-各种大数据展示用的图表
+10年前我读书的时候，我们院系有老师是做核酸检测的，因为那个时候不是啥显学，整个学科被11g抢资源抢的非常苦，简直是仇深似海。
 
-https://mp.weixin.qq.com/s/8J-uDw0qwDbj21UkQch2KA
+解析晶体结构且只解析晶体结构，是一项复杂的简单工作，是一件体力劳动远多于脑力劳动、重复性极高且成功率不低的技术工作。既然选择了这样的工作，就不要再把自己包装成具有深邃思考的科学大家。
 
-跨平台Canvas绘图引擎背后的黑科技
+一句话概括施老师颜老师的Research：基于电镜技术的热门蛋白质三维结构的解析工作。
 
-https://mp.weixin.qq.com/s/94IGjVPXZ0FeCILQN33eBQ
+科学大家可能会有很多CNS，但有很多CNS的，不一定就是大科学家。
 
-遇见大数据可视化：不要错过这么漂亮的数据可视化案例！
+不料谷歌人工智能程序今年把已知的上亿种蛋白质的结构全破解了，大部分结果和用实验获得的一样好，以后只会越来越好，而且开源谁都能用。于是颜宁的专业就悲剧了，当然不会马上失业，但没前途是肯定的。而她除了解析蛋白结构又不会干别的，没法转行做功能生物学研究，毅然回国当学官、学商是最佳选择。
 
-https://mp.weixin.qq.com/s/torRtPSVRnULRTbv4dB1sA
+2000起基本每三年就有诺贝尔化学奖颁给结构生物学成果（2003离子通道，2006真核生物转录，2009核糖体结构，2012 G蛋白偶联受体），自从十年前冷冻电镜成熟运用后一次都没有再发给结构生物学研究，虽然近十年有大量之前无法搞定的重要蛋白/复合物结构都被解出来了。
 
-大规模地理数据可视化入门：Deck.gl和H3
+https://www.zhihu.com/answer/2739900394
 
-https://mp.weixin.qq.com/s/UwPCDA89GH5X-HubeJddnQ
+如何看待颜宁宣布即将辞去普林斯顿大学教职，全职回国，出任深圳医学科学院创始院长？
 
-怎么画高大上的神经网络结构？试试这个！
+https://www.zhihu.com/answer/2737553223
 
-https://mp.weixin.qq.com/s/MMzvZA55Xb2sOA7rJiXiEw
-
-那些酷炫的深度学习网络图怎么画出来的？
-
-https://mp.weixin.qq.com/s/CqvranTh9dawJW5DP-oHpw
-
-手把手教你将矩阵画成张量网络图
-
-https://mp.weixin.qq.com/s/SWpgNMDIRfRugWBhMyGrTQ
-
-交互式《几何原本》再现江湖
-
-https://visualgo.net/zh
-
-一个数据结构和算法的可视化网站
-
-https://mp.weixin.qq.com/s/ZuzmCHoo4i8e5TjZUOTPGg
-
-17种经典图表总结，轻松玩转数据可视化！
-
-https://mp.weixin.qq.com/s/mGgOhuF5PVWzB5cie_ox0A
-
-Github上10个开源免费的后台控制面板你值得拥有！
-
-https://mp.weixin.qq.com/s/BpruKFMyL37MDXvzkMxnzQ
-
-技术人最不该忽视可视化数据分析
-
-https://mp.weixin.qq.com/s/mnKLpa_uPzoMrh7E7mtupg
-
-别动不动就画折线图了，教你4种酷炫可视化方法
-
-## howmuch.net
-
-howmuch.net是一个金融类的数据可视化网站，挺有意思的。比如下图：
-
-![](/images/article/top_10_company.jpg)
-
-网址：
-
-https://howmuch.net/
-
-## Gephi
-
-Gephi是一个针对图和网络的可视化工具。
-
-官网：
-
-https://gephi.org/
-
-## Processing
-
-Processing是一个在可视化领域用的比较多的sketchbook，类似于Logo语言的威力加强版。支持Java、python等多种语言。
-
-官网：
-
-https://processing.org
-
-# 5G
-
-https://mp.weixin.qq.com/s/oN-drJHFU34XanBzOKzrUQ
-
-有史以来最强的5G入门科普！
-
-https://mp.weixin.qq.com/s/IYT7_bcWG0hTX7yI1_C_Ig
-
-5G将是一个彻底的失败通信技术
-
-https://mp.weixin.qq.com/s/yIJT9D1YXa4rhf-RMBVPLw
-
-1G到5G之争：一部30年惊心动魄的移动通信史
-
-https://mp.weixin.qq.com/s/1un50xpUf0JGIG03M93gZQ
-
-解析5G背后的核心技术：波束成形
-
-https://mp.weixin.qq.com/s/uxuWmcplTmS8cJObd8cfVw
-
-第一次有人把5G核心网讲得如此通俗易懂！
-
-https://mp.weixin.qq.com/s/uYnu7v3w0evrJhTBYjbI_g
-
-啥叫5G超级上行？
-
-https://mp.weixin.qq.com/s/5v1uknmAPfqFR_5meie9GQ
-
-5G基站功耗到底有多可怕？网友惊呼：国家电网或是5G最大赢家！
-
-# 超算
-
-![](/images/img3/power.aug.gif)
-
-![](/images/img3/Supercomputers-history.png)
-
-Top 500超算之间的差距竟有3个数量级，从榜首到落榜差不多要10年时间。OS从2015年开始全都是Linux了。Windows在超算领域从来没有风光过，之前没钱，自然斗不过UNIX，后来又被Linux打趴下了。
-
-Sunway TaihuLight和Sierra的算力相当，但core的数量竟是后者的6.7倍，功耗是后者的2.06倍。差距明显啊！
-
-https://www.top500.org/
-
-超算排名网站
-
-https://zhuanlan.zhihu.com/p/33956771
-
-超算排名之中的地区和架构之争
+为什么现在网络上对施一公的风评变得这么差？

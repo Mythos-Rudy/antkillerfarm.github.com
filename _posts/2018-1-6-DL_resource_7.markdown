@@ -1,8 +1,11 @@
 ---
 layout: post
 title:  DL参考资源（七）
-category: resource 
+category: DL & NLP resource 
 ---
+
+* toc
+{:toc}
 
 # DL参考资源
 
@@ -78,10 +81,6 @@ https://mp.weixin.qq.com/s/oe8Zcv3EecDV2OUl9qejCA
 
 图像分类、定位、检测，语义分割和实例分割方法梳理
 
-http://mp.weixin.qq.com/s/zi1E-O8qHv0NUwkQmXI9Vw
-
-用AlphaGo背后的人工智能做金融投资
-
 https://mp.weixin.qq.com/s/4LjWHFO0wTP7kqnKf2mdWw
 
 林倞：Beyond Supervised Deep Learning--后深度学习时代的挑战
@@ -110,17 +109,9 @@ https://mp.weixin.qq.com/s/XX6GTgeN4M4rVvE6fgDFKw
 
 训练AI太辛苦？OpenAI新方法：不如让AI之间互教吧
 
-https://mp.weixin.qq.com/s/DBSj-5p5Dc6-z7POo42x2w
-
-深度学习引入信号处理技术，轻松分析股票等各种序列数据
-
 https://mp.weixin.qq.com/s/RsWY9jQ8biQu6Pc5tl3T4Q
 
 纽约大学：参考儿童认知发展，通过简单神经网络学习归纳偏置
-
-https://www.jianshu.com/p/86e09a28d656
-
-一些深度学习在股票交易应用的遐想
 
 https://mp.weixin.qq.com/s/XGA5W3pkDI8S5MDar61Bag
 
@@ -353,3 +344,15 @@ https://mp.weixin.qq.com/s/r-tl6ooNcQ_j4OFzV-5f3w
 https://mp.weixin.qq.com/s/OkSjIw54TNbRtKN0I2Ug1Q
 
 LeCun哈佛演讲：《机器怎样才能像人和动物一样学习》（135页PPT）
+
+https://www.zhihu.com/question/427088601
+
+在CV/NLP/DL领域中，有哪些修改一行代码或者几行代码提升性能的算法？
+
+https://www.zhihu.com/question/541441389
+
+有没有一种神经网络结构能同时求得其概率密度函数？
+
+https://mp.weixin.qq.com/s/VcW-88MVAVumSfOIaY183A
+
+李白: 你的模型权重很不错, 但可惜下一秒就是我的了

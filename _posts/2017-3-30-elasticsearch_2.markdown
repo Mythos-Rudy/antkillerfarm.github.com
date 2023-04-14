@@ -4,9 +4,28 @@ title:  Elasticsearch（二）, Flume & Kafka
 category: AI 
 ---
 
+* toc
+{:toc}
+
 # Elasticsearch
 
 ## ELK的配置部署（续）
+
+2.新建用户
+
+ES不允许以root用户执行。因此需要创建新用户：
+
+`adduser es`
+
+3.
+
+>access denied (javax.management.MBeanTrustPermission register) 
+
+jre/lib/security/java.policy文件中新增
+
+`permission javax.management.MBeanTrustPermission "register";`
+
+4.以es用户的身份解压各压缩包，否则会有一大堆的权限错误。
 
 5.Bootstrap checks failing
 
@@ -16,12 +35,12 @@ category: AI
 
 修改/etc/security/limits.conf：（需要root权限）
 
-{% highlight text %}
+```text
 es  soft    nproc     65536
 es  hard    nproc     65536
 es  soft    nofile    65536
 es  hard    nofile    65536
-{% endhighlight %}
+```
 
 重新登录es用户后，修改生效。
 
@@ -207,6 +226,66 @@ https://mp.weixin.qq.com/s/di_CJ7kBwI4ICe4mhz0Tcg
 
 滴滴基于ElasticSearch的一站式搜索中台实践
 
+https://mp.weixin.qq.com/s/-NfKH-2PpA-peq9CU0g1JA
+
+解密Elasticsearch技术，腾讯开源的万亿级分布式搜索分析引擎
+
+https://mp.weixin.qq.com/s/0TMESj2Z-XK2PzwBQo0Mpg
+
+Elasticsearch调优实践
+
+https://mp.weixin.qq.com/s/pT-6-U9mF4ttg0arp6BsVQ
+
+Python+ElasticSearch：有了这个超级武器，你也可以报名参加诗词大会了！
+
+https://mp.weixin.qq.com/s/W61SstvGawgVVqQxNa7GyQ
+
+Elasticsearch入门学习权威指南，719页pdf教您构建分布式实时搜索和分析引擎
+
+https://mp.weixin.qq.com/s/Olz-kvHM-SkC-pZr08r7ow
+
+相关搜索—使用Solr和Elasticsearch，360页pdf
+
+https://mp.weixin.qq.com/s/ipuIq_E5rOPPF7_XdS5PGQ
+
+腾讯万亿级Elasticsearch内存效率提升技术解密
+
+https://mp.weixin.qq.com/s/eejvp9yCJxP_Crj8P9jqew
+
+Elasticsearch索引容量管理实践
+
+https://mp.weixin.qq.com/s/Osw6IAK5G6v11nyhq5u-HA
+
+Elasticsearch遇上BERT：使用Elasticsearch和BERT构建搜索引擎
+
+https://mp.weixin.qq.com/s/MDT5-I5kza1yJdA_JWpPkA
+
+ElasticSearch介绍及使用方法
+
+https://mp.weixin.qq.com/s/S29Ro51Oidx5ikO8sj-UEA
+
+新一代搜索引擎项目ZeroSearch设计探索（ES是磁盘检索引擎。而ZS是磁盘检索引擎）
+
+https://mp.weixin.qq.com/s/2PRX_vVhi3SygrZydBfG6w
+
+携程Elasticsearch数据同步实践
+
+https://mp.weixin.qq.com/s/dFspZaLOOOl8Y28wN_EWfA
+
+还在用ELK？是时候了解一下轻量化日志服务Loki了
+
+https://mp.weixin.qq.com/s/JOS_fxec6YWjfekQzgGiKA
+
+百亿数据，毫秒级返回，如何构建？
+
+https://mp.weixin.qq.com/s/UFUItQlYsQrpvkHth1ujFw
+
+1W字 40图 硬核ES实战
+
+https://mp.weixin.qq.com/s/6k8THshasaYfSaLr58O1NA
+
+美团外卖搜索基于Elasticsearch的优化实践
+
 # Flume & Kafka
 
 Flume和Kafka都是日志系统。
@@ -233,6 +312,36 @@ http://www.cnblogs.com/lishouguang/p/4560858.html
 
 flume使用场景 flume与kafka的比较
 
+## 消息中间件的Style
+
+两种最常见的Style: 消息队列方式(Message queuing)和发布订阅(publish-subscribe)方式。
+
+参考：
+
+https://mp.weixin.qq.com/s/oiaXjFxNcwJenkGuJBPm5Q
+
+消息中间件的"Style"
+
+## 消息传递语义
+
+message delivery semantic也就是消息传递语义，简单说就是消息传递过程中消息传递的保证性。主要分为三种：
+
+- at most once：最多一次。消息可能丢失也可能被处理，但最多只会被处理一次。
+
+- at least once：至少一次。消息不会丢失，但可能被处理多次。可能重复，不会丢失。
+
+- exactly once：精确传递一次。消息被处理且只会被处理一次。不丢失不重复就一次。
+
+https://mp.weixin.qq.com/s/TScpvjpIlyZyj62e8EwOPg
+
+Kafka消息中间件到底会不会丢消息
+
+## 参考
+
+https://www.zhihu.com/question/54152397
+
+消息队列（mq）是什么？
+
 https://mp.weixin.qq.com/s/bjlDHFLwxjej2t8iDhVb1A
 
 Spark Streaming消费Kafka数据的两种方案
@@ -241,9 +350,17 @@ https://mp.weixin.qq.com/s/o-zfrJS5Ito1kWPBJUIryg
 
 Kafka相关资源
 
+https://mp.weixin.qq.com/s/TzF6GBb1NI5iE8q2Rxo95Q
+
+Kafka实战：Kafka in Action，209页pdf
+
 https://mp.weixin.qq.com/s/l0AL89M0xPbWMFj6U7yYZw
 
 消息中间件选型分析：从Kafka与RabbitMQ的对比看全局
+
+https://mp.weixin.qq.com/s/SaXRwTUaMlC64Z6qHvXiqg
+
+非常强悍的RabbitMQ总结
 
 https://mp.weixin.qq.com/s/oKBUb2IbG_h1xDhL42TbuQ
 
@@ -265,6 +382,34 @@ https://mp.weixin.qq.com/s/QJOfh5gJReQTimu-mAzexg
 
 以Kafka和RocketMQ为例，漫谈消息队列
 
+https://mp.weixin.qq.com/s/imLTVwgm8MOiY1_5s3rdFQ
+
+RocketMQ如何保证消息的可靠性？
+
+https://mp.weixin.qq.com/s/9ZqEOlD3v--U3BNCPZSUjw
+
+浅谈消息队列及常见的分布式消息队列中间件
+
 https://mp.weixin.qq.com/s/6aXcum-FAbvcGcOrkSC4vQ
 
 为什么Kafka会成为微服务架构的事实标准？
+
+https://zhuanlan.zhihu.com/p/87987916
+
+Kafka基本原理
+
+https://mp.weixin.qq.com/s/46u-qyk00yZM_bIah-zs-A
+
+基于Kafka的实时计算引擎如何选择？Spark or Flink？
+
+https://mp.weixin.qq.com/s/059DK6v1j5yi9OlqdbI7Cg
+
+从面试角度一文学完Kafka
+
+https://mp.weixin.qq.com/s/T6gCc8OBgyV-yeAg_MUzPQ
+
+简单理解Kafka的消息可靠性策略
+
+https://mp.weixin.qq.com/s/DQZh-V0jnlqLNqkyRkoDQQ
+
+使用Kafka，如何成功迁移SQL数据库中超过20亿条记录？

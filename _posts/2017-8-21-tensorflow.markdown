@@ -1,12 +1,13 @@
 ---
 layout: post
 title:  TensorFlow（一）
-category: AI 
+category: DL Framework 
 ---
 
-# TensorFlow
+* toc
+{:toc}
 
-## 概述
+# 概述
 
 TensorFlow是Google主导的开源深度学习库。
 
@@ -64,7 +65,7 @@ TensorFlow技术栈：
 
 ![](/images/article/tensorflow_layer.png)
 
-## CS 20SI
+# CS 20SI
 
 斯坦福最近专门为Tensorflow开设了一门课程：CS 20SI: Tensorflow for Deep Learning Research。
 
@@ -88,23 +89,42 @@ http://www.sohu.com/a/164277987_473283
 
 一名在斯坦福教授TensorFlow教师的“忏悔”：我觉得自己像个骗子
 
-## 源代码编译
+---
+
+Chip Huyen的新课：
+
+https://stanford-cs329s.github.io/
+
+CS 329S: Machine Learning Systems Design
+
+# blog
+
+http://www.jianshu.com/u/eaec1fc422e9
+
+一个TF的blog
+
+http://blog.csdn.net/u012436149
+
+一个TensorFlow+PyTorch的blog
+
+# 源代码编译
 
 **Step 1**：安装Bazel。
 
-参见[这里](/technology/2017/11/07/makefile.html#Bazel)
+参见[这里](/toolchain/2017/11/07/makefile.html#Bazel)
 
 **Step 2**：编译TensorFlow。
 
-{% highlight bash %}
+```bash
 ./configure
 # configure的时候要选择一些东西是否支持，这里建议都选N，不然后面会包错，如果支持显卡，就在cuda的时候选择y
 bazel build --config=opt //tensorflow/tools/pip_package:build_pip_package # CPU only
 bazel build --config=opt --config=cuda //tensorflow/tools/pip_package:build_pip_package # GPU
+bazel build --config=opt --copt=-g --strip=never //tensorflow/tools/pip_package:build_pip_package # debug mode + CPU
 bazel-bin/tensorflow/tools/pip_package/build_pip_package /tmp/tensorflow_pkg #生成wheel文件
-{% endhighlight %}
+```
 
-configure脚本会自动选择CPU指令集优化，因此源代码编译的TensorFlow，肯定比pip安装的要运行的快。
+configure脚本会自动选择CPU指令集优化，因此源代码编译的TensorFlow的CPU版本，肯定比pip安装的要运行的快。
 
 注意：这里即使只编译TF for python3，也要安装python2，否则bazel脚本会出错。
 
@@ -114,15 +134,18 @@ bazel编译相当消耗资源，在配置低的机器上，可通过如下选项
 
 例子：
 
-`bazel build --jobs 2 --local_resources 850,3.0,1.0 --config=opt //tensorflow/tools/pip_package:build_pip_package `
+`bazel build --jobs 2 --verbose_failures --local_resources 850,3.0,1.0 --config=opt //tensorflow/tools/pip_package:build_pip_package`
 
-按照我的实践`--local_resources`其实用处不大，有的C++文件编译需要上GB空间，即使有约束也会突破。而`--jobs`相对好一些，一般按照每个job 1.5GB来估算，就可以保证TensorFlow顺利编译成功。
+按照我的实践`--local_resources`其实用处不大，有的C++文件编译需要上GB空间，即使有约束也会突破。而`--jobs`相对好一些，一般按照每个job 2GB来估算，就可以保证TensorFlow顺利编译成功。
+
+编好之后，可以找到`bazel-bin/tensorflow/python/_pywrap_tensorflow_internal.so`，这个文件在debug模式下，体积竟然高达8GB。。。
 
 **Step 3**：安装TensorFlow。
 
-`sudo pip uninstall tensorflow`
-
-`sudo pip install /tmp/tensorflow_pkg/tensorflow-1.3.0-cp27-cp27mu-linux_x86_64.whl`
+```bash
+sudo pip uninstall tensorflow
+sudo pip install /tmp/tensorflow_pkg/tensorflow-1.3.0-cp27-cp27mu-linux_x86_64.whl
+```
 
 >安装之后，不要在tensorflow源代码文件夹下运行python，会报cannot import name 'build_info'的错误。
 
@@ -130,25 +153,73 @@ bazel编译相当消耗资源，在配置低的机器上，可通过如下选项
 
 GPU编译基本和CPU编译差不多，唯一需要注意的是：Ubuntu 16.04的gcc编译器是5.4.0，然而CUDA 8.0不支持5.0以上的编译器，因此需要降级，把编译器版本降到4.9。命令如下：
 
-`sudo apt-get install g++-4.9`
+`sudo apt install g++-4.9`
 
 configure脚本会询问使用什么版本的gcc，填`/usr/bin/gcc-4.9`即可。
 
 此外，Bazel的版本也要和其他部件一致。
 
-这里给出本人试验成功的一组配置：
+具体的要求参见：
 
-| Tensorflow | CUDA | CUDNN | gcc | bazel |
-|:--:|:--:|:--:|:--:|:--:|
-| 1.3.1 | 8.0 | 5.1.5 | 4.9 | 0.5.4 |
+https://tensorflow.google.cn/install/source?hl=en
 
-cudnn官网的链接目前已无法下载。但其实只是换了个地址而已：
+---
 
-https://developer.nvidia.com/rdp/cudnn-download
-
-***2018.11更新：***
+2018.11
 
 GPU编译已经没有太大意义了，只需`pip install tensorflow-gpu`即可。但需要注意的是，TF版本需要匹配对应的CUDA版本，否则安装过程不会有错误，但是运行时就会出问题。
+
+---
+
+2020.11
+
+现在TF的GPU版本已经比较完善了，但是相应的Nvidia依赖的安装，仍然比较麻烦。
+
+这里的Nvidia依赖，包括三个层面：
+
+- Nvidia driver
+
+https://www.nvidia.com/download/index.aspx
+
+- CUDA
+
+https://developer.nvidia.com/cuda-toolkit-archive
+
+CUDA自带了特定版本的Driver，但是和driver版本并无对应关系，不使用自带的driver也是完全可以的。
+
+- cuDNN
+
+https://developer.nvidia.com/rdp/cudnn-archive
+
+这个需要注册Nvidia账号才能下载。。。囧
+
+下载解压之后，将cuda/include/cudnn.h文件复制到/usr/local/cuda/include文件夹，将cuda/lib64/下所有文件复制到/usr/local/cuda/lib64文件夹中，并添加读取权限。
+
+Ubuntu 20.04已经自带了相应的driver和CUDA：
+
+`sudo apt install nvidia-driver-440 nvidia-utils-440 nvidia-cuda-toolkit`
+
+Pytorch可支持最新的CUDA，因此这样就可以了。
+
+而TF不支持最新的CUDA版本，所以还需要：
+
+`sudo apt install libcudart10.1`
+
+cuDNN这个没办法，只有硬装。
+
+装好之后，会有如下提示：
+
+`successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero`
+
+这个是正常的，NUMA是多机多卡才有的东西。
+
+---
+
+2022.6
+
+Nvidia的向后兼容性其实还马马虎虎，由于我尝鲜Ubuntu 22.04，并不能安装旧版的CUDA，以适配当前的TF（2.9.0）。于是我直接安装CUDA 11.5，竟然也没出啥问题。。。
+
+---
 
 参考：
 
@@ -172,7 +243,33 @@ https://mp.weixin.qq.com/s/bxJ7VCI_120psBti-j376w
 
 在ubuntu上配置tensorflow 1.7+CUDA踩过的坑
 
-## 基本概念
+https://zhuanlan.zhihu.com/p/81724891
+
+配置ubuntu18.04+cuda9.0+cudnn服务器tensorflow-gpu深度学习环境
+
+https://blog.csdn.net/qq_43202953/article/details/107951031
+
+Ubuntu 20.04安装cuda和cudnn
+
+# 快速更新
+
+对于要对tensorflow的C++部分进行调试的人来说，每次都重装pip包，显然是一件很麻烦的事情。这时可以考虑使用符号链接来省去打包和解包的时间。
+
+```bash
+# create soft link(do it only in the first time.)
+cd <python lib path>/tensorflow/python
+ln -s <tf path>/bazel-bin/tensorflow/python/_pywrap_tensorflow_internal.so _pywrap_tensorflow_internal.so
+
+cd <python lib path>/tensorflow
+ln -s <tf path>/bazel-bin/tensorflow/libtensorflow_framework.so.2.3.1 libtensorflow_framework.so.2
+
+# <python lib path> usually like this: /usr/lib/python3.8/site-packages
+
+# update
+bazel build --config=opt --copt=-g --strip=never //tensorflow/python:pywrap_tensorflow
+```
+
+# 基本概念
 
 **Variables**：维持计算图执行过程中的状态信息的变量。一般来说，这就是神经网络的参数。
 
@@ -188,7 +285,7 @@ Placeholders在图的执行过程中，需要由真实的tensor填充之：
 
 这里的batch_xs就是用来填充x的tensor。
 
-## 图计算
+# 图计算
 
 图计算是各个深度学习框架的中心概念，这里单独提出来讨论一下。
 
@@ -212,7 +309,7 @@ Graph和Session的关系，类似于类和对象的关系。Session是Graph的�
 
 以下是使用多个Graph的示例：
 
-{% highlight python %}
+```python
 import tensorflow as tf
 g1 = tf.Graph()
 with g1.as_default():
@@ -224,7 +321,7 @@ with tf.Session(graph=g1) as sess1:
     print sess1.run(c1)
 with tf.Session(graph=g2) as sess2:
     print sess2.run(c2)
-{% endhighlight %}
+```
 
 Tensorflow对计算图的简化，不仅在于使用默认的Graph。还在于可以只计算部分的Graph。部分Graph，也被称作Sub Graph。
 
@@ -233,121 +330,3 @@ Tensorflow对计算图的简化，不仅在于使用默认的Graph。还在于�
 反过来，如果只想执行ReLU和softmax的话，则可以`sess.run(softmax, feed_dict={add: add_tensor})`。也就是把Sub Graph的output作为`sess.run`的参数，而把input作为feed_dict的参数。
 
 虽然图计算是Tensorflow的主要使用方式，然而一般性的tensor计算（即非图计算），也是完全可行的。Tensorflow没有提供相关的API，直接使用numpy就可以了。
-
-下面的动图形象的展示了计算图的前向和后向运算的过程：
-
-![](/images/article/tensorflow.gif)
-
-参考：
-
-http://www.algorithmdog.com/dynamic-tensorflow
-
-动态图计算：Tensorflow第一次清晰地在设计理念上领先
-
-https://zhuanlan.zhihu.com/p/23932714
-
-YJango的TensorFlow整体把握
-
-http://www.cnblogs.com/lienhua34/p/5998853.html
-
-Tensorflow学习笔记2：About Session, Graph, Operation and Tensor
-
-## Fused Graph
-
-Fused Graph是TensorFlow新推出的概念。这里仍以softmax运算为例，讲一下它的基本思想。
-
-上面的softmax运算计算图中，总共有4个operation。Fused Graph则将这4个op整合为1个op，发给运算单元。
-
-这样不同的硬件厂商就可以自行对这个整合的op进行解释。功能强的硬件，可能直接就支持softmax运算。功能弱的硬件也不怕，反正总归可以将softmax分解为基本运算的。
-
-Qualcomm Hexagon平台的Fused Graph实现可参见：
-
-tensorflow/core/kernels/hexagon
-
-![](/images/article/fused_graph_2.png)
-
-上图是另一个计算图优化的例子。
-
-参考：
-
-https://developers.googleblog.com/2017/03/xla-tensorflow-compiled.html
-
-XLA - TensorFlow, compiled
-
-https://mp.weixin.qq.com/s/RO3FrPxhK2GEoDCGE9DXrw
-
-利用XLA将GPU性能推向极限
-
-## Eigen
-
-Eigen是一个线性代数方面的C++模板库。tensorflow和caffe2都使用了这个库。
-
-官网：
-
-http://eigen.tuxfamily.org/
-
-参见：
-
-https://zhuanlan.zhihu.com/p/26512099
-
-tensorflow和caffe2
-
-## TensorFlow高层封装
-
-目前对TensorFlow的封装如下所示：
-
-1.TensorFlow-Slim。主要提供了层一级的封装。粒度和OpenVX类似。
-
-2.tf.contrib.learn（之前也被称为skflow）。提供了类似sklearn的接口。
-
-前2个是TensorFlow自带的封装
-
-3.第三个是TFLearn。在tf.contrib.learn上的封装。需单独安装：
-
-`sudo pip install tflearn`
-
-http://tflearn.org/
-
-4.Keras。
-
-5.TensorLayer。这个的封装粒度介于TensorFlow-Slim和TFLearn之间。
-
-https://tensorlayer.readthedocs.io/en/stable/user/tutorials.html
-
-这个Tutorials的内容比较多，除了常见的CNN、RNN之外，还有RL和DAE的内容。
-
-6.Pretty Tensor。来自google的TensorFlow封装。
-
-https://github.com/google/prettytensor
-
-7.Sonnet。来自Deepmind的TensorFlow封装。
-
-https://github.com/deepmind/sonnet
-
-参见：
-
-http://www.infoq.com/cn/articles/introduction-of-tensorflow-part06
-
-深入浅出TensorFlow（六）TensorFlow高层封装
-
-## Slim
-
-代码：
-
-tensorflow/contrib/slim
-
-示例：
-
-https://github.com/mnuke/tf-slim-mnist
-
-参见：
-
-http://geek.csdn.net/news/detail/126133
-
-如何用TensorFlow和TF-Slim实现图像分类与分割
-
-实战心得：
-
-tf-slim-mnist例子中mnist数据不是原始格式的，而是经过了`datasets/download_and_convert_mnist.py`的转换。
-
-该示例执行时也没有控制台的输出信息，一度让我觉得很不方便。后来才发现，原来可以用TensorBoard查看log文件夹。

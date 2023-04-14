@@ -1,26 +1,57 @@
 ---
 layout: post
-title:  深度学习（二十五）——多任务学习, 人脸检测/识别（2）
+title:  深度学习（二十五）——多任务学习
 category: DL 
 ---
 
+* toc
+{:toc}
+
 # 多任务学习
+
+## 教程
 
 http://cs330.stanford.edu/
 
 CS 330: Deep Multi-Task and Meta Learning
 
+## 论文
+
+《Multi-Task Learning for Dense Prediction Tasks: A Survey》
+
+《Progressive Layered Extraction (PLE): A Novel Multi-Task Learning (MTL) Model for Personalized Recommendations》
+
+## 概述
+
+![](/images/img4/MTL.png)
+
+![](/images/img4/MTL_2.png)
+
+![](/images/img4/Single_MTL.png)
+
+![](/images/img4/Multi_MTL.png)
+
+## 参考
+
 https://mp.weixin.qq.com/s/guAgXdhZSbEAkERSB1sLRA
 
 多任务学习-Multitask Learning概述
+
+https://zhuanlan.zhihu.com/p/355147999
+
+《Multitask Learning》-多任务学习发展的关键节点
 
 https://mp.weixin.qq.com/s/A-CVKTz_moaFzTYywSt2gg
 
 张宇 杨强：多任务学习概述
 
-https://mp.weixin.qq.com/s/ZlCI02UdRuFBc-uKqIPE_w
+https://zhuanlan.zhihu.com/p/148132708
 
-深度学习多任务学习综述
+最新《深度多任务学习》综述论文
+
+https://zhuanlan.zhihu.com/p/46044947
+
+深度神经网络中多任务学习简介
 
 https://zhuanlan.zhihu.com/p/67524006
 
@@ -41,22 +72,6 @@ https://mp.weixin.qq.com/s/X6FwTgr282hbqgOz3oBX-w
 https://blog.csdn.net/CoderPai/article/details/80080455
 
 多任务学习与深度学习
-
-https://blog.csdn.net/CoderPai/article/details/80087188
-
-利用TensorFlow一步一步构建一个多任务学习模型
-
-https://mp.weixin.qq.com/s/mm9bXXTEzd8DwyYlMgGMZg
-
-NLP多任务学习：一种层次增长的神经网络结构
-
-https://mp.weixin.qq.com/s/fcFb6WkJVP8TYpoxkQgiWQ
-
-CMU提出“十字绣网络”，自动决定多任务学习的最佳共享层
-
-https://mp.weixin.qq.com/s/i7WAFjQHK1NGVACR8x3v0A
-
-自然语言十项全能：转化为问答的多任务学习
 
 https://mp.weixin.qq.com/s/NpO1UP_mzyaeqW26xLY1Xg
 
@@ -118,300 +133,292 @@ https://mp.weixin.qq.com/s/DUsXj46TCZ9w_Dxgw4ZH8g
 
 用于多任务CNN的随机滤波分组，性能超现有基准方法
 
-# 人脸检测/识别
+https://mp.weixin.qq.com/s/-SHLp26oGDDp9HG-23cetg
 
-## 人脸识别
+多任务学习在推荐算法中的应用
 
-人脸检测是从一张图片中，识别出人脸，这和通常的目标检测没有太大的差别。**而人脸识别，则是精确到具体的人。**
+https://mp.weixin.qq.com/s/avWy3-mju0d0QjufX_bi4Q
 
-人脸识别通常的做法是：
+Multi-task Learning的三个实用小知识
 
-1.使用人脸检测，得到人脸区域的图像。
+https://mp.weixin.qq.com/s/hLJB8yH8V0Ncug77jHU1Bw
 
-2.提取人脸特征。一般采用CNN+FC+loss的结构。其中，CNN+FC用于提取特征，而loss仅用于训练阶段。在推理阶段，我们使用CNN+FC得到人脸的特征向量即可。
+模型独立学习：多任务学习与迁移学习
 
-3.特征的对比。比较两个特征向量的相似度（可以使用LMS或者cos相似度）。超过阈值，即认为是同一张脸。
+https://zhuanlan.zhihu.com/p/138597214
 
-## OHEM
+Multi-task Learning and Beyond: 过去，现在与未来
 
-论文：
+https://mp.weixin.qq.com/s/gIEJoE9B8mmNx6u6bqLspQ
 
-《Training Region-based Object Detectors with Online Hard Example Mining》
+最新《深度多任务学习》综述论文，22页pdf
 
-代码：
+https://mp.weixin.qq.com/s/ifTNRW0W7-P_LyfNldtavQ
 
-https://github.com/abhi2610/ohem
+多任务学习方法在推荐中的演变
 
-参考：
+https://zhuanlan.zhihu.com/p/269492239
 
-https://blog.csdn.net/zimenglan_sysu/article/details/51318058
+多任务学习优化（Optimization in Multi-task learning）
 
-论文笔记
+https://www.cnblogs.com/RyanXing/p/10730829.html
 
-https://blog.csdn.net/Wayne2019/article/details/78945099
+Cross-stitch Networks for Multi-task Learning
 
-OHEM，Batch Hard（识别乱入），Focal Loss
+https://mp.weixin.qq.com/s/T_UsCkj9hnV7tgOTcaf6Wg
 
-https://blog.csdn.net/Z5337209/article/details/72838049
+Multi-Task多任务学习， 那些你不知道的事
 
-Faster R-CNN 深入理解 && 改进方法汇总
+https://mp.weixin.qq.com/s/vFHYk7202bSZ214Za_SOtQ
 
-https://zhuanlan.zhihu.com/p/28202204
+2021年浅谈多任务学习
 
-困难样本挖掘
+https://mp.weixin.qq.com/s/pvQHUXo83hMfH8kCumXSQA
 
-https://zhuanlan.zhihu.com/p/34179420
+如何利用多任务学习提升模型性能？
 
-目标检测入门（二）：模型的评测与训练技巧
+https://mp.weixin.qq.com/s/dcv2pqccrAtg2nNaHTTU2Q
 
-## FaceNet
+一文"看透"多任务学习
 
-论文：
+# Attention进阶+
 
-《FaceNet: A Unified Embedding for Face Recognition and Clustering》
+https://mp.weixin.qq.com/s/wrmjMLPuvpLIcF5VQBqZxg
 
-https://blog.csdn.net/stdcoutzyx/article/details/46687471
+最新“注意力机制Attention”大综述论文，66页pdf
 
-FaceNet--Google的人脸识别
+https://mp.weixin.qq.com/s/rrbwItXt-1EaGiqtDEGvog
 
-## OpenFace
+为节约而生：从标准Attention到稀疏Attention
 
-OpenFace是一款开源的人脸识别软件。它的原理基于CVPR 2015年的论文：FaceNet。由于采用了深度学习技术，OpenFace对人脸识别的准确率，大大超过了OpenCV。
+https://mp.weixin.qq.com/s/MzHmvbwxFCaFjmMkjfjeSg
 
-OpenFace是用Python和Torch编写的。
+遍地开花的Attention，你真的懂吗？
 
-官网：
+https://mp.weixin.qq.com/s/e_LEhLf2Rh-1zkEBmqS4nA
 
-https://cmusatyalab.github.io/openface/
+NLP这两年：15个预训练模型对比分析与剖析
 
-参考：
+https://mp.weixin.qq.com/s/LAInpFPa-3R1rfv6idILnw
 
-http://www.cnblogs.com/pandaroll/p/6590339.html
+注意力机制发展如何了，如何学习它在各类任务中的应用？
 
-开源人脸识别openface
+https://zhuanlan.zhihu.com/p/40920384
 
-https://mp.weixin.qq.com/s/RSCrkeIToeNKrFvMITxzDg
+真正的完全图解Seq2Seq Attention模型
 
-通过OpenFace来理解人脸识别
+https://mp.weixin.qq.com/s/ZSzHOu6uowRSoWrqB7vOaQ
 
-## SeetaFace
+深度学习注意力机制-Attention in Deep learning-附101页PPT
 
-SeetaFace人脸识别引擎由中科院计算所山世光研究员带领的人脸识别研究组研发。代码基于C++实现，且不依赖于任何第三方的库函数，开源协议为BSD-2，可供学术界和工业界免费使用。
+https://mp.weixin.qq.com/s/FlA1YrR0sLQGJoJZnSXpRw
 
-代码：
+DeepMind：深度学习注意力与记忆机制，附70页ppt
 
-https://github.com/seetaface
+https://mp.weixin.qq.com/s/_mBa-GTdILrvluJtegz8fw
 
-第一代
+南洋理工大学：注意力神经网络，Attention Neural Networks，78页ppt
 
-https://github.com/seetafaceengine/SeetaFace2
+https://mp.weixin.qq.com/s/pKxqPB9qIGmE_PslPa6EyA
 
-第二代
+长文详解Attention的前世今生
 
-论文：
+https://mp.weixin.qq.com/s/2kFZAmb_WnTNYUXT_jVMqg
 
-《Coarse-to-Fine Auto-Encoder Networks (CFAN) for Real-Time Face Alignment》
+Attention注意力机制的前世今生
 
-参考：
+https://mp.weixin.qq.com/s/eq1iTyKguQm5t6Xoc7KUgw
 
-https://zhuanlan.zhihu.com/p/22451474
+一文搞懂NLP中的Attention机制
 
-SeetaFace开源人脸识别引擎介绍
+https://zhuanlan.zhihu.com/p/106662375
 
-http://www.cnblogs.com/nenya33/p/6801045.html
+More About Attention
 
-CFAN
+https://mp.weixin.qq.com/s/MFxQSUMFNRXjdLQwzveO4w
 
-https://mp.weixin.qq.com/s/iESGCZjdvwUzqW7pu0GwrQ
+深度学习中的注意力机制
 
-中科视拓开源SeetaFace2人脸识别算法
+https://mp.weixin.qq.com/s/vkyPwsaxH-SvHqQx09VhVw
 
-## S3FD
+深度学习中的注意力机制（二）
 
-https://mp.weixin.qq.com/s/MyA8_yt4YCkFl67AyhpZow
+https://mp.weixin.qq.com/s/fbAAA7fO2voP_v-NsavQew
 
-尺度不变人脸检测器（S3FD-Single Shot Scale-invariant Face Detector）
+深度学习中的注意力机制（三）
 
-https://github.com/sfzhang15/SFD
+https://mp.weixin.qq.com/s/CftkSOmAx0UTtCixdxj6_A
 
-S3FD: Single Shot Scale-invariant Face Detector
+深度学习中的注意力机制（完结篇）
 
-## 人脸属性
+https://mp.weixin.qq.com/s/Qs6tm50YvzHaJv2rh60WMw
 
-人脸属性包括：人脸年龄、表情、颜值等。
+撩一发深度文本分类之RNN via Attention
 
-参考：
+https://mp.weixin.qq.com/s/MMIZGHTKM5FrvNE6ucQRYQ
 
-https://mp.weixin.qq.com/s/M952HsJnmfx3EGmiDcySGQ
+33页最新《自然语言处理中神经注意力机制综述》论文
 
-初学深度学习人脸属性分析必读的文章
+https://mp.weixin.qq.com/s/Q0Ft5bWTuiZUIQSTk7X6ZQ
 
-https://zhuanlan.zhihu.com/p/53229759
+图解神经机器翻译中的注意力机制
 
-年龄估计技术综述
+https://mp.weixin.qq.com/s/D7GQ8DRzss9ppP6pyAs1qA
 
-https://www.openu.ac.il/home/hassner/projects/cnn_agegender/
+从0到1再读注意力机制
 
-Age and Gender Classification using Convolutional Neural Networks
+https://mp.weixin.qq.com/s/K_VRt0B9-Xw7YJndmb4WZg
 
-https://mp.weixin.qq.com/s/0hVPateb108B1KpVpYXK0A
+Attention！注意力机制模型最新综述
 
-人工智能：长相越“娘”颜值越高
+https://mp.weixin.qq.com/s/hzwp5oGspdtDyNBmq8sMsw
 
-https://mp.weixin.qq.com/s/YlrWHDPIPzN4dQO2vo4DjA
+HAN：基于双层注意力机制的异质图深度神经网络
 
-人脸颜值研究综述
+https://mp.weixin.qq.com/s/SBrLPZjx2RdBwZpPQQ5DXQ
 
-https://www.oukohou.wang/2019/01/30/face-aging_using_GAN/
+HAN：异构图注意力网络
 
-论文阅读-人脸老化：Generative Adversarial Style Transfer Networks for Face Aging
+https://mp.weixin.qq.com/s/0EDN-ILeL_diZ1G11ikwjw
 
-https://mp.weixin.qq.com/s/s2SFQgUOZLV-f6auqymVOg
+T5模型：NLP Text-to-Text预训练模型超大规模探索
 
-基于Caffe的年龄&性别识别
+https://zhuanlan.zhihu.com/p/89719631
 
-https://mp.weixin.qq.com/s/I3MS1gB1yjSnadex4LfOYA
+T5: Text-to-Text Transfer Transformer阅读笔记
 
-旷视提出极轻量级年龄估计模型C3AE
+https://mp.weixin.qq.com/s/X1mLXPzJU7k_ANMzvVPxjA
 
-## 活体检测
+BERT、RoBERTa、DistilBERT与XLNet，我们到底该如何选择？
 
-https://mp.weixin.qq.com/s/zOnmKSnQctnyx7pKXX-tpQ
+https://mp.weixin.qq.com/s/GGRORF5EfJ5xzMLwAsJt5w
 
-活体检测新文解读：利用多帧人脸来预测更精确的深度
+从词袋到Transfomer，NLP十年突破史
 
-https://mp.weixin.qq.com/s?__biz=MzU4MjQ3MDkwNA==&mid=2247486721&idx=1&sn=f0e5b2b0165e391c0d5adc4ce253f2f6
+https://zhuanlan.zhihu.com/p/125145283
 
-人脸识别中的活体检测算法综述
+Rethink深度学习中的Attention机制
 
-https://mp.weixin.qq.com/s/A1pbiU5PA9Owe69lGX9afw
+https://mp.weixin.qq.com/s/fxEg8UOa3MeJ6qx5SjEHog
 
-活体识别告诉你为什么照片无法破解人脸系统
+NLP领域中各式各样Attention知识系统性的梳理和总结
 
-https://mp.weixin.qq.com/s/rroBWY0roDdRap28i-KYtQ
+https://mp.weixin.qq.com/s/_5YaZdYa8bTFiAzHyrMFBg
 
-初学活体检测与伪造人脸检测必读的文章
+理解卷积神经网络中的自注意力机制
 
-https://mp.weixin.qq.com/s/sPnoZyCkAhcCs_GtA79DrA
+https://mp.weixin.qq.com/s/y_hIhdJ1EN7D3p2PVaoZwA
 
-单目可见光静默活体检测Binary or Auxiliary Supervision论文解读
+阿里北大提出新attention建模框架，一个模型预测多种行为
 
-https://mp.weixin.qq.com/s/Vi2ypwO3uCD2lQZOwDFqTA
+https://mp.weixin.qq.com/s/Yq3S4WrsQRQC06GvRgGjTQ
 
-基于rPPG的人脸活体检测综述
+打入神经网络思维内部
 
-https://mp.weixin.qq.com/s/ViQDmUqNiXCQ1KzvlLI6Wg
+https://mp.weixin.qq.com/s/MJ1578NdTKbjU-j3Uuo9Ww
 
-OpenCV活体检测
+基于文档级问答任务的新注意力模型
 
-## DeepFace
+https://mp.weixin.qq.com/s/_3pA8FZwzegSpyz_cK63BQ
 
-《DeepFace: Closing the Gap to Human-Level Performance in Face Verification》
+Self-Attention GAN中的self-attention机制
 
-DeepFace先进行了两次全卷积＋一次池化，提取了低层次的边缘／纹理等特征。
+https://mp.weixin.qq.com/s/h7sLwVXb_UI8jvJU-oe3Cg
 
-后接了3个Local-Conv层，这里是用Local-Conv的原因是，人脸在不同的区域存在不同的特征（眼睛／鼻子／嘴的分布位置相对固定），当不存在全局的局部特征分布时，Local-Conv更适合特征的提取。
+Google AI提出“透明注意力”机制，实现更深层NMT模型
 
-## 人脸关键点
+https://mp.weixin.qq.com/s/1LYz5SH5rVnPPJ0tZvRQAA
 
-https://mp.weixin.qq.com/s/qWMQV33k1bDAHWwwVod3_g
+从各种注意力机制窥探深度学习在NLP中的神威
 
-初学深度学习人脸关键点检测必读文章
+https://zhuanlan.zhihu.com/p/33078323
 
-https://zhuanlan.zhihu.com/p/42968117
+数字串识别：基于位置的硬性注意力机制
 
-人脸关键点检测综述
+https://mp.weixin.qq.com/s/-gAISWjSiG6ccPuOPAEg3A
 
-https://mp.weixin.qq.com/s/CvdeV5xgUF0kStJQdRst0w
+五张动图，看清神经机器翻译里的Attention！
 
-从传统方法到深度学习，人脸关键点检测方法综述
+https://mp.weixin.qq.com/s/aixpv9t1PLPRWUP6PvZ0EQ
 
-https://mp.weixin.qq.com/s/ZrnAqDJCLtMy_qTQ2RZT0A
+用自注意力增强卷积：这是新老两代神经网络的对话
 
-级联MobileNet-V2实现人脸关键点检测
+https://mp.weixin.qq.com/s/i3Xd_IB7R0-QPztn-pgpng
 
-https://mp.weixin.qq.com/s/ymeJPUPRAGb1FltskqBs-A
+遍地开花的Attention，你真的懂吗？
 
-人脸关键点检测汇总（上）
+https://zhuanlan.zhihu.com/p/151640509
 
-https://mp.weixin.qq.com/s/N6y-RDx7VszgCVhSiwP8jA
+注意力机制在推荐系统中的应用
 
-人脸关键点检测汇总（下）
+https://mp.weixin.qq.com/s/-SU5cNbklI31WLmTawZJIQ
 
-https://mp.weixin.qq.com/s/D435jGsGPkCH5j-p8Zoksg
+自注意模型学不好？这个方法帮你解决！
 
-遮挡、光照等因素的人脸关键点检测
+https://mp.weixin.qq.com/s/K5EbO0djcXHN4K5LQiMh5g
 
-https://mp.weixin.qq.com/s/BV3xv8mH6K7dV1nik0X5aw
+Triplet Attention机制让Channel和Spatial交互更加丰富
 
-PFLD：简单、快速、超高精度人脸特征点检测算法
+https://mp.weixin.qq.com/s/C4f0N_bVWU9YPY34t-HAEA
 
-https://mp.weixin.qq.com/s/kWRW81aAMl18GIDQWqX1Ow
+UNC&Adobe提出模块化注意力模型MAttNet，解决指示表达的理解问题
 
-PFLD：简单高效的实用人脸关键点检测算法
+https://mp.weixin.qq.com/s/V3brXuey7Gear0f_KAdq2A
 
-https://mp.weixin.qq.com/s/HpgcPkAZb9R5jF-zsGcfcw
+基于注意力机制的交易上下文感知推荐，悉尼科技大学和电子科技大学最新工作
 
-美图影像实验室（MTlab）10000点人脸关键点技术全解读
+https://mp.weixin.qq.com/s/2gxp7A38epQWoy7wK8Nl6A
 
-https://mp.weixin.qq.com/s/YsuvIB56OxS9IBMQYSUdUg
+谷歌翻译最新突破，“关注机制”让机器读懂词与词的联系
 
-深度学习AI美颜系列——人像静态/动态贴纸特效算法实现
+https://zhuanlan.zhihu.com/p/25928551
 
-## 参考
+用深度学习（CNN RNN Attention）解决大规模文本分类问题-综述和实践
 
-https://github.com/ChanChiChoi/awesome-Face_Recognition
+https://mp.weixin.qq.com/s/l4HN0_VzaiO-DwtNp9cLVA
 
-不止面部识别，一切关于人脸AI的资源都能在这里下载
+循环注意力区域实现图像多标签分类
 
-https://mp.weixin.qq.com/s/FqH_5ztUWRDqb6X9_QggJw
+https://mp.weixin.qq.com/s/zhZLK4pgJzQXN49YkYnSjA
 
-深度学习在人脸检测中的应用
+自适应注意力机制在Image Caption中的应用
 
-https://github.com/jiankangdeng/handbook
+https://mp.weixin.qq.com/s/uvr-G5-_lKpyfyn5g7ES0w
 
-人脸识别手册 (分类论文集)
+基于注意力机制，机器之心带你理解与训练神经机器翻译系统
 
-https://github.com/ShownX/FacePaperCollection
+https://mp.weixin.qq.com/s/ANpBFnsLXTIiW6WHzGrv2g
 
-人脸相关文献代码集锦：人脸检测、人脸识别、人脸生成等
+自注意力机制学习句子embedding
 
-https://zhuanlan.zhihu.com/p/74603794
+https://mp.weixin.qq.com/s/49fQX8yiOIwDyof3PD01rA
 
-基于深度学习的人脸检测和识别方法介绍
+CMU&谷歌大脑提出新型问答模型QANet：仅使用卷积和自注意力，性能大大优于RNN
 
-https://mp.weixin.qq.com/s/FMremLz7777x-XGc02mmkA
+https://mp.weixin.qq.com/s/c64XucML13OwI26_UE9xDQ
 
-深度学习人脸检测入门必读文章
+滴滴披露语音识别新进展：基于Attention显著提升中文识别率
 
-https://mp.weixin.qq.com/s/__b-7Cl482taXwIVb_9vwQ
+https://mp.weixin.qq.com/s/7OYY3L7gL4wVv_EjoosOHA
 
-以人为本的计算机视觉研究：WIDER Challenge 2019（人脸检测/行人检测/人物检索）
+如何增强Attention Model的推理能力
 
-https://mp.weixin.qq.com/s/eZ78biXN-mVw3s9Ky_LBZg
+https://mp.weixin.qq.com/s/9Kt6_DfeYRnhsb10aCSFGw
 
-如何走近深度学习人脸识别？你需要这篇超长综述
+FAGAN：完全注意力机制（Full Attention）GAN，Self-attention+GAN
 
-https://mp.weixin.qq.com/s/tum24mzS2cUiKW87a1weFA
+https://mp.weixin.qq.com/s/lZOIK5BRXZrmL_Z9crl6sA
 
-人脸识别全面总结：从传统方法到深度学习
+机器翻译新突破！“普适注意力”模型：概念简单参数少，性能大增
 
-https://mp.weixin.qq.com/s/bFnuGu4xLJiRfANi0Rkduw
+https://mp.weixin.qq.com/s/jRfOzKO6OlQLokIzipbqUQ
 
-人脸识别的前世今生：从人工特征的百花齐放到深度学习的一统江湖
+为什么使用自注意力机制？
 
-https://zhuanlan.zhihu.com/p/32702868
+https://zhuanlan.zhihu.com/p/339123850
 
-人脸检测背景介绍和发展现状
+关于attention机制的一些细节的思考
 
-https://zhuanlan.zhihu.com/p/69777256
+https://mp.weixin.qq.com/s/n4mzHSweOT-vDWBGs0XFbw
 
-简述人脸识别开发原理。这篇文章对传统算法做了一个很好的总结。
-
-https://zhuanlan.zhihu.com/p/79863225
-
-人脸识别特征介绍以及难题概括
-
-https://mp.weixin.qq.com/s/QvmHO_fulTtYJYB4MdoKGw
-
-初学深度学习人脸识别和验证必读文章
+卷积神经网络中的自我注意

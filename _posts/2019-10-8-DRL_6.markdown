@@ -1,348 +1,320 @@
 ---
 layout: post
-title:  深度强化学习（六）——MARL, AlphaStar
+title:  深度强化学习（六）——AlphaGo（2）
 category: DRL 
 ---
 
+* toc
+{:toc}
+
 # AlphaGo
 
-## 参考（续）
+### 其他关键点（续）
 
-https://deepmind.com/blog/alphago-zero-learning-scratch/
+由于很多人类的棋局都是因为中间偶然的失误导致了全盘覆灭（所谓“一着不慎满盘皆输”），其中的偶然性非常大，局部的优劣往往和棋局的最终结果无关，因此Value Network并没有用人类棋谱来训练。
 
-AlphaGo Zero官方声明
+AlphaGo每更新一个“小版本”后，都要将这个版本和迄今最好的版本对比，如果新的版本胜率超过55%，才会用来取代以前最好的版本。这样做显然是为了防止AlphaGo自我博弈得“走火入魔”，陷入局部最优。
 
-https://zhuanlan.zhihu.com/mathNote
+![](/images/img4/AlphaGo.jpg)
 
-某牛的专栏，主要讲自制AlphaGo
+## AlphaGo Zero
 
-https://mp.weixin.qq.com/s/DC9QqHdWT0xFnowEBuJDbw
+论文：
 
-自动化所解读“深度强化学习”：从AlphaGo到AlphaGoZero
+《Mastering the game of Go without human knowledge》
 
-https://mp.weixin.qq.com/s/uZtaxRwROCqYmL2k6Muxaw
+![](/images/img3/AlphaGo_Zero.png)
 
-从阿尔法狗元(AlphaGo Zero)的诞生看终极算法的可能性
+AlphaGo Zero对AlphaGo进行了全面提升：
 
-https://mp.weixin.qq.com/s/i5OmLu8aNbypiTUmP4teeQ
+- input plane去掉了手工特征，基本全由历史信息组成。
 
-刘遥行：深入浅出看懂AlphaGo Zero
+- Policy Network和Value Network不再是两个同构的独立网络，而是合并成了一个网络，只是该网络有两个输出——Policy Head和Value Head。
 
-https://mp.weixin.qq.com/s/aBrwbB_DOGTen-6XL7LGFQ
+- 骨干结构采用了Resnet，层数大大增加。
 
-邓侃：白话蒙特卡洛树搜索和ResNet
+- 完全采用自我博弈，去掉了人类棋谱。
 
-https://mp.weixin.qq.com/s/nbTkr0PImlXUSYl91HD91Q
+- 取消了Fast rollout。AlphaGo Zero的实践表明，如果有足够好的Value函数的话，MCTS的采样效率要远远高于传统的alpha-beta剪枝。因此，rollout也不是必须的。
 
-AlphaGo背后的力量：蒙特卡洛树搜索入门指南
+>稍后的AlphaZero的实践表明：AlphaZero搜索80000个节点的棋力，已经超过了Stockfish搜索70000000个节点的棋力。
 
-https://mp.weixin.qq.com/s/-tH7DQo1cK9gA0bcpBJSDA
+- Policy Gradient vs. Policy Iteration
 
-AlphaGo Zero：笔记与伪代码
+AlphaGo依赖快速走子的结果，获得最终的结果信息。因此，它的奖励来源比较单一：只有对局的最终结果。这种做法实际上就是通常说的Policy Gradient。
 
-https://mp.weixin.qq.com/s/CJuVoOf7idUChFIn7dH0Lg
+但正如之前指出的：棋下输了，不意味着每步棋都是臭棋。因此，只使用最终结果，既会导致奖励稀疏，也不利于实时评估走子的价值。
 
-围棋中的数学原理
+AlphaGo Zero转而采用Policy Iteration方法，实时对盘面进行估计，不再依赖终局结果。
 
-https://mp.weixin.qq.com/s/d46qNFaftt4wxpV4sZnG-w
+![](/images/img3/AlphaGo_Zero_2.jpg)
 
-一张图看懂AlphaGo Zero
+## AlphaZero
 
-https://zhuanlan.zhihu.com/p/31749249
+论文：
 
-比AlphaGo Zero更强的AlphaZero问世，8小时解决一切棋类！
+《Mastering Chess and Shogi by Self-Play with aGeneral Reinforcement Learning Algorithm》
 
-https://mp.weixin.qq.com/s/L7bZMkqyncwEt6D5tK1OdQ
+AlphaZero相对于AlphaGo Zero的改进不算大，毕竟也就只差2个月。它的贡献在于，证明了DRL对于很多棋类都是有效的。
 
-AlphaZero炼成最强通用棋类AI，DeepMind强化学习算法8小时完爆人类棋类游戏
+## MuZero
 
-https://mp.weixin.qq.com/s/tFdnxqV5a5xZrFtB6E0AiQ
+MuZero是DeepMind 2019年11月的作品。
 
-新AlphaZero出世称霸棋界，8小时搞定一切棋类！自对弈通用强化学习无师自通！
+论文：
 
-https://mp.weixin.qq.com/s/qYWsFBKNCKCGUmizX_1sVg
+《Mastering Atari, Go, Chess and Shogi by Planning with a Learned Model》
 
-AlphaGo 教学工具终于上线了！
+参考代码：
 
-https://mp.weixin.qq.com/s/JxbIeDk8_wnYu_ewUHp29g
+https://github.com/AppliedDataSciencePartners/DeepReinforcementLearning
 
-深度学习与围棋实战书籍《Deep Learning and the Game of Go》
+2020.12，MuZero登上了Nature，算是炒了回冷饭。。。
 
-https://mp.weixin.qq.com/s/gsRnbknytz2FY2dWgdWEYg
+### 基本结构
 
-精通国际象棋的AI研究员：AlphaZero真的是一次突破吗？
+MuZero在不具备任何底层动态知识的情况下，通过结合基于树的搜索和学得模型，在Atari 2600游戏中达到了SOTA表现，在国际象棋、日本将棋和围棋的精确规划任务中可以匹敌AlphaZero，甚至超过了提前得知规则的围棋版AlphaZero。
 
-https://zhuanlan.zhihu.com/p/31809930
+![](/images/img4/MuZero.png)
 
-浅述：从Minimax到AlphaZero，完全信息博弈之路（1）
+传统方法的局限：
 
-https://zhuanlan.zhihu.com/p/32073374
+- Model-based RL在Atari 2600游戏上表现不佳。这类游戏的Model很难刻画，规则比较抽象。
 
-浅述：从Minimax到AlphaZero，完全信息博弈之路（2）
+- Model-Free RL在棋类游戏上表现不佳。棋类的规则十分明确。
 
-https://zhuanlan.zhihu.com/p/32089487
+![](/images/img3/MuZero.png)
 
-AlphaZero实战：从零学下五子棋
+上图是MuZero和AlphaZero的网络结构对比图。从中可以看出：
 
-http://mp.weixin.qq.com/s/72riTTC3w0q9oF5H-51kXA
+1.AlphaZero只有一个网络。（虽然有两个用途：Policy和Value）
 
-手把手教你搭建AlphaZero（使用Python和Keras）
+2.MuZero有三个网络：
 
-https://mp.weixin.qq.com/s/Qw2tT7H1PwDvPgOYy8YUsQ
+- Prediction Network。这个和AlphaZero相同。
 
-AlphaGo Zero代码迟迟不开源，TF等不及自己推了一个
+- Dynamics Network。
 
-https://mp.weixin.qq.com/s/Vq-osjgNXJQu5avGkxQdsw
+- Representation Network。
 
-手把手：AlphaGo有啥了不起，我也能教你做一个
+### Representation & Dynamics Network
 
-https://mp.weixin.qq.com/s/ajajJ9yJZsOy4Vc0ULBxXg
+Representation & Dynamics Network的主要思想来自如下论文：
 
-国际象棋版AlphaZero出来了诶，还开源了Keras实现
+1.《The Predictron: End-To-End Learning and Planning》
 
-https://zhuanlan.zhihu.com/p/41814142
+2.《Value Prediction Network》
 
-从源码解密AlphaGo Zero背后基本原理
+上文已经指出Model-based方法的困难在于：有的时候Model是很难刻画的，而环境本身也许并不如模拟器那么纯粹、简单。
 
-https://www.ifanr.com/630602
+一个很自然的思路就是：既然NN能表示Policy和Value，那么能不能表示Model呢？
 
-AlphaGo的棋局，与人工智能有关，与人生无关
+![](/images/img3/MuZero_3.png)
 
-https://mp.weixin.qq.com/s/J0w6kzzdKTbsaiZitbQdoA
+参考论文1提出了Predictron框架，它的主要思路是：
 
-达观数据：一文详解AlphaGo原理
+- 构建一个abstract MDP model。虽然我们并不知道它的state，更不清楚它的transition，但是不要紧，假设它存在就好。
 
-https://mp.weixin.qq.com/s/BBQ54HHrFiqxXkC-EI6ELw
+- 状态表示。(即上图中的$$s^0,s^1,\dots$$)
 
-Science封面：AlphaZero达成终极进化体，史上最强棋类AI降临！
+$$\vec{s} = f(s)$$
 
-https://mp.weixin.qq.com/s/Pgw_xaCNl_kCPCg8NFzUBQ
+这里用$$\vec{s}$$表示系统的抽象状态以区别其实际状态s。也就是说，在系统模型中，预测的不是实际的状态s, 而是抽象的状态。即：**建立real state space到abstract state space的映射。**
 
-人类没法下了！DeepMind贝叶斯优化调参AlphaGo，自弈胜率大涨16.5%
+- 模型预测，不只是状态流的预测，还包括立即回报和折扣因子的预测。
 
-https://mp.weixin.qq.com/s/eE3oL6c5zHmTglHE-dgBvg
+$$\vec{s}',\vec{r},\gamma = m(\vec{s}, \beta)$$
 
-详解AlphaGo到AlphaGo Zero！
+- 抽象状态$$\vec{s}$$处的值函数：
 
-https://mp.weixin.qq.com/s/aAF0Gr7yEPkHRLASecJipw
+$$\vec{v} = v(s)$$
 
-百度正用谷歌AlphaGo，解决一个比围棋更难的问题
+- 由回报、折扣因子和值函数计算得到估计值。这里可以对这个abstract MDP model应用TD(n)和TD($$\lambda$$)算法，得到如上图所示的k-step和$$\lambda$$-weighted的预测值。其中的g表示累计奖励值。
 
-https://hackernoon.com/the-3-tricks-that-made-alphago-zero-work-f3d47b6686ef
+这里的套路其实和DQN非常像，都是让预测值（这里是g）尽可能接近真实值。区别在于：这里既然是Model-based方法，那么自然有利用Model生成模拟样本的步骤，而DQN没有这样的步骤。
 
-The 3 Tricks That Made AlphaGo Zero Work
+参考论文2的做法也是类似的。
 
-https://web.stanford.edu/~surag/posts/alphazero.html
+![](/images/img3/MuZero_4.png)
 
-A Simple Alpha(Go) Zero Tutorial
+$$\mathbf{Encoding}\quad f_\theta^{enc}: x\to s$$
+
+$$\mathbf{Value}\quad f_\theta^{value}: s\to V_\theta(s)$$
+
+$$\mathbf{Outcome}\quad f_\theta^{out}: s,o\to r,\gamma$$
+
+$$\mathbf{Transition}\quad f_\theta^{trans}: s,o\to s'$$
+
+x：观测值（observation）。
+
+s：abstract state。
+
+o：abstract state上的option。
+
+s'：下一个abstract state。
+
+![](/images/img3/MuZero_5.png)
+
+也是预测若干步的奖励值。
+
+### 实现细节
+
+重新回到MuZero，下图是MuZero的关键步骤图。
+
+![](/images/img3/MuZero_2.png)
+
+A部分：Representation Network + Dynamics Network + MCTS
+
+B部分：从policy:$$\pi_t$$中采样得到action：$$a_{t+1}$$，环境根据$$a_{t+1}$$得到observation：$$o_{t+1}$$、h和reward：$$u_{t+1}$$。这些样本在用过后，被存入replay buffer。
+
+C部分：训练时，从replay buffer中，采样得到$$o_t$$，通过h函数，得到$$s_t$$，然后执行K-step展开，得到p,v,r。
+
+loss公式为：
+
+$$l_t(\theta)=\sum_{k=0}^K l^r(u_{t+k},r_t^k)+l^v(z_{t+k},v_t^k)+l^p(\pi_{t+k},p_t^k)+c\|\theta\|^2$$
+
+其中，p,v,r分别是policy、value、reward的预测值。而$$\pi$$、z、u则是对应的target值。（参见《深度强化学习（二）》中DQN一节中的current Q-value和target Q-value的定义）
+
+MuZero和VPN一样，都是在abstract state space中用dynamics model做planning。MuZero的改进在于增加了对每个abstract state上policy的预测，因此效率比VPN要高一些。
+
+最后需要澄清一点的是：**模拟的Model永远比不上确定的规则**。MuZero在棋类上的表现并不如AlphaZero。对比数据中，围棋项目的优势，更多的在于MuZero使用了更宽的网络。
+
+### 参考
 
 https://mp.weixin.qq.com/s/BLQF8WNsIe4a_rDeGWo_Vg
 
 通用AlphaGo诞生？DeepMind的MuZero在多种棋类游戏中超越人类
 
-# MARL
+https://www.zhihu.com/question/356976342
 
-Multi-agent Reinforcement Learning(MARL)，一般被称为多智能体强化学习。与之相对的则是Single-agent Reinforcement Learning(SARL)。
+如何评价DeepMind新提出的MuZero算法？
 
-以下主要参考了如下文章：
+https://zhuanlan.zhihu.com/p/31344949
 
-https://zhuanlan.zhihu.com/p/39037444
+联合模型的强化学习算法（三）
 
-多智能体强化学习笔记 01
+https://mp.weixin.qq.com/s/IcaxjdDLjihCK-nKBlJVWg
 
-https://zhuanlan.zhihu.com/p/43579796
+从α到μ：DeepMind棋盘游戏AI进化史
 
-多智能体强化学习笔记 02
+https://mp.weixin.qq.com/s/BWWCqAoSRkNAWXMiTOFhAA
 
-论文：
+DeepMind推出Agent57，在所有雅达利游戏上超越人类玩家
 
-《Multi-agent reinforcement learning: An overview》
+https://mp.weixin.qq.com/s/CvkIFuLTBDW0L8A9rJL7Ng
 
-《Game Theory and Multi-agent Reinforcement Learning》
+新算法MuZero登顶Nature，AI离人类规划又近了一步
 
-MARL应用了大量博弈论的知识，可参见《强化学习（十）》。
+https://mp.weixin.qq.com/s/dTJ7NvVs7qjF2FRoAZ_WlQ
 
-----
+MuZero算法过程详解
 
-我们使用如下示例，探讨一下**什么是MARL？**
+## Leela Zero
 
-![](/images/img3/MARL.png)
+Leela Zero是比利时人Gian-Carlo Pascutto开源的围棋AI。它的算法与AlphaGo Zero相同。而训练采用GTP协议，集合全球算力，进行分布式训练。
 
-上图是两个智能体1、2将金条（object）搬运回家的例子。这根金条需要两个人一人抬着一边才能扛回家。
+官网：
 
-要想把金条扛回家，小红和小蓝必须先绕过障碍物，然后每个人到达金条的一边，扛起金条后，两人还得绕开家门口的障碍物，这样才能将金条扛回家。
+http://zero.sjeng.org/
 
-从上面的问题可以看出，MARL至少应该包括如下几个要素：
+代码：
 
-- 在多智能体系统中至少有两个智能体。
+https://github.com/gcp/leela-zero
 
-- 智能体之间存在着一定的关系，如合作关系（如本例），竞争关系（如多人游戏），或者同时存在竞争与合作的关系。
+## GTP
 
-- 每个智能体最终所获得的回报不仅仅与自身的动作有关系，还跟对方的动作有关系。如本例中每个智能体要想获得回报，必须是金条被两个智能体一起搬回家。
+Go Text Protocol，其目的是建立一个比GMP（Go Modem Protocol）协议的ascii接口更合适于双机通信、更简单、更有效、更灵活的接口。
 
-SARL用MDP来描述，而MARL则需要用Markov game（马尔科夫博弈，又称随机博弈（stochastic game））来描述。
+官网：
 
-类似于MDP，Markov game可形式化表示为：
-
-$$(n,S,A_1,\dots,A_n,T,\gamma,R_1,\dots,R_n)$$
-
-n为玩家的个数，在本例中n为2。
-
-S为系统状态，一般指多智能体的联合状态，即每个智能体的联合状态。
-
-T为状态转移函数，指给定玩家当前状态和联合行为时，下一状态的概率分布。
-
-R为回报函数。它描述了多智能体之间的关系。当每个智能体的回报函数一致时，则表示智能体之间是合作关系；当回报函数相反时，则表示智能体之间是竞争关系，当回报函数介于两者之间，则是混合关系。
-
-MARL的结构一般如下图所示。
-
-![](/images/img3/MARL_2.png)
-
-**静态博弈**：static/stateless game是指没有状态s，不存在动力学使状态能够转移的博弈。例如一个矩阵博弈。
-
-**阶段博弈**：stage game，是随机博弈的组成成分，状态s是固定的，相当于一个状态固定的静态博弈，随机博弈中的Q值函数就是该阶段博弈的奖励函数。若干状态的阶段博弈组成一个随机博弈。
-
-**重复博弈**：智能体重复访问同一个状态的阶段博弈，并且在访问同一个状态的阶段博弈的过程中收集其他智能体的信息与奖励值，并学习更好的Q值函数与策略。
-
-----
-
-MARL的目标是找到每一个状态的纳什均衡策略，然后将这些策略联合起来。
-
-<div style="text-align: center;">
-<table>
-  <tr>
-    <td colspan="2" rowspan="2"></td>
-    <td colspan="3">Game setting</td>
-  </tr>
-  <tr>
-    <td>Stateless Games</td>
-    <td>Team Markov Games</td>
-    <td>General Markov Games</td>
-  </tr>
-  <tr>
-    <td rowspan="2">Information<br/>Requirement</td>
-    <td>Independent Learners</td>
-    <td>Stateless Q-learning<br/>Learning Automata<br/>IGA<br/>FMQ<br/>Commitment Sequences<br/>Lenient Q-learners</td>
-    <td>Policy Search<br/>Policy Gradient</td>
-    <td>MG-ILA<br/>(WoLF-)PG<br/>Learning of Coordination<br/>Independent RL<br/>CQ-learning</td>
-  </tr>
-  <tr>
-    <td>Joint Action Learners</td>
-    <td></td>
-    <td>Distributed- Q<br/>Sparse Tabular Q<br/>Utile Coordination</td>
-    <td>Nash-Q<br/>Friend-or-Foe Q<br/>Asymmetric Q<br/>Joint Action Learning<br/>Correlated-Q</td>
-  </tr>
-</table>
-</div>
+http://www.lysator.liu.se/~gunnar/gtp/
 
 参考：
 
-https://zhuanlan.zhihu.com/c_1061939147282915328
+https://www.tianqiweiqi.com/go-gtp.html
 
-一个MARL方面的专栏
+围棋引擎的GTP协议
 
-https://github.com/LantaoYu/MARL-Papers
+## minigo
 
-Paper list of multi-agent reinforcement learning (MARL)
+Google员工Andrew Jackson作品。但tf官方一再强调这并非TensorFlow项目的一环，也不是DeepMind的AlphaGo官方版本，而是由独立的团队依照AlphaGo Zero的论文而实做出的版本。
 
-https://blog.csdn.net/qq_38163755/article/details/98057751
+官网：
 
-Game Theory and Multi-agent Reinforcement Learning笔记1
+https://github.com/tensorflow/minigo
 
-https://blog.csdn.net/qq_38163755/article/details/98223987
+参考：
 
-Game Theory and Multi-agent Reinforcement Learning笔记2
+https://zhuanlan.zhihu.com/p/352536850
 
-https://mp.weixin.qq.com/s/bQx-ydEAfijgK1Ii5ilPFQ
+AlphaGo Zero中的强化学习算法和google开源工程实现——从原理到代码实现
 
-UCL汪军团队新方法提高群体智能，解决大规模AI合作竞争
+## AI作弊/对抗
 
-https://mp.weixin.qq.com/s/4lj_G2z0Lbfk5mOgvxLC6w
+十多年前，当我还是一个中二青年的时候，就幻想有朝一日能够拿围棋世界冠军。当然，就算再中二，我自己也明白靠实力那是不可能的，当时做梦的法宝是制造一个AI，然后碾压一下所谓的国手。
 
-对抗式协作：一个框架解决多个无监督学习视觉问题
+按照当时(2000年前后)人们的预计，这个AI在2030年之前，都不可能造出来，然而，最终的结果实际上只花了一半左右的时间。
 
-https://mp.weixin.qq.com/s/0v57oHMEDcJuUivs8D5pnQ
+再之后，随着AI围棋的平民化，我的中二梦终于也有人将之付诸实现了：
 
-善于单挑却难以协作，构建多智能体AI系统为何如此之难？
+https://mp.weixin.qq.com/s/npt2zZrKwPnNdY-hsa2RjQ
 
-https://mp.weixin.qq.com/s/tME5GsKEXveVcgWb-Zbx_A
+AI再乱围棋圈：“食言之战”柯洁落败；首例素人作弊引风波
 
-乔明达ICML 2018论文提出协作学习的鲁棒性方法
+这次作弊风波所使用的AI就是Leela Zero，可见目前（2018.5）它的棋力已经超过了顶尖棋手。
 
-https://mp.weixin.qq.com/s/0Xuxr7CXqsxrssW2I6NCBQ
+---
 
-通用智能化：BAIR简述人类-机器人协作新技术
+![](/images/img5/Go.png)
 
-https://mp.weixin.qq.com/s/GNbCu1lbOmwJDCU3vgMbtQ
+论文：
 
-OpenAI发布多智能体深度强化学习新算法LOLA
+《Adversarial Policies Beat Superhuman Go AIs》
 
-https://mp.weixin.qq.com/s/5Go20MyBxdVI1r5SkwA6lw
+官网：
 
-面向星际争霸：DeepMind提出多智能体强化学习新方法
+https://goattack.far.ai/
 
-https://mp.weixin.qq.com/s/TlcVxjhHXXGSpIvptC4H8g
+参考：
 
-使用Gym和CNN构建多智能体自动驾驶马里奥赛车
+https://www.zhihu.com/question/569568604
 
-https://mp.weixin.qq.com/s/zRcq1LMtK72Cl4T3877tgQ
+如何看待katago被找到致命缺陷？
 
-牛津教授吐槽DeepMind心智神经网络，还推荐了这些多智能体学习论文
+https://www.zhihu.com/question/584836681
 
-https://mp.weixin.qq.com/s/qU6XD45RGeMI-T7GI0dg2Q
+如何看待美国业余围棋爱好者战胜顶级围棋AI，15局胜14局？
 
-OpenAI竞争性自我对抗训练：简单环境下获得复杂的智能体
+---
 
-https://mp.weixin.qq.com/s/cUFSaHWGKhyZhEvRdX09hw
+https://www.zhihu.com/question/554569740
 
-谷歌大脑QT-Opt算法，机器人探囊取物成功率96%
+国际象棋比赛疑用智能肛珠作弊，比赛作弊是如何靠人工智能和肛珠实现的？
 
-https://mp.weixin.qq.com/s/xxB1lsiQxSfaHPKwZUI9bw
+## ELF OpenGo
 
-拔掉机器人的一条腿，它还能学走路？——三次元里优化的DRL策略
+ELF OpenGo是Facebook开源的围棋AI，它是FB的AI游戏框架ELF的一部分。
 
-https://mp.weixin.qq.com/s/e4hriDvTRLkg-mIifVWayw
+官网：
 
-如何解决深度学习中的多体问题
+https://github.com/pytorch/ELF
 
-https://zhuanlan.zhihu.com/p/61060358
+参考：
 
-Paper survey: Multi-Agent Reinforcement Learning
+https://mp.weixin.qq.com/s/lOAx3suLIS-pEWyi8xZl6Q
 
-https://zhang-yi-chi.github.io/2019/08/15/cooperative-multi-agent-rl/
+“全民体验”AlphaZero：FAIR田渊栋首次开源超级围棋AI
 
-Cooperative Multi-Agent Reinforcement Learning
+## PhoenixGo
 
-# AlphaStar
+PhoenixGo是腾讯微信团队的AlphaGo Zero复刻版。
 
-https://mp.weixin.qq.com/s/_Y0bCjTu9UrHfnen15htqQ
+官网：
 
-AlphaStar称霸星际争霸2！AI史诗级胜利，DeepMind再度碾压人类
+https://github.com/Tencent/PhoenixGo
 
-https://mp.weixin.qq.com/s/axr5VFbHQmYo0shW9ilBaQ
+参考：
 
-DeepMind回应一切：AlphaStar两百年相当于人类多长时间？
+https://mp.weixin.qq.com/s/tJDmxsuS1QigYS75ZIdzRA
 
-https://www.zhihu.com/question/310011363
-
-如何评价DeepMind在北京时间19年1月25日2点的《星际争霸 2》项目演示？
-
-https://mp.weixin.qq.com/s/k0l2uoik-Z9aA9zax7AoZg
-
-中科院自动化所深度解析：Deepmind AlphaStar如何战胜人类职业玩家
-
-https://zhuanlan.zhihu.com/p/55781614
-
-AlphaStar背后的机器学习原理
-
-https://mp.weixin.qq.com/s/XljE82cJZfFOgf2KrXWSKA
-
-DeepMind首个战胜星际2职业玩家的AI为何无敌？新视角揭秘AI里程碑
-
-https://mp.weixin.qq.com/s/_t2vLFfIG6VYAdWDalpIXQ
-
-说人话教AI打游戏，Facebook开源迷你版星际争霸，成果登上NeurIPS 2019
-
-https://mp.weixin.qq.com/s/X7QQn6W2dB3y_Ljii-sJ3w
-
-Alphastar再登Nature！星际争霸任一种族，战网狂虐99.8%人类玩家
+微信团队开源围棋AI技术PhoenixGo，复现AlphaGo Zero论文

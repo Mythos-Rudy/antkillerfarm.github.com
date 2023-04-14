@@ -1,8 +1,11 @@
 ---
 layout: post
-title:  Hbase
+title:  Hbase, 多维数组的行优先和列优先, 线性代数库
 category: AI 
 ---
+
+* toc
+{:toc}
 
 # Hbase
 
@@ -141,24 +144,6 @@ http://blog.csdn.net/dhtx_wzgl/article/details/49423979
 
 HBase学习之二级索引
 
-## OpenTSDB
-
-OpenTSDB（Time Series Database）是一个基于HBase的存放时序数据的数据库。
-
-官网：
-
-http://opentsdb.net/
-
-DB这个词很有误导性，其实它并不是一个db，单独一个OpenTSDB无法存储任何数据，它只是一层数据读写的服务，更准确的说它只是建立在Hbase上的一层数据读写的服务。
-
-HBase在使用上的一个难点就是如何根据业务的特点，设计键值和索引。OpenTSDB就是这方面的一个实践。
-
-参考：
-
-https://mp.weixin.qq.com/s/GApmeXGbjRTnhullArlkYg
-
-小米正用时序数据库，解决这个“硬核”问题
-
 ## 参考
 
 https://mp.weixin.qq.com/s/ucQgmb1NkdyfAw6wDTyWYg
@@ -192,3 +177,141 @@ https://mp.weixin.qq.com/s/pQbsGxM59fgQMYH54ETk7Q
 https://mp.weixin.qq.com/s/vyF0VAF8xjEWrBnS1_DtkA
 
 用HBase做高性能键值查询？
+
+# 多维数组的行优先和列优先
+
+这里以numpy为工具，介绍一下多维数组的行优先（Row-Major）和列优先（Column-Major）的概念。
+
+首先我们生成一个3x4的数组：
+
+`arr = np.arange(12).reshape(3,4)`
+
+它的形状是这样的：
+
+![](/images/article/arr_3x4.png)
+
+如果我们按照C语言的方式存储它，也就是行优先存储的话，那么在内存中，它的形状是这样的：
+
+![](/images/article/arr_3x4_C.png)
+
+这种存储方式又被称作C contiguous array。
+
+另一派存储方式，也就是列优先存储，它的代表是Fortran语言。上面的数组在内存中的形状就是这样的了：
+
+![](/images/article/arr_3x4_Fortran.png)
+
+这种存储方式又被称作Fortran contiguous array。
+
+上述描述也可用下图表示：
+
+![](/images/img2/Row_and_column_major_order.png)
+
+numpy对这两种方式都支持，而且还巧妙的利用了两者之间的差异，对运算进行了简化。
+
+`arr2 = arr.T`
+
+比如上述转置操作，你以为numpy真的做了转置运算吗？其实不然。
+
+```python
+>>>arr.flags.f_contiguous
+False
+>>>arr2.flags.f_contiguous
+True
+```
+
+看到没，这里仅仅设置了一个标志而已。
+
+类似的还有`np.transpose`这样的操作，也是设置一个标志而已。但有的情况下，函数会要求数组元素在内存中的连续性，这时就需要使用`np.ascontiguousarray`处理之。
+
+C和Fortran的这种差异，实际上是上世纪60年代，两大IT巨头AT&T和IBM之间战争的结果，并深远的影响了后来的软件。比如在通用计算领域，主要采用C格式，而数值计算领域，则多采用Fortran格式。
+
+典型的例子是Matlab。它最早是作为一些Fortran数学库的封装而存在的，因此很自然的采用了Fortran格式。OpenGL、OpenVX之类的接口，实际上也沿袭了这种路径依赖。
+
+---
+
+Fortran作为最早的高级语言（1957年），至今仍有很强的生命力，这主要归功于：
+
+1.对数组、复数等数值计算的原生支持。这些语法糖，对于非程序员的科技人员很友好。
+
+2.没有指针等复杂特性。这一点既降低了上手的门槛，又对于编译器优化（尤其是现在比较流行的并行计算优化）很有好处。普通科技人员即使没有经过特殊的程序训练，也可以写出非常高效的程序。
+
+FORTRAN有一条规则，名叫i到n规则 ：如果不明确定义变量类型，那么第一次使用这个变量时，凡是以i、j 、k 、l、m、n开头的变量，为整型变量，凡是不以这些字母开头的变量，为实型变量。
+
+https://www.zhihu.com/question/24890607
+
+为什么习惯使用i、j、k等作为循环变量?
+
+---
+
+对于同样的内存布局，我们只需要颠倒下标就可以进行行/列优先的转换：
+
+例如Caffe的默认格式是: NCHW，行优先。
+
+而OpenVX是：WHCN，列优先。
+
+两者在内存中的布局是完全相同的。
+
+到了TensorFlow，内存布局问题有了更进一步的抽象。TF将内存布局称为physical dimensions，而将数组下标称为logical dimensions。
+
+定义如下术语：
+
+- the most minor physical dimension (fastest varying index)
+- the last the most major (slowest varying index)
+
+使用minor_to_major的方式表示logical dimensions。
+
+例如：
+
+`f32[8,100,100,4]{3,0,2,1}`，其中`[8,100,100,4]`表示logical dimensions，`{3,0,2,1}`表示minor_to_major。则the most minor index为3，也就是the most minor physical dimension为4。
+
+# 线性代数库
+
+## ATLAS（Automatically Tuned Linear Algebra Soft）
+
+代码：
+
+https://sourceforge.net/projects/math-atlas/
+
+安装：
+
+`sudo apt install libatlas-base-dev`
+
+## OpenBLAS
+
+官网：
+
+http://www.openblas.net/
+
+代码：
+
+https://github.com/xianyi/OpenBLAS
+
+>作者：张先轶，北京理工大学本硕（2005年、2007年）+中科院博士（2014年）。PerfXLab（澎峰科技）创始人。   
+>个人主页：   
+>http://xianyi.github.io/index_cn.htm
+
+OpenBLAS需要gfortran参与编译：
+
+`sudo apt install gfortran`
+
+需要注意gcc的版本和gfortran的版本必须一致。例如，某台机器为了项目需要，没有使用ubuntu默认的gcc版本，这样即使安装了gfortran，也还是不行。最后，安装匹配的gfortran才解决了该问题。
+
+---
+
+OpenBLAS前身是日本人后藤和茂（Goto Kazushige）写的GotoBLAS2。这是一个真正的业界传奇。GotoBLAS2已经不再维护，而后继的OpenBLAS，主要还是项目维护而已。
+
+## Armadillo
+
+Armadillo是一个线性代数和科学计算的C++库。
+
+官网：
+
+http://arma.sourceforge.net/
+
+## ensmallen
+
+ensmallen是一个基于Armadillo的数学优化方面的C++库。
+
+官网：
+
+https://ensmallen.org/

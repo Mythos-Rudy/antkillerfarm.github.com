@@ -1,20 +1,23 @@
 ---
 layout: post
-title:  深度学习（四十九）——Fast Image Processing, DMN, 元学习
+title:  深度学习（四十九）——Fast Image Processing, DMN, 图像超分辨率进阶
 category: DL 
 ---
 
+* toc
+{:toc}
+
 # Fast Image Processing
+
+论文：
+
+《Fast Image Processing with Fully-Convolutional Networks》
 
 ![](/images/article/FIP.png)
 
 上图是照片界常用的几种修图方式之一。一般将这些图片风格转换的算法，称为图像处理算子（image processing operators）。如何加速image processing operators的计算，就成为了学界研究的课题之一。
 
 本文提出的模型就是用来加速image processing operators计算的。它是Intel Lab的Qifeng Chen和Jia Xu于2017年提出的。
-
-论文：
-
-《Fast Image Processing with Fully-Convolutional Networks》
 
 代码：
 
@@ -76,224 +79,220 @@ http://blog.csdn.net/javafreely/article/details/71994247
 
 动态记忆网络
 
-# 元学习
+# 图像超分辨率进阶
 
-人工智能的历史显示了明确的进展方向：
+亚像素尺度上对物体进行计数，是一类和超分辨率很相关的CV任务。
 
-第一代：**良好的老式人工智能**
+https://mp.weixin.qq.com/s/Zp5jlUspiocEZ6CI1cWJZw
 
-- 手工预测
-- 什么都不学
+深度学习能看到的比你更多，亚像素物体计数方法介绍
 
-第二代：**浅学习**
+---
 
-- 手工功能
-- 学习预测
+![](/images/img4/SR.jpg)
 
-第三代：**深度学习**
+https://zhuanlan.zhihu.com/p/266472242
 
-- 手工算法（优化器，目标，架构......）
-- 端到端地学习功能和预测
+一文带你入门超分网络及其渐进式上采样方法
 
-第四代：**元学习（Meta-Learning）**
+https://mp.weixin.qq.com/s/xpvGz1HVo9eLNDMv9v7vqg
 
-- 无手工
-- 端到端学习算法和功能以及预测
+NTIRE2017夺冠论文：用于单一图像超分辨率的增强型深度残差网络
 
-## 教程
+https://www.zhihu.com/question/25401250
 
-http://metalearning.ml
+如何通过多帧影像进行超分辨率重构？
 
-这是一个Meta-Learning方面的专题讨论会，有不少好东西。
+https://www.zhihu.com/question/38637977
 
-https://mp.weixin.qq.com/s/sQmDZsVGIADwO97yEFATkw
+超分辨率重建还有什么可以研究的吗？
 
-ICML2019《元学习》教程与必读论文列表
+https://zhuanlan.zhihu.com/p/25912465
 
-李宏毅的教程中也有一章介绍Meta-Learning。
+胎儿MRI高分辨率重建技术：现状与趋势
 
-## 参考
+https://mp.weixin.qq.com/s/i-im1sy6MNWP1Fmi5oWMZg
 
-https://github.com/gopala-kr/meta-learning
+华为推出新型HiSR：移动端的超分辨率算法
 
-元学习（meta-learning）相关文献资源大列表
+https://mp.weixin.qq.com/s/h4Xzt-aS1_-5zjTB0ypTLg
 
-https://github.com/sudharsan13296/Awesome-Meta-Learning
+普通视频转高清：10个基于深度学习的超分辨率神经网络
 
-元学习相关资源汇总
+https://mp.weixin.qq.com/s/WmqagSGRy98USgnz21W3Pg
 
-https://github.com/floodsung/Meta-Learning-Papers
+WDSR
 
-另一个元学习相关资源汇总
+https://mp.weixin.qq.com/s/oNavFLOPskHNxWIyBbFzHw
 
-https://mp.weixin.qq.com/s/KKK3VEpwL90g6Aro8qtXxQ
+WDSR (NTIRE2018 超分辨率冠军)
 
-学习如何学习的算法：简述元学习研究方向现状
+https://mp.weixin.qq.com/s/AxHTaT-G5_Y6Iw_3aIIxCg
 
-https://mp.weixin.qq.com/s/jlD5p5GXFmrWlxg9xvehxg
+超分辨率技术如何发展？这6篇ECCV 18论文带你一次尽览
 
-元学习—Meta Learning的兴起
+https://mp.weixin.qq.com/s/zWoQCKbZNz2td3cZxEsqKQ
 
-https://mp.weixin.qq.com/s/qoKQwEvOnP384i5Z-_jO1A
+腾讯优图提出SRN-DeblurNet：高效高质量去除复杂图像模糊
 
-CVPR2019最新元学习教程：基于元学习的计算机视觉应用
+https://mp.weixin.qq.com/s/eJkkbGBYxWlngkT5gjjW7g
 
-https://mp.weixin.qq.com/s/KtO3OTZ-bZ6m0ZSI6jTyjw
+效果惊人：上古卷轴III等经典游戏也能使用超分辨率GAN重制了
 
-OpenAI提出Reptile：可扩展的元学习算法
+https://mp.weixin.qq.com/s/M8gCrQDtjT1lszsxV2QQKg
 
-https://mp.weixin.qq.com/s/T4GiL9vW7ALOzWloE_QQBA
+FSRNet：端到端深度可训练人脸超分辨网络
 
-OpenAI开发可拓展元学习算法Reptile，能快速学习
+https://mp.weixin.qq.com/s/fkHfzkHRFpEGc-L4uGlqcg
 
-https://mp.weixin.qq.com/s/MWcoGsQJg1GBbSqzyPD9uQ
+从网络设计到实际应用，深度学习图像超分辨率综述
 
-基于梯度的元学习算法，可高效适应非平稳环境
+https://mp.weixin.qq.com/s/C9Ku4MvU2QuZ_GJcs8FelA
 
-https://zhuanlan.zhihu.com/p/35695477
+基于深度学习的图像超分辨率最新进展与趋势
 
-基于Meta Learning在动态竞争环境中实现策略自适应
+https://mp.weixin.qq.com/s/qNHbs2Bd4buVlu0j3Rtj0g
 
-https://mp.weixin.qq.com/s/AhadWUjtgsFmb8uTylTvqg
+Adobe提出新型超分辨率方法：用神经网络迁移参照图像纹理
 
-OpenAI提出新型元学习方法EPG，调整损失函数实现新任务上的快速训练
+https://mp.weixin.qq.com/s/N-kAIK_qMowsFqEtWTqt4w
 
-https://mp.weixin.qq.com/s/dmRdp2oMn0vGukclJSVZDg
+图像超分辨率重建--工程应用
 
-Uber AI论文：利用反向传播训练可塑神经网络，生物启发的元学习范式
+https://mp.weixin.qq.com/s/JaPYUWvh7RBHVUYgKlTeHw
 
-https://mp.weixin.qq.com/s/Cc4EHc6ei-PtZWhewM10xw
+旷视提出超分辨率新方法Meta-SR：单一模型实现任意缩放因子
 
-学习如何学习的算法：简述元学习研究方向现状
+https://mp.weixin.qq.com/s/aEu0q04pgXUE1mqAS5kewQ
 
-https://mp.weixin.qq.com/s/4f6-gXovdrYk7240TrUwJg
+不用P30 Pro，普通手机也能变身望远镜：陈启峰团队新作，登上CVPR 2019
 
-谷歌大脑：基于元学习的无监督学习更新规则
+https://mp.weixin.qq.com/s/CXDzPSSyObPHYc40YictKQ
 
-https://mp.weixin.qq.com/s/cAbMB-DB9vu2ua8t5J28ww
+CVPR 2019 神奇的超分辨率算法DPSR：应对图像模糊降质
 
-从零开始，了解元学习
+https://mp.weixin.qq.com/s/Rr4AKGjZNyV3PDoRBVH-lw
 
-https://mp.weixin.qq.com/s/Q36vpS1HF2IfeCsFLh656A
+低清视频也能快速转高清：超分辨率算法TecoGAN
 
-基于元强化学习的神经科学新理论
+https://mp.weixin.qq.com/s/PIq78vhNQxAKntnZilL4pQ
 
-https://mp.weixin.qq.com/s/XtzvHOk7CdXRBy02kUmgsg
+分割、检测与定位，高分辨率网络显神威！这会是席卷深度学习的通用结构吗？
 
-近期爆火的Meta Learning，遗传算法与深度学习的火花，再不了解你就out了
+https://mp.weixin.qq.com/s/G55dxHfMYxWzjz4_8YnUaw
 
-https://mp.weixin.qq.com/s/KvgYyuyICueNQPo_S27fEA
+深度学习超分辨率最新综述：一文道尽技术分类与效果评测
 
-BAIR展示新型模仿学习，学会像人那样执行任务
+https://zhuanlan.zhihu.com/p/67613641
 
-https://zhuanlan.zhihu.com/p/41223529
+基于多级神经纹理迁移的图像超分辨方法(Adobe Research)
 
-最前沿：Meta RL论文解读
+https://mp.weixin.qq.com/s/IStOD22WgZ6EBFCvIHkNSg
 
-https://zhuanlan.zhihu.com/p/40600485
+图像超分辨率网络：RCAN
 
-最前沿：Meta Learning前沿进展扫描
+https://mp.weixin.qq.com/s/4LIq3kZaXgaoEEyb8TQvwg
 
-https://zhuanlan.zhihu.com/p/28639662
+图像超分辨率重建--AI研究
 
-百家争鸣的Meta Learning/Learning to learn
+https://mp.weixin.qq.com/s/ETGPXVDGRHOq0W-ef_q2_A
 
-https://zhuanlan.zhihu.com/p/45845001
+RankSRGAN:排序学习+GAN用于超分辨率
 
-最前沿：用模仿学习来学习增强学习
+https://zhuanlan.zhihu.com/p/140507840
 
-https://zhuanlan.zhihu.com/p/46059552
+图像超分：USRNet
 
-Meta Learning单排小教学
+https://mp.weixin.qq.com/s/sju4SYFxzDkJevk3mi68Rw
 
-https://zhuanlan.zhihu.com/p/46131981
+图像超分辨率网络：EDSR
 
-最前沿：Meta Learning在少样本文本翻译上的应用
+https://mp.weixin.qq.com/s/uZQK0oQbV7wm0WVz_QxVQg
 
-https://zhuanlan.zhihu.com/p/46339823
+DRN：用于单图像超分辨率的对偶回归网络
 
-谈谈无监督Meta Learning的研究
+https://mp.weixin.qq.com/s/tE_-gUBmt_0h75CnkViUHA
 
-https://zhuanlan.zhihu.com/p/46340382
+超分辨率技术:Adobe Photoshop与深度神经网络对比
 
-ICLR19最新论文解读之Meta Domain Adaptation
+# Transformer进阶+
 
-https://mp.weixin.qq.com/s/RBMGI20AI92ZcWSlYczqAA
+https://mp.weixin.qq.com/s/MjCIAlDWyHPLj_sGSPc4rg
 
-伯克利、OpenAI等提出基于模型的元策略优化强化学习
+复旦邱锡鹏组最新综述：A Survey of Transformers
 
-https://mp.weixin.qq.com/s/p0dcov84pZqsU7XP30bexQ
+https://mp.weixin.qq.com/s/-Y7Qy-5aJNJ5bx8QJf3k2w
 
-Meta-Learning元学习：学会快速学习
+Transformer及其变种
 
-https://mp.weixin.qq.com/s/wl8j7dLu3OxPV7MNaO2-7Q
+https://mp.weixin.qq.com/s/nSokDcIkOSSrRnhHCuu4Mg
 
-《基于梯度的元学习》199页伯克利博士论文带你回顾元学习最新发展脉络
+Transformer家族简史（PART I）
 
-https://mp.weixin.qq.com/s/ftiGPBhAx5iqlW_Ltg1yhg
+https://mp.weixin.qq.com/s/p919Kfv-1GSDM6u6FpnBsA
 
-《元监督视觉学习》132页伯克利博士论文带你回顾元监督视觉应用最新发展脉络
+Transformer家族简史（PART II）
 
-https://mp.weixin.qq.com/s/K7sLM-LMcF6-gQrV1ddrDw
+https://mp.weixin.qq.com/s/M0zLw9hA5xzontKB7Zj23Q
 
-让智能体主动交互，DeepMind提出用元强化学习实现因果推理
+Memory Transformer，一种简单明了的Transformer改造方案
 
-https://mp.weixin.qq.com/s/8sBXlnXiZNsPRwFsgJVRQQ
+https://mp.weixin.qq.com/s/FJeZ8X9gtyciqCTs9zvlLA
 
-谷歌提出元奖励学习，两大基准测试刷新最优结果
+Transformer是CNN是GNN是RNN，Attention is all you need！
 
-https://mp.weixin.qq.com/s/x7uk7jBNvnM7Tgk9lFKy3Q
+https://mp.weixin.qq.com/s/d1qqRw7sWyLdoyfnqMBdJQ
 
-元学习(Meta-Learning)综述及五篇顶会论文推荐
+深度自适应Transformer
 
-https://mp.weixin.qq.com/s/GF_NLkSw64_6msmFep81fw
+https://mp.weixin.qq.com/s/UowNtBm_hqnes-Lz3POXGQ
 
-Google Brain ICLR Talk：元学习的前沿与挑战
+Transformers中的Beam Search高效实现
 
-https://zhuanlan.zhihu.com/p/70782949
+https://mp.weixin.qq.com/s/KdKbOrjeeo7Db095V7mSFA
 
-最前沿：General Meta Learning
+Transformer之自适应宽度注意力
 
-https://zhuanlan.zhihu.com/p/72920138
+https://mp.weixin.qq.com/s/EuCCeWz_rkktwLuFJ75BXA
 
-Meta Learning入门：MAML和Reptile
+Transformer+AutoML: 遗传搜索在序列式任务上的应用
 
-https://mp.weixin.qq.com/s/MsIAkJAcYHWkkMjzd7qXKA
+https://mp.weixin.qq.com/s/OEpLpWzkdfFUQf4cKNuG4w
 
-元学习与强化学习的概率视角，47页ppt，DeepMind牛津Yee Whye Teh
+Performer:基于正交随机特征的快速注意力计算
 
-https://mp.weixin.qq.com/s/IdUhvWJYviKtPs9jCbtybA
+https://mp.weixin.qq.com/s/eWQLkiJ_XIo7LpTUE9c0qA
 
-元知识图谱推理
+Transformer中的相对位置编码
 
-https://www.zhihu.com/question/291656490
+https://mp.weixin.qq.com/s/mZBHjuHJG9Ffd0nSoJ2ISQ
 
-求问meta-learning和few-shot learning的关系是什么？
+什么是Transformer位置编码？
 
-https://mp.weixin.qq.com/s/LZbprcnben6vPqsoC1DgDA
+https://mp.weixin.qq.com/s/V0NAOgluyZN9P8iuhMKRwQ
 
-DeepMind提出元梯度强化学习算法，显著提高大规模深度强化学习应用的性能
+Transformer为啥在NER上表现不好
 
-https://mp.weixin.qq.com/s/AH35EGTH1YDSx4WzUwY15g
+https://mp.weixin.qq.com/s/ANFSNW1-mcjPqjcroNHeZQ
 
-三四行代码打造元学习核心，PyTorch元学习库L2L现已开源
+RealFormer：Real简单，Real有效
 
-https://github.com/tristandeleu/pytorch-meta
+https://mp.weixin.qq.com/s/u-Twg6Cj6VfL6m4K0seBlw
 
-PyTorch上方便好用的元学习工具包
+谷歌研究院出品：高效Transformer模型最新综述
 
-https://mp.weixin.qq.com/s/Fte0SQ7J57AVGyTiIwWKAw
+https://mp.weixin.qq.com/s/2S_2Z5-ioCNxH1kqFcUuQA
 
-元学习与深度强化学习的机器人应用，84页ppt
+竞赛中的Transformer家族
 
-https://mp.weixin.qq.com/s/xu5ieaPP2de0GML7b-1BsA
+https://mp.weixin.qq.com/s/mc6M2vEcPG6oMfKe3_apzQ
 
-谈谈元学习的技术实现框架
+Transformer变体层出不穷，它们都长什么样？
 
-https://mp.weixin.qq.com/s/spRlzjFTh4KeyFfd8pmZgw
+https://mp.weixin.qq.com/s/IWUxVzpdGIX1Oxn4KxjhHA
 
-新框架ES-MAML：基于进化策略、简易的元学习方法
+一个Transformer，很强；两个，更强？（TransGAN）
 
-https://mp.weixin.qq.com/s/uAdFWT5rP40IMsLfFyr7XQ
+https://mp.weixin.qq.com/s/IWUxVzpdGIX1Oxn4KxjhHA
 
-一种深度网络快速适应的模型无关元学习方法(元学习经典论文)
+TransGAN：两个Transformer可以构造一个强大的GAN

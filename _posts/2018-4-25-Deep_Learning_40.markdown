@@ -1,8 +1,11 @@
 ---
 layout: post
-title:  深度学习（四十）——行人重识别, 数据增强
+title:  深度学习（四十）——行人重识别, 图像检索
 category: DL 
 ---
+
+* toc
+{:toc}
 
 # 行人重识别
 
@@ -14,9 +17,17 @@ https://github.com/gjy3035/Awesome-Crowd-Counting
 
 人群计数最全代码、数据、论文合集
 
+https://zhuanlan.zhihu.com/c_1111215695622352896
+
+一个人群计数方面的专栏
+
 https://mp.weixin.qq.com/s/ZmX_ir1pSUZbCaFpbcQ6Lw
 
 一文读懂行人检测算法
+
+https://mp.weixin.qq.com/s/a4zRYKIJUNatTW9YJZtu2Q
+
+关注度越来越高的行人重识别，有哪些热点？
 
 https://zhuanlan.zhihu.com/p/26168232
 
@@ -26,6 +37,14 @@ https://zhuanlan.zhihu.com/p/50387521
 
 从零开始行人重识别
 
+https://mp.weixin.qq.com/s/iAMjUHK5ZrVEGVliA0JE9Q
+
+行人Re-ID研究概述
+
+https://mp.weixin.qq.com/s/T-Odxp4K1E0I7Gq-fjCM7g
+
+行人跟踪算法及应用综述
+
 https://mp.weixin.qq.com/s/_NDw7pFmDB07mliHTA6VYQ
 
 旷视行人再识别（ReID）突破
@@ -33,6 +52,14 @@ https://mp.weixin.qq.com/s/_NDw7pFmDB07mliHTA6VYQ
 https://zhuanlan.zhihu.com/p/31181247
 
 从人脸识别到行人重识别，下一个风口
+
+https://mp.weixin.qq.com/s/QeNcO_JahvkscxWnd50xLw
+
+最新《深度学习行人重识别》综述论文，24页pdf
+
+https://mp.weixin.qq.com/s/Dy3_I27fa1j7ZdweoPXImw
+
+深度学习行人重识别ReID最新综述与展望
 
 https://mp.weixin.qq.com/s/zRdJktyk1LZWUd2cyTjpiw
 
@@ -93,6 +120,10 @@ https://zhuanlan.zhihu.com/p/40514536
 https://mp.weixin.qq.com/s/mktVMZ0Fdo0mubstpl2GDA
 
 Repulsion loss：专注于遮挡情况下的行人检测
+
+https://mp.weixin.qq.com/s/NF7j5NYB4TsYZWhA5VGfkQ
+
+Repulsion Loss：遮挡场景下的目标检测
 
 https://mp.weixin.qq.com/s/LZCYx-VyOAMWXBS76ttkFw
 
@@ -254,6 +285,10 @@ https://github.com/xingkongliang/Pedestrian-Detection
 
 行人检测（Pedestrian Detection）论文整理
 
+https://mp.weixin.qq.com/s/TGjW7AjtGe2aMU8G-c177Q
+
+自动驾驶中的行人检测方法设计
+
 https://zhuanlan.zhihu.com/p/85383077
 
 视频行人重识别2019各顶会顶刊文章阅读笔记
@@ -261,6 +296,10 @@ https://zhuanlan.zhihu.com/p/85383077
 https://mp.weixin.qq.com/s/kl01FypFQAmG_TiMTNnvNw
 
 旷视研究院提出VANet：具备视角感知力的车辆重识别网络
+
+https://mp.weixin.qq.com/s/2WgYJR6z3aDpOKqhVtSRVA
+
+最新综述：车辆重识别技术
 
 https://mp.weixin.qq.com/s/nqRJQ6K6e1TC6IUa57dw0g
 
@@ -274,96 +313,72 @@ https://zhuanlan.zhihu.com/p/96999382
 
 重识别（re-ID）特征适合直接用于跟踪（tracking）问题么？
 
-# 数据增强
+https://mp.weixin.qq.com/s/H98W-Ml2MfrbM4iuEV8uVg
 
-https://mp.weixin.qq.com/s/GqPfvWwH1T0XFwiZ86cW8A
+Group LSTM：拥挤场景的群体轨迹预测
 
-SamplePairing：针对图像处理领域的高效数据增强方式
+https://mp.weixin.qq.com/s/JZPLz1Xczby86id4Zvy1UQ
 
-https://mp.weixin.qq.com/s/cQtXvOjSXFc4YKn7ANBc_w
+CrowdHuman+Double Anchor：强强联合，推动密集行人检测技术落地
 
-谷歌大脑提出自动数据增强方法AutoAugment：可迁移至不同数据集
+https://zhuanlan.zhihu.com/p/342249413
 
-https://mp.weixin.qq.com/s/ojFo7-gUh73iK3uImFS2-Q
+深度学习行人重识别综述与展望
 
-一文道尽主流开源框架中的数据增强
+https://zhuanlan.zhihu.com/p/345252131
 
-https://mp.weixin.qq.com/s/xJhWu-1FyhIWbFBC5oHMkw
+FastReID V1.0：Beyond reID
 
-一文道尽深度学习中的数据增强方法（上）
+# 图像检索
 
-https://mp.weixin.qq.com/s/OctAGrcBB0a6TOGWMmVKUw
+## 传统方法
 
-深度学习中的数据增强（下）
+https://mp.weixin.qq.com/s/sM78DCOK3fuG2JrP2QaSZA
 
-https://mp.weixin.qq.com/s/lMU6_ywQqneyunqEV6uDiA
+SIFT与CNN的碰撞：万字长文回顾图像检索任务十年探索历程（上）
 
-如何改善你的训练数据集？
+https://mp.weixin.qq.com/s/yzVMDEpwbXVS0y-CwWSBEA
 
-https://mp.weixin.qq.com/s/ooX9Hj5ejO6po6Ghb4zOug
+SIFT与CNN的碰撞：万字长文回顾图像检索任务十年探索历程（下）
 
-一文解读合成数据在机器学习技术下的表现
+https://mp.weixin.qq.com/s/Sda94q-40goiZGSYGgm_Yw
 
-https://zhuanlan.zhihu.com/p/33485388
+基于内容的图像检索技术综述-传统经典方法
 
-mixup与paring samples ，ICLR2018投稿论文的数据增广两种方式
+https://mp.weixin.qq.com/s/ED-zovVT_vHId4mYXdEo5w
 
-https://mp.weixin.qq.com/s/_7xFBLPGT0VRTJ22toHJ3g
+高效大规模图像搜索开源实现
 
-深度学习中常用的图像数据增强方法
+## DL方法
 
-https://mp.weixin.qq.com/s/sXV9epWguGbJEZYo4yNp5Q
+https://zhuanlan.zhihu.com/p/36479489
 
-如何正确使用样本扩充改进目标检测性能
+图像检索：因缘际会与前瞻
 
-https://zhuanlan.zhihu.com/p/46833956
+https://mp.weixin.qq.com/s/jv6PvFHsweK_rFOuz-p-mg
 
-图像数据增强之弹性形变（Elastic Distortions）
+图像检索从入门到进阶
 
-https://mp.weixin.qq.com/s/iaeHnfepyeLuOioHqMO9bQ
+https://mp.weixin.qq.com/s/aRndRlVnY5ZRBFnNbVNecg
 
-一种小目标检测中有效的数据增强方法
+李飞飞CS231n项目：这两位工程师想用神经网络帮你还原买家秀
 
-https://mp.weixin.qq.com/s/ws1R-VPyJY6J18OttBDYog
+https://mp.weixin.qq.com/s/zHSDFR_Nd4LfvIaq9kSrww
 
-超少量数据训练神经网络：IEEE论文提出径向变换实现图像增强
+BMVC2018图像检索论文—使用区域注意力网络改进R-MAC方法
 
-https://mp.weixin.qq.com/s/g4022Rc1RNvr3IOC_bWuaQ
+https://mp.weixin.qq.com/s/FJCZvc8pl-CwFhyiCD6E-g
 
-深度学习中的数据增强方法都有哪些？
+Pinterest视觉搜索工程师孙彦：视觉搜索不是“鸡肋”
 
-https://mp.weixin.qq.com/s/YuFVEhO3wzCN5dIM_YqA7A
+https://mp.weixin.qq.com/s/QgYtfvsLGcfqLA98mp19tg
 
-EDA：最简单的自然语言处理数据增广方法
+KDD2018阿里巴巴论文揭示自家大规模视觉搜索算法
 
-https://mp.weixin.qq.com/s/IeqSfjt4x8HquXBeQN2gdQ
+https://mp.weixin.qq.com/s/CS4iAMprZizrXhpXDhySzg
 
-深度学习中的数据增强方法总结
+视频分类/行为识别研究综述，从数据集到方法
 
-https://zhuanlan.zhihu.com/p/76044027
+http://yongyuan.name/blog/layer-selection-and-finetune-for-cbir.html
 
-A survey on Image Data Augmentation数据增强文献综述
-
-https://mp.weixin.qq.com/s/2B0NBY39noikPEO1dB06Sg
-
-CV领域中数据增强相关的论文推荐
-
-https://www.zhihu.com/question/35339639
-
-使用深度学习(CNN)算法进行图像识别工作时，有哪些data augmentation的奇技淫巧？
-
-https://mp.weixin.qq.com/s/YtL7GeIGYm9xtdofnabu1g
-
-如何选择最合适的数据增强操作
-
-https://mp.weixin.qq.com/s/Vi_1Sg8OKG-EG4aC4QTCWA
-
-半监督学习的新助力：无监督数据扩增法
-
-https://mp.weixin.qq.com/s/omUtD3GFOpP1dvfWZgLDww
-
-计算机视觉模型效果不佳，你可能是被相机的Exif信息坑了
-
-https://mp.weixin.qq.com/s/pV7C2sSJwP3rBO6OYeF-nw
-
-基于马尔可夫链的数据增强
+图像检索：layer选择与fine-tuning性能提升验证

@@ -4,6 +4,9 @@ title:  深度学习（三十九）——视频处理
 category: DL 
 ---
 
+* toc
+{:toc}
+
 # 视频处理
 
 ## 视频目标分割
@@ -23,6 +26,14 @@ category: DL
 无监督（亦称作视频显著性检测）：寻找并分割视频中的主要目标。这意味着算法需要自行决定哪个物体才是“主要的”。
 
 半监督：在输入中（只）给出视频第一帧的正确分割掩膜，然后在之后的每一连续帧中分割标注的目标。
+
+## 视频理解
+
+视频理解中的三大基础领域:动作识别(Action Recognition)、时序动作定位(Temporal Action Localization)和视频 Embedding。
+
+https://mp.weixin.qq.com/s/ATKmdw50V50_gczEVfIZSw
+
+视频理解综述：动作识别、时序动作定位、视频Embedding
 
 ## 参考
 
@@ -45,6 +56,10 @@ https://mp.weixin.qq.com/s/nZVIVJ9z0AWA8VFouNpafg
 https://mp.weixin.qq.com/s/z1APyCxlOEPHn48OeJAHkQ
 
 基于深度学习的视频内容识别
+
+https://mp.weixin.qq.com/s/XFlcGZRrxmmUDZXg-ijFDA
+
+视频识别SOTA模型都在这了—PySlowFast! Facebook AI Research开源视频理解前沿算法代码库
 
 https://mp.weixin.qq.com/s/ovjoHCcR1xYb9N6kyFJUTg
 
@@ -298,6 +313,14 @@ https://mp.weixin.qq.com/s/THUjd-wXI6_57mdw4XfYUQ
 
 商汤-港中文MMLab开源图像视频超分辨率工具箱MMSR
 
+https://zhuanlan.zhihu.com/p/209133135
+
+基于深度学习的视频超分辨率技术：全面调研（2015-2020）
+
+https://mp.weixin.qq.com/s/9YSO1RW8mgyihrZWbEe20w
+
+视频超分辨率研究方法
+
 https://mp.weixin.qq.com/s/XZ-fn_Xd7vVoLiVr6Esb3g
 
 Ranking Attention-适用于视频分割的全新Attention机制
@@ -309,6 +332,10 @@ Super SloMo,基于光流和U-Net的视频插值
 https://mp.weixin.qq.com/s/8uxeOqcUvnZcKHv7qXwWJQ
 
 如何在视频里任意抠图？阿里工程师做到了！
+
+https://mp.weixin.qq.com/s/HHS888HA0slvjkkkI8HU8w
+
+字节实习生开发的AI，实现4K60帧视频实时抠图
 
 https://zhuanlan.zhihu.com/p/83604007
 
@@ -345,27 +372,3 @@ https://mp.weixin.qq.com/s/5qC70NoTBQ95vjI4cGl66g
 https://mp.weixin.qq.com/s/Wn-5VD2-YWwVUWCMEy-lvw
 
 AI碰撞短视频，从推荐到直播，快手探索了这些ML新思路
-
-https://mp.weixin.qq.com/s/cuejj8atJsbSDae9xnhsxA
-
-锁定视频中的目标：港大提出运动注意力检测方法
-
-https://mp.weixin.qq.com/s/AUfaghIcRwwzgZzhOqHVZg
-
-对标GLUE、ImageNet，谷歌推出视觉任务适应性基准VTAB
-
-https://mp.weixin.qq.com/s/sc3ROchBFK9pAb-FCKNwLg
-
-你说我导！微软玩转标题描述生成视频
-
-https://mp.weixin.qq.com/s/jUPhF6OHtVrmTbg29sQV2Q
-
-谷歌提出TVN视频架构：单CPU处理1s视频仅需37ms、GPU仅需10ms
-
-https://mp.weixin.qq.com/s/vuhoK4cVaHDn6oTuGqX_Eg
-
-你写脚本，AI自动剪视频：13分钟完成剪辑师7小时创作，清华北航联手打造
-
-https://mp.weixin.qq.com/s/IZs9Ctktmvzi_SAU9kD7Gg
-
-多模态人物识别技术及其在爱奇艺视频场景中的应用

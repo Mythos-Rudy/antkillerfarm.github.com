@@ -1,12 +1,99 @@
 ---
 layout: post
-title:  深度学习（十）——深度图像压缩, 花式卷积（1）
+title:  深度学习（十）——花式卷积（1）
 category: DL 
 ---
 
-# CNN进化史
+* toc
+{:toc}
 
-## 参考（续）
+# CNN进化史（续）
+
+### ZF Net
+
+论文：
+
+《Visualizing and understandingConvolutional Networks》
+
+本文是Matthew D.Zeiler 和Rob Fergus于（纽约大学）2013年撰写的论文，主要通过Deconvnet（反卷积）来可视化卷积网络，来理解卷积网络，并调整卷积网络；本文通过Deconvnet技术，可视化Alex-net，并指出了Alex-net的一些不足，最后修改网络结构，使得分类结果提升。
+
+参考：
+
+http://blog.csdn.net/u011534057/article/details/51274862
+
+论文阅读笔记
+
+http://blog.csdn.net/whiteinblue/article/details/43312059
+
+另一篇论文阅读笔记
+
+## 总结
+
+以下内容摘自中科视拓CEO山世光的演讲。
+
+以让小区里的巡逻机器人学会检测狗屎为例。
+
+在**前深度学习时代**，这个过程大概分三步：
+
+第一步，花几个月时间收集和标注几百或上千张图；
+
+第二步，观察并人为设计形状、颜色、纹理等特征；
+
+第三步，尝试各种分类器做测试，如果测试结果不好，返回第二步不断地迭代。
+
+人脸检测就是这样进行的，从上世纪八十年代开始做，大量研究者花了大概二十年时间，才得到了一个基本可用的模型，能较好地解决人脸检测的问题。而后在监控场景下做行人和车辆的检测，前后也花了大概十年的时间。就算基于这些经验，做出好用的狗屎检测器，至少还是需要一年左右的时间。
+
+在**深度学习时代**，开发一个狗屎检测器的流程被大大缩短了。尽管深度学习需要收集大量的数据并进行标注（用矩形把图中的狗屎位置框出来），但由于众包平台的繁荣，收集一万张左右的数据可能只需要两星期。
+
+接下来，我们只需要挑几个已经被证明有效的深度学习模型进行优化训练就可以了，训练优化大概需要一个星期，就算换几个模型再试试看。这样完成整个过程只需要一两个月而已。
+
+而在**后深度学习时代**，我们期待先花几分钟时间，在网上随便收集几张狗屎照片，交给机器去完成余下所有的模型选择与优化工作，或许最终只需要一、两星期解决这个问题。
+
+前深度学习时代的人脸识别的标准流程：
+
+第一步是人脸检测，其结果就是在图片中的脸部区域打一个矩形框。
+
+第二步是寻找眼睛、鼻子、嘴等特征点，目的是把脸对齐，也就是把眼鼻嘴放在近乎相同的位置，好像所有的脸都能“串成一串”一样，且只保留脸的中心区域，甚至连头发不要。
+
+第三步是光照的预处理，通过高斯平滑、直方图均衡化等来进行亮度调节、偏光纠正等。
+
+第四步是做Y=f(X)的变换。
+
+第五步，是计算两张照片得到的Y的相似程度，如果超过特定的阈值，就认定是同一个人。
+
+深度学习的到来对整个流程有一个巨大的冲击。
+
+一开始，研究者用深度学习完成人脸检测、特征点定位、预处理、特征提取和识别等每个独立的步骤。而后首先被砍掉的是预处理，我们发现这个步骤是完全不必要的。理论上来解释，深度学习学出来的底层滤波器本身就可以完成光照的预处理，而且这个预处理是以“识别更准确”为目标进行的，而不是像原来的预处理一样，以“让人看得更清楚”为目标。人的知识和机器的知识其实是有冲突的，人类觉得好的知识不一定对机器识别有利。
+
+而最近的一些工作就是把第二步特征点定位砍掉。因为神经网络也可以进行对齐变换，所以我们的工作通过空间变换（spatial transform），将图片自动按需进行矫正。并且我有一个猜测：传统的刻意把非正面照片转成正面照片的做法，也未必是有利于识别的。因为一个观察结果是，同一个人的两张正面照相似度可能小于一张正面、一张稍微转向的照片的相似度。最终，我们希望进行以识别为目标的对齐（recognition oriented alignment）。
+
+在未来，或许检测和识别也可能合二为一。现在的检测是对一个通用的人脸的检测，未来或许可以实现检测和识别全部端到端完成：只有特定的某个人脸出现，才会触发检测框出现。
+
+第五步的相似度（或距离测度）的计算方法存在一定的争议。我认为特征提取的过程已经通过损失函数暗含了距离测度的计算，所以深度特征提取与深度测度学习有一定的等价性。但也有不少学者在研究特征之间距离测度的学习，乃至于省略掉特征提取，直接学习输入两张人脸图片时的距离测度。
+
+总体来说，深度学习的引入体现了端到端、数据驱动的思想：**尽可能少地对流程进行干预、尽可能少地做人为假设。**
+
+## 参考
+
+http://mp.weixin.qq.com/s/ZKMi4gRfDRcTxzKlTQb-Mw
+
+计算机视觉识别简史：从AlexNet、ResNet到Mask RCNN
+
+http://mp.weixin.qq.com/s/kbHzA3h-CfTRcnkViY37MQ
+
+详解CNN五大经典模型:Lenet，Alexnet，Googlenet，VGG，DRL
+
+https://zhuanlan.zhihu.com/p/22094600
+
+Deep Learning回顾之LeNet、AlexNet、GoogLeNet、VGG、ResNet
+
+https://mp.weixin.qq.com/s/28GtBOuAZkHs7JLRVLlSyg
+
+深度卷积神经网络演化历史及结构改进脉络
+
+http://www.leiphone.com/news/201609/303vE8MIwFC7E3DB.html
+
+Google最新开源Inception-ResNet-v2，借助残差网络进一步提升图像分类水准
 
 https://mp.weixin.qq.com/s/x3bSu9ecl3dldCbvS1rT1g
 
@@ -68,71 +155,13 @@ https://mp.weixin.qq.com/s/acvpHt4zVQPI0H5nHcg3Bw
 
 67页综述深度卷积神经网络架构：从基本组件到结构创新
 
-# 深度图像压缩
+https://zhuanlan.zhihu.com/p/66215918
 
-Tiny Network Graphics是图鸭科技推出一种基于深度学习的图片压缩技术。由于商业因素，这里没有论文，技术细节也不详，但是下图应该还是有些用的。
+CNN系列模型发展简述
 
-![](/images/img2/TNG.png)
+https://zhuanlan.zhihu.com/p/68411179
 
-还有视频压缩：
-
-论文：
-
-《Deep Learning-Based Video Coding: A Review and A Case Study》
-
-参考：
-
-https://mp.weixin.qq.com/s/YBJwLqqL7aVUTG0LaUbwxw
-
-深度学习助力数据压缩，一文读懂相关理论
-
-https://mp.weixin.qq.com/s/WYsxFX4LyM562bZD8rO95w
-
-图鸭发布图片压缩TNG，节省55%带宽
-
-https://mp.weixin.qq.com/s/meK8UBnVHzA9YspQ2RFp6Q
-
-体积减半画质翻倍，他用TensorFlow实现了这个图像极度压缩模型
-
-https://mp.weixin.qq.com/s/_5tyt7pU0gIXbkmTOVEtDw
-
-嫌图片太大？！卷积神经网络轻松实现无损压缩到20%！
-
-https://mp.weixin.qq.com/s/a4oU8UK_hLMrKXNRQizAag
-
-图鸭科技获CVPR 2018图像压缩挑战赛单项冠军，技术解读端到端图像压缩框架
-
-https://mp.weixin.qq.com/s/VDyPjzXdwMGEsoXQmhrp9g
-
-图鸭科技斩获CVPR图像压缩挑战赛冠军，TNGcnn4p技术全解读
-
-https://mp.weixin.qq.com/s/B7reSwa9sCZqbkYVM5-VOA
-
-图像压缩哪家强？请看这份超详细对比
-
-https://mp.weixin.qq.com/s/K17wlC3tueNBfHkYBUFcQg
-
-基于深度学习的HEVC复杂度优化。这是篇视频压缩的blog。
-
-https://mp.weixin.qq.com/s/exUYS2v5VyRaMdFylWlobw
-
-用循环神经网络进行文件无损压缩：斯坦福大学提出DeepZip
-
-https://mp.weixin.qq.com/s/GEMOfh04XR5IyWWlvZeeng
-
-CLIC图像压缩挑战赛冠军方案解读
-
-https://zhuanlan.zhihu.com/p/78050429
-
-基于深度学习的视频压缩方案介绍
-
-https://mp.weixin.qq.com/s/gNtxBI0Alk70cEujxQmSFQ
-
-如何将图像压缩10倍？阿里工程师有个大胆的想法！这是一篇传统算法的blog。
-
-https://mp.weixin.qq.com/s/OkywKX4XygM8VqkL8A1fcA
-
-TIP 2019开源论文：基于深度学习的HEVC多帧环路滤波方法
+CNN网络结构的发展
 
 # 花式卷积
 
@@ -213,93 +242,3 @@ Dilated convolution在CNN方面的应用主要是Fisher Yu的贡献。
 https://github.com/fyu/dilation
 
 https://github.com/fyu/drn
-
->Fisher Yu，密歇根大学本硕+普林斯顿大学博士。   
->个人主页：   
->http://www.yf.io/
-
-和Deconvolution类似，Dilated convolution也可以采用space_to_batch和batch_to_space操作，将之转换为普通卷积。
-
-参考：
-
-https://zhuanlan.zhihu.com/p/28822428
-
-Paper笔记：Dilated Residual Networks
-
-https://mp.weixin.qq.com/s/1lMlSMS5xKc8k0QMAou45g
-
-重新思考扩张卷积！中科院&深睿提出新型上采样模块JPU
-
-https://mp.weixin.qq.com/s/NjFdu6iP3Sn9GbDhrbpisQ
-
-感受野与分辨率的控制术—空洞卷积
-
-## 分组卷积
-
-![](/images/article/AlexNet.png)
-
-Grouped Convolution最早在AlexNet中出现，由于当时的硬件资源有限，训练AlexNet时卷积操作不能全部放在同一个GPU处理，因此作者把feature maps分给2个GPU分别进行处理，最后把2个GPU的结果进行融合。
-
-![](/images/img3/group_conv.png)
-
-上图是Grouped Convolution的具体运算图：
-
-- input分成了g组。每组的channel数只有全部的1/g。（上图中g=2）
-
-- weight和bias也分成了g组。每组weight的input_num和output_num都只有普通卷积的1/g。也就是每组weight的尺寸只有原来的$$1/g^2$$，g组weight的总尺寸就是原来的1/g。
-
-- 每组input和相应的weight/bias进行普通的conv运算得到一个结果。g组结果合并在一起得到一个最终结果。
-
-可以看出，Grouped Convolution和普通Convolution的input/output的尺寸是完全一致的，只是运算方式有差异。由于group之间没有数据交换，总的计算量只有普通Convolution的1/g。
-
-在AlexNet的Group Convolution当中，特征的通道被平均分到不同组里面，最后再通过两个全连接层来融合特征，这样一来，就只能在最后时刻才融合不同组之间的特征，对模型的泛化性是相当不利的。
-
-为了解决这个问题，ShuffleNet在每一次层叠这种Group conv层前，都进行一次channel shuffle，shuffle过的通道被分配到不同组当中。进行完一次group conv之后，再一次channel shuffle，然后分到下一层组卷积当中，以此循环。
-
-![](/images/img2/ShuffleNet.png)
-
-论文：
-
-《ShuffleNet: An Extremely Efficient Convolutional Neural Network for Mobile Devices》
-
-代码：
-
-https://github.com/megvii-model/ShuffleNet-Series
-
-![](/images/img2/ShuffleNet_2.png)
-
-上图是ShuffleNet的Unit结构图，DWConv表示depthwise convolution，GConv表示pointwise group convolution。a是普通的Deep Residual Unit，b的进化用以提高精度，c的进一步进化用以减少计算量。
-
-参考：
-
-https://blog.yani.io/filter-group-tutorial/
-
-A Tutorial on Filter Groups (Grouped Convolution)
-
-https://mp.weixin.qq.com/s/b0dRvkMKSkq6ZPm3liiXxg
-
-旷视科技提出新型卷积网络ShuffleNet，专为移动端设计
-
-https://mp.weixin.qq.com/s/0MvCnm46pgeMGEw-EdNv_w
-
-CNN模型之ShuffleNet
-
-https://mp.weixin.qq.com/s/tceLrEalafgL8R44DZYP9g
-
-旷视科技提出新型轻量架构ShuffleNet V2：从理论复杂度到实用设计准则
-
-https://mp.weixin.qq.com/s/Yhvuog6NZOlVWEZURyqWxA
-
-ShuffleNetV2：轻量级CNN网络中的桂冠
-
-https://mp.weixin.qq.com/s/zLf0aKeMYwqMwC1TymMxgQ
-
-移动端高效网络，卷积拆分和分组的精髓
-
-https://zhuanlan.zhihu.com/p/86095608
-
-Learnable Group Convolutions:可以学习的分组卷积
-
-https://mp.weixin.qq.com/s/liCS3JoRj1scpc0jXFA4-w
-
-分组卷积最新进展，全自动学习的分组有哪些经典模型？

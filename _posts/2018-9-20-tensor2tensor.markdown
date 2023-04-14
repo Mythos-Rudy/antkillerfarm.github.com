@@ -1,8 +1,11 @@
 ---
 layout: post
-title:  Tensor2Tensor, NN中间语言, MXNet
-category: AI 
+title:  Tensor2Tensor, MXNet, Horovod, DL框架怀古
+category: DL Framework 
 ---
+
+* toc
+{:toc}
 
 # Tensor2Tensor
 
@@ -120,131 +123,6 @@ num_encoder_layers/num_decoder_layers控制transformer的层数，如果为0，�
 
 get_timing_signal_1d
 
-# GNU Octave
-
-GNU Octave是Matlab的一个开源实现。它拥有和后者兼容的语法，类似的IDE，并实现了大部分的基础库。
-
-官网：
-
-https://gnu.org/software/octave/
-
-安装方法:
-
-`sudo apt-get install octave`
-
-# NN中间语言
-
-## 概述
-
-随着目前DL框架越来越多，如何在框架之间对模型进行相互转换，就成为了工业界的一个大问题。
-
-https://github.com/ysh329/deep-learning-model-convertor
-
-这个网页包含了各种深度框架之间的模型相互转换的工具的列表。从中可以看出ONNX和MMdnn算是目前比较有用的转换工具了。
-
-这类many-to-many工具从实现原理上，主要是将各种模型转换成中间语言（IR，intermediate representation），然后再变换成目标语言。
-
-某网友的评价：
-
-Tensorflow Model / ONNX / Caffe Model / ... ---> DL IR (nGraph IR / *.IR) ---> LLVM IR ---> CPU JIT / GPU / ...
-
-如果把前面的Model看成一种语言或者DSL，就是DSL ---> DL IR ---> LLVM IR ---> Target，然后你就在中间层疯狂的做优化，编译器优化开发也是这样做的。
-
-在LLVM IR出现以前，很多编译器都有几层的IR表示，比如 C++ ----> 1st IR ----> OPT ----> 2nd IR ----> .... -> Target，只是LLVM出来以后，LLVM IR做了统一，编译器变为了 C++ ----> LLVM IR ---> OPT ----> LLVM IR ----> Target
-
-## NNEF
-
-Neural Network Exchange Format是Khronos制定的用于交换NN模型数据的数据格式标准。
-
-官网：
-
-https://www.khronos.org/nnef
-
-## ONNX
-
-和NNEF竞争的标准还有微软和Facebook联合推出的Open Neural Network Exchange。
-
-官网：
-
-https://github.com/onnx
-
-参考：
-
-https://mp.weixin.qq.com/s/etSrI8Z3-NWbrqNWIbfzjw
-
-微软Facebook联手发布AI生态系统
-
-https://mp.weixin.qq.com/s/D5rQ6r3s54PR_esAAu5rhQ
-
-开源一年多的模型交换格式ONNX，已经一统框架江湖了？
-
-## NNVM
-
-陈天奇等推出的NNVM也是一个类似的中间表示。官网：
-
-https://github.com/dmlc/nnvm
-
-参考：
-
-https://mp.weixin.qq.com/s/qkvX0rmEe0yQ-BhCmWAXSQ
-
-李沐：AWS开源端到端AI框架编译器NNVM
-
-## MMdnn
-
-MMdnn是微软推出的工具集，也是目前功能最强的工具集。
-
-官网：
-
-https://github.com/Microsoft/MMdnn
-
-## nGraph
-
-nGraph是Intel推出的一款能兼容所有框架的深度神经网络（DNN）模型编译器，可用于多种硬件设备（其实主要还是Intel家的硬件）。
-
-官网：
-
-https://ngraph.nervanasys.com/docs/latest/
-
-## 展望
-
-总的来说，DL方面的中间语言/接口/编译器架构都太多了。下图是Google最近（2019.4）推出的MLIR对自家各种优化技术的总结，这里还不包括其他家的相关技术。
-
-![](/images/img2/MLIR.png)
-
-从趋势来看，仅仅纠结于各种模型的导入/导出已经不再是最佳的做法，DL compiler才是王道。
-
-## 参考
-
-https://zhuanlan.zhihu.com/p/32711259
-
-从NNVM和ONNX看AI芯片的基础运算算子
-
-https://mp.weixin.qq.com/s/jjT0x99ht8xtfWmzL-0R1A
-
-深度学习的IR“之争”
-
-https://www.zhihu.com/question/269332944
-
-如何评价英特尔开源的nGraph编译器？
-
-# CATIA
-
-CATIA是法国达索公司的产品开发旗舰解决方案。作为PLM协同解决方案的一个重要组成部分，它可以通过建模帮助制造厂商设计他们未来的产品，并支持从项目前阶段、具体的设计、分析、模拟、组装到维护在内的全部工业设计流程。CATIA是GPU在工业上的一个重要的应用案例。
-
-官网：
-
-https://www.3ds.com/products-services/catia/
-
-# MLPerf
-
-MLPerf是谷歌、百度、斯坦福等联手打造的基准测量工具，用于测量机器学习软件与硬件的执行速度。
-
-它的到来代表着原本市场规模较为有限的AI性能比较方案正式踏上发展正轨。简而言之就是：以后各大公司发布的AI性能对比不能再王婆卖瓜自卖自夸了。
-
-官网：
-
-https://mlperf.org/
 
 # MXNet
 
@@ -307,3 +185,163 @@ https://mp.weixin.qq.com/s/hRH7hVsaQBqf0vhD_BqBgg
 https://zhuanlan.zhihu.com/p/42345854
 
 如何基于gluon训练一个强有力的Reid Baseline
+
+# Horovod
+
+Horovod是Uber开源的一套分布式深度学习框架。Horovod支持TensorFlow、Keras、PyTorch和Apache MXNet等后端框架。
+
+官网：
+
+https://eng.uber.com/horovod/
+
+代码：
+
+https://github.com/horovod/horovod
+
+参考：
+
+https://www.cnblogs.com/rossiXYZ/p/14856464.html
+
+深度学习分布式训练框架Horovod
+
+https://zhuanlan.zhihu.com/p/40578792
+
+Horovod-基于TensorFlow分布式深度学习框架
+
+https://zhuanlan.zhihu.com/p/158375055
+
+PyTorch单机多卡操作(分布式DataParallel，混合精度，Horovod)
+
+https://mp.weixin.qq.com/s/iQIRj7ifsOEnupYZuQsVwQ
+
+是时候放弃TensorFlow集群，拥抱Horovod了
+
+https://mp.weixin.qq.com/s/qOjGrR59Mf0Mzgh4bpDhrA
+
+详解Horovod：Uber开源的TensorFlow分布式深度学习框架
+
+https://mp.weixin.qq.com/s/yNxjJHpGns6utpBpI-0XDA
+
+分布式训练框架Horovod初步学习
+
+https://zhuanlan.zhihu.com/p/374575049
+
+一文看懂Horovod源码
+
+https://mp.weixin.qq.com/s/7c7Q0P3g3IEL_r4BU2ZxRg
+
+Horovod架构剖析——解密最成功的第三方DL分布式训练框架
+
+https://horovod.readthedocs.io/en/stable/xla.html
+
+Horovod with XLA in Tensorflow
+
+# DMLC
+
+Distributed (Deep) Machine Learning Community是陈天奇发起的一个社区。
+
+它的核心库，被称为dmlc-core。目前已被TVM、MXNet等项目所采用。
+
+代码：
+
+https://github.com/dmlc/dmlc-core
+
+# DL框架怀古
+
+2017.9
+
+http://deeplearning.net/
+
+这个网站是Theano的主站，也是我最早接触DL时浏览的网站。其时，我虽然对DL有浓厚的兴趣，但尚未以此作为工作内容。
+
+从该网站提供的招聘信息来看，Caffe、Theano、Torch是当时主流的三大框架库。
+
+岂料时隔一年半载之后，这三大框架都渐趋式微。
+
+Caffe被Caffe 2替代，但使用的广泛度仍超过后者。
+
+Theano被同样基于计算图的TensorFlow淘汰。2017年9月停止更新。
+
+Torch相对变动最小，它被PyTorch替代。这更可以看作是python对于lua的胜利。
+
+---
+
+2020.12
+
+又是三年过去了。
+
+生命力超强的Caffe终于过气了，大约从2019年下半年开始，即使是新入行的客户，也没人用它了。但是Caffe 2从来没火过。不知道是Caffe 2不行，让贾扬清去阿里，还是贾扬清去阿里了，导致的Caffe 2被放弃。
+
+遗弃列表还有CNTK和Chainer。
+
+mxnet一直半死不活，虽然李沐并未放弃，但是手下已经有些离开的了。
+
+倒是国内，一堆原先私有的框架，纷纷开源。比如清华Jittor，旷视MegEngine，华为Mindspore在2020.3扎堆开源。但是根本溅不起丝毫的水花。你不开源，是自己用；你开源了，还是自己用。反正我是没兴趣用。
+
+参考：
+
+https://www.zhihu.com/question/392035070
+
+如何看待亚马逊AI李沐团队大批人员离职?
+
+https://zhuanlan.zhihu.com/p/121834310
+
+深度学习框架的灵魂
+
+https://mp.weixin.qq.com/s/DxV7mm7xCXWFy_KTIDh_-Q
+
+深度学习框架简史：TF和PyTorch双头垄断
+
+https://mp.weixin.qq.com/s/_-z2d1GE_3FElzAwPyJZ8A
+
+十大流行AI框架和库的优缺点比较
+
+https://mp.weixin.qq.com/s/gWdeevVYctxjDDw9SOWe_Q
+
+PyTorch深度学习技术生态
+
+# LLVM+
+
+## 参考
+
+所谓的intrinsic function ，是属于编译器开洞魔法的范畴，这些函数的实现是直接写死在编译器的代码生成部分的，在最终得到的二进制里面不会存在这些函数的符号和实现。
+
+https://zhuanlan.zhihu.com/p/348365662
+
+C++标准库开洞史
+
+https://www.zhihu.com/question/569519423
+
+C++标准库中是否有需要依赖编译器魔法才能实现的功能？
+
+https://www.zhihu.com/question/582148351
+
+C/C++函数“必须声明但禁止定义”才能使用，函数地址也不存在，是什么神奇的操作？
+
+https://mp.weixin.qq.com/s/FSlJKnC0y51nsLDp1B3tXg
+
+Swift编译器Crash—Segmentation fault解决方案
+
+https://zhuanlan.zhihu.com/p/392381317
+
+LLVM IR的第一个Pass：上手官方文档Hello Pass
+
+https://csstormq.github.io/
+
+一个LLVM、TVM、NEON的专栏
+
+https://www.zhihu.com/question/484069566
+
+LLVM怎么表达硬件相关的特性?
+
+https://mp.weixin.qq.com/s/-IjJJG5huL6p3KjhO70s7Q
+
+编译器中的图论算法
+
+https://zhuanlan.zhihu.com/p/140462815
+
+LLVM基本概念入门
+
+https://zhuanlan.zhihu.com/p/141265959
+
+有关于TableGen的简单介绍

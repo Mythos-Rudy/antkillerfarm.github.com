@@ -1,0 +1,345 @@
+---
+layout: post
+title:  NVIDIA
+category: Chip 
+---
+
+* toc
+{:toc}
+
+# NVIDIA
+
+NVIDIA作为行业龙头，其影响力甚至在Khronos Group之上，它提出的标准很多成为了行业的事实标准。
+
+>最近（2018.2），公司副总M给我们讲座的时候，回顾他早年在NVIDIA的经历，当时他作为公司骨干，曾拥有数万股NV的股票，可惜早都卖了。这十几年来，NV股票经过5次分拆，当初的一股现在要值6500美元。他要不卖，现在可能已经是亿万富翁了。。。
+
+![](/images/img3/nvidia.jpg)
+
+---
+
+https://www.zhihu.com/question/22407373
+
+英伟达(NVIDIA)创始人黄仁勋是一个什么样的人？
+
+---
+
+第一代NVIDIA显卡甚至都不是PC游戏用的显卡，它是世嘉土星的兼容卡，可以在PC上玩SS游戏。因为要和Sega的3D技术兼容，N卡一度偏离了行业主流，差点破产。
+
+一款叫《孤岛危机》，别称“显卡危机”的游戏于2007年诞生了，带来绝佳画面的同时，也“羞辱”了包括卡皇8800 Ultra在内的全部游戏GPU。当年主流分辨率尚且只是720P，但孤岛危机也需要3张8800 Ultra（总价在当年的北京可以买下2.5㎡房）SLI到一起，才能满足最高画质+4AA下，60帧流畅玩的需求。
+
+---
+
+https://zhuanlan.zhihu.com/p/571633096
+
+NVIDIA软硬件全栈浅析
+
+## 术语
+
+iGPU：Integrated Graphics Processing Unit。
+
+dGPU：Discrete Graphics Processing Unit。
+
+Copy Engine：复制引擎可以在流处理簇做计算时执行主机与设备之间的内存传输。在早期的CUDA硬件并没有任何复制引擎，后来版本的硬件包括了一个复制引擎，可以传输线性设备内存（CUDA数组除外），而最新的CUDA硬件则包括了两个复制引擎，这样可以使PCIe总线饱和并可以在CUDA数组和线性内存之间转换。
+
+Stream Processor：传统的顶点和像素分离渲染架构，存在着资源分配不均匀的问题——两种单元的渲染在不同场景的任务量不同。如果一个单元既能做顶点渲染，又能做像素渲染的话，这个问题就迎刃而解了。这样的统一渲染单元被称为Stream Processor。
+
+---
+
+https://zhuanlan.zhihu.com/p/266633373
+
+详解CUDA的Context、Stream、Warp、SM、SP、Kernel、Block、Grid
+
+## 产品线
+
+Tesla产品专为数据中心与工作站计算应用而设计。
+
+Quadro产品专为专业图形与工程应用而设计。
+
+GeForce产品专为互动游戏与消费类应用而设计。
+
+|  | NVIDIA Tesla V100 | NVIDIA RTX 3090 |
+|:--:|:--:|:--:|
+| FP32 (float) performance | 14.13 TFLOPS | 35.58 TFLOPS |
+| FP64 (double) performance | 7066 GFLOPS | 1112 GFLOPS |
+
+RTX系列属于对于机器学习来说性价比较高的显卡，但是双精度浮点数性能很弱。
+
+NVIDIA HGX：主板级的产品。
+
+NVIDIA DGX：服务器级的产品。
+
+NVIDIA EGX：主打边缘计算的主板级产品。
+
+NVIDIA AGX：主打自动驾驶等AI功能的产品。目前已经有Parker、Xavier、Orin、Atlan、Thor等代产品。
+
+历代GPU架构代号：Tesla → Fermi → Kepler → Maxwell → Pascal → Volta → Turing → Amper → Hopper。
+
+V100表示是Volta架构的GPU，A100和H100同理。
+
+---
+
+因受美国芯片出口管制，英伟达无法向中国出口具有更优性能的旗舰款H100芯片，只得缩减性能调整为H800的低配版，H800的芯片到芯片的数据传输速率降低了50%。
+
+## 驱动安装
+
+查看显卡硬件型号：
+
+`ubuntu-drivers devices`
+
+安装驱动：
+
+`sudo ubuntu-drivers autoinstall`
+
+N卡型号：
+
+`nvidia-smi -L`
+
+参考：
+
+https://zhuanlan.zhihu.com/p/59618999
+
+Ubuntu 18.04安装NVIDIA显卡驱动
+
+## CUDA
+
+CUDA是NVIDIA最早推出的通用数学运算库。除了基本的数学运算之外，还提供了一些工具包：
+
+cuBLAS：线性计算库。
+
+NVBLAS：多GPU版的cuBLAS。
+
+cuFFT：FFT计算库。
+
+nvGRAPH：图计算库。（这里的图是数学图论中的图，和DL框架中的计算图是两回事。）
+
+cuRAND：随机数生成库。
+
+cuSPARSE；稀疏矩阵计算库。
+
+cuSOLVER：解线性方程的计算库。包括解稠密方程的cuSolverDN、解稀疏方程的cuSolverSP和矩阵分解的cuSolverRF。
+
+CUTLASS：另一个线性计算库。功能比cuBLAS更多。
+
+## Deep Learning SDK
+
+cuDNN：DL计算库。
+
+TensorRT：嵌入式设备上专用于DL inference的计算库。
+
+NVIDIA DIGITS：一款web应用工具，可在网页上对Caffe进行图形化操作和可视化。
+
+TensorRT还有个云端的集群版本：
+
+https://github.com/NVIDIA/tensorrt-inference-server
+
+参考：
+
+https://mp.weixin.qq.com/s/v8-JHd5tWm41WLqR-h6eKA
+
+使用TensorRT集成加速TensorFlow推理
+
+https://mp.weixin.qq.com/s/rMvhsi2vXxVC65C5Z4IXIw
+
+AI视频处理加速引擎TensorRT及Deepstream介绍
+
+https://zhuanlan.zhihu.com/p/35657027
+
+高性能深度学习支持引擎实战——TensorRT
+
+## NVDLA
+
+NVIDIA Deep Learning Accelerator是一个开源的用于inference的芯片方案。官网：
+
+http://nvdla.org/
+
+NVDLA由于其强大的背景，被很多芯片公司拿来套壳开发。
+
+参考：
+
+https://mp.weixin.qq.com/s/aFmr6WKhZ3E-PsF6-uJvJg
+
+一图理清Nvidia AI软件栈
+
+https://zhuanlan.zhihu.com/p/561018305
+
+NVDLA硬件架构之卷积核心
+
+## NVIDIA DALI
+
+NVIDIA DALI是一个GPU加速的数据增强和图像加载库，为优化深度学习框架数据pipeline而设计，而其中的NVIDIA nvJPEG是用于JPEG解码的高性能GPU加速库。
+
+代码：
+
+https://github.com/NVIDIA/dali
+
+## Tensor Core
+
+Tensor Core是Nvidia GPU里的AI计算单元。
+
+WMMA（warp matrix multiply-accumulate）
+
+https://mp.weixin.qq.com/s/pPjPLqgXZ8iCPS42vXJpuQ
+
+NVIDIA Tensor Core深度学习核心解析
+
+## PTX
+
+PTX (Parallel Thread Execution) 是NVIDIA GPU的伪指令集，之所以加个伪字，主要是因为这个指令集并不是真的硬件指令集，而仅仅是个抽象指令集。
+
+该抽象指令集可以屏蔽不同架构显卡之间的指令差异。
+
+官网：
+
+https://docs.nvidia.com/cuda/parallel-thread-execution/index.html
+
+gcc和llvm都有特定的pass可以生成PTX代码。
+
+NVIDIA GPU真正的指令集，被称作SASS。
+
+https://zhuanlan.zhihu.com/p/161624982
+
+SASS指令集概述
+
+## CUDA-X AI
+
+CUDA-X AI是软件加速库的集合，这些库建立在CUDA之上，提供对于深度学习、机器学习和高性能计算必不可少的优化功能。这些库包括cuDNN（用于加速深度学习基元）、cuML（用于加速数据科学工作流程和机器学习算法）、TensorRT（用于优化受训模型的推理性能）、cuDF（用于访问 pandas 之类的数据科学 API）、cuGraph（用于在图形上执行高性能分析），以及超过13个的其他库。
+
+官网：
+
+https://www.nvidia.cn/technologies/cuda-x/
+
+## RAPIDS
+
+RAPIDS，全称Real-time Acceleration Platform for Integrated Data Science，是NVIDIA针对数据科学和机器学习推出的一套开源GPU加速库，基于CUDA-X AI打造。
+
+官网：
+
+https://rapids.ai/
+
+代码：
+
+https://github.com/rapidsai
+
+![](/images/img4/RAPIDS.png)
+
+参考：
+
+https://blog.csdn.net/sinat_26917383/article/details/104503795
+
+NVIDIA的python-GPU算法生态
+
+## CUDA实战
+
+安装：
+
+http://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html
+
+参考：
+
+http://ishare.iask.sina.com.cn/f/17211495.html
+
+深入浅出谈CUDA技术
+
+http://blog.csdn.net/xsc_c/article/category/2186063
+
+某人的并行计算专栏
+
+https://mp.weixin.qq.com/s/9D7uda3CV7volenhl-jchg
+
+推荐几个不错的CUDA入门教程
+
+https://mp.weixin.qq.com/s/bvNnzkOzGYYYewc3G9DOIw
+
+GPU是如何优化运行机器学习算法的？
+
+https://mp.weixin.qq.com/s/nAwxtOUi6HpIjVOREgEfaA
+
+CUDA编程入门极简教程
+
+https://mp.weixin.qq.com/s/-zdIWkuRZXhsLJmOZljOBw
+
+《基于GPU-多核-集群等并行化编程》
+
+https://mp.weixin.qq.com/s/bCb5VsH58JII886lpg9lvg
+
+如何在CUDA中为Transformer编写一个PyTorch自定义层
+
+https://mp.weixin.qq.com/s/OYSzol-vufiKPuU9YxtbuA
+
+矩阵相乘在GPU上的终极优化：深度解析Maxas汇编器工作原理
+
+https://zhuanlan.zhihu.com/p/358220419
+
+PyTorch自定义CUDA算子教程与运行时间分析
+
+https://zhuanlan.zhihu.com/p/358778742
+
+详解PyTorch编译并调用自定义CUDA算子的三种方式
+
+https://zhuanlan.zhihu.com/p/360441891
+
+熬了几个通宵，我写了份CUDA新手入门代码
+
+https://mp.weixin.qq.com/s/EZxO8IIBDJ4c7eQhUffc2w
+
+怎样节省2/3的GPU？爱奇艺vGPU的探索与实践
+
+https://mp.weixin.qq.com/s/3VjGpyXZSkJhy6sFPUsZzw
+
+GPU虚拟化，算力隔离，和qGPU
+
+https://zhuanlan.zhihu.com/p/383115932
+
+大佬是怎么优雅实现矩阵乘法的？
+
+https://zhuanlan.zhihu.com/p/410278370
+
+CUDA矩阵乘法终极优化指南
+
+https://www.zhihu.com/column/c_1437330196193640448
+
+深入浅出GPU优化
+
+https://www.zhihu.com/question/41060378
+
+自己写的CUDA矩阵乘法能优化到多快？
+
+https://zhuanlan.zhihu.com/p/559957579
+
+简单谈谈CUDA的访存合并
+
+https://zhuanlan.zhihu.com/p/565897763
+
+GPGPU编程模型之CUDA
+
+## cuLitho
+
+光刻是芯片制造过程中最复杂、最昂贵、最关键的环节，其成本约占整个硅片加工成本的1/3甚至更多。计算光刻模拟了光通过光学元件并与光刻胶相互作用时的行为，应用逆物理算法来预测掩膜板上的图案，以便在晶圆上生成最终图案。
+
+“计算光刻是芯片设计和制造领域中最大的计算工作负载，每年消耗数百亿CPU小时。”黄仁勋讲解道，“大型数据中心24x7全天候运行，以便创建用于光刻系统的掩膜板。这些数据中心是芯片制造商每年投资近2000亿美元的资本支出的一部分。”而cuLitho能够将计算光刻的速度提高到原来的40倍。
+
+## 参考
+
+https://mp.weixin.qq.com/s/cGKtvtZzR--sGL4oNSZfAw
+
+深度分析NVIDIA A100显卡架构
+
+https://mp.weixin.qq.com/s/rtO8PxRj08GVimT3bfbplA
+
+我看英伟达H100 GPU
+
+https://www.zhihu.com/question/523521515
+
+如何评价英伟达3月22日发布的全新GPU H100？
+
+https://mp.weixin.qq.com/s/lP7sLiqiGGR2IY-FaorIPw
+
+英伟达：AI芯片还可以这样做
+
+https://mp.weixin.qq.com/s/jGGGMDokN9akzbjRkvUOaA
+
+NVIDIA GPU架构的变迁史
+
+https://jcf94.com/2020/05/24/2020-05-24-nvidia-arch/
+
+NVIDIA GPU架构演进

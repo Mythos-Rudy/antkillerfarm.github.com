@@ -1,265 +1,390 @@
 ---
 layout: post
-title:  机器学习（三十八）——PageRank算法, 社交网络, 数据清洗
+title:  机器学习（三十八）——Optimizer进阶, 时间序列分析（2）
 category: ML 
 ---
 
-# PageRank算法
+* toc
+{:toc}
 
-## 概述
+# Optimizer进阶
 
-在PageRank提出之前，已经有研究者提出利用网页的入链数量来进行链接分析计算，这种入链方法假设一个网页的入链越多，则该网页越重要。早期的很多搜索引擎也采纳了入链数量作为链接分析方法，对于搜索引擎效果提升也有较明显的效果。PageRank除了考虑到入链数量的影响，还参考了网页质量因素，两者相结合获得了更好的网页重要性评价标准。
+https://mp.weixin.qq.com/s/T4f4W0V6YNBbjWqWBF19mA
 
-对于某个互联网网页A来说，该网页PageRank的计算基于以下两个基本假设：
+目标函数的经典优化算法介绍
 
-**数量假设**：在Web图模型中，如果一个页面节点接收到的其他网页指向的入链数量越多，那么这个页面越重要。
+https://mp.weixin.qq.com/s/R_0_E5Ieaj9KiWgg1prxeg
 
-**质量假设**：指向页面A的入链质量不同，质量高的页面会通过链接向其他页面传递更多的权重。所以越是质量高的页面指向页面A，则页面A越重要。
+为什么梯度的方向与等高线切线方向垂直？
 
-利用以上两个假设，PageRank算法刚开始赋予每个网页相同的重要性得分，通过迭代递归计算来更新每个页面节点的PageRank得分，直到得分稳定为止。PageRank计算得出的结果是网页的重要性评价，这和用户输入的查询是没有任何关系的，即算法是主题无关的。
+https://mp.weixin.qq.com/s/0gdGNv98DytB8KxwVu_M0A
 
-**优点**：
+通俗易懂讲解Deep Learning最优化方法之AdaGrad
 
-这是一个与查询无关的静态算法，所有网页的PageRank值通过离线计算获得；有效减少在线查询时的计算量，极大降低了查询响应时间。
+https://mp.weixin.qq.com/s/VVHe2msyeUTGiC7f_f0FFA
 
-**缺点**：
+一文概览深度学习中的五大正则化方法和七大优化策略
 
-1）人们的查询具有主题特征，PageRank忽略了主题相关性，导致结果的相关性和主题性降低。
+https://mp.weixin.qq.com/s/qp5tJynA2uZIgv-IzJ_lrA
 
-2）旧的页面等级会比新页面高。因为即使是非常好的新页面也不会有很多上游链接，除非它是某个站点的子站点。
+从基础知识到实际应用，一文了解“机器学习非凸优化技术”
 
-## 马尔可夫链
+https://mp.weixin.qq.com/s/zFGQzC_uQdAwlr9BzA-CYg
 
-Markov链的基本定义参见《机器学习（二十六）》。
+深度学习需要了解的四种神经网络优化算法
 
-这里补充一些定义：
+https://mp.weixin.qq.com/s/rUqIfKWmEBVjajlAn2HXfg
 
-**定义1**：设C为状态空间的一个子集，如果从C内任一状态i不能到C外的任何状态，则称C为**闭集**。除了整个状态空间之外，没有别的闭集的Markov链被称为**不可约的**。
+理解深度学习中的学习率及多种选择策略
 
-如果用状态转移图表示Markov链的话，上面的定义表征了Markov链的**连通性**。
+https://mp.weixin.qq.com/s/UfplwSgyWnLNiCdIrconhA
 
-**定义2**：如果有正整数d，只有当$$n=d,2d,\dots$$时，$$P_{ii}^{(n)}>0$$，或者说当n不能被d整除时，$$P_{ii}^{(n)}=0$$，则称i状态为**周期性状态**。如果除了$$d=1$$之外，使$$P_{ii}^{(n)}>0$$的各n值没有公约数，则称该状态i为**非周期性状态**。
+SGD的那些变种，真的比SGD强吗
 
-这个定义表征了Markov链各状态的**独立性**。
+https://mp.weixin.qq.com/s/GS3TvS9nZw-CSJds-Aw_ug
 
-**定义3**：
+UIUC孙若愚：60页论文综述深度学习优化
 
-$$f_{ij}^{(n)}=P(X_{m+v}\neq j,X_{m+n}=j|X_m=i)$$
+https://mp.weixin.qq.com/s/7E8o1TnvmAvZgB7_AWCunQ
 
-其中，$$n>1,1\le v\le n-1$$。
+2018值得尝试的无参数全局优化新算法
 
-上式表示由i出发，首次到达j的概率，也叫**首中概率**。
+https://mp.weixin.qq.com/s/T-v9OTcJa5OQ71QmYrFtbg
 
-相应的还有**最终概率**：
+斯坦福大学提出SGD动量自调节器YellowFin
 
-$$f_{ij}=\sum_{n=1}^\infty f_{ij}^{(n)}$$
+https://mp.weixin.qq.com/s/6u5W7Lm81Wtczdzp5WCJWw
 
-**定义4**：
+DeepMind提出新型超参数最优化方法：性能超越手动调参和贝叶斯优化
 
-如果$$f_{ii}=1$$, 则称状态i为**常返**的，如果$$f_{ii}<1$$, 则称状态i为**非常返**的。
+https://mp.weixin.qq.com/s/0V8B-u5_bRM5Fu9oOAYjqw
 
-令$$u_i=\sum_{n=1}^\infty nf_{ii}^{(n)}$$，则$$u_i$$表示由i出发i，再返回i的**平均返回时间**。
+清华大学：通过在单纯形上软门限投影的加速随机贪心坐标下降
 
-如果$$u_i=\infty$$，则称i为**零常返**的。
+https://mp.weixin.qq.com/s/LuuvvL9yZ3ucXxRq0pZfsg
 
-常返态表征Markov链的极限分布。显然如果长期来看，状态i“入不敷出”的话，则其最终的极限概率为0。
+优化策略：Label Smoothing Regularization_LSR原理分析
 
-根据上面的定义，还可得到Markov链的三个推论：
+https://zhuanlan.zhihu.com/p/23866364
 
-**推论1**：有限状态的不可约非周期Markov链必存在平稳分布。
+从梯度下降到Hessian-Free优化
 
-**推论2**：若不可约Markov链的所有状态是非常返或零常返的，则不存在平稳分布。
+https://mp.weixin.qq.com/s/HPrjEdszBSvVoVS66W-Fjw
 
-**推论3**：若$$X_j$$是不可约的非周期的Markov链的平稳分布，则$$\lim_{n\to\infty}P_{ij}^{(n)}=X_j$$，即极限分布等于平稳分布。
+2017年深度学习优化算法研究亮点最新综述
 
-## 简易推导
+https://mp.weixin.qq.com/s/W06YcuGWalDbyUaZa_kZnQ
 
-![](/images/article/page_rank.jpg)
+2017年深度学习优化算法最新综述
 
-上图是一个Web图模型的示例。其中的节点表示网页，箭头表示网页链接。因此，从图论的角度来说，这是一个有向图。而从随机过程的角度，这也可以看做是一个Markov链。
+https://mp.weixin.qq.com/s/WQ6CxRS-v_y-7PnYY-1ffg
 
-上图中，A有两个入链B和C，则：
+在局部误差边界条件下的随机子梯度方法的加速
 
-$$PR(A)=PR(B)+PR(C)$$
+https://mp.weixin.qq.com/s/rOltA6fDzWmxcSyoHYqeSg
 
-然而图中除了C之外，B和D都不止有一条出链，所以上面的计算式并不准确：
+谷歌提出最新参数优化方法Adafactor，已在TensorFlow中开源
 
-$$PR(A) = \frac{PR(B)}{2} + \frac{PR(C)}{1}$$
+https://mp.weixin.qq.com/s/eTVPLSpZir4A49bhmWAibQ
 
-一般化，即：
+深度学习中的各种优化算法
 
-$$PR(A)= \frac{PR(B)}{L(B)}+ \frac{PR(C)}{L(C)}$$
+https://mp.weixin.qq.com/s/CQpIhVinDPhXpp70WhyYww
 
-其中，L表示外链个数。
+当前训练神经网络最快的方式：AdamW优化算法+超级收敛
 
-更一般化，可得：
+https://mp.weixin.qq.com/s/y3ThoC2A04q4uWiOsuhUJw
 
-$$PR(u) = \sum_{v \in B_u} \frac{PR(v)}{L(v)}$$
+腾讯AI Lab提出误差补偿式量化SGD：显著降低分布式机器学习的通信成本
 
-这里有两种异常情况需要处理。
+https://mp.weixin.qq.com/s/aBt0qXPHFvwSs-0MtJYKjQ
 
-1.互联网中不乏一些没有出链的网页，为了满足Markov链的收敛性，设定其对所有的网页（包括它自己）都有出链。
+一文告诉你Adam、AdamW、Amsgrad区别和联系，助你实现Super-convergence的终极目标
 
-2.互联网中一个网页只有对自己的出链，或者几个网页的出链形成一个循环圈。那么在不断地迭代过程中，这一个或几个网页的PR值将只增不减，显然不合理。
+https://mp.weixin.qq.com/s/aZlJNZsSv60ZZi2heGo_Mw
 
-对于这种情况，我们假定有一个确定的概率$$\alpha$$会输入网址直接跳转到一个随机的网页，并且跳转到每个网页的概率是一样的。即：
+一文简述深度学习优化方法——梯度下降
 
-$$PR(p_{i}) = \alpha \sum_{p_{j} \in M_{p_{i}}} \frac{PR(p_{j})}{L(p_{j})} + \frac{(1 - \alpha)}{N}$$
+https://mp.weixin.qq.com/s/DsmjjfInV_yPFWB2oSq-dA
 
-$$\alpha$$也叫阻尼系数，一般设定为0.85。
+取代学习率衰减的新方法：谷歌大脑提出增加Batch Size
 
-由Markov链的收敛性可知，无论每个网页的PR初始值如何设定，都不影响最终的PR值。
+https://mp.weixin.qq.com/s/jgOQGDqDKtbJXbAj3EpI9A
 
-在实际计算中，由于网页数量众多，而其中的链接关系相对较少，因此这个计算过程，实际上是一个巨维稀疏矩阵的凸优化问题，此处不再赘述。
+别用大批量mini-batch训练神经网络，用局部SGD！
 
-## TextRank
+https://zhuanlan.zhihu.com/p/45298186
 
-TextRank算法是PageRank算法在NLP领域的扩展，被广泛用于自动摘要和提取关键词。
+Matrix Factorization方法证明总结
 
-将原文本拆分为句子，在每个句子中过滤掉停用词（可选），并只保留指定词性的单词（可选）。由此可以得到句子的集合和单词的集合。
+https://mp.weixin.qq.com/s/0z4mt8iVk5gLRDwbhznV2g
 
-每个单词作为TextRank中的一个节点。假设一个句子依次由下面的单词组成：$$w_1,\dots,w_n$$。从中取出k个连续的单词序列，组成一个窗口。我们认为窗口中任意两个单词间存在一个无向边，从而构建出一个图模型。
+如何理解深度学习的优化？通过分析梯度下降的轨迹
 
-对该图模型应用PageRank算法，可得：
+https://mp.weixin.qq.com/s/5MI1J16sEkr4UR4rSrw1wA
 
-$$WS(V_i)=(1-d)+d\sum_{V_j \in In(V_i)}\frac{w_{ji}}{\sum_{V_k \in Out(V_j)}w_{jk}}WS(V_j)$$
+Michael Jordan新研究：采样可以比优化更快地收敛
 
-上式的W为权重（也可叫做结点相似度），一般采用以下定义：
+https://mp.weixin.qq.com/s/g8GLF0rf3IPAjRb9wZaS4w
 
-$$W(S_i,S_j)=\frac{|\{w_k|w_k\in S_i \& w_k\in S_j\}|}{\log(|S_i|)+\log(|S_j|)}$$
+神经网络的奥秘之优化器的妙用
 
-其中，$$\mid S_i\mid$$是句子i的单词数。
+https://mp.weixin.qq.com/s/i-fE4aISTJ0584aIHJ8R0Q
 
-上面说的是关键词的计算方法。计算自动摘要的时候，将句子定义为结点，并认为全部句子都是相邻的即可。自动摘要所用的权重函数，一般采用BM25算法。
+二阶优化！训练ImageNet仅需35个Epoch
 
-## 参考
+https://mp.weixin.qq.com/s/5KyODpSjkdYJ9q-itQDsAA
 
-http://www.cnblogs.com/rubinorth/p/5799848.html
+自Adam出现以来，深度学习优化器发生了什么变化？
 
-PageRank算法--从原理到实现
+https://mp.weixin.qq.com/s/3FSZOlA2sGQwiPj77ShTIQ
 
-http://blog.csdn.net/hguisu/article/details/7996185
+最优化算法鸟视解读
 
-PageRank算法
+https://mp.weixin.qq.com/s/4hSar7SuCjLkZUjuIfu1Lg
 
-http://www.docin.com/p-1231683333.html
+如何选择最适合你的学习率变更策略
 
-有限不可约马尔可夫链的非周期状态
+https://zhuanlan.zhihu.com/p/32923584
 
-http://www.docin.com/p-630952720.html
+Tensorflow中learning rate decay的奇技淫巧
 
-马尔科夫链
+https://mp.weixin.qq.com/s/qk3cw05ZdlYEKDGRG0fnLg
 
-https://mp.weixin.qq.com/s/J9OmqFzQK-GS95FjgAJkTw
+距离几何优化问题--从美国计算机教授追回被抢车辆谈起
 
-浅析PageRank算法
+https://mp.weixin.qq.com/s/rHkfb1pZhtzVjzYiTRB4WA
 
-https://mp.weixin.qq.com/s/fGaEYvo3WYKdzA3r8l6O3g
+交替方向乘子法（ADMM）的基本原理
 
-基于TextRank算法的文本摘要
+https://mp.weixin.qq.com/s/4uaaeZSXavbVuU8d1AZA6Q
 
-https://mp.weixin.qq.com/s/0ZNsP7sEfagZhjyaLZohSQ
+浅谈交替方向乘子法(ADMM)的经典使用
 
-程序员拒绝单曲循环：曲子只有5分钟，也得不重样播放450多天
+https://mp.weixin.qq.com/s/E3Iq8YpIZRZOk7SP-cu1xQ
 
-https://mp.weixin.qq.com/s/TyOYhId90N0Cm7nw98nXMg
+如何找到全局最小值？先让局部极小值消失吧
 
-PageRank、最小生成树：ML开发者应该了解的五种图算法
+https://mp.weixin.qq.com/s/el1E-61YjLkhFd6AgFUc7w
 
-# 社交网络
+拳打Adam，脚踢SGD：北大提出全新优化算法AdaBound
 
-## 信息传播模型
+https://mp.weixin.qq.com/s/TfrJ-rep-TIg345SXursbw
 
-### 感染模型
+为了围剿SGD大家这些年想过的那十几招
 
-SI、SIR等模型。
+https://mp.weixin.qq.com/s/9laU3EW0B64rwVb7so1BEA
 
-https://www.cnblogs.com/scikit-learn/p/6937326.html
+机器学习中的最优化算法总结
 
-基本的传染病模型：SI、SIS、SIR及其Python代码实现
+https://mp.weixin.qq.com/s/mylRodVvvzI3e0-9-fEzTw
 
-https://blog.csdn.net/robin_Xu_shuai/article/details/73699207
+深度研究自然梯度优化，从入门到放弃
 
-SI疾病传播模型实现
+https://mp.weixin.qq.com/s/scGkuMJ4lZULhmK69vWYpA
 
-### 影响力模型
+中国博士生提出最先进AI训练优化器RAdam，收敛快精度高，网友亲测：Adam可以退休了
 
-IC、LT等模型。
+https://mp.weixin.qq.com/s/010zXPYu36oLOoSkaA8YMg
 
-https://blog.csdn.net/asialee_bird/article/details/79673418
+RAdam优化器又进化：与LookAhead强强结合，性能更优速度更快（Ranger）
 
-社交网络影响力最大化
+https://mp.weixin.qq.com/s/g5mPfqxtEQBUvJQr0ORVBg
 
-http://cjc.ict.ac.cn/online/onlinepaper/wzj-201672182158.pdf
+可以丢掉SGD和Adam了，新的深度学习优化器Ranger：RAdam + LookAhead强强结合
 
-基于社交内容的潜在影响力传播模型
+https://mp.weixin.qq.com/s/OtmMKR0OWytcUgbCMrSc-A
 
-## 链接预测
+不是我们喜新厌旧，而是RAdam确实是好用，新的State of the Art优化器RAdam
 
-Link Prediction是指如何通过已知的网络节点以及网络结构等信息预测网络中尚未产生连边的两个节点之间产生链接的可能性。这种预测既包含了对未知链接（exist yet unknown links）的预测也包含了对未来链接（future links）的预测。该问题的研究在理论和应用两个方面都具有重要的意义和价值。
+https://www.zhihu.com/question/305694880
 
-http://www.docin.com/p-810499317.html
+为什么K-FAC这种二阶优化方法没有得到广泛的应用？
 
-社交网络中的链接预测研究
+https://mp.weixin.qq.com/s/etv5Ucyo2tiu64ZtUygz0A
 
-## 社区发现
+离线优化器
 
-社区发现（Community Detection）算法用来发现网络中的社区结构，也可以视为一种广义的聚类算法。
+https://mp.weixin.qq.com/s/zy5ALOInXHIh8LHmihu1UA
 
-https://blog.csdn.net/itplus/article/details/9286905
+在线优化器之FOBOS
 
-Community Detection算法
+https://mp.weixin.qq.com/s/7UhB8mSXQUfOPbDKqqg4rg
 
-https://www.zhihu.com/question/29042018
+非光滑优化的光滑化
 
-社区发现(Community detection)的经典方法有哪些？该领域最新的研究进展如何？
+https://zhuanlan.zhihu.com/p/92230537
 
-http://www.mapequation.org/index.html
+求解稀疏优化问题——半光滑牛顿方法
 
-这是一个复杂网络方面的网站，提供了很多算法的代码。例如infomap
+https://mp.weixin.qq.com/s/aLOd_W3juLuWaQeTdzAPjg
 
-https://www.cnblogs.com/nolonely/p/6262508.html
+数值优化（1）——引入，线搜索：步长选取条件
 
-社区发现算法总结（一）
+https://zhuanlan.zhihu.com/p/68748778
 
-https://www.cnblogs.com/nolonely/p/6268150.html
+指数移动平均（EMA）的原理
 
-社区发现算法总结（二）
+https://mp.weixin.qq.com/s/x7UQhSAiE9VJCzUSZfpytA
 
-https://sikasjc.github.io/2017/12/20/GN/
+大规模锥优化之Splitting Conic Solver(SCS)
 
-GN算法--复杂网络中社区发现与Python实现
+https://mp.weixin.qq.com/s/EmWRaAOTNYE0Maf6_r41oA
 
-https://www.cnblogs.com/LittleHann/p/9078909.html
+Adam那么棒，为什么还对SGD念念不忘？一个框架看懂深度学习优化算法
 
-社区发现算法-Fast Unfolding（Louvian）算法初探
+https://mp.weixin.qq.com/s/sXIOEGWdjE4_NWjVIe2d3Q
 
-http://blog.sina.com.cn/s/blog_617032070100er0r.html
+耶鲁大学等提出AdaBelief的新型优化器，速度快，训练稳，泛化强
 
-Infomap算法描述
+https://mp.weixin.qq.com/s/xeRBLkJTUs5wx2hZjyYeeQ
 
-https://mp.weixin.qq.com/s/S0vUBFCfizjVe_L4SIrGqQ
+那些年“号称”要超越Adam的优化器
 
-网络新闻真假难辨？机器学习来助你一臂之力
+# 时间序列分析
 
-https://mp.weixin.qq.com/s/2aKc4yM0b52X-SViGQycwA
+https://www.kaggle.com/thebrownviking20/everything-you-can-do-with-a-time-series/notebook
 
-大规模网络的社区检测和排序问题综述
+时间序列入门教程，从理论到业务实践，Kaggle kernels Master整理分享
 
-# 数据清洗
+https://mp.weixin.qq.com/s/V2cOgbq869TLChe1sWUQqg
 
-https://mp.weixin.qq.com/s/YrCC8CmP6UKuCmSdF2K_3g
+开源时间序列数据集整理
 
-数据挖掘中的数据清洗方法大全
+https://mp.weixin.qq.com/s/FRSe1mJTvk9U66ta-r9iCQ
 
-https://mp.weixin.qq.com/s/FHdo2DTapoTryA-hOM-y_w
+手把手教你用Python玩转时序数据，从采样、预测到聚类
 
-还在为数据清洗抓狂？这里有一个简单实用的清洗代码集
+https://mp.weixin.qq.com/s/7Y2we8gLidKMgnZCWnZURg
 
-https://mp.weixin.qq.com/s/r7ngZOM9tO-_OSfvs2aDJw
+时间序列预测方法综述
 
-数据清洗&预处理入门完整指南
+https://mp.weixin.qq.com/s/Q82YzANWDMkKWm5k2XmPkA
 
-https://mp.weixin.qq.com/s/r4ycLnjOl5hSPBMwKpnmsQ
+严谨解决5种机器学习算法在预测股价的应用
 
-如何打造高质量的NLP数据集
+https://mp.weixin.qq.com/s/iKM6zMSm1F2icjy79F9Hcg
+
+季节性的分析才不简单，小心不要在随机数据中也分析出季节性
+
+https://mp.weixin.qq.com/s/p8oN4xh-FHnay2eTsk6Gng
+
+基于高阶模糊认知图与小波变换的时间序列预测
+
+https://mp.weixin.qq.com/s/lmJk-iIzxxPmnZa6D8i_nw
+
+一文简述如何使用嵌套交叉验证方法处理时序数据
+
+https://mp.weixin.qq.com/s/05WAZcklXnL_hFPLZW9t7Q
+
+时间序列模型之相空间重构模型
+
+https://mp.weixin.qq.com/s/rIgjtILF7EtuBS5UWCEFcQ
+
+重大事件后，股价将何去何从？
+
+https://mp.weixin.qq.com/s/Y9d55KI64y-uRrWPRbDBzA
+
+Kaggle知识点：时序数据与Embedding
+
+https://mp.weixin.qq.com/s/DxRoTGtdrwqcjXL_ot57eg
+
+如何找到时序数据中线性的趋势
+
+https://mp.weixin.qq.com/s/iDUFr11-YX6oa6bLXWK3iQ
+
+时序特征挖掘的奇技淫巧
+
+https://mp.weixin.qq.com/s/S3xjk9QekWoni0eEvBhlLQ
+
+特征工程之处理时间序列数据
+
+https://mp.weixin.qq.com/s/15HXAIhmtYLbG3MjwEKDSQ
+
+从移动平均到指数平滑
+
+https://mp.weixin.qq.com/s/56so2p7a4wIgo38nVSR44A
+
+时间序列分解总结
+
+https://mp.weixin.qq.com/s/eHovfZiheQsv4Mb276su9w
+
+核密度估计和非参数回归
+
+https://mp.weixin.qq.com/s/6TpT1FH87esQWsUig0oS_Q
+
+手把手教你用Python进行时间序列分解和预测
+
+https://mp.weixin.qq.com/s/y6LL52Al3w5ErnpPX0A35Q
+
+开源新书《时间序列分析，数据/方法/应用》，6章110页pdf带你了解最新进展
+
+https://mp.weixin.qq.com/s/S3o4T8-CXVnS1laXE_g70w
+
+Python中的时间序列分解
+
+https://mp.weixin.qq.com/s/XImzWu0ZBe8Cgquc167iLA
+
+用于时间序列数据的泊松回归模型
+
+https://mp.weixin.qq.com/s/f8XG4tiYJUna2rMSo48Yyw
+
+漫谈时间序列预测
+
+https://mp.weixin.qq.com/s/OrCWlhfiJuOuc-0GChVWow
+
+如何将时间序列分解为周期序列和趋势序列的和？
+
+# 常凯申++
+
+https://mp.weixin.qq.com/s/XK9i7rvB8Wkski4kka1N0w
+
+国民党中央社笔下的欢乐魔幻孟良崮
+
+https://mp.weixin.qq.com/s/d65lVlvJywM-lCHiGKoLjw
+
+台湾有种兵，叫草莓兵
+
+https://mp.weixin.qq.com/s/VZEg4HEpXz8-pBUSAWCEgA
+
+张灵甫：一个被吹捧起来的名将
+
+https://mp.weixin.qq.com/s/QPHjUhj8_wzwu4BBTmI1yw
+
+淮海大决战，毛主席给杜聿明写了一封劝降信
+
+https://mp.weixin.qq.com/s/umirz887mpeMB1RhD3flOA
+
+国民党在逃跑前的大屠杀
+
+https://mp.weixin.qq.com/s/jrW-CJvX2ikYJS-x8KdhuQ
+
+冯玉祥最后的失败，部下纷纷倒戈，一代豪杰就此沦为历史的看客
+
+https://www.zhihu.com/answer/2067398198
+
+古代女人为何能容忍丈夫纳妾？
+
+https://mp.weixin.qq.com/s/E77i0I6pPNfWbPo-r61QZA
+
+台湾大佬，陈水扁的黑道盟友豹哥，死了
+
+https://www.zhihu.com/question/56175099
+
+如何评价孙元良？
+
+https://mp.weixin.qq.com/s/yIAEzugvMkZcLpxJvAvH3w
+
+台海最后一次空战！歼-6拼刺刀击落F-104，对面竟无耻称2:0大胜
+
+https://mp.weixin.qq.com/s/-gl0p05fKdV9dkXUsBmtRA
+
+马家军最惧怕的人，官至国民党中将，却投靠了共产党（吉鸿昌）
+
+https://mp.weixin.qq.com/s/axqjwH8jwBiZ1clgYh2lwA
+
+为什么都说国军不能打仗？
+
+https://mp.weixin.qq.com/s/Tdh736fhMRIfGHvGpGwyRg
+
+蒋介石“国军”战斗力低下成因之：器不如人

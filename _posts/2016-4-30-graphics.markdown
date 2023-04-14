@@ -4,6 +4,9 @@ title:  图像处理理论（一）——概述, 直方图, 二值化
 category: graphics 
 ---
 
+* toc
+{:toc}
+
 # 书籍
 
 《Digital Image Processing》，Rafael C. Gonzalez、Richard E. Woods著。
@@ -31,6 +34,10 @@ category: graphics
 https://mp.weixin.qq.com/s/rOgI5Vmj5i43RI1iHdSVXg
 
 866页《计算机视觉：原理，算法，应用，学习》最新第五版-附下载
+
+https://mp.weixin.qq.com/s/8ensybSIt8nedFtNZctKpA
+
+图像处理手册第七版，1032页pdf
 
 # 历史
 
@@ -221,6 +228,10 @@ $$T(i)=P(i)*L$$
 https://zhuanlan.zhihu.com/p/44918476
 
 直方图均衡化
+
+https://mp.weixin.qq.com/s/30YMHQNGYaY3K5SCBHCG2g
+
+没想到图像直方图有这么多应用场景
 
 # 二值化
 

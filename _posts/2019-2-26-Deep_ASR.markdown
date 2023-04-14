@@ -4,9 +4,12 @@ title:  深度语音识别（一）——概述, CTC
 category: speech 
 ---
 
+* toc
+{:toc}
+
 # 概述
 
-## end-to-end
+## end-to-end（E2E）
 
 《exploring neural transducers for end-to-end speech recognition》
 
@@ -16,23 +19,9 @@ category: speech
 | 对齐 | 单调，硬 | 单调，硬 | 不单调，软 |
 | 解码所需步数 | 输入长度 | 输入长度+输出长度 | 输出长度 |
 
-## 声纹识别
+最近还有一些基于Transformer的E2E方案。
 
-https://mp.weixin.qq.com/s/XUHS4o2G-iGuV9uuOmfBdQ
-
-为什么在说话人识别技术中，PLDA面对神经网络依然坚挺？
-
-https://mp.weixin.qq.com/s/bgIJMRZ64En3xMk3IGK-Vw
-
-如何基于迁移学习快速识别出讲话的人是谁？
-
-https://mp.weixin.qq.com/s/I2XU9u28S6LFoTY4kizoqw
-
-清华大学郑方：语音技术与身份信息的隐私保护
-
-https://mp.weixin.qq.com/s/YOupCjU06JhRCZNCbMvAgQ
-
-Google开源新AI模型，语音区分准确率92%创新高
+![](/images/img3/multilingual.png)
 
 # CTC
 
@@ -131,7 +120,7 @@ $$\sum_{(X,Y)\in \mathcal{D}}-\log p(Y\mid X)$$
 
 ![](/images/img2/CTC_3.png)
 
-这里如果把音节匹配换成掷骰子的例子，就可以看出这实际上和《机器学习（二十二）》中HMM所解决的第二个问题是类似的，而HMM的前向计算正是一种动态规划算法。动态规划算法可参见《机器学习（二十七）》。
+这里如果把音节匹配换成掷骰子的例子，就可以看出这实际上和《机器学习（三十）》中HMM所解决的第二个问题是类似的，而HMM的前向计算正是一种动态规划算法。动态规划算法可参见《强化学习（三）》。
 
 下面我们来介绍一下具体的计算方法。
 
@@ -224,8 +213,10 @@ CTC的输入/输出是many-to-one的，不支持one-to-one或one-to-many。比�
 Encoder-Decoder模型是sequence问题最常用的框架，它的数学形式为：
 
 $$
+\begin{array}\\
 H=encode(X)\\
 p(Y\mid X)=decode(H)
+\end{array}
 $$
 
 这里的H是模型的hidden representation。

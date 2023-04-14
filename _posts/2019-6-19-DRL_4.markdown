@@ -1,10 +1,115 @@
 ---
 layout: post
-title:  深度强化学习（四）——DDPG, PPO, IMPALA, Hierarchical RL, OpenAI
+title:  深度强化学习（四）——DDPG, PPO, IMPALA
 category: DRL 
 ---
 
+* toc
+{:toc}
+
+# A2C & A3C（续）
+
+## AC vs. GAN
+
+论文：
+
+《Connecting Generative Adversarial Networks and Actor-Critic Methods》
+
+| ![](/images/img3/AC_vs_GAN.png) | ![](/images/img3/AC_vs_GAN_2.png) |
+
+左图是GAN，右图是AC。
+
+| Method | GANs | AC |
+|:--:|:--:|:--:|
+| Freezing learning | yes | yes |
+| Label smoothing | yes | no |
+| Historical averaging | yes | no |
+| Minibatch discrimination | yes | no |
+| Batch normalization | yes | yes |
+| Target networks | n/a | yes |
+| Replay buffers | no | yes |
+| Entropy regularization | no | yes |
+| Compatibility | no | yes |
+
+## 参考
+
+https://zhuanlan.zhihu.com/p/51645768
+
+强化学习AC、A2C、A3C算法原理与实现！
+
+https://mp.weixin.qq.com/s/c4xoy4CJ_hsVdmGe1n3rTQ
+
+A3C——一种异步强化学习方法
+
+https://mp.weixin.qq.com/s/5kI72vg4JNAZWD93EYAUWA
+
+直观的强化学习算法(A2C)
+
+https://blog.csdn.net/u013236946/article/details/73195035
+
+A3C
+
+https://zhuanlan.zhihu.com/p/70360272
+
+最前沿：深度解读Soft Actor-Critic算法
+
+https://mp.weixin.qq.com/s/R308ohdMU8b7Ap4CLofvDg
+
+OpenAI开源算法ACKTR与A2C：把可扩展的自然梯度应用到强化学习
+
 # DDPG
+
+论文：
+
+《Continuous control with deep reinforcement learning》
+
+DDPG主要从：**PG->DPG->DDPG**发展而来。
+
+Policy Gradient的概念参见《强化学习（七）》，这里不再赘述。
+
+## DPG
+
+Deterministic Policy Gradient是Deepmind的D.Silver等在2014年提出的，即确定性的行为策略，每一步的行为通过函数$$\mu$$直接获得确定的值：
+
+$$a_{t} = \mu(s_{t} | \theta^{\mu})$$
+
+换句话说就是：**PG的action是采样出来的，而DPG是算出来的。**
+
+为何需要确定性的策略？简单来说，PG方法有以下缺点：
+
+- 即使通过PG学习得到了随机策略之后，在每一步行为时，我们还需要对得到的最优策略概率分布进行采样，才能获得action的具体值；而action通常是高维的向量，比如25维、50维，在高维的action空间的频繁采样，无疑是很耗费计算能力的；
+
+- 在PG的学习过程中，每一步计算policy gradient都需要在整个action space进行积分：
+
+$$\triangledown_{\theta} =  \int_{\mathcal{S}} \int_{A} \rho(s) \pi_{\theta}(a|s)Q^{\pi} (s,a)\mathrm{d}a \mathrm{d}s$$
+
+这个积分我们一般通过Monte Carlo 采样来进行估算，需要在高维的action空间进行采样，耗费计算能力。
+
+- 如果采取简单的Greedy策略，即每一步求解$$\arg\max_a Q(s,a)$$也不可行，因为在连续的、高维度的action空间，如果每一步都求全局最优解，太耗费计算性能。
+
+当然，反过来说，DPG也有一个缺点：无法探索环境。因此，在DPG的实际使用中，我们要采用其他策略来弥补这个缺点。
+
+## Noisy
+
+在介绍Rainbow的时候，我们提到了NoisyNet，但没有展开，这里可以说说Noisy在DRL中的作用。
+
+Noisy在DRL中的用法主要有：
+
+- Noise on Action。就是随机乱选。
+
+- Noise on Parameters。这种方法由于网络结构不变，参数也不是全换，因此相当于是有约束的随机选择，或者说是有系统的尝试。
+
+在DPG中，一般采用第二种方法。
+
+需要注意的是，参数的改变意味着策略的改变，因此，Noise在episode中需要保持不变，这样才能检测随机策略的真正效果。否则就是无目的的乱抖了。（类似帕金森症）
+
+产生噪声的方法有：
+
+- Independent Gaussian noise。
+
+- Factorised Gaussian noise。
+
+## DDPG
 
 Deepmind在2016年提出了DDPG（Deep Deterministic Policy Gradient）。从通俗角度看：**DDPG=DPG+A2C+Double DQN**。
 
@@ -78,7 +183,7 @@ https://zhuanlan.zhihu.com/p/27699682
 
 荐译一篇通俗易懂的策略梯度（Policy Gradient）方法讲解
 
-# PPO
+# PPO（Proximal Policy Optimization）
 
 PPO是2017年由OpenAI提出的一种基于随机策略的DRL算法，也是当前OpenAI的默认算法。
 
@@ -110,6 +215,10 @@ https://www.jianshu.com/p/f4d383b0bd4c
 
 TRPO与PPO实现
 
+https://mp.weixin.qq.com/s/09JCUUhsXKhvYGfXT2gDLg
+
+解读TRPO论文，深度强化学习结合传统优化方法
+
 https://bluefisher.github.io/2018/07/03/Proximal-Policy-Optimization-Algorithms/
 
 Proximal Policy Optimization Algorithms
@@ -121,6 +230,14 @@ Proximal Policy Optimization(PPO)算法原理及实现！
 https://morvanzhou.github.io/tutorials/machine-learning/reinforcement-learning/6-4-DPPO/
 
 Distributed Proximal Policy Optimization(DPPO)
+
+https://mp.weixin.qq.com/s/3uzx54YtqPeG6EDCVTE0YA
+
+24分钟让AI跑起飞车类游戏（Distributed PPO）
+
+https://mp.weixin.qq.com/s/sbE44zbyRpFyfQKYByBXzA
+
+深度强化学习之：PPO训练红白机1942
 
 # IMPALA
 
@@ -166,6 +283,14 @@ https://mp.weixin.qq.com/s/1zJyw67B6DqsHEJ3avbsfQ
 
 DeepMind推出分布式深度强化学习架构IMPALA，让一个Agent学会多种技能
 
+https://mp.weixin.qq.com/s/nfsm1v7MuI6mSpRb-rGBBQ
+
+谷歌推出分布式强化学习框架SEED，性能“完爆”IMPALA，可扩展数千台机器，还很便宜
+
+https://mp.weixin.qq.com/s/FQ7h0vixcztBUu70iFeYXw
+
+Google发布"强化学习"框架"SEED RL"
+
 # reward modeling
 
 ![](/images/img2/reward_modeling.jpg)
@@ -182,122 +307,6 @@ https://mp.weixin.qq.com/s/TIWnnCmVZnFQNH9Fig5aTw
 
 DeepMind发布新奖励机制：让智能体不再“碰瓷”
 
-# Hierarchical RL
+https://zhuanlan.zhihu.com/p/337759337
 
-![](/images/img3/Montezuma.png)
-
-之前已经提到，在DeepMind测试的40多款游戏中，有那么几款游戏无论怎么训练，结果都是0，也就是DQN完全无效。上面就是其中最知名的代表游戏《Montezuma’s Revenge》。这是一个解谜游戏，比如图中要拿到钥匙，然后去开门。这对我们而言是通过先验知识得到的。但是很难想象计算机如何仅仅通过图像感知这些内容。感知不到，那么这种游戏也就无从解决。
-
-论文：
-
-《Hierarchical Deep Reinforcement Learning: Integrating Temporal Abstraction and Intrinsic Motivation》
-
-![](/images/img3/HRL.png)
-
-该论文的主要思路就是，弄一个两个层级的神经网络，顶层用于决策，确定下一步的目标，底层用于具体行为。 
-
-这里的内在目标是人工确定的，因此智能程度不高，但是比较实用。
-
-其他算法：
-
-FuN (FeUdal Networks for Hierarchical Reinforcement Learning)
-
-HIRO (Data Efficient Hierarchical Reinforcement Learning)
-
-HAC (Learning Multi-Level Hierarchies with Hindsight)
-
-参考：
-
-https://zhuanlan.zhihu.com/p/78098982
-
-Hierarchical IL/RL(ICML 2018)
-
-https://blog.csdn.net/zhkmxx930xperia/article/details/87742722
-
-Integrating Temporal Abstraction and Intrinsic Motivation
-
-https://blog.csdn.net/songrotek/article/details/51384752
-
-DRL前沿之：Hierarchical Deep Reinforcement Learning
-
-https://mp.weixin.qq.com/s/IYyGgnoXZm6YfamLejqoNQ
-
-深度强化学习试金石：DeepMind和OpenAI攻克蒙特祖玛复仇的真正意义
-
-https://mp.weixin.qq.com/s/iBWjobr9srhB3MTiE_Wwmg
-
-史上最强Atari游戏通关算法：蒙特祖玛获分超过200万！
-
-# OpenAI
-
-OpenAI，由诸多硅谷大亨（Elon Musk等）联合建立的人工智能非营利组织。
-
-官网：
-
-https://openai.com/
-
-github：
-
-https://github.com/openai
-
-## Baselines
-
-若干经典RL算法的实现，包括A2C、DQN等。
-
-代码：
-
-https://github.com/openai/baselines
-
-## Gym
-
-Openai gym是一个用于开发和比较强化学习（reinforcement learning，RL）算法的工具包，与其他的数值计算库兼容，如tensorflow或者theano库。现在主要支持的是python语言，以后将支持其他语言。
-
-官网：
-
-https://gym.openai.com/
-
-{% highlight bash %}
-sudo apt install libffi-dev swig
-git clone https://github.com/openai/gym 
-cd gym
-pip install -e . # minimal install
-pip install -e .[all] # all install
-{% endhighlight %}
-
-这里选择minimal install就可以了，all install需要安装MuJoCo，而后者是收费软件。
-
-和Gym配套的还有一个算法库：
-
-https://github.com/openai/baselines
-
-当然，看名字也知道这只是一个简单的算法库。
-
-参考：
-
-http://tech.163.com/16/0510/09/BMMOPSCR00094OE0.html
-
-马斯克的AI野心——OpenAI Gym系统深度解析
-
-https://mp.weixin.qq.com/s/KK1gwDW2EyptZOiuFjyAlw
-
-OpenAI发布强化学习环境Gym Retro：支持千种游戏
-
-https://blog.csdn.net/jinzhuojun/article/details/77144590
-
-常用增强学习实验环境 I (MuJoCo, OpenAI Gym, rllab, DeepMind Lab, TORCS, PySC2)
-
-https://blog.csdn.net/jinzhuojun/article/details/78508203
-
-常用增强学习实验环境 II (ViZDoom, Roboschool, TensorFlow Agents, ELF, Coach等)
-
-https://mp.weixin.qq.com/s/0oVG7zMi08dzMQrk43T3mw
-
-像训练Dota2一样训练真实机器人？Gibson Environment环境了解一下
-
-https://mp.weixin.qq.com/s/_A0q8DFAsIclaofVgZfjMA
-
-定制股票交易OpenAI Gym强化学习环境
-
-https://blog.csdn.net/gsww404/article/details/80627892
-
-OpenAI-baselines的使用方法
+BeBold：一种新的强化学习探索准则

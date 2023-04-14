@@ -1,10 +1,45 @@
 ---
 layout: post
 title:  DL参考资源（四）
-category: resource 
+category: DL & NLP resource 
 ---
 
+* toc
+{:toc}
+
 # DL参考资源
+
+## 缺陷检测（续）
+
+https://mp.weixin.qq.com/s/MjG2YZWe80sN5eqWpQfxOw
+
+基于深度学习的表面缺陷检测方法综述
+
+https://mp.weixin.qq.com/s/15iowD4AocB6Ut_j8kGHeg
+
+一种先分割后分类的两阶段同步端到端缺陷检测方法
+
+https://mp.weixin.qq.com/s/Jb4UgRB1kC6c2_CzSQDKeg
+
+使用计算机视觉的方法在钢铁平面上检测焊接缺陷
+
+## 光神经网络
+
+https://mp.weixin.qq.com/s/EdDMj-fH2jXA222qyWvcuQ
+
+3D打印的深度神经网络，光速执行AI运算
+
+https://mp.weixin.qq.com/s/5zt8UIpNBcgNZpwHHJj68Q
+
+光学CNN层替换传统CNN层，超省电
+
+https://mp.weixin.qq.com/s/IheyYAC1yIigYOW-gtc5Eg
+
+Science重磅！用光速实现深度学习，跟GPU说再见
+
+https://mp.weixin.qq.com/s/ENYX87SMlgv30x08iYFQIw
+
+几乎零能耗零延迟！UCLA科学家发明光衍射神经网络，登上Science
 
 ## 参考
 
@@ -168,17 +203,13 @@ https://mp.weixin.qq.com/s/hE-2GLo1SNdIMY858_HuaQ
 
 化秋毫为波澜:运动放大算法
 
-https://mp.weixin.qq.com/s/y0SAI0f3w42z-nnoorFoEQ
-
-共享空间学习共有特征的异源图像匹配
-
 https://mp.weixin.qq.com/s/M7w7tMVd23YToIW7DypYjA
 
 用DL实现Bug自动归类：微软研究院提出DBRNN-A
 
 https://mp.weixin.qq.com/s/7dpYRLKpRn0MSa5bz_sBDg
 
-从傅里叶分析角度解读深度学习的泛化能力
+从傅立叶分析角度解读深度学习的泛化能力
 
 https://mp.weixin.qq.com/s/iZZHmxGFHQHk1rlzMzDQcg
 
@@ -215,10 +246,6 @@ https://mp.weixin.qq.com/s/CjYVCqs21pwGTuYYzzzPiQ
 https://mp.weixin.qq.com/s/K9j4tX6_U8rdtItKntJkVQ
 
 基于关系网络的视觉建模：有望替代卷积神经网络
-
-https://mp.weixin.qq.com/s/-ZhYXTIiEFHd-G-NZEqlcA
-
-深度学习可解释性！深度taylor分解
 
 https://mp.weixin.qq.com/s/Ou8a9ZkluYdSJhw-y7_jQQ
 
@@ -259,3 +286,39 @@ https://mp.weixin.qq.com/s/mPDRmo5XM1JkCBP8fAkYqA
 https://mp.weixin.qq.com/s/g7o60Ypri0J1e65cZQspiA
 
 探索权重无关神经网络
+
+https://mp.weixin.qq.com/s/VuCWmi8M62zpSciiqGx03A
+
+AI攻破高数核心，1秒内精确求解微分方程、不定积分，性能远超Matlab
+
+https://mp.weixin.qq.com/s/HQKBwPHzO0r54Qp8F74jUw
+
+只看影子就能还原视频，MIT新算法让摄像头无死角
+
+https://mp.weixin.qq.com/s/DlRbHavllHghzi-Xr5Y1Hg
+
+深度学习时代数据库：挑战与机会
+
+https://mp.weixin.qq.com/s/4hL6wWQ73icEWHfK6QKSMw
+
+频域学习，Learning in the Frequency Domain
+
+https://mp.weixin.qq.com/s/sRGdNquZyt7VbvuKL5JXYQ
+
+不仅搞定“梯度消失”，还让CNN更具泛化性：港科大开源深度神经网络训练新方法
+
+https://mp.weixin.qq.com/s/PGZiJuZ2Dg6Vhkv55vfxKQ
+
+对损失信息进行建模，实现信号处理高保真还原
+
+https://mp.weixin.qq.com/s/eeubsLVDCGcSiEC0nJekWA
+
+Adaptive Label Smoothing方法让模型结果更加鲁棒
+
+https://mp.weixin.qq.com/s/0Y3x6b6L3T4kOYNUXOYDIA
+
+噪声样本优秀论文综述（2017-2020）
+
+https://mp.weixin.qq.com/s/04oEiolE0Qnm7l7H0r8lzw
+
+深度学习模型如何处理大小可变的输入

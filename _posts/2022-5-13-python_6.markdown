@@ -1,0 +1,400 @@
+---
+layout: post
+title:  Python（六）, IDE, Vim
+category: language 
+---
+
+* toc
+{:toc}
+
+# Python
+
+https://mp.weixin.qq.com/s/a3YTmQMfpnviHnidXrhYtg
+
+这17个骚操作你都Ok吗
+
+https://zhuanlan.zhihu.com/p/41293278
+
+把python翻译成C++
+
+https://mp.weixin.qq.com/s/XV4LOBM1pO0N8oShZl7MzQ
+
+手把手教你用Python设计一个命令行界面
+
+https://mp.weixin.qq.com/s/b19SLduKoiOIeE5CA3ZOjg
+
+Python标准库之LRU缓存实现学习
+
+https://zhuanlan.zhihu.com/p/149240769
+
+Python自动化测试——必会模块 Unittest
+
+https://mp.weixin.qq.com/s/zABXQksUX6le8zWJeWUQXw
+
+Python的`__name__`变量，到底是个什么东西？
+
+https://mp.weixin.qq.com/s/FtlAkInyXgvUxDnSCikTIw
+
+全面深入理解Python面向对象编程
+
+https://blog.csdn.net/lys_828/article/details/106489371
+
+字符串模糊匹配及在实战中的应用（FuzzyWuzzy库）
+
+https://mp.weixin.qq.com/s/Ln5EPqbdNjy3HrVM7Wwe2g
+
+Heartrate：一个牛逼的工具，Python执行实时可视化
+
+https://mp.weixin.qq.com/s/J8IHOdUevyn9YS09D8Ou-g
+
+聊聊Python发送邮件的几种方式
+
+https://mp.weixin.qq.com/s/L0FoYh1npy-3rwRQWcj71g
+
+五大自动化测试的Python框架
+
+https://mp.weixin.qq.com/s/Oq316PWN10FBWzv-X26pAg
+
+高性能Python CPU Memery分析器
+
+https://mp.weixin.qq.com/s/wr18ylCJyJOX83BhbvGXng
+
+13个Python开发者必知的Python GUI库
+
+https://mp.weixin.qq.com/s/S_mIspLOrmj8ny0VHP52ZA
+
+Python高级技巧：lazy property
+
+https://mp.weixin.qq.com/s/QWH9qhKzECX-1rqDLfZyhw
+
+如何加速Python代码？
+
+https://mp.weixin.qq.com/s/OT9yRMFsNowXBbwKqmzP-Q
+
+一起来尝试借助哈密顿环自动玩贪吃蛇小游戏呀~
+
+哈密顿图：由指定的起点前往指定的终点，途中经过所有其他节点且只经过一次。
+
+https://segmentfault.com/a/1190000000414339
+
+一行Python代码实现并行
+
+https://mp.weixin.qq.com/s/nNGTVQDt9TxHeIKOyxh1Jw
+
+WTF Python：盘点鲜为人知的Python特性
+
+https://mp.weixin.qq.com/s/mANrN9k5Rjf1zQwhHvWUEw
+
+​解密Python中的对象模型
+
+https://mp.weixin.qq.com/s/zQldWMBK5LWDFMyLbobK5w
+
+抖音超火的九宫格视频是如何生成的
+
+https://mp.weixin.qq.com/s/muGLG9WJNsZqZmGuN0u5RQ
+
+Python+Dash快速web应用开发——基础概念篇
+
+https://mp.weixin.qq.com/s/rMrY-M60jhdfDnX6LYOlCA
+
+Python+Dash快速web应用开发——页面布局篇
+
+https://mp.weixin.qq.com/s/MzORtWN-mSmY9N5Ps5m5Mw
+
+Python+Dash快速web应用开发：回调交互篇（上）
+
+https://mp.weixin.qq.com/s/_o5upbRqjADpCkZ0q0ZwkA
+
+Python+Dash快速web应用开发：回调交互篇（中）
+
+https://mp.weixin.qq.com/s/81HauaX6fWstbUfgp3pJvw
+
+Python+Dash快速web应用开发：回调交互篇（下）
+
+https://mp.weixin.qq.com/s/RlJ5Y6xJ-8NfDW7oSZlYbw
+
+深入Python解释器源码，我终于搞明白了字符串驻留的原理！
+
+https://mp.weixin.qq.com/s/LeTNcQCT4mYu6HSlGoHbzQ
+
+手机最强Python编程神器，在手机上运行Python不再是梦！
+
+https://mp.weixin.qq.com/s/5xs1ivkrUAP_Rr9P-EMc5g
+
+代码优化指南：人生苦短，我用Python。这篇blog主要介绍了如何追踪Python脚本的CPU使用情况。
+
+https://mp.weixin.qq.com/s/HGH2e_0ocHv2VWsjOje9BQ
+
+程序员必知的Python陷阱与缺陷列表
+
+http://blog.csdn.net/linda1000/article/details/8315892
+
+单引号、双引号和三双引号的区别
+
+https://mp.weixin.qq.com/s/RP2j-PQMsAIXOK5u4zt3ZA
+
+Python加速运行技巧
+
+https://mp.weixin.qq.com/s/7sQ6p0IDWvttbvv_c71Etg
+
+Python单元测试详解
+
+https://mp.weixin.qq.com/s/TMcj-X5SmOqOgh6Ljkb3sw
+
+模型热更新小记
+
+https://mp.weixin.qq.com/s/czqO4Lo1Jt9zqg2UKNlLYg
+
+手把手教你用Python创建微信聊天机器人
+
+https://mp.weixin.qq.com/s/nT4GLtDtJ1MUg8TBHBDf_A
+
+足不出户也能放风筝？OpenGL一招搞定！
+
+https://mp.weixin.qq.com/s/7KdH2Zx3ugK6DXn5SYewAw
+
+盘点Python加密解密模块hashlib的7种加密算法
+
+https://mp.weixin.qq.com/s/EWnXlinxEJgzdRGJH4bFTQ
+
+只需一行代码，就能导入所有的Python库？
+
+https://mp.weixin.qq.com/s/egThaVvcgV_-opocwxWOVA
+
+让Python代码简洁的实用技巧
+
+https://mp.weixin.qq.com/s/xamO4TZS90FtZMcn398stQ
+
+推荐3个Python文本终端GUI框架
+
+# IDE
+
+http://pypl.github.io/IDE.html
+
+这个网站提供了常用IDE的流行排名
+
+## Scintilla
+
+Scintilla是Neil Hodgson出于对Richedit控件的失望，所开发的替代品（1990）。它是Notepad++等编辑器的基础控件。
+
+官网：
+
+https://www.scintilla.org
+
+Scintilla官方还推出了一个名叫SciTE的编辑器，用于展示Scintilla的新功能。
+
+## tree-sitter
+
+tree-sitter是一个多语言的语法分析器。
+
+官网：
+
+https://tree-sitter.github.io/
+
+参考：
+
+https://blog.csdn.net/weixin_43646592/article/details/119895482
+
+tree-sitter-编程语言解析工具包
+
+## LSP
+
+language server protocol是一种跨编辑器的语言支持实现规范。它由微软提出，目前vscode、vim、atom都已经支持了这个规范。
+
+在过去，每个IDE遇到一门全新的语言，往往都需要重新实现一次基本功能：对于流行的语言来说还好，因为IDE厂商有动力提供支持。但对于一门全新的语言，往往需要语言的发明人自己实现各种IDE的语言支持。由于各个IDE的接口不同，需要将语言支持在各个IDE中重新移植一遍。
+
+有了LSP规范后，语言支持插件开发者只需要编写一次，就可以很快地在IDE之间移植代码了。
+
+官网：
+
+https://microsoft.github.io/language-server-protocol/
+
+这里有一个社区维护的LSP Server列表：
+
+https://langserver.org/
+
+类似的还有DAP(Debug Adapter Protocol)，用于IDE与具体调试器通信。
+
+BSP(Build Server Protocol)，处于IDE和构建工具之间，用于统一构建功能的通信协议。
+
+它们都是通过协议去统一相同功能在不同工具之间的差异性。
+
+参考：
+
+https://blog.csdn.net/weixin_38358700/article/details/121919353
+
+DAP调试适配协议
+
+https://blog.csdn.net/weixin_38358700/article/details/121919581
+
+BSP构建服务协议
+
+## Source Insight
+
+Shift+F8：高亮选中的字
+
+http://www.cnblogs.com/bluestorm/archive/2012/10/28/2743792.html
+
+Source Insight常用设置和快捷键大全
+
+## Eclipse
+
+### 分栏显示
+
+1.拖住一个文件不放，直到鼠标图案发生改变。
+
+2.如果需要左右显示两个文件，向左右移动鼠标，如果需要上下显示两个文件，上下移动。这里的移动需要移出编辑窗口范围。
+
+## Other
+
+http://dcloud.io/index.html
+
+HBuilder，一个html编辑的IDE。
+
+## 十六进制编辑器
+
+https://mp.weixin.qq.com/s/Bq6p3DUePBAUlw1kek86QA
+
+开源十六进制编辑器登顶GitHub热榜（ImHex）
+
+https://zhuanlan.zhihu.com/p/59119723
+
+Linux上最好的十六进制编辑器
+
+# Vim
+
+## 模式
+
+普通模式：使用vim打开一个文件时默认模式，也叫命令模式，允许用户通过各种命令浏览代码、滚屏等操作。
+
+插入模式：也可以叫做编辑模式，在普通模式下敲击 i 、a 或 o 就进入插入模式，允许用户通过键盘输入、编辑。
+
+命令行模式：在普通模式下，先输入冒号:，接着输入命令，就可以通过配置命令对vim进行配置了，如改变颜色主题、显示行号等，这些配置命令也可以保存到/etc/vim/vimrc配置文件中，每次打开默认配置执行。
+
+可视化模式：在普通模式下敲击前盘上的 v 键，就进入可视化模式，然后移动光标就可以选中一块文本，常用来完成文本的复制、粘贴、删除等操作。
+
+替换模式：如果我们想修改某个字符，不需要先进入插入模式，删除，然后再输入新的字符，直接在普通模式下，敲击R键就可以直接替换。
+
+EX模式：类似于命令行模式，可以一次运行多个命令。
+
+用户统一使用ESC键返回到普通模式。
+
+## 常用操作
+
+`dd`: 删除整行
+
+`/`是向下查找，而`?`是向上查找，n是继续查找。
+
+`u`——撤销上一个编辑操作
+
+`:set nu`: 显示行号
+
+`:行号`: 跳转到行号
+
+`yy`: 复制整行
+
+`p`: 粘贴
+
+## 分栏显示
+
+`vim -on file1 file2 ...`：上下分屏。n为分屏个数。
+
+`vim -On file1 file2 ...`：左右分屏。
+
+`:new`——创建一个空白分栏界面，和原文件窗口上下排列。
+
+`:split`——将当前文件分成上下两栏显示。
+
+`:vnew`和`:vsplit`——功能相同，不同的是新窗口是左右排列的。
+
+`:only`——取消分屏。
+
+按下ctrl+w之后再利用方向键或者h,j,k,l可以选择当前激活的窗口。
+
+把光标移动到下一个的屏：ctrl+w w
+
+把光标移动到上一个的屏：ctrl+w p
+
+关闭其他窗口：Ctrl + w, o
+
+关闭当前屏：Ctrl+w，c
+
+`:vertical diffsplit file2`——垂直对比两个文档。
+
+## NeoVim
+
+NeoVim是Vim的派生品，以及最有力的竞争者。
+
+## 参考
+
+https://mp.weixin.qq.com/s/5694PDHy9BeoL8qy31MaxQ
+
+如何用vim格式化代码
+
+https://mp.weixin.qq.com/s/QpJWyLY5AyrXGF-j7LYTGg
+
+1700页数学笔记火了！全程敲代码，速度飞快易搜索，硬核小哥教你上手LaTeX+Vim
+
+https://mp.weixin.qq.com/s/tvn2SKXyrZZRGDF6-Myx3A
+
+Vim激荡30年发展史
+
+https://mp.weixin.qq.com/s/c9KAOJ6Z_5zjwI7C3OMq4w
+
+5分钟学会Vim分屏操作方方面面
+
+https://www.runoob.com/linux/linux-vim.html
+
+Linux vi/vim
+
+https://zhuanlan.zhihu.com/p/37352209
+
+VimScript五分钟入门
+
+# Latex+
+
+## 参考
+
+https://zhuanlan.zhihu.com/p/508559139
+
+Latex简明速查手册
+
+https://www.zhihu.com/question/40763253
+
+如何在Word和PowerPoint中优雅地插入Latex公式？
+
+https://mp.weixin.qq.com/s/3RtKAT3WE8P2YIZRA2dZ3A
+
+LaTeX的历史：图灵奖得主1977年开启的计划，引发学术圈重大变革
+
+https://mp.weixin.qq.com/s/KMWhz5_EXWoxgmHUek6zBA
+
+不会用latex写公式？看看这个python转latex的库（python2latex）
+
+https://www.zhihu.com/question/65508676
+
+怎么在LaTeX中排版Python代码？
+
+https://mp.weixin.qq.com/s/LumDQL9VKTHWK3RkOhKFcg
+
+1行代码搞定Latex公式编写，这个4.6M的Python小插件，堪称论文必备神器（handcalcs）
+
+https://zhuanlan.zhihu.com/p/268332132
+
+知乎公式编辑器的高级“玩法”
+
+https://mp.weixin.qq.com/s/E4EECj0QQ90ElfPqOL80eg
+
+Python编辑公式竟可以如此简单（latexify_py）
+
+https://zhuanlan.zhihu.com/p/38178015
+
+使用VSCode编写LaTeX
+
+https://zhuanlan.zhihu.com/p/194831235
+
+Knuth-Plass换行算法
+
+https://mp.weixin.qq.com/s/kGVLsqstajyrZ_cfkFegrA
+
+Latex数学排版简洁指南

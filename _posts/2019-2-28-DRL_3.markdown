@@ -1,10 +1,113 @@
 ---
 layout: post
-title:  深度强化学习（三）——A2C & A3C
+title:  深度强化学习（三）——DQN进化史, A2C & A3C
 category: DRL 
 ---
 
-# DQN进化史（续）
+* toc
+{:toc}
+
+# Deep Q-learning Network（续）
+
+## 参考
+
+https://zhuanlan.zhihu.com/p/21262246
+
+DQN从入门到放弃1 DQN与增强学习
+
+https://zhuanlan.zhihu.com/p/21292697
+
+DQN从入门到放弃2 增强学习与MDP
+
+https://zhuanlan.zhihu.com/p/21340755
+
+DQN从入门到放弃3 价值函数与Bellman方程
+
+https://zhuanlan.zhihu.com/p/21378532
+
+DQN从入门到放弃4 动态规划与Q-Learning
+
+https://zhuanlan.zhihu.com/p/21421729
+
+DQN从入门到放弃5 深度解读DQN算法
+
+https://zhuanlan.zhihu.com/p/21547911
+
+DQN从入门到放弃6 DQN的各种改进
+
+https://zhuanlan.zhihu.com/p/21609472
+
+DQN从入门到放弃7 连续控制DQN算法-NAF
+
+https://zhuanlan.zhihu.com/p/56023723
+
+通过Q-learning深入理解强化学习（上）
+
+https://mp.weixin.qq.com/s/0HukwNmg3k-rBrIBByLhnQ
+
+深度Q学习：一步步实现能玩《毁灭战士》的智能体
+
+https://mp.weixin.qq.com/s/x-qCA0TzoVUtZ8VAf8ey0A
+
+深度Q学习介绍
+
+https://mp.weixin.qq.com/s/SqU74jYBrjtp9L-bnBuboA
+
+教你完美实现深度强化学习算法DQN
+
+https://mp.weixin.qq.com/s/Vdt5h8APAFoeVxFYKlywpg
+
+用DeepMind的DQN解数学题，准确率提升15%
+
+https://mp.weixin.qq.com/s/RH4ifA46njdC7fyRI9kVMg
+
+深度Q网络与视觉格斗类游戏
+
+https://mp.weixin.qq.com/s/uymKtR_7IgMpfXcekfkCDg
+
+从强化学习基本概念到Q学习的实现，打造自己的迷宫智能体
+
+https://mp.weixin.qq.com/s/9ZvaZQ1yumhr75okBxNyeA
+
+优化强化学习Q-learning算法进行股市交易
+
+https://mp.weixin.qq.com/s/QkRdv0xMoqwaXsNAMAHR0A
+
+一图尽展视频游戏AI技术，DQN无愧众算法之鼻祖
+
+https://zhuanlan.zhihu.com/p/35882937
+
+强化学习——从Q-Learning到DQN到底发生了什么？
+
+https://mp.weixin.qq.com/s/D2a06cTOIqXozwQ2x7M2ew
+
+Python还能实现哪些AI游戏？
+
+# DQN进化史
+
+![](/images/img2/DQN.jpg)
+
+上图引用自论文：
+
+《Deep Learning for Video Game Playing》
+
+该论文最早发表于2017年，但是作者每年都会更新论文的内容。
+
+![](/images/img3/DRL.png)
+
+---
+
+在Nature DQN出来之后，肯定很多人在思考如何改进它。那么DQN有什么问题呢？
+
+- 目标Q值的计算准确吗？全部通过max Q来计算有没有问题？
+
+- 随机采样的方法好吗？按道理不同样本的重要性是不一样的Q值代表状态，动作的价值，那么单独动作价值的评估会不会更准确？
+
+- DQN中使用$$\epsilon$$-greedy的方法来探索状态空间，有没有更好的做法？
+
+- 使用卷积神经网络的结构是否有局限？加入RNN呢？
+
+- DQN无法解决一些高难度的Atari游戏比如《Montezuma's Revenge》，如何处理这些游戏？
 
 - DQN训练时间太慢了，跑一个游戏要好几天，有没有办法更快？
 
@@ -14,17 +117,33 @@ category: DRL
 
 ## Double DQN
 
-$$L=\left(\color{blue}{r+\gamma Q(s',\color{red}{\mathop{\arg\max}_{a'}Q(s',a',w)},w^-)}-Q(s,a,w)\right)^2$$
+$$L=\left({\color{blue}{r+\gamma Q(s',{\color{red}{\mathop{\arg\max}_{a'}Q(s',a',w)}},w^-)}}-Q(s,a,w)\right)^2$$
 
 Nature DQN的两个Q网络分离的还不够彻底，Double DQN用当前的Q网络来选择动作（公式中红色部分所示），而用目标Q网络来计算目标Q。
+
+参考：
+
+https://mp.weixin.qq.com/s/NkWj1bV7uMjACxAvxhPJXw
+
+DQN系列(1)：Double Q-learning
+
+https://mp.weixin.qq.com/s/WGxodXAxcgsz61VnuSF5aQ
+
+DQN系列(2): Double DQN算法原理与实现
 
 ## Prioritised replay
 
 采样优先级采用目标Q值与当前Q值的差值来表示：
 
-$$| \color{blue}{r+\gamma \max_{a'}Q(s',a',w^-)}-Q(s,a,w) |$$
+$$| {\color{blue}{r+\gamma \max_{a'}Q(s',a',w^-)}}-Q(s,a,w) |$$
 
 优先级越高，那么采样的概率就越高。
+
+参考：
+
+https://mp.weixin.qq.com/s/qPk3hbFDcuWIanddvBAUNA
+
+优先级经验回放(Prioritized Experience Replay)论文阅读、原理及实现
 
 ## Dueling Network
 
@@ -37,6 +156,12 @@ Dueling Network将Q网络分成了两个通道：
 $$Q(s,a)=V(s,v)+A(s,a,w)$$
 
 ![](/images/img3/DuelDQN.png)
+
+参考：
+
+https://mp.weixin.qq.com/s/7iSjytu3Dk5BsQwnfsTmYw
+
+北邮X滴滴：基于最小车队的动态车辆调度
 
 ## NAF
 
@@ -58,7 +183,7 @@ Atari游戏：高维输入，低维离散输出。
 
 - 只弄一个神经网络，既能输出动作也能输出Q值。这就是本节所要使用的方法。
 
-在《强化学习（八）》中，我们已经指出advantage function不改变策略梯度，但能有效约束variance。这里沿用了A函数定义：
+在[《强化学习（八）》](/rl/2019/10/01/RL_8.html#advantage_function)中，我们已经指出advantage function不改变策略梯度，但能有效约束variance。这里沿用了A函数定义：
 
 $$A(s,a)=Q(s,a)-V(s)$$
 
@@ -161,6 +286,9 @@ https://mp.weixin.qq.com/s/snNvN4FFP0VEZwDA0TAp1w
 
 强化学习训练Chrome小恐龙Dino Run：最高超过4000分
 
+https://mp.weixin.qq.com/s/35QHMm7Yt-55O631E2BY3A
+
+深度强化学习之：DQN训练超级玛丽闯关
 
 # A2C & A3C
 
@@ -182,7 +310,7 @@ Advantage Actor-Critic（A2C）：advantage function + AC
 
 Asynchronous Advantage Actor-Critic（A3C）：Async + A2C
 
-advantage function的含义参见《强化学习（八）》，这里谈谈A3C。
+advantage function的含义参见[《强化学习（八）》](/rl/2019/10/01/RL_8.html#advantage_function)，这里谈谈A3C。
 
 ## A3C
 
@@ -209,103 +337,3 @@ https://github.com/NVlabs/GA3C
 ![](/images/img3/GA3C.png)
 
 这是GA3C的网络结构图。
-
-## AC vs. GAN
-
-论文：
-
-《Connecting Generative Adversarial Networks and Actor-Critic Methods》
-
-| ![](/images/img3/AC_vs_GAN.png) | ![](/images/img3/AC_vs_GAN_2.png) |
-
-左图是GAN，右图是AC。
-
-| Method | GANs | AC |
-|:--:|:--:|:--:|
-| Freezing learning | yes | yes |
-| Label smoothing | yes | no |
-| Historical averaging | yes | no |
-| Minibatch discrimination | yes | no |
-| Batch normalization | yes | yes |
-| Target networks | n/a | yes |
-| Replay buffers | no | yes |
-| Entropy regularization | no | yes |
-| Compatibility | no | yes |
-
-## 参考
-
-https://zhuanlan.zhihu.com/p/51645768
-
-强化学习AC、A2C、A3C算法原理与实现！
-
-https://mp.weixin.qq.com/s/c4xoy4CJ_hsVdmGe1n3rTQ
-
-A3C——一种异步强化学习方法
-
-https://mp.weixin.qq.com/s/5kI72vg4JNAZWD93EYAUWA
-
-直观的强化学习算法(A2C)
-
-https://blog.csdn.net/u013236946/article/details/73195035
-
-A3C
-
-https://zhuanlan.zhihu.com/p/70360272
-
-最前沿：深度解读Soft Actor-Critic算法
-
-https://mp.weixin.qq.com/s/R308ohdMU8b7Ap4CLofvDg
-
-OpenAI开源算法ACKTR与A2C：把可扩展的自然梯度应用到强化学习
-
-# DDPG
-
-论文：
-
-《Continuous control with deep reinforcement learning》
-
-DDPG主要从：**PG->DPG->DDPG**发展而来。
-
-Policy Gradient的概念参见《强化学习（七）》，这里不再赘述。
-
-## DPG
-
-Deterministic Policy Gradient是Deepmind的D.Silver等在2014年提出的，即确定性的行为策略，每一步的行为通过函数$$\mu$$直接获得确定的值：
-
-$$a_{t} = \mu(s_{t} | \theta^{\mu})$$
-
-换句话说就是：**PG的action是采样出来的，而DPG是算出来的。**
-
-为何需要确定性的策略？简单来说，PG方法有以下缺点：
-
-- 即使通过PG学习得到了随机策略之后，在每一步行为时，我们还需要对得到的最优策略概率分布进行采样，才能获得action的具体值；而action通常是高维的向量，比如25维、50维，在高维的action空间的频繁采样，无疑是很耗费计算能力的；
-
-- 在PG的学习过程中，每一步计算policy gradient都需要在整个action space进行积分：
-
-$$\triangledown_{\theta} =  \int_{\mathcal{S}} \int_{A} \rho(s) \pi_{\theta}(a|s)Q^{\pi} (s,a)\mathrm{d}a \mathrm{d}s$$
-
-这个积分我们一般通过Monte Carlo 采样来进行估算，需要在高维的action空间进行采样，耗费计算能力。
-
-- 如果采取简单的Greedy策略，即每一步求解$$\arg\max_a Q(s,a)$$也不可行，因为在连续的、高维度的action空间，如果每一步都求全局最优解，太耗费计算性能。
-
-当然，反过来说，DPG也有一个缺点：无法探索环境。因此，在DPG的实际使用中，我们要采用其他策略来弥补这个缺点。
-
-## Noisy
-
-在介绍Rainbow的时候，我们提到了NoisyNet，但没有展开，这里可以说说Noisy在DRL中的作用。
-
-Noisy在DRL中的用法主要有：
-
-- Noise on Action。就是随机乱选。
-
-- Noise on Parameters。这种方法由于网络结构不变，参数也不是全换，因此相当于是有约束的随机选择，或者说是有系统的尝试。
-
-在DPG中，一般采用第二种方法。
-
-需要注意的是，参数的改变意味着策略的改变，因此，Noise在episode中需要保持不变，这样才能检测随机策略的真正效果。否则就是无目的的乱抖了。（类似帕金森症）
-
-产生噪声的方法有：
-
-- Independent Gaussian noise。
-
-- Factorised Gaussian noise。

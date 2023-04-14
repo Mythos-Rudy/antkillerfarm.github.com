@@ -4,7 +4,38 @@ title:  Python（四）
 category: language 
 ---
 
+* toc
+{:toc}
+
 # Python
+
+## mypy
+
+mypy是一个针对python语言的静态类型检查工具。
+
+官网：
+
+http://www.mypy-lang.org/
+
+参考：
+
+https://mp.weixin.qq.com/s/dBK8x_WajI2A3L5v6OQEgA
+
+四年完成400万行Python代码检查，甚至顺手写了个编译器
+
+## glob
+
+glob的历史可以追溯到早期的UNIX系统。用它可以查找符合特定规则的文件路径名。
+
+参考：
+
+https://blog.csdn.net/csapr1987/article/details/7469769
+
+python glob模块
+
+https://mp.weixin.qq.com/s/suUXM4Tdj6ekKQWC0g04Yg
+
+glob-被忽略的python超强文件批量处理模块
 
 ## PLY
 
@@ -60,43 +91,124 @@ Sly Lex Yacc是David Beazley的新作，号称新一代的PLY。
 
 https://sly.readthedocs.io/en/latest/
 
-## glob
+## Cython
 
-glob的历史可以追溯到早期的UNIX系统。用它可以查找符合特定规则的文件路径名。
-
-参考：
-
-https://blog.csdn.net/csapr1987/article/details/7469769
-
-python glob模块
-
-## Sphinx
-
-Sphinx可用于为python库生成doc。目前绝大多数python库的帮助文档都是用Sphinx生成的。
+和SWIG功能类似的替代品。
 
 官网：
 
-http://www.sphinx-doc.org/en/master/
+https://cython.org/
 
-代码：
+示例：
 
-https://github.com/sphinx-doc/sphinx
+https://github.com/antkillerfarm/antkillerfarm_crazy/tree/master/python/cython
 
-Sphinx是如下网站的默认解决方案：
+编译：
 
-https://readthedocs.org/
+`python setup.py build_ext --inplace`
 
-Read the Docs网站包含了大量python库的帮助文档，还为另外一些库提供了Hosting服务，即便后者有独立的域名。
+运行：
+
+```python
+>import hello
+>hello.say_hello()
+```
 
 参考：
 
-https://blog.csdn.net/preyta/article/details/73647937
+https://mp.weixin.qq.com/s/ODA74xgoS8X1HFxp4BfshQ
 
-使用Sphinx为你的python模块自动生成文档
+如何将Python自然语言处理速度提升100倍：用spaCy/Cython加速NLP
 
-https://www.ibm.com/developerworks/cn/opensource/os-sphinx-documentation/
+https://mp.weixin.qq.com/s/1Iyhsp5-2DyTfOb0JzqLZg
 
-使用sphinx制作简洁而又美观的文档
+比Python快100倍，利用spaCy和Cython实现高速NLP项目
+
+https://mp.weixin.qq.com/s/l-zmvQvmosw81G1wFCIDbQ
+
+用Cython造个轮子
+
+## .pyc & .pyx & .pyd
+
+.pyc: 编译好的二进制文件。
+
+.pyx: python的c扩展文件，代码要符合cython的规范
+
+.pyd: 编译好的cython动态库，仅在Windows平台有，Linux平台生成.so文件。
+
+参考:
+
+https://blog.csdn.net/sislcb/article/details/4002414
+
+py文件编译为pyc
+
+https://www.cnblogs.com/kaituorensheng/p/4452881.html
+
+Cython学习
+
+https://mp.weixin.qq.com/s/_fi4fpfN8Whe7_ZpkPL0tA
+
+怎么给Python写C扩展？
+
+https://mp.weixin.qq.com/s/eqNaX0YorcaMN8D9lnQprw
+
+简单上手一波Cython
+
+http://gashero.yeax.com/?p=38
+
+使用C/C++扩展Python
+
+## Pythran
+
+Pythran是一个transpiler，可以把Python的prototype转到C++。
+
+官网：
+
+https://pythran.readthedocs.io/en/latest/
+
+参考：
+
+https://mp.weixin.qq.com/s/hJGaREpBP0j7rqCXSZQMvA
+
+把Python自动翻译成C++
+
+## pybind11
+
+pybind11可以在C++11和Python之间建立互操作的关系，而且还是个header-only的方案。
+
+pybind11的灵感来源于Boost.Python，但是后者属于Boost的一部分，使用起来太笨重。
+
+官网：
+
+https://pybind11.readthedocs.io/en/stable/
+
+安装：
+
+`pip3 install pybind11`
+
+示例：
+
+https://github.com/pybind/cmake_example
+
+手动添加wrapper太麻烦。目前有一些开源项目，专门用来针对已有的C++代码来自动生成pybind11绑定代码：
+
+- binder
+- AutoWIG
+- robotpy-build
+
+参考：
+
+https://github.com/tensorflow/community/blob/master/rfcs/20190208-pybind11.md
+
+pybind11 vs SWIG
+
+https://zhuanlan.zhihu.com/p/52619334
+
+使用pybind11将C++代码编译为python模块
+
+https://zhuanlan.zhihu.com/p/192974017
+
+pybind11的最佳实践
 
 ## python调用GTK函数的一般规则
 
@@ -146,13 +258,13 @@ python:`err, debug = message.parse_error()`
 
 C:
 
-{% highlight c %}
+```c
 enum GstSeekFlags
 {
   GST_SEEK_FLAG_FLUSH,
   ...
 }
-{% endhighlight %}
+```
 
 python:`Gst.SeekFlags.FLUSH`
 
@@ -168,18 +280,18 @@ python:`Gst.CLOCK_TIME_NONE`
 
 C:
 
-{% highlight c %}
+```c
 gst_element_seek (pipeline, 1.0, GST_FORMAT_TIME, GST_SEEK_FLAG_FLUSH,
                          GST_SEEK_TYPE_SET, time_nanoseconds,
                          GST_SEEK_TYPE_NONE, GST_CLOCK_TIME_NONE))
-{% endhighlight %}
+```
 
 python:
 
-{% highlight python %}
+```python
 self.player.seek(1.0, Gst.Format.TIME, Gst.SeekFlags.FLUSH, Gst.SeekType.SET,\
                  time_nanoseconds, Gst.SeekType.NONE, Gst.CLOCK_TIME_NONE)
-{% endhighlight %}
+```
 
 这里首先按照一般的方法，将C代码转化成python代码。但是运行之后，产生如下错误：
 
@@ -195,66 +307,21 @@ self.player.seek(1.0, Gst.Format.TIME, Gst.SeekFlags.FLUSH, Gst.SeekType.SET,\
 
 `c_long(Gst.CLOCK_TIME_NONE).value`
 
-## .pyc & .pyx & .pyd
-
-.pyc: 编译好的二进制文件。
-
-.pyx: python的c扩展文件，代码要符合cython的规范
-
-.pyd: 编译好的cython动态库，仅在Windows平台有，Linux平台生成.so文件。
-
-参考:
-
-https://blog.csdn.net/sislcb/article/details/4002414
-
-py文件编译为pyc
-
-https://www.cnblogs.com/kaituorensheng/p/4452881.html
-
-Cython学习
-
-## Cython
-
-Cython支持python和C的混编。
-
-官网：
-
-https://cython.org/
-
-示例：
-
-https://github.com/antkillerfarm/antkillerfarm_crazy/tree/master/python/cython
-
-编译：
-
-`python setup.py build_ext --inplace`
-
-运行：
-
-{% highlight python %}
->import hello
->hello.say_hello()
-{% endhighlight %}
-
-## mypy
-
-mypy是一个针对python语言的静态类型检查工具。
-
-官网：
-
-http://www.mypy-lang.org/
-
-参考：
-
-https://mp.weixin.qq.com/s/dBK8x_WajI2A3L5v6OQEgA
-
-四年完成400万行Python代码检查，甚至顺手写了个编译器
-
 ## Django
+
+Django是一个Web框架。
 
 官网：
 
 https://www.djangoproject.com/
+
+中文教程：
+
+https://www.runoob.com/django/django-tutorial.html
+
+安装：
+
+`sudo pip install Django`
 
 参考：
 
@@ -266,198 +333,156 @@ http://www.liujiangblog.com/course/django/
 
 Django教程
 
-## pygame
+## SimpleHTTPServer
 
-pygame是一个python的游戏引擎。
+Django比较重量级了，如果只是想发布静态网页的话，可以用：
 
-官网：
+`python -m SimpleHTTPServer 7800`
 
-https://www.pygame.org/
+或者
+
+`python3 -m http.server 7800`
+
+除此之外，Flask、tornado也是较常用的Web框架。
+
+Flask底层使用的werkzeug库，是一个有名的WSGI工具包。
+
+基于python新增的async/await语法的异步Web框架，是最近的新流派，代表有：Sanic
+
+https://juejin.cn/post/6944598601674784775
+
+异步Web框架Sanic凭什么比Django Flask强？
+
+## 处理eml文件
+
+代码示例：
+
+https://github.com/antkillerfarm/antkillerfarm_crazy/blob/master/python/misc/hello_eml.py
+
+这个示例主要使用email包来解析eml文件。
+
+同时为了处理其中的html的内容，还用到了Beautiful Soup包。其网址为：
+
+https://www.crummy.com/software/BeautifulSoup/
+
+参见：
+
+https://mp.weixin.qq.com/s/p86yvl3uAm3FXw4V9NlNoA
+
+一文带你上手Python网页抓取神器BeautifulSoup库
+
+https://mp.weixin.qq.com/s/3o_T7Tyrstur6jkj0gexMA
+
+BeautifulSoup的使用
+
+## PDF
+
+https://mp.weixin.qq.com/s/fBz__E2Xu4GC7w1Uqx5NAA
+
+手把手教你如何用Python从PDF文件中导出数据
+
+https://mp.weixin.qq.com/s/xCKC3cz7jUvrwl4uvMNKTA
+
+20行Python代码教你批量将PDF转为Word
+
+https://mp.weixin.qq.com/s/IznKbG3cEF6uxP0Fe_0oaQ
+
+印度小哥“神剑”：PDF提取表格so easy！
+
+https://mp.weixin.qq.com/s/J-H638ZzhB-GOXMeAQ9aww
+
+Camelot: 三行代码提取PDF表格数据
+
+https://mp.weixin.qq.com/s/c0hszsSDS-u4z-83Y7km8Q
+
+pdf文档解析之pdfminer
+
+https://mp.weixin.qq.com/s/1BoBHbXXOGPZ4HK437lH4Q
+
+6款Python特殊文本格式处理库推荐
+
+https://mp.weixin.qq.com/s/bz7rCy0YyF1HrrHrWt9Mpw
+
+聊聊Python操作PDF的几种方法
+
+https://mp.weixin.qq.com/s/jzjumS2oJfFO-4SBa0qooQ
+
+利用Python将PDF文档转为MP3音频
+
+https://mp.weixin.qq.com/s/FmdbdAWenXWuY9s7ykVORQ
+
+三种方法，Python轻松提取PDF中全部图片
+
+https://mp.weixin.qq.com/s/UVKOU11dfWwP9Uyw9E400Q
+
+如何使用python提取pdf表格及文本，并保存到excel
+
+## word & excel
+
+安装：
+
+`pip install python-docx`
+
+文档：
+
+https://python-docx.readthedocs.io/en/latest/
 
 参考：
 
-https://github.com/marblexu/PythonPlantsVsZombies
+https://mp.weixin.qq.com/s/lEtE3ejBLzmm9_eo-_8NBg
 
-Python《植物大战僵尸》代码实现
+处理大型Excel文件，用Python就对了！
 
-https://mp.weixin.qq.com/s/la9srinIeibkXZEDRvv5pA
+https://mp.weixin.qq.com/s/GjG1Rc-HtLRkrNXY1pcp2Q
 
-手把手教你用Python实现“坦克大战”，附详细代码！
+xlwings，让excel飞起来！
 
-https://mp.weixin.qq.com/s/1xXULpT36P7LTO5HDbjptg
+https://mp.weixin.qq.com/s/6M7aiXgcne9cbHffqpm_Lw
 
-坦克大战小游戏
+n种方式教你用python读写excel等数据文件
 
-## 参考
+https://mp.weixin.qq.com/s/rBR4d_wyU8TKy1K9az4C-Q
 
-https://mp.weixin.qq.com/s/PC0bGKzIC_GXLOcVqDAZmA
-
-Python学习思维导图
-
-https://mp.weixin.qq.com/s/_OmRvwFmvuuOpBf7DQG8IA
-
-Python30个编程技巧
-
-https://github.com/leisurelicht/wtfpython-cn
-
-《What the f*ck Python!》中文版
-
-https://mp.weixin.qq.com/s/FbMvWgVf1rYtWH4cwYarIg
-
-140种Python标准库、第三方库和外部工具都有了
-
-https://mp.weixin.qq.com/s/O5okcuVKuf339BZzhmxiew
-
-13个Python GUI库
-
-https://mp.weixin.qq.com/s/hIMwss4h5k10oLanCYYS1g
-
-49个Python学习资源
-
-https://mp.weixin.qq.com/s/jHnkmpnOz1LApVCLJL-8Tw
-
-如何写出优雅又地道的Python代码？
-
-https://mp.weixin.qq.com/s/5xs1ivkrUAP_Rr9P-EMc5g
-
-代码优化指南：人生苦短，我用Python。这篇blog主要介绍了如何追踪Python脚本的CPU使用情况。
-
-https://mp.weixin.qq.com/s/HGH2e_0ocHv2VWsjOje9BQ
-
-程序员必知的Python陷阱与缺陷列表
-
-http://blog.csdn.net/linda1000/article/details/8315892
-
-单引号、双引号和三双引号的区别
-
-https://mp.weixin.qq.com/s/czqO4Lo1Jt9zqg2UKNlLYg
-
-手把手教你用Python创建微信聊天机器人
-
-https://mp.weixin.qq.com/s/DMK3gwMKbpsfOrWMxjb5lg
-
-不到20行代码，用Python做一个智能聊天机器人
-
-https://mp.weixin.qq.com/s/wIXCIMzZmh75SV-qJIKbCw
-
-Python程序员最常犯的10个错误，你中招了吗？
-
-https://mp.weixin.qq.com/s/W1j4G_QQqlzDYru231dZFA
-
-Python：编写条件分支代码的技巧
-
-http://www.cnblogs.com/Python666/p/7506546.html
-
-Python单例模式
-
-https://mp.weixin.qq.com/s/ST7TQ5Wkn_owv5bpTiTKVA
-
-2018年最好用的5个python网站开发框架
+从VBA到Python，Excel工作效率如何提高？
 
 https://mp.weixin.qq.com/s/3nr8uHnRoSgs-Zu6QxGiqw
 
 Python实现数据库一键导出为Excel表格！大大的增加了工作效率！
 
-https://mp.weixin.qq.com/s/dmJI2GlzgUJgYllfVOPt4g
+https://mp.weixin.qq.com/s/ZI7KDxH9z_UR2p3umBCNsA
 
-两句话轻松掌握Python最难知识点
+一套代码批量编辑Word和Excel，告别工具人
 
-https://mp.weixin.qq.com/s/PkzD1ig_D5AIUTkO5zH8pQ
+https://mp.weixin.qq.com/s/4q6poyFBLgwZJPzJNX3y0g
 
-Python字节码介绍
+Python操作Excel之一
 
-https://mp.weixin.qq.com/s/_ZvF6jK5Jo4rFGwHvEoAig
+https://mp.weixin.qq.com/s/NiDZfQCblcfw4XnPzBYIaQ
 
-一文读懂Python装饰器由来
+Python操作Excel之二
 
-https://mp.weixin.qq.com/s/RdnAQPAn9E8qDvtnCEgcKw
+https://mp.weixin.qq.com/s/m5mrlx3V3bBblqHdBZKa6w
 
-Tkinter可视化窗口
+Python操作Word
 
-https://mp.weixin.qq.com/s/_fi4fpfN8Whe7_ZpkPL0tA
+https://mp.weixin.qq.com/s/KhtVET6AAhYWWefBnvis2Q
 
-怎么给Python写C扩展？
+Word自动化排版画图
 
-https://mp.weixin.qq.com/s/-erFsz8NvLZ5mOIXyDosFg
+https://mp.weixin.qq.com/s/RLJAHQAheqrf8i-c8QtDtw
 
-使用PyInstaller将python转成可执行文件exe笔记
+Jupyter Notebooks嵌入Excel并使用Python替代VBA宏
 
-https://mp.weixin.qq.com/s/b19SLduKoiOIeE5CA3ZOjg
+https://mp.weixin.qq.com/s/ymPHlri3qMmTlvlWiBqsxg
 
-Python标准库之LRU缓存实现学习
+用Python+Excel制作天气预报表
 
-https://mp.weixin.qq.com/s/VPCUd5op6Vd-b0LbFEMSYQ
+## 音乐
 
-秒懂Python编程中的if __name__ == 'main' 的作用和原理
+https://web.mit.edu/music21/
 
-https://mp.weixin.qq.com/s/FtlAkInyXgvUxDnSCikTIw
+music21官网
 
-全面深入理解Python面向对象编程
+https://mp.weixin.qq.com/s/ONZD5RGI18rLTYhzIQQbVA
 
-https://mp.weixin.qq.com/s/_PtdgGElw0mvr_rRm5xrCg
-
-Python性能优化的20条招数
-
-https://mp.weixin.qq.com/s/0Rpbuo7LCRo1SnbE8NcH4Q
-
-快速学习Python的全套14张思维导图
-
-https://mp.weixin.qq.com/s/Cujl2nxITCuZL7B72uKVrQ
-
-为什么Python这么慢？
-
-https://mp.weixin.qq.com/s/a3YTmQMfpnviHnidXrhYtg
-
-这17个骚操作你都Ok吗
-
-https://zhuanlan.zhihu.com/p/41293278
-
-把python翻译成C++
-
-https://mp.weixin.qq.com/s/XV4LOBM1pO0N8oShZl7MzQ
-
-手把手教你用Python设计一个命令行界面
-
-https://mp.weixin.qq.com/s/EZh5PAUgXkIDzGbim6wqLQ
-
-用Python带你看白雪飘扬~
-
-https://mp.weixin.qq.com/s/SUyRNz_M7B6bcdV7-YxlZQ
-
-Python制作一款简易音乐播放器
-
-https://mp.weixin.qq.com/s/d2_MTvfbOFZmppej5UOwUw
-
-关于使用Python析构函数的正确姿势
-
-https://mp.weixin.qq.com/s/weEZEr4g8pI11Gijc-St0Q
-
-DeBug Python代码全靠print函数？换用这个一天2K+Star的工具吧
-
-https://mp.weixin.qq.com/s/wr18ylCJyJOX83BhbvGXng
-
-13个Python开发者必知的Python GUI库
-
-https://mp.weixin.qq.com/s/S_mIspLOrmj8ny0VHP52ZA
-
-Python高级技巧：lazy property
-
-https://mp.weixin.qq.com/s/06-iOG5TkRkHb4RZl1bXNQ
-
-史上最全Python迭代器与生成器
-
-https://mp.weixin.qq.com/s/lv_sjvXx8vWf6TsVoYoxFw
-
-Python处理文件系统的10种方法
-
-https://mp.weixin.qq.com/s/KCiR6ZE1EpYVfySaCG097A
-
-上半年最常见的Python面试题
-
-https://mp.weixin.qq.com/s/0dw2LHsIKFv8B_JaIMoekg
-
-python 字符编码处理总结
-
-https://mp.weixin.qq.com/s/fTs_r7DLbLWoos4uRM3KYA
-
-10个Python常见面试题，这些弄不明白不要说学过Python！
+用R包gm生成音乐

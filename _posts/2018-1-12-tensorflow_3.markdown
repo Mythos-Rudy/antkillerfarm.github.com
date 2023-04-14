@@ -1,266 +1,13 @@
 ---
 layout: post
 title:  TensorFlow（三）
-category: AI 
+category: DL Framework 
 ---
 
-# TensorFlow
+* toc
+{:toc}
 
-## Eager Execution
-
-TensorFlow的Eager Execution可立即评估操作，无需构建图：操作会返回具体的值，而不是构建以后再运行的计算图。这也就是所谓的动态图计算的概念。
-
-参考：
-
-https://mp.weixin.qq.com/s/Yp2zE85VCx8q67YXvuw5qw
-
-TensorFlow引入了动态图机制Eager Execution
-
-https://github.com/ZhuanZhiCode/TensorFlow-Eager-Execution-Examples
-
-Eager Execution的代码示例
-
-https://github.com/madalinabuzau/tensorflow-eager-tutorials
-
-TensorFlow的动态图工具Eager怎么用？这是一篇极简教程
-
-https://mp.weixin.qq.com/s/Lvd4NfLg0Lzivb4BingV7w
-
-Tensorflow Eager Execution入门指南
-
-https://github.com/snowkylin/TensorFlow-cn
-
-简单粗暴TensorFlow Eager教程
-
-https://mp.weixin.qq.com/s/zz8XCykJ6jxbE5J4YwAkEA
-
-一招教你使用tf.keras和eager execution解决复杂问题
-
-## Estimator
-
-![](/images/img2/tensorflow_programming_environment.png)
-
-Estimator是一个非常高级的API，其抽象等级甚至在Keras之上。
-
-Estimator主要包括以下部分：
-
-1.初始化。定义网络结构。
-
-2.train。
-
-3.evaluate。
-
-4.predict。
-
-TensorFlow已经包含了一些预置的Estimator。例如：BoostedTreesClassifier、DNNClassifier、LinearClassifier等。具体可参见：
-
-https://tensorflow.google.cn/api_docs/python/tf/estimator
-
-参考：
-
-https://mp.weixin.qq.com/s/a68brFJthczgwiFoUBh30A
-
-TensorFlow数据集和估算器介绍
-
-https://mp.weixin.qq.com/s/zpEVU1E5DfElAnFqHCqHOw
-
-训练效率低？GPU利用率上不去？快来看看别人家的tricks吧～
-
-## tf.data
-
-tf.data提供了一套构建灵活高效的输入流水线的API。
-
-![](/images/img2/datasets_without_pipelining.png)
-
-![](/images/img2/datasets_with_pipelining.png)
-
-上面两幅图中，第一幅图是没有使用流水线的情况，而第二幅图则是使用流水线的情况。
-
-参考：
-
-https://mp.weixin.qq.com/s/dfXTV4PFgC1Wbti42Zf4wQ
-
-tf.data API，让你轻松处理数据
-
-https://mp.weixin.qq.com/s/mjUnrPBPBuY6XKXkUymX-w
-
-实例介绍TensorFlow的输入流水线
-
-https://mp.weixin.qq.com/s/1ZlyVDJK6RWZ_1Ox7399IA
-
-用一行tf.data实现数据Shuffle、Batch划分、异步预加载等
-
-## TensorFlow Probability
-
-TensorFlow Probability是一个概率编程工具包。
-
-官网：
-
-https://tensorflow.google.cn/probability/
-
-参考：
-
-https://mp.weixin.qq.com/s/NPuYanaUnaX4mYbaNbNNSQ
-
-概率编程工具：TensorFlow Probability官方简介
-
-https://mp.weixin.qq.com/s/cV-5W4YWC9f9wsoNX5fIXA
-
-使用TensorFlow Probability对金融模型中的误差进行介绍性分析
-
-https://mp.weixin.qq.com/s/cxC3SarlBBPTwIxQZ4AG_g
-
-快速上手TensorFlow Probability内置概率编程教材
-
-https://mp.weixin.qq.com/s/T0TsS8YwyCbCjt4J-xonOw
-
-使用TensorFlow Probability Layers的变分自编码器
-
-https://mp.weixin.qq.com/s/6l-NS0NbYK44JS0jnRl82w
-
-使用TensorFlow Probability的概率层执行回归
-
-https://mp.weixin.qq.com/s/2cbd7LBPBRqGt-QO1A7SfQ
-
-在TensorFlow Probability中对结构时间序列建模
-
-## TensorFlow Federated
-
-TFF是一个开源框架，用于试验针对分散式数据的机器学习和其他计算。它采用的是一种名为联合学习(FL)的方法，许多参与的客户端能够训练共享的ML模型，同时将数据保存在本地。
-
-这个项目感觉上和Leela Zero有些相似。
-
-从原理上说，TFF主要使用了Federated Machine Learning技术。
-
-参考：
-
-https://mp.weixin.qq.com/s/K2-i3U-BCOctetMkvuvVxg
-
-TensorFlow Federated发布
-
-https://mp.weixin.qq.com/s/6QKyE3jIOwBK_2rcG-Vtiw
-
-联邦机器学习-概念与应用
-
-## TensorNetwork
-
-TensorFlow的计算图模型不仅可以用于DL领域，亦可应用于其他科学计算领域。TensorNetwork就是一个基于TensorFlow的张量运算库。现成的矩阵运算库已经很多了，这次升级为张量运算库了。
-
-https://github.com/google/TensorNetwork
-
-参考：
-
-https://mp.weixin.qq.com/s/jdjX0jirTHOUqsGagJmGLQ
-
-谷歌AI开源张量计算库TensorNetwork，计算速度暴涨100倍
-
-## Tensorflow 2.x
-
-![](/images/img3/TF.png)
-
-![](/images/img3/TF_2.png)
-
-https://mp.weixin.qq.com/s/BD-nJSZJLjBBq1n7HEHpKw
-
-将您的代码升级至TensorFlow 2.0
-
-https://mp.weixin.qq.com/s/xgsUF97aI1YfGSdh0FJ6Cw
-
-都在关心TensorFlow 2.0，那我手里基于1.x构建的程序怎么办？
-
-https://mp.weixin.qq.com/s/s8hAYadCw9-_BpWSCh38gg
-
-TensorFlow 2.0：数据读取与使用方式
-
-https://mp.weixin.qq.com/s/rVSC1AXj9YECjUrl5PkSGw
-
-详解深度强化学习展现TensorFlow 2.0新特性
-
-https://mp.weixin.qq.com/s/8D8kxFSfruwWhU2jmYL3sg
-
-Google大佬Josh Gordon发布Tensorflow 2.0入门教程
-
-https://mp.weixin.qq.com/s/Ra-lVtKoYI0eOC_6VrPZeg
-
-有了TensorFlow2.0，我手里的1.x程序怎么办？
-
-https://mp.weixin.qq.com/s/ddHKc5AffznRaEY_qhHN_g
-
-升级到tensorflow2.0，我整个人都不好了
-
-https://mp.weixin.qq.com/s/RcolwQnCqrAsGaKEK0oo_A
-
-TensorFlow 2.0中的tf.keras和Keras有何区别？为什么以后一定要用tf.keras？
-
-## 细节
-
-执行`session.run(out)`，会在终端打印out的值，但执行`res = session.run(out)`则不会。
-
-此外，`session.run`可以接受list作为参数。返回值也是一个list，分别对应输入list的每个元素的计算结果。
-
-----
-
-tensorflow的程序中,在main函数下,都是使用tf.app.run()来启动。查看源码可知,该函数是用来处理flag解析，然后执行main函数。
-
-https://blog.csdn.net/lujiandong1/article/details/53262612
-
-tensorflow中的tf.app.run()
-
-----
-
-TF提供了一套专门的IO函数：tf.gfile。主要优点在于：对于写文件来说，open操作直到真的需要写的时候才执行。
-
-----
-
-迁移学习的时候，有的时候需要保持某几层的权值，在后续训练中不被改变。这时，可以在创建Variable时，令trainable=false。
-
-----
-
-sparse_softmax_cross_entropy_with_logits和softmax_cross_entropy_with_logits的区别在于：后者的label是一个one hot的tensor，而前者label直接用对应分类的index表示就行了。
-
-----
-
-CNN中的padding：
-
-"SAME" = with zero padding。
-
-"VALID" = without padding。
-
-----
-
-op的自定义实现可使用`tf.py_func`。
-
-----
-
-tf.dtypes.cast: 类型转换
-
-----
-
-由源代码可以知道`optimizer.minimize`实际上包含了两个步骤，即`compute_gradients`和`apply_gradients`，前者用于计算梯度，后者用于使用计算得到的梯度来更新对应的variable。
-
-如果想要部分更新某个Variable的话，可用如下步骤：
-
-1.生成需要更新的元素的mask tensor。1代表要更新，0代表不更新。
-
-2.`compute_gradients`得到grad tensor。
-
-3.`grad = grad * mask`
-
-4.`apply_gradients`。
-
-通常来说，如果一个计算图中没有optimizer，则一般只包含forward运算，而没有backward运算。
-
-## blog
-
-http://www.jianshu.com/u/eaec1fc422e9
-
-一个TF的blog
-
-http://blog.csdn.net/u012436149
-
-一个TensorFlow+PyTorch的blog
-
-## Hama
+# Hama
 
 TensorFlow实际上是Google开发的第二代DL框架。在它之前，Google内部还有一个叫做DistBelief的框架。这个框架没有开源，但是有论文发表。因此，就有了一个叫做Apache Hama的项目，作为它的开源实现。
 
@@ -270,140 +17,318 @@ https://hama.apache.org/
 
 这个项目采用了一种叫做Bulk Synchronous Parallel的并行计算模型。
 
-# 我的TensorFlow实践
+# 模型文件
 
-## MNIST+Softmax
+tensorflow model包含2个文件：
+
+a）Meta graph:
+
+使用protocol buffer来保存整个tensorflow graph.例如所有的variables, operations, collections等等。这个文件使用.meta后缀。
+
+b) Checkpoint file:
+
+有2个文件：
+
+mymodel.data-00000-of-00001
+
+mymodel.index
+
+.data文件包含所有的weights,biases,gradients和其他variables的值。
+
+tensorflow还有一个叫checkpoint的文件，用来简单保存最近一次的checkpoint记录。
+
+## 保存模型
+
+```python
+w1 = tf.Variable(tf.random_normal(shape=[2]), name='w1')
+w2 = tf.Variable(tf.random_normal(shape=[5]), name='w2')
+saver = tf.train.Saver()
+sess = tf.Session()
+sess.run(tf.global_variables_initializer())
+saver.save(sess, 'my_test_model')
+```
+
+## 加载模型
+
+```python
+new_saver = tf.train.import_meta_graph('my_test_model-1000.meta')
+new_saver.restore(sess, tf.train.latest_checkpoint('./‘))
+```
+
+## 参考
+
+http://www.cnblogs.com/azheng333/archive/2017/06/09/6972619.html
+
+Tensorflow模型保存和加载
+
+http://blog.csdn.net/wiinter_fdd/article/details/72821923
+
+Tensorflow中的模型持久化
+
+https://mp.weixin.qq.com/s/3GfxnwzIeeQj1LVSYKnZjQ
+
+如何保存和恢复TensorFlow训练的模型？
+
+# .pb文件
+
+TensorFlow常用的模型保存格式还有.pb格式。这种格式下，模型和权重被整合为一个.pb文件，便于模型的发布和部署。相对应的，这种格式对于train就不太友好了。
+
+以下的脚本可用于将.pb文件导入到tensorboard中：
+
+https://github.com/antkillerfarm/antkillerfarm_crazy/blob/master/python/ml/tensorflow/graph/pb_visualize.py
+
+参考：
+
+https://www.jianshu.com/p/243d4f0b656c
+
+TensorFlow自定义模型导出：将.ckpt格式转化为.pb格式
+
+https://www.jianshu.com/p/c9fd5c01715e
+
+TensorFlow模型保存与恢复
+
+# 模型文件的图操作
+
+基本操作一般基于tf.Graph：
+
+https://tensorflow.google.cn/api_docs/python/tf/Graph
+
+复杂一点的进阶操作可参见：
+
+https://tensorflow.google.cn/api_guides/python/contrib.graph_editor
+
+示例：
+
+https://github.com/antkillerfarm/antkillerfarm_crazy/blob/master/python/ml/tensorflow/graph/hello_graph.py
+
+除了运算类op之外，TF还有辅助类的op，例如tf.shape和tf.Print。下面的示例展示了如何在Graph中插入tf.shape和tf.Print结点，从而导出中间的计算结果：
+
+https://github.com/antkillerfarm/antkillerfarm_crazy/blob/master/python/ml/tensorflow/graph/insert_print_node.py
+
+# TFLite
+
+官网：
+
+https://tensorflow.google.cn/lite/
+
+Tensorflow源代码中自带的toco（Tensorflow Optimizing COnverter）工具，可用于生成一个可供TensorFlow Lite框架使用的tflite文件。
 
 代码：
 
-https://github.com/antkillerfarm/antkillerfarm_crazy/tree/master/python/ml/tensorflow/hello_mnist.py
+https://github.com/tensorflow/tensorflow/tree/master/tensorflow/contrib/lite/toco
 
-## MNIST+CNN
+## 模型文件解析
+
+tflite模型使用flatbuffers进行序列化，因此也可以使用flatbuffers解析相关模型。
+
+需要注意的是flatbuffers生成的代码，有两种版本：
+
+- 精简版。默认设置。网上的解析代码用的都是这个版本。缺点：无法修改相应的模型。
+
+- 专业版。`--gen-object-api`。新增`UnPack/UnpackTo/Pack`方法，进行对象结构体与table结构体间的转换。
+
+专业版不是所有语言都有，至少ubuntu自带的flatc就没有提供对python的专业版支持。但是tensorflow自带的flatc是可以的。
+
+`bazel build //tensorflow/lite/tools:visualize`
+
+这个命令会生成一个schema_py_generated.py文件，也就是所谓的专业版本了。
+
+tflite模型中间结果的导出，不是太方便，原因是相关内存被复用。
+
+解决办法有两个：
+
+- 把想要dump的tensor设置为网络的output，然后转成tflite。
+
+- 修改tflite.invoke的代码，以导出中间结果。
+
+参考：
+
+https://stackoverflow.com/questions/57139676/savedmodel-tflite-signaturedef-tensorinfo-get-intermediate-layer-outputs
+
+这里还有一个非常Hack的方法：
+
+https://github.com/raymond-li/tflite_tensor_outputter/blob/master/tflite_tensor_outputter.py
+
+这个脚本跑起来有些问题，需要配合专业版的schema_py_generated.py才能使用。
+
+https://blog.csdn.net/abc20002929/article/details/112529203
+
+tflite模型调试-中间层output输出
+
+---
+
+https://gitee.com/antkillerfarm/antkillerfarm_crazy/blob/master/python/ml/tensorflow/tflite/tflite_multi_output_quant.py
+
+这个例子包含了以下内容：
+
+- 如何直接用tf算子搭建网络，并导出为tflite文件。注意`@tf.function`的用法。
+- 如何搭建多输出的网络。
+- 如何生成量化模型。注意`representative_dataset_gen`，它展示了如何用fake data替换真实数据。
+
+---
+
+参考：
+
+https://www.cnblogs.com/zhouyang209117/p/8087258.html
+
+使用flatbuffers
+
+http://harmonyhu.com/2019/02/03/flatbuffers-reflection/
+
+FlatBuffers反射
+
+https://blog.csdn.net/u011279649/article/details/83186550
+
+TFLite:模型文件的结构和解析器
+
+https://jackwish.net/2020/introducing-tflite-parser-package.html
+
+Introducing TFLite Parser Python Package
+
+https://jackwish.net/tflite/
+
+Easily Parse TFLite Models with Python
+
+## 参考
+
+https://www.jianshu.com/p/fa204a54a956
+
+生成TFLite模型文件
+
+https://mp.weixin.qq.com/s/eSczqqyzh4PZomJL4saxug
+
+出门问问：使用TensorFlow Lite在嵌入式端部署热词检测模型
+
+https://mp.weixin.qq.com/s/U_Pew90j9swIqti3oKEIQg
+
+玩转TensorFlow Lite：有道云笔记实操案例分享
+
+https://mp.weixin.qq.com/s/lNP9WdzSWE4FjB_-Sjc2aA
+
+TensorFlow Lite for Android初探
+
+https://mp.weixin.qq.com/s/IuD1oxeiFBq8kqh_zRLb0Q
+
+一步实现从TF到TF Lite，谷歌提出定制on-device模型框架
+
+https://mp.weixin.qq.com/s/65HiEwCyzeA_d9flPBcpLQ
+
+谷歌正式发布TensorFlowLite，半监督跨平台快速训练ML模型
+
+https://mp.weixin.qq.com/s/6_yZPlKLYiWBRQFk5Y1OKA
+
+TensorFlow Lite微控制器
+
+# Android NN
+
+TFLite是Google的Tensorflow团队开发的移动DL框架，它可以在任意系统（非android，甚至非linux）上执行。而Android NN则是Google的Android团队针对Android平台开发的DL框架。
+
+团队的不同，决定了这两款产品并非完全兼容。一般来说，TFLite由于紧跟Tensorflow，其对新op的支持要比后者更及时一些。而Android NN由于有Facebook等外部客户的需求推动，在个别情况下，也有相反的情况发生。
+
+Android NN支持的算子的代码在frameworks/ml/nn/common/operations下。
+
+>最新的代码里改到了packages/modules/NeuralNetworks/common/operations下。
+
+参考：
+
+https://developer.android.google.cn/ndk/reference/group/neural-networks
+
+这是Android NDK中的NN相关的接口文档
+
+https://developer.android.google.cn/ndk/guides/neuralnetworks
+
+Android NN的指南
+
+https://developer.arm.com/products/software/mali-drivers/android-nnapi
+
+这是ARM对于Android NN的一个实现。
+
+# TensorFlow Serving
+
+TensorFlow Serving是一个用于机器学习模型serving的高性能开源库。它可以将训练好的机器学习模型部署到线上，使用gRPC作为接口接受外部调用。更加让人眼前一亮的是，它支持模型热更新与自动模型版本管理。
 
 代码：
 
-https://github.com/antkillerfarm/antkillerfarm_crazy/tree/master/python/ml/tensorflow/hello_cnn.py
+https://github.com/tensorflow/serving
 
-第一个例子中，我对CPU的计算能力还没有切肤之痛，但在这里使用CPU差不多要花半个小时时间。。。
+TensorFlow Serving实际上是TensorFlow Extended (TFX)的一部分：
 
-## 框架怀古（2017.9）
+https://tensorflow.google.cn/tfx
 
-http://deeplearning.net/
+TFX还包括了Data Validation、Transform和Model Analysis等方面的功能。
 
-这个网站是Theano的主站，也是我最早接触DL时浏览的网站。其时，我虽然对DL有浓厚的兴趣，但尚未以此作为工作内容。
+参考：
 
-从该网站提供的招聘信息来看，Caffe、Theano、Torch是当时主流的三大框架库。
+https://zhuanlan.zhihu.com/p/23361413
 
-岂料时隔一年半载之后，这三大框架都渐趋式微。
+TensorFlow Serving尝尝鲜
 
-Caffe被Caffe 2替代，但使用的广泛度仍超过后者。
+http://www.cnblogs.com/xuchenCN/p/5888638.html
 
-Theano被同样基于计算图的TensorFlow淘汰。2017年9月停止更新。
+tensorflow serving
 
-Torch相对变动最小，它被PyTorch替代。这更可以看作是python对于lua的胜利。
+https://mp.weixin.qq.com/s/iqvpX6QuBEmF_UK9RMu9eQ
 
-# TensorFlow参考资源
+TensorFlow Serving入门
 
-https://mp.weixin.qq.com/s/t1QFIOq-VBNOrSm0zW-PlQ
+https://mp.weixin.qq.com/s/b569est_LpcxsoTNWXcfog
 
-深度学习TensorFlow实现集合
+TensorFlow Extended帮你快速落地项目
 
-https://mp.weixin.qq.com/s/IzijD8Sh3G2WsCz7aaxyhg
+https://mp.weixin.qq.com/s/qOy9fR8Zd3SufvsMmLpoGg
 
-TensorFlow深度学习概述
+使用TensorFlow Serving优化TensorFlow模型
 
-https://silencezjl.coding.me/2017/05/01/%E5%81%B7%E4%B8%80%E6%B3%A2%E8%B5%84%E6%BA%90/
+https://mp.weixin.qq.com/s/IPwOZKvDsONegyIuwkG6bQ
 
-各种TensorFlow资源
+将深度学习模型部署为web应用有多难？答案自己找
 
-https://mp.weixin.qq.com/s/haj9lS59yWtk-C75EtGIcw
+https://mp.weixin.qq.com/s/7nugWFKtD-C6cpwm2TyvdQ
 
-深度学习工程模板：简化加载数据、构建网络、训练模型和预测样本的流程
+手把手教你如何部署深度学习模型
 
-https://github.com/zsdev2015/machine_learning
+https://zhuanlan.zhihu.com/p/77664408
 
-某国内小牛写的中文入门demo，注释非常详细
+如何解决推荐系统工程难题——深度学习推荐模型线上serving？
 
-https://morvanzhou.github.io/tutorials/
+https://mp.weixin.qq.com/s/vqFRbsM9DGu8ikJ3VNp_-g
 
-一个以python语言教学的ML、DL教程，比较通俗易懂。
+TensorFlow Extended(TFX)：面向生产环境的机器学习
 
-https://mp.weixin.qq.com/s/gJBDXf_5ViPR9dNm3eH2Hg
+http://mp.weixin.qq.com/s/hpv6bzr-5VZet-UCHOCQLQ
 
-TensorFlow初学者必须了解的55个经典案例
+谷歌TFX：基于TensorFlow可大规模扩展的机器学习平台
 
-http://mp.weixin.qq.com/s/JZ1ceGQDmQUaNW5wl6biLA
+https://mp.weixin.qq.com/s/ANoY3MZEvz7SvKXDE-24NQ
 
-TensorFlow实现流行机器学习算法教程汇集
+迈向ML工程：TensorFlow Extended(TFX)简史
 
-https://github.com/taki0112/Tensorflow-Cookbook
+https://mp.weixin.qq.com/s/DkCGusznH8F8p39oRLuNBQ
 
-1500+星标，简单易用TensorFlow代码集
+TensorFlow Serving模型更新毛刺的完全优化实践
 
-https://mp.weixin.qq.com/s/bjxJyOitynRtCoW0FX1gXw
+https://mp.weixin.qq.com/s/GoaePWnq3OtU4hNatbIJ5A
 
-一文带你入门Tensorflow
+丰富TF Serving生态，爱奇艺开源灵活高性能的推理系统XGBoost Serving
 
-https://mp.weixin.qq.com/s/zmTqWNXlYcDyZb_dmEo_5Q
+# op的C++实现
 
-TensorFlow/PyTorch/Sklearn实现的五十种机器学习模型
+有的时候为了将Tensorflow的op移植到其他平台，需要找到相应op的cpu实现。比如space_to_batch这个op，它的实现在：
 
-https://mp.weixin.qq.com/s/O5vvGKHWkJQWzeiL7A_S_g
+core/kernels/spacetobatch_op.cc
 
-TensorFlow简单介绍
+简单的op一般找到这里就可以了，但space_to_batch还要更深一层：
 
-https://mp.weixin.qq.com/s/JSZwQkyxSSwfBWKJ578j3A
+core/kernels/spacetobatch_functor.cc
 
-TensorFlow最好的入门文章
+一般XXX_impl.cc或者XXX_functor.cc才是op实现真正所在的位置。
 
-https://mp.weixin.qq.com/s/68vaQRqUo8u09iheKzFVEw
+kernel的注册，一般在：
 
-玩转TensorFlow深度学习
+tensorflow/core/ops
 
-https://mp.weixin.qq.com/s/Es_5KUnkDzMwf_8WD8aW3g
+此外，TFlite的实现往往更加简单：
 
-GitHub万星：适用于初学者的TensorFlow代码资源集
+tensorflow/contrib/lite/kernels/internal/reference/reference_ops.h
 
-https://mp.weixin.qq.com/s/GaK_iSTBl7B4LTdaOtiR_Q
-
-香港科技大学TensorFlow课件分享
-
-https://mp.weixin.qq.com/s/RR3EEI8vm05EZSd7dGU__A
-
-史上最全的Tensorflow学习资源汇总，速藏！
-
-https://mp.weixin.qq.com/s/w4uo9Uodmud4FhqxRNanUw
-
-TensorFlow指南：GPU的使用
-
-https://mp.weixin.qq.com/s/gnDTOLWuPZiCVzspTk_zCQ
-
-TensorFlow轻度入门
-
-https://mp.weixin.qq.com/s/sbJdU7qMMyrSRuybTh7bKg
-
-开源中文书《TensorFlow内核剖析》，335页pdf
-
-https://mp.weixin.qq.com/s/5wy6yqaW_9pMBhgw8qDdOQ
-
-基于TensorFlow打造强化学习API
-
-https://github.com/yahoo/TensorFlowOnSpark
-
-TensorFlow On Spark
-
-https://mp.weixin.qq.com/s/7er3wNV_IhxhFDOIwNMpww
-
-深度强化学习入门：用TensorFlow构建你的第一个游戏AI
-
-https://mp.weixin.qq.com/s/jMPVl3CWvL7MSzq5F12YxQ
-
-维度、广播操作与可视化：如何高效使用TensorFlow
-
-https://mp.weixin.qq.com/s/OmVAnkHV2aI4D4pMKyVjCQ
-
-基于TensorFlow理解三大降维技术：PCA、t-SNE和自编码器
-
-https://mp.weixin.qq.com/s/YOyOR8fdaEKcydAywcc-HA
-
-如何使用TensorFlow API构建视频物体识别系统
+注册一个tfop分为两部分:Op和OpKernel。其中，Op是tfop的声明部分，类似于函数的声明，主要描述Op静态属性。OpKernel是tfop的实现部分，同样类似于函数的实现，主要描述OpKernel的具体计算逻辑。

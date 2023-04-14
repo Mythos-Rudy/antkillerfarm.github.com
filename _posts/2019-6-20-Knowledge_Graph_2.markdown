@@ -1,10 +1,105 @@
 ---
 layout: post
-title:  知识图谱参考资源（二）, 数据结构 & 普通CS算法
-category: resource 
+title:  知识图谱参考资源（二）
+category: graph 
 ---
 
+* toc
+{:toc}
+
 # 知识图谱参考资源
+
+https://mp.weixin.qq.com/s/ePJPoQlOveTrCvCTy8_Xxg
+
+知识图谱的技术与应用
+
+https://mp.weixin.qq.com/s/fuI9U7aZpuk-WX6GQNtOuA
+
+这是一份通俗易懂的知识图谱技术与应用指南
+
+https://mp.weixin.qq.com/s/lBeV6XWzk5bqNGiIMok-zw
+
+一文揭秘！自底向上构建知识图谱全过程
+
+https://mp.weixin.qq.com/s/uSPkgV-zIBEEJ0Ml-ILXqQ
+
+如何从零开始搭建知识图谱？
+
+https://mp.weixin.qq.com/s/3x__Dl1x1nMgWpp0zz_fPg
+
+如何构建知识体系：知识图谱搭建的第一步
+
+https://mp.weixin.qq.com/s/DALB8eBgVWHhFcZoJFLSpg
+
+基于图的RDF知识图谱数据管理
+
+https://mp.weixin.qq.com/s/An9mGawI8mhtlqyrVxTzYw
+
+SIGIR 2018基于知识图谱的文本信息检索
+
+https://mp.weixin.qq.com/s/3aINjnNwALEqbBAuLi6pEA
+
+应用知识图谱的推荐方法与系统
+
+https://mp.weixin.qq.com/s/RpPEqjRUnBIHpX7_guItoQ
+
+如何构建行业知识图谱
+
+https://mp.weixin.qq.com/s/CK-rtWoqjq8pb_6xK4xssQ
+
+知识图谱的前世今生与RDF的实践
+
+https://mp.weixin.qq.com/s/sCpKkkf2Tj37Nr5j7S7M6Q
+
+基于Freebase的问答研究
+
+https://mp.weixin.qq.com/s/kTrBLTH46KtfcAK4aZ2H0A
+
+请查收本周份“知识图谱”专题论文解读
+
+https://mp.weixin.qq.com/s/4huHklyr_H6fFDb6VJ7ozw
+
+知识图谱的前世今生：为什么我们需要知识图谱？
+
+https://mp.weixin.qq.com/s/gm-46sXSUb1mdp4g5DuTfA
+
+知识表示：知识图谱如何表示结构化的知识？
+
+https://mp.weixin.qq.com/s/XTgYPCejKwy1WyQYQYXZvQ
+
+基于知识库的问答：生成查询图进行语义分析
+
+https://mp.weixin.qq.com/s/8REGSXSpXXvz0YIMspZm4g
+
+最佳论文：南京大学提出DSKG，将多层RNN用于知识图谱补全
+
+https://mp.weixin.qq.com/s/zusfpa3c2T8mSyRSaXhVLg
+
+健康知识图谱，阿里工程师如何实现？
+
+https://mp.weixin.qq.com/s/8M4MyZ-EUKfGkuqzkuvYgw
+
+金融知识图谱搭建全攻略
+
+https://mp.weixin.qq.com/s/RoiIHPCV3vXAH_sUHhTOYw
+
+为电商而生的知识图谱，如何感应用户需求？
+
+https://mp.weixin.qq.com/s/-D5heoQLfOnp-AcWsJOi7A
+
+哈工大SCIR正式对外发布金融事理图谱Demo V1.0
+
+https://mp.weixin.qq.com/s/HNeInMIpho5pTDoK6dZ-ng
+
+一文详解达观数据知识图谱技术与应用——技术直播回顾
+
+https://mp.weixin.qq.com/s?__biz=MjM5MDI3MjA5MQ==&mid=2697267537&idx=1&sn=3011302613b90749d7ffe0cc3a805d1f
+
+知识图谱在旅游领域有哪些应用？携程度假团队这样回答
+
+https://mp.weixin.qq.com/s/Og5pgNaGIz5gTL_58DvTDw
+
+抛开炒作看知识图谱，为什么现在才爆发？
 
 https://zhuanlan.zhihu.com/p/46235742
 
@@ -134,18 +229,6 @@ https://mp.weixin.qq.com/s/R-mY_23bqol1VfA1125xiw
 
 67亿美金搞个图，创建知识图谱的成本有多高你知道吗？
 
-https://mp.weixin.qq.com/s/Emlzfgoo99T9xAsTKJRQXg
-
-一文看懂虚假新闻检测
-
-https://mp.weixin.qq.com/s/8qFGiMjIHXSwozDmTe7XbA
-
-《打击假新闻: 识别和缓解技术调查》
-
-https://mp.weixin.qq.com/s/5D5cfLC6flnn9fCYlMplMQ
-
-虚假新闻（Fake News）检测全面综述教程，156页PPT带你进入这一领域
-
 https://mp.weixin.qq.com/s/aEhLCkEnImubZlwEP2ZHBQ
 
 从本体论开始说起，运营商关系图谱的构建及应用
@@ -222,172 +305,82 @@ https://mp.weixin.qq.com/s/_cFDbp6PnAEjgtDIWSBDVQ
 
 知识结构化在阿里小蜜中的应用
 
-# 数据结构 & 普通CS算法
+https://mp.weixin.qq.com/s/a9N0d4fsCaQf9MaCvyahiA
 
-## TopK
+知识图谱与推荐系统的结合
 
-https://zhuanlan.zhihu.com/p/76734219
+https://mp.weixin.qq.com/s/0DGyw_PzZp3l3NPhtFbmLw
 
-面试官最喜爱的TopK问题算法详解
+目标检测新技能！引入知识图谱:Reasoning-RCNN
 
-https://www.cnblogs.com/qlky/p/7512199.html
+https://mp.weixin.qq.com/s/g2IA7S4STN61orwAANtBdg
 
-海量数据中找出前k大数（topk问题）
+关系图谱在贝壳的构建和应用
 
-https://www.jianshu.com/p/5b8f00d6a9d7
+https://mp.weixin.qq.com/s/5G-xon0i5Aq-M4i0rHJPBg
 
-topK算法问题
+如何从0构建知识图谱
 
-## 正则表达式
+https://zhuanlan.zhihu.com/p/59762355
 
-https://mp.weixin.qq.com/s/OtVRL37CNt_d5yEJPzzBzg
+推荐系统结合知识图谱简单总结
 
-一个由正则表达式引发的血案
+https://mp.weixin.qq.com/s/NkwyHsmpZCwsQPiQOMK7zw
 
-https://mp.weixin.qq.com/s/udEQzNk7vTltFhLyAXrsNQ
+针对复杂问题的知识图谱问答最新进展
 
-图文解读助你理解和使用正则表达式
+https://mp.weixin.qq.com/s/IIsmVvlblyEj6Ijn77DneQ
 
-https://zhuanlan.zhihu.com/p/27971065
+知识图谱中的实体摘要:算法、评价和应用，123页ppt
 
-关于多正则匹配
+https://mp.weixin.qq.com/s/wlk9UlgBze1QL9AlTKXEDg
 
-# Trie树
+基于知识图谱嵌入的链接预测综述，43页pdf
 
-Trie树也称字典树，因为其效率很高，所以在在字符串查找、前缀匹配等中应用很广泛，其高效率是以空间为代价的。
+https://mp.weixin.qq.com/s/BtdUEjJsqqmkNYHz8LHgQw
 
-下面以英文单词构建的字典树为例，这棵Trie树中每个结点包括26个孩子结点，因为总共有26个英文字母(假设单词都是小写字母组成)。
+基于Knowledge Embedding的多跳知识图谱问答
 
-如给出字符串"abc","ab","bd","dda"，根据该字符串序列构建一棵Trie树。则构建的树如下:
+https://mp.weixin.qq.com/s/cJZz_BfkfbJzV2l8NiPaFg
 
-![](/images/article/trie.jpg)
+电商知识图谱
 
-参考：
+https://mp.weixin.qq.com/s/IitK59eds2264sQ3Ej-aog
 
-https://mp.weixin.qq.com/s/J7C70ASC6GZJqmqut0Z6Ag
+知识图谱在小米的应用与探索
 
-双数组Trie树(DoubleArrayTrie)Java实现
+https://mp.weixin.qq.com/s/iVIoaZxhS1EyC2etRnBf4Q
 
-https://mp.weixin.qq.com/s/nMmrVPvjaPOLgxKNjMzetw
+行业知识图谱构建最新进展
 
-动画+解析，轻松理解“Trie树”
+https://mp.weixin.qq.com/s/E76Ekr63HYo8sPxoIQS-CA
 
-## 参考
+当知识图谱遇上个性化搜索
 
-BFS：Breadth First Search
+https://mp.weixin.qq.com/s/ixqzYrI-e9HQJ5hsHlWO_A
 
-DFS：Depth First Search
+BERT meet Knowledge Graph：预训练模型与知识图谱相结合的研究进展
 
-https://mp.weixin.qq.com/s/52JFdyaLwZq7nWiZq6z6qA
+https://mp.weixin.qq.com/s/Jf9CMm3YIINtvT9ivweQMA
 
-二叉堆是什么鬼？
+知识图谱补全技术
 
-https://mp.weixin.qq.com/s/4V1E2L14c3k-5i0c-JyTVQ
+https://mp.weixin.qq.com/s/UafpA31khwR9viFJh88czw
 
-如何在10亿数中找出前1000大的数
+当推荐系统遇见知识图谱
 
-https://mp.weixin.qq.com/s/yNn57Uw_-itzZXCSEAzrJw
+https://mp.weixin.qq.com/s/P1TIOrC8ve-6265dMz1nvQ
 
-一起搞定面试中的二叉树（一）
+当推荐系统遇见知识图谱（二）
 
-https://mp.weixin.qq.com/s/msv2NZ0aG96d3xQhX3HhNA
+https://mp.weixin.qq.com/s/GMr6SlkYUY5dydECpbjqXw
 
-一起搞定面试中的二叉树（二）
+常识性概念图谱建设以及在美团场景中的应用
 
-https://mp.weixin.qq.com/s/xttZJVR0r5vssOJ19sBHGQ
+https://mp.weixin.qq.com/s/LgxxIEMaiaMtc0GIDXGG9g
 
-快速排序算法
+美团外卖美食知识图谱的迭代及应用
 
-https://mp.weixin.qq.com/s/jQ6fEi_K2RSesJxZn_kujg
+https://mp.weixin.qq.com/s/d3VzMGjMnW4M8Zrd2DP7-Q
 
-外部排序
-
-https://mp.weixin.qq.com/s/QAAfjSeZtfd3PSN3wAP8RQ
-
-什么是外部排序？
-
-![](/images/img2/DS.png)
-
-![](/images/img2/sort.png)
-
-上面两个图的原始地址：
-
-http://bigocheatsheet.com/
-
-该网站还提供了其他关于算法复杂度的资料。
-
-http://blog.csdn.net/u013709270/article/details/53470428
-
-跳跃表的原理及实现
-
-https://mp.weixin.qq.com/s/t7Q0slX3q8Qlhg8F8pXrZQ
-
-如何找到字符串中的最长回文子串？
-
-https://www.cnblogs.com/tuding/p/7335853.html
-
-双调排序Bitonic Sort，适合并行计算的排序算法
-
-https://mp.weixin.qq.com/s/fP36LYFjAqqfP3rbYxAJlA
-
-优秀的排序算法如何成就了伟大的机器学习技术
-
-![](/images/img2/sort.gif)
-
-https://mp.weixin.qq.com/s/FAp10hI05qLLZi5BypondA
-
-除了冒泡排序，你知道Python内建的排序算法吗？
-
-这篇blog其实和Python关系不大，它主要讲述了Timsort排序算法。
-
->Tim Peters，美国软件工程师。他于2002年在python上实现了Timsort排序算法。该算法后来被诸如Java、Android、GNU Octave等所采用。
-
-早期最好的排序算法是QuickSort，比如C语言库自带的qsort函数，使用的就是该算法。然而它对于倒序数组这种最坏情况的复杂度居然是$$O(n^2)$$。
-
-https://mp.weixin.qq.com/s/gBHmBLGILd6rZ-6cuelw0Q
-
-这可能是你听说过最快的稳定排序算法（Timsort）
-
-https://mp.weixin.qq.com/s/d9yNsUVFg9UZN62xuOdxow
-
-为什么MySQL数据库要用B+树存储索引？
-
-https://mp.weixin.qq.com/s/-_DqyBIG3aSDWIYtkD7xuA
-
-看动画轻松理解“递归“与“动态规划”
-
-https://mp.weixin.qq.com/s/M8U9B7UA2AdfnJi5EpTv-g
-
-算法面试中经常问的“字符串”问题
-
-https://mp.weixin.qq.com/s/QHounf4el7nmXnpMSJHjvg
-
-这个问题不简单：寻找缺失元素
-
-https://blog.csdn.net/changtao381/article/details/8936765
-
-Splay Tree
-
-https://blog.csdn.net/simpsonk/article/details/72832959
-
-史上最强图解Treap总结
-
-https://www.cnblogs.com/BCOI/p/9072444.html
-
-TREAP
-
-https://blog.csdn.net/yishizuofei/article/details/81660841
-
-多路查找树：2-3树、2-3-4树、B树、B+树、B*树、R树
-
-http://www.cppblog.com/mysileng/archive/2013/04/06/199159.html
-
-Skip List（跳跃表）原理详解与实现
-
-https://mp.weixin.qq.com/s/M5syxE9Ln4UDLThPh5iuJg
-
-各种字符串Hash函数比较
-
-https://mp.weixin.qq.com/s/IaYnfEZ2bUXIpQvN3ZqFGA
-
-图解红黑树
+完备的娱乐行业知识图谱库如何建成？爱奇艺知识图谱落地实践

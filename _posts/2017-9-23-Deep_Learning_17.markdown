@@ -1,351 +1,335 @@
 ---
 layout: post
-title:  深度学习（十七）——无监督/半监督/自监督深度学习, 图像检索, 深度贝叶斯学习
+title:  深度学习（十七）——自动求导
 category: DL 
 ---
 
-# 无监督/半监督/自监督深度学习
+* toc
+{:toc}
 
-自监督学习是一种特殊目的的无监督学习。不同于传统的AutoEncoder等方法，仅仅以重构输入为目的，而是希望通过surrogate task学习到和高层语义信息相关联的特征。
+# Style Transfer（续）
+
+## 文本风格迁移
+
+不光图像、语音有风格迁移，文本也有。
+
+下面是一个金庸风格的例子
+
+```text
+Input：谢谢
+Output（金庸）：多谢之至
+
+Input：再见
+Output（金庸）：别过!
+
+Input：请问您贵性？
+Output（金庸）：请教阁下尊姓大名?
+```
+
+https://mp.weixin.qq.com/s/7nvqifY_J34mWEUM5IUsLQ
+
+NLP文本风格迁移
 
 ## 参考
 
-https://mp.weixin.qq.com/s/L4GQF0eE7MjLPrb8UygCww
+https://zhuanlan.zhihu.com/p/26746283
 
-无监督深度学习全景教程（193页PDF）
+图像风格迁移(Neural Style)简史
 
-https://mp.weixin.qq.com/s/kbqTHIOzAj1aERl4tm-kVA
+https://mp.weixin.qq.com/s/64H2dDcaTcKdKaOnwdsoEg
 
-2017上半年无监督特征学习研究成果汇总
+基于深度学习的艺术风格化研究
 
-https://mp.weixin.qq.com/s/J50L6hESBROfT8IIAnofQQ
+https://blog.csdn.net/red_stone1/article/details/79055467
 
-Yan LeCun109页最新报告：图嵌入, 内容理解，自监督学习
+人脸识别与神经风格迁移
 
-https://mp.weixin.qq.com/s/s440gdbUhLP41rLPjfgsmQ
+https://blog.csdn.net/cicibabe/article/details/70885715
 
-Yann Lecun自监督学习指南（附114页Slides全文下载）
+卷积神经网络图像风格转移
 
-https://mp.weixin.qq.com/s/foP1xSa5G8oNtAv_pI6AqQ
+https://blog.csdn.net/stdcoutzyx/article/details/53771471
 
-深度神经网络自监督视觉特征学习综述
+图像风格转换(Image style transfer)
 
-https://mp.weixin.qq.com/s/sEHA6fb0XIXQWsmJGf3fTA
+https://blog.csdn.net/u011534057/article/details/78935202
 
-DeepMind发布自监督学习最新教程，附122页全文资料下载
+风格迁移学习笔记(1):Multimodal Transfer: A Hierarchical Deep Convolutional Neural Network for Fast
 
-https://mp.weixin.qq.com/s/2Wm6eQodwlc5XkjGKqhwCg
+https://blog.csdn.net/u011534057/article/details/78935230
 
-南京大学周志华教授综述论文：弱监督学习
+风格迁移学习笔记(2):Universal Style Transfer via Feature Transforms
 
-https://mp.weixin.qq.com/s/aCWAU2RXk9fTzfFqOyjqUw
+https://mp.weixin.qq.com/s/l3hQCQWh5NgihzTs2A049w
 
-能自主学习的人工突触，为无监督学习开辟新的路径
+风格迁移原理及tensorflow实现
 
-https://mp.weixin.qq.com/s/9kMz-eNRwC51Fi0-7BfKzA
+https://mp.weixin.qq.com/s/5Omfj-fYRDt9j2VZH1XXkQ
 
-Active Learning: 一个降低深度学习时间，空间，经济成本的解决方案
+如何用Keras打造出“风格迁移”的AI艺术作品
 
-https://mp.weixin.qq.com/s/ZvTm9omnIRqPXcLFbZtoeg
+https://mp.weixin.qq.com/s/4q-9QsXD04mD-f2ke7ql8A
 
-深度学习的关键：无监督深度学习简介
+tensorflow风格迁移网络训练与使用
 
-https://mp.weixin.qq.com/s/GHjmiB6F2W3Zo8gVllTyyQ
+https://blog.csdn.net/hungryof/article/details/53981959
 
-重现“世界模型”实验，无监督方式快速训练
+谈谈图像的Style Transfer（一）
 
-https://mp.weixin.qq.com/s/3_VtdZNKBwNtMEMf2xc7qw
+https://blog.csdn.net/Hungryof/article/details/71512406
 
-CVPR智慧城市挑战赛：无监督交通异常检测，冠军团队技术分享
+谈谈图像的style transfer（二）
 
-https://mp.weixin.qq.com/s/3aAaM1DWsnCWEEbP7dOZEg
+https://mp.weixin.qq.com/s/8Fz6Q-6VgJsAko0K7HDsow
 
-伯克利等提出无监督特征学习新方法，代码已开源
+一个模型搞定所有风格转换，直接在浏览器实现（demo+代码）
 
-https://mp.weixin.qq.com/s/ZDPPWH570Vc6e1irwP1b1Q
+https://github.com/cysmith/neural-style-tf
 
-精细识别现实世界图像：李飞飞团队提出半监督适应性模型
+TensorFlow (Python API) implementation of Neural Style.这个项目实现了两张图片的画风融合，非常牛。
 
-https://mp.weixin.qq.com/s/X1Alcl7rVfTtZGZ40iXjXw
+https://github.com/jinfagang/pytorch_style_transfer
 
-Spotlight 论文：非参数化方法实现的极端无监督特征学习
+这个和上面的一样，不过是用pytorch实现的。
 
-https://mp.weixin.qq.com/s/kxEfoSjCF8n2jxlDfMaNDA
+https://mp.weixin.qq.com/s/g1hpuzH36j_rbYR23Mwx0w
 
-半监督学习在图像分类上的基本工作方式
+开源图像风格迁移，快看看大画家的潜力股
 
-https://mp.weixin.qq.com/s/uUMPUdG2TI10W5RumPaXkA
+https://mp.weixin.qq.com/s/OzancX-44Si13ZtZiONnpQ
 
-DeepMind无监督表示学习重大突破：语音、图像、文本、强化学习全能冠军！
+基于感知损失的实时风格迁移与超分辨率重建
 
-https://mp.weixin.qq.com/s/_VC6PGdCjlhcsndpunIteg
+https://mp.weixin.qq.com/s/yr9fNyzpOBt7dLsnh2T2xg
 
-何恺明等人提出新型半监督实例分割方法：学习分割Every Thing
+使用TFLite在移动设备上优化与部署风格转化模型
 
-https://mp.weixin.qq.com/s/qaxzSSDuuscwL5tt0QCQ0Q
+https://mp.weixin.qq.com/s/9AEYcY04lAl3dCRK9LPBeQ
 
-破解人类识别文字之谜：对图像中的字母进行无监督学习
+人脸风格化核心技术与数据集总结
 
-https://mp.weixin.qq.com/s/IsLlzDWnUXe8LVp4Y1Jb_A
+https://mp.weixin.qq.com/s/ylfeWiOrftCB823_gjQNmA
 
-35亿张图像！Facebook基于弱监督学习刷新ImageNet基准测试记录
+图像风格迁移也有框架了：使用Python编写，与PyTorch完美兼容，外行也能用
 
-https://mp.weixin.qq.com/s/TEk_i4kEjUqmAqF8LgTVjg
+# 自动求导
 
-FAIR提出用聚类方法结合卷积网络，实现无监督端到端图像分类
+DL发展到现在，其基本运算单元早就不止CNN、RNN之类的简单模块了。针对新运算层出不穷的现状，各大DL框架基本都实现了自动求导的功能。
 
-https://mp.weixin.qq.com/s/dSncg1pDHpIFOT4mXrFntA
+论文：
 
-Yan Lecun自监督学习：机器能像人一样学习吗？ 110页PPT
+《Automatic Differentiation in Machine Learning: a Survey》
 
-https://mp.weixin.qq.com/s/W4zwKqkVQN4v-IKzGrkudg
+## Manual differentiation
 
-通过传递不变性实现自监督视觉表征学习
+手动推出导数是什么样，然后硬编码。这种做法既耗时也容易出错，还没有灵活性。
 
-https://zhuanlan.zhihu.com/p/30265894
+## Numerical differentiation
 
-自监督学习近期进展
+数值微分最大的特点就是很直观，好计算，它直接利用了导数定义：
 
-https://mp.weixin.qq.com/s/cTlXMxcpzc7_5NVsTm1jcA
+$$f'(x)=\lim_{h\to 0}{f(x+h)-f(x)\over h}$$
 
-学习一帧，为整段黑白视频上色：谷歌提出自监督视觉追踪模型
+不过这里有一个很大的问题：h怎么选择？选大了，误差会很大；选小了，不小心就陷进了浮点数的精度极限里，造成舍入误差。
 
-https://mp.weixin.qq.com/s/Amr34SdrPZho1GQpFS7WBA
+第二个问题是对于参数比较多时，对深度学习模型来说，上面的计算是不够高效的，因为每计算一个参数的导数，你都需要重新计算$$f(x+h)$$。
 
-见微知著：语义分割中的弱监督学习
+因此，这种方法并不常用，而主要用于做梯度检查（Gradient check），你可以用这种不高效但简单的方法去检查其他方法得到的梯度是否正确。
 
-https://mp.weixin.qq.com/s/zOWA1oKbopZJuYIAYYlKTA
+## Symbolic differentiation
 
-港中文-商汤联合论文：自监督语义分割的混合与匹配调节
+符号微分的主要步骤如下：
 
-https://mp.weixin.qq.com/s/5xlSoC5sgzsAwMYMSFCjnw
+1.需要预置基本运算单元的求导公式。
 
-TextTopicNet:CMU开源无标注高精度自监督模型
+2.遍历计算图，得到运算表达式。
 
-https://mp.weixin.qq.com/s/343DfjOvkaozuxNK89V3zQ
+3.根据导数的代入法则和四则运算法则，求出复杂运算的求导公式。
 
-前景目标检测的无监督学习
+这种方法没有误差，是目前的主流，但遍历比较费时间。
 
-https://mp.weixin.qq.com/s/DwY0oGu-G30Szs-ArI5WaQ
+符号微分最大的弊病在于其对表达式的严格展开和变换也导致了所谓的表达式膨胀（expression swell）问题。
 
-程明明：面向弱监督的图像理解
+## Automatic Differentiation
 
-https://mp.weixin.qq.com/s/LFOljv-Hr6JqyI6TQ2X4sw
+自动微分是介于数值微分和符号微分之间的方法。首先对基本算子（函数）应用符号微分方法，其次带入数值进行计算，保留中间结果，最后通过链式求导法将中间结果应用于整个函数。
 
-半监督学习也能自动化？南大和第四范式提出Auto-SSL
+简单来说就是，**layer内部采用符号微分，layer之间采用数值微分。**
 
-https://mp.weixin.qq.com/s/83xAXrc_H_OExW3vii08hA
+优点：精度高，无表达式膨胀问题。
 
-谷歌提出新方法：基于单目视频的无监督深度学习结构化
+缺点：需要存储一些中间求导结果，内存占用会增加。
 
-https://mp.weixin.qq.com/s/gr0_p4WFToTrDfy47h-p0A
+Automatic Differentiation主要包括Forward-Mode Autodiff和Reverse-Mode Autodiff两种方法。
 
-基于自监督学习的视听觉信息同一性判断
+## Forward-Mode Autodiff
 
-https://mp.weixin.qq.com/s/Dqz97_U5pw_4d9KFblJfLg
+Forward-Mode Autodiff依赖于dual numbers。
 
-基于自编码器的表征学习：如何攻克半监督和无监督学习？
+类比复数的概念：
 
-https://mp.weixin.qq.com/s/LaIvAuBHYGNMug3NZ1pLhQ
+$$x = a + bi \quad (i^2 = -1)$$
 
-半监督深度学习小结：类协同训练和一致性正则化
+我们定义Dual number：
 
-https://mp.weixin.qq.com/s/aBDgV7u93MAv2MogZKBmvw
+$$x \mapsto x = x + \dot{x} d \quad (d^2=0)$$
 
-Google提出Grasp2Vec模型：利用自监督方法学习物体表示
+定义Dual number的运算法则：
 
-https://mp.weixin.qq.com/s/YfDZMEkOnxp0_ei2Oam-YQ
+$$(x + \dot{x}d) + ( y + \dot{y}d) = x + y + (\dot{x} + \dot{y})d$$
 
-基于弱监督的视频时序动作检测的介绍
+$$(x + \dot{x}d) ( y + \dot{y}d) = xy + \dot{x}yd + x\dot{y}d  +  \dot{x}\dot{y}d^2 = xy + (\dot{x}y+ x\dot{y})d$$
 
-https://mp.weixin.qq.com/s/RiL-s50oOI--PZyIOd2E0g
+$$-(x + \dot{x}d) = - x - \dot{x}d$$
 
-弱监督语义分割最新方法资源列表
+$$\frac{1}{x + \dot{x}d} = \frac{1}{x} - \frac{\dot{x}}{x^2}d$$
 
-https://mp.weixin.qq.com/s/USOWECXk_az4b6eTssfOBw
+dual number有很多非常不错的性质。以下面的指数运算多项式为例：
 
-基于弱监督深度学习的图像分割方法综述
+$$f(x) = p_0 + p_1x + p_2x^2 + ... + p_nx^n$$
 
-https://mp.weixin.qq.com/s/8oEdQOmSRrkIaTVQdhk2Dw
+用$$x + \dot{x}d$$替换x，则有：
 
-无监督领域特定单图像去模糊
+$$
+\begin{array}\\
+f(x + \dot{x}d) =   p_0 + p_1(x + \dot{x}d) + ... +  p_n(x + \dot{x}d)^n \\ 
+= p_0 + p_1x + p_2x^2 + ... + p_nx^n + \\ 
+p_1\dot{x}d + 2p_2x\dot{x}d + ... + np_{n-1}x\dot{x}d\\ 
+= f(x) + f'(x)\dot{x}d
+\end{array}$$
 
-https://mp.weixin.qq.com/s/FpIaa8XoJ9GsHxL-W1Cl5Q
+可以看出d的系数就是$$f'(x)$$。
 
-斯坦福AI实验室机器学习编程新范式：弱监督
+![](/images/img4/FMA.png)
 
-https://mp.weixin.qq.com/s/ys9iiiBL3iL2SJL247AMlA
+## Reverse-Mode Autodiff
 
-多伦多大学&NVIDIA最新成果：图像标注速度提升10倍！
+![](/images/img4/RMA.png)
 
-https://mp.weixin.qq.com/s/V6xiG931OUJyVx15QFb_mQ
+该算法首先前向（也就是从输入到输出）计算每个节点的值，然后反向（从输出到输入）计算所有的偏导数。
 
-弱监督视觉理解笔记
+当输出的维度大于输入的时候，适宜使用前向模式微分；当输出维度远远小于输入的时候，适宜使用反向模式微分。
 
-https://mp.weixin.qq.com/s/HopNSLS75TgE28LfY02qog
+考虑到大多数应用的特点是输出维度远远小于输入，因此目前大部分AI框架都会优先采用反向模式。
 
-不同视角构造cycle-consistency，降低视频标注成本
+## 实现方式
 
-https://mp.weixin.qq.com/s/XiLBHkraT8lJcOu2faqK5g
+虽然自动微分的数学原理已经明确，包括正向和反向的数学逻辑和模式。但具体的实现方法则可以有很大的差异。
 
-关于弱监督学习，这可能是目前最详尽的一篇科普文
+目前主要有三类方案：
 
-https://mp.weixin.qq.com/s/VnOfYuHQQf_q92VHVE3mrQ
+**基本表达式**：基本表达式或者称元素库（Elemental Libraries），基于元素库中封装一系列基本的表达式（如：加减乘除等）及其对应的微分结果表达式，作为库函数。用户通过调用库函数构建需要被微分的程序。
 
-谷歌新发布的半监督学习算法降低4倍错误率
+**操作符重载**：操作符重载或者称运算重载（Operator Overloading，OO），利用现代语言的多态特性（例如C++/JAVA/Python等高级语言），使用操作符重载对语言中基本运算表达式的微分规则进行封装。
 
-https://mp.weixin.qq.com/s/rOj_J1zNYf-Vj9tqLG5KOQ
+**源代码变换**（Source Code Transformation，SCT）：源代码变换或者叫做源码转换（Source Code Transformation，SCT）则是通过对语言预处理器、编译器或解释器的扩展，将其中程序表达（如：源码、AST抽象语法树 或 编译过程中的中间表达 IR）的基本表达式微分规则进行预定义，再对程序表达进行分析得到基本表达式的组合关系，最后使用链式法则对上述基本表达式的微分结果进行组合生成对应微分结果的新程序表达，完成自动微分。
 
-超强半监督学习MixMatch
+## 不可导函数的求导
 
-https://zhuanlan.zhihu.com/p/66389797
+不可导函数的求导，一般采用泰勒展开的方式。典型的算法有PGD（Proximal Gradient Descent）。
 
-虚拟对抗训练（VAT）：一种新颖的半监督学习正则化方法
+参考：
 
-https://mp.weixin.qq.com/s/DAtHXSfCpqCAZ0iVsfWkDA
+https://blog.csdn.net/bingecuilab/article/details/50628634
 
-半监督学习理论及其研究进展概述
+Proximal Gradient Descent for L1 Regularization
 
-https://mp.weixin.qq.com/s/eHzNIO-RSY-uf-K-OwtWfw
+## Tape
 
-集多种半监督学习范式为一体，谷歌新研究提出新型半监督方法MixMatch
+无论前向还是后向求导，都需要记录前向传播的所有计算过程以及中间结果。这种记录和调用的过程类似于磁带的读写，是一种顺序访问，而非随机访问，故名为Tape方法。
 
-https://mp.weixin.qq.com/s/3el7bPAeJrTQGfWW29ewuA
+针对动态图的自动求导，TF提出了GradientTape方法。
 
-新技术“红”不过十年，半监督学习为什么是个例外？
+https://zhuanlan.zhihu.com/p/102207302
 
-https://mp.weixin.qq.com/s/alnji5kgTxc34O7k78uGiA
+tensorflow计算图与自动求导——tf.GradientTape
 
-无监督学习中的目标检测
+## 其他
 
-https://mp.weixin.qq.com/s/8FtDhpgc-1j3TSL771N-Ng
+Jacobian-vector product function,JVP
 
-无标注数据是鸡肋还是宝藏？阿里工程师这样用它
+vector-Jacobian product function,VJP
 
-https://mp.weixin.qq.com/s/LdfLd2cZCdpvNYLKHUNwuA
+Hessian Vector Product,HVP
 
-简述无监督图像分类发展现状
+https://blog.csdn.net/apache/article/details/113925886
 
-https://mp.weixin.qq.com/s/qaLQK3uzaeyp68AbL0aOOQ
+Pytorch,Tensorflow Autograd/AutoDiff nutshells: Jacobian,Gradient,Hessian,JVP,VJP,etc
 
-怎么在视频标注上省钱？这里有一个面向视频推荐的多视图主动学习
+## 参考
 
-https://mp.weixin.qq.com/s/-cXOUw9zJteVUkbpRMIWtQ
+https://mp.weixin.qq.com/s/7Z2tDhSle-9MOslYEUpq6g
 
-何恺明一作，刷新7项检测分割任务，无监督预训练完胜有监督
+从概念到实践，我们该如何构建自动微分库
 
-https://mp.weixin.qq.com/s/wtHrHFoT2E_HLHukPdJUig
+https://mp.weixin.qq.com/s/bigKoR3IX_Jvo-re9UjqUA
 
-OpenAI科学家一文详解自监督学习
+机器学习之——自动求导
 
-# 图像检索
+https://www.jianshu.com/p/4c2032c685dc
 
-## 传统方法
+自动求导框架综述
 
-https://mp.weixin.qq.com/s/sM78DCOK3fuG2JrP2QaSZA
+http://txshi-mt.com/2018/10/04/NMT-Tutorial-3b-Autodiff/
 
-SIFT与CNN的碰撞：万字长文回顾图像检索任务十年探索历程（上）
+自动微分
 
-https://mp.weixin.qq.com/s/yzVMDEpwbXVS0y-CwWSBEA
+https://mp.weixin.qq.com/s/WiZ00mkEB7CND3VyIM5Swg
 
-SIFT与CNN的碰撞：万字长文回顾图像检索任务十年探索历程（下）
+最新《自动微分手册》77页pdf
 
-https://mp.weixin.qq.com/s/Sda94q-40goiZGSYGgm_Yw
+https://mp.weixin.qq.com/s/xXwbV46-kTobAMRwfKyk_w
 
-基于内容的图像检索技术综述-传统经典方法
+自动求导--Deep Learning框架必备技术二三事
 
-https://mp.weixin.qq.com/s/ED-zovVT_vHId4mYXdEo5w
+https://mp.weixin.qq.com/s/f0xFfA1inOVOdJnSZR4k6Q
 
-高效大规模图像搜索开源实现
+自动微分技术
 
-## DL方法
+https://zhuanlan.zhihu.com/p/79801410
 
-https://zhuanlan.zhihu.com/p/36479489
+PyTorch的自动求导机制详细解析，PyTorch的核心魔法
 
-图像检索：因缘际会与前瞻
+https://zhuanlan.zhihu.com/p/29904755
 
-https://mp.weixin.qq.com/s/aRndRlVnY5ZRBFnNbVNecg
+Autograd:PyTorch中的梯度计算
 
-李飞飞CS231n项目：这两位工程师想用神经网络帮你还原买家秀
+https://zhuanlan.zhihu.com/p/69294347
 
-https://mp.weixin.qq.com/s/zHSDFR_Nd4LfvIaq9kSrww
+PyTorch的Autograd
 
-BMVC2018图像检索论文—使用区域注意力网络改进R-MAC方法
+https://zhuanlan.zhihu.com/p/83172023
 
-https://mp.weixin.qq.com/s/FJCZvc8pl-CwFhyiCD6E-g
+Pytorch autograd,backward详解
 
-Pinterest视觉搜索工程师孙彦：视觉搜索不是“鸡肋”
+https://mp.weixin.qq.com/s/PELBuCvu-7KQ33XBtlYfYQ
 
-https://mp.weixin.qq.com/s/QgYtfvsLGcfqLA98mp19tg
+深度学习中的微分
 
-KDD2018阿里巴巴论文揭示自家大规模视觉搜索算法
+https://zhuanlan.zhihu.com/p/24709748
 
-https://mp.weixin.qq.com/s/CS4iAMprZizrXhpXDhySzg
+矩阵求导术（上）
 
-视频分类/行为识别研究综述，从数据集到方法
+https://zhuanlan.zhihu.com/p/24863977
 
-# 深度贝叶斯学习
+矩阵求导术（下）
 
-https://mp.weixin.qq.com/s/pHAbxeYBI2q6pUHNrAt1og
+https://mp.weixin.qq.com/s/2hu6a0wScJedwk3a5aKbIw
 
-贝叶斯学习与未来人工智能
+自动微分到底是什么？这里有一份自我简述
 
-https://mp.weixin.qq.com/s/Zd4rFU7Lebr4zmzxThNyVw
+https://zhuanlan.zhihu.com/p/347385418
 
-详解珠算：清华大学开源的贝叶斯深度学习库
+AI框架基础技术之自动求导机制 (Autograd)
 
-https://mp.weixin.qq.com/s/RpaOrngeXTKycLb3iCygZw
+https://www.zhihu.com/question/497827630
 
-利用贝叶斯神经网络进行随机动力系统中的学习与策略搜索
+Pytorch的自动微分机制是自动创建一个可以记录所有数据操作的计算图（有向无环图(DAG)）吗？
 
-https://mp.weixin.qq.com/s/lKm_ypn5I7tSjoQHceJ0jQ
+https://www.cnblogs.com/royhoo/p/Autodiff.html
 
-概率编程：使用贝叶斯神经网络预测金融市场价格
+自动微分（Autodiff）
 
-https://mp.weixin.qq.com/s/cDqxmRVQCIqdM5oiUh82YQ
+https://zhuanlan.zhihu.com/p/427444916
 
-Yee Whye Teh：《贝叶斯深度学习与深度贝叶斯学习》
-
-https://mp.weixin.qq.com/s/Zk2YG-IJNhJxTBU8THSM-g
-
-让DL可解释？这一份66页贝叶斯深度学习教程告诉你
-
-https://mp.weixin.qq.com/s/-izo9VUdxN33pwVFGV_tjw
-
-299页PPT带你回顾深度贝叶斯学习最新发展脉络
-
-https://github.com/bayesgroup/deepbayes-2018
-
-Seminars DeepBayes Summer School 2018
-
-https://mp.weixin.qq.com/s/WCRYppBLdl_M4etUChnfgw
-
-PyMC3和Theano代码构建贝叶斯深度网络
-
-https://mp.weixin.qq.com/s/7mwJpQFWWXJ3dvTAwDFI7Q
-
-贝叶斯卷积神经网络：架起深度学习与统计学的桥梁
-
-https://mp.weixin.qq.com/s/2LkpuchuHs82Sxs5rD8bWA
-
-《深度贝叶斯与序列学习》，279页PPT带你知晓深度贝叶斯序列模型在NLP最新进展
-
-https://zhuanlan.zhihu.com/p/74573041
-
-针对推荐系统的深度贝叶斯多目标学习
-
-https://mp.weixin.qq.com/s/b041h_hbHQYiXCiDHGaD5w
-
-深度贝叶斯自然语言处理，304页ppt带你了解最新研究进展
-
-https://zhuanlan.zhihu.com/p/77140176
-
-构建贝叶斯深度学习分类器
-
-https://mp.weixin.qq.com/s/4sDNUZiOiS6VH_oRSnW6HQ
-
-牛津大学YARIN GAL《贝叶斯深度学习》入门教程，336页ppt
-
-https://mp.weixin.qq.com/s/UiLyQKhIe2rDYiwPcqyqaw
-
-可跟踪概率模型，209页最新教程
+梯度的计算

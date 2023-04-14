@@ -1,34 +1,156 @@
 ---
 layout: post
-title:  深度学习（四）——AutoEncoder, 词向量（1）
+title:  深度学习（四）——Neural Network Zoo, CNN, AutoEncoder
 category: DL 
 ---
 
+* toc
+{:toc}
+
+
+# Neural Network Zoo
+
+在继续后续讲解之前，我们首先给出常见神经网络的结构图：
+
+![](/images/article/Neural_Networks.png)
+
+上图的原地址为：
+
+http://www.asimovinstitute.org/neural-network-zoo/
+
+单元结构：
+
+![](/images/article/neuralnetworkcells.png)
+
+层结构：
+
+![](/images/article/neuralnetworkgraphs.png)
+
+上图的原地址为：
+
+http://www.asimovinstitute.org/neural-network-zoo-prequel-cells-layers/
+
+参考：
+
+https://mp.weixin.qq.com/s/ysnLwvbSD4fcL5LK7wSnyA
+
+MIT高赞深度学习教程：一文看懂CNN、RNN等7种范例
+
 # CNN
 
-## 多通道卷积（续）
+## 概述
 
-参见：
+卷积神经网络（Convolutional Neural Networks，ConvNets或CNNs）属于神经网络的范畴，已经在诸如图像识别和分类的领域证明了其高效的能力。
 
-http://blog.csdn.net/u014114990/article/details/51125776
+CNN的开山之作是Yann LeCun的论文：
 
-多通道(比如RGB三通道)卷积过程
+《Gradient-Based Learning Applied to Document Recognition》
 
-https://www.zhihu.com/question/28385679
+>注：科学界的许多重要成果的开山之作，其名称往往和成果的最终名称有一定的差距。比如LeCun的这篇文章的名称中，就没有CNN。类似的还有Vapnik的SVM，最早被称为Support Vector Network。
 
-在Caffe中如何计算卷积？
+英文不好的，推荐以下文章：
 
-https://buptldy.github.io/2016/10/01/2016-10-01-im2col/
+http://www.hackcv.com/index.php/archives/104/
 
-Implementing convolution as a matrix multiplication（中文blog）
+CNN的直观解释
 
-https://zhuanlan.zhihu.com/p/66958390
+https://ujjwalkarn.me/2016/08/11/intuitive-explanation-convnets/
 
-通用矩阵乘（GEMM）优化与卷积计算
+上面文章的英文版本
 
-https://mp.weixin.qq.com/s/Q1Ovl1LrT5Y6amVqlYpdbA
+## 关键点
 
-基于GEMM实现的CNN底层算法被改？Google提出全新间接卷积算法
+这里以最经典的LeNet-5为例，提点一下CNN的要点。
+
+![](/images/article/LeNet_5.jpg)
+
+LeNet-5的caffe模板：
+
+https://github.com/BVLC/caffe/blob/master/examples/mnist/lenet.prototxt
+
+## 卷积
+
+在《数学狂想曲（十六）》中我们讨论了卷积的数学含义，结合《 图像处理理论（一）》和《 图像处理理论（二）》，不难看出卷积或者模板（算子, kernel, filter），在前DL时代，几乎是图像处理算法的基础和灵魂。
+
+![](/images/img4/convolution.webp)
+
+为了实现各种目的，人们手工定义或发现了一系列算子：
+
+![](/images/img4/filter.png)
+
+到了DL时代，卷积仍然起着非常重要的作用。但这个时候，不再需要人工指定算子，**算子本身也将由学习获得**。我们需要做的只不过是指定算子的个数而已。
+
+![](/images/img2/ML.jpg)
+
+![](/images/img2/DL.jpg)
+
+上面的两图形象的指出了ML和DL的差别。
+
+![](/images/img3/DL.png)
+
+比如，LeNet-5的C1:6@28*28，其中的6就是算子的个数。显然算子的个数越多，计算越慢。但太少的话，又会导致提取的特征数太少，神经网络学不到东西。
+
+需要注意的是，传统的CV算法中，通常只有单一的卷积运算。而CNN中的卷积层，实际上包括了**卷积+激活**两种运算，即：
+
+$$L_2=\sigma(Conv(L_1,W)+b)$$
+
+因此，相比全连接层而言，卷积层每次只有部分元素参与到最终的激活运算。从宏观角度看，这些元素实际上对应了图片的局部空间二维信息，它和后面的Pooling操作一道，起到了空间降维的作用。
+
+实际上，传统的MLP（MultiLayer Perceptron）网络，就是由于1D全连接的神经元控制了太多参数，而不利于学习到稀疏特征。
+
+CNN网络中，2D全连接的神经元则控制了局部感受野，有利于解离出稀疏特征。
+
+至于激活函数，则是为了保证变换的非线性。这也是CNN被归类为NN的根本原因。
+
+参考：
+
+https://mp.weixin.qq.com/s/dIIWAKv9woLO8M0CyN8lsw
+
+传统计算机视觉技术落伍了吗？不，它们是深度学习的“新动能”
+
+## 池化
+
+Pooling操作（也称Subsampling）使输入表示（特征维度）变得更小，并且网络中的参数和计算的数量更加可控的减小，因此，可以控制过拟合。
+
+它还可使网络对于输入图像中更小的变化、冗余和变换变得不变性。
+
+## Gaussian Connections
+
+LeNet-5最后一步的Gaussian Connections是一个当年的历史遗迹，目前已经被Softmax所取代。它的含义在上面提到的Yann LeCun的原始论文中有描述。
+
+>注意：现代版的LeNet-5最后一步的Softmax层，实际上包含了$$Wx+b$$和Softmax两种计算。相当于用Softmax函数替换Sigmoid/ReLU函数。
+
+### 其他
+
+![](/images/article/CNN_1.jpg)
+
+上图展示了不同分类的图片特征在特征空间中的分布，可以看出在CNN的低层中，这些特征是混杂在一起的；而到了CNN的高层，这些特征就被区分开来了。
+
+![](/images/article/CNN_2.jpg)
+
+上图是若干ML、DL算法按照不同维度划分的情况。
+
+## 多通道卷积
+
+MNIST的例子中，由于图像是单通道（灰度图）的，因此，多数教程都只是展示了单通道卷积的计算步骤：
+
+$$g(i,j)=\sum_{k,l}f(i+k,j+l)h(k,l)$$
+
+而多通道（例如彩色图像的RGB三通道）卷积实际上就是将各通道卷积之后的结果再加在一起：
+
+$$g(i,j)=\sum_{c,k,l}f(i+k,j+l)h(k,l)$$
+
+![](/images/article/conv_1.png)
+
+上图展示了一个4通道图像经卷积之后，得到2通道图像的过程。
+
+从中可以得出以下结论：
+
+1.RGB通道信息在卷积之后，就不复存在了。无论输入图像有多少个通道，输出图像的通道数只和feature的个数相关。
+
+2.即使是LeNet-5的MNIST示例中，实际上也是有多通道卷积的，只不过不在第一个卷积层而已。
+
+3.多通道卷积除了二维空间信息的卷积之外，还包括了**通道间信息**的卷积。这也是CNN中1x1卷积的意义之一。
 
 ## CNN的反向传播算法
 
@@ -45,6 +167,14 @@ $$\frac{\partial Loss}{\partial x} = \frac{\partial y^T}{\partial x}\cdot \frac{
 正向：$$Y=X*K$$
 
 反向：$$\Delta X = \Delta Y * rot_{180}(K)$$
+
+ConvBackpropInput：
+
+![](/images/img4/conv_BI.png)
+
+ConvBackpropFilter：
+
+![](/images/img4/conv_BF.png)
 
 卷积的反向传播，有时也被称为反卷积（Deconvolution）。
 
@@ -71,10 +201,6 @@ https://www.jianshu.com/p/f0674e48894c
 Tensorflow反卷积（DeConv）实现原理
 
 ## 参考
-
-http://lib.csdn.net/article/deeplearning/58185
-
-BP神经网络与卷积神经网络
 
 http://blog.csdn.net/Fate_fjh/article/details/52882134
 
@@ -126,7 +252,7 @@ https://mp.weixin.qq.com/s/Do6erhin3W4dK_-RTAyD6A
 
 http://www.qingruanit.net/blog/23930/note5837.html
 
-卷积神经网络（CNN）学习算法之----基于LeNet网络的中文验证码识别
+卷积神经网络（CNN）学习算法之---基于LeNet网络的中文验证码识别
 
 https://mp.weixin.qq.com/s/XiaAPd20YxbM0wDiSTAYMg
 
@@ -201,140 +327,3 @@ Autoencoder的结构如上图所示。它的特殊之处在于：
 ![](/images/img3/dae.png)
 
 黄色的三角表明输入数据中被加入了噪声。当然了DAE的输出要和无噪声样本做比较，这样才能体现去噪的效果。
-
-## Stacked AutoEncoders
-
-AE不仅可以单独使用，还可以堆叠式的使用。
-
-![](/images/img2/Stacked_SparseAE_Features1.png)
-
-上图是个普通的AE，其中的hidden层可以看作是input的Features，不妨称作Features I。
-
-![](/images/img2/Stacked_SparseAE_Features2.png)
-
-将Features I作为input，送进另一个AE，得到Features II。依此类推，就可以形成一个深度网络，这种方法叫做Stacked Auto-encoder Networks（SANs）。
-
-这实际上，就是Relu发明之前，预训练DNN的标准做法。经过SANs预训练的网络，每层的参数都被归一化，即使使用sigmoid激活函数，也没有严重的梯度消失现象，从而使DNN的训练成为了可能。
-
-参考：
-
-http://ufldl.stanford.edu/wiki/index.php/Stacked_Autoencoders
-
-Stacked Autoencoders
-
-## Deep AE
-
-一层的AE有时可能不能很好的进行数据降维，这个时候就可以使用如下所示的Deep AE：
-
-![](/images/img2/Deep_AE.jpg)
-
-Deep AE可用于异常检测：根据正常数据训练出来的Autoencoder，能够将正常样本重建还原，但是却无法将异于正常分布的数据点较好地还原，导致还原误差较大。
-
-参考：
-
-http://sofasofa.io/tutorials/anomaly_detection/
-
-利用Autoencoder进行无监督异常检测
-
-https://zhuanlan.zhihu.com/p/51053142
-
-基于自编码器的时间序列异常检测算法
-
-## 参考
-
-http://ufldl.stanford.edu/tutorial/unsupervised/Autoencoders/
-
-Autoencoders
-
-http://blog.csdn.net/changyuanchn/article/details/15681853
-
-深度学习之autoencoder
-
-https://mp.weixin.qq.com/s/cago4myCcLZkv1e43T__3g
-
-深入理解自编码器
-
-http://www.cnblogs.com/neopenx/p/4370350.html
-
-降噪自动编码器（Denoising Autoencoder)
-
-https://mp.weixin.qq.com/s/lODy8ucB3Bw9Y1sy1NxTJg
-
-无监督学习中的两个非概率模型：稀疏编码与自编码器
-
-https://mp.weixin.qq.com/s/QuDa__mi1NX1wOxo5Ki94A
-
-深度学习：自动编码器基础和类型
-
-http://blog.csdn.net/losteng/article/details/51067216
-
-CAE(Convolutional Auto-Encode) 卷积自编码
-
-https://mp.weixin.qq.com/s/q-WExyS-zylMA-L8ojOgRg
-
-简单易懂的自动编码器
-
-https://mp.weixin.qq.com/s/Ci0HPy3ENz1ZooB784aMcA
-
-谷歌大脑Wasserstein自编码器：新一代生成模型算法
-
-https://mp.weixin.qq.com/s/Pgf6JMokilV9JxYWi7Y20Q
-
-揭秘自编码器，一种捕捉数据最重要特征的神经网络
-
-https://mp.weixin.qq.com/s/FpPlSMfbtcxg_UnH0lwaqA
-
-手把手教你实现去噪自编码器（Denoise Autoencoder）
-
-https://zhuanlan.zhihu.com/p/82415579
-
-浅谈Deep Auto-encoder
-
-# 词向量
-
-## One-hot Representation
-
-NLP是ML和DL的重要研究领域。但是多数的ML或DL算法都是针对数值进行计算的，因此如何将自然语言中的文本表示为数值，就成为了一个重要的基础问题。
-
-词向量顾名思义就是单词的向量化表示。最简单的词向量表示法当属**One-hot Representation**：
-
-假设语料库的单词表中有N个单词，则词向量可表示为N维向量$$[0,\dots,0,1,0,\dots,0]$$
-
-这种表示法由于N维向量中只有一个非零元素，故名。该非零元素的序号，就是所表示的单词在单词表中的序号。
-
-某牛点评：
-
->如果你预测的label是苹果，雪梨，香蕉，草莓这四个，显然他们不直接构成比较关系，但如果我们用1,2,3,4来做label就会出现了比较关系，labe之间的距离也不同。有了比较关系，第一个label 和最后一个 label的距离太远，影响模型的学习。因为模型觉得label 1和label 2最像，和最后一个label 最不像。   
->不过当你的label之间存在直接的比较关系，就可以直接用数字当label。例如你做一个风控模型，预测的是四个风险类别[低，中，高，紧急]，其实你也可以用1，2，3，4来做label，因为确实存在一个比较。但这本质上就成了回归问题。
-
-One-hot Representation的缺点在于：
-
-1.该表示法中，由于任意两个单词的词向量都是正交的，因此无法反映单词之间的语义相似度。
-
-2.一个词库的大小是$$10^5$$以上的量级。维度过高，会妨碍神经网络学习到稀疏特征。
-
-参考：
-
-https://mp.weixin.qq.com/s?__biz=MzI4MzM2NTU0Mg==&mid=2247483698&idx=1&sn=cf185232e43b4523ab9b0bc0ce425ed4
-
-One-Hot编码与哑变量
-
-https://www.zhihu.com/question/359742335
-
-分类问题的label为啥必须是one hot形式？
-
-## Word Embedding
-
-针对One-hot Representation的不足，Bengio提出了Distributed Representation，也称为Word Embedding。
-
-![](/images/article/word_vector.png)
-
-Word Embedding的思路如上图所示，即想办法**将高维的One-hot词向量映射到低维的语义空间中**。
-
-Bengio自己提出了一种基于神经网络的Word Embedding的方案，然而由于计算量过大，目前已经被淘汰了。
-
-参考：
-
-http://www.cnblogs.com/neopenx/p/4570648.html
-
-词向量概况

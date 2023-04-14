@@ -1,150 +1,62 @@
 ---
 layout: post
 title:  TensorFlow（二）
-category: AI 
+category: DL Framework 
 ---
 
-# TensorFlow
+* toc
+{:toc}
 
-## TensorBoard
+# 图计算（续）
 
-TensorBoard是一个http服务，用以监控TensorFlow的执行。
+下面的动图形象的展示了计算图的前向和后向运算的过程：
 
-`writer = tf.summary.FileWriter("logs/", sess.graph)`
-
-然后
-
-`tensorboard --logdir='logs/'`
-
-启动之后，用浏览器打开`http://localhost:6006`即可。
-
-TensorBoard会将同类结点Group，但Group之后，有时反而不易观察具体的结构。这个时候最好Ungroup一下。
+![](/images/article/tensorflow.gif)
 
 参考：
 
-http://blog.csdn.net/u013082989/article/details/53510625
+http://www.algorithmdog.com/dynamic-tensorflow
 
-TensorFlow学习_01_安装_基本操作_可视化结构、过程_Mnist
+动态图计算：Tensorflow第一次清晰地在设计理念上领先
 
-https://blog.csdn.net/sinat_33761963/article/details/62433234
+https://zhuanlan.zhihu.com/p/23932714
 
-Tensorflow的可视化工具Tensorboard的初步使用
+YJango的TensorFlow整体把握
 
-https://mp.weixin.qq.com/s/Zaz9hmTuUbd-hCx-zHhBgg
+http://www.cnblogs.com/lienhua34/p/5998853.html
 
-TensorBoard：可视化学习
+Tensorflow学习笔记2：About Session, Graph, Operation and Tensor
 
-https://mp.weixin.qq.com/s/Kc-DqiuG2kn0NlVxkcNa4w
+# 控制流
 
-TensorBoard直方图信息中心
+## tf.cond
 
-https://mp.weixin.qq.com/s?__biz=MzU2OTA0NzE2NA==&mid=2247515390&idx=2&sn=ebf548bac3c7db9b0174265666c67d0c
+```python
+a=tf.constant(2)
+b=tf.constant(3)
+x=tf.constant(4)
+y=tf.constant(5)
+z = tf.multiply(a, b)
+result = tf.cond(x < y, lambda: tf.add(x, z), lambda: tf.square(y))
+with tf.Session() as session:
+    print(result.eval())
+```
 
-tensorboard学习笔记
+## tf.case
 
-## 模型文件
+```python
+decode_png = lambda :tf.image.decode_png(image_tensor, channels)
+decode_jpg = lambda :tf.image.decode_jpeg(image_tensor, channels)
+decoder = { tf.equal(image_ext, '.png'):  decode_png,
+            tf.equal(image_ext, '.jpg'):  decode_jpg}
+image_tensor = tf.case(decoder, default = decode_png, exclusive = True)
+```
 
-tensorflow model包含2个文件：
+---
 
-a）Meta graph:
+控制流对于多数的AI加速硬件并不友好，违背了Directed Acyclic Graph的假设。所以针对这一点，TF亦提出了condition sub graph和body sub graph的概念。
 
-使用protocol buffer来保存整个tensorflow graph.例如所有的variables, operations, collections等等。这个文件使用.meta后缀。
-
-b) Checkpoint file:
-
-有2个文件：
-
-mymodel.data-00000-of-00001
-
-mymodel.index
-
-.data文件包含所有的weights,biases,gradients和其他variables的值。
-
-tensorflow还有一个叫checkpoint的文件，用来简单保存最近一次的checkpoint记录。
-
-### 保存模型
-
-{% highlight python %}
-w1 = tf.Variable(tf.random_normal(shape=[2]), name='w1')
-w2 = tf.Variable(tf.random_normal(shape=[5]), name='w2')
-saver = tf.train.Saver()
-sess = tf.Session()
-sess.run(tf.global_variables_initializer())
-saver.save(sess, 'my_test_model')
-{% endhighlight %}
-
-### 加载模型
-
-{% highlight python %}
-new_saver = tf.train.import_meta_graph('my_test_model-1000.meta')
-new_saver.restore(sess, tf.train.latest_checkpoint('./‘))
-{% endhighlight %}
-
-参考：
-
-http://www.cnblogs.com/azheng333/archive/2017/06/09/6972619.html
-
-Tensorflow模型保存和加载
-
-http://blog.csdn.net/wiinter_fdd/article/details/72821923
-
-Tensorflow中的模型持久化
-
-https://mp.weixin.qq.com/s/3GfxnwzIeeQj1LVSYKnZjQ
-
-如何保存和恢复TensorFlow训练的模型？
-
-## .pb文件
-
-TensorFlow常用的模型保存格式还有.pb格式。这种格式下，模型和权重被整合为一个.pb文件，便于模型的发布和部署。相对应的，这种格式对于train就不太友好了。
-
-以下的脚本可用于将.pb文件导入到tensorboard中：
-
-https://github.com/antkillerfarm/antkillerfarm_crazy/blob/master/python/ml/tensorflow/graph/pb_visualize.py
-
-参考：
-
-https://www.jianshu.com/p/243d4f0b656c
-
-TensorFlow自定义模型导出：将.ckpt格式转化为.pb格式
-
-https://www.jianshu.com/p/c9fd5c01715e
-
-TensorFlow模型保存与恢复
-
-## 模型文件的图操作
-
-基本操作一般基于tf.Graph：
-
-https://tensorflow.google.cn/api_docs/python/tf/Graph
-
-复杂一点的进阶操作可参见：
-
-https://tensorflow.google.cn/api_guides/python/contrib.graph_editor
-
-示例：
-
-https://github.com/antkillerfarm/antkillerfarm_crazy/blob/master/python/ml/tensorflow/graph/hello_graph.py
-
-除了运算类op之外，TF还有辅助类的op，例如tf.shape和tf.Print。下面的示例展示了如何在Graph中插入tf.shape和tf.Print结点，从而导出中间的计算结果：
-
-https://github.com/antkillerfarm/antkillerfarm_crazy/blob/master/python/ml/tensorflow/graph/insert_print_node.py
-
-## TFRecord
-
-TFRecord是TensorFlow官方定义的存放样本数据文件。
-
-参考：
-
-http://www.cnblogs.com/antflow/p/7299029.html
-
-TFRecord的使用
-
-https://zhuanlan.zhihu.com/p/27481108
-
-TensorFlow直接读取图片和读写TFRecords速度对比
-
-## 多核(multicore)，多线程(multi-thread)
+# 多核(multicore)，多线程(multi-thread)
 
 在Tensorflow程序中，我们会经常看到”with tf.device("/cpu:0"): “ 这个语句。单独使用这个语句，而不做其他限制，实际上默认tensorflow程序占用所有可以使用的内存资源和CPU核。
 
@@ -154,228 +66,296 @@ http://deepnlp.org/blog/tensorflow-parallelism/
 
 Tensorflow并行：多核(multicore)，多线程(multi-thread)
 
-## 控制流
+# tf.data
 
-### tf.cond
+tf.data提供了一套构建灵活高效的输入流水线的API。
 
-{% highlight python %}
-a=tf.constant(2)
-b=tf.constant(3)
-x=tf.constant(4)
-y=tf.constant(5)
-z = tf.multiply(a, b)
-result = tf.cond(x < y, lambda: tf.add(x, z), lambda: tf.square(y))
-with tf.Session() as session:
-    print(result.eval())
-{% endhighlight %}
+![](/images/img2/datasets_without_pipelining.png)
 
-### tf.case
+![](/images/img2/datasets_with_pipelining.png)
 
-{% highlight python %}
-decode_png = lambda :tf.image.decode_png(image_tensor, channels)
-decode_jpg = lambda :tf.image.decode_jpeg(image_tensor, channels)
-decoder = { tf.equal(image_ext, '.png'):  decode_png,
-            tf.equal(image_ext, '.jpg'):  decode_jpg}
-image_tensor = tf.case(decoder, default = decode_png, exclusive = True)
-{% endhighlight %}
+上面两幅图中，第一幅图是没有使用流水线的情况，而第二幅图则是使用流水线的情况。
 
-## 内存布局
+参考：
 
-Tensorflow和Caffe的内存布局存在较大差异，这是两者模型转换时，最常遇到的问题。一般认为，Caffe的内存布局对硬件加速更友好一些（局部数据在内存中摆放在一起）。
+https://mp.weixin.qq.com/s/dfXTV4PFgC1Wbti42Zf4wQ
 
-|  | Tensorflow | Caffe |
-|:--:|:--:|:--:|
-| Tensor | NHWC | NCHW |
-| Weight | HWIO | OIHW |
+tf.data API，让你轻松处理数据
 
-## TFLite
+https://mp.weixin.qq.com/s/mjUnrPBPBuY6XKXkUymX-w
+
+实例介绍TensorFlow的输入流水线
+
+https://mp.weixin.qq.com/s/1ZlyVDJK6RWZ_1Ox7399IA
+
+用一行tf.data实现数据Shuffle、Batch划分、异步预加载等
+
+# Eigen
+
+Eigen是一个线性代数方面的C++模板库。tensorflow和caffe2都使用了这个库。
 
 官网：
 
-https://tensorflow.google.cn/lite/
+http://eigen.tuxfamily.org/
 
-Tensorflow源代码中自带的toco工具，可用于生成一个可供TensorFlow Lite框架使用的tflite文件。
+使用Eigen也比较简单，无须link，只要引用相关头文件即可。
+
+参见：
+
+https://zhuanlan.zhihu.com/p/26512099
+
+tensorflow和caffe2
+
+https://www.zhihu.com/question/28571059
+
+Eigen的速度为什么这么快？
+
+# Eager Execution
+
+TensorFlow的Eager Execution可立即评估操作，无需构建图：操作会返回具体的值，而不是构建以后再运行的计算图。这也就是所谓的动态图计算的概念。
+
+参考：
+
+https://mp.weixin.qq.com/s/Yp2zE85VCx8q67YXvuw5qw
+
+TensorFlow引入了动态图机制Eager Execution
+
+https://github.com/ZhuanZhiCode/TensorFlow-Eager-Execution-Examples
+
+Eager Execution的代码示例
+
+https://github.com/madalinabuzau/tensorflow-eager-tutorials
+
+TensorFlow的动态图工具Eager怎么用？这是一篇极简教程
+
+https://mp.weixin.qq.com/s/Lvd4NfLg0Lzivb4BingV7w
+
+Tensorflow Eager Execution入门指南
+
+https://github.com/snowkylin/TensorFlow-cn
+
+简单粗暴TensorFlow Eager教程
+
+https://github.com/snowkylin/tensorflow-handbook
+
+简单粗暴TensorFlow 2.0
+
+https://mp.weixin.qq.com/s/zz8XCykJ6jxbE5J4YwAkEA
+
+一招教你使用tf.keras和eager execution解决复杂问题
+
+# Tensorflow 2.x
+
+![](/images/img3/TF.png)
+
+![](/images/img3/TF_2.png)
+
+```python
+import tensorflow
+main_version = tensorflow.__version__.split('.')[0]
+if int(main_version) == 2:
+    import tensorflow.compat.v1 as tf
+    tf.compat.v1.disable_v2_behavior()
+    import tensorflow.compat.v1.lite as tflite
+else:
+    import tensorflow as tf
+    import tensorflow.contrib.lite as tflite
+```
+
+https://mp.weixin.qq.com/s/BD-nJSZJLjBBq1n7HEHpKw
+
+将您的代码升级至TensorFlow 2.0
+
+https://mp.weixin.qq.com/s/xgsUF97aI1YfGSdh0FJ6Cw
+
+都在关心TensorFlow 2.0，那我手里基于1.x构建的程序怎么办？
+
+https://mp.weixin.qq.com/s/s8hAYadCw9-_BpWSCh38gg
+
+TensorFlow 2.0：数据读取与使用方式
+
+https://mp.weixin.qq.com/s/rVSC1AXj9YECjUrl5PkSGw
+
+详解深度强化学习展现TensorFlow 2.0新特性
+
+https://mp.weixin.qq.com/s/8D8kxFSfruwWhU2jmYL3sg
+
+Google大佬Josh Gordon发布Tensorflow 2.0入门教程
+
+https://cloud.tencent.com/developer/article/1498043
+
+有了TensorFlow2.0，我手里的1.x程序怎么办？
+
+https://mp.weixin.qq.com/s/ddHKc5AffznRaEY_qhHN_g
+
+升级到tensorflow2.0，我整个人都不好了
+
+https://mp.weixin.qq.com/s/RcolwQnCqrAsGaKEK0oo_A
+
+TensorFlow 2.0中的tf.keras和Keras有何区别？为什么以后一定要用tf.keras？
+
+https://mp.weixin.qq.com/s/BI2BjAJGXzRk4k9d99PgLQ
+
+tensorflow2.4性能调优最佳实践
+
+## TensorFlow Addons
+
+TensorFlow SIG Addons是包含社区贡献的代码库，也就是1.x时代的contrib文件夹内的内容。一般用`tfa`作为包前缀。
+
+# cross-compile
+
+TF的交叉编译不是不好用，而是非常不好用。。。这一点其实Google内部也心知肚明。但凡能不用bazel的地方，其实Google也不想用，比如TF Lite就提供了CMake的编译选项。
+
+但TF由于是个跨语言的项目（至少包含了Python和C++），所以Bazel还是有一定的优势的。
+
+网上关于TF交叉编译的文章不多，写的比较好的主要有：
+
+https://www.morethantechnical.com/2018/03/08/cross-compile-latest-tensorflow-1-5-for-the-nvidia-jetson-tk1/
+
+Cross-compile latest Tensorflow (1.5+) for the Nvidia Jetson TK1
+
+然而这个已经有点年头了，并不适合新版本的bazel。
+
+其实目前官方代码库中，已经有一些交叉编译的例子了。比如raspberry pi的：
+
+`./tensorflow/tools/ci_build/pi/build_raspberry_pi.sh AARCH64`
+
+TF也有一个repo用于放置工具链相关的内容：
+
+https://github.com/tensorflow/toolchains.git
+
+我这里是参考`toolchains/cpus/arm/cc_config.bzl.tpl`来编写适合自己的脚本。
+
+目前可行的编译选项如下：
+
+```bash
+bazel build --crosstool_top=//cross_compiler:toolchain --cpu=aarch64 --host_crosstool_top=@bazel_tools//tools/cpp:toolchain --distinct_host_configuration=true --config=opt //tensorflow/tools/pip_package:build_pip_package
+```
+
+相关选项的含义如下：
+
+`--crosstool_top`：指定交叉编译的工具链。
+
+`--host_crosstool_top`：有些项目实际上需要编译Host版本，比如flatbuffers。这些项目的bazel文件中，往往能找到类似`cfg = "host"`的选项。因此，这里还需要指定Host的工具链。当然Host的工具链一般都是系统自带的，也许并不需要特殊指定，这时可以使用`@bazel_tools//tools/cpp:toolchain`这样的默认设置。
+
+`--distinct_host_configuration=true`：即使配置好Host的工具链，也不代表项目会被按照Host编译。这时就需要打开这个开关了。
+
+最后是打包wheel的环节：
+
+虽然打包出来的wheel文件名字叫做`tensorflow-2.7.0-cp39-cp39-linux_x86_64.whl`，但是不要紧，相关的cross-compile的内容已经在里面了，只需要将之改名字为`tensorflow-2.7.0-cp39-none-linux_aarch64.whl`即可。
+
+---
+
+以下是一些趟坑的细节：
+
+一般来说，标准库的头文件是不需要加入项目的依赖的，如果bazel报这方面的问题，设置一下`cxx_builtin_include_directories`即可。
+
+`__float128`只存在于X86体系下。如果报错，多半是工具链没有设置到`aarch64`的头文件路径下。
+
+编译python包的话，还需要相应平台提供python-dev的环境，不然这些也要自己搞定。
+
+---
+
+参考：
+
+https://bazel.build/tutorials/cc-toolchain-config
+
+Bazel Tutorial: Configure C++ Toolchains
+
+https://github.com/bazelbuild/bazel/issues/1353
+
+Using bazel to cross-compile tensorflow for other targets.
+
+https://www.cnblogs.com/jojodru/p/7744630.html
+
+在Ubuntu 16.04上使用bazel交叉编译tensorflow
+
+# TensorFlow高层封装
+
+目前对TensorFlow的封装如下所示：
+
+1.TensorFlow-Slim。主要提供了层一级的封装。粒度和OpenVX类似。
+
+2.tf.contrib.learn（之前也被称为skflow）。提供了类似sklearn的接口。
+
+前2个是TensorFlow自带的封装
+
+3.第三个是TFLearn。在tf.contrib.learn上的封装。需单独安装：
+
+`sudo pip install tflearn`
+
+http://tflearn.org/
+
+4.Keras。
+
+5.TensorLayer。这个的封装粒度介于TensorFlow-Slim和TFLearn之间。
+
+https://tensorlayer.readthedocs.io/en/stable/user/tutorials.html
+
+这个Tutorials的内容比较多，除了常见的CNN、RNN之外，还有RL和DAE的内容。
+
+6.Pretty Tensor。来自google的TensorFlow封装。
+
+https://github.com/google/prettytensor
+
+7.Sonnet。来自Deepmind的TensorFlow封装。
+
+https://github.com/deepmind/sonnet
+
+参见：
+
+http://www.infoq.com/cn/articles/introduction-of-tensorflow-part06
+
+深入浅出TensorFlow（六）TensorFlow高层封装
+
+# Slim
 
 代码：
 
-https://github.com/tensorflow/tensorflow/tree/master/tensorflow/contrib/lite/toco
+tensorflow/contrib/slim
+
+示例：
+
+https://github.com/mnuke/tf-slim-mnist
+
+参见：
+
+http://geek.csdn.net/news/detail/126133
+
+如何用TensorFlow和TF-Slim实现图像分类与分割
+
+实战心得：
+
+tf-slim-mnist例子中mnist数据不是原始格式的，而是经过了`datasets/download_and_convert_mnist.py`的转换。
+
+该示例执行时也没有控制台的输出信息，一度让我觉得很不方便。后来才发现，原来可以用TensorBoard查看log文件夹。
+
+# Estimator
+
+![](/images/img2/tensorflow_programming_environment.png)
+
+Estimator是一个非常高级的API，其抽象等级甚至在Keras之上。
+
+Estimator主要包括以下部分：
+
+1.初始化。定义网络结构。
+
+2.train。
+
+3.evaluate。
+
+4.predict。
+
+TensorFlow已经包含了一些预置的Estimator。例如：BoostedTreesClassifier、DNNClassifier、LinearClassifier等。具体可参见：
+
+https://tensorflow.google.cn/api_docs/python/tf/estimator
 
 参考：
 
-https://www.jianshu.com/p/fa204a54a956
+https://mp.weixin.qq.com/s/a68brFJthczgwiFoUBh30A
 
-生成TFLite模型文件
+TensorFlow数据集和估算器介绍
 
-https://mp.weixin.qq.com/s/eSczqqyzh4PZomJL4saxug
+https://mp.weixin.qq.com/s/zpEVU1E5DfElAnFqHCqHOw
 
-出门问问：使用TensorFlow Lite在嵌入式端部署热词检测模型
-
-https://mp.weixin.qq.com/s/U_Pew90j9swIqti3oKEIQg
-
-玩转TensorFlow Lite：有道云笔记实操案例分享
-
-https://mp.weixin.qq.com/s/lNP9WdzSWE4FjB_-Sjc2aA
-
-TensorFlow Lite for Android初探
-
-https://mp.weixin.qq.com/s/IuD1oxeiFBq8kqh_zRLb0Q
-
-一步实现从TF到TF Lite，谷歌提出定制on-device模型框架
-
-https://mp.weixin.qq.com/s/65HiEwCyzeA_d9flPBcpLQ
-
-谷歌正式发布TensorFlowLite，半监督跨平台快速训练ML模型
-
-https://mp.weixin.qq.com/s/6_yZPlKLYiWBRQFk5Y1OKA
-
-TensorFlow Lite微控制器
-
-## Android NN
-
-TFLite是Google的Tensorflow团队开发的移动DL框架，它可以在任意系统（非android，甚至非linux）上执行。而Android NN则是Google的Android团队针对Android平台开发的DL框架。
-
-团队的不同，决定了这两款产品并非完全兼容。一般来说，TFLite由于紧跟Tensorflow，其对新op的支持要更及时一些。但Android NN由于有Facebook等外部客户的需求推动，在个别情况下，也有相反的情况发生。
-
-Android NN支持的算子的代码在aosp/frameworks/ml/nn/common/operations下。
-
-参考：
-
-https://developer.android.google.cn/ndk/reference/group/neural-networks
-
-这是Android NDK中的NN相关的接口文档
-
-https://developer.android.google.cn/ndk/guides/neuralnetworks
-
-Android NN的指南
-
-https://developer.arm.com/products/software/mali-drivers/android-nnapi
-
-这是ARM对于Android NN的一个实现。
-
-https://mp.weixin.qq.com/s/fal6vz9gaZMbR41QMGE3AQ
-
-MLIR发布：全新的中介码与编译器框架
-
-## Broadcast
-
-Broadcast是一种填充元素以使操作数的形状相匹配的操作。例如，对一个[3,2]的张量和一个[3,1]的张量相加在TF中是合法的，TF会使用默认的规则将[3,1]的张量填充为[3,2]的张量，从而使操作能够执行下去。
-
-参考：
-
-https://www.cnblogs.com/yangmang/p/7125458.html
-
-numpy数组广播
-
-https://blog.csdn.net/LoseInVain/article/details/78763303
-
-TensorFlow中的广播Broadcast机制
-
-## TensorFlow Serving
-
-TensorFlow Serving是一个用于机器学习模型serving的高性能开源库。它可以将训练好的机器学习模型部署到线上，使用gRPC作为接口接受外部调用。更加让人眼前一亮的是，它支持模型热更新与自动模型版本管理。
-
-代码：
-
-https://github.com/tensorflow/serving
-
-TensorFlow Serving实际上是TensorFlow Extended (TFX)的一部分：
-
-https://tensorflow.google.cn/tfx
-
-TFX还包括了Data Validation、Transform和Model Analysis等方面的功能。
-
-参考：
-
-https://zhuanlan.zhihu.com/p/23361413
-
-TensorFlow Serving尝尝鲜
-
-http://www.cnblogs.com/xuchenCN/p/5888638.html
-
-tensorflow serving
-
-https://mp.weixin.qq.com/s/iqvpX6QuBEmF_UK9RMu9eQ
-
-TensorFlow Serving入门
-
-https://mp.weixin.qq.com/s/TL87BY3DdP1bolc0Sxkahg
-
-gRPC客户端创建和调用原理解析
-
-https://zhuanlan.zhihu.com/p/30628048
-
-远程通信协议：从CORBA到gRPC
-
-https://mp.weixin.qq.com/s/b569est_LpcxsoTNWXcfog
-
-TensorFlow Extended帮你快速落地项目
-
-https://mp.weixin.qq.com/s/qOy9fR8Zd3SufvsMmLpoGg
-
-使用TensorFlow Serving优化TensorFlow模型
-
-https://mp.weixin.qq.com/s/IPwOZKvDsONegyIuwkG6bQ
-
-将深度学习模型部署为web应用有多难？答案自己找
-
-https://mp.weixin.qq.com/s/7nugWFKtD-C6cpwm2TyvdQ
-
-手把手教你如何部署深度学习模型
-
-https://zhuanlan.zhihu.com/p/77664408
-
-如何解决推荐系统工程难题——深度学习推荐模型线上serving？
-
-https://mp.weixin.qq.com/s/vqFRbsM9DGu8ikJ3VNp_-g
-
-TensorFlow Extended(TFX)：面向生产环境的机器学习
-
-http://mp.weixin.qq.com/s/hpv6bzr-5VZet-UCHOCQLQ
-
-谷歌TFX：基于TensorFlow可大规模扩展的机器学习平台
-
-## op的C++实现
-
-有的时候为了将Tensorflow的op移植到其他平台，需要找到相应op的cpu实现。比如space_to_batch这个op，它的实现在：
-
-core/kernels/spacetobatch_op.cc
-
-简单的op一般找到这里就可以了，但space_to_batch还要更深一层：
-
-core/kernels/spacetobatch_functor.cc
-
-一般XXX_impl.cc或者XXX_functor.cc才是op实现真正所在的位置。
-
-此外，TFlite的实现往往更加简单：
-
-tensorflow/contrib/lite/kernels/internal/reference/reference_ops.h
-
-## TensorFlow.js
-
-https://mp.weixin.qq.com/s/dqMS4NjmNYs7IFHm8uFM8w
-
-TensorFlow发布面向JavaScript开发者的机器学习框架TensorFlow.js
-
-https://zhuanlan.zhihu.com/p/35181413
-
-TensorFlow.js人脸识别—玩转吃豆豆小游戏
-
-https://mp.weixin.qq.com/s/ebLHZAG8H78TsZUKSzAtIw
-
-TF官方博客：基于TensorFlow.js框架的浏览器实时姿态估计
-
-https://mp.weixin.qq.com/s/z6p4A4DfCuK8IBGVGwrtLQ
-
-如何利用TensorFlow.js部署简单的AI版“你画我猜”图像识别应用
-
-https://mp.weixin.qq.com/s/NO_XY-JmTpIkoC-fpkZ-qg
-
-在浏览器上也能训练神经网络？TensorFlow.js带你玩游戏~
-
-https://mp.weixin.qq.com/s/vjpMr3TsF3Lui8Q0IstQxw
-
-浏览器上跑：TensorFlow发布实时人物分割模型，秒速25帧，24个部位
-
-https://mp.weixin.qq.com/s/-BblgnvPLuqpYM8PZ7PQCQ
-
-三行代码实时追踪你的手，只要有浏览器就够了
+训练效率低？GPU利用率上不去？快来看看别人家的tricks吧～

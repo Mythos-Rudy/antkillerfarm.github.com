@@ -4,11 +4,14 @@ title:  Python（一）
 category: language 
 ---
 
+* toc
+{:toc}
+
 # Python
 
 ## 教程
 
-http://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000
+https://www.liaoxuefeng.com/wiki/1016959663602400
 
 国人写的一个中文教程。
 
@@ -30,7 +33,7 @@ https://pypi.python.org/pypi
 
 Ubuntu下的安装方法是：
 
-`sudo apt-get install python-pip`
+`sudo apt install python-pip`
 
 使用方法是：
 
@@ -74,9 +77,19 @@ https://pypi.mirrors.ustc.edu.cn/simple/
 
 http://pypi.douban.com/simple/
 
+对于Tensorflow这样的大包，有的时候即使是国内镜像也不能顺利安装。这时，可以使用断点续传工具下载相应的whl文件：
+
+`pip install xxx.whl`
+
+pip安装缓存目录:`~/.cache/pip`
+
 指定版本：
 
 `pip install -v pycrypto==2.3`
+
+查看可用的版本：
+
+随便输一个不可能出现的版本号，出错信息里有所有可用的版本信息。
 
 列出已安装的包：
 
@@ -88,7 +101,29 @@ http://pypi.douban.com/simple/
 
 安装：`pip install --no-index --find-links="/tmp/tranferred_packages" <package>`
 
-----
+参考：
+
+https://mp.weixin.qq.com/s/8U44tyW84nVzSykownc2yw
+
+最全的pip使用指南
+
+https://www.jianshu.com/p/ce85f5bd900f
+
+pip解决ImportError: cannot import name 'main'
+
+---
+
+问题：
+
+`SSL: CERTIFICATE_VERIFY_FAILED`
+
+解决：
+
+`pip3 --trusted-host pypi.python.org install numpy`
+
+当然最根本的办法还是安装相关的SSL证书，只是有点麻烦。
+
+---
 
 requirements：
 
@@ -99,6 +134,12 @@ requirements：
 https://www.jianshu.com/p/b183b464a611
 
 python requirements文件生成与使用
+
+---
+
+https://mp.weixin.qq.com/s/9q0bLHTpzS-SvzfzHtZBXg
+
+Python依赖库管理哪家强？pip、pipreqs、pigar、pip-tools、pipdeptree任君挑选
 
 ## IDE
 
@@ -146,7 +187,7 @@ distutils-extra在distutils的基础上做了扩展，提供诸如i18n之类的�
 
 安装方法:
 
-`sudo apt-get install python-distutils-extra`
+`sudo apt install python-distutils-extra`
 
 ### setuptools
 
@@ -158,7 +199,7 @@ https://pythonhosted.org/setuptools/setuptools.html
 
 安装方法:
 
-`sudo apt-get install python-setuptools`
+`sudo apt install python-setuptools`
 
 ### Easy Install
 
@@ -168,6 +209,12 @@ setuptools提供的一个工具，可从网络下载安装外部依赖文件。
 
 https://pythonhosted.org/setuptools/easy_install.html
 
+参考：
+
+https://mp.weixin.qq.com/s/w6ln1VCtOye-f21BShCNqg
+
+花了两天，终于把Python的setup.py给整明白了
+
 ## PyGObject
 
 谈起Python调用GTK+的话题，在GTK+ 2的时代可以使用PyGTK库。它的官网是：
@@ -176,11 +223,21 @@ http://www.pygtk.org/
 
 但由于PyGTK库本质上来说，使用了和一般的Python调用C库一样的方法，因此每导入一个库，都需要编写大量的接口文件。GNOME工程有那么多项目，采用这种办法显然是不太可行的。
 
-于是，GNOME工程发起了GObject Introspection项目。众所周知，GNOME工程诸多项目的基石是GObject。这是一个很成功的类型系统，使用该系统可以获得远比普通C库更强的支持。GObject Introspection项目的目标就是创建一个用于跨语言绑定的中间层。这个项目的官网是：
+于是，GNOME工程发起了GObject Introspection项目。众所周知，GNOME工程诸多项目的基石是GObject。这是一个很成功的类型系统，使用该系统可以获得远比普通C库更强的支持。GObject Introspection项目的目标就是创建一个用于跨语言绑定的中间层。
+
+这也是GTK相对Qt的重大优势：几乎所有语言都有GTK绑定，但只有少数语言能绑定到Qt上，而且除了原生C++语言之外，其他的都是功能阉割版。
+
+这个项目的官网是：
 
 https://wiki.gnome.org/Projects/GObjectIntrospection
 
-随着GObject Introspection项目的进展，越来越多的语言绑定开始使用这套系统，python也不例外。PyGObject项目就是这种方法的成果，目前它已经取代了PyGTK库，成为GTK+ 3时代Python调用GTK+的官方方案。它的官网是：
+文档：
+
+https://gi.readthedocs.io/en/latest/
+
+PyGObject项目就是这种方法的成果，目前它已经取代了PyGTK库，成为GTK+ 3时代Python调用GTK+的官方方案。
+
+它的官网是：
 
 https://wiki.gnome.org/Projects/PyGObject
 
@@ -196,7 +253,7 @@ http://python-gtk-3-tutorial.readthedocs.org/en/latest/
 
 Ubuntu下，可以执行：
 
-`sudo apt-get install python-gi python3-gi`
+`sudo apt install python-gi python3-gi`
 
 Windows下，有个PyGObject for Windows项目，该项目的官网是：
 
@@ -220,10 +277,10 @@ Unofficial Windows Binaries for Python Extension Packages
 
 ## list操作
 
-{% highlight python %}
+```python
 L.append(var)   #追加元素
 L.extend(list)  #追加list，即合并list到L上
-{% endhighlight %}
+```
 
 ## Python中的括号
 
@@ -285,37 +342,37 @@ z是关键字参数，它有默认值，可以不传。
 
 **一个星号**：收集位置参数放到一个元组中。例子：
 
-{% highlight python %}
+```python
 def prints(*arg):
-    print arg;
+    print arg
 prints (1,2,3,4,5,6,7)
-#result: (1,2,3,4,5,6,7) 
-{% endhighlight %}
+#result: (1,2,3,4,5,6,7)
+```
 
 **两个星号**：收集关键字参数，并将其放到一个字典中。例子：
 
-{% highlight python %}
+```python
 def prints(**arg):
     print arg
 prints (a=1,b=2,c=3,d=4,e=5,f=6,g=7)
 #result: {‘a’: 1, ‘c’: 3, ‘b’: 2, ‘e’: 5, ‘d’: 4, ‘g’: 7, ‘f’: 6}
-{% endhighlight %}
+```
 
 **分隔不同类型参数**：
 
-{% highlight python %}
+```python
 def mix(a,b,*,x,y):
   """位置参数与关键字参数混合"""
   return a,b,x,y
 
 print(mix(1,2,x=3,y=4))
-{% endhighlight %}
+```
 
 星号前面的a和b是位置参数，星号后面的x和y是关键字参数，调用mix()函数并传入参数时，关键字参数一定要使用"变量名=值"的形式传入数据，如果同位置参数一样传入数据，就会引发一个TypeError异常
 
 ### 调用方法时
 
-{% highlight python %}
+```python
 def add(x,y):
     print x+y
 
@@ -326,7 +383,7 @@ add(*para)
 kkwd = {'x' :1,'y':2}
 add(**kkwd)
 #result: 3
-{% endhighlight %}
+```
 
 参考：
 
@@ -334,12 +391,18 @@ http://blog.csdn.net/yzj99848873/article/details/48025593
 
 Python星号（ * ）操作符的用法
 
+## 类型建议符
+
+`def twoSum(num1: int, num2: int=100) -> int:`
+
+值得注意的是，类型建议符并非强制规定和检查，也就是说即使传入的实际参数与建议参数不符，也不会报错。
+
 ## pass语句
 
-{% highlight python %}
+```python
 def iplaypython():
        pass
-{% endhighlight %}
+```
 
 定义一个函数iplaypython，但函数体部分暂时还没有完成，又不能空着不写内容，因此可以用pass来替代占个位置。
 
@@ -359,51 +422,16 @@ http://www.cnblogs.com/ifantastic/p/3768415.html
 
 dir()与`__dict__`，`__slots__`的区别
 
-## python调试
+## Typer
 
-首先：
+一个命令行选项的快速处理的库。
 
-`import pdb`
+官网：
 
-然后在需要断点的地方：
+https://typer.tiangolo.com/
 
-`pdb.set_trace()`
+它的设计参考了FastAPI，后者是一个Web版本的API接口库，用于提供restful风格的API。
 
-然后直接运行脚本即可，其他命令和gdb十分相似。
+官网：
 
-pdb和gdb的差异主要在于：
-
-1.pdb需要修改代码，而gdb不需要。
-
-2.可以直接运行脚本进入pdb模式，而gdb需要先进入gdb环境，然后才可以运行程序。显然pdb的灵活性比较高。
-
-参考：
-
-https://blog.jamespan.me/2016/06/09/remote-debug-your-python-code
-
-远程调试你的Python代码
-
-https://www.ibm.com/developerworks/cn/linux/l-cn-pythondebugger/index.html
-
-Python代码调试技巧
-
-## yield
-
-yield就是return返回一个值，并且记住这个返回的位置，下次迭代就从这个位置后(下一行)开始。
-
-参考：
-
-https://www.jianshu.com/p/d09778f4e055
-
-彻底理解Python中的yield
-
-## with
-
-Python的with语句允许我们非常方便地使用资源，而不必担心资源没有关闭。例如：
-
-{% highlight python %}
-with open('/path/to/file', 'r') as f:
-    f.read()
-{% endhighlight %}
-
-任何对象，只要正确实现了上下文管理，就可以用于with语句。
+https://fastapi.tiangolo.com/

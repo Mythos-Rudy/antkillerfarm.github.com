@@ -1,20 +1,15 @@
 ---
 layout: post
-title:  深度学习（二十八）——SOM, 多模态学习
+title:  深度学习（二十八）——SOM, Recursive NN
 category: DL 
 ---
 
-# RBM & DBN & Deep Autoencoder（续）
+* toc
+{:toc}
 
-## DBN
+# RBM & DBM & DBN & Deep Autoencoder
 
-RBM不仅可以单独使用，也可以堆叠起来形成Deep Belief Nets(DBNs)，其中每个RBM层都与其前后的层进行通信。单个层中的节点之间不会横向通信。
-
-深度置信网络可以直接用于处理无监督学习中的未标记数据聚类问题，也可以在RBM层的堆叠结构最后加上一个Softmax层来构成分类器。
-
-除了第一个和最后一个层，深度置信网络中的每一层都扮演着双重角色：既是前一层节点的隐藏层，也是后一层节点的输入（或“可见”）层。深度置信网络是由多个单层网络组成的。
-
-深度置信网络常用于图像、视频序列和动作捕捉数据的识别、聚类与生成。
+## DBM & DBN（续）
 
 参考：
 
@@ -26,6 +21,10 @@ https://zhuanlan.zhihu.com/p/40100223
 
 深度学习与TensorFlow：关于DBN的一些认识
 
+https://mp.weixin.qq.com/s/Qs-rg25B7hACzw6uEqRQbg
+
+深度信念网络研究现状与展望
+
 ## Deep Autoencoder
 
 ![](/images/img2/deep_autoencoder.png)
@@ -34,7 +33,7 @@ Deep Autoencoder由两个对称的DBN组成，其中一个DBN通常有四到五�
 
 让我们用以下的示例来描绘一个编码器的大致结构：
 
-784 (输入) ----> 1000 ----> 500 ----> 250 ----> 100 -----> 30
+784 (输入) ---> 1000 ---> 500 ---> 250 ---> 100 ----> 30
 
 假设进入网络的输入是784个像素（MNIST数据集中28x28像素的图像），那么深度自动编码器的第一层应当有1000个参数，即相对较大。
 
@@ -64,7 +63,7 @@ https://mp.weixin.qq.com/s/hnmKM-_zgb5m80NTd_b8gw
 
 能量学习之Hopfield Networks
 
->John Joseph Hopfield，1933年生，美国科学家。Cornell University博士（1958），先后执教于UCB、Princeton和Caltech。美国科学院、美国艺术科学院院士。   
+>John Joseph Hopfield，1933年生，美国科学家。Cornell University博士（1958），先后执教于UCB、Princeton和Caltech。美国艺术科学院、美国科学院院士。   
 >他爸也叫John Joseph Hopfield，波兰物理学家。
 
 http://txshi-mt.com/2018/02/10/UTNN-12-Restricted-Boltzmann-Machines/
@@ -110,6 +109,10 @@ https://mp.weixin.qq.com/s/mXJthyETebtww5TvEljuoQ
 https://blog.csdn.net/hanlin_tan/article/details/62078935
 
 机器学习中的玻尔兹曼分布——最小代价和极大似然
+
+https://mp.weixin.qq.com/s/yodpXMGAoBpEa20_PkFA0w
+
+浅析玻尔兹曼机的原理和实践
 
 # SOM
 
@@ -189,52 +192,116 @@ http://www.ai-junkie.com/ann/som/som1.html
 
 Kohonen's Self Organizing Feature Maps
 
-# 多模态学习
+# Recursive NN
 
-https://github.com/HuaizhengZhang/Awsome-Deep-Learning-for-Video-Analysis
+http://blog.csdn.net/qq_26609915/article/details/52119512
 
-深度学习视频分析/多模态学习资源大列表
+递归神经网络（recursive NN）结合自编码（Autoencode）实现句子建模
 
-https://mp.weixin.qq.com/s/ruRkqBEdyj2Dx0WTO5Jhcw
+http://blog.csdn.net/mengmengz07/article/details/51348554
 
-多模态学习研究进展综述
+recursive neural network梳理
 
-https://mp.weixin.qq.com/s/g3rwPsusYi7gQopOHvdNrA
+https://mp.weixin.qq.com/s/DwaSF76uvqFKkybaTUpl3w
 
-多模态学习调研
+空间序列递归神经网络用于高光谱图像分类
 
-https://mp.weixin.qq.com/s/vpBPkjuCebSWh5qPLYHCkw
+# 迁移学习+
 
-上海交大提出多模态框架“EmotionMeter”，更精准地识别人类情绪
+https://zhuanlan.zhihu.com/p/57656210
 
-https://mp.weixin.qq.com/s/BBg04rDtiqU-XrWortufNA
+Deep Domain Adaptation论文集(五)：基于数据重构的迁移方法
 
-康奈尔&英伟达提出多模态无监督图像转换新方法
+https://zhuanlan.zhihu.com/p/57930557
 
-http://mp.weixin.qq.com/s/khOINUyrNV3TFfgNRheH0A
+Deep Domain Adaptation论文集(六)：源域与目标域特征空间不一致的处理方法
 
-卷积神经网络压缩、多模态的语义分析研究
+https://zhuanlan.zhihu.com/p/58514431
 
-https://mp.weixin.qq.com/s/ywU4L659iRcmIgmV6RtbXA
+Domain Adaptation：不用深度网络，如何处理源域和目标域异构问题？
 
-DeepMind新研究连接听与看，实现“听声辨位”的多模态学习
+https://zhuanlan.zhihu.com/p/272508224
 
-https://mp.weixin.qq.com/s/1qhcyTXttgKWlw-Oy556Tw
+Domain Adaptation基础概念与相关文章解读
 
-TPAMI2019最新《多模态机器学习综述》
+https://mp.weixin.qq.com/s/7QrIfNXQgSqYC1SOFUOlgQ
 
-https://mp.weixin.qq.com/s/BczgUuh2FIvP5MG9xh87wQ
+对迁移学习中域适应的理解和3种技术的介绍
 
-多模态多任务学习新论文
+https://mp.weixin.qq.com/s/e_ltoKzqBhmicwb7vcFcoQ
 
-https://mp.weixin.qq.com/s/ipj8qpYRiYbIeXn2PZb1SQ
+迁移学习-该做的和不该做的
 
-5G时代下多模态理解做不到位注定要掉队
+https://mp.weixin.qq.com/s/Yzbn8B9DsBErt9VbAQTY3w
 
-https://mp.weixin.qq.com/s/UghgWBN7mE8oJdMUvjAjcQ
+深度迁移学习方法的基本思路
 
-何晖光：多模态情绪识别及跨被试迁移学习
+https://mp.weixin.qq.com/s/CWoKwJ0tyMm10ffgRXLXvg
 
-https://mp.weixin.qq.com/s/EMWpBP5iB1Qrleo3XNjbuQ
+机器学习模型如何泛化到未知领域？微软亚研“领域泛化 (Domain Generalization)”综述论文概述理论、算法等
 
-IEEE Fellow何晓东&邓力：多模态智能论文综述：表示学习，信息融合与应用
+https://mp.weixin.qq.com/s/ZuiKVan3EqOQDR1wjH01WA
+
+基于小样本学习的图像分类技术综述
+
+https://mp.weixin.qq.com/s/MdmB4lzSjSYrhc07Gwe8mQ
+
+基于PyTorch，集合17种方法，南京大学等提出小样本算法库LibFewShot
+
+# DRL参考资源+
+
+https://mp.weixin.qq.com/s/W9yhj7_frLYWJocoBR1TMQ
+
+避免AI错把黑人识别为大猩猩：伯克利大学提出协同反向强化学习
+
+https://mp.weixin.qq.com/s/p2hlc2PsLgrvxOF8wBZANg
+
+李飞飞高徒范麟熙解析强化学习在游戏和现实中的应用
+
+http://mp.weixin.qq.com/s/EPbKE-TAnAPugJDhXHEyNA
+
+DeepMind开源Psychlab平台——搭建AI和认知心理学的桥梁
+
+https://mp.weixin.qq.com/s/xJ_g3BvbM-WaIyLthHdhEw
+
+DeepMind发布通用强化学习新范式，自主机器人可学会任何任务
+
+https://mp.weixin.qq.com/s/3HYELsdYwCJeUmXDBXx8NQ
+
+这款超火的游戏，AI只用4小时，就秀出了人类花1年才能达到的水平
+
+https://mp.weixin.qq.com/s/aEXi3XqcrWpAtdcMkFhBxw
+
+强化学习中的调参经验与编程技巧（on policy篇）
+
+https://mp.weixin.qq.com/s/VpvgNhktLBl_p9gkanp4Pw
+
+2020格斗游戏AI冠军方案：基于强化学习对手建模的滚动时域演化算法
+
+https://mp.weixin.qq.com/s/hb7iiJDWnNAXXUJmYKbqaw
+
+强化学习帮我通关了超级玛丽！
+
+https://mp.weixin.qq.com/s/BoZQ8aMF2Aohj536qhfWPg
+
+Nature重磅：OpenAI科学家提出全新增强学习算法，玩游戏可完胜人类，或推动AI向真正智能学习体进化（Go-Explore）
+
+https://mp.weixin.qq.com/s/HBqX6pz4EzO70YpmQ8xtRw
+
+世界上最难的“沙雕”游戏被AI攻破了
+
+https://mp.weixin.qq.com/s/teBlXXw4JQ8k3olCDOKXyw
+
+量化金融自动交易的深度强化学习库。哥大开源“FinRL”
+
+https://mp.weixin.qq.com/s/8UX65PGZkRokguLTnoGVFA
+
+强化学习组合优化综述论文
+
+https://mp.weixin.qq.com/s/Cfim24MSmClvo2HjW7thTw
+
+最强原创综述！当强化学习邂逅组合优化
+
+https://mp.weixin.qq.com/s/nNTag_D_qN7WcE7DEMJFaA
+
+横扫6个SOTA，吊打强化学习！谷歌最强行为克隆算法登CoRL顶会，机器人干活10倍速

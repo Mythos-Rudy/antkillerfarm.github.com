@@ -1,114 +1,11 @@
 ---
 layout: post
-title:  机器学习（三十四）——概率图模型, 机器学习语录, CRF
+title:  机器学习（三十四）——机器学习语录, Linear Discriminant Analysis, NLP机器翻译常用评价度量
 category: ML 
 ---
 
-# 概率图模型
-
-## 资料
-
-probabilistic graphical model（PGM）最早由Judea Pearl发明。
-
-这方面比较重要的文章和书籍有：
-
-http://www.cis.upenn.edu/~mkearns/papers/barbados/jordan-tut.pdf
-
-Michael Irwin Jordan著。
-
-《Probabilistic Graphical Models: Principles and Techniques》，Daphne Koller，Nir Friedman著（2009年）。
-
->注：Judea Pearl，1936年生，以色列-美国计算机科学家，UCLA教授。2011年获得图灵奖。
-
->Michael Irwin Jordan，1956年生，美国计算机科学家。UCSD博士，先后执教于MIT和UCB。吴恩达的导师。
-
->Daphne Koller，女，1968年生，以色列-美国计算机科学家。斯坦福大学博士及教授。和吴恩达共同创立在线教育平台Coursera。
-
->Nir Friedman，1967年生，以色列计算机科学家。斯坦福大学博士，耶路撒冷希伯来大学教授。
-
-http://www.cs.cmu.edu/~epxing/Class/10708-14/lectures/
-
-CMU的邢波（Eric Xing）所开的概率图模型课程。
-
-## 概述
-
-概率图模型的三要素：Graph：$$\mathcal{G}$$、Model：$$\mathcal{M}$$和Data：$$\mathcal{D}\equiv\{X^{(i)}_1,\dots,X^{(i)}_m\}^N_{i=1}$$。
-
-它要解决的三大问题：
-
-1.**表示**。如何获取或定义真实世界的不确定度？如何对领域知识/假设/约束编码？
-
-2.**推断**。根据模型/数据，推断答案。
-
-$$\text{e.g.}:P(x_i\mid \mathcal{D})$$
-
-3.**学习**。根据数据确定哪个模型是正确的。
-
-$$\text{e.g.}:\mathcal{M}=\arg\max_{\mathcal{M}\in M}F(\mathcal{D};\mathcal{M})$$
-
-![](/images/article/PGM.png)
-
-上图是PGM的一个示例。其中$$X_i$$表示随机变量，图中共有8个随机变量，假设它们均为二值变量，则整个状态空间共有$$2^8$$种组合。遍历这样大的状态空间无疑是一件极为费力的事情。
-
-如果$$X_i$$是条件独立的话，则由上图可得：
-
-$$P(X_1,\dots,X_8)=P(X_2)P(X_4\mid X_2)P(X_5\mid X_2)P(X_1)P(X_3\mid X_1)\\P(X_6\mid X_3,X_4)P(X_7\mid X_6)P(X_8\mid X_5,X_6)$$
-
-这样，状态空间就缩小为$$2+4+4+2+4+8+4+8=36$$种组合了。
-
-根据边的类型，PGM可分为两类：
-
-1.有向边表示变量间的**因果**关系。这样的PGM，常称为Bayesia Network（BN）或Directed Graphical Model（DGM）。
-
-2.无向边表示变量间的**相关**关系。这样的PGM，常称为Markov Random Field（MRF）或Undirected Graphical Model（UGM）。
-
->注：因果关系是一种强逻辑关系，需要变量间有深刻的内在联系。而相关关系要弱的多，典型的例子就是《机器学习（十七）》中的尿布和啤酒的故事。尿布和啤酒虽然正相关，然而它们本身却没有多大的联系。
-
-根据模型的不同，PGM又可分为生成模型（Generative Model, GM）和判别模型（Discriminative Model, DM）。两者的区别在《机器学习（二）》中已经简单提到过，这里做一个扩展。
-
-之前提到的机器学习算法，主要是建立特征向量X和标签Y之间的联系。但是实际情况下，X中的状态不一定都能得到，因此可以根据可见性，将X分为可观测变量集合O和其他变量集合R，Y也不一定是一个标签，而可能是一个变量集合。即：
-
-$$GM:P(Y,R,O)\to P(Y\mid O)$$
-
-$$DM:P(Y,R\mid O)\to P(Y\mid O)$$
-
-注意，在贝叶斯学派的观点中，模型的参数也是随机变量，因此，R在某些情况下，不仅包含不可观测的变量，也包含模型参数。
-
-## 贝叶斯网络
-
-贝叶斯网络是最简单的有向图模型。
-
-首先给出几个术语的定义：
-
-**有向无环图(Directed Acyclic Graph, DAG)**：这个术语的字面意思很清楚，不解释。
-
-**马尔可夫毯(Markov Blanket, MB)**：有向图——结点A的父结点+A的子结点+A的子结点的其他父结点。如下图所示：
-
-![](/images/article/Markov_blanket.png)
-
-无向图——结点A的邻近结点。
-
-下图是图模型的部分变种之间的关系图。
-
-![](/images/article/Generative_Models.png)
-
-## 参考
-
-https://mp.weixin.qq.com/s/srLs_88QOFkBiKMiLZH9HA
-
-想了解概率图模型？你要先理解图论的基本定义与形式
-
-https://mp.weixin.qq.com/s/S-6Mb6zNzVPpxR8DbWdT-A
-
-读懂概率图模型：你需要从基本概念和参数估计开始
-
-https://mp.weixin.qq.com/s/b_0sxD0noWnuIkCxxUBlDA
-
-终极入门：马尔可夫网络 (Markov Networks)
-
-https://mp.weixin.qq.com/s/QvD97vfnv1x8w-e33WymRA
-
-从贝叶斯理论到图像马尔科夫随机场
+* toc
+{:toc}
 
 # 机器学习语录
 
@@ -122,154 +19,214 @@ https://mp.weixin.qq.com/s/QvD97vfnv1x8w-e33WymRA
 
 既然角度在一维上不是线性的，那么二维呢？没错，可以采用复数坐标(x,y)来表示角度，这样角度就是线性的了。
 
-## 数值计算中的小技巧
-
-1.两个数值趋近于无穷小且相近的数字相除的结果应该大约为1，但却因为分母接近为0而变成无穷。这时可以直接取对数执行运算，其结果在数值上会较为稳定。
-
 ## 相关关系不等同于因果关系
 
 我们可以通过一句调侃的话来解释：“地球变暖、地震、龙卷风，以及其他自然灾害，都和18世纪以来全球海盗数量的减少有直接关系”。这两个变量的变化有相关性，但是并不能说存在因果关系，因为往往存在第三类（甚至第4、5类）未被观察到的变量在起作用。相关关系应该看作是潜在的因果关系的一定程度的体现，但需要进一步研究。
 
-# MEMM
+# Linear Discriminant Analysis
 
-Maximum Entropy Markov Model
+在《机器学习（二十六）》中，我们已经讨论了一个LDA，这里我们来看看另一个LDA。
 
-http://www.cnblogs.com/en-heng/p/6201893.html
+Linear Discriminant Analysis是Ronald Fisher于1936年提出的方法，因此又叫做Fisher's linear discriminant。正如之前在《知名数据集》中提到的，Iris flower Data Set也是出自该论文。
 
-中文分词：最大熵马尔可夫模型MEMM
+之前我们讨论的PCA、ICA也好，对样本数据来言，可以是没有类别标签y的。回想我们做回归时，如果特征太多，那么会产生不相关特征引入、过度拟合等问题。我们可以使用PCA来降维，但**PCA没有将类别标签考虑进去，属于无监督的**。
 
-http://www.cnblogs.com/549294286/archive/2013/06/06/3121761.html
+比如回到上次提出的文档中含有“learn”和“study”的问题，使用PCA后，也许可以将这两个特征合并为一个，降了维度。但假设我们的类别标签y是判断这篇文章的topic是不是有关学习方面的。那么这两个特征对y几乎没什么影响，完全可以去除。
 
-统计模型之间的比较，HMM，最大熵模型，CRF条件随机场
+再举一个例子，假设我们对一张100*100像素的图片做人脸识别，每个像素是一个特征，那么会有10000个特征，而对应的类别标签y仅仅是0/1值，1代表是人脸。这么多特征不仅训练复杂，而且不必要特征对结果会带来不可预知的影响，但我们想得到降维后的一些最佳特征（与y关系最密切的），怎么办呢？
 
-http://blog.csdn.net/caohao2008/article/details/4242308
+给定特征为d维的N个样例$$x^{(i)}\{x_1^{(i)},x_2^{(i)},\dots,x_d^{(i)}\}$$，其中有$$N_1$$个样例属于类别$$w_1$$，另外$$N_2$$个样例属于类别$$w_2$$。
 
-HMM,MEMM,CRF模型的比较
+现在我们觉得原始特征数太多，想将d维特征降到只有一维，而又要保证类别能够“清晰”地反映在低维数据上，也就是这一维就能决定每个样例的类别。
 
-http://blog.csdn.net/zhoubl668/article/details/7787690
+我们将这个最佳的向量称为w（d维），那么样例x（d维）到w上的投影可以用下式来计算：
 
-标注偏置问题(Label Bias Problem)和HMM、MEMM、CRF模型比较
+$$y=w^Tx$$
 
-http://tripleday.cn/2016/07/14/hmm-memm-crf/
+这里得到的y值不是0/1值，而是x投影到直线上的点到原点的距离。
 
-HMM、MEMM和CRF的学习总结
+![](/images/img2/LDA.jpg)
 
-https://zhuanlan.zhihu.com/p/33397147
+我们首先看看x是二维的情况，从直观上来看，右图比较好，可以很好地将不同类别的样本点分离。这实际上就是LDA的思想：**最大化类间方差与最小化类内方差，即减少分类内部之间的差异，而扩大不同分类之间的差异。**
 
-概率图模型体系：HMM、MEMM、CRF
+接下来我们从定量的角度来找到这个最佳的w。
 
-# CRF
+首先我们寻找每类样例的均值（中心点），这里i只有两个：
 
-条件随机场(Conditional Random Field)由Lafferty等人于2001年提出，结合了最大熵模型和隐马尔可夫模型的特点，是一种无向图模型，近年来在分词、词性标注和命名实体识别等序列标注任务中取得了很好的效果。
+$$\mu_i=\frac{1}{N_i}\sum_{x\in \omega_i}x$$
 
-https://mp.weixin.qq.com/s/heYpeVLrZBRjXtMQou2BAA
+由于x到w投影后的样本点均值为：
 
-如何轻松愉快的理解条件随机场（CRF）？
+$$\tilde{\mu_i}=\frac{1}{N_i}\sum_{y\in \omega_i}y=\frac{1}{N_i}\sum_{y\in \omega_i}w^Tx=w^T\mu_i$$
 
-http://www.chokkan.org/software/crfsuite/
+由此可知，投影后的的均值也就是样本中心点的投影。
 
-CRFsuite: A fast implementation of Conditional Random Fields (CRFs)
+什么是最佳的直线（w）呢？我们首先发现，能够使投影后的两类样本中心点尽量分离的直线是好的直线，定量表示就是：
 
-https://github.com/scrapinghub/python-crfsuite
+$$J(w)=\mid \tilde{\mu_1}-\tilde{\mu_2} \mid=\mid w^T(\mu_1-\mu_2) \mid$$
 
-A python binding for crfsuite
+J(w)越大越好。
 
-http://taku910.github.io/crfpp/
+但是只考虑J(w)行不行呢？不行，看下图：
 
-CRF++: Yet Another CRF toolkit
+![](/images/img2/LDA_2.png)
 
-https://mp.weixin.qq.com/s/1rx_R1BGRVAIDqKixNLMQA
+样本点均匀分布在椭圆里，投影到横轴$$x_1$$上时能够获得更大的中心点间距J(w)，但是由于有重叠，$$x_1$$不能分离样本点。投影到纵轴$$x_2$$上，虽然J(w)较小，但是能够分离样本点。因此我们还需要考虑样本点之间的方差，方差越大，样本点越难以分离。
 
-终极入门 马尔可夫网络 (Markov Networks)——概率图模型
+我们使用另外一个度量值，称作散列值（scatter），对投影后的类求散列值，如下：
 
-https://mp.weixin.qq.com/s/GXbFxlExDtjtQe-OPwfokA
+$$\tilde{s_i}^2=\sum_{y\in \omega_i}(y-\tilde{\mu_i})^2$$
 
-一文轻松搞懂-条件随机场CRF
+从公式中可以看出，只是少除以样本数量的方差值，散列值的几何意义是样本点的密集程度，值越大，越分散，反之，越集中。
 
-https://zhuanlan.zhihu.com/p/35969159
+而我们想要的投影后的样本点的样子是：不同类别的样本点越分开越好，同类的越聚集越好，也就是均值差越大越好，散列值越小越好。正好，我们可以使用J(w)和S来度量，最终的度量公式是：
 
-CRF条件随机场
+$$J(w)=\frac{\mid \tilde{\mu_1}-\tilde{\mu_2} \mid}{\tilde{s_1}^2+\tilde{s_2}^2}$$
 
-https://mp.weixin.qq.com/s/0FIns5Xt2G1seqFbpGvzTQ
+接下来的事就比较明显了，我们只需寻找使J(w)最大的w即可。
 
-长文详解基于并行计算的条件随机场
+先把散列值公式展开：
 
-https://blog.csdn.net/liuyuemaicha/article/details/73147548
+$$\tilde{s_i}^2=\sum_{y\in \omega_i}(y-\tilde{\mu_i})^2=\sum_{x\in \omega_i}(w^Tx-w^T\mu_i)^2=\sum_{x\in \omega_i}w^T(x-\mu_i)(x-\mu_i)^Tw$$
 
-从PGM到HMM再到CRF
+我们定义上式中间部分：
 
-https://mp.weixin.qq.com/s/4r4k6JIj4xvHHmt3QqmbuA
+$$S_i=\sum_{x\in \omega_i}(x-\mu_i)(x-\mu_i)^T$$
 
-以RNN形式做CRF后处理—CRFasRNN
+这也被称为散列矩阵（scatter matrices）。
 
-https://mp.weixin.qq.com/s/JsqhwwJ7wnNcgOuAR6ekxw
+我们继续定义：
 
-理解条件随机场
+$$S_W=S_1+S_2$$
 
-https://mp.weixin.qq.com/s/79M6ehrQTiUc0l_sO9fUqA
+$$S_W$$称为**Within**-class scatter matrix。
 
-用于序列标注问题的条件随机场（Conditional Random Field, CRF）
+$$S_B=(\mu_1-\mu_2)(\mu_1-\mu_2)^T$$
 
-https://zhuanlan.zhihu.com/p/78006020
+$$S_B$$称为**Between**-class scatter matrix。
 
-NCRF++学习笔记
+那么J(w)最终可以表示为：
 
-https://zhuanlan.zhihu.com/p/91031332
+$$J(w)=\frac{w^TS_Bw}{w^TS_Ww}$$
 
-用腻了CRF，试试LAN吧？
+在我们求导之前，需要对分母进行归一化，因为不做归一化的话，w扩大任何倍，公式都成立，我们就无法确定w。因此，我们打算令$$\|w^TS_Ww\|=1$$，那么加入拉格朗日乘子后，求导：
 
-## BiLSTM+CRF
+$$
+\begin{array}\\
+c(w)=w^TS_Bw-\lambda(w^TS_Ww-1)\Rightarrow \frac{\text{d}c}{\text{d}w}=2S_Bw-2\lambda S_Ww=0\\
+\Rightarrow S_Bw=\lambda S_Ww\Rightarrow S_W^{-1}S_Bw=\lambda w
+\end{array}$$
 
-![](/images/img2/BiLSTM_CRF.jpg)
+可见，w实际上就是矩阵$$S_W^{-1}S_B$$的特征向量。
 
-https://mp.weixin.qq.com/s/vbBNYzKq6AnsDTy8lFsKAw
+因为：
 
-TensorFlow RNN深度学习BiLSTM+CRF实现sequence labeling序列标注
+$$S_Bw=(\mu_1-\mu_2)(\mu_1-\mu_2)^Tw$$
 
-https://www.jianshu.com/p/97cb3b6db573
+其中，后面两项的积是一个常数，记做$$\lambda_w$$，则：
 
-BiLSTM模型中CRF层的运行原理-1
+$$S_W^{-1}S_Bw=S_W^{-1}(\mu_1-\mu_2)\lambda_w=\lambda w$$
 
-https://www.jianshu.com/p/7c83478eeb56
+由于对w扩大缩小任何倍不影响结果，因此可以约去两边的未知常数$$\lambda,\lambda_w$$，得到：
 
-BiLSTM模型中CRF层的运行原理-2
+$$w=S_W^{-1}(\mu_1-\mu_2)$$
 
-https://mp.weixin.qq.com/s/Na07vvySqo11VXRGe2YbCg
+至此，我们只需要求出原始样本的均值和方差就可以求出最佳的方向w。
 
-如何理解LSTM后接CRF？
+![](/images/img2/LDA_3.png)
 
-https://mp.weixin.qq.com/s/1FCWMRapGMXjxTLoA2fYCg
+上述结论虽然来自2维，但对于多维也是成立的。大特征值所对应的特征向量分割性能最好。由于$$S_W^{-1}S_B$$不一定是对称阵，因此得到的K个特征向量不一定正交，这也是与PCA不同的地方。
 
-CRF和LSTM 模型在序列标注上的优劣？
+![](/images/img2/LDA_4.jpg)
 
-# 自适应滤波器
+**PCA选择样本点投影具有最大方差的方向，LDA选择分类性能最好的方向。**
 
-《自适应滤波器原理（Adaptive Filter Theory）》，Simon Haykin著。
+使用LDA的一些限制：
 
-## 基本估计
+1.LDA至多可生成C-1维子空间。C为类别数。
 
-三种基本的信息处理运算：
+LDA降维后的维度区间在[1,C-1]，与原始特征数n无关，对于二值分类，最多投影到1维。
 
-**滤波（Filter）**：利用$$[0,t]$$的数据，来估计t时刻信息的运算过程。
+2.LDA不适合对非高斯分布样本进行降维。
 
-**平滑（Smoothing）**：利用$$[0,t]$$的数据，来估计$$t'(t'<t)$$时刻信息的运算过程。
+![](/images/img2/LDA_5.jpg)
 
-**预测（Prediction）**：利用$$[0,t]$$的数据，来估计$$t+\tau(\tau>0)$$时刻信息的运算过程。
+上图中红色区域表示一类样本，蓝色区域表示另一类，由于是2类，所以最多投影到1维上。不管在直线上怎么投影，都难使红色点和蓝色点内部凝聚，类间分离。
 
-可见，滤波和预测是实时运算，而平滑是非实时运算。
+3.LDA在样本分类信息依赖方差而不是均值时，效果不好。
 
-## Optimal Wiener Filters
+![](/images/img2/LDA_6.png)
 
->Norbert Wiener，1894～1964，美国数学家，控制论之父。18岁获得Harvard博士。MIT教授。
+上图中，样本点依靠方差信息进行分类，而不是均值信息。LDA不能够进行有效分类，因为LDA过度依靠均值信息。
 
-Wiener Filter主要用于**平稳状态下的线性滤波**。该滤波器在均方误差意义上是最优的。误差信号均方值相对于线性滤波器可调参数的曲线，称为**误差性能曲面**。该曲面的极小点即为Wiener solutions。
+对LDA稍加扩展就得到了《图像处理理论（一）》中的Otsu法。**Otsu法实际上是一维离散域的LDA。**
 
-根据滤波器的记忆能力，可将线性滤波器分为Finite Impulse Response和Infinite Impulse Response，分别代表有限记忆和无限长但衰减的记忆。
-
-在非平稳环境下，误差性能曲面随时间变化而变化，但只要输入数据的变化与算法学习率相比是慢的，则滤波器就能跟踪住。
+此外，对于二值分类问题，最小二乘法和Fisher线性判别分析是一致的。
 
 参考：
 
-https://blog.csdn.net/bluecol/article/details/46242355
+https://mp.weixin.qq.com/s/u-6nPrb4r9AS2gtrl5s-FA
 
-图像去模糊（维纳滤波）
+LDA(Linear Discriminant Analysis)算法介绍
+
+http://www.cnblogs.com/jerrylead/archive/2011/04/21/2024384.html
+
+线性判别分析（Linear Discriminant Analysis）（一）
+
+http://www.cnblogs.com/jerrylead/archive/2011/04/21/2024389.html
+
+线性判别分析（Linear Discriminant Analysis）（二）
+
+https://mp.weixin.qq.com/s/AeLwfmM0N-b1dfxt3v4C-A
+
+教科书上的LDA为什么长这样？
+
+https://zhuanlan.zhihu.com/p/84660707
+
+线性判别分析
+
+# NLP机器翻译常用评价度量
+
+机器翻译的评价指标主要有：BLEU、NIST、Rouge、METEOR等。
+
+参考：
+
+http://blog.csdn.net/joshuaxx316/article/details/58696552
+
+BLEU，ROUGE，METEOR，ROUGE-浅述自然语言处理机器翻译常用评价度量
+
+http://blog.csdn.net/guolindonggld/article/details/56966200
+
+机器翻译评价指标之BLEU
+
+https://mp.weixin.qq.com/s/niVOM-lnzI2-Tgxn8Qterw
+
+NLP中评价文本输出都有哪些方法？为什么要小心使用BLEU？
+
+http://blog.csdn.net/han_xiaoyang/article/details/10118517
+
+机器翻译评估标准介绍和计算方法
+
+http://blog.csdn.net/lcj369387335/article/details/69845385
+
+自动文档摘要评价方法---Edmundson和ROUGE
+
+https://mp.weixin.qq.com/s/XiZ6Uc5cHZjczn-qoupQnA
+
+对话系统评价方法综述
+
+https://zhuanlan.zhihu.com/p/33088748
+
+数据集和评价指标介绍
+
+https://mp.weixin.qq.com/s/9hoM_yF96XxSbQHEP6oasw
+
+怎样生成语言才能更自然，斯坦福提出超越Perplexity的评估新方法
+
+https://mp.weixin.qq.com/s/TnAZUjFSn7ATtRmBexJlXw
+
+文本生成评价方法 BLEU ROUGE CIDEr SPICE Perplexity METEOR
+
+https://mp.weixin.qq.com/s/n4OnRGkrn5DYuZUmmrmzpg
+
+NLG任务评价指标BLEU与ROUGE

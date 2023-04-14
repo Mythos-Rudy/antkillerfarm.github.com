@@ -1,8 +1,11 @@
 ---
 layout: post
-title:  IT杂谈, 电子科技史
-category: technology 
+title:  IT杂谈
+category: resource 
 ---
+
+* toc
+{:toc}
 
 # IT杂谈
 
@@ -24,7 +27,7 @@ category: technology
 
 归根到底，西雅图电脑公司只是个硬件公司，它并不重视软件的价值。所以虽然它的软件技术比MS这样的软件公司还强，但是却不懂得如何利用软件。因此没有把握好时代的脉搏，让MS占了便宜，也就不足为奇了。
 
-----
+---
 
 2019.7
 
@@ -34,7 +37,7 @@ https://github.com/microsoft/MS-DOS
 
 从代码来看，确实也就是几个星期的工作量
 
-----
+---
 
 https://mp.weixin.qq.com/s/ncdgNEXnUrQimOzoZzVrjA
 
@@ -78,7 +81,7 @@ PS：这是一篇自己写于2011.11的文章，转眼间已经3年半过去了�
 
 既然没有野心去自己创业，那么继续加强自己的技术水平，“将以有为也”，也是不错的选择。
 
-首先是数论的研究。印度人在这方面很有天份。拉马努扬发现了分划数的公式，实在很难想像一个有着40多个符号的公式是人能想出来的。
+首先是数论的研究。印度人在这方面很有天份。拉马努扬（Srinivasa Ramanujan）发现了分划数的公式，实在很难想像一个有着40多个符号的公式是人能想出来的。
 
 还有玻色，他所发现的玻色-爱因斯坦凝聚，虽然没有为他本人带来诺贝尔奖，但是却给后来者带来了3个诺贝尔奖。
 
@@ -140,52 +143,15 @@ PS：这里吐槽一下IT技术进步的速度，以基于文本的搜索为例�
 
 如果你在2016年的时候，掌握这门手艺，那么你离失业已经不远了。因为，几乎不会有老板，会为了一个15年前的老技术而投资招人。
 
-# 电子科技史
+# 新潮电子
 
-https://mp.weixin.qq.com/s/YdoIVBpn1dFUEzDEF5pYJw
+https://best.pconline.com.cn/yuanchuang/1480778.html
 
-被迫离开工作近20年的公司，半导体老兵上演逆袭。林孝平，一个小儿麻痹患者。
+即是电视也是音箱——Divoom Tivoo像素蓝牙音箱
 
-https://mp.weixin.qq.com/s/hIWvLLKWksNlO2eaVKcbAA
+# 项目管理
 
-那个延续摩尔定律的人的传奇人生。Mark Bohr，UIUC硕士（1978），美国工程院院士。
+https://mp.weixin.qq.com/s/EmiSKzLaw6nN9TnG6lrFug
 
-https://mp.weixin.qq.com/s?__biz=MzI1NTA0MDUyMA==&mid=2456660188&idx=1&sn=b9dafaa60e10130442aac48f165800f7
+把“烦恼”放进看板，开源免费的项目管理工具来帮你啦！
 
-芯片春秋·ARM传
-
-https://mp.weixin.qq.com/s/bggtiz_a-Io8e9UQohxv1A
-
-紫光芯片王国是怎样建成的
-
-https://mp.weixin.qq.com/s/KOjA94ODbWBEOGS-DWCNyw
-
-美国本土的晶圆厂大盘点
-
-https://mp.weixin.qq.com/s/zzlJ1VjgR70jZQrBsUBLMA
-
-日本元器件三龙头的成功秘籍
-
-https://mp.weixin.qq.com/s/p7T-xcyWHDYueEE3V42dfg
-
-德州仪器往事
-
-https://m.uczzd.cn/webview/news?aid=7934419892823166898
-
-仅300员工却垄断全球, 7亿一台供不应求, 买一台都成了巨头（Canon Tokki）
-
-https://mp.weixin.qq.com/s/z4Aik3NgB6XE64YCZolM4w
-
-仙童兴亡史
-
-https://mp.weixin.qq.com/s/GuO87_b9g6jFAepIWxDw5g
-
-闪存技术的52年发展史
-
-https://mp.weixin.qq.com/s/TlCtyF2HG_5l4STgoMJ05w
-
-日本电子产业大败局
-
-https://mp.weixin.qq.com/s/TlhhDjKlLYslif0RtpNotw
-
-世界三大电子展(CES、MWC、IFA)的前世今生

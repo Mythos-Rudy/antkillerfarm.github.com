@@ -4,9 +4,66 @@ title:  知名数据集（二）
 category: resource 
 ---
 
+* toc
+{:toc}
+
 # 知名数据集
 
-## CV（续）
+## NLP（续）
+
+https://mp.weixin.qq.com/s/Ud2pwlNSIEb3HncCrniMxA
+
+最全中华古诗词数据库，收录30多万诗词
+
+https://mp.weixin.qq.com/s/FdQ7IF4N3BhiqjZ32ZMirg
+
+中文细粒度命名实体识别数据集来了
+
+https://mp.weixin.qq.com/s/jkM0iYFMjIXdfFQVxw86Bg
+
+KdConv：多领域知识驱动的中文多轮对话数据集
+
+## CV
+
+http://www.cvpapers.com/datasets.html
+
+常见的cvpr研究的数据库下载链接
+
+https://mp.weixin.qq.com/s/SKZhcd3QpoVMubTkD14iWw
+
+Fashion-MNIST：替代MNIST手写数字集的图像数据集
+
+https://mp.weixin.qq.com/s/77VZ8HPQXWAPvmpZA97kmg
+
+CV预训练模型全集
+
+https://niessner.github.io/Matterport/
+
+全球最大的3D数据集公开了！标记好的10800张全景图
+
+https://mp.weixin.qq.com/s/FciCPM8CjOwGKlltJsH0XA
+
+超全的3D视觉数据集汇总
+
+https://mp.weixin.qq.com/s/q2lsD4MSqQG-LqRmVjEHeg
+
+图像配对数据集TTL：展现人类和机器判断图像相似性的差异
+
+https://mp.weixin.qq.com/s/Y__z-0nxAZNuZsZefCm4IA
+
+纽约大学联合谷歌大脑提出“COG”数据集，可提高系统的“视觉推理”能力
+
+https://mp.weixin.qq.com/s/0D8OQ6hF_70mNtadewyGVw
+
+全球最大的第一视角视频数据集开源，取自真实生活，还能提升厨艺
+
+https://mp.weixin.qq.com/s/NXI9Bp4xxbZCQqAddK1HgA
+
+Google开放最大目标检测数据集，还要为它举办AI挑战赛
+
+https://mp.weixin.qq.com/s/DsBoGT2Pl4tRwHX8REOqnw
+
+MURA：斯坦福ML团队开放的大型放射影像数据集与挑战赛
 
 https://mp.weixin.qq.com/s/_wQoiC6ogcLWSEUFUGHd5g
 
@@ -168,6 +225,14 @@ https://mp.weixin.qq.com/s/WvkIQ85CpCR7yhHiPbX6HA
 
 Objects365：大且高质量的数据集用于目标检测
 
+https://mp.weixin.qq.com/s/yj-8sTl_ZT17IvpqPs89IA
+
+改变多目标跟踪领域！CMU等推出大规模多类别MOT数据集TAO
+
+https://mp.weixin.qq.com/s/2yzD3EYIQpsTjJcwrD1_PA
+
+11个经典遥感数据集
+
 ## 人脸/行为
 
 http://blog.csdn.net/wangkr111/article/details/44514097
@@ -177,6 +242,10 @@ http://blog.csdn.net/wangkr111/article/details/44514097
 https://mp.weixin.qq.com/s/aPlNov77l-3hBRePbIEOrg
 
 一文道尽“人脸数据集”
+
+https://mp.weixin.qq.com/s/VX5IIzDwPXCxCxvocAji0g
+
+最全1.5万字长文解读7大方向人脸数据集v2.0版
 
 https://mp.weixin.qq.com/s/BCgVMYe011O-Jse4ZFBbxg
 
@@ -214,6 +283,22 @@ https://mp.weixin.qq.com/s/XsRIuxpqK2UlgLhM7Vxg6g
 
 动作识别数据集简介
 
+https://mp.weixin.qq.com/s/T0EHQlfac1ni9a3Z71-kmg
+
+爱奇艺人物识别数据集已上线
+
+https://mp.weixin.qq.com/s/oytk2jEljYn8nL8a4wycLg
+
+这几年人脸都有哪些有意思的数据集？
+
+https://zhuanlan.zhihu.com/p/130720627
+
+FineGym：面向细粒度动作分析的层级化高质量数据集
+
+https://mp.weixin.qq.com/s/e4XcUJ7goqygu9LlBy8yOA
+
+全网唯一秃头数据集：20万张人像，网罗各类秃头
+
 ## 推荐系统
 
 http://www.zanmel.com/2015/12/14/10-great-datasets-on-movies/
@@ -235,6 +320,10 @@ https://mp.weixin.qq.com/s/U96j-8_8yo_KGEu9ufWBGg
 https://zhuanlan.zhihu.com/p/40785841
 
 6个推荐系统开放公共数据集整理分享
+
+https://mp.weixin.qq.com/s/dCN0N1EpQVxXyBpUyG-3Hg
+
+推荐系统领域常见公共数据集
 
 ## 无人驾驶
 
@@ -294,58 +383,14 @@ https://mp.weixin.qq.com/s/S8V9-9L86ob1Fnt6NMuJgA
 
 Mapillary发布世界最大交通标志数据集，用于自动驾驶研究
 
-## 医疗
+https://mp.weixin.qq.com/s/hXtkTECVfsBltAtYWu4XYg
 
-https://mp.weixin.qq.com/s/849fLGndmaRvz_oWt6HWtg
+最大识车数据集出炉：6.4万张，车型参数完整标注，交通安防二手车都能用
 
-一文道尽医学图像数据集与竞赛
+https://zhuanlan.zhihu.com/p/110987552
 
-https://mp.weixin.qq.com/s/AW5PGDXCTPMf8hwsPxOfjg
+新数据集：从行人重识别到无人机目标定位
 
-NIHCC发布迄今世界最大的CT医学影像数据集
+https://mp.weixin.qq.com/s/G8tImide_U33shaybprvcw
 
-https://mp.weixin.qq.com/s/M3s3z3YnEBvUxpDVGFVKHw
-
-斯坦福吴恩达团队公布最大医学影像数据集
-
-https://mp.weixin.qq.com/s/9TFLE3R7ct0HzaAwOCfkbw
-
-斯坦福联合MIT，发布两类巨大量级X光胸片数据集
-
-https://mp.weixin.qq.com/s/OhwDbFfHs-farxUVxRDw4Q
-
-吴恩达斯坦福实验室发布MRNet数据集，包含1千多张标注膝关节核磁共振成像
-
-## Other
-
-https://mp.weixin.qq.com/s/VCJoBf2ECdvyRLU7atciYA
-
-浙江大学和帝国理工大学发布的交通速度预测数据集
-
-https://mp.weixin.qq.com/s/dsLVogBtYjYeMULWp4QrhA
-
-一网打尽成语歇后语，GitHub新华字典数据库
-
-https://zhuanlan.zhihu.com/p/40984645
-
-打通推荐系统与知识图谱: 第一个公开的大规模链接数据集合
-
-http://www.stats.gov.cn/tjsj/tjbz/xzqhdm/201703/t20170310_1471429.html
-
-国家统计局：最新县及县以上行政区划代码
-
-https://github.com/wecatch/china_regions
-
-最全最新中国省，市，地区json及sql数据
-
-https://mp.weixin.qq.com/s/h38VZnInkuOjkgcEmsTtMg
-
-让机器帮你做行测题，UCLA朱松纯团队提出关系和类比视觉推理数据集RAVEN
-
-https://mp.weixin.qq.com/s/8wiHVMhKjzlg8BqMMLLgYw
-
-神经网络也能解数学题，DeepMind发布千万数学题海数据集
-
-https://mp.weixin.qq.com/s/YU4tRplyLxFpJdkqclhXyQ
-
-DeepMind大放送：开放4个多物体表征学习数据集，还有一篇智能体新研究
+天津大学推出大型无人机航拍车辆数据集DroneVehicle

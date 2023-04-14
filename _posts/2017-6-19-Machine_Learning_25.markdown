@@ -4,6 +4,9 @@ title:  机器学习（二十五）——Tri-training, 聚类算法, 元胞自�
 category: ML 
 ---
 
+* toc
+{:toc}
+
 # Tri-training
 
 ## 半监督学习
@@ -27,6 +30,12 @@ category: ML
 4.根据B的真实标记，更新模型A。
 
 以SVM为例，对于改善模型性能帮助最大的样本往往是位于分类边界的样本，可将这些样本挑出来，查询它的标记。
+
+参考：
+
+https://mp.weixin.qq.com/s/9pGfdn3cAT7G5-TNWwg_qg
+
+主动学习（ACTIVE LEARNING）
 
 ### 纯半监督学习和推断学习
 
@@ -92,18 +101,6 @@ http://lamda.nju.edu.cn/huangsj/dm11/files/gaoy.pdf
 
 # 聚类算法
 
-## 谱聚类
-
-http://www.cnblogs.com/pinard/p/6221564.html
-
-谱聚类（spectral clustering）原理总结
-
-https://mp.weixin.qq.com/s/DrD7aONVfN3Ibx4x6z-e3Q
-
-理解谱聚类
-
-## 参考
-
 https://mp.weixin.qq.com/s/xGPiaXTnQad3RcMwIELP4w
 
 流式聚类算法
@@ -143,6 +140,14 @@ https://www.zhihu.com/question/34554321
 https://mp.weixin.qq.com/s/7zV370J7nv5wSWxdYa5Plg
 
 DBSCAN聚类算法原理介绍，以及代码实现
+
+https://blog.csdn.net/huacha__/article/details/81094891
+
+DBSCAN聚类算法
+
+https://mp.weixin.qq.com/s/pgjItzm_XDe_nxxHxt34Xw
+
+详解DBSCAN聚类
 
 https://mp.weixin.qq.com/s/8dB2OQCoZ7_kSxExm32WSA
 
@@ -201,6 +206,14 @@ http://www.cnblogs.com/Firefly727/articles/1856328.html
 https://mp.weixin.qq.com/s/KZcNsTLurOm7MNfCkNvcZw
 
 CNN与元胞自动机：“深度”之含义初探
+
+https://mp.weixin.qq.com/s/TQ-koPMLknWQtDsolrU8Jw
+
+什么是元胞自动机？
+
+https://mp.weixin.qq.com/s/g8rogZKkZvGEYA9MD_kFwA
+
+硬核解读！燃烧了152天的澳大利亚山火是怎么来的？又是怎么灭的？
 
 # simhash
 
@@ -289,6 +302,10 @@ https://blog.csdn.net/baidu_21807307/article/details/51794373
 ## K-D Tree
 
 K-Dimensional Tree
+
+https://mp.weixin.qq.com/s/pkqC8phkYDZhLvMaDNaHkg
+
+空间连接运算与空间索引
 
 https://blog.csdn.net/acdreamers/article/details/44664645
 

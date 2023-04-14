@@ -1,8 +1,11 @@
 ---
 layout: post
-title:  深度学习（三十四）——词向量进阶
+title:  深度学习（三十四）——词向量进阶, 深度贝叶斯学习
 category: DL 
 ---
+
+* toc
+{:toc}
 
 # 词向量进阶
 
@@ -32,6 +35,10 @@ https://zhuanlan.zhihu.com/p/36788547
 
 网络表示学习论文引介
 
+https://mp.weixin.qq.com/s/TaLsCHNIYPRAog38gu5N8g
+
+word2vec, node2vec, graph2vec, X2vec：构建向量嵌入表示理论，120页ppt
+
 https://mp.weixin.qq.com/s/zTNX_LeVMeHhJG7kPewn2g
 
 除了自然语言处理，你还可以用Word2Vec做什么？
@@ -51,6 +58,22 @@ https://mp.weixin.qq.com/s/UtfidoBCJ0Wjpnl_C1a7iw
 https://mp.weixin.qq.com/s/0JmB0sMUVsiuwrVObN_10g
 
 浙江大学提出设计网络嵌入算法的度惩罚原则，可有效保留无标度特性
+
+https://mp.weixin.qq.com/s/YGBvWIENE9TASvb_t_Pebw
+
+爱奇艺深度语义表示学习的探索与实践
+
+https://mp.weixin.qq.com/s/SN6qnaorfYpIYMNcZQTR8Q
+
+推荐系统embedding技术实践总结
+
+https://mp.weixin.qq.com/s/ziKG-fvXyVc59eyNjoXseA
+
+不要再对类别变量进行独热编码了
+
+https://mp.weixin.qq.com/s/AjmaX0B7xaCwEWi8sDOJyA
+
+论推荐算法中的Embedding思想
 
 ## 参考
 
@@ -170,10 +193,6 @@ https://mp.weixin.qq.com/s/QW7t7iaIN1yaHYzOtwgYAQ
 
 Representation Learning on Network网络表示学习
 
-https://mp.weixin.qq.com/s/F2jF1vuzK4u8ZPrDK_CyLw
-
-KDD2018 网络表示学习最新教程：DeepWalk作者Perozzi等人带你探索最前沿
-
 https://mp.weixin.qq.com/s/KK-_G7Sc9HyYlxH1nLxVfA
 
 斯坦福大学提出全新网络嵌入方法—GraphWave
@@ -257,3 +276,121 @@ Airbnb基于Embedding技术的实时个性化推荐
 https://mp.weixin.qq.com/s/3ZZvTULbdeSKzF51Wa74WQ
 
 分布式词向量表示，附239页PPT下载
+
+https://zhuanlan.zhihu.com/p/109935332
+
+万物皆可embedding
+
+https://mp.weixin.qq.com/s/iMU2LPDadmVMgzUifw3-XA
+
+浅谈电商搜索推荐中ID类特征的统一建模：Hema Embedding解读
+
+https://lumingdong.cn/application-practice-of-embedding-in-recommendation-system.html
+
+推荐系统的中embedding的应用实践
+
+https://mp.weixin.qq.com/s/76BaQ6b1FYz05pZUbplGhQ
+
+一文总结词向量的计算、评估与优化
+
+https://mp.weixin.qq.com/s/BwqVwN-9R8ROjgfnTUcMQg
+
+万字长文聊一聊Embedding技术
+
+https://mp.weixin.qq.com/s/iOhCZ__NbhQnjHVj0bSqRw
+
+怎样将Embedding融入传统机器学习框架？
+
+https://mp.weixin.qq.com/s/k-Bgkh7Ff2g_CIpQfq47AA
+
+自然语言处理中词向量表示算法概述
+
+# 深度贝叶斯学习
+
+https://mp.weixin.qq.com/s/4sDNUZiOiS6VH_oRSnW6HQ
+
+牛津大学YARIN GAL《贝叶斯深度学习》入门教程，336页ppt
+
+https://mp.weixin.qq.com/s/w_phnVwm13P8dU0Ks-b-YA
+
+《贝叶斯深度学习: DL与Bayesian原理 》NeurIPS2019硬核教程
+
+https://mp.weixin.qq.com/s/J_sbJb8i-O8CwhHvVyPv1w
+
+《深度贝叶斯数据挖掘》，附257页PPT下载
+
+https://mp.weixin.qq.com/s/cDqxmRVQCIqdM5oiUh82YQ
+
+Yee Whye Teh：《贝叶斯深度学习与深度贝叶斯学习》
+
+https://mp.weixin.qq.com/s/JZVl0kygVawdW8qflPps6g
+
+《神经贝叶斯信息处理》教程，220页ppt，国立交通大学
+
+https://mp.weixin.qq.com/s/Zk2YG-IJNhJxTBU8THSM-g
+
+让DL可解释？这一份66页贝叶斯深度学习教程告诉你
+
+https://mp.weixin.qq.com/s/-izo9VUdxN33pwVFGV_tjw
+
+299页PPT带你回顾深度贝叶斯学习最新发展脉络
+
+https://mp.weixin.qq.com/s/UiLyQKhIe2rDYiwPcqyqaw
+
+可跟踪概率模型，209页最新教程
+
+https://mp.weixin.qq.com/s/pHAbxeYBI2q6pUHNrAt1og
+
+贝叶斯学习与未来人工智能
+
+https://mp.weixin.qq.com/s/Zd4rFU7Lebr4zmzxThNyVw
+
+详解珠算：清华大学开源的贝叶斯深度学习库
+
+https://mp.weixin.qq.com/s/RpaOrngeXTKycLb3iCygZw
+
+利用贝叶斯神经网络进行随机动力系统中的学习与策略搜索
+
+https://github.com/bayesgroup/deepbayes-2018
+
+Seminars DeepBayes Summer School 2018
+
+https://mp.weixin.qq.com/s/WCRYppBLdl_M4etUChnfgw
+
+PyMC3和Theano代码构建贝叶斯深度网络
+
+https://mp.weixin.qq.com/s/7mwJpQFWWXJ3dvTAwDFI7Q
+
+贝叶斯卷积神经网络：架起深度学习与统计学的桥梁
+
+https://mp.weixin.qq.com/s/2LkpuchuHs82Sxs5rD8bWA
+
+《深度贝叶斯与序列学习》，279页PPT带你知晓深度贝叶斯序列模型在NLP最新进展
+
+https://zhuanlan.zhihu.com/p/74573041
+
+针对推荐系统的深度贝叶斯多目标学习
+
+https://mp.weixin.qq.com/s/b041h_hbHQYiXCiDHGaD5w
+
+深度贝叶斯自然语言处理，304页ppt带你了解最新研究进展
+
+https://zhuanlan.zhihu.com/p/77140176
+
+构建贝叶斯深度学习分类器
+
+https://mp.weixin.qq.com/s/0e4GHNRCF9xKFELAZ4zRFA
+
+A simple tutorial for Bayesian neural network
+
+https://mp.weixin.qq.com/s/NkRemHPRnEcEwbs5b-Mz9w
+
+贝叶斯编程，378页pdf，Bayesian Programming
+
+https://mp.weixin.qq.com/s/DDg4HTp-APwEIul1ZaFFPQ
+
+最新《贝叶斯推断》教程，125页ppt与视频，DeepMind Shakir Mohamed博士
+
+https://zhuanlan.zhihu.com/p/283633149
+
+Bayesian Deep Learning最新研究总结

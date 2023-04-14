@@ -4,87 +4,8 @@ title:  机器学习（十七）——主成分分析
 category: ML 
 ---
 
-# 协同过滤的ALS算法
-
-## ALS-WR（续）
-
-但是喜好是有程度差异的，因此需要定义程度系数：
-
-$$c_{ui}=1+\alpha r_{ui}$$
-
-这里的$$r_{ui}$$表示原始量化值，比如观看电影的时间；
-
-这个公式里的1表示最低信任度，$$\alpha$$表示根据用户行为所增加的信任度。
-
-最终，损失函数变为：
-
-$$\min_{x_*,y_*}L(X,Y)=\min_{x_*,y_*}\sum_{u,i}c_{ui}(p_{ui}-x_u^Ty_i)^2+\lambda(\sum_u\mid x_u\mid ^2+\sum_i\mid y_i\mid ^2)$$
-
-除此之外，我们还可以使用指数函数来定义$$c_{ui}$$：
-
-$$c_{ui}=1+\alpha \log(1+r_{ui}/\epsilon)$$
-
-ALS-WR没有考虑到时序行为的影响，时序行为相关的内容，可参见：
-
-http://www.jos.org.cn/1000-9825/4478.htm
-
-基于时序行为的协同过滤推荐算法
-
-## 参考
-
-参考论文：
-
-《Large-scale Parallel Collaborative Filtering forthe Netflix Prize》
-
-《Collaborative Filtering for Implicit Feedback Datasets》
-
-《Matrix Factorization Techniques for Recommender Systems》
-
-其他参考：
-
-http://www.jos.org.cn/html/2014/9/4648.htm
-
-基于大规模隐式反馈的个性化推荐
-
-http://www.fuqingchuan.com/2015/03/812.html
-
-协同过滤之ALS-WR算法
-
-http://www.docin.com/p-714582034.html
-
-基于矩阵分解的协同过滤算法
-
-http://www.tuicool.com/articles/fANvieZ
-
-Spark MLlib中的协同过滤
-
-http://www.68idc.cn/help/buildlang/ask/20150727462819.html
-
-Alternating Least Squares(ASL)的数学推导
-
-https://mp.weixin.qq.com/s/bRhIm8Xvlb51zE2HpDO5Og
-
-一文读懂推荐系统知识体系
-
-http://mp.weixin.qq.com/s/QhP3wRGbrO7sYSDNm8z0gQ
-
-常用推荐算法（50页干货）
-
-https://zhuanlan.zhihu.com/p/23036112
-
-推荐系统常用的推荐算法
-
-https://mp.weixin.qq.com/s/6x8cK_SDW67At3IUZ15ijQ
-
-协同过滤典型算法概述
-
-https://mp.weixin.qq.com/s/wtvwWZhqCRjJgdCpa7qdJw
-
-矩阵分解在协同过滤推荐中的应用
-
-https://mp.weixin.qq.com/s/sUQPaiYAfRpCFryrHMqPoA
-
-想写出人见人爱的推荐系统，先了解经典矩阵分解技术
+* toc
+{:toc}
 
 <a name="PCA"/>
 
@@ -264,6 +185,10 @@ https://mp.weixin.qq.com/s/C-tZRvHKcpO5jQArZi_GQA
 
 数据降维算法-从PCA到LargeVis
 
+https://mp.weixin.qq.com/s/HGBB1RLr5eux9xLtXJpokg
+
+哈工大硕士生用Python实现了11种经典数据降维算法，源代码库已开放
+
 PCA还可用于升维：
 
 https://www.cnblogs.com/lochan/p/7011831.html
@@ -304,18 +229,94 @@ https://zhuanlan.zhihu.com/p/78193297
 
 PCA和SVD的联系和区别？
 
-https://mp.weixin.qq.com/s/c8P9KmkQTqNcazcjU9qQFw
-
-机器学习中的维度灾难
-
 https://mp.weixin.qq.com/s/Uj9AFbyFRO6jIBoC3Gy8nA
 
 小孩都看得懂的主成分分析
 
-# 独立成分分析
+https://mp.weixin.qq.com/s/N-JtuayRYRrZ-_P67u7rvA
 
-这一节我们将讲述独立成分分析（Independent Components Analysis，ICA）算法。
+如何使用PCA去除数据集中的多重共线性
 
-首先，我们介绍一下经典的鸡尾酒宴会问题(cocktail party problem)。
+# 欧洲+
 
-假设在party中有n个人，他们可以同时说话，我们也在房间中放置了n个声音接收器(Microphone)用来记录声音。宴会过后，我们从n个麦克风中得到了m组数据$$x^{(i)}$$，其中的i表示采样的时间顺序。由于宴会上人们的说话声是混杂在一起的，因此，采样得到的声音也是混杂不清的，那么我们是否有办法从混杂的数据中，提取出每个人的声音呢？
+“来自科西嘉的怪物在儒安港登陆。”
+
+“不可明说的吃人魔王向格腊斯逼近。”
+
+“卑鄙无耻的窃国大盗进入格尔勒诺布尔。”
+
+“拿破仑·波拿巴占领里昂。”
+
+“拿破仑将军接近枫丹白露。”
+
+“至高无上的皇帝陛下于今日抵达自己忠实的巴黎。”
+
+---
+
+新时代的印巴分治。。。囧
+
+https://zhuanlan.zhihu.com/p/617758344
+
+穆斯林尤萨夫将任苏格兰首席大臣！英国多个重要职位被印巴裔垄断
+
+---
+
+https://www.fmprc.gov.cn/ce/cepl/chn/hwly/t754262.htm
+
+伟大的国王卡齐米日三世
+
+https://www.zhihu.com/question/343334470
+
+为什么要辱法，法国做了什么荒诞的事？
+
+https://www.zhihu.com/answer/1318998332
+
+二战后德国失去东普鲁士相当于中国失去哪里？
+
+https://mp.weixin.qq.com/s/RsDeC81TVkIz_fqqwdXUJw
+
+出产泰坦尼克号的北爱尔兰，还有哪些可能性？
+
+https://mp.weixin.qq.com/s/TwKilqJiWo6UvQhg2dkCig
+
+菲利普亲王病逝：以蒙巴顿和温莎之名
+
+https://mp.weixin.qq.com/s/rsk0hwZ3o71cY_sWo7kBXA
+
+英国女王，和昨日世界一起离开
+
+https://mp.weixin.qq.com/s/y7oUufw8eXu6Ey4EaATE-g
+
+去埃及打仗，拿破仑为什么要带这么多科学家？
+
+https://www.zhihu.com/question/31646175
+
+冰岛与英国的鳕鱼战争的经过结果与影响？
+
+https://mp.weixin.qq.com/s/SdXXsx7-1YRGkiaLd1S-NA
+
+为什么沙俄输掉了日俄战争？“天时地利人和”一个都没有，焉能不败？
+
+https://mp.weixin.qq.com/s/trg51nbyAdXs1rGTToCTDQ
+
+为了钱，苏格兰贵族连国家都卖掉了
+
+https://mp.weixin.qq.com/s/QuFiaHL1g1ylZ1_8lj5wug
+
+7天，商船就能改造为航母
+
+https://www.zhihu.com/answer/2674690400
+
+巴尔干战争
+
+https://www.zhihu.com/question/21289988
+
+很多欧美影视中贵族女子骑马都是侧骑的，侧骑是否比跨骑难得多？
+
+https://mp.weixin.qq.com/s/hK_RBjRSkMKQTH-hP6FqRg
+
+一战德国最活跃的破交舰：擒商船押战俘，捉迷藏把英军耍得团团转，结局却令人唏嘘
+
+https://www.zhihu.com/question/533876759
+
+尼西亚帝国为什么没能走奥斯曼帝国的崛起之路?

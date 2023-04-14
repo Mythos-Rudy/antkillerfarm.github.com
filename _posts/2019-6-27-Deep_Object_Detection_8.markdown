@@ -1,215 +1,385 @@
 ---
 layout: post
-title:  深度目标检测（八）——目标检测进阶（2）
+title:  深度目标检测（八）——其它目标检测网络, 花式IOU, 3D目标检测, 旋转框检测, 小目标检测, 花式NMS, YOLOv4
 category: Deep Object Detection 
 ---
 
-# 目标检测进阶
+* toc
+{:toc}
 
-https://mp.weixin.qq.com/s/PpT-NmTVjRi0_SEq0lISXw
+# Anchor-Free（续）
 
-旷视科技Oral论文解读：IoU-Net让目标检测用上定位置信度
+https://mp.weixin.qq.com/s/4UEmRcSo0ZGoiLh6iKf_oQ
 
-https://mp.weixin.qq.com/s/OqlZ2TRGbHURYW00440lgQ
+ATSS：自动选择样本，消除Anchor based和Anchor free物体检测方法之间的差别
 
-微软亚洲研究院与北京大学共同提出用于物体检测的可学习区域特征提取模块
+https://mp.weixin.qq.com/s/UhHh_DFoxKW5K3OCe3Bjqg
 
-https://www.zhihu.com/question/270143544
+目标检测：Anchor-Free时代
 
-目标检测中，不同物体之间的距离非常接近如何解决？
+https://mp.weixin.qq.com/s/PqDkdxqvUvSKvTklVojOyA
 
-https://mp.weixin.qq.com/s/b4s8Te29DyS71xwQU789pQ
+CPNDet：简单地给CenterNet加入two-stage，更快更强
 
-实体零售场景下密集商品的精确探测
+https://mp.weixin.qq.com/s/7mHhltqDcnYZdHWoRS_EBg
 
-https://mp.weixin.qq.com/s/iW-k12CIO0gSx8Y6etTzgA
+YOLO之外的另一选择，手机端97FPS的Anchor-Free目标检测模型NanoDet现已开源
 
-三分支网络——目前目标检测性能最佳网络框架
+https://zhuanlan.zhihu.com/p/336016003
 
-https://mp.weixin.qq.com/s/JN1N-IqIL4tAh4rIkZcxpg
+OneNet: End-to-End One-Stage Object Detection
 
-Grid R-CNN解读：商汤最新目标检测算法
+https://mp.weixin.qq.com/s/0FPpc2PhLPiE9mg6eRh11Q
 
-https://mp.weixin.qq.com/s/_2DwSY6olj3wKy2xKukEGg
+OneNet：一阶段的端到端物体检测器，无需NMS
 
-商汤开源Grid R-CNN Plus：相比Grid RCNN，速度更快，精度更高
+https://mp.weixin.qq.com/s/ov4xLhicTqsce0bG2pw95A
 
-https://mp.weixin.qq.com/s/baPfFVi7deEsCAFu3ColoQ
+anchor-base和anchor-free差异分析
 
-CVPR2018目标检测算法总览
+https://mp.weixin.qq.com/s/yft97xTTX0FUXpyHtI_XMQ
 
-https://mp.weixin.qq.com/s/t5p1xGKVnwd7wbiOzucFqQ
+anchor-free存在什么缺点？
 
-基于深度学习的目标检测算法剖析与实现
+# 其它目标检测网络
 
-https://mp.weixin.qq.com/s/-zQZjHVs7bYyGkGuMUf3qg
+## A-Fast-RCNN
 
-目标检测领域还有什么可做的？19个方向给你建议
+A-Fast-RCNN首次将对抗学习引入到了目标检测领域，idea在当时是非常创新的。
 
-https://mp.weixin.qq.com/s/k8msLl6c2Cp_5h-4xBD6Zw
+http://blog.csdn.net/jesse_mx/article/details/72955981
 
-CVPR2019-目标检测分割技术进展
+A-Fast-RCNN论文笔记
 
-https://mp.weixin.qq.com/s/uzG8sic5Y6LVqBS6iKQDhw
+## G-CNN
 
-目标检测中图像增强，mixup如何操作？
+G-CNN是MaryLand大学的工作，论文主要的思路也是消除region proposal，和YOLO，SSD不同，G-CNN的工作借鉴了迭代的想法，把边框检测等价于找到初始边框到最终目标的一个路径。但是使用one-step regression不能处理这个非线性的过程，所以作者采用迭代的方法逐步接近最终的目标。
 
-https://mp.weixin.qq.com/s/pkFcmm15gnuRJtngFX7f0w
+http://blog.csdn.net/zijin0802034/article/details/53535647
 
-目标检测训练trick超级大礼包—不改模型提升精度，值得拥有
+G-CNN: an Iterative Grid Based Object Detector
 
-https://mp.weixin.qq.com/s/flXzhQ-Ypf3fwTqLelLzOQ
+## D2D
 
-李沐等将目标检测绝对精度提升5%，不牺牲推理速度
+![](/images/img4/D2D.png)
 
-https://mp.weixin.qq.com/s/6QsyYtEVjavoLfU_lQF1pw
+https://mp.weixin.qq.com/s/U15qB2PlQN3qpFBuQiY6RA
 
-目标检测新文：Generalized Intersection over Union
+Describe-to-Detect(D2D)：一种新的特征检测方法
 
-https://mp.weixin.qq.com/s/Xs3nThAcUOq62bO2p61YFA
+# 花式IOU
 
-论文解读 Receptive Field Block Net for Accurate and Fast
+![](/images/img5/IOU.jpg)
 
-https://mp.weixin.qq.com/s/dcrBQ-t3tLOTouEyofOBxg
+![](/images/img5/IOU_2.jpg)
 
-间谍卫星：利用卷积神经网络对卫星影像进行多尺度目标检测
+常规IOU存在两个问题：
 
-https://mp.weixin.qq.com/s/LtXylKTKsHdjMPw9Q1HyXA
+问题1：即状态1的情况，当预测框和目标框不相交时，IOU=0，无法反应两个框距离的远近，此时损失函数不可导，IOU无法优化两个框不相交的情况。
 
-优于MobileNet、YOLOv2：移动设备上的实时目标检测系统Pelee
+问题2：即状态2和状态3的情况，当两个预测框大小相同，两个IOU也相同，IOU无法区分两者相交情况的不同。
 
-https://mp.weixin.qq.com/s/Gq3bflJq59Tx-nDCvbweNA
+## GIOU
 
-无需预训练分类器，清华&旷视提出专用于目标检测的骨干网络DetNet
+![](/images/img5/IOU.jpg)
 
-https://blog.csdn.net/wq604887956/article/details/83053927
+![](/images/img5/IOU_2.jpg)
 
-2018小目标检测文章总结
+问题：状态1、2、3都是预测框在目标框内部且预测框大小一致的情况，这时预测框和目标框的差集都是相同的，因此这三种状态的GIOU值也都是相同的，这时GIOU退化成了IOU，无法区分相对位置关系。
 
-https://mp.weixin.qq.com/s/u3eXhoFvo7vZujc0XoQQWQ
+## DIOU
 
-旷视研究院解读Light-Head R-CNN：平衡精准度和速度
+好的目标框回归函数应该考虑三个重要几何因素：重叠面积、中心点距离，长宽比。
 
-https://mp.weixin.qq.com/s/6cUP9vvfcuv8rIEnGnAFiA
+![](/images/img5/IOU_3.jpg)
 
-NCSU&阿里巴巴论文：可解释的R-CNN
+DIOU_Loss考虑了重叠面积和中心点距离，当目标框包裹预测框的时候，直接度量2个框的距离。
 
-https://mp.weixin.qq.com/s/1vOdOMyByBacSBMVrscq5Q
+![](/images/img5/IOU_4.jpg)
 
-黄畅：基于DenesBox的目标检测在自动驾驶中的应用
+但它没有考虑到长宽比。
 
-https://mp.weixin.qq.com/s/-PeXMU_gkcT5YnMcLoaKag
+## CIOU
 
-CVPR清华大学研究，高效视觉目标检测框架RON
+CIOU loss= IOUloss+中心点损失+长宽比例损失
 
-https://mp.weixin.qq.com/s/XoKdsQKyaI3LsDxF7uyKuQ
+$$CIOU\_ Loss=1-CIOU=1-(IOU-\frac{Distance\_ 2^2}{Distance\_ C^2}-\frac{v^2}{(1-IOU)+v})$$
 
-聊聊目标检测中的多尺度检测（Multi-Scale），从YOLO到FPN，SNIPER，SSD填坑贴和极大极小目标识别
+$$v=\frac{4}{\pi^2}(\arctan\frac{w^{gt}}{h^{gt}}-\arctan\frac{w^{p}}{h^{p}})^2$$
 
-https://mp.weixin.qq.com/s/XdH54ImSfgadCoISmVyyVg
+由于NMS也和IOU有关，所以对应的也有DIOU_nms等。
 
-基于单目摄像头的物体检测
+## EIoU & SIoU
 
-https://mp.weixin.qq.com/s/h_ENriEXr7WI_XR_DtxpMQ
+EIOU loss =IOUloss+中心点损失+宽损失+长损失
 
-这样可以更精确的目标检测——超网络
+SIoU =Distance cost（angle + distance）+Shape cost+IOU loss
 
-https://mp.weixin.qq.com/s?__biz=MzI5MDUyMDIxNA==&mid=2247486104&idx=1&sn=5580a4680f3190adb98638471e9b5982
+https://zhuanlan.zhihu.com/p/537428926
 
-百度视觉团队斩获 ECCV Google AI 目标检测竞赛冠军，获奖方案全解读
+一文搞懂EIoU与SIoU
 
-https://zhuanlan.zhihu.com/p/54182158
+## 参考
 
-GHM（解决one-stage样本不平衡问题）目标检测算法论文阅读笔记
+https://zhuanlan.zhihu.com/p/57992040
 
-https://mp.weixin.qq.com/s/nL9l7hvG3RG7G7LzCzzvug
+使用GIoU作为检测任务的Loss
 
-旷视科技2018 COCO负责人俞刚：如何构建检测与分割的冠军系统
+https://mp.weixin.qq.com/s/ZbryNlV3EnODofKs2d01RA
 
-https://mp.weixin.qq.com/s/ZQqcsJenqkXtH1czOe5WnA
+目标检测回归损失函数简介：Smooth L1/IoU/GIoU/DIoU/CIoU Loss
 
-阿里巴巴提出Auto-Context R-CNN算法，刷出Faster RCNN目标检测新高度
+https://mp.weixin.qq.com/s/F07Wp-cXIOE4-qdL55WtJQ
 
-https://mp.weixin.qq.com/s/aLYQepnr_BjS27Fb-zoZ_g
+基于DIou改进的YOLOv3目标检测
 
-迈向完全可学习的物体检测器：可学习区域特征提取方法
+https://mp.weixin.qq.com/s/YeyxuN6RCgF2TcxctXiJQg
 
-https://zhuanlan.zhihu.com/p/43655912
+使用GIoU作为目标检测新loss
 
-“别挡我，我要C位出道！”谈谈深度学习目标检测中的遮挡问题
+https://mp.weixin.qq.com/s/m8D5uutwlvkQNucFX_TnGw
 
-https://mp.weixin.qq.com/s/VtlSVF4d9LwPJhDEYSbgTg
+DIoU和CIoU：IoU在目标检测中的正确打开方式
 
-无监督难分样本挖掘改进目标检测
+https://mp.weixin.qq.com/s/VtBfIVj74dhg9HjpxN7rhw
 
-https://mp.weixin.qq.com/s/AupXIoVmhcOBrX1z1vgdtw
+DIoU损失函数详解
 
-弱监督实现精确目标检测，上交大提出协同学习框架
+https://zhuanlan.zhihu.com/p/109677830
 
-https://mp.weixin.qq.com/s/Lt00ASVSb_fDDJdtCO0-tQ
+Distance-IoU Loss
 
-物体检测中的结构推理网络
+https://zhuanlan.zhihu.com/p/94799295
 
-https://mp.weixin.qq.com/s/f0Ynln-27z5A6LXt8j5qKQ
+IoU、GIoU、DIoU、CIoU损失函数的那点事儿
 
-据说以后在探头下面用帽子挡脸没用了：SymmNet遮挡物检测的对称卷积神经网络
+https://zhuanlan.zhihu.com/p/342991797
 
-https://mp.weixin.qq.com/s/cEg6HmS651riJVAtHdPafg
+从L1 loss到EIoU loss，目标检测边框回归的损失函数一览
 
-基于域适应弱监督学习的目标检测
+# 3D目标检测
 
-https://mp.weixin.qq.com/s/A51X1e9E9T9pPbYdQVQtSg
+https://mp.weixin.qq.com/s/bAV74fxvwI73Qt7qm_jPJA
 
-你是个成熟的C位检测器了，应该可以自动找C位了
+一文读懂深度学习在摄像头和激光雷达融合的3-D目标检测中的应用
 
-https://blog.csdn.net/u014380165/article/details/80602027
+https://mp.weixin.qq.com/s/8an3eBrOZ5d6_PdNp6QkyA
 
-Cascade RCNN算法笔记
+一文教你读懂3D目标检测
 
-https://mp.weixin.qq.com/s/KupXlIt8bHLLGF6qWFH6vQ
+https://zhuanlan.zhihu.com/p/112836340
 
-从Grid R-CNN到Grid R-CNN Plus：基于网格的目标检测演化
+谷歌最新论文：从图像中进行3-D目标检测
 
-https://mp.weixin.qq.com/s/kdD658xzC-JxuWGYqLRtcQ
+https://mp.weixin.qq.com/s/DxDkYfzW5BqhidPlqT772Q
 
-性能达到SOTA的CSP对象检测网络
+从单幅图像到双目立体视觉的3D目标检测算法
 
-https://mp.weixin.qq.com/s/8k0Mhver2mLnKmV8rVqJHQ
+https://blog.csdn.net/savant_ning/article/details/69950588
 
-小目标检测相关技巧总结
+多视图3D目标检测学习笔记
+
+https://mp.weixin.qq.com/s/3JzwA2HAzoWtE_j2UhZCSw
+
+Stereo R-CNN 3D目标检测
+
+https://zhuanlan.zhihu.com/p/58734240
+
+3D Object Detection Overview - 2019
+
+https://mp.weixin.qq.com/s/n3ZUsq2I0CaJ5pIl2nZUFQ
+
+3D目标检测：MonoDIS
+
+https://mp.weixin.qq.com/s/WBiDyIBV9OaKbxUhBml2AA
+
+GS3D(monocular 3D detection)
+
+https://mp.weixin.qq.com/s/G7YNTR8FAsCtkCxLQv1-dQ
+
+Facebook开源3D目标检测框架VoteNet，曾刷新两大数据集最高精度
+
+https://mp.weixin.qq.com/s/s_cAZ--KHvNZq3thrIGx3w
+
+MVX-Net：多模型三位像素网络用于3D目标检测
 
 https://mp.weixin.qq.com/s/ouBxEXcY4s894Sec4ifBtQ
 
 基于YOLO的3D目标检测：YOLO-6D
 
-https://mp.weixin.qq.com/s/dFoUO4xArZpmtbKg1Kx6Zg
+https://mp.weixin.qq.com/s/yCu5Xx6peDKyU06yBlixpA
 
-COCO mAP 53.3！骨干网合成算法CBNet带来目标检测精度新突破
+首个实时单目3D目标检测算法：RTM3D
 
-https://mp.weixin.qq.com/s?__biz=MzIwMTc4ODE0Mw==&mid=2247499933&idx=1&sn=b9fe7d6714c44acedd12a60cfe6b1c60
+https://zhuanlan.zhihu.com/p/101346137
 
-小样本域适应的目标检测
+Det3D-首个通用3D目标检测框架
 
-https://zhuanlan.zhihu.com/p/84890413
+https://zhuanlan.zhihu.com/p/85686290
 
-PolarMask：一阶段实例分割新思路
+MLOD：基于鲁棒特征融合方法的多视点三维目标检测
 
-https://mp.weixin.qq.com/s/IRD0iIVXyENlUOyfSbmlBA
+https://mp.weixin.qq.com/s/LN2l67jhivb0hyy6JSLMVA
 
-目标检测的渐进域自适应
+3D目标检测深度学习方法数据预处理综述
 
-https://mp.weixin.qq.com/s/10EhUj03NGPTnyOCvLqDQw
+https://mp.weixin.qq.com/s/nGMMb6GHp-BajyfRTN-jDw
 
-港大提出视频显著物体检测算法MGA，大幅提升分割精度
+不用激光雷达，照样又快又准！3D目标检测之SMOKE
 
-https://mp.weixin.qq.com/s/mqB9wtUjMJ1EhINrUUEf9Q
+# 旋转框检测
 
-香港中文大学博士陈恺：物体检测中的训练样本采样
+在真实的场景中，许多时候，我们不仅仅需要找一个“方方正正”的框把物体框起来(英文中，这种框称之为Axis-Aligned)，而可能更需要的是能够找一个，“有一些旋转角度的，能够把物体完全的包络起来的框”。
 
-https://mp.weixin.qq.com/s/syoJTnh6KMMRUYPQjUnEAg
+![](/images/img3/rotated_OD.jpg)
 
-一个算法同时解决两大CV任务，让目标检测和实例分割互相帮助
+上右图使用水平的检测框从图中将物体扣出，效果会很差，因为：
 
-https://mp.weixin.qq.com/s/ba5rQp4IVYbVbHq3Ef7mEg
+1、每个检测框中还会同时包含很多其他物体的“一部分”。
 
-深度学习检测小目标常用方法
+2、水平检测框相互之间的IoU值较高，在NMS过程中很容易被抑制掉。
+
+![](/images/img4/AlphaRotate.png)
+
+《AlphaRotate: A Rotation Detection Benchmark using TensorFlow》
+
+参考：
+
+https://zhuanlan.zhihu.com/p/105841613
+
+旋转框检测方法综述-FasterRCNN的问题
+
+https://zhuanlan.zhihu.com/p/105881332
+
+旋转框检测方法综述-RotateAnchor系列
+
+https://mp.weixin.qq.com/s/nOBfPFfJMBkkkVEPV0TG0Q
+
+PIoU Loss：倾斜目标检测专用损失函数，公开超难倾斜目标数据集Retail50K
+
+https://mp.weixin.qq.com/s/U8RXvWP7K1xM_tzhdttPfA
+
+BBAVectors：一种Anchor Free的旋转物体检测方法
+
+https://zhuanlan.zhihu.com/p/98703562
+
+旋转目标(遥感/文字)检测方法整理（2017-19年）
+
+https://zhuanlan.zhihu.com/p/163696749
+
+用CenterNet对旋转目标进行检测
+
+https://mp.weixin.qq.com/s/pDjszZk43vuVO6kY3bRczw
+
+ODTK：来自NVIDIA的旋转框物体检测工具箱
+
+https://zhuanlan.zhihu.com/p/337272217
+
+Dynamic Anchor Learning for Object Detection
+
+https://mp.weixin.qq.com/s/Zf6_L9MfKd0AhhgsGSi6EA
+
+旋转目标检测中anchor匹配机制的问题和一些思考
+
+# 小目标检测
+
+https://mp.weixin.qq.com/s/8k0Mhver2mLnKmV8rVqJHQ
+
+小目标检测相关技巧总结
+
+https://mp.weixin.qq.com/s/svqygu4nFkW4ci7dYMnKsw
+
+小目标检测的数据增广秘籍
+
+https://blog.csdn.net/wq604887956/article/details/83053927
+
+2018小目标检测文章总结
+
+https://mp.weixin.qq.com/s/UQLvHDf62iV8KeZ5LoQdsA
+
+在小目标检测上另辟蹊径的SNIP
+
+https://mp.weixin.qq.com/s/iaeHnfepyeLuOioHqMO9bQ
+
+一种小目标检测中有效的数据增强方法
+
+https://mp.weixin.qq.com/s/UbCLqfyEOKUGnvySweUzMw
+
+使用关键点进行小目标检测
+
+https://mp.weixin.qq.com/s/1v84QyvH-k0lzRPOEyaBgw
+
+我们是如何改进YOLOv3进行红外小目标检测的？
+
+https://mp.weixin.qq.com/s/5TRm1vYx8dYVQHU7FdHdJg
+
+在目标检测中如何解决小目标的问题？
+
+https://mp.weixin.qq.com/s/V9CJVaRYlS5Snyveblb3uw
+
+小目标检测的一些问题，思路和方案
+
+https://mp.weixin.qq.com/s/zvKxi0b-D0fXzx928Wp51A
+
+小目标检测研究进展
+
+# 花式NMS
+
+https://mp.weixin.qq.com/s/ro0lG3uMUPYNZA9rM3I_YQ
+
+目标检测算法中检测框合并策略技术综述
+
+https://mp.weixin.qq.com/s/GdNcQqDeVQ1vtIJrAIYpWw
+
+目标检测之非极大值抑制(NMS)各种变体
+
+https://zhuanlan.zhihu.com/p/151914931
+
+一文打尽目标检测NMS——精度提升篇
+
+https://zhuanlan.zhihu.com/p/157900024
+
+一文打尽目标检测NMS——效率提升篇
+
+https://zhuanlan.zhihu.com/p/151398233
+
+一文了解目标检测边界框概率分布
+
+https://mp.weixin.qq.com/s/OnJQm8xCmxa4szB-lJC9Uw
+
+或许你的NMS该换了，Confluence更准、更稳的目标检测结果
+
+https://mp.weixin.qq.com/s/W6m2eaysYiK6-3Niz4KeOA
+
+Confluence：物体检测中不依赖IoU的NMS替代算法论文解析
+
+# YOLOv4
+
+YOLO系列(v1-v3)作者Joe Redmon宣布不再继续CV方向的研究，引起学术圈一篇哗然。
+
+YOLOv4（2020.4）的一作是Alexey Bochkovskiy。YOLO官方的github正式加入YOLOv4的论文和代码链接，也意味着YOLOv4得到了Joe Redmon的认可，也代表着YOLO的停更与交棒。
+
+论文：
+
+《YOLOv4: Optimal Speed and Accuracy of Object Detection》
+
+代码：
+
+https://github.com/AlexeyAB/darknet
+
+![](/images/img5/YOLOv4.jpg)
+
+Yolov4的五个基本组件：
+
+- CBM：Yolov4网络结构中的最小组件，由Conv+Bn+Mish激活函数三者组成。
+- CBL：由Conv+Bn+Leaky_relu激活函数三者组成。
+- Res unit：借鉴Resnet网络中的残差结构，让网络可以构建的更深。
+- CSPX：借鉴CSPNet网络结构，由卷积层和X个Res unint模块Concate组成。
+- SPP：采用1×1，5×5，9×9，13×13的最大池化的方式，进行多尺度融合。
+
+各部分的改进如下：
+
+- 输入端：这里指的创新主要是训练时对输入端的改进，主要包括Mosaic数据增强、cmBN、SAT自对抗训练。
+- BackBone主干网络：将各种新的方式结合起来，包括：CSPDarknet53、Mish激活函数、Dropblock。
+- Neck：目标检测网络在BackBone和最后的输出层之间往往会插入一些层，比如Yolov4中的SPP模块、FPN+PAN结构。
+- Prediction：输出层的锚框机制和Yolov3相同，主要改进的是训练时的损失函数CIOU_Loss，以及预测框筛选的nms变为DIOU_nms。

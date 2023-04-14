@@ -1,8 +1,205 @@
 ---
 layout: post
-title:  深度学习（十三）——花式池化, 深度信息检索
+title:  深度学习（十三）——姿态/行为检测, 花式池化
 category: DL 
 ---
+
+* toc
+{:toc}
+
+# Non-local
+
+https://zhuanlan.zhihu.com/p/33345791
+
+Non-local neural networks
+
+https://zhuanlan.zhihu.com/p/109514384
+
+医学图像分割的Non-local U-Nets
+
+https://mp.weixin.qq.com/s/Tox7jEFNHFHZQ-KdojMIpA
+
+GCNet：当Non-local遇见SENet
+
+https://zhuanlan.zhihu.com/p/48198502
+
+Non-local Neural Networks论文笔记
+
+https://mp.weixin.qq.com/s/zHZO1pmY8PCoI9vkDOaUgw
+
+CCNet--于"阡陌交通"处超越恺明的Non-local
+
+https://mp.weixin.qq.com/s/6q2q9OVhOYjk4ZrhLvAdkA
+
+Non-local Neural Networks及自注意力机制思考
+
+https://mp.weixin.qq.com/s/v4IK4gJvZ3J03Ikrujiyhw
+
+视觉注意力机制：Non-local模块与Self-attention的之间的关系与区别？
+
+https://mp.weixin.qq.com/s/EElEYaDbfdxlGWL_jBEwzQ
+
+Non-local与SENet、CBAM模块融合：GCNet、DANet
+
+https://mp.weixin.qq.com/s/lZxamQryotfLTKpRJKaA5Q
+
+Non-local模块如何改进？来看CCNet、ANN
+
+https://mp.weixin.qq.com/s/2O-T6akdPjGe2rUZKoE4Kw
+
+Self-attention机制及其应用：Non-local网络模块
+
+https://zhuanlan.zhihu.com/p/138444916
+
+写写non local network
+
+# 姿态/行为检测
+
+基于CNN的2D多人姿态估计方法，通常有2个思路（Bottom-Up Approaches和Top-Down Approaches）：
+
+- Top-Down framework，就是先进行行人检测，得到边界框，然后在每一个边界框中检测人体关键点，连接成每个人的姿态，缺点是受人体检测框影响较大，代表算法有RMPE。
+
+- Bottom-Up framework，就是先对整个图片进行每个人体关键点部件的检测，再将检测到的人体部位拼接成每个人的姿态，代表方法就是openpose。
+
+## OpenPose
+
+OpenPose是一个实时多人关键点检测的库，基于OpenCV和Caffe编写。它是CMU的Yaser Sheikh小组的作品。
+
+>Yaser Ajmal Sheikh，巴基斯坦信德省易司哈克工程科学与技术学院本科（2001年）+中佛罗里达大学博士（2006年）。现为CMU副教授。
+
+![](/images/article/openpose.png)
+
+OpenPose的使用效果如上图所示。
+
+论文：
+
+《Realtime Multi-Person 2D Pose Estimation using Part Affinity Fields》
+
+《Hand Keypoint Detection in Single Images using Multiview Bootstrapping》
+
+《Convolutional pose machines》
+
+官方代码（caffe）：
+
+https://github.com/CMU-Perceptual-Computing-Lab/openpose
+
+Tensorflow版本：
+
+https://github.com/ildoonet/tf-pose-estimation
+
+参考：
+
+https://zhuanlan.zhihu.com/p/37526892
+
+OpenPose：实时多人2D姿态估计
+
+https://mp.weixin.qq.com/s?__biz=MzIwMTE1NjQxMQ==&mid=2247488741&idx=2&sn=93f05747f3a94a2cbfa2431901d2d97f
+
+OpenPose升级，CMU提出首个单网络全人体姿态估计网络，速度大幅提高
+
+https://mp.weixin.qq.com/s/jAmUscrMZ8EmG3th-3Yx3w
+
+实战：基于OpenPose的卡通人物可视化
+
+## DensePose
+
+与OpenPose类似的还有Facebook提出的DensePose。
+
+论文：
+
+《DensePose: Dense Human Pose Estimation In The Wild》
+
+数据集：
+
+http://densepose.org/
+
+这里包含了一个名为DensePose-COCO的姿态数据集。
+
+参考：
+
+https://mp.weixin.qq.com/s/sFd9hrMrKDl5UJwlY6N7mw
+
+Facebook提出DensePose数据集和网络架构：可实现实时的人体姿态估计
+
+https://mp.weixin.qq.com/s/t29ITfRPD3yCmRD5wJyq7g
+
+ICCV2017 PoseTrack challenge优异方法：基于检测和跟踪的视频中人体姿态估计
+
+https://mp.weixin.qq.com/s/mGcKpu3BXlAGO-t2FUCxAg
+
+基于深度模型的人脸对齐和姿态标准化
+
+https://mp.weixin.qq.com/s/gwRD3SzTof349V8W0_lRfg
+
+实时评估世界杯球员的正确姿势：FAIR开源DensePose
+
+https://zhuanlan.zhihu.com/p/39219404
+
+Dense Pose
+
+https://blog.csdn.net/sinat_26917383/article/details/79704097
+
+关键点定位：四款人体姿势关键点估计论文笔记
+
+https://mp.weixin.qq.com/s/-A87-z5inWBsF1-5UYagTA
+
+Facebook实时人体姿态估计：Dense Pose及其应用展望
+
+## Hourglass networks
+
+Hourglass networks是University of Michigan的Alejandro Newell的作品。（2016年3月）
+
+论文：
+
+《Stacked hourglass networks for human pose estimation》
+
+![](/images/img3/Hourglass_Networks.png)
+
+上图是Stacked Hourglass networks的网络结构图，其中的每个沙漏形状的结构，都是一个hourglass module，其结构如下图所示：
+
+![](/images/img3/Hourglass_Networks_2.png)
+
+hourglass module基本可以看作是把concat换成add之后的U-NET，或者也可以看作是resnet版的U-NET。上图中一个module包含了4次add，因此也被叫做4阶hourglass module。
+
+参考：
+
+https://blog.csdn.net/shenxiaolu1984/article/details/51428392
+
+Stacked Hourglass算法详解
+
+https://mp.weixin.qq.com/s/nfPBRBLG1ThsY3DvONHYrA
+
+CenterNet骨干网络之hourglass
+
+https://mp.weixin.qq.com/s/lzxd9J97nkOBLXgEcbdoKA
+
+使用Hourglass网络来理解人体姿态
+
+## 评价度量
+
+Object Keypoint Similarity(OKS)：
+
+$$\mathbf{OKS} = \frac{\sum_i exp(-\frac{d_i^2}{2s^2k_i^2}) \delta (v_i >0)}{\sum_i \delta (v_i >0)}$$
+
+其中，$$d_i$$是检测的关键点与groundtruth关键点之间的欧氏距离；$$v_i$$是groundtruth关键点的可见性标志；s是目标的尺度；$$k_i$$是控制衰减(falloff)的per-keypoint常数。
+
+## 步态识别
+
+https://mp.weixin.qq.com/s/g6032xTGEtvbsfwXboMJ4A
+
+大阪大学副校长Yasushi Yagi：步态分析
+
+http://mp.weixin.qq.com/s/Y-PvMz_Vz8nBGRZo9dwUCA
+
+中科院步态识别技术：不看脸50米内在人群中认出你！
+
+https://mp.weixin.qq.com/s/3Pe5wJ0VomzwKMF84OqcMg
+
+步态识别的深度学习综述
+
+https://mp.weixin.qq.com/s/afX8Y84nTS20q4Y36uOWqQ
+
+复旦提出GaitSet算法，步态识别的重大突破！
 
 # 花式池化
 
@@ -14,7 +211,21 @@ category: DL
 
 ![](/images/article/max_pooling.png)
 
-上图是Max Pooling的示意图。除了max之外，常用的池化函数还有mean、min等。
+上图是Max Pool的示意图，也就是选择池子里最大的那个值。
+
+除了max之外，常用的池化函数还有：
+
+Min Pool:
+
+$$Y=\min(P)$$
+
+Average Pool:
+
+$$Y=\text{mean}(P)$$
+
+L2 Pool:
+
+$$Y=\sqrt{\frac{\sum p^2}{n}}$$
 
 ICLR2013上，Zeiler提出了另一种pooling手段stochastic pooling。只需对Pooling区域中的元素按照其概率值大小随机选择，即元素值大的被选中的概率也大。而不像max-pooling那样，永远只取那个最大值元素。
 
@@ -36,9 +247,33 @@ Stochastic-pooling则介于两者之间，通过对像素点按照数值大小�
 
 比如，AlphaGo采用CNN识别棋局，但对棋局来说，下采样显然是没有什么物理意义的，因此，**AlphaGo的CNN是没有Pooling的**。
 
+## Adaptive pool
+
+在实际的项目当中，我们往往预先只知道的是输入数据和输出数据的大小，而不知道核与步长的大小。
+
+Adaptive pool只要我们给定输入数据和输出数据的大小，自适应算法就能够自动帮助我们计算核的大小和每次移动的步长。
+
+标准的Max/AvgPooling是通过kernel_size，stride与padding来计算output_size： 
+
+output_size = ceil ( (input_size+2∗padding−kernel_size)/stride）+1
+
+反过来的话，就有如下公式：
+
+stride = floor ( (input_size / (output_size) )
+
+kernel_size = input_size − (output_size−1) * stride
+
+padding = 0
+
+参考：
+
+https://blog.csdn.net/xiaosongshine/article/details/89453037
+
+AdaptivePooling与Max/AvgPooling相互转换
+
 ## 全局平均池化
 
-Global Average Pooling是另一类池化操作，一般用于替换FullConnection层。
+Global Average Pool是另一类池化操作，一般用于替换FullConnection层。
 
 ![](/images/article/global_average_pooling.png)
 
@@ -60,6 +295,8 @@ Global Average Pooling是另一类池化操作，一般用于替换FullConnectio
 
 2.将不同通道的均值连接成一个一维tensor。
 
+GAP实际上就是kernel size等于WxH的AP。类似的，还有Global Max Pool。
+
 ## UnPooling
 
 UnPooling是一种常见的上采样操作。其过程如下图所示：
@@ -72,172 +309,56 @@ UnPooling是一种常见的上采样操作。其过程如下图所示：
 
 3.上采样阶段，利用第1步保存的Max Location，重建下一层的feature map。
 
-# 深度信息检索
+从上面的描述可以看出，UnPooling不完全是Pooling的逆运算：
 
-Information Retrieval是用户进行信息查询和获取的主要方式，是查找信息的方法和手段。狭义的信息检索仅指信息查询（Information Search）。即用户根据需要，采用一定的方法，借助检索工具，从信息集合中找出所需要信息的查找过程。广义的信息检索是信息按一定的方式进行加工、整理、组织并存储起来，再根据信息用户特定的需要将相关信息准确的查找出来的过程。
+1.Pooling之后的feature map，要经过若干运算，才会进行UnPooling操作。
 
-这方面的DL应用可参见以下的综述文章：
+2.对于非Max Location的地方以零填充。然而这样并不能完全还原信息。
 
-《MatchZoo: A Toolkit for Deep Text Matching》
+参考：
 
-## ARC-I & ARC-II
+http://blog.csdn.net/u012938704/article/details/52831532
 
-《Convolutional neural network architectures for matching natural language sentences》
+caffe反卷积
 
-## DSSM
+## K-max Pooling
 
-论文：
-
-《Learning deep structured semantic models for web search using clickthrough data》
-
-### Word Hashing
-
-DSSM已经意识到one-hot是一种低效的词向量表示方式，因此，它转而采用了一种叫做Word Hashing的技术。
-
-Word Hashing是非常重要的一个trick，以英文单词来说，比如good，它可以写成`#good#`，然后按tri-grams来进行分解为`#go goo ood od#`，再将这个tri-grams灌入到bag-of-word中，这种方式可以非常有效的解决vocabulary太大的问题(因为在真实的web search中vocabulary就是异常的大)，另外也不会出现oov问题，因此英文单词才26个，3个字母的组合都是有限的，很容易枚举光。
-
-那么问题就来了，这样两个不同的单词会不会产出相同的tri-grams，paper里面做了统计，说了这个冲突的概率非常的低，500K个word可以降到30k维，冲突的概率为0.0044%。
-
-但是在中文场景下，这个Word Hashing估计没有这么有效了。
-
-上面讲述了Word Hashing的词向量的构建方法，这种方法也可以扩展到句子：统计一下句子中每个tri-grams出现的次数，然后用次数组成句子向量即可。
-
-### 网络结构
-
-![](/images/img3/DSSM.png)
-
-上图是DSSM的网络结构：句子向量经过若干层的神经网络之后，得到了语义向量（semantic concept vectors）。计算两个语义向量的cos相似度，得到两个句子的匹配程度。
-
-### 参考
-
-https://www.microsoft.com/en-us/research/project/dssm/
-
-微软的DSSM模型
-
-https://www.cnblogs.com/baiting/p/7195998.html
-
-深度语义匹配模型-DSSM及其变种
-
-https://blog.csdn.net/u013074302/article/details/76422551
-
-语义相似度计算——DSSM
-
-https://mp.weixin.qq.com/s/U2r4qDLh4WZFgAIoF_SRPg
-
-金融客服AI新玩法：语言学运用、LSTM+DSSM算法、多模态情感交互
-
-## CDSSM
-
-《Learning semantic representations using convolutional neural networks for web search》
-
-## MV-LSTM
-
-《A deep architecture for semantic matching with multiple positional sentence representations》
-
-## CNTN
-
-《Convolutional Neural Tensor Network Architecture for Community-Based Question Answering》
-
-## DRMM
-
-《A deep relevance matching model for ad-hoc retrieval》
-
-## MatchPyramid
-
-《Text Matching as Image Recognition》
-
-## Match-SRNN
-
-《Match-SRNN: Modeling the Recursive Matching Structure with Spatial RNN》
-
-## K-NRM
-
-《End-to-End Neural Ad-hoc Ranking with Kernel Pooling》
-
-## 代码搜索
-
-https://mp.weixin.qq.com/s/B3Uv-dhB5VYJnu06N4lYBg
-
-深度学习遇见代码搜索，一篇论文概览神经代码搜索
-
-https://mp.weixin.qq.com/s/GFIxA9kEGNJ9rg96mRw0PQ
-
-自然语言语义代码搜索之路
+![](/images/article/kmax_pooling.png)
 
 ## 参考
 
-https://github.com/harpribot/awesome-information-retrieval
+http://www.cnblogs.com/tornadomeet/p/3432093.html
 
-信息检索优质资源汇总
+Stochastic Pooling简单理解
 
-https://mp.weixin.qq.com/s/5ba3EM6e9R-i3UpzUhm49w
+http://mp.weixin.qq.com/s/XzOri12hwyOCdI1TgGQV3w
 
-神经信息检索导论，微软研究员129页最新书册
+新型池化层sort_pool2d实现更快更好的收敛：表现优于最大池化层
 
-https://mp.weixin.qq.com/s/aZsj1FQnzHOr-YBcy_ljpw
+http://blog.csdn.net/liuchonge/article/details/67638232
 
-DNN在搜索场景中的应用
+CNN与句子分类之动态池化方法DCNN--模型介绍篇
 
-https://mp.weixin.qq.com/s/1jgdI-Pt0PtN3oAs0Wh4XA
+https://mp.weixin.qq.com/s/K1RBux3AfxVFT8_uezYHFA
 
-阿里提出电商搜索全局排序方法，淘宝无线主搜GMV提升5%
+被Hinton，DeepMind和斯坦福嫌弃的池化，到底是什么？
 
-https://mp.weixin.qq.com/s/9Fcj5lO-JPfFVnRSSM_56w
+https://mp.weixin.qq.com/s/J4opJ6NvbTxbHWAWNHEltw
 
-深度学习在美团搜索广告排序的应用实践
+自然语言处理中CNN模型几种常见的Max Pooling操作
 
-https://mp.weixin.qq.com/s/wni3F9lKuO4OT32BVe0QDQ
+https://mp.weixin.qq.com/s/KGFsMl3X52_T50h7Bhk65w
 
-谷歌发大招：搜索全面AI化，不用关键词就能轻松“撩书”
+CNN一定需要池化层吗？
 
-https://mp.weixin.qq.com/s/TrWwp-DBTrKqIT_Pfy_o5w
+https://zhuanlan.zhihu.com/p/341820742
 
-阿里妈妈首次公开新一代智能广告检索模型，重新定义传统搜索框架
+深度神经网络中的池化方法：全面调研（1989-2020）
 
-https://mp.weixin.qq.com/s/fZv9FgbdQ1bWPoNdl9sF1A
+https://mp.weixin.qq.com/s/1Np5KFDR1Wnbwl5Akod13g
 
-“宝石迷阵”与信息检索
+SoftPool：基于Softmax加权的池化操作
 
-https://mp.weixin.qq.com/s/Vvo3Ti3XiGQz0IwLgATfWQ
+https://mp.weixin.qq.com/s/86cOSCLWJZBs4vLHGxrjGQ
 
-电商搜索算法技术的演进
-
-https://mp.weixin.qq.com/s/MpuUdZi8CWcu0b-ij-bHjA
-
-Jeff Dean出品：用机器学习索引替代B-Trees，3倍性能提升，10-100倍空间缩小
-
-https://mp.weixin.qq.com/s/uztYEW_azetOkOGiZcbCuw
-
-JeffDean又用深度学习搞事情：这次要颠覆整个计算机系统结构设计。这篇blog介绍了如何用DL方法提高内存访问的命中率。
-
-https://zhuanlan.zhihu.com/p/37020639
-
-读论文系列：CVPR2018 SSAH
-
-https://mp.weixin.qq.com/s/TdnstQaBcLaXg8BvuR7oYA
-
-基于素描图的细粒度图像检索
-
-https://mp.weixin.qq.com/s/N3JBHlqneG9dI0I26M3wHQ
-
-如何做好大规模视觉搜索？eBay基于实践总结出了7条建议
-
-https://mp.weixin.qq.com/s/8Twe3e3WKCY9pTiNtnW2sg
-
-重磅！谷歌等推出基于机器学习的数据库SageDB
-
-https://mp.weixin.qq.com/s/NJf5e25tvT_xKXLD7UY1AQ
-
-MySQL智能调度系统。这篇blog其实和MySQL关系不大，算是DL在负载均衡方面的应用吧。
-
-https://mp.weixin.qq.com/s/fzdK4YPTUgiW0D0aeH7WlQ
-
-用于跨模态检索的综合距离保持自编码器
-
-https://mp.weixin.qq.com/s/AWsiAYyVWY83s5uJ01Lg6Q
-
-千亿级照片，毫秒间匹配最佳结果，微软开源Bing搜索背后的关键算法
-
-https://mp.weixin.qq.com/s/fw5dRWmvZ17lqzxjKFrCtQ
-
-相关性特征在图片搜索中的实践
+我看尽了池化

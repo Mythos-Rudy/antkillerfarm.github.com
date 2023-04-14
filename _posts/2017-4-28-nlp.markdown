@@ -4,9 +4,24 @@ title:  NLP（一）
 category: AI 
 ---
 
+* toc
+{:toc}
+
 # NLP
 
 自然语言处理（Natural Language Processing）是深度学习的主要应用领域之一。
+
+![](/images/img3/nlp_task.png)
+
+参考：
+
+https://blog.csdn.net/CoderPai/article/details/105050924
+
+NLP任务总结
+
+https://mp.weixin.qq.com/s/qskKTKKSeBBV8qJbPURL8A
+
+一文看尽各种NLP任务
 
 ## 教程
 
@@ -50,6 +65,10 @@ http://phontron.com/class/nn4nlp2017/assets/slides/
 
 CMU NN for NLP
 
+http://phontron.com/class/nn4nlp2020/schedule.html
+
+CMU CS 11-747: Neural Networks for NLP
+
 http://phontron.com/class/mtandseq2seq2017/
 
 CMU Machine Translation and Sequence to Sequence Models
@@ -85,6 +104,14 @@ https://mp.weixin.qq.com/s/wQEahUTHvqDNndv8Spkolw
 https://mp.weixin.qq.com/s/HcGDwZWhuL-vmF19aerJyw
 
 Jacob Eisenstein《自然语言处理》最新经典教材免费分享
+
+https://mp.weixin.qq.com/s/wutcKURaYvBGcHvLSayKAw
+
+机器阅读理解的任务与模式研究，61页pdf，多伦多约克大学
+
+https://mp.weixin.qq.com/s/jjio8GUiinM2No5q568ImQ
+
+深度学习自然语言处理概述，116页ppt，Jiri Materna
 
 ## 书籍
 
@@ -215,7 +242,7 @@ http://www.ikvm.net/
 
 https://github.com/stanfordnlp/stanfordnlp
 
-看来在AI领域，Java是越来越不行了。2年前，好多AI库沿袭了大数据开发的语言习惯，使用了Java语言。然而，Google的tensorflow的出现，硬是将生态扭到了python语言一边。正如若干年前，Google在Android开发中引入Java一样，当时的业界基本都是C++的天下。
+看来在AI领域，Java是越来越不行了。2年前，好多AI库沿袭了大数据开发的语言习惯，使用了Java语言。然而，Google的tensorflow的出现，硬是将生态扭到了python语言一边。正如若干年前，Google在Android开发中引入Java一样，当时的手机业界基本都是C++的天下。
 
 ### THUCTC
 
@@ -317,6 +344,10 @@ https://mp.weixin.qq.com/s/f2tegV4KwjyttMAhoHknMg
 
 jieba分词快速入门
 
+https://mp.weixin.qq.com/s/rzF_Er6yJdQaQB7hyoc9Bw
+
+浅谈结巴分词算法原理
+
 ### NLPIR
 
 NLPIR汉语分词系统(又名ICTCLAS2013)，是中科院张华平博士的作品。官网：
@@ -391,18 +422,6 @@ https://zhuanlan.zhihu.com/p/48504619
 
 写给NLP研究者的编程指南
 
-### TorchNLP
-
-代码：
-
-https://github.com/kolloldas/torchnlp
-
-参考：
-
-https://mp.weixin.qq.com/s/xCHvB7gKCBxXk1_rAtG0sw
-
-基于PyTorch/TorchText的自然语言处理库
-
 ### FlashText
 
 在NLP任务中，清理文本数据通常需要替换句子中的关键词或从句子中提取关键词。通常，这样的操作可以用正则表达式来完成，但是如果要搜索的词汇量过大，操作就会变得麻烦。Python中基于FlashText算法的FlashText模块，为这种情况提供了一个合适的替代方案。
@@ -421,28 +440,10 @@ https://mp.weixin.qq.com/s/IKxweABi4IEyXjKNw9BJgA
 
 正则表达式太慢？这里有一个提速100倍的方案：FlashText
 
-### fuzzywuzzy
+https://mp.weixin.qq.com/s/ImtSR6VwYalN6gTgjVJOsQ
 
-fuzzywuzzy可以很容易地实现诸如字符串比较比率、token比率等操作。对于匹配不同数据库中的记录也很方便。
+十五分钟完成Regex五天任务：FlashText，语料库数据快速清理利器
 
-代码：
+https://mp.weixin.qq.com/s/NmB8Jbm8zEwxQ8PGoz_wvg
 
-https://github.com/seatgeek/fuzzywuzzy
-
-## NLPchina
-
-NLPchina(中国自然语言处理开源组织)旗下有许多好用的工具。
-
-官网：
-
-http://www.nlpcn.org/
-
-Github：
-
-https://github.com/NLPchina
-
-### Ansj
-
-Ansj是一个NLPchina旗下的开源的Java中文分词工具，基于中科院的ictclas中文分词算法，比其他常用的开源分词工具（如mmseg4j）的分词准确率更高。
-
-https://github.com/NLPchina/ansj_seg
+关键词匹配利器FlashText

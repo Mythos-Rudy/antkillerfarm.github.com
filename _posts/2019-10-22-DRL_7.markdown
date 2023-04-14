@@ -1,365 +1,343 @@
 ---
 layout: post
-title:  深度强化学习（七）——Dota 2, DRL参考资源（1）
+title:  深度强化学习（七）——MARL
 category: DRL 
 ---
 
-# Dota 2
+* toc
+{:toc}
 
-https://mp.weixin.qq.com/s/rPsxvzOLuoo_IRtgH94Ecw
+# AlphaGo（续）
 
-OpenAI自学习多智能体5v5团队战击败人类玩家
+## KataGo
 
-https://mp.weixin.qq.com/s/VPVzXzBYD_nYO1SjTMNGVA
+KataGo是2019年以后发起的一个新项目，主要解决了Leela Zero和ELF OpenGo耗费算力过多的问题。它不仅训练更快，推理也有极大改进，即使家用显卡PC也可在合理的时间算出结果。支持更多的规则（如日本规则），改善了AlphaGo胜势下缓手的缺陷。
 
-Dota2团战AI击败人类最全解析：能团又能gank，AI一日人间180年
+目前，KataGo的棋力已经超越了Leela Zero和ELF OpenGo。
 
-https://mp.weixin.qq.com/s/5Vg9RFvyNv6T7QkIfPm1aQ
+官网：
 
-DOTA2中打败Dendi的AI如何炼出？
+https://katagotraining.org/
 
-https://mp.weixin.qq.com/s/e4lK3UoQq-8j1YIWKALBLg
+## 参考
 
-嵌入技术在Dota2人工智能战队OpenAI Five中的应用
+https://blog.csdn.net/amds123/article/details/70666594
 
-https://mp.weixin.qq.com/s/xsoS3tvOh78rkbI0UUIkPQ
+论文笔记：Mastering the game of Go with deep neural networks and tree search
 
-2:0！Dota2世界冠军OG被OpenAI碾压，全程人类只推掉两座外塔
+https://mp.weixin.qq.com/s/Sfv-jzQAkN0PsZOGZUQhkQ
 
-https://mp.weixin.qq.com/s/X73jL5T_uZ87F3iE-uTnpw
+AlphaGo Zero横空出世，DeepMind Nature论文解密不使用人类知识掌握围棋
 
-Dota2冠军OG如何被AI碾压？OpenAI累积三年的完整论文终于放出
+https://mp.weixin.qq.com/s/oAxouYX7-wDC5okbu--Wuw
 
-# DRL参考资源
+Nature重磅：人工智能从0到1, 无师自通完爆阿法狗100-0
 
-https://mp.weixin.qq.com/s/ruAAQEjPIDPWPiuPepKU6Q
+https://zhuanlan.zhihu.com/p/30262872
 
-Deep Reinforcement Learning: An Overview
+关于AlphaGo Zero
 
-https://mp.weixin.qq.com/s/FjmlXqlpaRVLdAbjqspOJA
+https://zhuanlan.zhihu.com/p/30263585
 
-这是一份你必须学习的强化学习算法清单
+DeepMind新一代围棋程序AlphaGo Zero再次登上Nature
 
-https://mp.weixin.qq.com/s/lfXQqllfFPtuNIrQZiD-NQ
+https://www.zhihu.com/question/66861459
 
-深度强化学习十大原则
+如何评价DeepMind发表在Nature上的AlphaGo Zero？
 
-https://mp.weixin.qq.com/s/I8IwPCY6-zocJKFXMr6rUg
+https://deepmind.com/blog/alphago-zero-learning-scratch/
 
-深度强化学习的18个关键问题
+AlphaGo Zero官方声明
 
-https://mp.weixin.qq.com/s/_lmz0l1vP_CQ6p6DdFnHWA
+https://zhuanlan.zhihu.com/mathNote
 
-谷歌大脑工程师的深度强化学习劝退文
+某牛的专栏，主要讲自制AlphaGo
 
-https://zhuanlan.zhihu.com/p/39999667
+http://xtf615.com/2018/02/10/AlphaGo/
 
-强化学习路在何方？
+Alpha Go论文解析
 
-https://mp.weixin.qq.com/s/oA98YyLqn1B22QZ5b_iDVA
+http://xtf615.com/2018/02/12/AlphaGo-Zero/
 
-IJCAI 2018：聚焦强化学习的学习效率
+AlphaGo Zero论文解析
 
-https://mp.weixin.qq.com/s/FtHJCXniVne2TGKfgCeS9w
+http://xtf615.com/2018/02/24/AlphaZeroDesign/
 
-Pieter Abbeel：深度强化学习加速方法
+AlphaZero问题研究和算法设计与实现
 
-https://mp.weixin.qq.com/s/xlnwB9e1ks-4M4djnyIAyQ
+https://mp.weixin.qq.com/s/DC9QqHdWT0xFnowEBuJDbw
 
-解读72篇DeepMind深度强化学习论文
+自动化所解读“深度强化学习”：从AlphaGo到AlphaGoZero
 
-https://mp.weixin.qq.com/s/VYIyWRykREjOyLu4YDhLeA
+https://mp.weixin.qq.com/s/uZtaxRwROCqYmL2k6Muxaw
 
-61篇NIPS2019深度强化学习论文及部分解读
+从阿尔法狗元(AlphaGo Zero)的诞生看终极算法的可能性
 
-https://mp.weixin.qq.com/s/e6QOz-MQSn7n53EPtpw64w
+https://mp.weixin.qq.com/s/i5OmLu8aNbypiTUmP4teeQ
 
-DeepMind强化学习综述：她可以很快，但快从慢中来
+刘遥行：深入浅出看懂AlphaGo Zero
 
-https://zhuanlan.zhihu.com/p/72642285
+https://mp.weixin.qq.com/s/aBrwbB_DOGTen-6XL7LGFQ
 
-基于模型的强化学习论文合集
+邓侃：白话蒙特卡洛树搜索和ResNet
 
-https://zhuanlan.zhihu.com/p/77976582
+https://mp.weixin.qq.com/s/nbTkr0PImlXUSYl91HD91Q
 
-强化学习并行训练论文合集
+AlphaGo背后的力量：蒙特卡洛树搜索入门指南
 
-https://mp.weixin.qq.com/s/sHP03DAeZvdBxwVPuSNRPg
+https://mp.weixin.qq.com/s/-tH7DQo1cK9gA0bcpBJSDA
 
-如何丝滑地入门神经网络？写个AI赛车游戏，只训练4代就能安全驾驶
+AlphaGo Zero：笔记与伪代码
 
-https://mp.weixin.qq.com/s/1SZKhG1ZbD1pl-3YQD_umg
+https://mp.weixin.qq.com/s/CJuVoOf7idUChFIn7dH0Lg
 
-6行代码搞定基本的RL算法，速度围观Reddit高赞帖
+围棋中的数学原理
 
-https://mp.weixin.qq.com/s/7BsXPQ8wC6_fHulU63ZQiQ
+https://mp.weixin.qq.com/s/d46qNFaftt4wxpV4sZnG-w
 
-当强化学习遇见泛函分析
+一张图看懂AlphaGo Zero
 
-https://mp.weixin.qq.com/s/6n5HawyR4AgH8Dq0gJMw2g
+https://zhuanlan.zhihu.com/p/31749249
 
-强化学习的基本概念与代码实现
+比AlphaGo Zero更强的AlphaZero问世，8小时解决一切棋类！
 
-https://mp.weixin.qq.com/s/RLEuaiRdq6AbTSUcYQ5O3A
+https://mp.weixin.qq.com/s/L7bZMkqyncwEt6D5tK1OdQ
 
-深度强化学习在NLP怎么用？看清华黄民烈老师这一份120页《自然语言处理和搜索中的深度强化学习应用》讲义
+AlphaZero炼成最强通用棋类AI，DeepMind强化学习算法8小时完爆人类棋类游戏
 
-https://zhuanlan.zhihu.com/p/29019246
+https://mp.weixin.qq.com/s/tFdnxqV5a5xZrFtB6E0AiQ
 
-基于策略的增强学习
+新AlphaZero出世称霸棋界，8小时搞定一切棋类！自对弈通用强化学习无师自通！
 
-https://mp.weixin.qq.com/s/OY56lJ_NFf5vVAgKfKyx2A
+https://mp.weixin.qq.com/s/NwuuNIc9kc2qOGQP2pvRnA
 
-利用强化学习自动搜索最优化方法
+AlphaZero原理与启示
 
-https://mp.weixin.qq.com/s/nYOOwVoijl1p4V0A7yaI3w
+https://mp.weixin.qq.com/s/8Zv3ElL2nWK-UDOHNjKb4g
 
-机遇与挑战：用强化学习自动搜索优化算法
+从源码解密AlphGo Zero背后基本原理
 
-http://mp.weixin.qq.com/s/TBVVdX3erOpXNjXmhLmxOw
+https://mp.weixin.qq.com/s/qYWsFBKNCKCGUmizX_1sVg
 
-学“深度强化学习”，看懂DeepMind这篇文章就够了!
+AlphaGo 教学工具终于上线了！
 
-https://mp.weixin.qq.com/s/uDFsWebfLmka-zZX3Y_8kg
+https://mp.weixin.qq.com/s/JxbIeDk8_wnYu_ewUHp29g
 
-深度强化学习在面向任务的对话管理中的应用
+深度学习与围棋实战书籍《Deep Learning and the Game of Go》
 
-https://mp.weixin.qq.com/s/FROyReDu7i5amGv-J4cmtg
+https://mp.weixin.qq.com/s/gsRnbknytz2FY2dWgdWEYg
 
-“世界模型”实现，一步步让机器掌握赛车和躲避火球的技能
+精通国际象棋的AI研究员：AlphaZero真的是一次突破吗？
 
-https://mp.weixin.qq.com/s/curzH8WrFyl5WWT4lDfpwQ
+https://zhuanlan.zhihu.com/p/31809930
 
-Chrome暗藏的恐龙跳一跳，已经被AI轻松掌握了
+浅述：从Minimax到AlphaZero，完全信息博弈之路（1）
 
-https://mp.weixin.qq.com/s/1b3_AiFhwXqxb7FozdRYIQ
+https://zhuanlan.zhihu.com/p/32073374
 
-最in强化学习+NLP技术分享会
+浅述：从Minimax到AlphaZero，完全信息博弈之路（2）
 
-https://mp.weixin.qq.com/s/RKQb7-mQ-ELRRq18db02Pg
+https://zhuanlan.zhihu.com/p/32089487
 
-DeepMind大突破！AI模拟大脑导航功能，学会像动物一样“抄近路”
+AlphaZero实战：从零学下五子棋
 
-https://mp.weixin.qq.com/s/qBwszD9rn4gKazXdwqexSQ
+http://mp.weixin.qq.com/s/72riTTC3w0q9oF5H-51kXA
 
-MIT提出使用“深度强化学习”帮助智能体在运动中做出“动作决策”
+手把手教你搭建AlphaZero（使用Python和Keras）
 
-https://mp.weixin.qq.com/s/i-udn1M4kiJpF8U7u5Uepg
+https://mp.weixin.qq.com/s/Qw2tT7H1PwDvPgOYy8YUsQ
 
-专家解读DeepMind最新论文：深度学习模型复现大脑网格细胞
+AlphaGo Zero代码迟迟不开源，TF等不及自己推了一个
 
-https://mp.weixin.qq.com/s/AS1VFjBFnSk19QJ28tBVWA
+https://mp.weixin.qq.com/s/Vq-osjgNXJQu5avGkxQdsw
 
-NIPS 2017斯坦福赛题大公开：强化学习模拟人类肌肉骨骼模型
+手把手：AlphaGo有啥了不起，我也能教你做一个
 
-https://mp.weixin.qq.com/s/TWjFWe6-dZWDoTi5gN1BxA
+https://mp.weixin.qq.com/s/ajajJ9yJZsOy4Vc0ULBxXg
 
-深度强化学习在指代消解中的一种尝试
+国际象棋版AlphaZero出来了诶，还开源了Keras实现
 
-https://mp.weixin.qq.com/s/YnMgJDAh3XhyyNdI8RXmtw
+https://zhuanlan.zhihu.com/p/41814142
 
-腾讯知文等提出新型生成式摘要模型：结合主题信息和强化训练生成更优摘要
+从源码解密AlphaGo Zero背后基本原理
 
-https://mp.weixin.qq.com/s/JbCIBFDRvg5qcpZ11g58dw
+https://www.ifanr.com/630602
 
-DeepMind提出关系性深度强化学习：在星际争霸2任务中获得最优水平
+AlphaGo的棋局，与人工智能有关，与人生无关
 
-https://mp.weixin.qq.com/s/SpCorsAiTWGYGiohT_gZtg
+https://mp.weixin.qq.com/s/J0w6kzzdKTbsaiZitbQdoA
 
-如何训练智能体Agent玩毁灭战士ViZDoom？
+达观数据：一文详解AlphaGo原理
 
-https://mp.weixin.qq.com/s/ewC2_8O29Gg0blxK7mHsYA
+https://mp.weixin.qq.com/s/BBQ54HHrFiqxXkC-EI6ELw
 
-比TD、MC、MCTS指数级快，性能超越A3C、DDQN等模型，这篇RL算法论文在Reddit上火了
+Science封面：AlphaZero达成终极进化体，史上最强棋类AI降临！
 
-https://mp.weixin.qq.com/s/Q9QzXo_M3jYKjBWSsLYwgQ
+https://mp.weixin.qq.com/s/Pgw_xaCNl_kCPCg8NFzUBQ
 
-强化学习+树搜索：一种新型程序合成方法
+人类没法下了！DeepMind贝叶斯优化调参AlphaGo，自弈胜率大涨16.5%
 
-https://mp.weixin.qq.com/s/l46yJdRaftMlwr6odiSiHg
+https://mp.weixin.qq.com/s/eE3oL6c5zHmTglHE-dgBvg
 
-Yoshua Bengio团队基于深度强化学习打造聊天机器人MILABOT
+详解AlphaGo到AlphaGo Zero！
 
-https://mp.weixin.qq.com/s/6_cW22DCzSw3DpUDrLXLcA
+https://mp.weixin.qq.com/s/aAF0Gr7yEPkHRLASecJipw
 
-OpenAI提出强化学习近端策略优化，可替代策略梯度法
+百度正用谷歌AlphaGo，解决一个比围棋更难的问题
 
-http://mp.weixin.qq.com/s/S4jhpNKYZP5YQWaiiOQGFA
+https://hackernoon.com/the-3-tricks-that-made-alphago-zero-work-f3d47b6686ef
 
-DeepMind：“预测地图”海马体催生强化学习新算法
+The 3 Tricks That Made AlphaGo Zero Work
 
-https://mp.weixin.qq.com/s/KZHidOi5KYgg393R_JspBA
+https://web.stanford.edu/~surag/posts/alphazero.html
 
-DeepMind都拿不下的游戏，刚刚被OpenAI玩出历史最高分
+A Simple Alpha(Go) Zero Tutorial
 
-https://mp.weixin.qq.com/s/VrVdsxn94ux_46mIyS8f0w
+https://mp.weixin.qq.com/s/362skBPuwxS-bLcvv14MQg
 
-谷歌大脑实现更宽广的智能体视野，在Atari2600上可持续超越人类玩家！
+井字棋、五子棋AlphaGo Zero算法实战
 
-https://mp.weixin.qq.com/s/P5EysBHBaR6L3IfeSgo6fw
+https://mp.weixin.qq.com/s/IaJoaQJw68JXBN93d680PQ
 
-强化学习20分钟，剑桥博士教汽车学会自动驾驶！
+深入浅出解读并思考AlphaGo
 
-https://mp.weixin.qq.com/s/w3SsadgKaL8-tlzYLvMm-A
+https://mp.weixin.qq.com/s/foiyPVtLH5KVe_ST5rn-EQ
 
-讲真？一天就学会了自动驾驶——强化学习在自动驾驶的应用
+深度学习与围棋：为围棋数据设计神经网络
 
-https://mp.weixin.qq.com/s/oyxqA_LYtze1f_YDwDZziQ
+https://mp.weixin.qq.com/s/AcdhvGO-SdqODMFuVBJvUA
 
-从零开始自学设计新型药物，UNC提出结构进化强化学习
+AI杀入斗地主领域，快手开发DouZero对标AlphaZero，干掉344个AI获第一
 
-https://zhuanlan.zhihu.com/p/41467058
+# MARL
 
-Policy Optimization with Demonstrations
+Multi-agent Reinforcement Learning(MARL)，一般被称为多智能体强化学习。与之相对的则是Single-agent Reinforcement Learning(SARL)。
 
-https://openreview.net/pdf?id=rJzoujRct7
+书籍：
 
-深度学习之斗地主
+http://www.masfoundations.org/download.html
 
-https://mp.weixin.qq.com/s/qWuoo6cGLWLk4OKlunR-Og
+《MULTIAGENT SYSTEMS Algorithmic, Game-Theoretic, and Logical Foundations》
 
-滴滴KDD 2018论文详解：基于强化学习技术的智能派单模型
+以下主要参考了如下文章：
 
-https://zhuanlan.zhihu.com/p/43496459
+https://zhuanlan.zhihu.com/p/39037444
 
-解决Sparse Reward RL任务的简单回顾
+多智能体强化学习笔记 01
 
-https://mp.weixin.qq.com/s/G99vqIYeWzgQ4kL4p77cKA
+https://zhuanlan.zhihu.com/p/43579796
 
-用强化学习做神经机器翻译：中山大学&MSRA填补多项空白
+多智能体强化学习笔记 02
 
-https://mp.weixin.qq.com/s/GUyZ0U5_JlXCI-5mO796SA
+论文：
 
-超越DQN和A3C：深度强化学习领域近期新进展概览
+《Multi-agent reinforcement learning: An overview》
 
-https://zhuanlan.zhihu.com/p/43843955
+《Game Theory and Multi-agent Reinforcement Learning》
 
-BAIR：基于人类演示&RL的夹爪训练——高效、通用、低成本
+《Is multiagent deep reinforcement learning the answer or the question? A brief survey》
 
-https://mp.weixin.qq.com/s/ADZlLx6gMTFU6IoBCF669g
+MARL应用了大量博弈论的知识，可参见《强化学习（十）》。
 
-快1万倍！伯克利提出用深度RL优化SQL查询
+---
 
-https://mp.weixin.qq.com/s/oZDDP59o-1qwfz8prK3nJQ
+![](/images/img4/MARL.jpg)
 
-伯克利最新研究：如何用目标图像进行机器视觉强化学习？
+多智能体学习有三种范式：集中式学习、独立式学习和集中式训练分布式执行（Centralized Training with Decentralized Execution, CTDE）。
 
-https://mp.weixin.qq.com/s/00zHwpw2xWP2fR9sDHE2Xw
+集中式学习将整个系统视为一个整体，采用单智能体强化学习算法训练，解决了环境非平稳问题，但需要上帝视角全局通信，无法解决无通信、大规模和大动作空间的问题；
 
-BAIR讲述如何利用深度强化学习控制灵活手
+独立式学习让每个智能体独立训练自己的策略，忽视了多智能体系统的特性，带来环境极不平稳问题；
 
-https://mp.weixin.qq.com/s/V7RESEm4xzhW8tXEjKjn1Q
+集中式训练分布式执行作为折中，训练时拥有上帝视角，执行时独立决策，一定程度上解决了上述问题，是一种比较好的方法。
 
-层次强化学习、记忆与预测模型
+https://zhuanlan.zhihu.com/p/349092158
 
-https://mp.weixin.qq.com/s/aNskPERmekw9yQVb7A3GPQ
+多智能体强化学习路线图 (MARL Roadmap)
 
-Google大脑最新研究成果：使用强化学习实现动态系统的韧性计算
+---
 
-https://mp.weixin.qq.com/s/pJkCOCl6o70le1WsE9p3pg
+我们使用如下示例，探讨一下**什么是MARL？**
 
-在全景视频中预测头部运动：一种深度强化学习方法
+![](/images/img3/MARL.png)
 
-https://mp.weixin.qq.com/s/fodjmmh_jJMh4hD3m2OrLg
+上图是两个智能体1、2将金条（object）搬运回家的例子。这根金条需要两个人一人抬着一边才能扛回家。
 
-凭借幻想的目标进行视觉强化学习
+要想把金条扛回家，小红和小蓝必须先绕过障碍物，然后每个人到达金条的一边，扛起金条后，两人还得绕开家门口的障碍物，这样才能将金条扛回家。
 
-https://mp.weixin.qq.com/s/6HVSh7_9Akmf6OE8PGNy6Q
+从上面的问题可以看出，MARL至少应该包括如下几个要素：
 
-怎样让AI完成人类搞不定的任务？OpenAI提出迭代扩增法给AI设目标
+- 在多智能体系统中至少有两个智能体。
 
-https://mp.weixin.qq.com/s/JpZimrHALjuc-H9WF8sPZg
+- 智能体之间存在着一定的关系，如合作关系（如本例），竞争关系（如多人游戏），或者同时存在竞争与合作的关系。
 
-智能体只想看电视？谷歌新型好奇心方法让智能体离开电视继续探索
+- 每个智能体最终所获得的回报不仅仅与自身的动作有关系，还跟对方的动作有关系。如本例中每个智能体要想获得回报，必须是金条被两个智能体一起搬回家。
 
-https://mp.weixin.qq.com/s/dic_ssebe32L30pAUxlP6w
+SARL用MDP来描述，而MARL则需要用Markov game（马尔科夫博弈，又称随机博弈（stochastic game））来描述。
 
-谷歌AI-强化学习中的好奇和拖延
+类似于MDP，Markov game可形式化表示为：
 
-https://mp.weixin.qq.com/s/tieGV_tDWkVVW2YFes4AqA
+$$(n,S,A_1,\dots,A_n,T,\gamma,R_1,\dots,R_n)$$
 
-学习何时做分类决策，深度好奇提出强化学习模型Jumper
+n为玩家的个数，在本例中n为2。
 
-https://mp.weixin.qq.com/s/THgo4YzhUN2PUkyI5sSnpw
+S为系统状态，一般指多智能体的联合状态，即每个智能体的联合状态。
 
-开源啦：连DeepMind也捉急的游戏，OpenAI给你攻破第一关的高分算法
+T为状态转移函数，指给定玩家当前状态和联合行为时，下一状态的概率分布。
 
-https://mp.weixin.qq.com/s/loH6M0_U1DVrod0Drkl4eg
+R为回报函数。它描述了多智能体之间的关系。当每个智能体的回报函数一致时，则表示智能体之间是合作关系；当回报函数相反时，则表示智能体之间是竞争关系，当回报函数介于两者之间，则是混合关系。
 
-深度强化学习教机器人自己穿衣服！
+MARL的结构一般如下图所示。
 
-https://mp.weixin.qq.com/s/VqPPQnH22Y-XeojNEZn3YQ
+![](/images/img3/MARL_2.png)
 
-CoRL 2018最佳系统论文：如此鸡贼的机器手，确定不是人在控制？
+**静态博弈**：static/stateless game是指没有状态s，不存在动力学使状态能够转移的博弈。例如一个矩阵博弈。
 
-https://mp.weixin.qq.com/s/eEQhwV1cA4nEgEBcOKDenA
+**阶段博弈**：stage game，是随机博弈的组成成分，状态s是固定的，相当于一个状态固定的静态博弈，随机博弈中的Q值函数就是该阶段博弈的奖励函数。若干状态的阶段博弈组成一个随机博弈。
 
-将逆向课程生成用于强化学习：伯克利新研究让智能体掌握全新任务
+**重复博弈**：智能体重复访问同一个状态的阶段博弈，并且在访问同一个状态的阶段博弈的过程中收集其他智能体的信息与奖励值，并学习更好的Q值函数与策略。
 
-https://mp.weixin.qq.com/s/cO1VlYGwdRBAbPs7IgvcAA
+---
 
-超越传统强化学习的价值分布方法
+MARL的目标是找到每一个状态的纳什均衡策略，然后将这些策略联合起来。
 
-https://mp.weixin.qq.com/s/oyWyb58l4ztqIEyrk0g01A
+<div style="text-align: center;">
+<table>
+  <tr>
+    <td colspan="2" rowspan="2"></td>
+    <td colspan="3">Game setting</td>
+  </tr>
+  <tr>
+    <td>Stateless Games</td>
+    <td>Team Markov Games</td>
+    <td>General Markov Games</td>
+  </tr>
+  <tr>
+    <td rowspan="2">Information<br/>Requirement</td>
+    <td>Independent Learners</td>
+    <td>Stateless Q-learning<br/>Learning Automata<br/>IGA<br/>FMQ<br/>Commitment Sequences<br/>Lenient Q-learners</td>
+    <td>Policy Search<br/>Policy Gradient</td>
+    <td>MG-ILA<br/>(WoLF-)PG<br/>Learning of Coordination<br/>Independent RL<br/>CQ-learning</td>
+  </tr>
+  <tr>
+    <td>Joint Action Learners</td>
+    <td></td>
+    <td>Distributed- Q<br/>Sparse Tabular Q<br/>Utile Coordination</td>
+    <td>Nash-Q<br/>Friend-or-Foe Q<br/>Asymmetric Q<br/>Joint Action Learning<br/>Correlated-Q</td>
+  </tr>
+</table>
+</div>
 
-强化学习在美团“猜你喜欢”的实践
+参考：
 
-https://zhuanlan.zhihu.com/p/48186354
+https://zhuanlan.zhihu.com/c_1061939147282915328
 
-robot浅谈
+一个MARL方面的专栏
 
-https://mp.weixin.qq.com/s/f-rmdWq3kJUJGhuPwU8JtQ
+https://www.zhihu.com/people/yao-xing-hu/posts
 
-深度策略梯度算法是真正的策略梯度算法吗？
+一个MARL方面的专栏
 
-https://zhuanlan.zhihu.com/p/51202503
+https://github.com/LantaoYu/MARL-Papers
 
-强化学习在视觉上的应用（RL for computer Vision）
-
-https://mp.weixin.qq.com/s/Dq4HsRg05bVMjvrsrxfOOQ
-
-从这篇YouTube论文，剖析强化学习在工业级场景推荐系统中的应用
-
-https://mp.weixin.qq.com/s/cyaQt-SO7sgG49kuUyPJbQ
-
-旷视开源的深度强化学习绘画智能体论文解读
-
-https://mp.weixin.qq.com/s/amXiNKJPEkAnu2m5NAERVw
-
-Top-K Oﬀ-Policy Correction
-
-https://mp.weixin.qq.com/s/kNtzy9-6GbsRhlL-mxksew
-
-基于强化学习的人机对话
-
-https://mp.weixin.qq.com/s?__biz=MzU1NTMyOTI4Mw==&mid=2247494226&idx=1&sn=a96ea0ad8961ec3698301cf0c4514843
-
-以YouTube论文学习如何在推荐场景应用强化学习
-
-https://mp.weixin.qq.com/s/uppNSwxNrw4_8NGBQv85xw
-
-今日头条首次改进DQN网络，解决推荐中的在线广告投放问题
-
-https://mp.weixin.qq.com/s/Uin1gOmJEa6cvkiFJm6cHw
-
-你当年没玩好的《愤怒的小鸟》，AI现在也犯难了
-
-https://mp.weixin.qq.com/s/YY1FIMjDIMABdwRC5x9w4g
-
-17种深度强化学习算法用Pytorch实现
-
-https://mp.weixin.qq.com/s/lxnyoo46tS7-MXAB7HNouA
-
-人工智能在电网管理中的应用
-
-https://mp.weixin.qq.com/s/ZYIfzk1kZ4azpmxWagkQuw
-
-强化学习如何用于模型量化？
-
-https://mp.weixin.qq.com/s/w4m4fG-a30AgulNPhBVC5w
-
-基于强化学习的自动交易系统研究与发展综述
-
-https://mp.weixin.qq.com/s/4DypXsu_1bCq8szLmk1jng
-
-在深度学习模型的优化上，梯度下降并非唯一的选择（演化策略）
+Paper list of multi-agent reinforcement learning (MARL)

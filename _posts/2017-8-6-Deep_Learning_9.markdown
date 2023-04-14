@@ -1,10 +1,171 @@
 ---
 layout: post
-title:  深度学习（九）——CNN进化史（2）
+title:  深度学习（九）——Bi-directional RNN, CNN进化史
 category: DL 
 ---
 
-# CNN进化史（续）
+* toc
+{:toc}
+
+# ResNet（续）
+
+https://mp.weixin.qq.com/s/2JwgiCuBoluBNYesYp4zAA
+
+ResNet及其变种的结构梳理、有效性分析与代码解读
+
+https://mp.weixin.qq.com/s/CFKRzF9WuDrNVSivMf3YNw
+
+目标检测新突破！了解Res2Net深度多尺度目标检测架构
+
+https://mp.weixin.qq.com/s/1R7XWPqiDBNcUjIE-sF08Q
+
+ResNeXt深入解读与模型实现
+
+https://zhuanlan.zhihu.com/p/100122970
+
+基于Keras框架的深度残差收缩网络代码
+
+https://mp.weixin.qq.com/s/scFnuqx0zOtBvFh0JYA0UA
+
+来聊聊ResNet及其变种
+
+https://mp.weixin.qq.com/s/W4IqXMRZJbQ-7fGEF43-sA
+
+真正的最强ResNet改进，高性能“即插即用”金字塔卷积
+
+# Bi-directional RNN
+
+众所周知，RNN在处理长距离依赖关系时会出现问题。LSTM虽然改进了一些，但也只能缓解问题，而不能解决该问题。
+
+研究人员发现将原文倒序（将其倒序输入编码器）产生了显著改善的结果，因为从解码器到编码器对应部分的路径被缩短了。同样，两次输入同一个序列似乎也有助于网络更好地记忆。
+
+基于这样的实验结果，1997年Mike Schuster提出了Bi-directional RNN模型。
+
+>注：Mike Schuster，杜伊斯堡大学硕士（1993）+奈良科技大学博士。语音识别专家，尤其是日语、韩语方面。Google研究员。
+
+论文：
+
+《Bidirectional Recurrent Neural Networks》
+
+下图是Bi-directional RNN的结构示意图：
+
+![](/images/article/Bi_directional_RNN.png)
+
+从图中可以看出，Bi-directional RNN有两个隐层，分别处理前向和后向的时序信息。
+
+除了原始的Bi-directional RNN之外，后来还出现了Deep Bi-directional RNN。
+
+![](/images/article/Deep_Bi_RNN.png)
+
+上图是包含3个隐层的Deep Bi-directional RNN。
+
+参见：
+
+https://mp.weixin.qq.com/s/_CENjzEK1kjsFpvX0H5gpQ
+
+结合堆叠与深度转换的新型神经翻译架构：爱丁堡大学提出BiDeep RNN
+
+# CNN进化史
+
+## 计算机视觉
+
+6大关键技术：
+
+![](/images/article/computer_vision_2.jpg)
+
+**图像分类**：根据图像的主要内容进行分类。数据集：MNIST, CIFAR, ImageNet
+
+**物体定位**：预测包含主要物体的图像区域，以便识别区域中的物体。数据集：ImageNet
+
+**物体识别**：定位并分类图像中出现的所有物体。这一过程通常包括：划出区域然后对其中的物体进行分类。数据集：PASCAL, COCO
+
+**语义分割**：把图像中的每一个像素分到其所属物体类别，在样例中如人类、绵羊和草地。数据集：PASCAL, COCO
+
+**实例分割**：把图像中的每一个像素分到其所属物体实例。数据集：PASCAL, COCO
+
+**关键点检测**：检测物体上一组预定义关键点的位置，例如人体上或者人脸上的关键点。数据集：COCO
+
+参考：
+
+https://github.com/weiaicunzai/awesome-image-classification
+
+GitHub：图像分类最全资料集锦
+
+https://mp.weixin.qq.com/s/nK__d-PV6DY5mDfA_UgDmQ
+
+全解：目标检测，图像分类、分割、生成……
+
+https://mp.weixin.qq.com/s/Go8AQay7tgykXLRtfHGLmg
+
+改变你对世界看法的五大计算机视觉技术！
+
+https://mp.weixin.qq.com/s/WNkzfvYtEO5zJoe_-yAPow
+
+一文览尽计算机视觉研究方向
+
+https://zhuanlan.zhihu.com/p/55747295
+
+深度学习在计算机视觉领域（包括图像，视频，3-D点云，深度图）的应用一览
+
+## CNN简史
+
+![](/images/article/computer_vision_3.jpg)
+
+![](/images/article/CNN_3.png)
+
+完整版本参见：
+
+https://github.com/Nikasa1889/HistoryObjectRecognition/blob/master/HistoryOfObjectRecognition.pdf
+
+![](/images/img3/CNN.jpg)
+
+参考：
+
+https://mp.weixin.qq.com/s/K68CpueI4e4y7o1uZ28KMQ
+
+从神经科学到计算机视觉：人类与计算机视觉五十年回顾
+
+https://mp.weixin.qq.com/s/FzCrOiFuutqSQSp4VcydoQ
+
+计算机视觉简介：历史、现状和发展趋势
+
+## AlexNet
+
+2012年，ILSVRC比赛冠军的model——Alexnet（以第一作者Alex命名）的结构图如下：
+
+![](/images/article/AlexNet.png)
+
+换个视角：
+
+![](/images/article/AlexNet_2.png)
+
+AlexNet的caffe模板：
+
+https://github.com/BVLC/caffe/blob/master/models/bvlc_alexnet/deploy.prototxt
+
+其中的LRN（Local Response Normalization）层也是当年的遗迹，被后来的实践证明，对于最终效果和运算量没有太大帮助，因此也就慢慢废弃了。
+
+虽然，LeNet-5是CNN的开山之作（它不是最早的CNN，但却是奠定了现代CNN理论基础的模型），但是毕竟年代久远，和现代实用的CNN相比，结构实在过于原始。
+
+AlexNet作为第一个现代意义上的CNN，它的意义主要包括：
+
+1.Data Augmentation。包括水平翻转、随机裁剪、平移变换、颜色、光照变换等。
+
+2.Dropout。
+
+3.ReLU激活函数。
+
+4.多GPU并行计算。
+
+5.当然最应该感谢的是李飞飞团队搞出来的标注数据集合ImageNet。
+
+>注：ILSVRC（Large Scale Visual Recognition Challenge）大赛，在2016年以前，一直是CV界的顶级赛事。但随着技术的成熟，目前的科研重点已经从物体识别转移到了物体理解领域。2017年将是该赛事的最后一届。WebVision有望接替该赛事，成为下一个目标。
+
+参考：
+
+https://zhuanlan.zhihu.com/p/22538465
+
+运用CNN对ImageNet进行图像分类
 
 ## VGG
 
@@ -126,6 +287,10 @@ https://mp.weixin.qq.com/s/rkTL1cj7tG5FaLP9cYRb4A
 
 CNN模型之SqueezeNet
 
+https://mp.weixin.qq.com/s/kE2WW3EaLsEoYTQdzL30RA
+
+SqueezeNet/SqueezeNext简述
+
 ## 其他知名CNN
 
 ### Network In Network
@@ -156,88 +321,6 @@ http://www.cnblogs.com/dmzhuo/p/5868346.html
 
 读论文“Network in Network”——ICLR 2014
 
-### ZF Net
+https://mp.weixin.qq.com/s/H_KY_JbqiZ1q7VLwAf2EDA
 
-论文：
-
-《Visualizing and understandingConvolutional Networks》
-
-本文是Matthew D.Zeiler 和Rob Fergus于（纽约大学）2013年撰写的论文，主要通过Deconvnet（反卷积）来可视化卷积网络，来理解卷积网络，并调整卷积网络；本文通过Deconvnet技术，可视化Alex-net，并指出了Alex-net的一些不足，最后修改网络结构，使得分类结果提升。
-
-参考：
-
-http://blog.csdn.net/u011534057/article/details/51274862
-
-论文阅读笔记
-
-http://blog.csdn.net/whiteinblue/article/details/43312059
-
-另一篇论文阅读笔记
-
-## 总结
-
-以下内容摘自中科视拓CEO山世光的演讲。
-
-以让小区里的巡逻机器人学会检测狗屎为例。
-
-在**前深度学习时代**，这个过程大概分三步：
-
-第一步，花几个月时间收集和标注几百或上千张图；
-
-第二步，观察并人为设计形状、颜色、纹理等特征；
-
-第三步，尝试各种分类器做测试，如果测试结果不好，返回第二步不断地迭代。
-
-人脸检测就是这样进行的，从上世纪八十年代开始做，大量研究者花了大概二十年时间，才得到了一个基本可用的模型，能较好地解决人脸检测的问题。而后在监控场景下做行人和车辆的检测，前后也花了大概十年的时间。就算基于这些经验，做出好用的狗屎检测器，至少还是需要一年左右的时间。
-
-在**深度学习时代**，开发一个狗屎检测器的流程被大大缩短了。尽管深度学习需要收集大量的数据并进行标注（用矩形把图中的狗屎位置框出来），但由于众包平台的繁荣，收集一万张左右的数据可能只需要两星期。
-
-接下来，我们只需要挑几个已经被证明有效的深度学习模型进行优化训练就可以了，训练优化大概需要一个星期，就算换几个模型再试试看。这样完成整个过程只需要一两个月而已。
-
-而在**后深度学习时代**，我们期待先花几分钟时间，在网上随便收集几张狗屎照片，交给机器去完成余下所有的模型选择与优化工作，或许最终只需要一、两星期解决这个问题。
-
-前深度学习时代的人脸识别的标准流程：
-
-第一步是人脸检测，其结果就是在图片中的脸部区域打一个矩形框。
-
-第二步是寻找眼睛、鼻子、嘴等特征点，目的是把脸对齐，也就是把眼鼻嘴放在近乎相同的位置，好像所有的脸都能“串成一串”一样，且只保留脸的中心区域，甚至连头发不要。
-
-第三步是光照的预处理，通过高斯平滑、直方图均衡化等来进行亮度调节、偏光纠正等。
-
-第四步是做Y=f(X)的变换。
-
-第五步，是计算两张照片得到的Y的相似程度，如果超过特定的阈值，就认定是同一个人。
-
-深度学习的到来对整个流程有一个巨大的冲击。
-
-一开始，研究者用深度学习完成人脸检测、特征点定位、预处理、特征提取和识别等每个独立的步骤。而后首先被砍掉的是预处理，我们发现这个步骤是完全不必要的。理论上来解释，深度学习学出来的底层滤波器本身就可以完成光照的预处理，而且这个预处理是以“识别更准确”为目标进行的，而不是像原来的预处理一样，以“让人看得更清楚”为目标。人的知识和机器的知识其实是有冲突的，人类觉得好的知识不一定对机器识别有利。
-
-而最近的一些工作就是把第二步特征点定位砍掉。因为神经网络也可以进行对齐变换，所以我们的工作通过空间变换（spatial transform），将图片自动按需进行矫正。并且我有一个猜测：传统的刻意把非正面照片转成正面照片的做法，也未必是有利于识别的。因为一个观察结果是，同一个人的两张正面照相似度可能小于一张正面、一张稍微转向的照片的相似度。最终，我们希望进行以识别为目标的对齐（recognition oriented alignment）。
-
-在未来，或许检测和识别也可能合二为一。现在的检测是对一个通用的人脸的检测，未来或许可以实现检测和识别全部端到端完成：只有特定的某个人脸出现，才会触发检测框出现。
-
-第五步的相似度（或距离测度）的计算方法存在一定的争议。我认为特征提取的过程已经通过损失函数暗含了距离测度的计算，所以深度特征提取与深度测度学习有一定的等价性。但也有不少学者在研究特征之间距离测度的学习，乃至于省略掉特征提取，直接学习输入两张人脸图片时的距离测度。
-
-总体来说，深度学习的引入体现了端到端、数据驱动的思想：**尽可能少地对流程进行干预、尽可能少地做人为假设。**
-
-## 参考
-
-http://mp.weixin.qq.com/s/ZKMi4gRfDRcTxzKlTQb-Mw
-
-计算机视觉识别简史：从AlexNet、ResNet到Mask RCNN
-
-http://mp.weixin.qq.com/s/kbHzA3h-CfTRcnkViY37MQ
-
-详解CNN五大经典模型:Lenet，Alexnet，Googlenet，VGG，DRL
-
-https://zhuanlan.zhihu.com/p/22094600
-
-Deep Learning回顾之LeNet、AlexNet、GoogLeNet、VGG、ResNet
-
-https://mp.weixin.qq.com/s/28GtBOuAZkHs7JLRVLlSyg
-
-深度卷积神经网络演化历史及结构改进脉络
-
-http://www.leiphone.com/news/201609/303vE8MIwFC7E3DB.html
-
-Google最新开源Inception-ResNet-v2，借助残差网络进一步提升图像分类水准
+致敬Network in Network，华为诺亚提出Transformer-in-Transformer

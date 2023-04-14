@@ -4,7 +4,199 @@ title:  深度学习（十五）——fine-tuning, Style Transfer（1）
 category: DL 
 ---
 
-# fine-tuning（续）
+* toc
+{:toc}
+
+# Normalization进阶（续）
+
+## Cosine Normalization
+
+Normalization还能怎么做？
+
+我们再来看看神经元的经典变换$$f_w(x)=w\cdot x$$。
+
+对输入数据x的变换已经做过了，横着来是LN，纵着来是BN。
+
+对模型参数w的变换也已经做过了，就是WN。
+
+好像没啥可做的了。然而天才的研究员们盯上了中间的那个点，对，就是$$\cdot$$。
+
+$$f_w(x)=\cos \theta=\frac{w\cdot x}{\|w\|\cdot\|x\|}$$
+
+参考：
+
+https://mp.weixin.qq.com/s/EBRYlCoj9rwf0NQY0B4nhQ
+
+Layer Normalization原理及其TensorFlow实现
+
+http://mlexplained.com/2018/01/10/an-intuitive-explanation-of-why-batch-normalization-really-works-normalization-in-deep-learning-part-1/
+
+An Intuitive Explanation of Why Batch Normalization Really Works
+
+https://mp.weixin.qq.com/s/KnmQTKneSimuOGqGSPy58w
+
+详解深度学习中的Normalization，不只是BN（1）
+
+https://mp.weixin.qq.com/s/nSQvjBRMaBeoOjdHbyrbuw
+
+详解深度学习中的Normalization，不只是BN（2）
+
+https://mp.weixin.qq.com/s/Z119_EpLKDz1TiLXGbygJQ
+
+MIT新研究参透批归一化原理
+
+https://mp.weixin.qq.com/s/Lp2pq95woQ5-E3RemdRnyw
+
+动态层归一化（Dynamic Layer Normalization）
+
+https://zhuanlan.zhihu.com/p/43200897
+
+深度学习中的Normalization模型
+
+## IBN-Net
+
+IBN-Net是汤晓鸥小组的新作（2018.7）。
+
+![](/images/img2/IBN-Net.png)
+
+与BN相比，IN有两个主要的特点：第一，它不是用训练批次来将图像特征标准化，而是用单个样本的统计信息；第二，IN能将同样的标准化步骤既用于训练，又用于推断。
+
+潘新钢等发现，IN和BN的核心区别在于，IN学习到的是不随着颜色、风格、虚拟性/现实性等外观变化而改变的特征，而要保留与内容相关的信息，就要用到BN。
+
+论文：
+
+《Two at Once: Enhancing Learning and Generalization Capacities via IBN-Net》
+
+参考：
+
+https://mp.weixin.qq.com/s/LVL90n4--WPgFLMQ-Gnf6g
+
+汤晓鸥为CNN搓了一颗大力丸
+
+https://mp.weixin.qq.com/s/6hNpgffEnUTkNAfrPgKHkA
+
+IBN-Net：打开Domain Generalization的新方式
+
+https://mp.weixin.qq.com/s/lCasw_-Bl3_J6cGBipNsSA
+
+从IBN-Net到Switchable Whitening：在不变性与判别力之间权衡
+
+## Group Normalization
+
+论文：
+
+《Group Normalization》
+
+![](/images/img2/Group_Normalization.png)
+
+参考：
+
+https://mp.weixin.qq.com/s/H2GmqloNumttFlaSArjgUg
+
+FAIR何恺明等人提出组归一化：替代批归一化，不受批量大小限制
+
+https://mp.weixin.qq.com/s/44RvXEYYc5lebsHs_ooswg
+
+全面解读Group Normalization
+
+https://mp.weixin.qq.com/s/J8i0Qsl0q9sYS2iAc-M44w
+
+BN，LN，IN，GN都是什么？不同归一化方法的比较
+
+## L2 Normalization
+
+L2 Normalization本身并不复杂，然而多数资料都只提到1维的L2 Normalization的计算公式：
+
+$$
+\begin{array}\\
+x=[x_1,x_2,\dots,x_d]\\
+y=[y_1,y_2,\dots,y_d]\\
+y=\frac{x}{\sqrt{\sum_{i=1}^dx_i^2}}=\frac{x}{\sqrt{x^Tx}}
+\end{array}
+$$
+
+对于多维L2 Normalization几乎未曾提及，这里以3维tensor：A[width, height, channel]为例介绍一下多维L2 Normalization的计算方法。
+
+多维L2 Normalization有一个叫axis(有时也叫dim)的参数，如果axis=0的话，实际上就是将整个tensor flatten之后，再L2 Normalization。这个是比较简单的。
+
+这里说说axis=3的情况。axis=3意味着对channel进行Normalization，也就是：
+
+$$B_{xy}=\sum_{z=0}^Z \sqrt{A_{xyz}^2}\\
+C_{xyz}=\frac{A_{xyz}}{B_{xy}}\\
+D_{xyz}=C_{xyz} \cdot S_{z}
+$$
+
+一般来说，求出C的运算被称作L2 Normalization，而求出D的运算被称作L2 Scale Normalization，S被称为Scale。
+
+## Local Response Normalization
+
+![](/images/img3/LRN.png)
+
+LRN最早出自Alexnet，虽然后来由于效果不佳，已经很少使用了，但它的思路还是可以借鉴的。
+
+LRN分为Inter-Channel LRN和Intra-Channel LRN两种，如果不加说明的话，一般是指前者。
+
+Inter-Channel LRN：
+
+$$b_{x,y}^i=a_{x,y}^i / \left( k+\alpha \sum_{j=\max (0,i-n/2)}^{\min(N-1,i+n/2)}(a_{x,y}^j)^2\right)^\beta$$
+
+其中，$$a_{x,y}^i$$表示feature map第i通道上坐标为x,y的点的值。因此，Inter-Channel LRN的做法就是：将相邻的几个通道上相同坐标的点的值，代入公式，进行Normalization。
+
+这实际上和1x1的卷积比较像，不同之处在于：1x1的卷积处理所有通道，而Inter-Channel LRN只处理相邻通道。
+
+上式中的$$k,n,\alpha,\beta$$均为超参数，N为通道数。显然，如果$$(k,\alpha,\beta,n)=(0,1,1,N)$$的话，就是Channel Normalization了。
+
+Intra-Channel LRN：
+
+$$b_{x,y}^k=a_{x,y}^k / \left( k+\alpha \sum_{i=\max (0,x-n/2)}^{\min(W,x+n/2)}\sum_{j=\max (0,y-n/2)}^{\min(H,y+n/2)}(a_{i,j}^k)^2\right)^\beta$$
+
+Intra-Channel LRN和平均池化非常类似，它处理的是W,H上的相邻关系。
+
+参考：
+
+https://mc.ai/difference-between-local-response-normalization-and-batch-normalization/
+
+Difference between Local Response Normalization and Batch Normalization
+
+## 参考
+
+https://zhuanlan.zhihu.com/p/69659844
+
+如何区分并记住常见的几种Normalization算法
+
+https://mp.weixin.qq.com/s/KYGqSOftm8FWDXk_C13iCQ
+
+Conditional Batch Normalization详解
+
+https://mp.weixin.qq.com/s/w_W4NwkCRdbyZbEwMlrFRQ
+
+超越BN和GN！谷歌提出新的归一化层：FRN
+
+https://mp.weixin.qq.com/s/T5vDmlaVdqvvxtqd1t3lww
+
+Unsupervised Batch Normalization
+
+https://mp.weixin.qq.com/s/f-S_Wgc2B_2oN7Nk-20y8g
+
+正则化与标准化大总结
+
+https://zhuanlan.zhihu.com/p/75539170
+
+神经网络中Normalization的发展历程
+
+https://zhuanlan.zhihu.com/p/340747455
+
+深度学习中眼花缭乱的Normalization学习总结
+
+https://zhuanlan.zhihu.com/p/380620373
+
+BatchNorm避坑指南
+
+# fine-tuning
+
+fine-tuning和迁移学习虽然是两个不同的概念。但局限到CNN的训练领域，基本可以将fine-tuning看作是一种迁移学习的方法。
+
+举个例子，假设今天老板给你一个新的数据集，让你做一下图片分类，这个数据集是关于Flowers的。问题是，数据集中flower的类别很少，数据集中的数据也不多，你发现从零训练开始训练CNN的效果很差，很容易过拟合。怎么办呢，于是你想到了使用Transfer Learning，用别人已经训练好的Imagenet的模型来做。
 
 由于ImageNet数以百万计带标签的训练集数据，使得如CaffeNet之类的预训练的模型具有非常强大的泛化能力，这些预训练的模型的中间层包含非常多一般性的视觉元素，我们只需要对他的后几层进行微调，再应用到我们的数据上，通常就可以得到非常好的结果。最重要的是，**在目标任务上达到很高performance所需要的数据的量相对很少**。
 
@@ -29,10 +221,6 @@ Caffe fine-tuning微调网络
 http://blog.csdn.net/sinat_26917383/article/details/54999868
 
 caffe中fine-tuning模型三重天（函数详解、框架简述）+微调技巧
-
-http://yongyuan.name/blog/layer-selection-and-finetune-for-cbir.html
-
-图像检索：layer选择与fine-tuning性能提升验证
 
 h1ttps://www.zhihu.com/question/49534423
 
@@ -91,149 +279,3 @@ https://mp.weixin.qq.com/s/54HQU3B4cSdRb1Z4srSfJg
 ![](/images/img2/style_transfer_2.png)
 
 可以看出随着层数的增加，CNN捕捉的区域更大，特征更加复杂，从边缘到纹理再到具体物体。
-
-## Deep Visualization
-
-上述的CNN可视化的方法一般被称作Deep Visualization。
-
-论文：
-
-《Understanding Neural Networks Through Deep Visualization》
-
-这篇论文是Deep Visualization的经典之作。作者是Jason Yosinski。
-
->Jason Yosinski，Caltech本科+Cornell博士。现为Uber AI Labs的科学家。   
->个人主页：   
->http://yosinski.com/
-
-该文提出了如下公式：
-
-$$V(F_i^l)=\mathop{\arg\max}_{X}A_i^l(X), X \leftarrow X + \eta\frac{\partial A_i^l(X)}{\partial X}$$
-
-X初始化为一张噪声图片，然后按照上述公式，优化得到激活函数输出最大的X。
-
-Deep Visualization除了用于提取纹理之外，还可用于模型压缩。
-
-论文：
-
-《Demystifying Neural Network Filter Pruning》
-
-https://github.com/yosinski/deep-visualization-toolbox
-
-这是作者Jason Yosinski提供的Deep Visualization的工具的代码。
-
-https://github.com/antkillerfarm/antkillerfarm_crazy/tree/master/deep-visualization-toolbox
-
-原始版本是基于python 2编写的，这是我修改的python 3版本
-
-https://github.com/Sunghyo/revacnn
-
-这是另一个CNN可视化工具
-
-参考：
-
-https://zhuanlan.zhihu.com/p/24833574
-
-Deep Visualization:可视化并理解CNN
-
-http://www.cnblogs.com/jesse123/p/7101649.html
-
-Tool-Deep Visualization
-
-https://mp.weixin.qq.com/s/dflEAOELK0f19y4KuVd_dQ
-
-40行Python代码，实现卷积特征可视化
-
-https://mp.weixin.qq.com/s/fpVFpN5beJFyLW19WnBzvw
-
-揭开黑盒一角！谷歌联合OpenAI发布“神经元显微镜”，可视化神经网络运行机制
-
-https://mp.weixin.qq.com/s/o-MFPt6LR_5XDpacqw754Q
-
-马里兰大学论文：可视化神经网络的损失函数
-
-https://mp.weixin.qq.com/s/iIhiMKutVtYEUgAiErLkVQ
-
-Deep Dream
-
-## DL方法
-
-受到上述事实的启发，2015年德国University of Tuebingen的Leon A. Gatys写了如下两篇论文：
-
-《Texture Synthesis Using Convolutional Neural Networks》
-
-《A Neural Algorithm of Artistic Style》
-
-代码：
-
-https://github.com/jcjohnson/neural-style
-
-torch版本
-
-https://github.com/anishathalye/neural-style
-
-tensorflow版本
-
-在第一篇论文中，Gatys使用Gramian matrix从各层CNN中提取纹理信息，于是就有了一个不用手工建模就能生成纹理的方法。
-
-Gramian matrix（由Jørgen Pedersen Gram提出）中的元素定义如下：
-
-$$G_{ij}=\langle v_i, v_j \rangle$$
-
-这里的$$v_i$$表示向量，$$G_{ij}$$是向量的内积。可以看出Gramian matrix是一个半正定的对称矩阵。
-
-在第二篇论文中，Gatys更进一步指出：**纹理能够描述一个图像的风格。**
-
-既然第一篇论文解决了从图片B中提取纹理的任务，那么还有一个关键点就是：**如何只提取图片内容而不包括图片风格?**
-
-## Cost Function
-
-神经风格迁移生成图片G的cost function由两部分组成：C与G的相似程度和S与G的相似程度。
-
-$$J(G)=\alpha \cdot J_{content}(C,G)+\beta \cdot J_{style}(S,G)$$
-
-其中，$$\alpha, \beta$$是超参数，用来调整$$J_{content}(C,G)$$与$$J_{style}(S,G)$$的相对比重。
-
-神经风格迁移的基本算法流程是：首先令G为随机像素点，然后使用梯度下降算法，不断修正G的所有像素点，使得J(G)不断减小，从而使G逐渐有C的内容和S的风格，如下图所示：
-
-![](/images/img2/style_transfer_3.png)
-
-换句话来说就是：**每次迭代只更新图片G，而不更新网络的参数。**
-
-我们先来看J(G)的第一部分$$J_{content}(C,G)$$，它表示内容图片C与生成图片G之间的相似度。
-
-使用的CNN网络是之前预训练好的模型，例如Alex-Net。**C，S，G共用相同模型和参数。**
-
-首先，需要选择合适的层数l来计算$$J_{content}(C,G)$$。
-
-如前所述，CNN的每个隐藏层分别提取原始图片的不同深度特征，由简单到复杂。如果l太小，则G与C在像素上会非常接近，没有迁移效果；如果l太深，则G上某个区域将直接会出现C中的物体。因此，l既不能太浅也不能太深，一般选择网络中间层。
-
-若C和G在l层的激活函数输出$$a^{[l](C)}$$与$$a^{[l](G)}$$，则相应的$$J_{content}(C,G)$$的表达式为：
-
-$$J_{content}(C,G)=\frac12||a^{[l](C)}-a^{[l](G)}||^2$$
-
-接下来，我们定义图片的风格矩阵（style matrix）为：
-
-$$G_{kk'}^{[l]}=\sum_{i=1}^{n_H^{[l]}}\sum_{j=1}^{n_W^{[l]}}a_{ijk}^{[l]}a_{ijk'}^{[l]}$$
-
-风格矩阵$$G_{kk'}^{[l]}$$计算第l层隐藏层不同通道对应的所有激活函数输出和。若两个通道之间相似性高，则对应的$$G_{kk'}^{[l]}$$较大。从数学的角度来说，这里的风格矩阵实际上就是两个tensor的**互相关矩阵**，也就是上面提到的Gram矩阵。
-
-Gram矩阵描述的是全局特征的自相关，如果输出图与风格图的这种自相关相近，那么差不多是我们所理解的”风格”。当然，其实也可以用很多其他的统计信息进行描绘风格。比如有用直方图的, 甚至还可以直接简化成”均值+方差”的。
-
-风格矩阵$$G_{kk'}^{[l][S]}$$表征了风格图片S第l层隐藏层的“风格”。相应地，生成图片G也有$$G_{kk'}^{[l][G]}$$。那么，$$G_{kk'}^{[l][S]}$$与$$G_{kk'}^{[l][G]}$$越相近，则表示G的风格越接近S。这样，我们就可以定义出$$J^{[l]}_{style}(S,G)$$的表达式：
-
-$$J^{[l]}_{style}(S,G)=\frac{1}{(2n_H^{[l]}n_W^{[l]}n_C^{[l]})}\sum_{k=1}^{n_C^{[l]}}\sum_{k'=1}^{n_C^{[l]}}||G_{kk'}^{[l][S]}-G_{kk'}^{[l][G]}||^2$$
-
-为了提取的“风格”更多，也可以使用多层隐藏层，然后相加，表达式为：
-
-$$J_{style}(S,G)=\sum_l\lambda^{[l]}\cdot J^{[l]}_{style}(S,G)$$
-
-## 实现细节
-
-![](/images/img2/style_transfer.png)
-
-这是原始论文的插图，其符号表示和本文有所差异。其中的A、F、P各层的output，都是使用预训练好的Alex-Net生成的。
-
-可以看出A和P，在整个迭代过程中，只需要进行一次Alex-Net的前向计算，因此可以事先计算好。
-
-为了在迭代过程中，不修改Alex-Net的权重，而只修改F，我们可以使用`tf.constant`来创建Alex-Net的各个参数，进而建立Alex-Net。这样在backward的时候，梯度就只会修正到`tf.Variable`，也就是F上。

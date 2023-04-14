@@ -4,6 +4,9 @@ title:  深度学习（三十五）——姿态/行为检测进阶
 category: DL 
 ---
 
+* toc
+{:toc}
+
 # 姿态/行为检测进阶
 
 https://github.com/cbsudux/awesome-human-pose-estimation
@@ -25,6 +28,30 @@ https://mp.weixin.qq.com/s/VjCB_CCENVye9SvDYOmsaA
 https://mp.weixin.qq.com/s/Oln0s6pOvCWn9sAu-XjGaw
 
 人体姿态估计的过去，现在，未来
+
+https://zhuanlan.zhihu.com/p/108381101
+
+基于深度学习目标姿态估计的论文一览（上）
+
+https://zhuanlan.zhihu.com/p/108381336
+
+基于深度学习目标姿态估计的论文一览（下）
+
+https://zhuanlan.zhihu.com/p/104917833
+
+人体姿态估计(Human Pose Estimation)经典方法整理
+
+https://mp.weixin.qq.com/s/7hCtECn_mKWyTJpTZmmLtQ
+
+基于深度学习目标姿态估计的论文一览（2017-2020）
+
+https://zhuanlan.zhihu.com/p/112836018
+
+基于深度学习的人体姿态估计介绍
+
+https://zhuanlan.zhihu.com/p/337212192
+
+亚马逊李沐团队提出：行为识别的全面调研（2014-2020）
 
 https://mp.weixin.qq.com/s/6pNZ8Crs4Lel2C0TlFAc4Q
 
@@ -49,6 +76,10 @@ DeepMind视频行为分类竞赛，百度IDL获第一
 https://mp.weixin.qq.com/s/4baaoCCdGX4iTw2MO_Y9rA
 
 熊元骏：人类行为理解研究进展
+
+https://mp.weixin.qq.com/s/3e1K_Dw6wSDR5DC8E8SSXg
+
+行为识别综述
 
 https://mp.weixin.qq.com/s/pTlELRhUL9Zg50HXDWjbqw
 
@@ -258,6 +289,10 @@ https://mp.weixin.qq.com/s/KdsHDoPEdrYZgqcW7SMfSw
 
 从DeepNet到HRNet，这有一份深度学习“人体姿势估计”全指南
 
+https://mp.weixin.qq.com/s/p3SsatJHrg1BOuwnoYo8xw
+
+打通多个视觉任务的全能Backbone:HRNet
+
 https://mp.weixin.qq.com/s/spaI9rPy9H3wnlStoncBqQ
 
 中科大&微软开源：基于高清表示网络的人体姿态估计
@@ -330,40 +365,6 @@ https://mp.weixin.qq.com/s/Xur9sEDiPtM2jJfHd46bZw
 
 You Only Watch Once：实时人体动作定位网络
 
-# Capsule
+https://mp.weixin.qq.com/s/oPYWwZ6GkaE4L4YMxh7WGA
 
-https://github.com/freefuiiismyname/capsule-mrc
-
-基于capsule的观点型阅读理解模型
-
-https://mp.weixin.qq.com/s/cskdgsysD7R_FKChAKmlDg
-
-利用Capsule重构过程，Hinton等人实现对抗样本的自动检测
-
-https://mp.weixin.qq.com/s/7fBXMvT4eyZrKhPKQTAIZQ
-
-你听说过胶囊网络吗？
-
-https://mp.weixin.qq.com/s/F9SGZPZj6gup_nOVuDel6A
-
-与胶囊网络异曲同工：Bengio等提出四元数循环神经网络
-
-https://mp.weixin.qq.com/s/4o9XHGwx5lYsJ7YfUNHSoQ
-
-百年老图难倒谷歌AI，网友：是鸭是兔？连我都不能确定
-
-https://mp.weixin.qq.com/s/dN1p7nuv6xtnIsSuY73CcA
-
-基于GNN，强于GNN：胶囊图神经网络的PyTorch实现
-
-https://mp.weixin.qq.com/s/lcJcaiMtYXGVOwa_sVsVfA
-
-Hinton老爷子CapsNet再升级，结合无监督，接近当前最佳效果
-
-https://mp.weixin.qq.com/s/A0m3lkIBCTFf5bzTQlYbgQ
-
-基于胶囊网络的计算机视觉应用
-
-https://mp.weixin.qq.com/s/BqsFIUrVEVz5kOFh3W93gQ
-
-胶囊网络升级新版本，推特2000+赞
+利用OpenCV和深度学习来实现人类活动识别

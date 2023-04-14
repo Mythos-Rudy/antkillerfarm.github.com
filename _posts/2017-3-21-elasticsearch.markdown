@@ -4,6 +4,9 @@ title:  Elasticsearch（一）
 category: AI 
 ---
 
+* toc
+{:toc}
+
 # Elasticsearch
 
 ## 概况
@@ -34,10 +37,10 @@ ElasticSearch和Solr的对比
 
 #### 运行
 
-{% highlight bash %}
+```bash
 cd ES_HOME
 bin/elasticsearch
-{% endhighlight %}
+```
 
 #### 测试
 
@@ -47,20 +50,20 @@ bin/elasticsearch
 
 #### 运行
 
-{% highlight bash %}
+```bash
 cd LS_HOME
 bin/logstash -f logstash.conf
-{% endhighlight %}
+```
 
 LS_HOME/logstash.conf：
 
-{% highlight bash %}
+```bash
 input { stdin { } }
 output {
   elasticsearch { hosts => ["localhost:9200"] }
   stdout { codec => rubydebug }
 }
-{% endhighlight %}
+```
 
 #### 测试
 
@@ -70,10 +73,10 @@ output {
 
 #### 运行
 
-{% highlight bash %}
+```bash
 cd K_HOME/bin
 bin/kibana
-{% endhighlight %}
+```
 
 #### 测试
 
@@ -109,17 +112,17 @@ ES和MySQL的层级对应关系如下：
 
 以如下conf文件为例：
 
-{% highlight bash %}
+```bash
 input { stdin { } }
 output {
   elasticsearch { hosts => ["localhost:9200"] index => "msg" document_type => "true_msg"}
   stdout { codec => rubydebug }
 }
-{% endhighlight %}
+```
 
 其查询语句为：
 
-{% highlight bash %}
+```bash
 GET msg/true_msg/_search
 {
   "query": {
@@ -127,7 +130,7 @@ GET msg/true_msg/_search
   },
   "_source": ["message"]
 }
-{% endhighlight %}
+```
 
 ## 编写LogStash的conf
 
@@ -346,13 +349,13 @@ ES的中文分词功能，以插件的形式提供。主要包括官方维护的
 
 验证：
 
-{% highlight bash %}
+```bash
 POST msg/true_msg/_analyze
 {
   "analyzer": "smartcn",
   "text": "我爱北京天安门"
 }
-{% endhighlight %}
+```
 
 ### IK
 
@@ -383,6 +386,12 @@ analyzers: mmseg_maxword,mmseg_complex,mmseg_simple
 tokenizers: mmseg_maxword,mmseg_complex,mmseg_simple
 
 token_filter: cut_letter_digit
+
+参考：
+
+https://www.cnblogs.com/en-heng/p/5872308.html
+
+简单高效的MMSeg
 
 ### 其他
 
@@ -423,20 +432,3 @@ config/elasticsearch.yml
 ES 5.X需要JDK 8才行，然而公司的服务器是JDK 7，为了不干扰已有的服务，需要修改bin/elasticsearch脚本中的JAVA_HOME变量。
 
 同时运行两个JDK的方法还有很多种，比如下面提到的创建新用户，然后修改用户配置的的方法。
-
-2.新建用户
-
-ES不允许以root用户执行。因此需要创建新用户：
-
-`adduser es`
-
-3.
-
->access denied (javax.management.MBeanTrustPermission register) 
-
-jre/lib/security/java.policy文件中新增
-
-`permission javax.management.MBeanTrustPermission "register";`
-
-4.以es用户的身份解压各压缩包，否则会有一大堆的权限错误。
-

@@ -4,33 +4,12 @@ title:  深度学习（二十一）——图像超分辨率, SRCNN, DRCN
 category: DL 
 ---
 
-# Ultra Deep Network（续）
+* toc
+{:toc}
 
-## Dual Path Networks
+# Ultra Deep Network
 
-DPN是冯佳时和颜水成团队的Yunpeng Chen的作品。
-
->冯佳时，中国科学技术大学自动化系学士，新加坡国立大学电子与计算机工程系博士。现任新加坡国立大学电子与计算机工程系助理教授。
-
-论文：
-
-《Dual Path Networks》
-
-代码：
-
-https://github.com/cypw/DPNs
-
-这篇论文首先从拓扑关系的角度分析了ResNet、DenseNet和HORNN（Higher Order RNN）之间的联系。
-
-![](/images/img2/DPN_3.png)
-
-如上所示，RNN相当于共享权值的串联的ResNet，而DenseNet则相当于并联的RNN。
-
-更进一步的，上述三者都可表述为以下通式：
-
-$$h^k=g^k\left[\sum_{t=0}^{k-1}f_t^k(h^t)\right]$$
-
-其中，$$h^t$$表示t时刻的隐层状态；索引k表示当前时刻；$$x^t$$表示t时刻的输入；$$f_t^k(⋅)$$表示特征提取；$$g^k$$表示对提取特征做输出前的变换。
+## Dual Path Networks（续）
 
 如果$$f_t^k(\cdot)$$和$$g^k(\cdot)$$每个Step都共享，那么就是HORNN，如果只有$$f_t^k(\cdot)$$共享，那么就是ResNet，两者都不共享，那就是DenseNet。
 
@@ -66,6 +45,10 @@ http://blog.csdn.net/u014380165/article/details/75676216
 
 DPN（Dual Path Network）算法详解
 
+https://mp.weixin.qq.com/s/m4cRV9yX-8r4BI0EkVRYig
+
+残差网络家族10多个变种学习卡片，请收下！
+
 # 图像超分辨率
 
 ![](/images/img2/Super_Resolution.png)
@@ -88,6 +71,14 @@ SR目前主要有两个用途：
 
 >IEEE Medal of Honor是IEEE的最高奖，除了1963年之外，每年只有1人得奖，个别年份甚至会轮空。
 
+参考：
+
+https://mp.weixin.qq.com/s/NhFUCCu9I4SGH7sbqvQeuw
+
+数字通信时代的引路人：奈奎斯特（Nyquist）
+
+---
+
 最简单的当然是《图像处理理论（二）》中提到的梯度锐化和拉普拉斯锐化，这种简单算法当然不要指望有什么好效果，聊胜于无而已。这是1995年以前的主流做法。
 
 稍微复杂的方法，如同CV的其它领域经历了“信号处理->ML->DL”的变迁一样，SR也进入了ML阶段。
@@ -106,13 +97,31 @@ ML时代的代表算法还有：
 
 这篇论文是黄煦涛和马毅小组的Jianchao Yang的作品。
 
->黄煦涛（Thomas Huang），1936年生。生于上海，国立台湾大学本科（1956）+MIT硕博（1960,1963）。UIUC教授。美国工程院院士，中国科学院+中国工程院外籍院士。
+>黄煦涛（Thomas Huang），1936~2020。生于上海，国立台湾大学本科（1956）+MIT硕博（1960,1963）。UIUC教授。美国工程院院士，中国科学院+中国工程院外籍院士。
 
 >马毅，清华本科（1995）+UCB硕博（1997,2000）。UCB教授。IEEE fellow。   
 >个人主页：   
 >http://yima.csl.illinois.edu/
 
 这篇论文提出的算法，在形式上和后文这些DL算法已经非常类似了，也是基于HR和LR配对的有监督训练。区别只在于这篇论文使用矩阵的稀疏表示来拟合SR函数，而DL算法使用神经网络拟合SR函数。前者是线性变换，而后者是非线性变换。
+
+参考：
+
+https://mp.weixin.qq.com/s/A8c-15OgKaGPiTETEqyWbw
+
+华人计算机视觉鼻祖、双院外籍院士黄煦涛逝世，昔日名师门徒遍天下
+
+https://mp.weixin.qq.com/s/asa10LOLI5V8tu1j_VcaDQ
+
+张正友忆华人计算机视觉宗师Thomas S. Huang
+
+https://mp.weixin.qq.com/s/XPepZGmkFQAp9e-KFpaG_A
+
+纪念黄煦涛教授
+
+https://mp.weixin.qq.com/s/pgXEWIGvGGc8o1RefWTXAw
+
+Super Res Zoom
 
 ## 参考
 
@@ -144,6 +153,10 @@ https://zhuanlan.zhihu.com/p/76820438
 
 基于深度学习的超分辨率图像技术一览
 
+https://mp.weixin.qq.com/s/o-I6T8f4AcETJqlDNZs9ug
+
+深入浅出深度学习超分辨率
+
 # SRCNN
 
 SRCNN（Super-Resolution CNN）是汤晓鸥小组的Chao Dong的作品。
@@ -167,7 +180,7 @@ SRCNN（Super-Resolution CNN）是汤晓鸥小组的Chao Dong的作品。
 >吐槽一下，这种表格属于论文必须有，但是却没什么营养的部分，且不乏造假的例子。原因很简单，一个idea，如果没有好效果，paper连发都发不了。但是，没有好效果的idea，未必没有价值，不说是否能启发人们的思维，至少能让后来者，不用再掉到同一个坑里。   
 >比如化学领域，失败的实验远远多于成功的实验。在计算能力不发达的时代，人们主要关注成功的案例，但现在大家逐渐意识到：失败的案例才是更大的财富。
 
-这里对其中的指标做一个简介。
+这里对其中的指标IQA（image quality assessment）做一个简介。
 
 **PSNR（Peak Signal to Noise Ratio，峰值信噪比）**
 
@@ -201,6 +214,10 @@ $$MSSIM(X,Y)=\frac{1}{N}\sum_{k=1}^NSSIM(x_k,y_k)$$
 
 主观得分一般采用MOS（mean opinion score）作为评价指标。
 
+其他指标参见论文：
+
+《Comparison of Image Quality Models for Optimization of Image Processing Systems》
+
 参考：
 
 http://blog.csdn.net/u011692048/article/details/77496861
@@ -214,6 +231,18 @@ PSNR和SSIM
 https://mp.weixin.qq.com/s/hGum0fXrKUHCoaInVVS3rQ
 
 除了MSE loss，也可以试试用它：SSIM的原理和代码实现
+
+https://mp.weixin.qq.com/s/UKxQQx0IJGWOFikz3pncAw
+
+最新的图像质量评价
+
+https://zhuanlan.zhihu.com/p/120254892
+
+谈谈图像质量量化评估标准
+
+https://mp.weixin.qq.com/s/t1kv9ChSskrXE1lW80dsew
+
+结构相似度索引（SSIM）全攻略：理论+代码
 
 # DRCN
 

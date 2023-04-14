@@ -1,8 +1,11 @@
 ---
 layout: post
-title:  孩子的编程语言, Go, Julia, Rust, VS, Javascript（三）
+title:  孩子的编程语言, Go, Julia, Rust, VS
 category: language 
 ---
+
+* toc
+{:toc}
 
 # 孩子的编程语言
 
@@ -54,7 +57,7 @@ http://www.cs.berkeley.edu/~bh/logo.html
 
 2）按照源代码包里面readme的提示，编译之。提示缺少libbsd和libtermcap。
 
-3）`sudo apt-get install libbsd-dev libncurses5-dev`
+3）`sudo apt install libbsd-dev libncurses5-dev`
 
 重新编译即可。
 
@@ -84,6 +87,12 @@ turtle是python对于LOGO语言图形库的实现。大概是出于照顾初学�
 
 https://docs.python.org/3/library/turtle.html
 
+参考：
+
+https://mp.weixin.qq.com/s/HaxaJHKZnctyGJZnvloCKA
+
+What?!Python一行代码，能玩这么多童年的游戏？
+
 ## 其他
 
 https://mp.weixin.qq.com/s/WJcLbYwH3-cTRHkMYNjJZA
@@ -101,6 +110,10 @@ https://mp.weixin.qq.com/s/7SfFeKUwEixcmChe3lC-lg
 https://www.codewar.cn/
 
 CodeCombat是一个让学生通过玩游戏学习计算机科学的平台
+
+https://mp.weixin.qq.com/s/TLnUMECwumg-xA48b1bOIg
+
+这三款超好评编程游戏，好玩到停不下来
 
 # Go
 
@@ -120,7 +133,38 @@ https://www.runoob.com/go/go-tutorial.html
 
 `go run xxx.go`
 
+第一次运行的时候，由于大量库需要编译，耗时会比较长。
+
+- Web 框架：Gin、Beego、Echo等。
+- 微服务框架：go-kit、go-micro等。
+- 数据库连接库：go-sql-driver/mysql、go-redis/redis、mongo-go-driver、go-elasticsearch，以及gorm、xorm等。
+- 中间件软件：etcd、Consul、NSQ、Caddy等。
+- 数据库软件：TiDB、Cockroach、InfluxDB、Cayley等。
+- 数据爬取软件：Pholcus、Colly等。
+
+---
+
+Go的几个创始人（Ken Thompson、Rob Pike）来自于Bell Lab的Plan 9项目，所以Go里有大量的Plan 9遗产。
+
+https://zhuanlan.zhihu.com/p/29892487
+
+Go语言的实现为何使用Plan 9的汇编器?
+
+https://www.zhihu.com/question/19706063
+
+为什么Plan9在生产环境没有实际的应用，是因为应用程序匮乏的原因么？
+
+---
+
 参考：
+
+https://mp.weixin.qq.com/s/Gv_C16cbXZfDda-tYpuT5w
+
+Mastering Go第二版中文版
+
+https://mp.weixin.qq.com/s/0JHfBodffVXxst61LZ7RcA
+
+Go语言入门学习笔记
 
 https://mp.weixin.qq.com/s/ka5woeuvNxX3Y0Y4UMlruw
 
@@ -157,6 +201,102 @@ Go实现ORM及构建查询
 https://mp.weixin.qq.com/s/DxE3YOE1GDq6ZXRhpzfC0w
 
 使用Go语言徒手撸一个简单的负载均衡器
+
+https://mp.weixin.qq.com/s/SWfPV6tUC5olZgIdVabd3A
+
+从入门到掉坑：Go内存池/对象池技术介绍
+
+https://mp.weixin.qq.com/s/UqwwUfJEITHuMU8EhhGNRw
+
+图解Golang的内存分配
+
+https://mp.weixin.qq.com/s/eAptnygPQcQ5Ex8-6l0byA
+
+Golang单元测试详尽指引
+
+https://mp.weixin.qq.com/s/o0qtdwE4TfppqWAKJLDhSw
+
+Go中的循环是如何转为汇编的？看完你懂了吗？
+
+https://zhuanlan.zhihu.com/p/299041493
+
+Go netpoller网络模型之源码全面解析
+
+https://zhuanlan.zhihu.com/p/299047984
+
+Go netpoller网络模型之源码全面解析（二）
+
+https://mp.weixin.qq.com/s/BNknXR0wP4vtguchijeY_w
+
+sync.mutex源代码分析
+
+https://zhuanlan.zhihu.com/p/349197066
+
+Go与C的桥梁：cgo入门，剖析与实践
+
+https://zhuanlan.zhihu.com/p/364813527
+
+一文教你搞懂Go中栈操作
+
+https://zhuanlan.zhihu.com/p/374825312
+
+go pprof实战
+
+https://mp.weixin.qq.com/s/N5wby-aWWEPc7mHN_lN3lQ
+
+手把手教你如何进行Golang单元测试
+
+https://mp.weixin.qq.com/s/SxaNLfGwM4dyzvBUvLAHvA
+
+写给想去字节写Go的你
+
+https://zhuanlan.zhihu.com/p/265806072
+
+将Go程序跑在裸机上
+
+https://zhuanlan.zhihu.com/p/397473228
+
+将Go程序跑在裸机上之LibOS
+
+## GTK
+
+熟悉我的朋友都知道，新语言的GTK demo是一定要有的。毕竟helloworld太简单了，容易让人产生从三到万的错觉。
+
+go的GTK绑定主要有两个项目：
+
+For GTK3:
+
+https://github.com/gotk3/gotk3
+
+For GTK2:
+
+https://github.com/mattn/go-gtk
+
+需要注意的是，第一个项目由于没有使用GObject Introspection，所以只支持了主要功能。项目作者也介绍说，当初发起项目的时候，并不知道GObject Introspection这样的神器，也许以后的某个时间会迁移过去。至于GTK2就不用说了，GI是只有GTK3才有的福利。
+
+安装：
+
+`go get github.com/gotk3/gotk3/gtk`
+
+参考：
+
+https://www.jianshu.com/p/be197980d4bb
+
+2019，Go GUI项目爆发的一年？
+
+## Fyne
+
+官网：
+
+https://fyne.io/
+
+`go get fyne.io/fyne/v2`
+
+参考：
+
+https://www.jianshu.com/p/08411943a74d
+
+Fyne折腾手记：开发一个简易桌面应用
 
 # Julia
 
@@ -302,6 +442,20 @@ https://zhuanlan.zhihu.com/c_1078248076300521472
 
 一个Rust OS的专栏
 
+## 参考
+
+https://mp.weixin.qq.com/s/JBlzMIhMa7TB5tHGSRhVkQ
+
+​半小时入门Rust，这是一篇Rust代码风暴
+
+https://mp.weixin.qq.com/s/xGBAGBGsxBDuKkSxXOZRjQ
+
+在Rust代码中编写Python是种怎样的体验？
+
+https://zyxin.xyz/blog/2021-10/FirstGlanceOnRust/
+
+初识Rust - 从一个Python/C++/C#程序员的角度对比Rust
+
 # VS
 
 ## 分栏显示
@@ -324,166 +478,4 @@ VS2015以后，MS不再提供VS的离线安装包，因为安装文件实在是�
 
 2.安装证书。证书在offline\certificates下。
 
-3.运行运行offline\vs_community.exe。
-
-# Javascript（续）
-
-## TypeScript
-
-TypeScript是JavaScript的一个超集，而且本质上向这个语言添加了可选的静态类型和基于类的面向对象编程。
-
-官网：
-
-https://www.typescriptlang.org/
-
-安装：
-
-`npm install -g typescript`
-
-TypeScript文件的后缀是`.ts`，它不能直接在浏览器中运行，而需要编译成JS才能运行。也正因为如此，TS并没有什么兼容性问题。
-
-编译：
-
-`tsc helloworld.ts`
-
-## D3.js
-
-D3.js是一个数据可视化的库。
-
-官网：
-
-https://d3js.org/
-
-参考：
-
-https://www.cnblogs.com/fastmover/p/7779660.html
-
-D3.js从入门到“放弃”指南
-
-## Traffic Demo
-
-2019.9
-
-最近心血来潮，翻出了本科时代的作业。其中有一个交通仿真的小demo，最早是用Java Applet写的。岂料，现在别说浏览器了，就连专门看这个的AppletViewer在新版SDK中，都不见踪影了。。。
-
-于是，只好作现代化移植。本来首选JavaFX的，不料刚开始写，就发现JavaFX对于多线程渲染做的很差，而这个Demo正是个多线程的版本。
-
-反正都要大改，还不如直接移植到js上，连编译都省了。
-
-原始版本：
-
-https://github.com/antkillerfarm/antkillerfarm_crazy/tree/master/java/trafic
-
-新版本：
-
-https://github.com/antkillerfarm/antkillerfarm_crazy/tree/master/nodejs/js/traffic
-
-众所周知，js是单线程的，所以这个版本也是单线程的，逻辑稍微复杂了一些。
-
-## 框架
-
-React、Angular、Vue.js似乎是目前最流行的三个框架了。
-
-## WebAssembly
-
-WebAssembly，简称Wasm，是一种能在浏览器上执行的二进制虚拟机字节码。
-
-官网：
-
-https://webassembly.org/
-
-参考：
-
-https://www.ibm.com/developerworks/cn/web/wa-lo-webassembly-status-and-reality/index.html
-
-WebAssembly现状与实战
-
-https://www.jianshu.com/p/bff8aa23fe4d
-
-几张图让你看懂WebAssembly
-
-https://www.zhihu.com/question/31415286
-
-如何评论浏览器最新的WebAssembly字节码技术？
-
-## 参考
-
-https://zhuanlan.zhihu.com/p/22989691
-
-JavaScript世界万物诞生记
-
-https://mp.weixin.qq.com/s/F5jCHDzgj1YSJBGrEi-RfA
-
-JavaScript性能优化的小知识总结
-
-https://mp.weixin.qq.com/s/WS1hQN5SmK5uavT_0fbrkg
-
-一文说透为什么JavaScript最牛逼
-
-https://mp.weixin.qq.com/s/OwJ2gBWvmj8rJ_vW5nzaPA
-
-10个免费好用功能强大的网页动画效果库
-
-https://mp.weixin.qq.com/s/pYtKpfL68lEy9bus9HHAMQ
-
-Javascript将HTML页面生成PDF并下载
-
-https://mp.weixin.qq.com/s/Sjg6jgl1D6IkYgsuQSgFHg
-
-十个最流行的前端CSS库
-
-https://zhuanlan.zhihu.com/p/35551654
-
-基于React的高质量坦克大战复刻版
-
-https://mp.weixin.qq.com/s/zfOZAmgpndcqgxHHaS1j3g
-
-用Vue和React构建相同应用程序，区别在哪？
-
-https://mp.weixin.qq.com/s/DHxEqsTMOyc7pHfmJrfNEg
-
-一篇文章理解JS继承
-
-https://mp.weixin.qq.com/s/tNi5LJmotuXSoHbZhNgPcw
-
-GitHub已完全弃用jQuery，问题是为什么？
-
-https://mp.weixin.qq.com/s/WHh9v3icCc90PwiLyv0Hng
-
-为什么Facebook的API以一个循环作为开头？
-
-https://mp.weixin.qq.com/s/GQ2azFxcmXrY78rTAdxuVA
-
-JS/CSS体积减少了67%，我们是如何做到的？
-
-https://mp.weixin.qq.com/s/c1bMljAx1QWz9QQJX7sHmg
-
-大部分教程不会告诉你的12个JS技巧
-
-https://www.jianshu.com/p/c8b86b09daf0
-
-函数防抖和节流
-
-https://mp.weixin.qq.com/s/vEbTP1SDP3GW20XAP825jw
-
-一种字体，变成千姿百态艺术字，可尖可圆可开花，隔壁设计师馋哭了
-
-https://mp.weixin.qq.com/s/fEAfuVzfOwKjnTB-mdS5UA
-
-用JS写一个同Excel表现的智能填充算法
-
-https://mp.weixin.qq.com/s/D-XvKCSUCzMGcEz_xWTwqg
-
-现代CSS进化史
-
-https://mp.weixin.qq.com/s/zDt92-5NVaAFZJRfEHCUvg
-
-什么是Native、Web App、Hybrid、React Native 和 Weex？
-
-https://mp.weixin.qq.com/s/pdOVONHbjfIJPW45nEw1fg
-
-前端本地文件操作与上传
-
-http://chrome.360.cn/test/html5/index.html
-
-一个用于检测浏览器对html 5支持情况的网页
+3.运行offline\vs_community.exe。

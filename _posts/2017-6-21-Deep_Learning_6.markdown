@@ -1,12 +1,181 @@
 ---
 layout: post
-title:  深度学习（六）——RNN, LSTM
+title:  深度学习（六）——RNN
 category: DL 
 ---
 
+* toc
+{:toc}
+
 # 词向量
 
-## 参考（续）
+## FastText
+
+Word2Vec作者Mikolov加盟Facebook之后，提出了文本分类新作FastText。
+
+FastText模型架构和Word2Vec中的CBOW模型很类似。不同之处在于，FastText预测标签，而CBOW模型预测中间词。
+
+Github：
+
+https://github.com/facebookresearch/fastText
+
+FastText的论文其实有两篇：
+
+《Bag of Tricks for Efficient Text Classification》
+
+这篇就是上述文本分类的论文。
+
+《Enriching Word Vectors with Subword Information》
+
+这篇是根据词根改进词向量的论文。因此，有的blog说，使用FastText生成词向量，实际上就是指的这篇文章。
+
+参考：
+
+http://www.algorithmdog.com/fast-fasttext
+
+超快的 fastText
+
+https://mp.weixin.qq.com/s/tXgF7rQdZm3IFAluMU5ywg
+
+fastText之源码分析
+
+https://mp.weixin.qq.com/s/S4RGicXwZqis6vQFpB31qQ
+
+Bag of Tricks for Efficient Text Classification
+
+https://mp.weixin.qq.com/s/eq1I92rjIAWEpYw-1fEHeQ
+
+从Facebook AI Research开源fastText谈起文本分类：词向量模性、深度表征和全连接
+
+https://mp.weixin.qq.com/s/aq_kWkwgwtz5qFo0lNEEqg
+
+Tomas Mikolov论文简评：从Word2Vec到FastText
+
+https://mp.weixin.qq.com/s/v1-mLhmbp5MoRR824tdPDw
+
+玩转词向量：用fastText预训练向量做个智能小程序
+
+https://mp.weixin.qq.com/s/LLrq1F2uEC2xEWZrd9uijA
+
+一行代码自动调参，支持模型压缩指定大小，Facebook升级FastText
+
+https://mp.weixin.qq.com/s/VxODwO8qA33Cr1n62YXYBQ
+
+fastText：极快的文本分类工具
+
+https://mp.weixin.qq.com/s/TRrL6_nI4GimH_OJ1CswiQ
+
+NLP重铸篇之Fasttext
+
+## RNNLM
+
+RNNLM是Mikolov早期提出的文本分类的工具。（其实就是他的博士毕业论文）
+
+官网：
+
+http://rnnlm.org/
+
+yandex后来又提出了一个加速版本的RNNLM：
+
+https://github.com/yandex/faster-rnnlm
+
+## Item2Vec
+
+本质上，word2vec模型是在word-context的co-occurrence矩阵基础上建立起来的。因此，任何基于co-occurrence矩阵的算法模型，都可以套用word2vec算法的思路加以改进。
+
+比如，推荐系统领域的协同过滤算法。
+
+协同过滤算法是建立在一个user-item的co-occurrence矩阵的基础上，通过行向量或列向量的相似性进行推荐。如果我们将同一个user购买的item视为一个context，就可以建立一个item-context的矩阵。进一步的，可以在这个矩阵上借鉴CBoW模型或Skip-gram模型计算出item的向量表达，在更高阶上计算item间的相似度。
+
+论文：
+
+《Item2Vec: Neural Item Embedding for Collaborative Filtering》
+
+在实际的新闻信息流推荐中，Word2Vec的点击效果比ALS要好30%+，主要有两个原因：
+
+1. 用户的兴趣和行为是多样的，局部的行为往往更偏相关，往往整体的样本差异是很大的；
+
+2. 在负样本采样中，ALS 是全局的负样本采样，Word2Vec 更倾向高频，倾向高频的采样更不容易让学习出的结果都与高频（头部）的结果相似。
+
+参考：
+
+https://mp.weixin.qq.com/s/vpxCP1Uw23y9XNTRUhY79w
+
+达观数据推荐算法实现：协同过滤之item embedding
+
+https://www.sohu.com/a/215535516_99992181
+
+有这好事？神经网络模型Word2vec竟能根据个人喜好推荐音乐
+
+https://mp.weixin.qq.com/s/Ta2Im4WCWq5eQ8SF-mNpuQ
+
+万物皆Embedding，从经典的word2vec到深度学习基本操作item2vec
+
+https://mp.weixin.qq.com/s/6XJuZBTmfRWWFwS9J3HOsQ
+
+推荐技术随谈
+
+## word2vec/doc2vec的缺点
+
+1.word2vec/doc2vec基于BOW（Bag Of Word，词袋）模型。该模型的特点是忽略词序，因此对于那些交换词序会改变含义的句子，无法准确评估它们的区别。
+
+2.虽然我们一般使用word2vec/doc2vec来比较文本相似度，但是从原理来说，word2vec/doc2vec提供的是关联性（relatedness），而不是相似性（similarity）。这会带来以下问题：不但近义词的词向量相似，反义词的词向量也相似。因为它们和其他词的关系（也就是语境）是类似的。
+
+3.由于一个词只有一个向量来表示，因此，无法处理一词多义的情况。
+
+然而关联性并非都是坏事，有的时候也会起到意想不到的效果。比如在客服对话的案例中，客户可能会提供自己的收货地址，显然每个客户的地址都是不同的，但是有意思的是，这些地址的词向量是非常相似的。
+
+总之，**只利用无标注数据训练得到的Word Embedding在匹配度计算的实用效果上和主题模型技术相差不大，它们本质上都是基于共现信息的训练。**
+
+4.除了余弦相似度之外，词向量的模长，也是一个重要的特征，词向量模长越大，重要性越低（或者越高，取决于生成词向量的算法）。
+
+参考：
+
+https://www.zhihu.com/question/22266868
+
+Word2Vec如何解决多义词的问题？
+
+## 参考
+
+http://www.cnblogs.com/iloveai/p/word2vec.html
+
+word2vec前世今生
+
+https://mp.weixin.qq.com/s/NMngfR7EWk-pa6c4_FY9Yw
+
+图解Word2vec，读这一篇就够了
+
+http://www.cnblogs.com/maybe2030/p/5427148.html
+
+文本深度表示模型——word2vec&doc2vec词向量模型
+
+https://www.zhihu.com/question/29978268
+
+如何用word2vec计算两个句子之间的相似度？
+
+https://mp.weixin.qq.com/s/kGi-Hf7CX6OKcCMe7IC7zA
+
+NLP之Wrod2Vec三部曲
+
+https://mp.weixin.qq.com/s/VMK_UpOUI0y7apTGR02D1Q
+
+图解Word2Vec
+
+https://mp.weixin.qq.com/s/CMcNkEFW9UUXAW0832dT6g
+
+对学习/理解Word2Vec有帮助的材料
+
+https://mp.weixin.qq.com/s/XMGZXAt_LUX5iTet7_SX4Q
+
+深度学习和自然语言处理：诠释词向量的魅力
+
+https://mp.weixin.qq.com/s/Rn_aJYozQ0f53Mjq4MKSwA
+
+哪种词向量模型更胜一筹？Word2Vec，WordRank or FastText?
+
+https://mp.weixin.qq.com/s/H7m7lqWpK27pJp9obXxlIQ
+
+见微知著，从细节处提升词向量的表示能力
 
 http://licstar.net/archives/328
 
@@ -52,9 +221,17 @@ https://mp.weixin.qq.com/s/nHEyJLU18AE-SatW9HKeOw
 
 Word2Vec——深度学习的一小步，自然语言处理的一大步
 
-https://www.zhihu.com/question/290088641/answer/543419468
+https://www.zhihu.com/answer/543419468
 
 CNN文本分类中是否可以使用字向量代替词向量？
+
+https://mp.weixin.qq.com/s/zDneR1BU6xvt8cndEF4_Xw
+
+深入浅出Word2Vec原理解析
+
+https://mp.weixin.qq.com/s/CQ9FdFcWuW0Ku3UtbGmmgg
+
+Word Vectors
 
 # RNN
 
@@ -72,9 +249,15 @@ RNN是Recurrent Neural Network和Recursive Neural Network的简称。前者主�
 
 虽然理论上，我们可以给每一时刻赋予不同的$$U,V,W$$，然而出于简化计算和稀疏度的考量，RNN所有时刻的$$U,V,W$$都是相同的。
 
-RNN的误差反向传播算法，被称作**Backpropagation Through Time**。其主要公式如下：
+RNN的误差反向传播算法，被称作**Backpropagation Through Time（BPTT）**。其主要公式如下：
 
-$$\nabla U=\frac{\partial E}{\partial U}=\sum_t\frac{\partial e_t}{\partial U} \\\nabla V=\frac{\partial E}{\partial V}=\sum_t\frac{\partial e_t}{\partial V} \\\nabla W=\frac{\partial E}{\partial W}=\sum_t\frac{\partial e_t}{\partial W}$$
+$$
+\begin{array}\\
+\nabla U=\frac{\partial E}{\partial U}=\sum_t\frac{\partial e_t}{\partial U} \\
+\nabla V=\frac{\partial E}{\partial V}=\sum_t\frac{\partial e_t}{\partial V} \\
+\nabla W=\frac{\partial E}{\partial W}=\sum_t\frac{\partial e_t}{\partial W}
+\end{array}
+$$
 
 从上式可以看出，三个误差梯度实际上都是**时域的积分**。
 
@@ -116,174 +299,3 @@ y_t &= \sigma_y(W_{y} h_t + b_y)
 >Jeffrey Locke Elman，1948年生，Harvard College本科（1969年）+University of Texas博士（1977年）。University of California, San Diego教授，American Academy of Arts and Sciences院士（2015年）。 美国心理学会会员。  
 >个人主页：   
 >https://tatar.ucsd.edu/jeffelman/
-
->Harvard College是Harvard University最古老的本部，目前一般提供本科教育。它和其他许多研究生院以及相关部门，共同组成了Harvard University。类似的还有Yale College和Yale University。
-
->American Academy of Arts and Sciences建于1780年。当时，美国正在法国等国的协助下与英国作战，所以美国的创立者选择比照包括作家、人文学者、科学家、军事家、政治家在内的法兰西学术院，建立新大陆的学术院。   
->后来，林肯总统比照英国皇家学会，于1863年创建了主要涵盖自然科学的National Academy of Sciences，United States。   
->这两个学院是美国学术界最权威的组织。
-
->美国的创立者，一般被翻译为Founding Fathers of the United States。此外还有一个更响亮的称号76ers。没错，NBA那支球队的名字就是这么来的。
-
-除了Elman RNN之外，还有Jordan RNN。（没错，这就是吴恩达的导师的作品）
-
-$$\begin{align}
-h_t &= \sigma_h(W_{h} x_t + U_{h} y_{t-1} + b_h) \\
-y_t &= \sigma_y(W_{y} h_t + b_y)
-\end{align}$$
-
-Elman RNN的记忆来自于隐层单元，而Jordan RNN的记忆来自于输出层单元。
-
-## 参考
-
-http://blog.csdn.net/aws3217150/article/details/50768453
-
-递归神经网络(RNN)简介
-
-http://blog.csdn.net/heyongluoyao8/article/details/48636251
-
-循环神经网络(RNN, Recurrent Neural Networks)介绍
-
-https://mp.weixin.qq.com/s/pq8-u05ww0JgTEgU-0P-Lw
-
-一文搞懂RNN（循环神经网络）基础篇
-
-http://mp.weixin.qq.com/s?__biz=MzIzODExMDE5MA==&mid=2694182661&idx=1&sn=ddfb3f301f5021571992824b21ddcafe
-
-循环神经网络
-
-http://www.wildml.com/2015/10/recurrent-neural-networks-tutorial-part-3-backpropagation-through-time-and-vanishing-gradients/
-
-Backpropagation Through Time算法
-
-https://baijia.baidu.com/s?old_id=560025
-
-Tomas Mikolov详解RNN与机器智能的实现
-
-https://sanwen8.cn/p/3f8sRTh.html
-
-为什么RNN需要做正交初始化？
-
-http://blog.csdn.net/shenxiaolu1984/article/details/71508892
-
-RNN的梯度消失/爆炸与正交初始化
-
-https://mp.weixin.qq.com/s/vHQ1WbADHAISXCGxOqnP2A
-
-看大牛如何复盘递归神经网络！
-
-https://mp.weixin.qq.com/s/0V9DeG39is_BxAYX0Yomww
-
-为何循环神经网络在众多机器学习方法中脱颖而出？
-
-https://mp.weixin.qq.com/s/-Am9Z4_SsOc-fZA_54Qg3A
-
-深度理解RNN：时间序列数据的首选神经网络！
-
-https://mp.weixin.qq.com/s/ztIrt4_xIPrmCwS1fCn_dA
-
-“魔性”的循环神经网络
-
-https://mp.weixin.qq.com/s/tIXJNkT9gIjGYZz7dekiNw
-
-手把手教你写一个RNN
-
-https://mp.weixin.qq.com/s/BqVicouktsZu8xLVR-XnFg
-
-完全图解RNN、RNN变体、Seq2Seq、Attention机制
-
-https://mp.weixin.qq.com/s/gGGXKT2fTn2xPPvo7PE8IA
-
-像训练CNN一样快速训练RNN：全新RNN实现，比优化后的LSTM快10倍
-
-https://mp.weixin.qq.com/s/OltT-GFDVxaiukb1HVSY3w
-
-通俗讲解循环神经网络的两种应用
-
-https://mp.weixin.qq.com/s/PZMmjT9eXL7rU2pxkQWTiw
-
-从90年代的SRNN开始，纵览循环神经网络27年的研究进展
-
-https://mp.weixin.qq.com/s/7LcqRGPYX6JXpY_0hbjmbA
-
-循环神经网络(RNN)入门帖：向量到序列，序列到序列，双向RNN，马尔科夫化
-
-# LSTM
-
-本篇笔记主要摘自：
-
-http://www.jianshu.com/p/9dc9f41f0b29
-
-理解LSTM网络
-
-## LSTM结构图
-
-为了解决原始RNN只有短时记忆的问题，人们又提出了一个RNN的变种——LSTM（Long Short-Term Memory）。其结构图如下所示：
-
-![](/images/article/LSTM.png)
-
-和RNN的时序展开图类似，这里的每个方框表示**某个时刻从输入层到隐层的映射**。
-
-我们首先回顾一下之前的模型在这里的处理。
-
-MLP的该映射关系为：
-
-$$h=\sigma (W\cdot x+b)$$
-
-RNN在上式基础上添加了历史状态$$h_{t-1}$$：
-
-$$h_t=\sigma (W\cdot [h_{t-1},x_t]+b)$$
-
-LSTM不仅添加了历史状态$$h_{t-1}$$，还添加了所谓的**细胞状态**$$C_{t-1}$$，即上图中图像上部的水平横线。
-
-## 步骤详解
-
-神经网络的设计方式和其他算法不同，我们不需要指定具体的参数，而只需要给出一个功能的实现机制，然后借助误差的反向传播算法，训练得到相应的参数。这一点在LSTM上体现的尤为明显。
-
-LSTM主要包括以下4个步骤（也可称为4个功能或门）：
-
-### 决定丢弃信息
-
-![](/images/article/LSTM_1.png)
-
-这一部分也被称为**忘记门**。
-
-### 确定更新的信息
-
-![](/images/article/LSTM_2.png)
-
-这一部分也被称为**输入门**。
-
-### 更新细胞状态
-
-![](/images/article/LSTM_3.png)
-
-### 输出信息
-
-![](/images/article/LSTM_4.png)
-
-显然，在这里不同的参数会对上述4个功能进行任意组合，从而最终达到长时记忆的目的。
-
-### 其他细节
-
-在一般的神经网络中，激活函数可以随意选择，无论是传统的sigmoid，还是新的tanh、ReLU，都不影响模型的大致效果。（差异主要体现在训练的收敛速度上，最终结果也可能会有细微影响。）
-
-**但是，上述标准LSTM模型中，tanh函数可以随意替换，而sigmoid函数却不能被替换，切记。**
-
-sigmoid用在了各种gate上，产生0~1之间的值，这个一般只有sigmoid最直接了。
-
-tanh用在了状态和输出上，是对数据的处理，这个用其他激活函数也可以。
-
-forget bias的初始值可以设为以1为均值，这对于训练很有好处，这就是tensorflow中forget_bias参数的来历。参见论文：
-
-《An Empirical Exploration of Recurrent Network Architectures》
-
-## LSTM的变体
-
-![](/images/article/LSTM_5.png)
-
-上图中的LSTM变体被称为**peephole connection**。其实就是将细胞状态加入各门的输入中。可以全部添加，也可以部分添加。
-
-![](/images/article/LSTM_6.png)
-
-上图中的LSTM变体被称为**Coupled Input and Forget Gate（CIFG）**。它将忘记和输入门连在了一起。

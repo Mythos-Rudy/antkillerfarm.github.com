@@ -4,19 +4,18 @@ title:  Ubuntu使用技巧（一）
 category: linux 
 ---
 
+* toc
+{:toc}
+
 # 在Ubuntu上安装VMWare tools
 
 VMWare自带的VMWare tools在新版的Ubuntu上总是安装不上，其实解决方法也很简单。
 
-`sudo apt-get install linux-headers-virtual open-vm-dkms open-vm-tools（图形界面）`
+`sudo apt install linux-headers-virtual open-vm-dkms open-vm-tools（图形界面）`
 
 或
 
-`sudo apt-get install --no-install-recommends linux-headers-virtual open-vm-dkms open-vm-tools（命令行）`
-
-# 如何以管理员身份操作Gnome的资源管理器--nautilus
-
-`apt-get install nautilus-gksu`
+`sudo apt install --no-install-recommends linux-headers-virtual open-vm-dkms open-vm-tools（命令行）`
 
 # 没有声音
 
@@ -30,7 +29,7 @@ VMWare自带的VMWare tools在新版的Ubuntu上总是安装不上，其实解�
 
 * install the dependencies:
 
-`sudo apt-get install build-essential libgtop2-dev libgtk-3-dev libappindicator3-dev git-core`
+`sudo apt install build-essential libgtop2-dev libgtk-3-dev libappindicator3-dev git-core`
 
 * create a folder for git_project and download the code.
 
@@ -46,15 +45,23 @@ https://github.com/mgedmin/indicator-netspeed.git
 
 * launch the indicator:
 
-`sudo make install`
-
-`indicator-netspeed`
+```bash
+sudo make install
+indicator-netspeed
+```
 
 附带的说一下，刚开始的时候，我给这个程序添加了一个桌面快捷方式。但是每次开机还要按一下快捷方式，着实不方便。后来发现在选择“关机”的那个菜单上方还有个叫做“启动应用程序”的东东，之前看名字还以为是Windows下Run的替代品，结果实际上是桌面的开机启动程序。。。
 
 另，修改~/.profile之类的文件是不行的，因为那是在进入桌面之前运行的。由于桌面还没有ready，好多桌面程序都是跑不起来的。
 
 在Ubuntu 14.04中“启动应用程序”找不着了，但是实际的功能实现机制还是没有变——在~/.config/autostart下创建desktop文件。
+
+```bash
+mkdir -p ~/.config/autostart
+cp indicator-netspeed.desktop ~/.config/autostart
+```
+
+在Ubuntu 22.04中，`libappindicator3-dev`被`libayatana-appindicator3-dev`取代，但用法基本不变。
 
 ## 虚拟机和宿主机的文件共享——FTP方式
 
@@ -76,19 +83,17 @@ http://blog.chinaunix.net/uid-11187-id-3026834.html
 
 最后，比较了一下虚拟机和真实机器在组网上的差异后，我忽然意识到虚拟机FTP不能正常访问的原因，应该是由于虚拟机是在一个虚拟的内网之中。默认情况下，外网机器是无法访问虚拟机的，而虚拟机则可以正常访问外网。因此，反过来，我在win7上用IIS搭建FTP服务，然后在ubuntu虚拟机上用Filezilla访问FTP。这下终于成功了。
 
+目前，STFP日渐流行，搭建server的方法如下：
+
+`sudo apt install open-sshserver`
+
+参考：
+
+https://blog.csdn.net/Nation_chen/article/details/7066277
+
+ubuntu安装ftp服务器
+
 # Ubuntu使用小技巧
-
-安装 7zip：
-
-`sudo apt-get install p7zip`
-
-安装 rar:
-
-`sudo apt-get install rar unrar`
-
-rar比较奇怪，压缩和解压是使用不同的包，这点和7zip是不一样的。
-
-常按Win键，会弹出Unity所用的键盘快捷键。
 
 ## ape文件的处理
 
@@ -102,19 +107,19 @@ Monkey's Audio，是一种常见的无损音频压缩编码格式，扩展名为
 
 2）Update the package index:
 
-`sudo apt-get update`
+`sudo apt update`
 
 3)Install GPG key of the repository:
 
-`sudo apt-get install deb-multimedia-keyring`
+`sudo apt install deb-multimedia-keyring`
 
 4)Install monkeys-audio deb package:
 
-`sudo apt-get install monkeys-audio`
+`sudo apt install monkeys-audio`
 
 5)安装shntool和flac包
 
-`sudo apt-get install shntool flac`
+`sudo apt install shntool flac`
 
 6)执行以下命令将ape切割成flac文件
 
@@ -130,7 +135,7 @@ Monkey's Audio，是一种常见的无损音频压缩编码格式，扩展名为
 
 devhelp每个版本放书的目录都不尽相同，一般如果安装了gtk的话，可以找找gtk-doc文件夹的位置，然后把书放到gtk-doc下。
 
-`sudo apt-get install libgtk-3-doc`
+`sudo apt install libgtk-3-doc`
 
 # Unity侧边栏快速启动的研究
 
@@ -146,7 +151,7 @@ Unity侧边栏和Win7的任务栏有些类似，不仅会显示当前正在执�
 
 2）用任意文本编辑工具编辑该文件，内容如下：
 
-{% highlight c %}
+```text
 [Desktop Entry]
 Version=1.0
 Type=Application
@@ -182,7 +187,7 @@ TargetEnvironment=Unity
 Name=LibreOffice
 Exec=libreoffice
 TargetEnvironment=Unity
-{% endhighlight %}
+```
 
 从本质上来说，这其实就是个桌面启动文件。有兴趣的同学可以用“Desktop Entry”为关键字搜索一下.desktop文件的写法。
 
@@ -218,13 +223,17 @@ apt是一套完整的软件包管理方案。除了最常用apt-get之外，还�
 
 添加新的软件源。
 
+有的源需要添加GPG Key：
+
+`wget -qO - http://deb.opera.com/archive.key | sudo apt-key add -`
+
 ## apt vs. apt-get
 
 在ubuntu14.04以后，apt逐渐取代apt-get，称为默认的软件升级工具。基本可以认为apt=apt-get+apt-cache。
 
 ## 软件包的网上查询
 
-使用apt-get获取软件虽然方便，但是从ubuntu的源获得的软件包和直接使用源码编译安装的包相比，包中的各个文件被分散在好多个文件夹中，查找起来很不方便。
+使用apt获取软件虽然方便，但是从ubuntu的源获得的软件包和直接使用源码编译安装的包相比，包中的各个文件被分散在好多个文件夹中，查找起来很不方便。
 
 这时可以到这个网址：
 
@@ -252,7 +261,7 @@ libupnp_1.6.19+git20160116-1.debian.tar.xz
 
 下载软件deb+未安装的依赖：
 
-`sudo apt-get --print-uris --yes -d --reinstall install <package name> | grep "http://" |  awk '{print$1}' | xargs -I'{}' echo {} | tee files.list`
+`sudo apt --print-uris --yes -d --reinstall install <package name> | grep "http://" |  awk '{print$1}' | xargs -I'{}' echo {} | tee files.list`
 
 `wget --input-file files.list`
 
@@ -260,7 +269,7 @@ libupnp_1.6.19+git20160116-1.debian.tar.xz
 
 `PACKAGES="<package name>"`
 
-`apt-get download ${PACKAGES} && apt-cache depends -i ${PACKAGES} | awk '/Depends:/ {print $2}' | xargs  apt-get download`
+`apt download ${PACKAGES} && apt-cache depends -i ${PACKAGES} | awk '/Depends:/ {print $2}' | xargs  apt download`
 
 2.安装deb包。
 
@@ -276,13 +285,13 @@ apt的cache路径为：/var/cache/apt/archives/
 
 参考：
 
-Ubuntu使用apt-get安装本地deb包
+Ubuntu使用apt安装本地deb包
 
 ## apt降级（downgrade）安装
 
 有的时候新的版本不好使的情况下，也可采用如下方式降级：
 
-`sudo apt-get install <pkg_name>=<version>`
+`sudo apt install <pkg_name>=<version>`
 
 ## dpkg
 
@@ -295,19 +304,3 @@ dpkg是Debian类Linux发行版的基本包管理工具，apt可以看作对它�
 如果缺少依赖，可以用如下方式解决：
 
 `sudo apt --fix-broken install`
-
-# tftp
-
-Ubuntu下面关于TFTP的程序，有三套：
-
-1.tftp和tftpd
-
-2.atftp和atftpd
-
-3.tftp-hpa和tftpd-hpa
-
-目前以tftp-hpa和tftpd-hpa最为流行。
-
-安装命令：
-
-`sudo apt-get install tftp-hpa tftpd-hpa`

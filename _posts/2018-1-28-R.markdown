@@ -4,6 +4,9 @@ title:  R
 category: language 
 ---
 
+* toc
+{:toc}
+
 # R
 
 R语言是另一个应用较广的数学工具语言和环境，主要应用于统计学和数据挖掘等领域。在这些领域，其影响力甚至超过了Matlab。
@@ -22,7 +25,7 @@ https://r-forge.r-project.org/
 
 安装方法:
 
-`sudo apt-get install r-base r-base-dev`
+`sudo apt install r-base r-base-dev`
 
 书籍：
 
@@ -84,6 +87,10 @@ https://www.datasciencecentral.com/profiles/blogs/600-websites-about-r
 
 600个R资源网站
 
+https://mp.weixin.qq.com/s/u9n1BWazGns661imxBP-dg
+
+使用机器学习R语言，149页pdf，Practical Machine Learning in R
+
 ## 交互环境
 
 R语言有个和python类似的命令行交互环境。
@@ -126,11 +133,11 @@ CRAN虽然提供了各个软件包的帮助文档，然而无论是数据的组�
 
 此外R还支持从github安装软件包，如下所示：
 
-{% highlight R %}
+```R
 install.packages("devtools")
 devtools::install_github("jlmelville/mnist")
 library(mnist)
-{% endhighlight %}
+```
 
 ## 语言细节
 
@@ -164,12 +171,12 @@ R和python类似，变量使用前无需声明类型。
 
 列表（List）的下标一般是个name。这里使用一个解析后的json文件作为示例，演示一下在复杂结构中下标的用法。
 
-{% highlight json %}
+```json
 {"data":[
 {"readCount":"97","title":"R1"},
 {"readCount":"469","title":"R2"}
 ]}
-{% endhighlight %}
+```
 
 假设这个json文件保存在列表json中，则`"readCount":"97"`需要这样引用：
 
@@ -205,11 +212,11 @@ paste可将多个字符串连接到一起。这个函数的声明很有意思：
 
 示例：
 
-{% highlight R %}
+```R
 add<-function(x,y){
   return (x+y)
 }
-{% endhighlight %}
+```
 
 这种方式和JavaScript十分类似。
 
@@ -217,11 +224,11 @@ add<-function(x,y){
 
 as库可进行各种常见数据格式的转换，非常好使。
 
-{% highlight R %}
+```R
 strDates <- c("01/05/1965", "08/16/1975")
 dates <- as.Date(strDates, "%m/%d/%Y") 
 strDates <- as.character(dates)
-{% endhighlight %}
+```
 
 ### 操作mysql数据库
 
@@ -229,7 +236,7 @@ strDates <- as.character(dates)
 
 `install.packages`可以自动处理R依赖，然而它不能处理非R依赖。
 
-`sudo apt-get install libmysqlclient-dev`
+`sudo apt install libmysqlclient-dev`
 
 2.安装RMySQL包。
 
@@ -237,7 +244,7 @@ strDates <- as.character(dates)
 
 示例：
 
-{% highlight R %}
+```R
 conn<-dbConnect(MySQL(), dbname = "ml", username="root", password="123456")
 summary(conn)
 query<-dbSendQuery(conn, "SELECT * FROM csdn")
@@ -245,7 +252,13 @@ data<-fetch(query, n = -1)
 dbClearResult(query)
 print(data)
 dbDisconnect(conn)
-{% endhighlight %}
+```
+
+参考：
+
+https://mp.weixin.qq.com/s/VEKg-KEtge1L7Sa4oo2xQg
+
+从R连接MySQL数据库
 
 ### 内置数据集
 
@@ -365,7 +378,7 @@ R语言的高质量图形渲染库Cairo
 
 https://mp.weixin.qq.com/s/GN0KARrvosWb7Gr_BKYhCQ
 
-10 种机器学习算法的要点（附Python和R代码）
+10种机器学习算法的要点（附Python和R代码）
 
 https://zhuanlan.zhihu.com/p/22852262
 
@@ -418,3 +431,15 @@ https://mp.weixin.qq.com/s/0jKN59DMo1HmCtw8ce-y7Q
 https://mp.weixin.qq.com/s/SLmyeLOp3h0bkD08WJS_Rg
 
 如何用R绘制交互式社会网络图？
+
+https://mp.weixin.qq.com/s/bB7583hMU9DGIc4-PMMQXw
+
+详解线性回归、朴素贝叶斯、随机森林在R和Python中的实现应用！
+
+https://mp.weixin.qq.com/s/Q_chMLju5YEIFncWJ2GFlw
+
+为新手准备的现代化R包开发流程
+
+https://mp.weixin.qq.com/s/VyuEC1M_6Wsl1KUvzVUyGA
+
+同一个项目中让R和Python无缝工作的五种方法

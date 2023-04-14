@@ -4,6 +4,9 @@ title:  机器学习（一）——线性回归
 category: ML 
 ---
 
+* toc
+{:toc}
+
 # 序
 
 >Machine Learning = Statistics + Optimization   
@@ -34,7 +37,7 @@ http://cs229.stanford.edu/syllabus.html
 
 用吴恩达自己的话来说，他还拿着斯坦福教职，很大程度就是想教这门课。因此，该课程内容每年都有小幅更新。
 
-它在coursera上也有个网页，内容相对简单一些：
+它在coursera上也有个网页，内容相对简单一些（基本不讲数学公式，适合非算法岗的工程人员）：
 
 https://www.coursera.org/learn/machine-learning
 
@@ -49,6 +52,18 @@ https://www.csie.ntu.edu.tw/~htlin/mooc/
 https://mp.weixin.qq.com/s/5lpwvBr3oYnu36onF2S5EA
 
 机器学习发展历史回顾
+
+---
+
+![](/images/img4/ML_workflow.jpg)
+
+![](/images/img4/ML.png)
+
+![](/images/img4/ML_2.png)
+
+https://mp.weixin.qq.com/s/WiAlhSRT-02SryeMM5ecpA
+
+机器学习的通俗讲解
 
 # 线性回归
 
@@ -129,7 +144,15 @@ http://files.cnblogs.com/files/leoleo/matrix_rules.pdf
 
 https://zhuanlan.zhihu.com/p/35323714
 
-梯度、散度、旋度、Jacobian、Hessian、Laplacian 的关系图
+梯度、散度、旋度、Jacobian、Hessian、Laplacian的关系图
+
+https://mp.weixin.qq.com/s/869EVyCmYPQKBA-kdo0lNQ
+
+张量101
+
+https://mp.weixin.qq.com/s/iEi2UWEwxsO5C8Ra74jFaQ
+
+张量求导和计算图
 
 ## 梯度下降算法
 
@@ -212,16 +235,16 @@ $$\theta_j:=\theta_j-\alpha\frac{\partial J(\theta)}{\partial \theta_j} \tag{3}$
 
 $$\theta_j:=\theta_j+\alpha(y^{(i)}-h_{\theta}(x^{(i)}))x^{(i)}_j \tag{4}$$
 
-迭代方式分为两种：
+迭代方式很多，常见的有以下几种：
 
-1.批量梯度下降（batch gradient descent）算法。方法如下：
+1.批量梯度下降（Batch Gradient Descent）。方法如下：
 
 >Repeat until convergence {   
 >>$$\theta_j:=\theta_j+\alpha\sum_{i=1}^m(y^{(i)}-h_{\theta}(x^{(i)}))x^{(i)}_j$$(for every j)   
 >
 >}
 
-2.随机梯度下降（stochastic gradient descent）算法。方法如下：
+2.随机梯度下降（Stochastic Gradient Descent）。方法如下：
 
 >Loop {   
 >>for i=1 to m, {   
@@ -239,25 +262,6 @@ $$\theta_j:=\theta_j+\alpha(y^{(i)}-h_{\theta}(x^{(i)}))x^{(i)}_j \tag{4}$$
 
 ![](/images/article/ogd_vs_mini_batch.png)
 
-参考：
+3.Mini-batch Gradient Descent，这种方法的行为和效果介于前两者之间。
 
-https://mp.weixin.qq.com/s/7sS-r6jIF4GAhZicBfFGDA
-
-通过代码原理教你搞懂SGD随机梯度下降、BGD、MBGD
-
-## 正规方程组算法
-
-正规方程组（Normal Equations）算法，是传统的以解方程的方式求最小值的方法。
-
-如果，令
-
-$$X=\begin{bmatrix}
-     (x^{(1)})^T \\ (x^{(2)})^T \\ \vdots \\ (x^{(m)})^T
-\end{bmatrix},
-\vec{y}=\begin{bmatrix}
-     (y^{(1)}) \\ (y^{(2)}) \\ \vdots \\ (y^{(m)})
-\end{bmatrix}$$
-
-则：
-
-$$\theta=(X^TX)^{-1}X^T\vec{y}$$
+![](/images/img4/SGD.png)

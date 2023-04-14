@@ -4,9 +4,68 @@ title:  图像处理理论（九）——Camshift, Harris
 category: graphics 
 ---
 
+* toc
+{:toc}
+
 # Meanshift
 
-## Meanshift与目标跟踪（续）
+## Meanshift聚类（续）
+
+因此，上述Mean Shift向量也可以改写成：
+
+$$M_h\left ( x \right )=\frac{\sum_{i=1}^{n}G\left ( \frac{x_i-x}{h_i} \right )w\left ( x_i \right )\left ( x_i-x \right )}{\sum_{i=1}^{n}G\left ( \frac{x_i-x}{h_i} \right )w\left ( x_i \right )}$$
+
+这里的核函数可以是Uniform核，也可以是Gaussian核。
+
+参考：
+
+https://wenku.baidu.com/view/5862334827d3240c8447ef40.html
+
+meanshift算法简介
+
+http://www.cnblogs.com/liqizhou/archive/2012/05/12/2497220.html
+
+Meanshift，聚类算法
+
+https://wenku.baidu.com/view/0d9eb876a417866fb84a8eb2.html
+
+mean-shift算法概述
+
+http://www.cnblogs.com/cfantaisie/archive/2011/06/10/2077188.html
+
+meanshift聚类
+
+https://blog.csdn.net/google19890102/article/details/51030884
+
+Mean Shift聚类算法
+
+## 反向投影图
+
+在继续介绍Meanshift之前，我们先引入反向投影图的概念。
+
+首先，我们对图像的像素值按照某种特征进行直方图统计，得到一组bin值。
+
+然后，计算位置x上的bin值，并用该bin值替换原来的像素值，就得到了反向投影图。
+
+参考：
+
+https://blog.csdn.net/poiiy333/article/details/9051409
+
+反向投影图
+
+http://www.cnblogs.com/zsb517/archive/2012/06/20/2556508.html
+
+opencv直方图反向投影
+
+## Meanshift与目标跟踪
+
+由于RGB对光照的变化比较敏感，而这种敏感对目标跟踪而言是不利的。因此，通常我们要将图像转换到HSV颜色空间。
+
+首先，统计**目标box**区域内H（色调）分量的直方图，并对其进行归一化，使得该直方图成为概率直方图。这一步相当于统计目标的颜色特征。
+
+然后，使用统计得到的概率直方图，将**全图**转换为反向投影图，并应用Meanshift算法。由于前后两帧中目标通常不会隔的太远，原目标中心可能仍在目标范围内。因此，目标中心会向反向投影图中概率大的地方移动，从而达到了目标跟踪的效果。
+
+总结：用meanshift进行跟踪最重要的一点是输入图像的把握，也就是要让它的迭代能越来越迭代到目标上。这种图像也不一定就是反向投影图，只要是一幅反映当前图像中每个像素点含有目标概率的图就可以了。反向投影图恰好就是这样的一幅图而已。
 
 优点：
 
@@ -85,10 +144,6 @@ Camshift算法是Continuously Adaptive Mean Shift algorithm的简称。它是一
 http://blog.sina.com.cn/s/blog_5d1476580101a57j.html
 
 Camshift算法
-
-http://blog.163.com/thomaskjh@126/blog/static/370829982010113133152722/
-
-CAMSHIFT原理
 
 https://wenku.baidu.com/view/59596ac42cc58bd63186bd37.html
 
@@ -195,19 +250,3 @@ $$R=det \boldsymbol{M} - \alpha(trace\boldsymbol{M})^2$$
 $$det\boldsymbol{M} = \lambda_1\lambda_2=AC-B^2$$
 
 $$trace\boldsymbol{M}=\lambda_2+\lambda_2=A+C$$
-
-## Harris角点的性质
-
-**增大$$\alpha$$的值，将减小角点响应值R，降低角点检测的灵性，减少被检测角点的数量；减小$$\alpha$$值，将增大角点响应值R，增加角点检测的灵敏性，增加被检测角点的数量**。
-
-**Harris角点检测算子对亮度和对比度的变化不敏感**。这是因为在进行Harris角点检测时，使用了微分算子对图像进行微分运算，而微分运算对图像密度的拉升或收缩和对亮度的抬高或下降不敏感。换言之，对亮度和对比度的仿射变换并不改变Harris响应的极值点出现的位置。
-
-Harris角点检测算子使用的是角点附近的区域灰度二阶矩矩阵。而二阶矩矩阵可以表示成一个椭圆，椭圆的长短轴正是二阶矩矩阵特征值平方根的倒数。当特征椭圆转动时，特征值并不发生变化，所以判断角点响应值R也不发生变化，由此说明**Harris角点检测算子具有旋转不变性**。
-
-**Harris角点检测算子不具有尺度不变性**。如下图所示，当右图被缩小时，在检测窗口尺寸不变的前提下，在窗口内所包含图像的内容是完全不同的。左侧的图像可能被检测为边缘或曲线，而右侧的图像则可能被检测为一个角点。
-
-![](/images/img2/harris_4.png)
-
-为了解决尺度不变性问题，可以使用多尺度Harris角点算法，将Harris角点检测算子与高斯尺度空间表示相结合，使其具有尺度不变性：
-
-$$\boldsymbol{M}=\mu(x,\sigma_I,\sigma_D)=\sigma_D^2g(\sigma_I)\otimes\begin{bmatrix}L_x^2(x,\sigma_D)&L_xL_y(x,\sigma_D)\\L_xL_y(x,\sigma_D)&L_y^2(x,\sigma_D)\end{bmatrix}$$

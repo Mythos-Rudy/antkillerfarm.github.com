@@ -1,14 +1,25 @@
 ---
 layout: post
-title:  量子计算, 遗传算法 & 进化算法, PaddlePaddle, X-Deep Learning, TVM, 安全
+title:  量子计算, 遗传 & 进化 & 模拟退火算法, PaddlePaddle, X-Deep Learning
 category: resource 
 ---
 
+* toc
+{:toc}
+
 # 量子计算
+
+![](/images/img4/Quantum.png)
+
+![](/images/img4/quant.jpg)
 
 https://www.zhihu.com/people/xuan-xing-29/posts
 
 某量子通信牛人的blog
+
+https://www.zhihu.com/column/p/378409297
+
+地表最强量子计算机汇总
 
 https://www.zhihu.com/question/28171555
 
@@ -54,10 +65,6 @@ https://mp.weixin.qq.com/s/mNOLn7WiZFpGW25Ppefo3g
 
 何为量子机器学习？
 
-https://mp.weixin.qq.com/s/egmodqeThnw5H7DwKRwQbw
-
-如何运用数学进行高效生产？（模拟退火算法）
-
 https://mp.weixin.qq.com/s/86c59-nIsrTNUABx4QYobA
 
 量子机器学习入门科普：解读量子力学和机器学习的共生关系
@@ -97,7 +104,15 @@ https://mp.weixin.qq.com/s/xgF61ageCtk4hZMsQqgpEg
 
 为什么Google的量子霸权纯属忽悠大众
 
-# 遗传算法 & 进化算法
+https://mp.weixin.qq.com/s/GBeTausaAIf0W2cD7wt47Q
+
+从基础量子位到当下火热的量子计算机，一文助你入门量子计算
+
+https://mp.weixin.qq.com/s/NRI6HhhpHiRbLy44FMKtCg
+
+敲开图灵之门：CS大四学生长文畅谈量子计算机的“前世、今生、未来”
+
+# 遗传 & 进化 & 模拟退火算法
 
 http://blog.csdn.net/u010945683/article/details/40987331
 
@@ -106,6 +121,10 @@ http://blog.csdn.net/u010945683/article/details/40987331
 https://mp.weixin.qq.com/s/PqvcYexM8WFD0c2m8jv7Ew
 
 遗传算法介绍
+
+https://mp.weixin.qq.com/s/tOyOtnGHgjsewAsZusfDEA
+
+什么是遗传算法？
 
 https://mp.weixin.qq.com/s/v1tLGUJ4My-tVWziSURHzA
 
@@ -202,6 +221,42 @@ https://mp.weixin.qq.com/s/nFOaWGqBQtbvPJF7BGCBIA
 https://mp.weixin.qq.com/s/Jc5f4iX9uoOo5igQ79P77w
 
 多目标进化算法在混合可再生能源系统的应用
+
+https://mp.weixin.qq.com/s/HinllnxgOXQc-NIZ6Qur5A
+
+小小黏菌，大大智慧：预测星系间暗物质网络的黏菌算法
+
+https://mp.weixin.qq.com/s/amhWo269x2utl9xIKukrtw
+
+利用遗传算法优化GANs
+
+https://mp.weixin.qq.com/s/p8KS81X_w9zaUb6iiCMJsQ
+
+进化计算前沿综述：值得算法学习的6个生物进化特征
+
+https://mp.weixin.qq.com/s/Fl6nU3xVK80tmq2uvjKf4A
+
+用N.E.A.T遗传算法玩FlappyBird
+
+https://mp.weixin.qq.com/s/95h7WQHGP-glfyO6-S9S8g
+
+什么是鸟群算法
+
+https://mp.weixin.qq.com/s/j9BGw_oCg7eyzg4w4j681w
+
+生物老师：数学老师，你走开，这道题我来解（遗传算法）
+
+https://mp.weixin.qq.com/s/egmodqeThnw5H7DwKRwQbw
+
+如何运用数学进行高效生产？（模拟退火算法）
+
+https://mp.weixin.qq.com/s/tig9hpBJxvIZeGyWF0i8ug
+
+什么是模拟退火算法？
+
+https://zhuanlan.zhihu.com/p/266874840
+
+模拟退火算法详解
 
 # PaddlePaddle
 
@@ -303,82 +358,36 @@ https://mp.weixin.qq.com/s/kdCk_twY_czQo58y3x_yyA
 
 阿里深度学习框架开源了！无缝对接TensorFlow、PyTorch
 
-# TVM
+# Jittor
+
+https://mp.weixin.qq.com/s/ZwP1H-efHK1dp2X2ElEs8g
+
+清华开源Jittor：首个国内高校自研深度学习框架，一键转换PyTorch
+
+# chainer
+
+chainer是一个日本公司Preferred Networks写的基于python的深度学习框架。
 
 官网：
 
-https://tvm.ai
+https://chainer.org/
 
-![](/images/img3/tvm_stack.png)
+代码：
 
-参考：
+https://github.com/chainer/chainer
 
-https://mp.weixin.qq.com/s/irvBbPKENiZX9G_6wh5c-Q
+Preferred Networks是日本目前最强的AI创业公司，估值已经超过20亿美元。在工业机器人领域具有很强的实力。
 
-陈天奇等人提出TVM：深度学习自动优化代码生成器
+它推出的PaintsChainer是一个给黑白线稿上色的App。
 
-https://mp.weixin.qq.com/s/28n8g_epHsYB0I9GVc_lww
+官网：
 
-陈天奇团队TVM重磅更新：直接在浏览器使用GPU
+https://github.com/pfnet/PaintsChainer
 
-https://mp.weixin.qq.com/s/7JGLm-hkCZBNDLA98qvWNA
+# MegEngine
 
-自动生成硬件优化内核：陈天奇等人发布深度学习编译器TVM
+MegEngine是旷视提出的深度学习框架。
 
-https://mp.weixin.qq.com/s/YVIvdMznb3oatIXqD5a5_A
+官网:
 
-陈天奇等人提出AutoTVM：让AI来编译优化AI系统底层算子
-
-https://mp.weixin.qq.com/s/HquT_mKm7x_rbDGz4Voqpw
-
-阿里巴巴最新实践：TVM+TensorFlow提高神经机器翻译性能
-
-https://zhuanlan.zhihu.com/p/50529704
-
-手把手带你遨游TVM
-
-https://mp.weixin.qq.com/s/z5rsU_uAAaRxgD9YAxDkZA
-
-陈天奇：深度学习编译技术的现状和未来
-
-https://zhuanlan.zhihu.com/p/75203171
-
-如何利用TVM快速实现超越Numpy(MKL)的GEMM
-
-# 安全
-
-https://mp.weixin.qq.com/s?__biz=MjM5NjQ5MTI5OA==&mid=2651748921&idx=2&sn=04ee8977545923ad9b485ba236d7a126
-
-前端安全系列之一：如何防止XSS攻击？
-
-http://www.ruanyifeng.com/blog/2014/05/oauth_2_0.html
-
-理解OAuth 2.0
-
-https://www.cnblogs.com/linianhui/category/929878.html
-
-一个认证授权方面的专栏
-
-https://mp.weixin.qq.com/s/OLg_wocXJz7VGDabTtxdWQ
-
-Web登录很简单？开玩笑！
-
-https://mp.weixin.qq.com/s/agS2-wu6HGO__QfbIt7Esw
-
-数字签名是什么？
-
-https://mp.weixin.qq.com/s/YNMw8u7O6u7Bc4-mnrwRXg
-
-老听别人说加密算法，现在给你个机会深入了解下
-
-http://www.xfyun.cn/share/?p=2626
-
-开发者常犯的十大加密错误
-
-https://mp.weixin.qq.com/s/nWoo-Pr50341WJNwtSZq1w
-
-工程师的灵魂拷问：你的密钥安全吗？
-
-https://mp.weixin.qq.com/s/z5zMETSMUGoTiZYMooKZ-g
-
-内核空间镜像攻击揭秘：ARM硬件特性，竟能开启安卓8终端的上帝模式？
+https://megengine.org.cn/

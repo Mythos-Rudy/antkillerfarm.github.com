@@ -1,12 +1,153 @@
 ---
 layout: post
-title:  大数据平台参考资源（一）
+title:  分布式系统, 大数据平台参考资源（一）
 category: resource 
 ---
+
+* toc
+{:toc}
+
+# 分布式系统
+
+## 教程
+
+https://pdos.csail.mit.edu/6.824/index.html
+
+6.824: Distributed Systems
+
+https://www.cs.cmu.edu/~dga/15-440/S14/syllabus.html
+
+15-440: Distributed Systems
+
+https://www.cs.cmu.edu/~15712/index.html
+
+15-712 Advanced Operating Systems and Distributed Systems
+
+https://courses.cs.washington.edu/courses/cse552/
+
+CSE 552: Distributed and Parallel Systems
+
+https://people.eecs.berkeley.edu/~alig/cs294-91/
+
+CS294-91 Distributed Computing
+
+## 分布式事务
+
+https://mp.weixin.qq.com/s/yBquVKyKnhpy2yPxY-0eqA
+
+大白话聊聊分布式事务
+
+https://mp.weixin.qq.com/s/2AL3uJ5BG2X3Y2Vxg0XqnQ
+
+如何选择分布式事务解决方案？
+
+https://mp.weixin.qq.com/s/TFGRcHV6EgeLB45OEJPRXw
+
+来了！阿里开源分布式事务解决方案Fescar
+
+https://mp.weixin.qq.com/s/4AYMb_v3GctPddpKUZUUfw
+
+25张图让你彻底掌握分布式事务原理
+
+https://mp.weixin.qq.com/s/ZrMUgjApwgsCNOzmpFBl3g
+
+什么是分布式事务？
+
+## 分布式锁
+
+https://mp.weixin.qq.com/s/UTJL98BhrQ3yLvAQrl1P8A
+
+​我们的系统需要什么样的分布式锁？
+
+https://mp.weixin.qq.com/s/foAit8ratliRG6R2KC05Hg
+
+浅谈分布式锁
+
+https://www.cnblogs.com/intsmaze/p/6384105.html
+
+一句话说清分布式锁，进程锁，线程锁
+
+https://mp.weixin.qq.com/s/RKgWxwHQwJJ-4I4NQFoKTw
+
+分布式锁夺命连环9问
+
+https://mp.weixin.qq.com/s/imM3_MIp6CS_8DVL8bGr_Q
+
+隔壁的老哥又让我用分布式锁
+
+## 杂谈
+
+面对大规模数据的计算和存储时，有两种处理思路：
+
+**垂直扩展（scale up）**：通过升级单机的硬件，如 CPU、内存、磁盘等，提高计算机的处理能力。
+
+**水平扩展（scale out）**：通过添加更多的机器到分布式系统中，提高整个系统的处理能力。
+
+---
+
+https://mp.weixin.qq.com/s/12s9JUxVDqAnLAeqc_de8w
+
+聊聊分布式系统架构
+
+https://mp.weixin.qq.com/s/KbNNU246BAeJmLoWbKie6g
+
+分布式系统架构经典资料
+
+https://mp.weixin.qq.com/s/_g9lw9uEbjLDUHgXFc2aaw
+
+大规模分布式系统资源管理（一）
+
+https://mp.weixin.qq.com/s/-jJN8KXvpZVPmmKnremQdw
+
+大规模分布式系统资源管理（二）
+
+https://mp.weixin.qq.com/s/_7q9K9D1q40eaGkLt9yDhQ
+
+分布式系统关注点——深入浅出“异步”
+
+https://zhuanlan.zhihu.com/p/108636766
+
+从RAID到分布式系统的副本分布
+
+https://mp.weixin.qq.com/s/Ey_ofboH7EvAbPxTNHWC3w
+
+13张图彻底搞懂分布式系统服务注册与发现原理
+
+https://mp.weixin.qq.com/s/2xohw5r4cirbbL933EPK5A
+
+分布式服务框架设计要点
+
+https://mp.weixin.qq.com/s/ACQVjdpMDrd7wh_pMLWScw
+
+分布式服务框架设计要点（续）
+
+https://mp.weixin.qq.com/s/910pclefErC4Tx7NujJamg
+
+分布式缓存---Memcached
+
+https://mp.weixin.qq.com/s/ZGYOwGjg06GSqCW3VoIzYg
+
+万万没想到，分布式存储系统的一致性是……
+
+https://mp.weixin.qq.com/s/og2fAZCjaUpmQM0FRH76DA
+
+这三年被分布式坑惨了，曝光十大坑
+
+http://www.cnblogs.com/rjzheng/p/8994962.html
+
+分布式之消息队列复习精讲
+
+https://mp.weixin.qq.com/s/ggPftQm2ewGOJwlRDQGgDQ
+
+快速实现一个分布式定时器
 
 # 大数据平台参考资源
 
 ![](/images/img3/big_data.png)
+
+![](/images/img4/big_data_storage.png)
+
+![](/images/img4/CAP.png)
 
 https://dzone.com/
 
@@ -16,6 +157,10 @@ https://mp.weixin.qq.com/s/giF05uBffq6WKHnTUqUPvg
 
 这是dzone中一些资源的列表
 
+https://mp.weixin.qq.com/s/m4FR4LjVBxlPGXWAsTne6g
+
+大数据存储技术综述
+
 http://v.kuaidadi.com/
 
 滴滴快的大数据平台
@@ -23,6 +168,14 @@ http://v.kuaidadi.com/
 https://mp.weixin.qq.com/s/HJ6uZEYOQFvgR5bZBs5_dA
 
 全球100款大数据工具汇总
+
+https://mp.weixin.qq.com/s/fpQGi5pUmTmH96s8Jcyu3Q
+
+关于大数据的完整讲解
+
+https://mp.weixin.qq.com/s/mGXcD8gRQfyHpmqx46kmPw
+
+什么是流式输出？
 
 https://mp.weixin.qq.com/s/0ek_bGUZ2EbYEX-kq3YByg
 
@@ -72,9 +225,9 @@ https://mp.weixin.qq.com/s/5gUm_xNkHGxpnUSgZaLmJw
 
 关于大数据，你应该知道的75个专业术语
 
-https://mp.weixin.qq.com/s/NqLpT47ZWD6oJzfo_tWceA
+https://mp.weixin.qq.com/s/yX0hgIOLuaKsAcrWfOfcUQ
 
-Paxos（分布式一致性算法）
+一文带你理解云原生
 
 https://mp.weixin.qq.com/s/z3N5v4H_W2sxh2XPpFbAcA
 
@@ -132,14 +285,6 @@ https://mp.weixin.qq.com/s/ZMqCwoV3CuDwGuD_rAIsbg
 
 什么是Bitmap算法？
 
-https://mp.weixin.qq.com/s/2xohw5r4cirbbL933EPK5A
-
-分布式服务框架设计要点
-
-https://mp.weixin.qq.com/s/ACQVjdpMDrd7wh_pMLWScw
-
-分布式服务框架设计要点（续）
-
 https://mp.weixin.qq.com/s/x_OPSwc82d1IoWPj7xb6zg
 
 那些你不知道的王者荣耀高并发背后的故事
@@ -155,10 +300,6 @@ https://mp.weixin.qq.com/s/JNTgDjtqCukVwH6u1dp2Vg
 https://mp.weixin.qq.com/s/EmAhBjZnLns_25gR-aVgwg
 
 MillWheel: Google是如何在事件流处理上做到exactly one semantic的
-
-https://mp.weixin.qq.com/s/F7WTNeC3OUr76sZARtqRjw
-
-分布式架构系统生成全局唯一序列号的一个思路
 
 https://mp.weixin.qq.com/s/CxUGWhJZ1ST_Xq3H02c_Ww
 
@@ -200,6 +341,10 @@ https://mp.weixin.qq.com/s/jMWuMuIvI1cFThC-WQGbHQ
 
 大家一直在谈的领域驱动设计（DDD），我们在互联网业务系统是这么实践的
 
+https://mp.weixin.qq.com/s/dVK64_v60qEUAX7kQnfSxw
+
+基于DDD的golang实现
+
 https://mp.weixin.qq.com/s/WzfzTIPAYlQjkHwmNjiInA
 
 Shield：支撑美团点评品类最丰富业务的移动端模块化框架开源了
@@ -212,10 +357,6 @@ https://mp.weixin.qq.com/s/HhabrgpbWSn_f2Q-QfgaAA
 
 智能投放系统之场景分析最佳实践
 
-https://mp.weixin.qq.com/s/12s9JUxVDqAnLAeqc_de8w
-
-聊聊分布式系统架构
-
 https://mp.weixin.qq.com/s/nXYrUgEhaCo4patd1YovOw
 
 微信亿级用户异常检测框架的设计与实践
@@ -223,6 +364,10 @@ https://mp.weixin.qq.com/s/nXYrUgEhaCo4patd1YovOw
 https://mp.weixin.qq.com/s/Ju4d71VrL0omGkV3s3U_1Q
 
 聊聊MyBatis缓存机制
+
+https://juejin.cn/post/6844904003394863118
+
+如何设计一个本地缓存
 
 https://mp.weixin.qq.com/s/rVfoSk3HCEEHvdlKz7A2xA
 
@@ -252,33 +397,13 @@ https://mp.weixin.qq.com/s/uxsmwT-nvTga7tWiMLrrvw
 
 用Python实现一个大数据搜索引擎
 
-https://mp.weixin.qq.com/s/KbNNU246BAeJmLoWbKie6g
-
-分布式系统架构经典资料
-
-https://mp.weixin.qq.com/s/_g9lw9uEbjLDUHgXFc2aaw
-
-大规模分布式系统资源管理（一）
-
-https://mp.weixin.qq.com/s/-jJN8KXvpZVPmmKnremQdw
-
-大规模分布式系统资源管理（二）
-
 https://mp.weixin.qq.com/s/fx6XfBpuzozsJCvllMcCqw
 
 战狼项目：美团点评金融核心交易系统可用性7个9是这样炼成的
 
-https://mp.weixin.qq.com/s/yBquVKyKnhpy2yPxY-0eqA
-
-大白话聊聊分布式事务
-
 http://www.cnblogs.com/zhangweizhong/category/879056.html
 
 如何打造一个小而精的电商网站架构
-
-https://mp.weixin.qq.com/s/ow-6rQYGlvX316h63aCGVg
-
-百度正式开源其Raft一致性算法实现braft
 
 https://mp.weixin.qq.com/s/zlPZr1hsyUN3lUo9WzIDbg
 
@@ -291,14 +416,6 @@ Service Mesh是大方向，那Database Mesh呢？
 https://mp.weixin.qq.com/s/Db6Am-bAyufg3m67Ta5GBQ
 
 当你和天猫精灵对话时，它在想什么？阿里智能对话技术深度解读
-
-https://mp.weixin.qq.com/s/910pclefErC4Tx7NujJamg
-
-分布式缓存---Memcached
-
-https://mp.weixin.qq.com/s/ZGYOwGjg06GSqCW3VoIzYg
-
-万万没想到，分布式存储系统的一致性是……
 
 https://mp.weixin.qq.com/s/EM9EVZYeqd5eJ3YbvgiyEw
 
@@ -323,83 +440,3 @@ DataMan：美团旅行数据质量监管平台实践
 https://mp.weixin.qq.com/s/iCJ9IeAPnaqatEWzgXONfg
 
 每天数百亿用户行为数据，美团点评怎么实现秒级转化分析？
-
-https://mp.weixin.qq.com/s/AJt-Ky1o7OIh7n2KMShS-w
-
-手把手教你从0到1写一个简单的缓存框架
-
-https://mp.weixin.qq.com/s/de3YqaSFaxUyiBMEW7fsKg
-
-并发服务器（一）：简介
-
-https://mp.weixin.qq.com/s/KkrSxVZhOI22JDk4K20cxg
-
-并发服务器（二）：线程
-
-https://mp.weixin.qq.com/s/-OgxpAz6Zz817N9hfK8njQ
-
-分布式存储中的数据分布策略
-
-https://mp.weixin.qq.com/s/zDbcV_vJeBOnAYxK0WEJQQ
-
-Web系统大规模并发：电商秒杀与抢购
-
-https://mp.weixin.qq.com/s/QxV4-sa72ALCZdD4QWqLPA
-
-如何让快递更"快"？菜鸟自研定时任务调度引擎首次公开
-
-https://mp.weixin.qq.com/s/MSR18sqUznuiUgUM5YkvZg
-
-携程图片服务架构
-
-https://mp.weixin.qq.com/s/pxNRzWs3sZmbr-K18FvnrA
-
-美团点评智能支付核心交易系统的可用性实践
-
-https://mp.weixin.qq.com/s/UYN4cxH4gT0WsFTrBKRKGA
-
-美团酒旅实时数据规则引擎应用实践
-
-https://mp.weixin.qq.com/s/oYiQEMelkXHbT3ke2BmHOw
-
-如何逐步去构建一个大型网站系统
-
-https://mp.weixin.qq.com/s/xlCO__HucTUd_gYNRTueGg
-
-携程基于大数据分析的实时风控体系
-
-https://mp.weixin.qq.com/s/y6ntgPxTaLFBJDn3usBd1g
-
-美团点评广告实时索引的设计与实现
-
-https://mp.weixin.qq.com/s/-K2K22fLOz4Hl7MIUAJfRA
-
-美团点评数据平台Kerberos优化实战
-
-https://mp.weixin.qq.com/s/NwjYJde9_TC4PXMPpYw1Gw
-
-聊聊开源消息中间件的架构和原理
-
-https://mp.weixin.qq.com/s/Kv1Qq4118I2itYwPYyQUoA
-
-Spark Streaming实时计算在甜橙金融监控系统中的应用及优化
-
-https://mp.weixin.qq.com/s/syM4ReAWpZ5d4KI87ogpiQ
-
-从单一架构到分布式交易架构，网易严选的成功实践
-
-https://mp.weixin.qq.com/s/qh88sawJUZedv3X0LIRsAQ
-
-ESearch：58集团基于C++语言自主研发的搜索内核
-
-http://www.cnblogs.com/rjzheng/p/8994962.html
-
-分布式之消息队列复习精讲
-
-https://mp.weixin.qq.com/s/Mcg5rj3QrgVj3wyY4xttnQ
-
-关于商业部署机器学习，这有一篇详尽指南
-
-https://mp.weixin.qq.com/s/TFGRcHV6EgeLB45OEJPRXw
-
-来了！阿里开源分布式事务解决方案Fescar

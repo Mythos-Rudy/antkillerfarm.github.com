@@ -1,242 +1,17 @@
 ---
 layout: post
-title:  垃圾筐
-category: resource 
+title:  垃圾筐, 真垃圾筐
+category: Education 
 ---
 
+* toc
+{:toc}
+
 # 垃圾筐
-
-Introspective Neural Networks
-
-http://www.cnblogs.com/cyjb/p/UnionFindSets.html
-
-并查集（Union-find Sets）
-
-高斯背景
-
-laurent series
-
-Base32/Base36/Base64/Base85
-
-方差分析(Analysis of Variance，简称ANOVA)
-
-Partial Least Squares Discriminant Analysis
-
-Wavenumber
-
-http://blog.codinglabs.org/articles/algorithms-for-cardinality-estimation-part-i.html
-
-解读Cardinality Estimation算法
-
-https://mp.weixin.qq.com/s/zQJve_w5OoM6u-WcSWArdQ
-
-神速Hash
-
-https://mp.weixin.qq.com/s/NlJ4-b5SjIjPGgvLUuSxFw
-
-孩子，有时候并不是生活欺骗了你，而是你可能还不懂概率统计……
-
-http://blog.csdn.net/luo123n/article/details/48574123
-
-PMI（Pointwise Mutual Information）
-
-https://mp.weixin.qq.com/s/7usiElPtYAt1DCBIv5BZ2Q
-
-多项式插值算法与回归算法
-
-https://mp.weixin.qq.com/s/6fd8oxnahJ0EoocRV4q8Bg
-
-一看就懂的Alpha-Beta剪枝算法详解
-
-https://mp.weixin.qq.com/s/0o6fjKlUJVHZ6Vb65bFjGg
-
-俄罗斯方块可以永无止境地玩下去吗？
-
-https://mp.weixin.qq.com/s/Rw3O5MDbEIfgmWCVgFe95w
-
-五次方程的微分方程解法
-
-https://mp.weixin.qq.com/s/CC77DL5RKhr5SekDyfqm3Q
-
-为什么我一唱歌，就有人说我的音乐是数学老师教的？
-
-https://mp.weixin.qq.com/s/uRdMOX63mefH71sM-PBNnA
-
-立交桥布局中的迷人曲线
-
-https://mp.weixin.qq.com/s/xHm4AjopGKSUE0-uAk5IHg
-
-用概率论告诉你：直觉到底有多不靠谱。包括了三门问题和本福特定律。
-
-https://mp.weixin.qq.com/s/5Ti9_9DMOpRjGCuC2fjc4w
-
-河流为什么是弯曲的？
-
-https://mp.weixin.qq.com/s/E_EzwLr4JOzR1pk3MOeU_w
-
-复动力系统简介
-
-https://mp.weixin.qq.com/s/QmDCFY0SP3cl71HvwvthJQ
-
-如果高斯没有故意“坑”黎曼，估计这门神奇的学科就不会出现了……
-
-http://www.cnblogs.com/zeze/p/6999651.html
-
-粗糙集（Rough Set Approach）
-
-https://mp.weixin.qq.com/s/mc9aH5hDgRFS2h2blPhb8w
-
-21张绘画完美演绎地球演化新说！
-
-http://www.matrix67.com/
-
-一个数学blog
 
 https://mp.weixin.qq.com/s/tIau6pRZU0r4Aasofca5yQ
 
 50张动图带你走进神奇的物理化学生物世界，超震撼！
-
-https://mp.weixin.qq.com/s/np9OuEMQNtKMC7P1KPzTmg
-
-通往物理学世界的地图
-
-https://mp.weixin.qq.com/s/3svGvbk0-ek5tQCWJ9ii4A
-
-读懂相对论：从弯曲空间的几何开始
-
-https://mp.weixin.qq.com/s/COIYp4Ao9fBPnaUZvhCxkg
-
-表情包的画质是如何越传越差甚至还变绿的？
-
-https://mp.weixin.qq.com/s/oEhG7AaY_TAljvhhK5YfNA
-
-拉东变换与医学CT技术
-
-https://mp.weixin.qq.com/s/9ZmyidQ888PiT7jbr7Zusg
-
-物理学家辞掉NASA工作玩折纸，竟被请回实验室“折卫星”（折纸几何学）
-
-https://mp.weixin.qq.com/s/Y1bskBi8GUi1MW1VMM2-vw
-
-没有照相机之前，画家是怎么修出漂亮的图的？
-
-https://zhuanlan.zhihu.com/p/54898983
-
-一道弹性碰撞的物理题，结果为什么会出现$$\pi$$？
-
-https://zhuanlan.zhihu.com/p/26645548
-
-支付宝集五福活动五福是随机给定的吗?
-
-https://wenku.baidu.com/view/209d2f8183d049649b665894.html
-
-超纯水18.2的意义
-
-https://mp.weixin.qq.com/s/Kake5sQm79L2j_uDqKfznQ
-
-在《我的世界》里从零打造一台计算机有多难？复旦本科生大神花费了一年心血
-
-![](/images/img3/PAL-NTSC-SECAM.png)
-
-https://zhuanlan.zhihu.com/p/66319869
-
-29.97Hz这种奇葩帧率是怎么来的？
-
-https://mp.weixin.qq.com/s/mKyT376nbKNyxouuPYpSBA
-
-“千万豪车”掘进地下城，“基建狂魔”如何打造“钢铁穿山甲”？
-
-https://mp.weixin.qq.com/s/7cziogvznmYWax1LKfnPjQ
-
-史上最硬核高中数学题，题目居然不过4行？
-
-https://mp.weixin.qq.com/s/g3_njGlo3dC696wo0wplVQ
-
-臭氧空洞再度加剧，是谁在偷偷破坏臭氧层？
-
-https://zhuanlan.zhihu.com/p/51330777
-
-宇称不守恒到底说了啥？杨振宁和李政道的发现究竟有多大意义？
-
-https://zhuanlan.zhihu.com/p/55922673
-
-杨-米尔斯理论说了啥？为什么说这是杨振宁超越他诺奖的贡献？
-
-https://mp.weixin.qq.com/s/pE2hXaq-T20LXbvuXdTFJQ
-
-用火烧子弹，结果会怎样？可能又要颠覆你的认知了！
-
-https://mp.weixin.qq.com/s/k3v_5vXWfyBag5mmjD78Xw
-
-拓扑物理浅析
-
-https://zhuanlan.zhihu.com/p/30124129
-
-引力波的能量之谜：“爱因斯坦奇迹年”和五份手稿
-
-https://mp.weixin.qq.com/s/ChZ-cNTSb7Pm_ka9gunm9A
-
-73岁硬核老爷爷，用物理自证车祸无责，葛军：看来又有新题材了
-
-https://mp.weixin.qq.com/s/oybz1DsC8lO5fmgA-3gEfQ
-
-指纹识别不灵敏怎么办？
-
-https://mp.weixin.qq.com/s/DrMK8XuJckmb-zujR540Sw
-
-40个金属之最，搞了一辈子机械知道不会超过10个。。。
-
-https://mp.weixin.qq.com/s/oCoyEh1VhUmqZnf9okgYnA
-
-科普：十大物理学中最牛逼的思想实验!
-
-https://mp.weixin.qq.com/s/_0SN18UFx_GGlHebUaar9A
-
-兵器试验中心数字弹道的传奇。陆载德的故事——从一位左腿残疾的清华学子成长为90年代共和国军队中唯一的独腿将军。
-
-![](/images/img3/DC.gif)
-
-![](/images/img3/BLDC.gif)
-
-https://mp.weixin.qq.com/s/rpiOZWQwj92MiFQPXD-NMQ
-
-何谓BLDC电机？BLDC电机是如何旋转的？
-
-https://mp.weixin.qq.com/s/IQ8YSyp-m2jCIDfLtuh_ew
-
-天上会掉金子吗？会！你现在用的这些就是！
-
-https://mp.weixin.qq.com/s/lu4wQOIzVtsFvwhO1c2d0A
-
-一大坨泥巴在移动，没人能够阻止它
-
-https://mp.weixin.qq.com/s/R5EonufyiXy8bzD2fddnEg
-
-不喷岩浆喷泥浆，这些火山是要闹哪样？
-
-https://mp.weixin.qq.com/s/KUr8kkHov0XgolEo0y6z8g
-
-不同颜色的尿液颜，是怎么形成的？
-
-https://mp.weixin.qq.com/s/IcY_RfIpioEBC493bEtUdw
-
-计算机鼻祖的鼻祖-差分机：机械史上的最强大脑，最复杂的巅峰之作
-
-https://mp.weixin.qq.com/s/KJyvT_MsD2DZ6QvwXh32ug
-
-假如把地球46亿年历史压缩到一天
-
-https://mp.weixin.qq.com/s/NHjfCLp6k7GYh8fScL_UWg
-
-几天前，一颗小行星与地球擦肩而过，我们几乎毫不知情
-
-https://mp.weixin.qq.com/s/XDBvVjIRfjtDrTN4zd92yg
-
-高铁辐射致癌，为什么会有这种令人喷饭的言论出现？
-
-https://mp.weixin.qq.com/s/WRd_kx-HeSSgDtPTdgk09A
-
-山上“飞”来只火凤凰，这里的居民却要杀掉它？
 
 ![](/images/img3/Universe.jpg)
 
@@ -244,98 +19,262 @@ https://mp.weixin.qq.com/s/WRd_kx-HeSSgDtPTdgk09A
 
 http://www.cpepweb.org/main_universe/universe-poster.html
 
-https://zhuanlan.zhihu.com/p/72636777
-
-粒子物理入门notes
-
-https://mp.weixin.qq.com/s/ELC60377pzaFwJv7czOneQ
+https://new.qq.com/omn/20191029/20191029A0OCRI00.html
 
 15种偶然制造的东西，居然改变了世界！
 
-https://zhuanlan.zhihu.com/p/71793554
+http://www.makertime.org/
 
-最美的公式：你也能懂的麦克斯韦方程组（积分篇）
+一个硬核的geek网站
 
-https://zhuanlan.zhihu.com/p/78503083
+https://www.sohu.com/a/388192289_597695
 
-最美的公式：你也能懂的麦克斯韦方程组（微分篇）
+我们拉的屎都去哪了？？？
 
-https://zhuanlan.zhihu.com/p/81867668
+https://mp.weixin.qq.com/s/w6aY1_RryWnFq8FomPTDhw
 
-见证奇迹的时刻：如何从麦克斯韦方程组推出电磁波
+地铁也要遵循“红灯停、绿灯行”的交通规则吗？
 
-https://mp.weixin.qq.com/s/aUYieCVLLom7EaWIhfccRQ
+https://zhuanlan.zhihu.com/p/37801456
 
-院士写了首《化工之歌》，聊聊化工那些事
+科学家有了钱以后真是挺吓人的！看看DE.Shaw的牛逼人生
 
-https://mp.weixin.qq.com/s/SkQ69SnATYXzlXZ2FEWVsw
+# 真垃圾筐
 
-为什么金属不能放进微波炉，结果太可怕了......
+主流发达国家教职体系，PI（Principal Investigator）制：助理教授（Assistant Professor，AP）->副教授（Associate Professor）->教授（Full Professor->讲席教授（Chair Professor）
 
-https://mp.weixin.qq.com/s/A9M_2DVqmFQaTdSy2yEJ1A
+![](/images/img2/tenure.jpg)
 
-为什么烤面包会这么香？
+从称呼上来看，正式的院士是Member, 有投票权。外籍院士的英文原文是Foreign Associate, 没有投票权。中文都翻译成“院士”，宣传的时候也从来不提区别，有吃豆腐的嫌疑，明明是两个不一样的词。
 
-https://mp.weixin.qq.com/s/K-ukk-HuztMDCyHWLZaXww
+中国科学院院士大概700多名，而美国科学院院士3000多名，如果只是考虑在各自国家的难度的话，中国院士的晋升难度明显高于美国。
 
-谁是这个世界上最“有名”的科学家？——亚历山大·冯·洪堡（Alexander von Humboldt）
+---
 
-https://mp.weixin.qq.com/s?__biz=MjM5MDE3OTk2Ng==&mid=2657461706&idx=1&sn=589d7a4d65f2e2fdd696100e06b1a257
+青千：指中组部千人计划中的青年千人计划；
 
-高考成绩接近满分，却被清华北大拒绝，被称“中国最帅科学家”（中国油田分层开采和化学驱油技术的奠基人——王德民）
+青拔：指中组部万人计划中的青年拔尖人才；
 
-https://mp.weixin.qq.com/s/0fdnEWpLvPSbweFh0v4x9A
+青长：指教育部长江学者奖励计划中的青年长江学者；
 
-科学家的浪漫，是用激光画一道彩虹（姜黄素）
+优青：指国家自然科学基金委设立的优秀青年科学基金项目。
 
-https://mp.weixin.qq.com/s/TM8Cc3AI7Vo5H6VnOl3gyw
+---
 
-唯一两获诺贝尔化学奖的科学家，自称“只是把实验室搞砸的家伙”（弗雷德里克·桑格）
+https://mp.weixin.qq.com/s/iCbxGPZNOO-o0GT23BHeAw
 
-https://mp.weixin.qq.com/s/wIaMPdYWHzn9vDpiuWZOVg
+博士后x求职记
 
-解读2019诺贝尔化学奖：他们创造了一个可充电的世界
+https://mp.weixin.qq.com/s/cAgXbOUrBff78ahicxSwGQ
 
-https://mp.weixin.qq.com/s/NE20FomTJCFd_HSfXTHyjg
+俩博士相亲，第一反应是查对方发多少SCI，学傻了是一种怎样的体验？
 
-年仅21岁，干掉6位诺贝尔奖得主，被誉为科学界最强杀手，却惨被人骂成一个笑话（央视《走近科学》栏目）
+![](/images/img2/bio_PhD.jpg)
 
-https://mp.weixin.qq.com/s/H9xRY-sXmVewmmZEWTlmOQ
+https://zhuanlan.zhihu.com/p/56874296
 
-水银、放血、泻药与死在产床的妇人
+我的劝退之总结篇
 
-https://mp.weixin.qq.com/s/oTltrhF25ClrImp6KUlagw
+---
 
-他俩曾和鸽子较劲，却歪打正着获得诺奖（阿诺·彭齐亚斯（Arno Penzias）和罗伯特·威尔逊（Robert Wilson）——宇宙微波背景）
+科大黄秋原、同济沈海英、交大钱璐璐、复旦李敏、中科大陈璐，由于手段极其高级，所以现在被网友称为“学术圈妲己”。
 
-https://mp.weixin.qq.com/s/CkZhqcGxRoOoaLGvQIVUIQ
+https://www.zhihu.com/answer/761750649
 
-科学家开发出“反太阳能”装置，黑夜照样能发电！
+学术圈五大蛊王吃瓜汇总
 
-## 空气动力学
+https://www.zhihu.com/question/558481182
 
-https://mp.weixin.qq.com/s/ei84HDZIkXQr2k0ghlN_Mw
+怎样看待北京理工大学教授方岱宁在学术会议中被已婚女博士后疯狂亲吻？
 
-C罗踢球时在想什么？这是一篇空气动力学的blog
+---
 
-https://mp.weixin.qq.com/s/67vQtycjDEo-JdUpUA1hqg
+https://zhuanlan.zhihu.com/p/92515874
 
-荷兰人发明的新客机是劈叉的！乘客坐在机翼上
+方舟子: P图技术谁最高？中国院士曹雪涛
 
-https://mp.weixin.qq.com/s/t2EM1l7ujoSquGl2x5hBBA
+https://news.ifeng.com/c/7rjYqMdUTaK
 
-21世纪最强王者纸飞机：用一张A4纸拿到了吉尼斯世界记录
+“美国方舟子”、PS杀手，举报南开校长的她究竟何许人也？
 
-https://mp.weixin.qq.com/s/vJDY58Qi_-VhVMHOjGSo8w
+https://new.qq.com/omn/20191118/20191118A0LULL00.html
 
-伦敦大学惊现数学神人！创造最完美打水漂方程，一块石头破吉尼斯世界纪录！看完跪了...
+一个科研狗对“南开校长曹院士论文造假事件”的完全剖析
 
-## Bélády's Algorithm
+https://zhuanlan.zhihu.com/p/92387410
 
-Bélády认为最好的缓存算法是：丢弃那些在将来最长时间不被使用的数据。显然这是一个理想化的算法，因为我们没有办法预测未来。但它可以作为衡量缓存算法优越度的一个理论上限。
+Elisabeth M Bik质疑曹雪涛论文图片复用等不端行为的更新记录
 
->László Bélády，1928年生，匈牙利计算机科学家。Technical University of Budapest本硕。IBM研究员。
+https://zhuanlan.zhihu.com/p/92940106
 
-https://mp.weixin.qq.com/s/AdmEd1FHxpZUwSGYy3qggg
+“南开大学校长曹雪涛院士涉嫌论文数据造假事件”相关推文收录
 
-利用cpu缓存实现高性能程序
+https://mp.weixin.qq.com/s/duqvHrh-iaA381xsnudNAA
+
+天津大学硕士举报其导师学术不端，123页材料称十年造假80篇论文！
+
+https://www.zhihu.com/question/479884738
+
+如何看待张文宏博士学位论文被举报？
+
+---
+
+没过几年，荷兰人惠更斯也发明了自己的气泵，并通过了研究发现了一种“异常悬浮效应”——在气泵中，水竟然可以悬浮起来。
+
+然而，英吉利海峡对面的波义尔和胡克却从来没有重复起来这个实验。1663年，惠更斯被邀请到英国，在他的亲自指导下，胡克和波义尔终于得以重复出这个“异常悬浮效应”。果然，科学法则并没有因为隔了一道英吉利海峡而有所不同。
+
+https://zhuanlan.zhihu.com/p/347299733
+
+14年前，林国强院士发现自己论文无法复现后，是这样处理的
+
+https://www.zhihu.com/question/441079956
+
+中科院监审局道德委侯兴宇处长发文称“重复实验在生命科学中并不一定可靠”，你认同吗？
+
+---
+
+科学岛是中国科学院合肥物质科学研究院(以下简称合肥研究院)的别称。合肥研究院位于合肥市西郊的蜀山湖畔的董铺岛上，面积2.65平方公里。江泽民总书记1998年莅临视察时，对这里的科研环境给予了很高的评价，并欣然题词"科学岛"。
+
+https://www.zhihu.com/question/407163721
+
+如何看待中科院合肥研究院90多名科研人员集体辞职？
+
+---
+
+霍华德来教你天衣无缝的图谱造假：
+
+1. 先弄清楚峰背后的物理原理，共振产生的一般是洛伦兹型峰，多种因素叠加一般是高斯型峰。
+
+2. 计算系统阻尼及峰强度，如果强阻尼可能会造成峰位偏移，最好解一下偏微分方程，不要直接套公式。
+
+3. 如果两个峰比较近，还需要考虑模式耦合，可能会有能级劈裂。
+
+4. 确定噪音类型，白噪音、1/f噪音，棕噪音、粉噪音及其多种混合。
+
+5. 分解噪声源，分别测量噪音能量谱，根据噪音类型及强度重新生成背景噪音。
+
+Fano resonance
+
+Rabi flopping
+
+https://www.zhihu.com/answer/1875410335
+
+如何看待顶尖材料学家崔屹团队Nature Catalysis文章撤稿，因原始数据丢失，噪声无法重复？
+
+https://blog.csdn.net/Gou_Hailong/article/details/105761432
+
+高斯分布+柯西-洛伦兹分布+三种光谱线型函数（洛伦兹线型函数+多普勒/高斯线型函数+vogit线型函数）
+
+---
+
+https://www.zhihu.com/question/463739570
+
+上海杨浦区邯郸路某大学教师持刀伤人，被害人已死亡，有哪些信息值得关注？
+
+https://mp.weixin.qq.com/s/AdK0Y6CeBSyofoFHXUyaVg
+
+非升即走：中国特色tenure-track
+
+https://m.sohu.com/a/471538809_488672
+
+复旦凶杀案：值得每个学霸及家长反思
+
+---
+
+2021年6月6日下午四点，航天投资控股有限公司党委书记、董事长张陶以汇报航天投资情况为由，约国际宇航科学院吴美蓉和王晋年两位院士一起聚餐，吃饭席间提出让两位院士推荐其入选国际宇航科学院院士。
+
+张陶及其下属随吴、王两位院士回到王的住处，在电梯前的楼道及电梯间对王进行长达1个多小时之久的恶意殴打，致使王晋年肋骨骨折、全身多发性软组织损伤、头胸腹部肿胀、头晕呕吐；在楼道及电梯间对吴院士推搡，致使吴美蓉脊椎骨折、住院手术。
+
+https://zhuanlan.zhihu.com/p/386332176
+
+航天书记张陶评院士不成，电梯殴打86岁老院士致重伤
+
+---
+
+清华“学霸”杨奇函，为了顺利录入清华大学经管学院，曾在黑龙江省各大高中贴吧散布“杨奇函成绩很好，报考了清华经管学院”的消息，结果“全省只有我一人报了（清华）经管学院”。杨奇函也成为了清华经管学院历史上在黑龙江招生“最差纪录保持者”。
+
+https://www.sohu.com/a/537882125_115479
+
+复旦考研调剂生上演“碟中谍”：用2个小号假装高分考生，吓退他人
+
+---
+
+基层科研工作者碰了学术红线，基工没了。
+
+院士杰青碰了学术红线，红线没了。
+
+但凡读一读那篇发表在冻土上的雄文，都不会认为那是在谄媚导师。那篇文章是向师娘舞剑，意在导师，转弯抹角的嘲讽揭露一些圈子内的蝇营狗苟。
+
+https://www.zhihu.com/question/421679320
+
+大谈“导师崇高师娘优美”论文作者徐中民被处理，已拨项目资金被追回，说明了什么问题？
+
+---
+
+苏式动员型模式的核心要素：人为操纵劳动力价格，以实物、货币、非实物（社会地位、荣誉等）三重保障来降低人力资源成本。
+
+https://www.zhihu.com/question/442248640
+
+饶-裴一事最终不了了之，会对中国学术圈产生怎样的影响？
+
+---
+
+我的同学小刘考了580分，特别想上山东大学，但它在内蒙古的录取分数要600分。怎么办呢？小刘找了十几个650分的考生去报山东大学，让那些600分的人望而却步。到了最后一分钟，小刘一声令下，所有650分的考生统统撤离山东大学，把坑位留给小刘。
+
+https://mp.weixin.qq.com/s/TtuC4DRqz1-QIDI66rBWcA
+
+内蒙人报高考志愿，比在纽交所炒股还刺激
+
+---
+
+他眼里面只有钱，学习就是为了钱，崇洋媚外。
+
+我们努力学习是为了什么？是为了中华民族伟大复兴。
+
+https://www.zhihu.com/question/584989437
+
+如何看安徽省庐江中学某主题会上，一男生打断陈宏友副教授的崇洋媚外发言、并号召为中华民族伟大复兴而读书？
+
+---
+
+张尧学用开源项目remote-desktop-clients（不确定占比多少），获得了国家级的大奖。
+
+https://github.com/iiordanov/remote-desktop-clients/issues/39
+
+---
+
+https://mp.weixin.qq.com/s/1dlOCpoJiCkh55WDAajLuw
+
+内卷、找关系、作弊、丑闻-美国富人的名校之梦
+
+https://mp.weixin.qq.com/s/eI-u_RsabtuyRajDYnnZDg
+
+殷极物理竞赛作弊事件
+
+https://www.aiweinews.com/archives/27796.html
+
+知乎：清华学霸情侣马艺妮宋思睿约北大妹子3P被拒挂朋友圈
+
+https://www.zhihu.com/question/471268212
+
+如何看待上海财经大学一女博士拿不到学位，学院称“论文不符要求”？是否与此前多次举报教授论文抄袭有关？
+
+https://www.zhihu.com/question/365900362
+
+如何看待中文核心期刊《冰川冻土》上某论文全程在夸作者导师、师母，为何这样的论文也能发表？
+
+https://mp.weixin.qq.com/s/qQIUj87iMUn7RsPKABignA
+
+华中科技大学教授涉嫌性骚扰女研究生
+
+https://www.zhihu.com/answer/692061772
+
+学术圈修仙记
+
+https://www.zhihu.com/question/503354095
+
+如何看待复旦大学毕业生最后一科考试被举报作弊，取消学位证、毕业证以及研究生资格，后起诉母校？
+
+https://k.sina.com.cn/article_7517400647_1c0126e4705901sdfc.html
+
+北大博士梅桢再上热搜，被爆高考400分，又一位“外籍”投机者？

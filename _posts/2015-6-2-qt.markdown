@@ -1,14 +1,21 @@
 ---
 layout: post
-title:  Qt, 线程池, WebService, Spring
+title:  Qt, WebService, 负载均衡
 category: technology 
 ---
 
-# Qt主循环
+* toc
+{:toc}
+
+# Qt
+
+## Qt主循环
 
 这篇文章有个大概的比较和说明：
 
 http://blog.chinaunix.net/uid-20754930-id-1877623.html
+
+GUI主循环设计及其在MiniGUI, GTK, QT的实现
 
 以下是我针对Qt5代码（2015.4）的一个研究。
 
@@ -50,7 +57,7 @@ Android平台：
 
 以下和Unix平台相同。
 
-# Qt多线程中connect的使用
+## Qt多线程中connect的使用
 
 近日在研究OpenGL多线程处理时，偶然看到了如下代码：
 
@@ -62,7 +69,7 @@ https://github.com/antkillerfarm/antkillerfarm_crazy/tree/master/Qt/MyGlTest
 
 粗看代码，发现并无特殊的OpenGL处理，理论上应该无法达到一个线程处理渲染，另一个线程处理贴图的目标。但实际编译运行代码，又确实可用。因此这里面一定有什么原因。
 
-{% highlight cpp %}
+```cpp
 void ThreadGl::run()
 {
     connect(this, SIGNAL(SigCopy()), this, SLOT(Copy()));
@@ -85,7 +92,7 @@ void ThreadGl::Copy()
 {
     m_glWidgets -> OnTimeOut(m_pImage, m_Formal, m_pthId);
 }
-{% endhighlight %}
+```
 
 这段代码引起了我的注意。粗一看，connect函数连接的SIGNAL和SLOT都属于同一个对象。而connect函数的第5个参数（这是个有默认值的可省略参数）的默认值为Qt::AutoConnection。
 
@@ -113,17 +120,17 @@ void ThreadGl::Copy()
 
 `QMetaObject::activate`中使用以下代码，判定信号接收者的线程是否和信号发送者的一致。
 
-{% highlight cpp %}
+```cpp
 const bool receiverInSameThread = currentThreadId == receiver->d_func()->threadData->threadId;
-{% endhighlight %}
+```
 
 于是问题转化为`receiver->d_func()->threadData`是怎么来的呢？
 
 答案在`QObject::QObject`中：
 
-{% highlight cpp %}
+```cpp
 d->threadData = (parent && !parent->thread()) ? parent->d_func()->threadData : QThreadData::current();
-{% endhighlight %}
+```
 
 从这里可以看出所谓信号接收者的线程，实际上是接收者对象创建时所处的线程。
 
@@ -137,27 +144,19 @@ https://blog.csdn.net/feiyangqingyun/
 
 一个Qt的blog
 
-# 线程池
+## PyQt
 
-假设一个服务器完成一项任务所需时间为：T1创建线程时间，T2在线程中执行任务的时间，T3销毁线程时间。如果：T1+T3远大于T2，则可以采用线程池，以提高服务器性能。
+PyQt是一个python语言的Qt封装。除此之外，还有一个叫PySide的库也是干这个的。
 
-一个线程池包括以下四个基本组成部分：
+它们的区别在于：PyQt是Riverbank Computing开发的，历史早，功能强。PySide是Qt官方提供的，然而很久以来都比不过前者。。。
 
-1.线程池管理器（ThreadPool）：用于创建并管理线程池，包括 创建线程池，销毁线程池，添加新任务；
+https://mp.weixin.qq.com/s/jNa4JTefasFDWoGJDBL6-Q
 
-2.工作线程（PoolWorker）：线程池中线程，在没有任务时处于等待状态，可以循环的执行任务；
+PyQt编写GUI界面
 
-3.任务接口（Task）：每个任务必须实现的接口，以供工作线程调度任务的执行，它主要规定了任务的入口，任务执行完后的收尾工作，任务的执行状态等；
+https://mp.weixin.qq.com/s/sR1R2DRA2XASx9LJExasfA
 
-4.任务队列（taskQueue）：用于存放没有处理的任务。提供一种缓冲机制。
-
-在libupnp项目中，提供了一个简易的线程池实现。
-
-参考：
-
-https://mp.weixin.qq.com/s/KigkxkUDYP8r1SEmDUvCCw
-
-从串行线程封闭到对象池、线程池
+15个开源示例手把手带你用PyQt做小型桌面应用
 
 # WebService
 
@@ -173,7 +172,11 @@ JWS包含了JAX-WS、JAX-RS、JAXB、JAXR、SAAJ、StAX等组件。这里主要�
 
 http://www.blogjava.net/zjhiphop/archive/2009/04/29/webservice.html
 
+java调用webservice的各种方法总结
+
 http://blog.csdn.net/lifetragedy/article/details/7205832
+
+5天学会jaxws-webservice编程
 
 以上两篇是中文blog。
 
@@ -256,7 +259,7 @@ jaxws-demo中，调用wsgen生成的wsdl和xsd文件，在这里被wsimport编�
 
 解决方法：
 
-{% highlight xml %}
+```xml
 <plugin>
     <groupId>org.jvnet.jax-ws-commons</groupId>
     <artifactId>jaxws-maven-plugin</artifactId>
@@ -268,7 +271,7 @@ jaxws-demo中，调用wsgen生成的wsdl和xsd文件，在这里被wsimport编�
         </vmArgs>
     </configuration>
 </plugin>
-{% endhighlight %}
+```
 
 这个问题是由于JDK 1.8以后相关权限变得更加严格所导致的。
 
@@ -280,48 +283,78 @@ https://my.oschina.net/fuckmylife0/blog/325432
 
 jaxws-demo-client就是具体的客户端实现了，可以看出相比于上一步的桩代码，这里的代码文件，数量上要少得多。
 
-# Spring
+# 负载均衡
 
-Spring是一个Java Web应用框架。官网：
+正向代理，“它代理的是客户端，代客户端发出请求”。
 
-http://spring.io/
+反向代理，“它代理的是服务端，代服务端接收请求”。
 
-## Ubuntu安装Eclipse、Spring
+http://blog.csdn.net/gzh0222/article/details/8540604
 
-1.安装Eclipse
+lvs、haproxy、nginx负载均衡的比较分析
 
-`sudo apt-get install eclipse`
+https://mp.weixin.qq.com/s/SO1ZLSPaRkk8WwUl9u-JPA
 
-2.安装Spring
+仅需这一篇，吃透“负载均衡”妥妥的
 
-`sudo apt-get install libspring-web-portlet-java`
+https://mp.weixin.qq.com/s/3KZ99d94yqRDxEByn7nGWg
 
-注意：ubuntu软件仓库中还有一个叫做spring的游戏引擎，不要弄错了。
+QPS比Nginx提升60%，阿里Tengine负载均衡算法揭秘
 
-http://www.mkyong.com/spring/quick-start-maven-spring-example/
+https://mp.weixin.qq.com/s/XsyXkaOIJ3m8sdCt8Pl5Ig
 
-Maven+Spring hello world example
+计算密集型服务的负载均衡策略
 
-http://wiki.jikexueyuan.com/project/spring/
+https://mp.weixin.qq.com/s/SmpUPJRK0TMdA0rkb_Q6VQ
 
-Spring 教程
+什么是集群？什么又是负载均衡？
 
-## Restful
+https://mp.weixin.qq.com/s/sCGI3XPga5gTZF0iskJlMA
 
-http://spring.io/guides/gs/rest-service/
+全网最详尽的负载均衡原理图解
 
-## Spring Boot
+https://mp.weixin.qq.com/s/o5lTN4IpHmZqLUKoJsSyKw
 
-https://www.tianmaying.com/tutorial/deploy-spring-boot-application
+爱奇艺TFServing负载均衡问题研究及改进实践
 
-部署Spring Boot应用
+## Nginx
 
-http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
+https://mp.weixin.qq.com/s/31DGDYpDHcYg-4qM4OczxA
 
-Spring Boot默认的配置文件
+深入浅出Nginx
 
-## WebService
+https://mp.weixin.qq.com/s/h9sXZc4Y62f4KOSVXAB1Pg
 
-https://spring.io/guides/gs/producing-web-service/
+Nginx基本功能极速入门
 
-http://localhost:9999/ws/countries.wsdl
+https://www.cnblogs.com/wcwnina/p/8728391.html
+
+Nginx相关介绍
+
+https://mp.weixin.qq.com/s/aCAuJQEB2pmL92OTEb_4Xg
+
+Nginx为什么这么快？
+
+https://mp.weixin.qq.com/s/3GSuB1tLe-G5hZPUiAXuVA
+
+Nginx，为什么依旧这么“香”？
+
+https://blog.csdn.net/yujing1314/article/details/107000737
+
+搞懂Nginx一篇文章就够了
+
+https://mp.weixin.qq.com/s/-8Ka8nMYpH7cipzfm36utw
+
+写给小白的Nginx文章
+
+https://mp.weixin.qq.com/s/gd59U50tlJPa4B4avXRG1Q
+
+Nginx架构浅析
+
+https://mp.weixin.qq.com/s/eUindWNZiCv_tSLQeYfmLg
+
+Nginx常用配置清单
+
+https://mp.weixin.qq.com/s/LmtHTOVOvdcnMBuxv7a9_A
+
+Nginx最全操作总结

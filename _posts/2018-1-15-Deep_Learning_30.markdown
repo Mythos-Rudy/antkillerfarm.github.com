@@ -1,374 +1,408 @@
 ---
 layout: post
-title:  深度学习（三十）——Graph NN（2）, 自动求导
+title:  深度学习（三十）——元学习, 深度哈希
 category: DL 
 ---
 
-# Graph NN（续）
+* toc
+{:toc}
 
-https://mp.weixin.qq.com/s/_0quf0IRe8mn4dnsBwf6Aw
+# 元学习
 
-基于路径的实体图关系抽取模型
+人工智能的历史显示了明确的进展方向：
 
-https://mp.weixin.qq.com/s/jCgbBldpw4TGHUvN9WkJZg
+第一代：**良好的老式人工智能**
 
-在对抗中学习网络结构——87页PPT带你学习Graph中的GAN
+- 手工预测
+- 什么都不学
 
-https://mp.weixin.qq.com/s/xTZbfiLYHB64AJJRcw04qQ
+第二代：**浅学习**
 
-知识图和神经网络：如何有效读取图节点属性
+- 手工功能
+- 学习预测
 
-https://mp.weixin.qq.com/s/9fFjVSiMg-LwddXfNJuKuw
+第三代：**深度学习**
 
-DeepMind开源图网络库，一种结合图和神经网络的新方法
+- 手工算法（优化器，目标，架构......）
+- 端到端地学习功能和预测
 
-https://mp.weixin.qq.com/s/5DmpgPN4t3p3H53Xu7_-3A
+第四代：**元学习（Meta-Learning）**
 
-北大、微软亚洲研究院：高效的大规模图神经网络计算
+- 无手工
+- 端到端学习算法和功能以及预测
 
-https://mp.weixin.qq.com/s/BFJD8i_yg1Y6fxZS5or-rw
+![](/images/img4/Meta_Learning.png)
 
-Bengio最新论文提出GibbsNet：深度图模型中的迭代性对抗推断
+## 教程
 
-https://zhuanlan.zhihu.com/p/48834333
+http://web.stanford.edu/class/cs330/
 
-GCN in 2018：2018年顶会论文中的图卷积神经网络的理论与应用
+CS 330: Deep Multi-Task and Meta Learning
 
-https://mp.weixin.qq.com/s/zg3yW7e4UKIs9-m6WmcbvA
+http://metalearning.ml
 
-GraphWave：一种全新的无监督网络嵌入方法
+这是一个Meta-Learning方面的专题讨论会，有不少好东西。
 
-https://mp.weixin.qq.com/s/mamet6l_lA7fhoYkysZ7PQ
+https://mp.weixin.qq.com/s/sQmDZsVGIADwO97yEFATkw
 
-华为联合LSE提出KONG：有序近邻图的核函数
+ICML2019《元学习》教程与必读论文列表
 
-https://mp.weixin.qq.com/s/OnRB44tliuTFcjlmuRG3Xw
-
-图神经网络“理论在哪里“？
-
-https://mp.weixin.qq.com/s/Uy2ekBiwkI2sIo637b-16g
-
-北大、微软提出NGra：高效大规模图神经网络计算
-
-https://mp.weixin.qq.com/s/diIzbc0tpCW4xhbIQu8mCw
-
-阿里凑单算法首次公开！基于Graph Embedding的打包购商品挖掘系统解析
-
-https://mp.weixin.qq.com/s/chiHw5gKnJyTJTQeF6gViw
-
-在向量空间中启用网络分析和推理，清华大学崔鹏博士最新分享
-
-https://mp.weixin.qq.com/s/kQlxLDHLI6xxFzwJVjFj7w
-
-GraRep: 基于全局结构信息的图结点表示学习
-
-https://mp.weixin.qq.com/s/c6ZhSk4r3pvnjHsvpwkkSw
-
-用图卷积网络(GCN)来做语义角色标注
-
-https://mp.weixin.qq.com/s/6vhFfSh2mveBiZXB1oZb1Q
-
-图分类：结合胶囊网络Capsule和图卷积GCN
-
-https://mp.weixin.qq.com/s/aGP8pcsCmEdjdCWVjA82Jg
-
-近期必读的5篇CVPR 2019图卷积网络相关论文和代码
-
-https://mp.weixin.qq.com/s/XApSbi-Pg-AeYGkPN3fldg
-
-旷视研究院提出ML-GCN：基于图卷积网络的多标签图像识别模型
-
-https://mp.weixin.qq.com/s/49vnVOO0G_JvKrWcsN2_Ww
-
-关系图注意力网络-Relational Graph Attention Networks
-
-https://mp.weixin.qq.com/s/rvcj9-6KlBsVmF_CAsip2A
-
-超越标准GNN！DeepMind、谷歌提出图匹配网络
-
-https://mp.weixin.qq.com/s/UotqgRjCTpjPrsIEWBRPxA
-
-基于随机游走的图匹配算法
-
-https://mp.weixin.qq.com/s/dDaFhssFEYxS7ElMy4ekJw
-
-基于图嵌入的深度图匹配
-
-https://mp.weixin.qq.com/s/LZvxvDpxQEtlKuXoxT_gTQ
-
-可变形曲面跟踪，亮风台新出基于图匹配的方法
-
-https://mp.weixin.qq.com/s/7DyPJ9LnqZ9XyAop33SxSw
-
-ST-GCN动作识别算法详解
-
-https://mp.weixin.qq.com/s/fxVsN2dDmayxJfxBRIXHhQ
-
-解读PingSage：图卷积神经网络在数十亿数据网络级别推荐系统的应用
-
-https://mp.weixin.qq.com/s/lyy3AhqLDBT88B2LSSIbZQ
-
-图表示解决长文本关系匹配问题：腾讯提出概念交互图算法
-
-https://mp.weixin.qq.com/s/bvp3NIrrarJc_MesKy1x_A
-
-崔泽宇：套装搭配推荐在图神经网络上的应用
-
-https://mp.weixin.qq.com/s/_8K0s9WceJ-xlRViHhz2Zw
-
-Google图挖掘团队最新博客《图表示学习中的创新》
-
-https://mp.weixin.qq.com/s/c3SBGlxzJOYhQBrJ2h3j0g
-
-呼奋宇：深度层次化图卷积神经网络
-
-https://mp.weixin.qq.com/s/YPV2BR6eayKUlPazUeZVnQ
-
-何时能懂你的心——图卷积神经网络（GCN）
-
-https://mp.weixin.qq.com/s/sRKW8DLXZXWLUUVTb12F4Q
-
-“AI新贵”图神经网络算法及平台在阿里的大规模实践
-
-https://mp.weixin.qq.com/s/tAfTmGWqG6IR8SOP0uKW6g
-
-什么限制了GNN的能力？首篇探究GNN普适性与局限性的论文出炉！
-
-https://mp.weixin.qq.com/s/Orv47r4EchVIR7VcleoJ5Q
-
-谷歌图表征学习创新：学习单个节点多个嵌入&自动学习最优超参数
-
-https://mp.weixin.qq.com/s/DNePTCpyjrlZEixw5L7w5A
-
-GraphSAGE：我寻思GCN也没我牛逼
-
-https://mp.weixin.qq.com/s/1DHvLLysMU24dBeLzbSpUA
-
-GraphSAGE
-
-https://mp.weixin.qq.com/s/IcLk-fMjKO19BaHbuUCeXg
-
-GraphSAGE算法原理，实现和应用
-
-https://mp.weixin.qq.com/s/C-Pa1jznQntyhocdxS-4Hg
-
-节点嵌入训练加快300倍！解读开源高性能图嵌入系统GraphVite
-
-https://mp.weixin.qq.com/s/9MWoCmtKPPVs3Rmko-7adQ
-
-10亿节点异构网络中，GCN如何应用？
-
-https://mp.weixin.qq.com/s/gE0jGuduKOQYqkTAuhC2Nw
-
-基于空间对齐的图卷积网络
-
-https://mp.weixin.qq.com/s/xJ05ctlYhyVy__6CaOm4WQ
-
-利用图Transformer实现基于知识图谱的文本生成
-
-https://zhuanlan.zhihu.com/p/81350196
-
-GAT（图注意力模型）
-
-https://mp.weixin.qq.com/s/nGPUcDHTrG6KwAqDCkfA1w
-
-基于超图网络模型的图网络进化算法
-
-https://mp.weixin.qq.com/s/XoVUJln3oyhk2jMOtWwfog
-
-基于图神经网络的协同过滤算法
-
-https://mp.weixin.qq.com/s?__biz=MzU2OTA0NzE2NA==&mid=2247515242&idx=2&sn=7497044ec2f80215061fb0de8abb2f72
-
-用于Web级推荐系统的图卷积神经网络
-
-https://mp.weixin.qq.com/s?__biz=MzU2OTA0NzE2NA==&mid=2247515402&idx=2&sn=726b417a71789e65430cbd931c78959e
-
-基于门控图网络实现图到序列学习
-
-https://mp.weixin.qq.com/s/aIU8mP5nlnqR4Qt-4RfMgQ
-
-孙付伟：Graph Embedding在知乎的应用实践
-
-https://blog.csdn.net/yyl424525/article/details/100057907
-
-Cluster-GCN: An Efficient Algorithm for Training Deep and Large Graph Convolutional Networks
-
-https://zhuanlan.zhihu.com/p/86216369
-
-从3/4层拓展到56层，如何训练超级深层的图卷积神经网络
-
-https://mp.weixin.qq.com/s/ceC1_39cmpqYOoHsu-4sCQ
-
-HEC-Montreal唐建博士：图神经网络推理
-
-https://mp.weixin.qq.com/s/emPDgw_c68JgbpYnem4JvA
-
-一文读懂简化的图卷积网络GCN（SGC）
-
-https://mp.weixin.qq.com/s/olt_i6JxfslFSdbz0Dx4oA
-
-用于深度时空图建模的Graph WaveNet
-
-https://mp.weixin.qq.com/s/LzaP6BWaKXL4O_Jf9QN7Rw
-
-基于层次化注意力图网络和多视角学习的商品推荐
-
-https://mp.weixin.qq.com/s/EKb9hN9cFrwNtSWWBpE4dw
-
-首次基于神经架构搜索自动生成图卷积结构，刷新人体动作识别准确率
-
-https://mp.weixin.qq.com/s/-Fw8HcrQjBoYA4lXk0NZ3Q
-
-图变换网络：Graph Transformer Network
-
-https://mp.weixin.qq.com/s/nigeDLq-HrtELfhfWj5qow
-
-自注意力图池化
-
-https://mp.weixin.qq.com/s/_uoyv-NAn8GypYXGsLvjhg
-
-Graph U-Nets
-
-https://zhuanlan.zhihu.com/p/78466344
-
-从源头探讨GCN的行文思路
-
-https://mp.weixin.qq.com/s/YNIwmR8K-H2eKbKoZSZZ-Q
-
-CIKM最佳应用论文：11亿节点的大型图，看闲鱼如何用图卷积过滤垃圾评论
-
-https://mp.weixin.qq.com/s/aMFFQBfVXgQr71nyjpyf0g
-
-一文读懂：图卷积在基于骨架的动作识别中的应用
-
-https://mp.weixin.qq.com/s/6RSYTlNvw7TyOJsjHf1iYQ
-
-基于图上下文知识融入的预训练语言模型
-
-https://mp.weixin.qq.com/s/0B1ROCg7SMn0I7-5HVeMIg
-
-用图神经网络改善视频的多标签分类
-
-https://mp.weixin.qq.com/s/M7nzr6n4tZAMR1CXo3Q0OQ
-
-基于图神经网络的CTR预测中的特征交互建模
-
-https://mp.weixin.qq.com/s/ee_Mq2vzJ2z253B7PZZc9w
-
-2019年，异质图神经网络领域有哪些值得读的顶会论文？
-
-# 自动求导
-
-DL发展到现在，其基本运算单元早就不止CNN、RNN之类的简单模块了。针对新运算层出不穷的现状，各大DL框架基本都实现了自动求导的功能。
-
-论文：
-
-《Automatic Differentiation in Machine Learning: a Survey》
-
-## Numerical differentiation
-
-数值微分最大的特点就是很直观，好计算，它直接利用了导数定义：
-
-$$f'(x)=\lim_{h\to 0}{f(x+h)-f(x)\over h}$$
-
-不过这里有一个很大的问题：h怎么选择？选大了，误差会很大；选小了，不小心就陷进了浮点数的精度极限里，造成舍入误差。
-
-第二个问题是对于参数比较多时，对深度学习模型来说，上面的计算是不够高效的，因为每计算一个参数的导数，你都需要重新计算$$f(x+h)$$。
-
-因此，这种方法并不常用，而主要用于做梯度检查（Gradient check），你可以用这种不高效但简单的方法去检查其他方法得到的梯度是否正确。
-
-## Symbolic differentiation
-
-符号微分的主要步骤如下：
-
-1.需要预置基本运算单元的求导公式。
-
-2.遍历计算图，得到运算表达式。
-
-3.根据导数的代入法则和四则运算法则，求出复杂运算的求导公式。
-
-这种方法没有误差，是目前的主流，但遍历比较费时间。
-
-## Automatic differentiation
-
-除此之外，常用的自动求导技术，还有Automatic differentiation。（请注意这里的AD是一个很狭义的概念。）
-
-类比复数的概念：
-
-$$x = a + bi \quad (i^2 = -1)$$
-
-我们定义Dual number：
-
-$$x \mapsto x = x + \dot{x} d \quad (d^2=0)$$
-
-定义Dual number的运算法则：
-
-$$(x + \dot{x}d) + ( y + \dot{y}d) = x + y + (\dot{x} + \dot{y})d$$
-
-$$(x + \dot{x}d) ( y + \dot{y}d) = xy + \dot{x}yd + x\dot{y}d  +  \dot{x}\dot{y}d^2 = xy + (\dot{x}y+ x\dot{y})d$$
-
-$$-(x + \dot{x}d) = - x - \dot{x}d$$
-
-$$\frac{1}{x + \dot{x}d} = \frac{1}{x} - \frac{\dot{x}}{x^2}d$$
-
-dual number有很多非常不错的性质。以下面的指数运算多项式为例：
-
-$$f(x) = p_0 + p_1x + p_2x^2 + ... + p_nx^n$$
-
-用$$x + \dot{x}d$$替换x，则有：
-
-$$f(x + \dot{x}d) =   p_0 + p_1(x + \dot{x}d) + ... +  p_n(x + \dot{x}d)^n \\ 
-= p_0 + p_1x + p_2x^2 + ... + p_nx^n + \\ 
-p_1\dot{x}d + 2p_2x\dot{x}d + ... + np_{n-1}x\dot{x}d\\ 
-= f(x) + f'(x)\dot{x}d$$
-
-可以看出d的系数就是$$f'(x)$$。
-
-## 不可导函数的求导
-
-不可导函数的求导，一般采用泰勒展开的方式。典型的算法有PGD（Proximal Gradient Descent）。
-
-参考：
-
-https://blog.csdn.net/bingecuilab/article/details/50628634
-
-Proximal Gradient Descent for L1 Regularization
+李宏毅的教程中也有一章介绍Meta-Learning。
 
 ## 参考
 
-https://mp.weixin.qq.com/s/7Z2tDhSle-9MOslYEUpq6g
+https://github.com/gopala-kr/meta-learning
 
-从概念到实践，我们该如何构建自动微分库
+元学习（meta-learning）相关文献资源大列表
 
-https://mp.weixin.qq.com/s/bigKoR3IX_Jvo-re9UjqUA
+https://github.com/sudharsan13296/Awesome-Meta-Learning
 
-机器学习之——自动求导
+元学习相关资源汇总
 
-https://www.jianshu.com/p/4c2032c685dc
+https://github.com/floodsung/Meta-Learning-Papers
 
-自动求导框架综述
+另一个元学习相关资源汇总
 
-https://mp.weixin.qq.com/s/xXwbV46-kTobAMRwfKyk_w
+https://coladrill.github.io/2018/10/24/元学习总览/
 
-自动求导--Deep Learning框架必备技术二三事
+元学习总览
 
-https://mp.weixin.qq.com/s/f0xFfA1inOVOdJnSZR4k6Q
+https://zhuanlan.zhihu.com/p/261170127
 
-自动微分技术
+元学习综述《Meta-Learning in Neural Networks: A Survey》
 
-https://mp.weixin.qq.com/s/0tTlPG4hd9hcHORkZF6w1A
+https://mp.weixin.qq.com/s/KKK3VEpwL90g6Aro8qtXxQ
 
-PyTorch的自动求导机制详细解析，PyTorch的核心魔法
+学习如何学习的算法：简述元学习研究方向现状
 
-https://mp.weixin.qq.com/s/PELBuCvu-7KQ33XBtlYfYQ
+https://mp.weixin.qq.com/s/jlD5p5GXFmrWlxg9xvehxg
 
-深度学习中的微分
+元学习—Meta Learning的兴起
 
-https://zhuanlan.zhihu.com/p/24709748
+https://mp.weixin.qq.com/s/WZtmy_RK4lsWqp9qIMCnUA
 
-矩阵求导术（上）
+Meta Learning 1: 基于度量的方法
 
-https://zhuanlan.zhihu.com/p/24863977
+https://mp.weixin.qq.com/s/A4amtD9jPIRus8Ojnhd3PA
 
-矩阵求导术（下）
+Meta Learning 2: 更多基于度量的方法
+
+https://mp.weixin.qq.com/s/j72Xlh8vUAltvUx0DFGoCA
+
+Meta Learning 3: 少样本文本分类 InductionNet
+
+https://mp.weixin.qq.com/s/bAyZZEuFEmlaFn4zTZL3Tw
+
+Meta Learning 4: 基于优化的方法
+
+https://zhuanlan.zhihu.com/p/133159617
+
+Meta-Learning in Neural Networks: A survey
+
+https://mp.weixin.qq.com/s/qoKQwEvOnP384i5Z-_jO1A
+
+CVPR2019最新元学习教程：基于元学习的计算机视觉应用
+
+https://zhuanlan.zhihu.com/p/136975128
+
+一文入门元学习（Meta-Learning）
+
+https://mp.weixin.qq.com/s/z7t2dSnjZqZ3w6q7PUtTVg
+
+最新《元学习》教程，牛津大学Yee Whye Teh教授，165页ppt
+
+https://mp.weixin.qq.com/s/hMTm38gCccxt-Jnz28Xx1A
+
+元强化学习综述及前沿进展
+
+https://mp.weixin.qq.com/s/8koAVoPHczRSfiZkU7kiVQ
+
+元学习最新AAAI2021-Tutorial，附视频与240页ppt
+
+https://mp.weixin.qq.com/s/KtO3OTZ-bZ6m0ZSI6jTyjw
+
+OpenAI提出Reptile：可扩展的元学习算法
+
+https://mp.weixin.qq.com/s/T4GiL9vW7ALOzWloE_QQBA
+
+OpenAI开发可拓展元学习算法Reptile，能快速学习
+
+https://mp.weixin.qq.com/s/MWcoGsQJg1GBbSqzyPD9uQ
+
+基于梯度的元学习算法，可高效适应非平稳环境
+
+https://zhuanlan.zhihu.com/p/35695477
+
+基于Meta Learning在动态竞争环境中实现策略自适应
+
+https://mp.weixin.qq.com/s/AhadWUjtgsFmb8uTylTvqg
+
+OpenAI提出新型元学习方法EPG，调整损失函数实现新任务上的快速训练
+
+https://mp.weixin.qq.com/s/dmRdp2oMn0vGukclJSVZDg
+
+Uber AI论文：利用反向传播训练可塑神经网络，生物启发的元学习范式
+
+https://mp.weixin.qq.com/s/Cc4EHc6ei-PtZWhewM10xw
+
+学习如何学习的算法：简述元学习研究方向现状
+
+https://mp.weixin.qq.com/s/4f6-gXovdrYk7240TrUwJg
+
+谷歌大脑：基于元学习的无监督学习更新规则
+
+https://mp.weixin.qq.com/s/cAbMB-DB9vu2ua8t5J28ww
+
+从零开始，了解元学习
+
+https://mp.weixin.qq.com/s/Q36vpS1HF2IfeCsFLh656A
+
+基于元强化学习的神经科学新理论
+
+https://mp.weixin.qq.com/s/XtzvHOk7CdXRBy02kUmgsg
+
+近期爆火的Meta Learning，遗传算法与深度学习的火花，再不了解你就out了
+
+https://mp.weixin.qq.com/s/KvgYyuyICueNQPo_S27fEA
+
+BAIR展示新型模仿学习，学会像人那样执行任务
+
+https://zhuanlan.zhihu.com/p/41223529
+
+最前沿：Meta RL论文解读
+
+https://zhuanlan.zhihu.com/p/40600485
+
+最前沿：Meta Learning前沿进展扫描
+
+https://zhuanlan.zhihu.com/p/28639662
+
+百家争鸣的Meta Learning/Learning to learn
+
+https://zhuanlan.zhihu.com/p/45845001
+
+最前沿：用模仿学习来学习增强学习
+
+https://zhuanlan.zhihu.com/p/46059552
+
+Meta Learning单排小教学
+
+https://zhuanlan.zhihu.com/p/46131981
+
+最前沿：Meta Learning在少样本文本翻译上的应用
+
+https://zhuanlan.zhihu.com/p/46339823
+
+谈谈无监督Meta Learning的研究
+
+https://zhuanlan.zhihu.com/p/46340382
+
+ICLR19最新论文解读之Meta Domain Adaptation
+
+https://mp.weixin.qq.com/s/RBMGI20AI92ZcWSlYczqAA
+
+伯克利、OpenAI等提出基于模型的元策略优化强化学习
+
+https://mp.weixin.qq.com/s/p0dcov84pZqsU7XP30bexQ
+
+Meta-Learning元学习：学会快速学习
+
+https://mp.weixin.qq.com/s/wl8j7dLu3OxPV7MNaO2-7Q
+
+《基于梯度的元学习》199页伯克利博士论文带你回顾元学习最新发展脉络
+
+https://mp.weixin.qq.com/s/ftiGPBhAx5iqlW_Ltg1yhg
+
+《元监督视觉学习》132页伯克利博士论文带你回顾元监督视觉应用最新发展脉络
+
+https://mp.weixin.qq.com/s/K7sLM-LMcF6-gQrV1ddrDw
+
+让智能体主动交互，DeepMind提出用元强化学习实现因果推理
+
+https://mp.weixin.qq.com/s/8sBXlnXiZNsPRwFsgJVRQQ
+
+谷歌提出元奖励学习，两大基准测试刷新最优结果
+
+https://mp.weixin.qq.com/s/x7uk7jBNvnM7Tgk9lFKy3Q
+
+元学习(Meta-Learning)综述及五篇顶会论文推荐
+
+https://mp.weixin.qq.com/s/GF_NLkSw64_6msmFep81fw
+
+Google Brain ICLR Talk：元学习的前沿与挑战
+
+https://zhuanlan.zhihu.com/p/70782949
+
+最前沿：General Meta Learning
+
+https://zhuanlan.zhihu.com/p/72920138
+
+Meta Learning入门：MAML和Reptile
+
+https://mp.weixin.qq.com/s/MsIAkJAcYHWkkMjzd7qXKA
+
+元学习与强化学习的概率视角，47页ppt，DeepMind牛津Yee Whye Teh
+
+https://mp.weixin.qq.com/s/IdUhvWJYviKtPs9jCbtybA
+
+元知识图谱推理
+
+https://www.zhihu.com/question/291656490
+
+求问meta-learning和few-shot learning的关系是什么？
+
+https://mp.weixin.qq.com/s/LZbprcnben6vPqsoC1DgDA
+
+DeepMind提出元梯度强化学习算法，显著提高大规模深度强化学习应用的性能
+
+https://mp.weixin.qq.com/s/AH35EGTH1YDSx4WzUwY15g
+
+三四行代码打造元学习核心，PyTorch元学习库L2L现已开源
+
+https://github.com/tristandeleu/pytorch-meta
+
+PyTorch上方便好用的元学习工具包
+
+https://mp.weixin.qq.com/s/Fte0SQ7J57AVGyTiIwWKAw
+
+元学习与深度强化学习的机器人应用，84页ppt
+
+https://mp.weixin.qq.com/s/xu5ieaPP2de0GML7b-1BsA
+
+谈谈元学习的技术实现框架
+
+https://mp.weixin.qq.com/s/spRlzjFTh4KeyFfd8pmZgw
+
+新框架ES-MAML：基于进化策略、简易的元学习方法
+
+https://mp.weixin.qq.com/s/uAdFWT5rP40IMsLfFyr7XQ
+
+一种深度网络快速适应的模型无关元学习方法(元学习经典论文)
+
+https://mp.weixin.qq.com/s/joUb4cBxzUVyichYfN9l8g
+
+元强化学习迎来一盆冷水：不比元Q学习好多少
+
+https://mp.weixin.qq.com/s/MPNQPNfFjUqCKUH7OdTDzA
+
+元迁移学习的小样本学习，Meta-transfer Learning for Few-shot Learning，33页ppt
+
+https://mp.weixin.qq.com/s/eUQQEB_0ts0K9h1mw7GQcA
+
+元人脸识别，Learning Meta Face Recognition
+
+https://mp.weixin.qq.com/s/wPKSUpQcB-WrpgsU1Q4iZA
+
+使用MAML元学习的少样本图分类
+
+https://mp.weixin.qq.com/s/CBAdmV4sItmAjxPIA8Fa2w
+
+元学习: 深度阐述元学习的理论模型
+
+https://zhuanlan.zhihu.com/p/113701629
+
+深度阐述元学习的理论模型
+
+https://mp.weixin.qq.com/s/L8eqDp62rMR6Lyco0uGQUQ
+
+南加州大学等开源元学习研究库learn2learn
+
+https://mp.weixin.qq.com/s/BZEqg8pBJ8mcJZhfVAVn8g
+
+最新《元学习神经架构、初始权值、超参数和算法组件》报告，附视频与PPT
+
+https://mp.weixin.qq.com/s/dK2qwYcAZ8Gdb7U2tKIcAA
+
+达摩院基于元学习的对话系统
+
+https://mp.weixin.qq.com/s/46nvCl5o4QYvRemzOrnaoQ
+
+进入Meta Learning的世界(一)
+
+https://mp.weixin.qq.com/s/BhB1n70aAvlwXK7YtNvF0g
+
+《元学习》研究进展
+
+# 深度哈希
+
+https://mp.weixin.qq.com/s/7HALWPQN4PD8JMdeu7zCig
+
+深度哈希方法综述
+
+https://mp.weixin.qq.com/s/EsGCPljYNysFkyMHp1IeUQ
+
+深度哈希图像检索综述论文，14页pdf
+
+https://mp.weixin.qq.com/s/iVKnLyNJGVRsR5fWc92Rwg
+
+深度离散哈希算法，可用于图像检索！
+
+https://mp.weixin.qq.com/s/XUYJub0559wwQ9H1wA_SAg
+
+机器学习时代的哈希算法，将如何更高效地索引数据
+
+https://mp.weixin.qq.com/s/vFBlFAQLvDZP7IvwKoaPhA
+
+无问西东，只问哈希
+
+https://mp.weixin.qq.com/s/XAxuLg2i3q5_uKDo1wU_rA
+
+从哈希到卷积神经网络：高精度&低功耗
+
+https://mp.weixin.qq.com/s/i8iQtCC7ahXLY1a1wOacsA
+
+Science：最新发现哈希可能是大脑的通用计算原理
+
+https://mp.weixin.qq.com/s/ZOVWXNym5yHoo-MmpxXo0A
+
+自监督对抗哈希SSAH：当前最佳的跨模态检索框架
+
+https://mp.weixin.qq.com/s/VldzlYg5AfDRho8bsROL_g
+
+HashGAN:基于注意力机制的深度对抗哈希模型提升跨模态检索效果
+
+https://mp.weixin.qq.com/s/3Z2Zc8zTq2uiPyw7ZuuZfw
+
+解密美图大规模多媒体数据检索技术DeepHash
+
+https://mp.weixin.qq.com/s/QklCVuukfElVDBFNxLXNKQ
+
+哈希革新Transformer：这篇ICLR高分论文让一块GPU处理64K长度序列
+
+https://zhuanlan.zhihu.com/p/161058660
+
+⾼维特征的哈希技巧
+
+# 行人重识别+
+
+https://mp.weixin.qq.com/s/Vi_1Sg8OKG-EG4aC4QTCWA
+
+半监督学习的新助力：无监督数据扩增法
+
+https://mp.weixin.qq.com/s/omUtD3GFOpP1dvfWZgLDww
+
+计算机视觉模型效果不佳，你可能是被相机的Exif信息坑了
+
+https://mp.weixin.qq.com/s/pV7C2sSJwP3rBO6OYeF-nw
+
+基于马尔可夫链的数据增强
+
+https://mp.weixin.qq.com/s/6yfHwsk-fTEtQhrciMEBug
+
+重识别（re-ID）特征适合直接用于跟踪（tracking）问题么？
+
+https://mp.weixin.qq.com/s/Q34wjziJBBOrb1VPhQJK8g
+
+行人重识别简介
+
+https://mp.weixin.qq.com/s/OALGxuvUdQMbsK1k4g2V7Q
+
+遮挡也能识别？地平线提出用时序信息提升行人检测准确度
+
+https://mp.weixin.qq.com/s/2v-Y_-_si6_dxq3cICy-lg
+
+疫情蔓延让这项CV技术突然火了，盘点开源代码
+
+https://mp.weixin.qq.com/s/Z6l9R5uzWsAn_DTgTsGstg
+
+京东发布FastReID：目前最强悍的目标重识别开源库！

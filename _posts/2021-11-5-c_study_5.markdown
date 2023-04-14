@@ -1,0 +1,399 @@
+---
+layout: post
+title:  C/C++编程心得（五）, C++ Test framework
+category: language 
+---
+
+* toc
+{:toc}
+
+# C/C++参考资源
+
+## spaceship operator
+
+spaceship operator: `<=>`
+
+C++20引入了spaceship operator：
+
+- 如果`a<b`，返回std::strong_ordering::less。
+- 如果`a>b`，返回std::strong_ordering::greater。
+- 如果a与b全等/相等，返回std::strong_ordering::equal。
+
+这和`strcmp`的设计理念类似。
+
+此外，还有关系运算符的重载推导，定义了`<=>`之后，其他诸如`==`、`!=`、`<`、`<=`、`>`、`>=`的关系运算自动成立，无需再写相应的重载函数了。同理，如果定义了`==`，那么`!=`就自动成立了。
+
+参考：
+
+https://cloud.tencent.com/developer/article/1352324
+
+C++20草案中的宇宙飞船运算符(<=>,spaceship operator)
+
+## 线程安全注解
+
+线程安全注解是现代C++开发的机制，可以在代码编译阶段检查锁的使用情况，从而发现线程同步的相关问题。该功能目前只有clang编译器支持。
+
+https://blog.csdn.net/qq_32648921/article/details/109114887
+
+线程安全注解
+
+## Implementation-defined、Unspecified、Undefined
+
+Implementation-defined：C标准没有明确规定，但是要求编译器必须对此做出明确规定，并写在编译器的文档中。
+
+Unspecified：C标准没有明确规定，编译器可以自己决定，不必写在编译器的文档中。
+
+Undefined：C标准没规定怎么处理，编译器很可能也没规定。
+
+https://www.cnblogs.com/MagicLetters/archive/2011/08/03/2126471.html
+
+C语言中关于Implementation-defined、Unspecified和Undefined
+
+## 在构造函数内部调用构造函数
+
+```cpp
+struct CLS
+{
+    int m_i;
+    CLS( int i ) : m_i(i){}
+    CLS()
+    {
+        CLS(0);
+    }
+};
+```
+
+如上，在`CLS()`调用`CLS(0);`会创建一个新的临时对象，达不到重载的目的。
+
+应该怎么做呢？`new (this)CLS(0);`
+
+https://www.cnblogs.com/stemon/p/4834043.html
+
+在构造函数内部调用构造函数
+
+## 基类析构函数为什么是虚函数？
+
+如果基类析构函数不是虚函数，则当通过父类指针或引用指向子类时，在调用析构函数时只调用父类的析构函数，所以只释放父类在堆区开辟的内存，子类在堆区开辟的内存没有被释放。
+
+## 临时对象的生命周期
+
+```cpp
+string test()
+{
+    return "abc";
+}
+
+int main()
+{
+    const char *p = test().c_str();
+    cout << p << endl;
+
+    return 0;
+}
+```
+
+`string("abc")`是一个临时对象，在执行完`const char *p = string("abc").c_str();`这个语句后，临时对象就析构了，而不会等到块结束。
+
+https://blog.csdn.net/stpeace/article/details/46461167
+
+聊聊C++临时对象的析构时间点
+
+## switch...case
+
+```c
+switch (reg) {
+       case TAS5086_CLOCK_CONTROL ... TAS5086_BKNDERR:
+       return 1;
+       case TAS5086_INPUT_MUX:
+       case TAS5086_PWM_OUTPUT_MUX:
+       return 4;
+}
+```
+
+可以用上面的办法，少写一些case语句。
+
+https://www.zhihu.com/question/300975864
+
+为什么很多程序员不用 switch，而是大量的 if...else if ...？
+
+## uint8_t
+
+对于要求严格位宽的场合，应用程序可以使用uint8_t，uint16_t，uint32_t来获得移植时的一致性。它的头文件是inttypes.h。
+
+## 并发与多线程
+
+https://blog.csdn.net/qq_38231713/category_10001159.html
+
+一个C++11并发与多线程的专栏
+
+## K&R风格
+
+在C语言的函数定义上，我们通常用的函数定义方式为ANSI C的函数定义方式。但是在C语言之父创立C语言之时，函数的定义形式并非现在我们所见到的形式。
+
+这种风格被称为K&R风格，多见于一些历史悠久的项目或者老的书籍中。出于兼容性考虑，现代的C编译器仍然支持K&R风格。
+
+>记得大学学C语言，用的是谭浩强的书。当时，授课老师看不上谭的书，于是另外推荐了一本，那本书更古老，用的就是所谓的K&R风格。。。但在实际工作中，从来没见过K&R风格的代码。。。
+
+详见：
+
+http://blog.chinaunix.net/uid-7426920-id-2627743.html
+
+ANSI和K&R两种函数定义风格
+
+## SFINAE
+
+SFINAE：Substitution failure is not an error
+
+https://en.cppreference.com/w/cpp/language/sfinae
+
+官方文档
+
+https://zhuanlan.zhihu.com/p/21314708
+
+C++模板进阶指南：SFINAE
+
+## 打印vector的N种方法
+
+```cpp
+auto vec = make_index_vector(std::make_index_sequence<10>());
+for(auto i : vec) {std::cout << i << ' ';}
+std::cout << std::endl;
+std::iota(vec.begin(), vec.end(), 999);
+std::copy(vec.begin(), vec.end(), std::ostream_iterator<int>(std::cout, " "));
+std::cout << std::endl;
+std::for_each(std::begin(vec),std::end(vec),[](int n){std::cout<<n<<" ";});
+std::cout << std::endl;
+```
+
+## malloc与calloc
+
+两者都是动态分配内存。
+
+**主要的不同**：malloc不初始化分配的内存，已分配的内存中可以是任意的值。calloc初始化已分配的内存为0。
+
+**次要的不同**：calloc返回的是一个数组，而malloc返回的是一个对象。
+
+常用的malloc实现主要有：
+
+- dlmalloc。由Doug Lea从1987年开始编写。
+- ptmalloc（pthread malloc）。glibc使用的malloc版本。dlmalloc的一个变种。
+- tcmalloc。Google开源的一个内存管理库。
+- Jemalloc。facebook推出的，最早的时候是freebsd的libc malloc实现。
+
+在多线程环境使用tcmalloc和jemalloc效果非常明显。
+
+当线程数量固定，不会频繁创建退出的时候， 可以使用jemalloc；反之使用tcmalloc可能是更好的选择。
+
+https://www.cnblogs.com/cthon/p/10563946.html
+
+内存优化总结:ptmalloc、tcmalloc和jemalloc
+
+## RVO
+
+```cpp
+std::vector<int> return_vector(void)
+{
+    std::vector<int> tmp {1,2,3,4,5};
+    return tmp;
+}
+std::vector<int> rval_ref = return_vector();
+```
+
+如果按照一般的返回值传递的规则，tmp作为局部变量是传不到外面去的，因此返回的时候，会在外部创建一个同类型的变量，并将tmp的内容复制过去。从而带来了一次复制的开销。
+
+RVO(Return Value Optimization)就是用来优化这种情况的。上述代码执行RVO之后，就等价于：
+
+```
+void return_vector(std::vector<int>& tmp)
+{
+    tmp = std::vector<int>({1,2,3,4,5});
+}
+std::vector<int> rval_ref;
+return_vector(rval_ref);
+```
+
+https://www.zhihu.com/question/27000013
+
+什么时候应当依靠返回值优化（RVO）？
+
+## 参考
+
+`vector<bool>`并不是一个通常意义上的vector容器，这个源自于历史遗留问题。 早在C++98的时候，就有`vector< bool>`这个类型了，但是因为当时为了考虑到节省空间的想法，所以`vector<bool>`里面不是一个Byte一个Byte储存的，它是一个bit一个bit储存的！
+
+https://www.zhihu.com/question/23367698
+
+c++中为什么不提倡使用`vector<bool>`？
+
+---
+
+https://zhuanlan.zhihu.com/p/23016264
+
+这么多款STL，总有一款适合你
+
+https://mp.weixin.qq.com/s/Hpn7KqYlBKz0JdryiozqyQ
+
+每个开发者都应该了解的一些C++特性
+
+https://www.cnblogs.com/wuchanming/p/3913492.html
+
+emplace_back与push_back的区别
+
+https://zhuanlan.zhihu.com/p/82895086
+
+当我们谈论C++时，我们在谈论什么？
+
+https://mp.weixin.qq.com/s/pxyTlQn4wx-N_MaWZc0oAQ
+
+漫谈C++的各种检查
+
+https://mp.weixin.qq.com/s/LchYGGcSbIMVGxO0Uea0RA
+
+深入C++回调
+
+https://blog.csdn.net/hahahacff/article/details/39504699
+
+Java中创建对象的时候代码执行顺序(这个问题C++应该也存在)
+
+https://blog.csdn.net/msq19895070/article/details/7910969
+
+嵌入式程序员应知道的几个基本问题
+
+http://dev.yesky.com/393/3007393.shtml
+
+深入理解C++中的mutable关键字
+
+http://blog.csdn.net/apunix/archive/2008/01/14/2043945.aspx
+
+UNREFERENCED_PARAMETER的作用
+
+https://mp.weixin.qq.com/s/1ELGzBkIdO1xa6LZV80raQ
+
+C++中Future和Promise的一种简单实现
+
+https://www.zhihu.com/question/24301047
+
+如何理解C++11的六种memory order？
+
+https://mp.weixin.qq.com/s/en9T7WfQDvFan9tu1q8oRA
+
+c++11与内存模型
+
+https://mp.weixin.qq.com/s/2Lq93xPffOVZB8WvbkhCDg
+
+函数调用的三种约定，你都清楚吗
+
+https://mp.weixin.qq.com/s/m-dLZGAvY5BdVRfVWSpS2g
+
+C++11的异步操作不只是thread
+
+https://zhuanlan.zhihu.com/p/58976871
+
+编程风格之声明式与命令式的区别
+
+# C++ Test framework
+
+## boost.test
+
+boost.test是一个C++的单元测试框架。
+
+代码示例：
+
+https://github.com/antkillerfarm/antkillerfarm_crazy/tree/master/cpp/boost_test
+
+要点：
+
+- 测试代码无须main函数。
+
+- 编译：`-DBOOST_TEST_DYN_LINK`
+
+- 链接：`-lboost_unit_test_framework`
+
+打印所有的log：
+
+`unit_test --log_level=all`
+
+参考：
+
+https://www.ibm.com/developerworks/cn/aix/library/au-ctools1_boost/
+
+了解Boost单元测试框架
+
+https://www.ibm.com/developerworks/cn/aix/library/au-ctools2_cppunit/index.html
+
+了解CppUnit
+
+https://www.ibm.com/developerworks/cn/aix/library/au-ctools3_ccptest/
+
+了解CppTest。上面这3篇算是比较权威的C++单元测试工具的教程了，作者都是Arpan Sen。
+
+https://my.oschina.net/vaero/blog/227528
+
+C++单元测试：boost.test
+
+https://remonstrate.wordpress.com/2011/07/06/boost-%e7%9a%84-unit-test/
+
+boost的unit test
+
+## googletest
+
+安装：
+
+`sudo apt install libgtest-dev`
+
+代码：
+
+https://github.com/google/googletest
+
+`gtest_filter`是一个很有用的选项。
+
+示例：
+
+`./foo_test --gtest_filter=FooTest*.*-FooTest.Bar:FooTest2.Bar`
+
+运行所有“测试案例名称(testcase_name)”为FooTest的案例，但是除了FooTest.Bar和FooTest2.Bar。
+
+`-`表示去除，`:`表示并列。
+
+`TEST(FooTest, DISABLED_DoesAbc) { ... }`
+
+去除测试用例。
+
+参考：
+
+https://www.ibm.com/developerworks/cn/aix/library/au-googletestingframework.html
+
+Google C++ Testing Framework简介
+
+https://www.cnblogs.com/coderzh/archive/2009/04/06/1426755.html
+
+玩转Google开源C++单元测试框架Google Test系列(gtest)
+
+## gmock
+
+gmock是google公司推出的一款开源的白盒测试工具。
+
+测试一个模块的时候，可能涉及到和其他模块交互，可以将模块之间的接口mock起来，模拟交互过程。
+
+比如要测试A模块，必过A模块需要调用B模块的函数。如果B模块还没有实现，此时，就可以用gmock将B模块的某些接口打桩。这样就可以让A模块的测试继续进行下去。
+
+gmock目前是googletest的一部分，一般也与后者配合使用。
+
+https://zhuanlan.zhihu.com/p/101906555
+
+googletest-gmock使用示例
+
+## CTest
+
+CTest是CMake集成的一个测试工具。
+
+参考：
+
+https://www.cnblogs.com/457220157-FTD/p/4139149.html
+
+CTest
+
+## doctest
+
+官网：
+
+https://github.com/onqtam/doctest

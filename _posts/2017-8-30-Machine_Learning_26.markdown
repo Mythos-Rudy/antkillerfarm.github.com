@@ -4,6 +4,9 @@ title:  机器学习（二十六）——Latent Dirichlet Allocation
 category: ML 
 ---
 
+* toc
+{:toc}
+
 # Latent Dirichlet Allocation
 
 Latent Dirichlet Allocation，简称LDA。注意不要和Linear Discriminant Analysis搞混了。
@@ -12,6 +15,8 @@ Latent Dirichlet Allocation，简称LDA。注意不要和Linear Discriminant Ana
 
 >注：靳志辉，北京大学计算机系计算语言所硕士，日本东京大学情报理工学院统计自然语言处理方向博士。2008年加入腾讯，主要工作内容涉及统计自然语言处理和大规模并行机器学习工具的研发工作。目前为腾讯社交与效果广告部质量研发中心总监，主要负责腾讯用户数据挖掘、精准广告定向、广告语义特征挖掘、广告转化率预估等工作。   
 >他写的另一篇文章《正态分布的前世今生》，也是统计界著名的科普文，非常值得一看。
+
+<a name="Markov"/>
 
 ## 马氏链及其平稳分布
 
@@ -25,6 +30,9 @@ $$P(X_{t+1}=x\mid X_t, X_{t-1}, \cdots) =P(X_{t+1}=x\mid X_t)$$
 
 >Andrey(Andrei) Andreyevich Markov，1856~1922，俄国数学家。圣彼得堡大学博士，导师Pafnuty Chebyshev。最早研究随机过程的数学家之一。圣彼得堡学派的第二代领军人物，俄罗斯科学院院士。   
 >虽然现在将随机过程（stochastic process）划为数理统计科学的一部分，然而在19世纪末期，相关的研究者在学术界分属两个不同的团体。其中最典型的就是英国的剑桥学派（Pearson、Fisher等）和俄国的圣彼得堡学派（Chebyshev、Markov等）。因此将Markov称为统计学家是非常错误的观点。
+
+>有的课本里给的马氏链的定义为：在已知它目前状态(现在)条件下，它未来的演变(将来)不依赖于它以往的演变(过去)。   
+>显然这个定义和上面的定义是等价的，但由此引入的**历史无关性**的概念却颇有迷惑性。从公式来看，马氏链不但不是历史无关，而且历史信息还是该模型的精髓，所谓的历史无关，仅仅指的是太老的历史就被忽略了。
 
 一些非周期的马氏链，经过若干次的状态转移之后，其状态概率会收敛到一个特定的数值，即平稳分布（stationary distribution）。
 
@@ -49,6 +57,8 @@ http://blog.csdn.net/lanchunhui/article/details/50451620
 http://blog.csdn.net/pipisorry/article/details/46618991
 
 马尔科夫模型
+
+<a name="MCMC"/>
 
 ## MCMC
 
@@ -77,11 +87,15 @@ https://zhuanlan.zhihu.com/p/32315762
 
 如何简单地理解“哈密尔顿蒙特卡洛 (HMC)”？
 
+https://mp.weixin.qq.com/s/BZh3-jk2LNK55jKGJXQgjw
+
+蚂蚁金服：如何训练可自动调整负样本采样器？
+
 ## Gibbs Sampling
 
 这个算法虽然以Gibbs命名，但却是Geman兄弟于1984年研究Gibbs random field时，发现的算法。
 
->注：Josiah Willard Gibbs，1839~1903，美国科学家。他在物理、化学和数学方面都有重大理论贡献。耶鲁大学博士和教授。统计力学的创始人。
+>Josiah Willard Gibbs，1839~1903，美国科学家。他在物理、化学和数学方面都有重大理论贡献。耶鲁大学博士和教授。统计力学的创始人。
 
 >Donald Jay Geman，1943年生，美国数学家。美国西北大学博士，布朗大学教授。随机森林算法的早期研究者之一。
 
@@ -90,6 +104,12 @@ https://zhuanlan.zhihu.com/p/32315762
 因为高维空间中，沿坐标轴方向上的两点之间的转移，满足细致平稳条件。因此，Gibbs Sampling的核心就是沿坐标轴循环迭代采样，该算法收敛之后的采样点即符合指定概率分布。
 
 这里需要特别指出的是，Gibbs Sampling比Metropolis–Hastings算法高效的原因在于：Gibbs Sampling每次沿坐标轴的转移是必然会被接受的，即$$\alpha=1$$。
+
+参考：
+
+https://mp.weixin.qq.com/s/ogSrwfDxXP0rCkP6diexdA
+
+吉布斯——热力学大师与统计物理奠基人
 
 ## Unigram Model
 
@@ -194,9 +214,3 @@ LDA模型的目标有两个：
 由于参数$$\overrightarrow{\theta}_m$$是和训练语料中的每篇文档相关的，对于我们理解新的文档并无用处，所以工程上最终存储LDA模型时，一般没有必要保留。
 
 这一步实际上是一个**聚类**的过程。
-
-**使用模型**：对于新来的一篇文档$$doc_{new}$$，我们能够计算这篇文档的topic分布$$\overrightarrow{\theta}_{new}$$。
-
-从最终给出的算法可以看出，虽然LDA用到了MCMC和Gibbs Sampling算法，但最终目的并不是生成符合相应分布的随机数，而是求出模型参数$$\overrightarrow{\varphi}$$的值，并用于预测。
-
-这一步实际上是一个**分类**的过程。可见，LDA不仅可用于聚类，也可用于分类，是一种无监督的学习算法。

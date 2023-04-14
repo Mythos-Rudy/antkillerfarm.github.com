@@ -4,6 +4,9 @@ title:  Android Studio
 category: technology 
 ---
 
+* toc
+{:toc}
+
 # Android Studio配置
 
 又是两年不曾摸过Android的开发了，一切又需要从头开始。这次卷土重来，windows已经不是我首选的平台了，因此以下的内容都是在Ubuntu 14.04下完成的。PS：除了网银、游戏、公司的工作，我现在已经基本不在windows下玩了。
@@ -74,12 +77,12 @@ https://dl.google.com/dl/android/studio/ide-zips/2.1.2.0/android-studio-ide-143.
 
 # 关于一个语法现象
 
-{% highlight java %}
+```java
     AlertDialog dialog = new AlertDialog.Builder(SmartGuider.this)
            .setTitle("设置错误")
            .setMessage("GPS功能未开启，请先开启GPS后再使用本程序！\n\n点击Ok进入系统设置页面，点击Cancel退出程序。")
            .create();
-{% endhighlight %}
+```
 
 在apidemo中，有很多类似于这样的语句。刚阅读到的时候，先是觉得是不是语法有误，怎么能在一条语句中，调用两个成员函数。接着一想，这是人家出的demo，怎么可能犯这种低级错误，一处也就罢了，总不可能到处都出这种错吧。
 
@@ -87,21 +90,21 @@ https://dl.google.com/dl/android/studio/ide-zips/2.1.2.0/android-studio-ide-143.
 
 于是去Android SDK中查看相关类的方法，才发现了奥妙。
 
-{% highlight java %}
+```java
 AlertDialog create()
 AlertDialog.Builder setTitle(CharSequence title)
 AlertDialog.Builder setMessage(CharSequence message)
-{% endhighlight %}
+```
 
 由于setTitle和setMessage返回的都是AlertDialog.Builder类型的引用（多半就是this），从而使得这样连写的语法得以实现。如果把create放到setTitle或setMessage之前，显然就会出错了。因此这根本就不是什么新语法，而只是一种技巧而已。
 
 在C语言中，其实也有类似的情况，例如
 
-`char *strcpy(char *strDestination,const char *strSource);`
+`char *strcpy(char *strDestination, const char *strSource);`
 
 为什么不写成
 
-`void strcpy(char *strDestination,const char *strSource);`
+`void strcpy(char *strDestination, const char *strSource);`
 
 或者
 
@@ -185,19 +188,19 @@ google 的地址
 
 如果你之前已经通过某种途径获得了AOSP的源码，但是你希望以后通过TUNA同步，只需要将.repo/manifest.xml中的
 
-{% highlight xml %}
+```xml
 <remote  name="aosp"
 fetch=".."
 review="https://android-review.googlesource.com/" />
-{% endhighlight %}
+```
 
 改为下面的code即可：
 
-{% highlight xml %}
+```xml
 <remote  name="aosp"
 fetch="git://aosp.tuna.tsinghua.edu.cn/android/"
 review="https://android-review.googlesource.com/" />
-{% endhighlight %}
+```
 
 这个方法也可以用来在同步Cyanogenmod代码的时候从TUNA同步部分代码。
 
@@ -226,30 +229,6 @@ git://git.omapzoom.org/
 https://android-git.linaro.org/git/
 
 推荐使用中科大的源，作为清华的替代品。
-
-# Linaro
-
-Linaro虽然名义上是一家非营利性质的开放源代码软件工程公司。然而，它所提供的ARM工具链，基本上已经是御用级别的了。
-
-官网：
-
-https://www.linaro.org/
-
-# Yocto
-
-Yocto是一个开源协作项目，它提供了一些模板、工具和方法来支持面向嵌入式产品的自定义Linux系统。
-
-官网：
-
-https://www.yoctoproject.org/
-
-它也提供了一套工具链，依附于旗下的子项目：Poky Linux。似乎NXP用的较多。
-
-参考：
-
-https://www.ibm.com/developerworks/cn/linux/l-yocto-linux/index.html
-
-使用Yocto Project构建自定义嵌入式Linux发行版
 
 # Retrofit
 

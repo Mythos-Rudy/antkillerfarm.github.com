@@ -1,12 +1,90 @@
 ---
 layout: post
-title:  深度学习（二）——神经元激活函数, Dropout, 深度学习常用术语解释
+title:  深度学习（二）——神经元激活函数, Dropout
 category: DL 
 ---
 
+* toc
+{:toc}
+
 # BP算法
 
-## 随机初始化（续）
+## 链式法则（续）
+
+值得注意的是残差梯度实际上包括两部分：$$\Delta x$$和$$\Delta w$$。如下图所示：
+
+![](/images/img2/BP.png)
+
+其中，$$\Delta x$$和$$\Delta w$$分别是$$\Delta$$在x和w的偏导数方向上的分量。$$\Delta x$$用于向上层传递梯度，而$$\Delta w$$用于更新权值w。
+
+通常来说，我们只需要更新权值w，但少数情况下，w和x可能都需要更新，这时只要分别计算w和x的偏导，并更新即可。
+
+![](/images/img4/BP.png)
+
+上图是多层MLP的正反向运算关系图。z表示每层的feature map，w表示weight，g表示gradients。上图上半部分展示了正向运算，而下半部分，左侧展示了gradients的更新，右侧展示了weight的更新。
+
+除了基于梯度下降的BP算法之外，还有基于GA（genetic algorithm）的BP算法，但基本只有学术界还在尝试。
+
+参考：
+
+https://mp.weixin.qq.com/s/A_Sekyi1kxT1zYcQFBOkDA
+
+Quickprop介绍：一个加速梯度下降的学习方法（由于80/90年代的BP算法收敛缓慢，Scott Fahlman发明了一种名为Quickprop的学习算法。）
+
+https://zhuanlan.zhihu.com/p/25202034
+
+道理我都懂，但是神经网络反向传播时的梯度到底怎么求？
+
+https://mp.weixin.qq.com/s/Ub3CMQszkx7pGKoPcB0bYA
+
+BP反向传播矩阵推导图示详解​
+
+https://tech.zealscott.com/deeplearning/11-785/lecture12/
+
+Back propagation through a CNN
+
+https://mp.weixin.qq.com/s/XzyudySeceDueTDM36Q2Wg
+
+学好偏导
+
+https://mp.weixin.qq.com/s/MX8sFKJQZMDMHwkBJ8mCtQ
+
+5种神经网络常见的求导
+
+## 随机初始化
+
+神经网络的参数的**随机初始化**的目的是使对称失效。否则的话，所有对称结点的权重都一致，也就无法区分并学习了。
+
+随机初始化的方法有如下几种：
+
+1.Gaussian。用给定均值和方差的Gaussian分布设定随机值。这也是最常用的方法。
+
+2.Xavier。该方法基于Gaussian分布或均匀分布产生随机数。其中分布W的均值为零，方差公式如下：
+
+$$\text{Var}(W)=\frac{1}{n_{in}}\tag{1}$$
+
+其中，$$n_{in}$$表示需要输入层的神经元的个数。也有如下变种：
+
+$$\text{Var}(W)=\frac{2}{n_{in}+n_{out}}\tag{2}$$
+
+其中，$$n_{out}$$表示需要输出层的神经元的个数。
+
+公式1也被称作LeCun initializer，公式2也被称作Glorot initializer。
+
+3.MSRA。该方法基于零均值的Gaussian分布产生随机数。Gaussian分布的标准差为：
+
+$$\sqrt{\frac{2}{n_l}}$$
+
+其中，$$n_l=k_l^2d_{l-1}$$，$$k_l$$表示l层的filter的大小，$$d_{l-1}$$表示l-1层的filter的数量。
+
+这种方法也被称作He initializer，是何恺明发明的。
+
+>何恺明，清华本科+香港中文大学博士（2011）。先后在MS和Facebook担任研究员。   
+>个人主页：http://kaiminghe.com/
+
+何恺明在训练ResNet的时候发现Xavier方法对于ReLU激活不是太有效，故而提出了新方法。
+
+除了随机初始化之外，还有**预训练初始化**。比较早期的方法是使用greedy layerwise auto-encoder做无监督学习的预训练，经典代表为Deep Belief Network；而现在更为常见的是有监督的预训练+模型微调。
 
 参考：
 
@@ -21,6 +99,14 @@ https://mp.weixin.qq.com/s/_wt-zTpbd25OL3os0X6cJg
 https://mp.weixin.qq.com/s/Nmi4u8LKrsjYKH3_3vmaVQ
 
 神经网络初始化trick：大神何凯明教你如何训练网络！
+
+https://mp.weixin.qq.com/s/DCYusE1lwvm14qpsnPYMpw
+
+初始化：你真的了解我吗？
+
+https://zhuanlan.zhihu.com/p/305055975
+
+kaiming初始化的推导
 
 ## BP算法的缺点
 
@@ -186,80 +272,4 @@ Dropout是神经网络中解决过拟合问题的一种常见方法。
 
 2.因为dropout程序导致两个神经元不一定每次都在一个dropout网络中出现。这会迫使网络去学习更加鲁棒的特征。换句话说，假如我们的神经网络是在做出某种预测，它不应该对一些特定的线索片段太过敏感，即使丢失特定的线索，它也应该可以从众多其它线索中学习一些共同的模式（鲁棒性）。
 
-除了Dropout之外，还有**DropConnect**。两者原理上类似，后者只隐藏神经元之间的连接。DropConnect也被称作Weight dropout。
-
-总的来说，Dropout类似于机器学习中的L1、L2规则化等增加稀疏性的算法，也类似于随机森林、模拟退火之类的增加随机性的算法。
-
-参考：
-
-https://zhuanlan.zhihu.com/p/23178423
-
-Dropout解决过拟合问题
-
-https://mp.weixin.qq.com/s/WvPS9LQ6vfD4OkaRbZ0wBw
-
-如何通过方差偏移理解批归一化与Dropout之间的冲突
-
-https://mp.weixin.qq.com/s/yvwAPmclvgtytfhmETM_mg
-
-Hinton提出的经典防过拟合方法Dropout，只是SDR的特例
-
-https://mp.weixin.qq.com/s/QT7X_ubXS13X5E_5KdbNNQ
-
-谷歌大脑提出DropBlock卷积正则化方法，显著改进CNN精度
-
-https://mp.weixin.qq.com/s/0Go146A5dU0-RESQAaAHzQ
-
-Dropout可能要换了，Hinton等研究者提出神似剪枝的Targeted Dropout
-
-https://mp.weixin.qq.com/s/xmNuUPBuNo6E6XvBA8BR4Q
-
-Dropout的前世与今生
-
-https://mp.weixin.qq.com/s/jFz-2Bdn4dbFAza6MXtroA
-
-Dropout的那些事
-
-https://mp.weixin.qq.com/s/XgiWfRcIMiPUSoadMtAbIg
-
-神经网络Dropout层中为什么dropout后还需要进行rescale？
-
-## Dropout预测阶段
-
-经Dropout处理过的模型，在预测阶段不再Dropout，而是打开所有的神经元。这样的效果类似于集成学习，即若干个弱分类器，集成为一个强分类器。
-
-假设p是训练时Dropout的概率。预测阶段由于所有神经元都会参与运算，这会导致$$Wx+b$$是训练阶段的$$\frac{1}{1-p}$$倍，因此需要对W进行相应修正才行，即：
-
-$$W_{ij} \to (1-p)W_{ij}$$
-
 Dropout还有若干变种，如Annealed dropout（Dropout rate decreases by epochs）、Standout（Each neural has different dropout rate）。
-
-# 深度学习常用术语解释
-
-## 深度学习中epoch、batch size、iterations的区别
-
-one epoch：所有的训练样本完成一次Forword运算和BP运算。
-
-batch size：一次Forword运算以及BP运算中所需要的训练样本数目，其实深度学习每一次参数的更新所需要损失函数并不是由一个{data：label}获得的，而是由一组数据加权得到的，这一组数据的数量就是[batch size]。当然batch size越大，所需的内存就越大，要量力而行。
-
-iterations（迭代）：每一次迭代都是一次权重更新，每一次权重更新需要batch size个数据进行Forward运算得到损失函数，再BP算法更新参数。
-
-最后可以得到一个公式one epoch = numbers of iterations = N = 训练样本的数量/batch size
-
-参考：
-
-https://zhuanlan.zhihu.com/p/83626029
-
-浅析深度学习中Batch Size大小对训练过程的影响
-
-## Vanilla
-
-Vanilla是神经网络领域的常见词汇，比如Vanilla Neural Networks、Vanilla CNN等。Vanilla本意是香草，在这里基本等同于raw。比如Vanilla Neural Networks实际上就是BP神经网络，而Vanilla CNN实际上就是最原始的CNN。
-
-## weight decay
-
-在《机器学习（十四）》中，我们已经指出了规则化在防止病态矩阵中的应用。实际上，规则化也是防止过拟合的重要手段。
-
-$$J(W,b)= \left[ \frac{1}{m} \sum_{i=1}^m J(W,b;x^{(i)},y^{(i)}) \right] + \frac{\lambda}{2} \sum_{l=1}^{n_l-1} \; \sum_{i=1}^{s_l} \; \sum_{j=1}^{s_{l+1}} \left( W^{(l)}_{ji} \right)^2$$
-
-上式中在普通loss函数后，添加的规则项也被称作weight decay。

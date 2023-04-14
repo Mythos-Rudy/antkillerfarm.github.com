@@ -4,6 +4,9 @@ title:  深度目标检测（一）——概述
 category: Deep Object Detection 
 ---
 
+* toc
+{:toc}
+
 # 概述
 
 Object Detection是计算机视觉的一个重要的分支。类似的分支还有目标分割、目标识别和目标跟踪。
@@ -47,6 +50,10 @@ https://mp.weixin.qq.com/s/BFL2PhAojZ5zHstgTrhlrw
 https://mp.weixin.qq.com/s/UoIhAcMRgMJ8rlA29_Nacg
 
 深度学习目标检测近年进展
+
+https://zhuanlan.zhihu.com/p/27546796
+
+视觉目标检测和识别之过去，现在及可能
 
 ## CV实践的难点
 
@@ -301,15 +308,3 @@ RCNN算法分为4个步骤：
 http://blog.csdn.net/surgewong/article/details/39316931
 
 http://blog.csdn.net/charwing/article/details/27180421
-
-Selective Search的主要思想:
-
-**Step 1**：使用一种过分割手段，将图像分割成小区域 (1k~2k个)。
-
-这里的步骤实际上并不简单，可参考论文：
-
-《Efficient Graph-Based Image Segmentation》
-
-中文版：
-
-http://blog.csdn.net/surgewong/article/details/39008861

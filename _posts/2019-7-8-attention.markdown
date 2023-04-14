@@ -4,6 +4,9 @@ title:  Attention（一）——Vanilla Attention, Neural Turing Machines
 category: Attention 
 ---
 
+* toc
+{:toc}
+
 # Vanilla Attention
 
 众所周知，RNN在处理长距离依赖关系时会出现问题。理论上，LSTM这类结构能够处理这个问题，但在实践中，长距离依赖关系仍旧是个问题。例如，研究人员发现将原文倒序（将其倒序输入编码器）产生了显著改善的结果，因为从解码器到编码器对应部分的路径被缩短了。同样，两次输入同一个序列似乎也有助于网络更好地记忆。
@@ -20,7 +23,15 @@ category: Attention
 
 ![](/images/img2/Attention.jpg)
 
-Attention机制的一个主要优势是它让我们能够解释并可视化整个模型。举个例子，通过对attention权重矩阵a的可视化，我们能够理解模型翻译的过程。
+上图是添加了Attention机制之后的seq2seq的框架图。
+
+需要注意的是，在通常的使用中，**W的值不仅和位置有关，还和时间有关**。因此，上图中的W的值在Step 1和Step 2中是**不同**的。（上上图中，$$a_{t,2}$$的t也表明了这一点。）假设输入语句长度为M，输出语句长度为N，词向量的长度D，则W是一个$$M\times N\times D$$的tensor。
+
+如果不考虑时间问题，那么Attention就退化为普通的FC，这时的W就是一个$$M\times D$$的tensor了。因此，Attention的参数量比普通的FC要大的多。
+
+>这里有一个训练的小技巧。虽然输出语句的长度不能事先得知，但不妨设置一个最大值$$N_{max}$$，这样tensor的尺寸就可以定下来了。然后用mask技术挡住后面的输出词语即可。例如我们训练生成第i个词的权重时，前面的i-1个词的mask为1，而后面的其他词的mask为0。
+
+Attention机制的一个主要优势是能够解释并可视化整个模型。举个例子，通过对attention权重矩阵a的可视化，我们能够理解模型翻译的过程。
 
 ![](/images/article/attention_2.png)
 
@@ -28,7 +39,13 @@ Attention机制的一个主要优势是它让我们能够解释并可视化整�
 
 如果再仔细观察attention的等式，我们会发现attention机制有一定的成本。我们需要为每个输入输出组合分别计算attention值。50个单词的输入序列和50个单词的输出序列需要计算2500个attention值。这还不算太糟糕，但如果你做字符级别的计算，而且字符序列长达几百个字符，那么attention机制将会变得代价昂贵。
 
-attention机制解决的根本问题是允许网络返回到输入序列，而不是把所有信息编码成固定长度的向量。正如我在上面提到，我认为使用attention有点儿用词不当。换句话说，attention机制只是简单地让网络模型访问它的内部存储器，也就是编码器的隐藏状态。在这种解释中，网络选择从记忆中检索东西，而不是选择“注意”什么。不同于典型的内存，这里的内存访问机制是弹性的，也就是说模型检索到的是所有内存位置的加权组合，而不是某个独立离散位置的值。弹性的内存访问机制好处在于我们可以很容易地用反向传播算法端到端地训练网络模型（虽然有non-fuzzy的方法，其中的梯度使用抽样方法计算，而不是反向传播）。
+**attention机制解决的根本问题是允许网络返回到输入序列，而不是把所有信息编码成固定长度的向量。**也就是输出不仅仅取决于encoder的结果，还取决于输入序列。
+
+正如我在上面提到，我认为使用attention有点儿用词不当。换句话说，attention机制只是简单地让网络模型访问它的内部存储器，也就是编码器的隐藏状态。在这种解释中，网络选择从记忆中检索东西，而不是选择“注意”什么。不同于典型的内存，这里的内存访问机制是弹性的，也就是说模型检索到的是所有内存位置的加权组合，而不是某个独立离散位置的值。弹性的内存访问机制好处在于我们可以很容易地用反向传播算法端到端地训练网络模型（虽然有non-fuzzy的方法，其中的梯度使用抽样方法计算，而不是反向传播）。
+
+**输入序列加权的过程，非常类似于查字典的过程**，这也是后来的Transformer模型引入q,k,v（query,key,value）概念的原因。
+
+![](/images/img5/Attention.png)
 
 论文：
 
@@ -37,6 +54,14 @@ attention机制解决的根本问题是允许网络返回到输入序列，而�
 《Learning where to Attend with Deep Architectures for Image Tracking》
 
 《Neural Machine Translation by Jointly Learning to Align and Translate》
+
+## Luong Attention and Bahdanau Attention
+
+![](/images/img5/Attention_2.png)
+
+https://blog.csdn.net/sinat_34072381/article/details/106728056
+
+Attention机制（Bahdanau attention & Luong Attention）
 
 # Neural Turing Machines
 
@@ -50,7 +75,7 @@ Attention and Augmented Recurrent Neural Networks
 
 该文主要讲述了Attention在RNN领域的应用。
 
-----
+---
 
 NTM是一种使用Neural Network为基础来实现传统图灵机的理论计算模型。利用该模型，可以通过训练的方式让系统“学会”具有时序关联的任务流。
 
@@ -154,29 +179,10 @@ https://zhuanlan.zhihu.com/p/63895164
 
 完全解析Tranformer转移力机制
 
-## Multi-Head Attention
+https://mp.weixin.qq.com/s/I4FaPxj-8i3YHjaMoAniPQ
 
-![](/images/img2/Attention_6.png)
+为什么有些深度学习网络要加入Product层？
 
-这个是Google提出的新概念，是Attention机制的完善。不过从形式上看，它其实就再简单不过了，就是把Q,K,V通过参数矩阵映射一下，然后再做Attention，把这个过程重复做h次，结果拼接起来就行了，可谓“大道至简”了。具体来说：
+https://www.zhihu.com/question/325839123
 
-$$head_i = Attention(\boldsymbol{Q}\boldsymbol{W}_i^Q,\boldsymbol{K}\boldsymbol{W}_i^K,\boldsymbol{V}\boldsymbol{W}_i^V)$$
-
-所谓“多头”（Multi-Head），就是指多做几次同样的事情（参数不共享），然后把结果拼接。
-
-## Self Attention
-
-到目前为止，对Attention层的描述都是一般化的，我们可以落实一些应用。比如，如果做阅读理解的话，Q可以是篇章的词向量序列，取K=V为问题的词向量序列，那么输出就是所谓的Aligned Question Embedding。
-
-而在Google的论文中，大部分的Attention都是Self Attention，即“自注意力”，或者叫内部注意力。
-
-所谓Self Attention，其实就是Attention(X,X,X)，X就是前面说的输入序列。也就是说，在序列内部做Attention，寻找序列内部的联系。
-
-下表展示了Self Attention相对于其他运算的计算量分析：
-
-| Layer Type | Complexity per Layer | Sequential Operations | Maximum Path Length |
-|:--:|:--:|:--:|:--:|
-| Self-Attention | $$O(n^2 \cdot d)$$ | $$O(1)$$ | $$O(1)$$ |
-| Recurrent | $$O(n \cdot d^2)$$ | $$O(n)$$ | $$O(n)$$ |
-| Convolutional | $$O(k \cdot n \cdot d^2)$$ | $$O(1)$$ | $$O(\log_k(n))$$ |
-| Self-Attention (restricted) | $$O(r \cdot n \cdot d)$$ | $$O(1)$$ | $$O(n/r)$$ |
+深度学习attention机制中的Q,K,V分别是从哪来的？

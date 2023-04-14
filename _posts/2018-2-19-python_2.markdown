@@ -4,13 +4,35 @@ title:  Python（二）
 category: language 
 ---
 
+* toc
+{:toc}
+
 # Python
 
-## with（续）
+## yield
+
+yield就是return返回一个值，并且记住这个返回的位置，下次迭代就从这个位置后(下一行)开始。
+
+参考：
+
+https://www.jianshu.com/p/d09778f4e055
+
+彻底理解Python中的yield
+
+## with
+
+Python的with语句允许我们非常方便地使用资源，而不必担心资源没有关闭。例如：
+
+```python
+with open('/path/to/file', 'r') as f:
+    f.read()
+```
+
+任何对象，只要正确实现了上下文管理，就可以用于with语句。
 
 实现上下文管理是通过__enter__和__exit__这两个方法实现的：
 
-{% highlight python %}
+```python
 class Query(object):
 
     def __init__(self, name):
@@ -28,11 +50,11 @@ class Query(object):
 
     def query(self):
         print('Query info about %s...' % self.name)
-{% endhighlight %}
+```
 
 编写__enter__和__exit__仍然很繁琐，因此Python的标准库contextlib提供了更简单的写法：
 
-{% highlight python %}
+```python
 from contextlib import contextmanager
 
 @contextmanager
@@ -44,24 +66,35 @@ def tag(name):
 with tag("h1"):
     print("hello")
     print("world")
-{% endhighlight %}
+```
 
 上述代码执行结果为：
 
-{% highlight text %}
+```text
 <h1>
 hello
 world
 </h1>
-{% endhighlight %}
+```
 
 with语句首先执行yield之前的语句，因此打印出<h1>；yield调用会执行with语句内部的所有语句，因此打印出hello和world；最后执行yield之后的语句，打印出</h1>。
 
 参考：
 
-https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/001478651770626de401ff1c0d94f379774cabd842222ff000
+https://www.liaoxuefeng.com/wiki/1016959663602400/1115615597164000
 
 contextlib
+
+## Singleton
+
+```python
+class NewInt(object):
+    _singleton = None
+    def __new__(cls, *args, **kwargs):
+        if not cls._singleton:
+            cls._singleton = object.__new__(cls, *args, **kwargs)
+        return cls._singleton
+```
 
 ## `__init__.py`的作用
 
@@ -69,7 +102,7 @@ contextlib
 
 示例：
 
-{% highlight python %}
+```python
 # package
 # __init__.py
 import re
@@ -80,17 +113,17 @@ import os
 # a.py
 import package 
 print(package.re, package.urllib, package.sys, package.os)
-{% endhighlight %}
+```
 
 `__init__.py`中还有一个重要的变量，`__all__`,它用来将模块全部导入。
 
-{% highlight python %}
+```python
 # __init__.py
 __all__ = ['os', 'sys', 're', 'urllib']
 
 # a.py
 from package import *
-{% endhighlight %}
+```
 
 参见：
 
@@ -100,19 +133,19 @@ Python `__init__.py`作用详解
 
 ## import
 
-{% highlight python %}
+```python
 import subpackage1.a # 将模块subpackage.a导入全局命名空间，例如访问a中属性时用subpackage1.a.attr
 from subpackage1 import a #　将模块a导入全局命名空间，例如访问a中属性时用a.attr_a
 from subpackage.a import attr_a # 将模块a的属性直接导入到命名空间中，例如访问a中属性时直接用attr_a
-{% endhighlight %}
+```
 
 上面的例子给出了import子目录文件的方法。如果是父目录呢？
 
-{% highlight python %}
+```python
 import sys
 sys.path.append("..")
 import subpackage1.a # 假设subpackage1在../下
-{% endhighlight %}
+```
 
 使用上法还可以导入任意目录，只需要将路径加入`sys.path`即可。可以是相对路径，也可以是绝对路径。
 
@@ -148,9 +181,24 @@ New Style还可以这样玩：
 
 `'{name} {name} {age}'.format(name='John', age='two')`
 
-`print("{:.2f}".format(3.1415926));`
+`print("{:.2f}".format(3.1415926))`
+
+`print("{0: >50}".format(3.1415926))`
 
 有了上述的placeholder之后，参数也未必再需要按出现的顺序给了。相同的placeholder设置一次就行了。
+
+还可以这样：
+
+```python
+from string import Template
+info = dict(Mcap=Mcap, curr=curr)
+Template('The market cap of Alibaba is $Mcap mio $curr.')
+        .substitute(info)
+```
+
+python3.6引入了f-string：
+
+`f'The market cap of Alibaba is {Mcap} mio {curr}.'`
 
 python的字符串还有其他玩法：
 
@@ -162,41 +210,51 @@ python的字符串还有其他玩法：
 
 `=================Hello World!================`
 
+参考：
+
+https://mp.weixin.qq.com/s/jTiZOazn66nK6CU1SAtpTw
+
+格式化String
+
+https://mp.weixin.qq.com/s/YkV7jdSEkTCSXuotENY3Mg
+
+99%的Python用户都不知道的f-string隐秘技巧
+
 ## 特殊语法：filter、map、reduce、lambda
 
 **filter(function, sequence)**：对sequence中的item依次执行function(item)，将执行结果为True的item组成一个List/String/Tuple（取决于sequence的类型）返回。
 
-{% highlight python %}
+```python
 >>> def f(x): return x % 2 != 0 and x % 3 != 0 
 >>> filter(f, range(2, 25)) 
 [5, 7, 11, 13, 17, 19, 23]
-{% endhighlight %}
+```
 
 **map(function, sequence) **：对sequence中的item依次执行function(item)，将执行结果组成一个List返回。
 
-{% highlight python %}
+```python
 >>> def cube(x): return x*x*x 
 >>> map(cube, range(1, 11)) 
 [1, 8, 27, 64, 125, 216, 343, 512, 729, 1000]
-{% endhighlight %}
+```
 
 **reduce(function, sequence, starting_value)**：对sequence中的item顺序迭代调用function，如果有starting_value，还可以作为初始值调用，例如可以用来对List求和。
 
-{% highlight python %}
+```python
 >>> def add(x,y): return x + y 
 >>> reduce(add, range(1, 11)) 
 55 (PS: 1+2+3+4+5+6+7+8+9+10)
-{% endhighlight %}
+```
 
 **lambda**：这是Python支持一种有趣的语法，它允许你快速定义单行的最小函数，类似与C语言中的宏，这些叫做lambda的函数，是从LISP借用来的，可以用在任何需要函数的地方： 
 
-{% highlight python %}
+```python
 >>> g = lambda x: x * 2 
 >>> g(3)
 6
 >>> (lambda x: x * 2)(3) 
 6
-{% endhighlight %}
+```
 
 参考：
 
@@ -207,6 +265,10 @@ Python特殊语法：filter、map、reduce、lambda
 https://www.zhihu.com/question/20125256
 
 Lambda表达式有何用处？如何使用？
+
+https://mp.weixin.qq.com/s/sBKosZTns_qePiKIYbCd1w
+
+一文搞懂Python匿名函数
 
 ## defaultdict()和namedtuple()
 
@@ -226,7 +288,7 @@ defaultdict()：返回一个和dictionary类似的对象，和dict不同主要�
 
 namedtuple()：namedtuple创建一个和tuple类似的对象，而且对象拥有可以访问的属性。这对象更像带有数据属性的类，不过数据属性是只读的。
 
-{% highlight python %}
+```python
 >>> from collections import namedtuple
 >>> TPoint = namedtuple('TPoint', ['x', 'y'])
 >>> p = TPoint(x=10, y=10)
@@ -236,7 +298,7 @@ TPoint(x=10, y=10)
 10
 >>> p.y
 10
-{% endhighlight %}
+```
 
 PS：非常类似C语言的结构体，不过数据属性是只读的。
 
@@ -246,9 +308,23 @@ http://www.cnblogs.com/herbert/p/3468294.html
 
 再谈collections模块defaultdict()和namedtuple()
 
+---
+
+collections模块还有其他一些功能。例如：
+
+https://mp.weixin.qq.com/s/lHFbec5oBshoASjJQHXxtg
+
+用好collections模块，对李白诗集进行字频统计
+
 ## @的用法
 
-@在python中是装饰器的意思，它的用法比较复杂。参见：
+`@`在python中是装饰器的意思，它的用法比较复杂。假设我们要增强函数的功能，比如，在函数调用前后自动打印日志，但又不希望修改函数的定义，这种在代码运行期间动态增加功能的方式，称之为“装饰器”（Decorator）。
+
+在python 3.5以后，`@`是一个操作符，表示矩阵-向量乘法。
+
+`A@x`就是矩阵-向量乘法`np.dot(A, x)`。
+
+参见：
 
 https://www.zhihu.com/question/26930016
 
@@ -258,13 +334,25 @@ https://mp.weixin.qq.com/s/1QjJqFfJNNych9b6ae5VUg
 
 深入理解Python装饰器
 
-https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/00143186781871161bc8d6497004764b398401a401d4cce000
+https://www.liaoxuefeng.com/wiki/1016959663602400/1017502538658208
 
 使用@property
+
+https://www.liaoxuefeng.com/wiki/1016959663602400/1017451662295584
+
+装饰器
 
 https://mp.weixin.qq.com/s/qMT46hjOQeXsjVpZPqLRVA
 
 一文读懂Python装饰器
+
+https://mp.weixin.qq.com/s/_ZvF6jK5Jo4rFGwHvEoAig
+
+一文读懂Python装饰器由来
+
+https://mp.weixin.qq.com/s/Wsk6H3Z6HwGPKTRNYc2cLw
+
+一个已经存在10年，却被严重低估的库（decorator）
 
 ## 闭包
 
@@ -278,7 +366,7 @@ https://mp.weixin.qq.com/s/qYKNGqItnSXq0-Zq2kMCKA
 
 ## @classmethod和@staticmethod
 
-{% highlight python %}
+```python
 class A(object):
     def foo(self, x):
         print("executing foo(%s,%s)" % (self, x))
@@ -290,7 +378,7 @@ class A(object):
     @staticmethod
     def static_foo(x):
         print("executing static_foo(%s)" % x)
-{% endhighlight %}
+```
 
 @classmethod类似于C++中的static，无须实例化就可以调用。@staticmethod则是普通成员函数的简写。python一般用cls表示类，而用self表示类的实例。当然，这只是编程规范的约束，而非编译器约束，使用其他名字也是可以的。
 
@@ -306,85 +394,27 @@ python中@classmethod @staticmethod区别
 
 示例：
 
-{% highlight python %}
+```python
 class A():
     pass
 
 a=A()
 a.name = "Job"
 a.age = 10
-{% endhighlight %}
+```
 
-## del
+## 命令行参数
 
-由于python都是引用，而python有GC机制，所以，del语句作用在变量上，而不是数据对象上。
+`-v`: 打印运行信息。
 
-{% highlight python %}
-if __name__=='__main__':
-    a=1       #对象1被变量a引用，对象1的引用计数器为1
-    b=a       #对象1被变量b引用，对象1的引用计数器加1
-    c=a       #对象1被变量c引用，对象1的引用计数器加1
-    del a     #删除变量a，解除a对1的引用
-    del b     #删除变量b，解除b对1的引用
-    print(c)  #最终变量c仍然引用1
-{% endhighlight %}
-
-参考：
-
-https://blog.csdn.net/love1code/article/details/47276683
-
-python中del的用法
+`-u`: stdout立即输出，无缓冲。
 
 ## deep copy
 
-https://mp.weixin.qq.com/s/0jjJrclscaA5LkdhHUNkUg
+https://blog.csdn.net/qq_32907349/article/details/52190796
 
 Python的进阶：copy()与deepcopy()区别
 
 https://mp.weixin.qq.com/s/bgk375-KxF-is5dIgV_p4g
 
 5张图彻底理解Python中的浅拷贝与深拷贝
-
-## Python 2 to Python 3
-
-https://www.linuxzen.com/qian-yi-dao-python-3.html
-
-迁移到Python 3
-
-https://www.zhihu.com/question/19698598
-
-Python 2和Python 3有哪些主要区别？
-
-https://mp.weixin.qq.com/s/Q3cqLuOZDSMOdAjVrCDrtQ
-
-在Python 2.7即将停止支持时，我们为你准备了一份3.x迁移指南
-
-https://mp.weixin.qq.com/s/J4bBvu9z3BNcwMSmmL5SMQ
-
-Python 2大限来了！113天后自生自灭，官方不再维护更新
-
-文件print：
-
-{% highlight python %}
-Python2: print >>sys.stderr, "fatal error"
-Python3: print("fatal error", file=sys.stderr)
-{% endhighlight %}
-
-dict切片：
-
-{% highlight python %}
-Python2: 
-self._layers = net.blobs.keys()
-self._layers = self._layers[1:] # TypeError: 'dict_keys' object is not subscriptable
-
-Python3:
-self._layers = list(net.blobs.keys())
-self._layers = self._layers[1:]
-{% endhighlight %}
-
-检查某对象是否为字符串或Unicode对象：
-
-{% highlight python %}
-Python2: isinstance(anobj, basestring)
-Python3: isinstance(anobj, str)
-{% endhighlight %}

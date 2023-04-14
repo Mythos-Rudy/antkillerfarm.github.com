@@ -4,11 +4,34 @@ title:  雷达 & 信号处理
 category: resource 
 ---
 
+* toc
+{:toc}
+
 # 雷达 & 信号处理
+
+![](/images/img4/GPS.jpg)
+
+---
+
+软件无线电（SDR），在无线通信和安全研究领域它是一种重要的手段。SDR的基本思想是用软件实现无线通信硬件（比如芯片或基站）的功能。
+
+https://zhuanlan.zhihu.com/p/100616192
+
+开源Wi-Fi芯片/FPGA设计以及背后的中国开发者
+
+---
+
+信号采样窗口之外的边缘点，本来应该mirror pad（总不可能出了采样窗口，信号直接就降为0吧），结果实际成了zero pad，然后灵敏度直接掉了3db，被竞争对手按在地上摩擦。
+
+---
 
 https://mp.weixin.qq.com/s/zDcbrZeK4tlO0jA3-s_lYg
 
 雷达方面的术语
+
+https://mp.weixin.qq.com/s/5UUEe6IiicuPGYHOgjwdgA
+
+雷达基本原理
 
 https://www.ll.mit.edu/outreach/introduction-radar-systems
 
@@ -21,6 +44,10 @@ http://www.dspguide.com/pdfbook.htm
 https://mp.weixin.qq.com/s/VnQiPzKima7pjzjOrtw3zQ
 
 雷达与通信系统的对比
+
+https://mp.weixin.qq.com/s/HTSM6jpzfO62CLS19G_iow
+
+什么是天线？一文全看懂
 
 https://mp.weixin.qq.com/s/vmQKK9cEbBRIvd2uOzmC1w
 
@@ -234,194 +261,200 @@ https://mp.weixin.qq.com/s/qwFuUadFMZy0T2aHIpV9aQ
 
 超全电工学公式、电工图！
 
-# AI工具+
+https://zhuanlan.zhihu.com/p/103155774
 
-https://mp.weixin.qq.com/s/3eoN0YHI84oomdTZO6TrvQ
+应用于雷达信号的深度学习方法
 
-快速搞定机器人开发！Facebook联合CMU开源PyRobot框架
+https://mp.weixin.qq.com/s/px_g-qpYJ3R5V2HzZ8Vw0g
 
-https://mp.weixin.qq.com/s/Uih8JaRCaeD38o9AoovRmA
+波束形成原理的基本理解
 
-字节跳动开源高性能分布式训练框架BytePS：兼容TensorFlow、PyTorch等
+https://mp.weixin.qq.com/s/XXZkJrECeLCw4dp6dj407Q
 
-https://mp.weixin.qq.com/s/o9cYmqwuvlbOuUXSNIuicg
+信号采样的形象化理解
 
-十个最常用深度学习图像/视频数据标注工具
+https://mp.weixin.qq.com/s/-F6paciMJAESxwNROGXP_A
 
-https://mp.weixin.qq.com/s/iKXZmhffiYaFHsIU21zVQA
+差分干涉测量基础知识
 
-NeuralNLP-NeuralClassifier：腾讯开源深度学习文本分类工具
+https://mp.weixin.qq.com/s/eNSwzSqa4fg5NBtsgeq-SQ
 
-https://mp.weixin.qq.com/s/UwijIjGOF-eRb2GjDxB95g
+合成孔径雷达成像基础
 
-漫画汉化组福音：深度学习工具一键抠图
+https://mp.weixin.qq.com/s/HWb4QSlkezlgRcM30jAujA
 
-https://mp.weixin.qq.com/s/suLJs_GjRsdYA5fwtsje7g
+SIMO雷达基础基础知识
 
-腾讯AI开源框架Angel 3.0重磅发布：超50万行代码，支持3种算法，打造全栈机器学习平台
+https://mp.weixin.qq.com/s/8RyNo1o8nRxEFoUcAF3rNw
 
-https://mp.weixin.qq.com/s/adroDI2bm13o6Q40ECc7Zw
+信号系统和数字信号处理
 
-MediaPipe: Google Research 开源的跨平台多媒体机器学习模型应用框架
+https://zhuanlan.zhihu.com/p/228219488
 
-https://mp.weixin.qq.com/s/U2e4H1QjjBqH9YbElFLhxw
+Bode Plots（伯德图）
 
-Microsoft Icecaps：一个用于会话建模的开源工具包
+https://mp.weixin.qq.com/s/VlVRZlaO_JHhAjv_CkO78g
 
-https://zhuanlan.zhihu.com/p/75584326
+离散时间信号和系统
 
-combo:“Python机器学习模型合并工具库”简介
+https://mp.weixin.qq.com/s/h9ktbyKyiCAV-cbGK2HHJQ
 
-https://github.com/arraiyopensource/kornia
+阻抗匹配，最强介绍，不懂的入
 
-可微分的“OpenCV”：这是基于PyTorch的可微计算机视觉库
+https://mp.weixin.qq.com/s/gFalBUQGzezAuXdJfn1n2A
 
-https://mp.weixin.qq.com/s/5Pm03dLW9vbDukgWi1-Tug
+关于光通信的最强进阶科普
 
-OpenARK：惊艳的增强现实、虚实交互开源库
+https://mp.weixin.qq.com/s/KtArx_RRr5aw0QBVr_Tffw
 
-https://mp.weixin.qq.com/s/h0PwA9vtABWHgxd42yX3Fg
+这27个电源符号，还傻傻分不清楚？
 
-当时尚遇上AI！港中文MMLab开源MMFashion工具箱
+https://zhuanlan.zhihu.com/p/549588865
 
-# Attention进阶+
+推荐一个非常实用的峰值查找算法（peak detection）
 
-https://mp.weixin.qq.com/s/7OYY3L7gL4wVv_EjoosOHA
+# 数字成像++
 
-如何增强Attention Model的推理能力
+https://mp.weixin.qq.com/s/VjzXYgkzAGloczaaPXni2A
 
-https://mp.weixin.qq.com/s/9Kt6_DfeYRnhsb10aCSFGw
+PDAF进化史
 
-FAGAN：完全注意力机制（Full Attention）GAN，Self-attention+GAN
+https://mp.weixin.qq.com/s/vg64EpcCVsk7gQAoEozSRQ
 
-https://mp.weixin.qq.com/s/lZOIK5BRXZrmL_Z9crl6sA
+PDAF进阶
 
-机器翻译新突破！“普适注意力”模型：概念简单参数少，性能大增
+https://mp.weixin.qq.com/s/m7q6jHbdnb7fw4lKIDfVWw
 
-https://mp.weixin.qq.com/s/JoTzaInn_uAA9oZgMcfskw
+camera接口之MIPI联盟浅谈
 
-计算机视觉技术self-attention最新进展
+https://mp.weixin.qq.com/s/DbDrDhbQAhXOsfxQ8UJVZg
 
-https://mp.weixin.qq.com/s/jRfOzKO6OlQLokIzipbqUQ
+三星S9凝时摄影背后的sensor技术
 
-为什么使用自注意力机制？
+https://mp.weixin.qq.com/s/gOikxUxWpqdDRr6_KT2jxQ
 
-https://mp.weixin.qq.com/s/_3pA8FZwzegSpyz_cK63BQ
+图像处理，计算机视觉与machine learning的区别与联系
 
-Self-Attention GAN中的self-attention机制
+https://mp.weixin.qq.com/s/7fvVmmpPSldwa3TZ3dVb2g
 
-https://mp.weixin.qq.com/s/h7sLwVXb_UI8jvJU-oe3Cg
+3D LUT--色彩校正的利器
 
-Google AI提出“透明注意力”机制，实现更深层NMT模型
+https://mp.weixin.qq.com/s/m_EKOLjWjTyx4RBxsAAAGg
 
-https://mp.weixin.qq.com/s/1LYz5SH5rVnPPJ0tZvRQAA
+4x4阵列摄/“深感”摄
 
-从各种注意力机制窥探深度学习在NLP中的神威
+https://mp.weixin.qq.com/s/dX_thGA2V_-AMjDGTUgWrg
 
-https://zhuanlan.zhihu.com/p/32928645
+计算摄影技术：身怀绝技的扫地僧
 
-计算机视觉中的注意力机制
+https://mp.weixin.qq.com/s/ZSczU1_J_exb2oreiHtK3g
 
-https://zhuanlan.zhihu.com/p/56501461
+夜景拍照之sensor篇
 
-计算机视觉中的注意力机制
+https://mp.weixin.qq.com/s/eyIeLaBZ0f_EsxglsUuH8A
 
-https://zhuanlan.zhihu.com/p/33078323
+深度学习自动构图研究报告
 
-数字串识别：基于位置的硬性注意力机制
+https://mp.weixin.qq.com/s/k2JLF_aM3j68GjEByCZF-g
 
-https://zhuanlan.zhihu.com/p/32971586
+模拟/数字增益对图像噪声的影响
 
-图像描述：基于项的注意力机制
+https://mp.weixin.qq.com/s/QmEQuEk2B_fAleewTuNClg
 
-https://zhuanlan.zhihu.com/p/33158614
+3D成像技术和CMOS传感器的发展方向简析
 
-图像识别：基于位置的柔性注意力机制
+https://mp.weixin.qq.com/s/R7wnyHT6M-KF3ZMz0bPrVg
 
-https://mp.weixin.qq.com/s/tVKEJ9rqlMaZ9bx6ngIelw
+这台相机没镜头！美国教授新发明，一块玻璃可成像，拍照给计算机看
 
-自注意力机制在计算机视觉中的应用
+https://mp.weixin.qq.com/s/j970Qp8Cz2fpbImujkS2Xg
 
-https://mp.weixin.qq.com/s/6q2q9OVhOYjk4ZrhLvAdkA
+自动驾驶应用中的LED flicker问题
 
-Non-local Neural Networks及自注意力机制思考
+https://mp.weixin.qq.com/s/Yy-XEyM0YGTRFUX2uWgNKw
 
-https://mp.weixin.qq.com/s/-gAISWjSiG6ccPuOPAEg3A
+夜景拍照之算法篇
 
-五张动图，看清神经机器翻译里的Attention！
+https://mp.weixin.qq.com/s/h7MQhZjnP3lLkLD0cKNixA
 
-https://mp.weixin.qq.com/s/Qs6tm50YvzHaJv2rh60WMw
+高动态范围成像的理论基础
 
-撩一发深度文本分类之RNN via Attention
+https://mp.weixin.qq.com/s/Wd6LD8Rme8XJwtYWU-ALtQ
 
-https://mp.weixin.qq.com/s/MMIZGHTKM5FrvNE6ucQRYQ
+动态范围压缩（DRC）的四种方法
 
-33页最新《自然语言处理中神经注意力机制综述》论文
+https://mp.weixin.qq.com/s/7_mDPCEq3S-843PwUQSwXA
 
-https://mp.weixin.qq.com/s/Q0Ft5bWTuiZUIQSTk7X6ZQ
+车载相机image sensor选型
 
-图解神经机器翻译中的注意力机制
+https://mp.weixin.qq.com/s/byeQKa7d5FSLS7JrBwP_Zw
 
-https://mp.weixin.qq.com/s/D7GQ8DRzss9ppP6pyAs1qA
+什么是多光谱/高光谱成像
 
-从0到1再读注意力机制
+https://mp.weixin.qq.com/s/nz9NHdyhRqxdhYopFQ_5Ag
 
-https://mp.weixin.qq.com/s/K_VRt0B9-Xw7YJndmb4WZg
+红外热成像与快速发热病患检测
 
-Attention！注意力机制模型最新综述
+https://mp.weixin.qq.com/s/Htn1Il96fus7s8NkD2_98w
 
-https://mp.weixin.qq.com/s/hzwp5oGspdtDyNBmq8sMsw
+Google Pixel4相机解密(1)夜景
 
-HAN：基于双层注意力机制的异质图深度神经网络
+https://mp.weixin.qq.com/s/2uNcJxU-USpb-LZkka__eQ
 
-https://mp.weixin.qq.com/s/aixpv9t1PLPRWUP6PvZ0EQ
+剖析苹果的激光雷达及参数估计
 
-用自注意力增强卷积：这是新老两代神经网络的对话
+https://mp.weixin.qq.com/s/DLsmHtUz3gAXMdzNsUTyFA
 
-https://mp.weixin.qq.com/s/i3Xd_IB7R0-QPztn-pgpng
+苹果的DTOF中的SPAD原理和特性
 
-遍地开花的Attention，你真的懂吗？
+https://mp.weixin.qq.com/s/S8Wda_orUyco43FzV0cEeQ
 
-https://mp.weixin.qq.com/s/rrbwItXt-1EaGiqtDEGvog
+紫边/紫晕与图像传感器的关系
 
-为节约而生：从标准Attention到稀疏Attention
+https://zhuanlan.zhihu.com/p/74085115
 
-https://mp.weixin.qq.com/s/G4mFW8cn-ho3KGmbw5sSTw
+深度学习在3-D环境重建中的应用
 
-计算机视觉中注意力机制原理及其模型发展和应用
+https://mp.weixin.qq.com/s/k9gff0Ote_V9qtN7HAruBA
 
-https://mp.weixin.qq.com/s/MzHmvbwxFCaFjmMkjfjeSg
+工业相机的sensor
 
-遍地开花的Attention，你真的懂吗？
+https://mp.weixin.qq.com/s/kvINl4pL4_wD71e33jaUSg
 
-https://mp.weixin.qq.com/s/7ETHeN2xV_hEwkDxrhJyNg
+下一代cmos image sensor---有机光导薄膜图像传感器
 
-用Attention玩转CV，一文总览自注意力语义分割进展
+https://mp.weixin.qq.com/s/024h8tPvCPPUyuT53CCPWQ
 
-https://mp.weixin.qq.com/s/e_LEhLf2Rh-1zkEBmqS4nA
+液态镜头的发展与应用
 
-NLP这两年：15个预训练模型对比分析与剖析
+https://mp.weixin.qq.com/s/0XlH3fFKZBfX3UMq7eTbYw
 
-https://mp.weixin.qq.com/s/0EDN-ILeL_diZ1G11ikwjw
+什么是event camera
 
-T5模型：NLP Text-to-Text预训练模型超大规模探索
+https://mp.weixin.qq.com/s/5fQDFlR5NZNW_HS2cOfTzg
 
-https://zhuanlan.zhihu.com/p/89719631
+高光谱成像技术的介绍
 
-T5: Text-to-Text Transfer Transformer阅读笔记
+https://mp.weixin.qq.com/s/tSc_VKlohhhpT-3l37Bx0w
 
-https://mp.weixin.qq.com/s/X1mLXPzJU7k_ANMzvVPxjA
+激荡二十年——手机相机技术的发展历程
 
-BERT、RoBERTa、DistilBERT与XLNet，我们到底该如何选择？
+https://mp.weixin.qq.com/s/GYpuj1rPRknWsRX6Av9XsQ
 
-https://mp.weixin.qq.com/s/Di-TbseiezMBc-MUYoEFHg
+各种有趣的屏下摄像头
 
-CV领域的注意力机制
+https://mp.weixin.qq.com/s/XihwGVU-8QJORfvENhhLnA
 
-https://mp.weixin.qq.com/s/GGRORF5EfJ5xzMLwAsJt5w
+图像传感器厂家大盘点（上）
 
-从词袋到Transfomer，NLP十年突破史
+https://mp.weixin.qq.com/s/wSgSZA2c0fP3E8JgHn6yRQ
 
-https://mp.weixin.qq.com/s/fxEg8UOa3MeJ6qx5SjEHog
+AI时代的去马赛克算法
 
-NLP领域中各式各样 Attention 知识系统性的梳理和总结
+https://mp.weixin.qq.com/s/YKL0Cwp1l9_4lAj8knMIqQ
+
+高级AI视觉算法是否还需要ISP?
+
+https://mp.weixin.qq.com/s/x4cz9mW1HOF8rtRv4uqLCQ
+
+门控相机：车载ADAS相机的未来？

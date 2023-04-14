@@ -1,8 +1,63 @@
 ---
 layout: post
-title:  语音识别（四）——DTW, Spectrogram
+title:  语音识别（四）——声学模型, 解码器技术, DTW, Spectrogram
 category: speech 
 ---
+
+* toc
+{:toc}
+
+# 声学模型
+
+声学模型主要有两个问题，分别是特征向量序列的可变长和音频信号的丰富变化性。
+
+**可变长特征向量序列**问题在学术上通常有动态时间规划（Dynamic Time Warping, DTW）和隐马尔科夫模型（Hidden Markov Model, HMM）方法来解决。
+
+**音频信号的丰富变化性**是由说话人的各种复杂特性或者说话风格与语速、环境噪声、信道干扰、方言差异等因素引起的。声学模型需要足够的鲁棒性来处理以上的情况。
+
+在过去，主流的语音识别系统通常使用梅尔倒谱系数（Mel-Frequency Cepstral Coefficient, MFCC）或者线性感知预测（Perceptual Linear Prediction, PLP）作为特征，使用混合高斯模型-隐马尔科夫模型（GMM-HMM）作为声学模型。
+
+在近些年，区分性模型，比如深度神经网络（Deep Neural Network, DNN）在对声学特征建模上表现出更好的效果。基于深度神经网络的声学模型，比如上下文相关的深度神经网络-隐马尔科夫模型（CD-DNN-HMM）在语音识别领域已经大幅度超越了过去的GMM-HMM模型。
+
+参考：
+
+https://zhuanlan.zhihu.com/p/23567981
+
+声学模型
+
+# 解码器技术
+
+解码器模块主要完成的工作包括：给定输入特征序列$$x_1^T$$的情况下，在由声学模型、声学上下文、发音词典和语言模型等四种知识源组成的搜索空间（Search Space）中，通过维特比（Viterbi）搜索，寻找最佳词串$$[w_1^N]^{opt}=[w_1,\dots,w_N]_{opt}$$，使得满足：
+
+$$[w_1^N]^{opt}=\mathop{\arg\max}_{w_1^N,N}p(w_1^N\mid x_1^T)$$
+
+在解码过程中，各种解码器的具体实现可以是不同的。按搜索空间的构成方式来分，有动态编译和静态编译两种方式。
+
+**静态编译**，是把所有知识源统一编译在一个状态网络中，在解码过程中，根据节点间的转移权重获得概率信息。由AT&T提出的Weighted Finite State Transducer（WFST）方法是一种有效编译搜索空间并消除冗余信息的方法。
+
+**动态编译**，预先将发音词典编译成状态网络构成搜索空间，其他知识源在解码过程中根据活跃路径上携带的历史信息动态集成。
+
+参考：
+
+https://zhuanlan.zhihu.com/p/23648888
+
+语音识别之解码器技术简介
+
+# 人类声音
+
+成年男性：80-140 Hz
+
+成年女性：130-220 Hz
+
+儿童：180-320 Hz
+
+从信号处理的角度，人类声音的处理方式和普通的雷达信号处理并无本质差异，主要的区别在于：**雷达信号经过了载波调制，而人类声音则没有这个步骤。**
+
+参考：
+
+https://wenku.baidu.com/view/6123ba2f0066f5335a8121fe.html
+
+人声频率范围及各频段音色效果
 
 # 建模单元
 
@@ -10,7 +65,7 @@ category: speech
 
 描述一种语言的基本单位被称为音素phoneme，例如BRYAN这个词就可以看做是由B, R, AY, AX, N五个音素构成的。这种模式也叫做单音素monophone模式。
 
-然而语音没有图像识别那么简单，因为我们再说话的时候很多发音都是连在一起的，很难区分，所以一般用左中右三个HMM state来描述一个音素，也就是说BRYAN这个词中的R音素就变成了用B-R, R, R-AY三个HMM state来表示。这种模式又被称作三音素triphone模式。
+然而语音没有图像识别那么简单，因为我们在说话的时候很多发音都是连在一起的，很难区分，所以一般用左中右三个HMM state来描述一个音素，也就是说BRYAN这个词中的R音素就变成了用B-R, R, R-AY三个HMM state来表示。这种模式又被称作三音素triphone模式。
 
 character显然是个最粗的划分，尽管英语是表音文字，然而一个字母有多个发音，仍然是个普遍现象。
 
@@ -116,11 +171,25 @@ https://zhuanlan.zhihu.com/p/72453060
 
 动态时间规整下搜索和挖掘数万亿个时间序列子序列
 
+https://mp.weixin.qq.com/s/ulS4lI3MZgcoDADF1sWnKA
+
+DTW算法详解
+
+https://mp.weixin.qq.com/s/pr-dUGaY-JxgUiu8HK5hqQ
+
+时序数据DTW距离
+
 # Spectrogram
 
 ## Window function
 
-Fourier transform研究的是整个时间域和频率域的关系。但实际的信号处理过程，不可能对无限长的信号进行测量和运算，而是取其有限的时间片段进行分析。做法是从信号中截取一个时间片段，然后用截取的信号时间片段进行周期延拓处理，得到虚拟的无限长的信号，然后就可以对信号进行FT、相关分析等数学处理。
+Fourier transform研究的是整个时间域和频率域的关系。因此它只能获取一段信号总体上包含哪些频率的成分，却对各成分出现的时刻并无所知。
+
+![](/images/img3/FT.png)
+
+如上图所示的三个信号，虽然在时域上差异很大，但在频域上却是同一个信号。
+
+此外，实际的信号处理过程，亦不可能对无限长的信号进行测量和运算，而是取其有限的时间片段进行分析。这时就需要从信号中截取一个时间片段，然后用截取的信号时间片段进行周期延拓处理，得到虚拟的无限长的信号，然后就可以对信号进行FT、相关分析等数学处理了。
 
 无限长的信号被截断以后，其频谱发生了畸变，原来集中在f(0)处的能量被分散到两个较宽的频带中去了（这种现象称之为频谱能量泄漏）。
 
@@ -140,54 +209,6 @@ https://mp.weixin.qq.com/s/84f-HbQSvGPr2tD9EpdbVw
 
 典型窗函数分析，对LFM信号进行时域和频域加窗对比
 
-## Hann window
+https://mp.weixin.qq.com/s/6F0cFHsHRasxNVlKty8GDQ
 
-Hann window虽然是以Julius Ferdinand von Hann的名字命名，但却是Blackman和Tukey的作品。他们和同一实验室的Claude E. Shannon, Hendrik Wade Bode，合称为Information Age的四大先锋。
-
->Julius Ferdinand von Hann，1839～1921，奥地利气象学家。现代气象学之父。
-
->Ralph Beebe Blackman，1904～1990，美国数学家。长期供职于AT&T Bell Laboratories。二战时，参与了防空火炮控制系统的平滑研究。
-
->John Wilder Tukey，1915～2000，美国数学家。Princeton University博士，长期供职于AT&T Bell Laboratories。英国皇家学会会员。Cooley–Tukey FFT算法发明者。
-
-$$w(n) = \sum_{k = 0}^{K} (-1)^k a_k\; \cos\left( \frac{2 \pi k n}{N-1} \right),\quad 0\le n \le N-1$$
-
-上式是Cosine-sum windows的计算公式，令K=1，则：
-
-$$w(n) = a_0 - \underbrace{(1-a_0)}_{a_1}\cdot \cos\left( \tfrac{2 \pi n}{N - 1} \right),\quad 0\le n \le N-1$$
-
-这类Window function有好几个特例：
-
-Hann window：
-
-$$w(n) = 0.5\; \left[1 - \cos \left ( \frac{2 \pi n}{N-1} \right) \right] = \sin^2 \left ( \frac{\pi n}{N-1} \right)$$
-
-Hamming window：
-
-$$w(n) = 0.54 - 0.46\cdot \cos\left( \tfrac{2 \pi n}{N - 1}\right)$$
-
->Richard Wesley Hamming，1915～1998，美国数学家。University of Chicago本科（1937）+University of Nebraska硕士（1939）+UIUC博士（1942）。参与曼哈顿计划，后长期供职于Bell Lab。通信和计算机工程领域的宗师级人物，美国工程院院士，图灵奖得主（1968）。Hamming code 、Hamming distance等都是他的贡献。
-
-## STFT
-
-$$\mathbf{STFT}\{x(t)\}(\tau,\omega) \equiv X(\tau, \omega) = \int_{-\infty}^{\infty} x(t) w(t-\tau) e^{-j \omega t} \, dt$$
-
-上式是STFT（Short-time Fourier transform）的定义。和FT相比，STFT将FT中的被积函数$$x(t)$$，换成了$$x(t) w(t-\tau)$$。其中，w(t)是窗函数（Window function），因此STFT又叫做加窗傅立叶变换。
-
-参考：
-
-https://mp.weixin.qq.com/s/TsO-tope0m4sHfVmZ0_Hog
-
-STFT极简版
-
-## Spectrogram
-
-DTW是一种时域方法，作为信号处理自然少不了频域方法。这里我们先来了解一个叫声谱图的东西。
-
-![](/images/img2/Spectrogram.png)
-
-这段语音被分为很多帧，每帧语音都对应于一个频谱（通过短时FFT计算），频谱表示频率与能量的关系。在实际使用中，频谱图有三种，即线性振幅谱、对数振幅谱、自功率谱（对数振幅谱中各谱线的振幅都作了对数计算，所以其纵坐标的单位是dB（分贝）。这个变换的目的是使那些振幅较低的成分相对高振幅成分得以拉高，以便观察掩盖在低幅噪声中的周期信号）。
-
-![](/images/img2/Spectrogram_2.png)
-
-我们先将其中一帧语音的频谱通过坐标表示出来。
+学好了傅立叶变换，你就能……做好一盘锅包肉

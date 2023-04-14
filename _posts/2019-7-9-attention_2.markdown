@@ -1,12 +1,44 @@
 ---
 layout: post
-title:  Attention（二）——花式Attention, Transformer
+title:  Attention（二）——花式Attention
 category: Attention 
 ---
 
-# 花式Attention
+* toc
+{:toc}
 
-## Self Attention（续）
+# 花式Attention（续）
+
+## Multi-Head Attention
+
+![](/images/img2/Attention_6.png)
+
+这个是Google提出的新概念，是Attention机制的完善。不过从形式上看，它其实就再简单不过了，就是把Q,K,V通过参数矩阵映射一下，然后再做Attention，把这个过程重复做h次，结果拼接起来就行了，可谓“大道至简”了。具体来说：
+
+$$head_i = Attention(\boldsymbol{Q}\boldsymbol{W}_i^Q,\boldsymbol{K}\boldsymbol{W}_i^K,\boldsymbol{V}\boldsymbol{W}_i^V)$$
+
+所谓“多头”（Multi-Head），就是指多做几次同样的事情（参数不共享），然后把结果拼接。
+
+https://www.zhihu.com/question/446385446
+
+BERT中，multi-head 768 * 64 * 12与直接使用768 * 768矩阵统一计算，有什么区别？
+
+## Self Attention
+
+到目前为止，对Attention层的描述都是一般化的，我们可以落实一些应用。比如，如果做阅读理解的话，Q可以是篇章的词向量序列，取K=V为问题的词向量序列，那么输出就是所谓的Aligned Question Embedding。
+
+而在Google的论文中，大部分的Attention都是Self Attention，即“自注意力”，或者叫内部注意力。
+
+所谓Self Attention，其实就是Attention(X,X,X)，X就是前面说的输入序列。也就是说，在序列内部做Attention，寻找序列内部的联系。
+
+下表展示了Self Attention相对于其他运算的计算量分析：
+
+| Layer Type | Complexity per Layer | Sequential Operations | Maximum Path Length |
+|:--:|:--:|:--:|:--:|
+| Self-Attention | $$O(n^2 \cdot d)$$ | $$O(1)$$ | $$O(1)$$ |
+| Recurrent | $$O(n \cdot d^2)$$ | $$O(n)$$ | $$O(n)$$ |
+| Convolutional | $$O(k \cdot n \cdot d^2)$$ | $$O(1)$$ | $$O(\log_k(n))$$ |
+| Self-Attention (restricted) | $$O(r \cdot n \cdot d)$$ | $$O(1)$$ | $$O(n/r)$$ |
 
 其中，n表示序列长度，d表示词向量的维度，k表示卷积核的大小，r表示restricted self-attention中的neighborhood的数量。
 
@@ -21,6 +53,20 @@ category: Attention
 - 它没有了递归的限制，就像CNN一样可以在每一层内实现并行。
 
 - self-attention借鉴CNN中multi-kernel的思想，进一步进化成为Multi-Head attention。每一个不同的head使用不同的线性变换，学习不同的relationship。
+
+---
+
+![](/images/img3/self_attention.jpg)
+
+- 一维卷积的感受野是有限的，注意力机制的感受野是无限的（全局的）。
+
+- 一维卷积的连接强度（权重）是与输入无关的，注意力机制的连接强度是与输入相关的。
+
+参考：
+
+https://www.zhihu.com/question/288081659
+
+attention跟一维卷积的区别是啥？
 
 ## Position Embedding
 
@@ -44,6 +90,10 @@ https://zhuanlan.zhihu.com/p/92017824
 
 浅谈Transformer-based模型中的位置表示
 
+https://mp.weixin.qq.com/s/ENpXBYQ4hfdTLSXBIoF00Q
+
+如何优雅地编码文本中的位置信息？三种positioanl encoding方法简述
+
 ## Hard Attention
 
 论文：
@@ -52,7 +102,7 @@ https://zhuanlan.zhihu.com/p/92017824
 
 我们之前所描述的传统的Attention Mechanism是Soft Attention。Soft Attention是参数化的（Parameterization），因此可导，可以被嵌入到模型中去，直接训练。梯度可以经过Attention Mechanism模块，反向传播到模型其他部分。
 
-相反，Hard Attention是一个随机的过程。Hard Attention不会选择整个encoder的输出做为其输入，Hard Attention会依概率Si来采样输入端的隐状态一部分来进行计算，而不是整个encoder的隐状态。为了实现梯度的反向传播，需要采用蒙特卡洛采样的方法来估计模块的梯度。
+相反，Hard Attention是一个随机的过程。Hard Attention不会选择整个encoder的输出做为其输入，Hard Attention会依概率$$S_i$$来采样输入端的隐状态一部分来进行计算，而不是整个encoder的隐状态。为了实现梯度的反向传播，需要采用蒙特卡洛采样的方法来估计模块的梯度。
 
 两种Attention Mechanism都有各自的优势，但目前更多的研究和应用还是更倾向于使用Soft Attention，因为其可以直接求导，进行梯度反向传播。
 
@@ -69,6 +119,8 @@ https://zhuanlan.zhihu.com/p/92017824
 >Christopher Manning，澳大利亚人，Stanford博士（1994），现为Stanford教授。从事NLP近三十年，率先将统计方法引入NLP。
 
 ![](/images/img2/Global_attention.png)
+
+上图中蓝色表示输入的词向量，红色表示输出的词向量。
 
 传统的Attention model中，所有的hidden state都被用于计算Context vector的权重，因此也叫做Global Attention。
 
@@ -220,72 +272,10 @@ https://mp.weixin.qq.com/s/JVkhX_v2fCaICawk-P-fzw
 
 通俗易懂：8大步骤图解注意力机制
 
-# Transformer
+https://juejin.im/post/5e57d69b6fb9a07c8a5a1aa2
 
-之前的文章已经介绍了Attention和《Attention is All You Need》。但实际上，《Attention is All You Need》不仅提出了两种Attention模块，而且还提出了如下图所示的Transformer模型。该模型主要用于NMT领域，由于Attention不依赖上一刻的数据，同时精度也不弱于LSTM，因此有很好并行计算特性，在工业界得到了广泛应用。阿里巴巴和搜狗目前的NMT方案都是基于Transformer模型的。
+啥是Attention?
 
-代码：
+https://mp.weixin.qq.com/s/PF02OwP0CHDf6l4BHHDqow
 
-https://github.com/Kyubyong/transformer
-
-![](/images/img2/Transformer.png)
-
-上图中的Feed Forward的公式为：
-
-$$FFN(x) = \max(0,xW_1 + b_1)W_2 + b_2$$
-
-Transformer的讲解首推：
-
-http://jalammar.github.io/visualizing-neural-machine-translation-mechanics-of-seq2seq-models-with-attention/
-
-Visualizing A Neural Machine Translation Model (Mechanics of Seq2seq Models With Attention)
-
-http://jalammar.github.io/illustrated-transformer/
-
-The Illustrated Transformer
-
-这里仅对要点做一个总结：
-
-1.Transformer是一个标准的Seq2seq结构，有encoder和decoder两部分。
-
-2.encoder可以并行执行，一次性算完。而decoder的输入不仅包含encoder的输出，还包含了decoder上次的输出，因此还是一个循环结构，并不能完全并行。
-
-3.为了解决循环结构的次序问题，论文提出了上图所示的Masked Multi-Head Attention。
-
-参考：
-
-https://zhuanlan.zhihu.com/p/39034683
-
-Attention is all you need模型笔记
-
-https://zhuanlan.zhihu.com/p/40920384
-
-真正的完全图解Seq2Seq Attention模型
-
-https://mp.weixin.qq.com/s/RLxWevVWHXgX-UcoxDS70w
-
-细讲《Attention Is All You Need》
-
-https://mp.weixin.qq.com/s/1wReNLTtpKySPwi5u1iXMA
-
-All Attention You Need
-
-https://mp.weixin.qq.com/s/S_xhaDrOaPe38ZvDLWl4dg
-
-从技术到产品，搜狗为我们解读了神经机器翻译的现状
-
-https://mp.weixin.qq.com/s/vzjKU_0qhapWKOYZ4Rnj-Q
-
-谷歌的机器翻译模型Transformer，现在可以用来做任何事了
-
-https://mp.weixin.qq.com/s/lgGDTCF3qg84njv2IeHC9A
-
-大规模集成Transformer模型，阿里达摩院如何打造WMT 2018机器翻译获胜系统
-
-https://mp.weixin.qq.com/s/_UC2jlOfb34tfB_tsEXjMg
-
-谷歌全新神经网络架构Transformer：基于自注意力机制，擅长自然语言理解
-
-https://mp.weixin.qq.com/s/w3IKoygTLDsAxk1MB5JrGg
-
-详细讲解Transformer新型神经网络在机器翻译中的应用
+一文读懂Attention机制

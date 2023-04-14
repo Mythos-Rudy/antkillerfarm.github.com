@@ -1,10 +1,19 @@
 ---
 layout: post
-title:  深度目标检测（五）——YOLOv3, Tiny-YOLO, One-stage vs. Two-stage
+title:  深度目标检测（五）——YOLOv3
 category: Deep Object Detection 
 ---
 
+* toc
+{:toc}
+
 # YOLOv2（续）
+
+### High Resolution Classifier
+
+所有state-of-the-art的检测方法基本上都会使用ImageNet预训练过的模型（classifier）来提取特征，例如AlexNet输入图片会被resize到不足256x256，这导致分辨率不够高，给检测带来困难。所以YOLO(v1)先以分辨率224x224训练分类网络，然后需要增加分辨率到448x448，这样做不仅将网络切换为检测网络，也改变了分辨率。所以作者想能不能在预训练的时候就把分辨率提高了，训练的时候只是由分类网络切换为检测网络。
+
+YOLOv2首先修改预训练分类网络的分辨率为448x448，在ImageNet数据集上训练10轮（10 epochs）。这个过程让网络有足够的时间调整filter去适应高分辨率的输入。然后fine tune为检测网络。mAP获得了4%的提升。
 
 ### Convolutional With Anchor Boxes
 
@@ -144,6 +153,8 @@ https://github.com/YunYang1994/tensorflow-yolov3
 
 TF版本
 
+![](/images/img5/YOLOv3.jpg)
+
 它的改进点在于：
 
 - **骨干网络再次升级。**
@@ -153,6 +164,12 @@ TF版本
 上图是YOLOv3的网络结构图。由于这个网络共有53层Conv，因此也被作者称作**Darknet-53**。
 
 从结构来看，它明显借鉴了ResNet的残差结构。而3x3、1x1卷积核的使用，则显然是SqueezeNet的思路。
+
+Yolov3的三个基本组件：
+
+- CBL：Yolov3网络结构中的最小组件，由Conv+Bn+Leaky_relu激活函数三者组成。
+- Res unit：借鉴Resnet网络中的残差结构，让网络可以构建的更深。
+- ResX：由一个CBL和X个残差组件构成，是Yolov3中的大组件。每个Res模块前面的CBL都起到下采样的作用，因此经过5次Res模块后，得到的特征图是608->304->152->76->38->19大小。
 
 - **多尺度先验框**。
 
@@ -224,50 +241,22 @@ https://zhuanlan.zhihu.com/p/50595699
 
 揭秘YOLOv3鲜为人知的关键细节
 
-# Tiny-YOLO
+https://mp.weixin.qq.com/s/EElv2Tc73JKS8jpejEGB1w
 
-YOLO系列还包括了一个速度更快但精度稍低的嵌入式版本系列——Tiny-YOLO。
+YOLO v3实战之钢筋数量AI识别（一）
 
-到了YOLOv3时代，Tiny-YOLO被改名为YOLO-LITE。
+https://mp.weixin.qq.com/s/HEBO9uZMD2CZW_Y-8eBK1A
 
-此外，还有使用其他轻量级骨干网络的YOLO变种，如MobileNet-YOLOv3。
+YOLOv1/v2/v3简述
 
-参考：
+https://mp.weixin.qq.com/s/5IfT9cWVbZq4cwHPLes5vA
 
-https://mp.weixin.qq.com/s/xNaXPwI1mQsJ2Y7TT07u3g
+你对YOLOV3损失函数真的理解正确了吗？
 
-YOLO-LITE:专门面向CPU的实时目标检测
+https://mp.weixin.qq.com/s/biPLPaunfkQtpywaHbBfLg
 
-https://zhuanlan.zhihu.com/p/50170492
+YOLOV3损失函数再思考
 
-重磅！YOLO-LITE来了
+https://mp.weixin.qq.com/s/Cws-3Cni-_v3AED918eB4A
 
-https://zhuanlan.zhihu.com/p/52928205
-
-重磅！MobileNet-YOLOv3来了
-
-https://mp.weixin.qq.com/s/LhXXPyvxci1d4xLzT0XFaw
-
-xYOLO：最新最快的实时目标检测
-
-# One-stage vs. Two-stage
-
-虽然我们在概述一节已经提到了One-stage和Two-stage的概念。但鉴于这个概念的重要性，在介绍完主要的目标检测网络之后，很有必要再次总结一下。
-
-![](/images/img2/One_stage.png)
-
-![](/images/img2/Two_stage.png)
-
-上两图是One-stage(YOLO)和Two-stage(Faster R-CNN)的网络结构图。
-
-One-stage一步搞定分类和bbox问题。
-
-而Two-stage则分为两步：
-
-1.根据区域是foreground，还是background，生成bbox。
-
-2.对bbox进行分类和细调。
-
-论文：
-
-《Speed/accuracy trade-offs for modern convolutional object detectors》
+高斯YoloV3目标检测

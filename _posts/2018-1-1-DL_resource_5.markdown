@@ -1,8 +1,11 @@
 ---
 layout: post
 title:  DL参考资源（五）
-category: resource 
+category: DL & NLP resource 
 ---
+
+* toc
+{:toc}
 
 # DL参考资源
 

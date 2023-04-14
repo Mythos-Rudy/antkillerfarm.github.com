@@ -1,10 +1,21 @@
 ---
 layout: post
-title:  机器学习（二十七）——EMD, LSA
+title:  机器学习（二十七）——LSA
 category: ML 
 ---
 
-# Latent Dirichlet Allocation（续）
+* toc
+{:toc}
+
+# Latent Dirichlet Allocation
+
+## LDA（续）
+
+**使用模型**：对于新来的一篇文档$$doc_{new}$$，我们能够计算这篇文档的topic分布$$\overrightarrow{\theta}_{new}$$。
+
+从最终给出的算法可以看出，虽然LDA用到了MCMC和Gibbs Sampling算法，但最终目的并不是生成符合相应分布的随机数，而是求出模型参数$$\overrightarrow{\varphi}$$的值，并用于预测。
+
+这一步实际上是一个**分类**的过程。可见，LDA不仅可用于聚类，也可用于分类，是一种无监督的学习算法。
 
 ## 如何确定LDA的topic个数
 
@@ -33,6 +44,10 @@ https://www.zhihu.com/question/32286630
 http://blog.sina.com.cn/s/blog_4c9dc2a10102vua9.html
 
 Perplexity（困惑度）详解
+
+https://mp.weixin.qq.com/s/VwSmjv03LyqFFseQHJpgdQ
+
+主题模型的主题数确定和可视化
 
 ## LDA漫游指南
 
@@ -94,89 +109,6 @@ https://www.zhihu.com/question/298517764
 
 目前有比Topic Model更先进的聚类方式么？比如针对短文本的、加入情感分析的？
 
-# Earth mover's distance
-
-推土机距离（EMD）是两个概率分布之间的距离度量的一种方式。如果将区间D的概率分布比作沙堆P，那么$$P_r$$和$$P_\theta$$之间的EMD距离，就是推土机将$$P_r$$改造为$$P_\theta$$所需要的工作量。
-
-![](/images/article/earth_move.png)
-
-EMD的计算公式为：
-
-$$EMD(P_r,P_\theta) = \frac{\sum_{i=1}^m \sum_{j=1}^n f_{i,j}d_{i,j}}{\sum_{i=1}^m \sum_{j=1}^n f_{i,j}}$$
-
-其中，f表示土方量，d表示运输距离。
-
-然而，搬运土方的方案并不唯一，有的聪明，有的愚笨。因此，两个分布的EMD距离，通常指的是，所有方案的EMD距离的最小值。
-
-![](/images/img3/EMD.png)
-
-一般来说，可用上面这样的矩阵来可视化并计算EMD距离。
-
-这个问题实际是线性规划中的运输问题，可以用匈牙利算法迭代求解。最终求得的最小值就是EMD。
-
-最优方案也被称为“最优传输”，相关的研究被称作“最优传输理论”。法国数学家蒙日最早研究过该类问题。
-
->Gaspard Monge, Comte de Péluse，1746～1818，法国数学家。微分几何之父，巴黎综合理工大学（École Polytechnique）创始人、校长。海军部长。   
->革命形势在1794年已经开始恶化，蒙日的好友、化学家拉瓦锡就是在那时被声称“革命不需要科学”的群众，送上了断头台。
-两年后的现在，50岁的蒙日又被革命群众认定为“不够激进”。他不得不从巴黎逃离，路途中还担心自己的安危——狂热的革命群众随时可能把他抓回去，并送上断头台。   
->一封意外的来信打消了蒙日的恐惧。写信人是法兰西共和国意大利方面军总司令拿破仑，27岁的总司令在信中表示，除了乐意向蒙日“伸出感激和友谊之手”，还想向他致谢。原来在4年前，他们见过面。当时蒙日担任法国海军部长，拿破仑尚是“不得宠的年轻炮兵军官”。在部长那里，拿破仑受到了“热诚的欢迎”。尽管蒙日根本记不起这件事，拿破仑则依旧“珍藏着这段记忆”。
-
-EMD可以是多维分布之间的距离。一维的EMD也被称为Match distance。
-
-EMD有时也称作Wasserstein距离。
-
->Leonid Vaseršteĭn，俄罗斯数学家，Moscow State University硕博，现居美国，Penn State University教授。Wasserstein是他名字的德文拼法，并为英文文献所沿用。他在去美国之前，曾在德国住过一段时间。
-
-由于最优传输问题的计算比较复杂，因此在DL时代，我们通常使用神经网络来计算EMD距离，例如WGAN。
-
-在文本处理中，有一个和EMD类似的编辑距离（Edit distance），也叫做Levenshtein distance。它是指两个字串之间，由一个转成另一个所需的最少编辑操作次数。许可的编辑操作包括将一个字符替换成另一个字符，插入一个字符，删除一个字符。一般来说，编辑距离越小，两个串的相似度越大。
-
->注：严格来说，Edit distance是一系列字符串相似距离的统称。除了Levenshtein distance之外，还包括Hamming distance等。
-
->Vladimir Levenshtein，1935年生，俄罗斯数学家，毕业于莫斯科州立大学。2006年获得IEEE Richard W. Hamming Medal。
-
-参考：
-
-https://vincentherrmann.github.io/blog/wasserstein/
-
-Wasserstein GAN and the Kantorovich-Rubinstein Duality
-
-http://chaofan.io/archives/earth-movers-distance-%e6%8e%a8%e5%9c%9f%e6%9c%ba%e8%b7%9d%e7%a6%bb
-
-Earth Mover's Distance——推土机距离
-
-https://mp.weixin.qq.com/s/rvPLYa1NFg_LRvb8Y8-aCQ
-
-Wasserstein距离在生成模型中的应用
-
-https://mp.weixin.qq.com/s/2xOrSyyWSbp8rBVbFoNrxQ
-
-Wasserstein is all you need：构建无监督表示的统一框架
-
-https://mp.weixin.qq.com/s/NXDJ4uCpdX-YcWiKAsjJLQ
-
-传说中的推土机距离基础，最优传输理论了解一下
-
-https://mp.weixin.qq.com/s/5sNXmQbINIWMGjX5TYAPYw
-
-最优传输理论你理解了，传说中的推土机距离重新了解一下
-
-https://mp.weixin.qq.com/s/iwZrWYbppwStJlXESUufZQ
-
-想要算一算Wasserstein距离？这里有一份PyTorch实战
-
-https://mp.weixin.qq.com/s/itQNrNsdjAgPl5R48V-HtQ
-
-计算最优传输（Computational Optimal Transport）
-
-https://zhuanlan.zhihu.com/p/72803739
-
-Word Mover's Distance-文档距离优化方案
-
-https://mp.weixin.qq.com/s/Zi9v_sbxPkHWUWwNhMMMAg
-
-编辑距离
-
 # LSA
 
 ## 基本原理
@@ -228,3 +160,153 @@ http://shiyanjun.cn/archives/548.html
 https://mp.weixin.qq.com/s/iZOVUYKWP-fN8BwAuVwAUw
 
 TF-IDF不容小觑
+
+# Loss function详解+
+
+https://mp.weixin.qq.com/s/CPfhGxig9BMAgimBSOLy3g
+
+用于图像检索的等距离等分布三元组损失函数
+
+https://www.zhihu.com/question/375794498
+
+深度学习的多个loss如何平衡？
+
+https://mp.weixin.qq.com/s/tzY_lG0F9dP5Q-LmwuHLmQ
+
+常见损失函数和评价指标总结
+
+https://mp.weixin.qq.com/s/lw9frtqocqsS-q2KGfzO1Q
+
+深入理解计算机视觉中的损失函数
+
+https://mp.weixin.qq.com/s/_HQ5an_krRCYMVnwEgGJow
+
+深度学习的多个loss如何平衡 & 有哪些“魔改”损失函数，曾经拯救了你的深度学习模型？
+
+https://blog.csdn.net/shanglianlm/article/details/85019768
+
+十九种损失函数
+
+https://mp.weixin.qq.com/s/8oKiVRjtPQIH1D2HltsREQ
+
+图像分割损失函数最全面、最详细总结
+
+https://zhuanlan.zhihu.com/p/158853633
+
+一文理解Ranking Loss/Margin Loss/Triplet Loss
+
+https://zhuanlan.zhihu.com/p/235533342
+
+目标检测：Loss整理
+
+https://zhuanlan.zhihu.com/p/191355122
+
+NLP样本不均衡之常用损失函数对比
+
+https://mp.weixin.qq.com/s/KL_D8pWtcXCJHz7dd70jyw
+
+Face Recognition Loss on Mnist with Pytorch
+
+https://zhuanlan.zhihu.com/p/77686118
+
+机器学习常用损失函数小结
+
+https://zhuanlan.zhihu.com/p/38855840
+
+SphereReID：从人脸到行人，Softmax变种效果显著
+
+https://mp.weixin.qq.com/s/ZoLO6OilivPgle03KdNzCQ
+
+人脸识别中Softmax-based Loss的演化史
+
+https://mp.weixin.qq.com/s/DwtA6GivVCDvL4MXNDBFWg
+
+阿里巴巴提出DR Loss：解决目标检测的样本不平衡问题
+
+https://zhuanlan.zhihu.com/p/145927429
+
+DR Loss
+
+https://mp.weixin.qq.com/s/x0aBo-w669_2FyCGKWJ4iQ
+
+理解计算机视觉中的损失函数
+
+https://mp.weixin.qq.com/s/LOewKsxtWm7dFJS6ioryuw
+
+Siamese网络，Triplet Loss以及Circle Loss的解释
+
+https://zhuanlan.zhihu.com/p/58883095
+
+常见的损失函数(loss function)总结
+
+https://mp.weixin.qq.com/s/UjBCjwNDIxDoAoyQAf8V6A
+
+旷视研究院提出Circle Loss，革新深度特征学习范式
+
+https://mp.weixin.qq.com/s/5RpbXzuHp_tR6C_nBdiXGA
+
+Circle Loss：从统一的相似性对的优化角度进行深度特征学习
+
+https://zhuanlan.zhihu.com/p/304462034
+
+根据标签分布来选择损失函数
+
+https://mp.weixin.qq.com/s/Ywzbn2_QqYd1W8dv8cxupw
+
+Seesaw Loss：一种面向长尾目标检测的平衡损失函数
+
+https://mp.weixin.qq.com/s/qJIlbLuM7--wj3fDLUecYw
+
+Pytorch中的四种经典Loss源码解析
+
+https://mp.weixin.qq.com/s/7Jg-YvS3nvcPJ-zYhK96EA
+
+分享神经网络中设计loss function的一些技巧
+
+https://mp.weixin.qq.com/s/cYcztl8N9JF-XXp9xLJIxg
+
+一文道尽softmax loss及其变种
+
+https://mp.weixin.qq.com/s/MTeuRYutMiCmthEAObyAIg
+
+从最优化的角度看待Softmax损失函数
+
+https://zhuanlan.zhihu.com/p/23340343
+
+Center Loss及其在人脸识别中的应用
+
+https://zhuanlan.zhihu.com/p/34404607
+
+人脸识别的LOSS（上）
+
+https://zhuanlan.zhihu.com/p/34436551
+
+人脸识别的LOSS（下）
+
+https://mp.weixin.qq.com/s/kI22wSoyNT3QXXI8pVwbjA
+
+腾讯AI Lab提出新型损失函数LMCL：可显著增强人脸识别模型的判别能力
+
+https://mp.weixin.qq.com/s/8KM7wUg_lnFBd0fIoczTHQ
+
+用收缩损失(Shrinkage Loss)进行深度回归跟踪
+
+https://mp.weixin.qq.com/s/piYyhPbA6kAXuSE5yHfQ1g
+
+人脸识别损失函数综述
+
+https://zhuanlan.zhihu.com/p/60747096
+
+人脸识别损失函数简介与Pytorch实现：ArcFace、SphereFace、CosFace
+
+https://mp.weixin.qq.com/s/_cVNNZBBJljdWBPU9d38CA
+
+常见的损失函数超全总结
+
+https://mp.weixin.qq.com/s/P6xLYrNP4pNKtHcxAWAOKg
+
+数据竞赛中的各种loss function
+
+https://mp.weixin.qq.com/s/Q4ryiTOSJQaJ2e5clmXjtg
+
+一文看尽深度学习中的15种损失函数

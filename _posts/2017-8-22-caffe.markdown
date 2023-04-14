@@ -1,8 +1,11 @@
 ---
 layout: post
-title:  Caffe, 硬件
-category: AI 
+title:  Caffe, darknet
+category: DL Framework 
 ---
+
+* toc
+{:toc}
 
 # Caffe
 
@@ -34,18 +37,18 @@ Ubuntu 17.04以后：
 
 不过由于DL进展比较快，自定义Layer的需求也是相当广泛，因此有必要掌握源代码编译的方法。
 
-`sudo apt-get install libprotobuf-dev libleveldb-dev libsnappy-dev libopencv-dev libhdf5-serial-dev protobuf-compiler`
+`sudo apt install libprotobuf-dev libleveldb-dev libsnappy-dev libopencv-dev libhdf5-serial-dev protobuf-compiler`
 
-`sudo apt-get install --no-install-recommends libboost-all-dev`
+`sudo apt install --no-install-recommends libboost-all-dev`
 
 虽然Caffe支持CMake Build，但是定制化没有Make Build方便，所以我选择后者。
 
-{% highlight bash %}
+```bash
 cp Makefile.config.example Makefile.config
 make all -j 8
 make test -j 8
 make runtest -j 8
-{% endhighlight %}
+```
 
 这里会遇到`fatal error: hdf5.h`的问题，解决办法：
 
@@ -99,12 +102,12 @@ examples/mnist/train_lenet.sh
 
 照例，还是MNIST。
 
-{% highlight bash %}
+```bash
 cd $CAFFE_ROOT
 ./data/mnist/get_mnist.sh
 ./examples/mnist/create_mnist.sh
 ./examples/mnist/train_lenet.sh
-{% endhighlight %}
+```
 
 默认使用GPU，如果要用CPU的话，可修改lenet_solver.prototxt：
 
@@ -114,7 +117,7 @@ cd $CAFFE_ROOT
 
 prototxt：模板文件。定义NN中的层之类的结构。
 
-从阅读习惯上，我们浏览一个NN结构，通常是从input到output。prototxt文件的组织也采用了这样的顺序。然而和通常描述上下访问关系的顺序（从上到下）不同，Caffe认为input在最底部，所以input结点只有top属性。
+从阅读习惯上，我们浏览一个NN结构，通常是从input到output。prototxt文件的组织也采用了这样的顺序。然而和通常描述访问关系的顺序（从上到下）不同，Caffe认为Layer的input是bottom，而output是top。
 
 复杂网络的prototxt往往不止一个：
 
@@ -190,7 +193,8 @@ Caffe中用于数据操作和交换的数据结构。简单来说，就是一个
 | TensorFlow | number,height,width,channel | RGB | RGBRGBRGB |
 | Darknet | number,channel,height,width | RGB | RRRGGGBBB |
 | OpenVX | width,height,channel,number |  |  |
-| OpenCV | height,width,channel |  |  |
+| OpenCV | height,width,channel | BGR |  |
+| PIL | height,width,channel | RGB |  |
 
 >注：在API层面，Caffe和OpenVX顺序完全相反，但是由于OpenVX是列优先存储，因此在内存存储方面，两者的格式正好完全一致。详见《多维数组的行优先和列优先》一节。
 
@@ -206,7 +210,7 @@ lr_mult参数和decay_mult参数的存在，允许不同的层有不同的学习
 
 在一个卷积层中，通常会有2组lr_mult参数和decay_mult参数，其中前一组是weight参数的学习率或衰减率，而后一组是bias参数的。
 
-{% highlight txt %}
+```text
 param {
     lr_mult: 1
     decay_mult: 1
@@ -215,7 +219,7 @@ param {
     lr_mult: 2
     decay_mult: 0
 }
-{% endhighlight %}
+```
 
 上面这组参数被实践证明，是比较work的参数。
 
@@ -245,7 +249,7 @@ tf.strided_slice用法
 
 ### slice
 
-{% highlight txt %}
+```text
 layer {
   name: "data_each"
   type: "Slice"
@@ -259,7 +263,7 @@ layer {
     slice_point: 200
   }
 }
-{% endhighlight %}
+```
 
 其中slice_point的个数必须等于top的个数减一。输入的data_all维度为$$(250\times 3\times 24 \times 24)$$，拆分后的3个输出的维度依次为$$(150\times 3\times 24 \times 24),(50\times 3\times 24 \times 24),(50\times 3\times 24 \times 24)$$。
 
@@ -270,6 +274,17 @@ Caffe的代码相对比较简单，符合个人作品的特点。
 Caffe没有计算图的概念，所有操作都聚焦于NN本身，对于实际业务的支持有限。其结构主要针对CNN进行设计，通用性无法和TensorFlow相比。但相对简单的结构，非常适合CV用途，成为了目前CV DL的事实标准。
 
 Caffe的代码有相当一部分是由.proto文件自动生成的，最著名的当属LayerParameter。因此如果在C++代码中找不到相关实现的话，不妨到.proto文件中碰碰运气。
+
+例如Conv的实现在`src/caffe/layers/conv_layer.cpp`中。
+
+## Conv Backprop
+
+```cpp
+src/caffe/layers/conv_layer.cpp: ConvolutionLayer::Backward_cpu
+src/caffe/layers/base_conv_layer.cpp: BaseConvolutionLayer::weight_cpu_gemm
+src/caffe/util/math_functions.cpp: caffe_cpu_gemm
+cblas_sgemm
+```
 
 ## Ristretto Caffe
 
@@ -361,56 +376,19 @@ https://mp.weixin.qq.com/s/YYwmRwq5TN7JPah_arNyaQ
 
 Facebook开源产业级深度学习框架Caffe2
 
-# 硬件
+# darknet
 
-https://mp.weixin.qq.com/s/ZexnsNmqsD2yq-7YNASohw
+darknet代码：
 
-数模转换器的基本原理及DAC类型简介
+https://github.com/pjreddie/darknet/
 
-https://mp.weixin.qq.com/s/1XmbkoRkXUtmR0pnENhfGA
+有个叫做darkflow的项目，可以用于将darknet模型转换成tensorflow模型：
 
-基于高速DDFS的高精度DAC的设计
+https://github.com/thtrieu/darkflow
 
-https://mp.weixin.qq.com/s/aavlfxII5PW_RrsF6nS99g
+## Conv Backprop
 
-模-数转换(A/D)技术
-
-https://mp.weixin.qq.com/s/Coz81Zidz_LaSYkcErJsOQ
-
-NAND Flash与NOR Flash究竟有何不同
-
-http://mp.weixin.qq.com/mp/homepage?__biz=MzUyMTA2OTM1MA==&hid=4&sn=192b1f4e49979e13c7df491725415d06&scene=18
-
-一个OLED方面的公众号
-
-https://mp.weixin.qq.com/s/lBRHV1mnO1JMwlnO_rQjxA
-
-LCD与OLED之争：谁才是真正的赢家？
-
-https://zhuanlan.zhihu.com/p/48343011
-
-芯片中的数学——均衡器EQ和它在高速外部总线中的应用。这个blog主要介绍了眼图的概念。
-
-https://mp.weixin.qq.com/s/oCBSGVtGSwq9c59rcVc2-A
-
-无线接收器的百年创新及架构发展史
-
-https://mp.weixin.qq.com/s/KPmkphlJFv5dScLlhAigEw
-
-新型存储器技术盘点
-
-https://zhuanlan.zhihu.com/p/54517790
-
-内存条应该怎么插？为什么要从远端插起？不遵循为啥还可以work？有啥副作用？
-
-https://zhuanlan.zhihu.com/p/65478149
-
-为什么USB Type C电缆正反插都可以？它是怎么做到的？
-
-https://mp.weixin.qq.com/s/dk_sl3OvPwvnRWPpPJ4D_Q
-
-USB3.1 Type-C高速接口设计指南
-
-https://mp.weixin.qq.com/s/AJA01Cvm3k2HntUUAg9FPg
-
-关于“陶瓷电容”，你不知道的事
+```cpp
+src/convolutional_layer.c: backward_convolutional_layer
+src/gemm.c: gemm
+```

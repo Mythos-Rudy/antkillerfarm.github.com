@@ -4,75 +4,10 @@ title:  ML参考资源（三）
 category: resource 
 ---
 
+* toc
+{:toc}
+
 # ML参考资源
-
-https://mp.weixin.qq.com/s/s2XpGne0sAqnuN-u6g5k1A
-
-资金流因子全面测试兼正交化方法详解
-
-https://mp.weixin.qq.com/s/oblwg01BUIJjVhBeHa9HQQ
-
-程序员分析了50万条拼多多商品数据，告诉你到底是消费升级还是降级！
-
-https://mp.weixin.qq.com/s/4HVkEnk6_hONWJYdi8L53g
-
-闲聊结构化预测（structured learning）
-
-https://mp.weixin.qq.com/s/GP_t_fhklpVNhC6J6i0YbA
-
-再聊聊自然语言处理中的结构化预测问题
-
-https://mp.weixin.qq.com/s/G6-XbqCO5iuwGDen-r6aWg
-
-唐宏:基于概率主题模型的高分辨率遥感图像非监督语义分割
-
-https://mp.weixin.qq.com/s/l4W7qmKJ4Pc-rlF-KvhrPA
-
-机器学习在信用评分卡中的应用
-
-https://mp.weixin.qq.com/s/O3SIexXUeWM1svdI_ygrDg
-
-非精确图匹配方法综述
-
-https://mp.weixin.qq.com/s/vOZust2RceSVoYPH6nauJw
-
-机器学习模型该如何选择和评估？希望这个小册子能帮到你！
-
-https://mp.weixin.qq.com/s/eW3fGJAQQMS12EmmeqZsYQ
-
-如何打开黑盒子模型？41页最新机器学习可解释模型综述论文
-
-https://mp.weixin.qq.com/s/Z1ixoRmUDl17CF4k7JS4zg
-
-浅谈物流网络中的选址规划问题
-
-https://mp.weixin.qq.com/s/voumCoLRPJO2eHFUVGm0PA
-
-理解Scikit-Learn中分类性能度量指标
-
-https://mp.weixin.qq.com/s/JW62V3wBguSPSAkyWKAEpQ
-
-一个数据分析师眼中的数据预测与监控
-
-https://mp.weixin.qq.com/s/Xk1myDvYQxvKKyQ7RKqcyw
-
-机器学习可重复性最佳实践
-
-https://mp.weixin.qq.com/s/tnkS6xtuv29A_TGlPUAxlQ
-
-我猜，每个程序员对着电梯都想过调度算法吧！
-
-https://mp.weixin.qq.com/s/0m5DuJzh92aYUgdiQ3PfIg
-
-数据竞赛大杀器之模型融合(stacking & blending)
-
-https://mp.weixin.qq.com/s/21LVssq2ynMgp_x1lwSC9w
-
-基于稀疏自表示与模糊双C均值聚类的SAR图像分割
-
-https://mp.weixin.qq.com/s/Oi1yJty_guzTUbRGZ5MuEw
-
-使用高斯过程的因果推理：GP CaKe的基本思路
 
 https://mp.weixin.qq.com/s/vLvjo8Cso_bYEuW-AFoyiA
 
@@ -114,10 +49,6 @@ https://mp.weixin.qq.com/s/rDdpQDogQR1E6TMkG4j1sA
 
 80页PPT解读量化开发与实盘
 
-https://mp.weixin.qq.com/s/X7aGCeUkLuuFbHrnK2TiMg
-
-啥是有限元？
-
 https://mp.weixin.qq.com/s/hPjf7t5j-kBrrEIhNGo8jQ
 
 从区域到边界（边界元）
@@ -142,10 +73,6 @@ https://mp.weixin.qq.com/s/R7Qud_x6DGqbHAOl7OMruQ
 
 一文带你入门算法分发！
 
-https://mp.weixin.qq.com/s/lJQprqGShGys3vfhYSxDWg
-
-机器学习在股票交易中难点分析
-
 https://mp.weixin.qq.com/s/lpNTdnfp2FnJ97EivhUv2g
 
 12种降维方法终极指南
@@ -165,10 +92,6 @@ https://mp.weixin.qq.com/s/0bVwxkncZrqxvhHXvbTHIA
 https://mp.weixin.qq.com/s/8KEWJROGSe-7nmBlrkQ7Nw
 
 雇水军刷分有效吗？虚假评论的影响研究分析
-
-https://github.com/yzhao062/awesome-ensemble-learning
-
-集成学习相关资源大列表
 
 https://mp.weixin.qq.com/s/csQoFtE0v1jUAGC08NtX3g
 
@@ -210,14 +133,242 @@ https://mp.weixin.qq.com/s/byzL0Te5-QQLR7bxJpoZrw
 
 超好用的自信学习：1行代码查找标签错误，3行代码学习噪声标签
 
-https://mp.weixin.qq.com/s/KmPTljxY4eyoYV8hXLxIXg
-
-浅谈滴滴派单算法
-
 https://mp.weixin.qq.com/s/p3w2GSjGMJOwlMJk3xmbvQ
 
 AI插手！用文本分析鉴定《红楼梦》、《亨利八世》实际作者
 
-https://mp.weixin.qq.com/s/H1diSCPZe6oTouufPY1JkA
+https://mp.weixin.qq.com/s/ZY7WZzePqRfDPv6JX2vWsQ
 
-机组排班优化及悠桦林的实践
+30张地图看懂世界格局，用大数据说话
+
+https://mp.weixin.qq.com/s/FT8Yn8VpgVroEbgSTG9lGA
+
+如何判断样本标注的靠谱程度？置信度学习（CL）简述
+
+https://mp.weixin.qq.com/s/ukFPwO9vZ5t3OLiKr5MQMw
+
+缺失数据统计分析，第三版，462页pdf
+
+https://mp.weixin.qq.com/s/WJUGbyPgLgVX6Q8SXjOP1A
+
+如何抢别人怀里的女孩子?
+
+https://zhuanlan.zhihu.com/p/114264831
+
+Kernel Distribution Embedding（用于测试两批数据是否来自同一个分布采样）
+
+https://mp.weixin.qq.com/s/zJfafmJfmmQIjmjsLh_j-g
+
+百度内部PPT流出：数据分析的道与术
+
+https://zhuanlan.zhihu.com/p/146557232
+
+标注数据存在错误怎么办？MIT&Google提出用置信学习找出错误标注
+
+https://mp.weixin.qq.com/s/tdF46p_fLpaVjPfK2WtRgw
+
+如何用运筹学帮助特朗普赢得大选?
+
+https://mp.weixin.qq.com/s/typfJcOcRwS20HOwG_zcRg
+
+如何通过抽样分布估计你的模型的不确定性
+
+https://mp.weixin.qq.com/s/_igLvU_UZmRb2azn7RzJTg
+
+非线性回归中的Levenberg-Marquardt算法理论和代码实现
+
+https://mp.weixin.qq.com/s/41OmNMK1VFKQRuW6D7kqgA
+
+王茂霖：数据挖掘提分三板斧
+
+https://mp.weixin.qq.com/s/v7m0I9o6QV6qKSQqnsMoRw
+
+共享两轮车供需算法浅谈
+
+https://mp.weixin.qq.com/s/Mc9vHkt--u3jyh5VZmA56Q
+
+如何消除多重共线性
+
+# AI工具+
+
+https://mp.weixin.qq.com/s/6q7wy7Xq7GcepdLkQN-1wA
+
+最新中文NLP开源工具箱来了！支持6大任务，面向工业应用
+
+https://mp.weixin.qq.com/s/203UyMxZ-Sx14WEX-KMusg
+
+异类框架BigDL，TensorFlow的潜在杀器！
+
+https://mp.weixin.qq.com/s/wDISPCffD-8fnW1GD4EcDg
+
+Kornia开源可微分计算机视觉库
+
+https://mp.weixin.qq.com/s/Ad-LNsbA2KRdvKRNUl2LNw
+
+DeepPavlov: 强大的聊天机器人和对话系统开源AI库
+
+https://mp.weixin.qq.com/s/W5kUPzwzCWP1qnTdbgNSFA
+
+大批量生成假数据，faker.js获得近28k个Star
+
+https://mp.weixin.qq.com/s/3eoN0YHI84oomdTZO6TrvQ
+
+快速搞定机器人开发！Facebook联合CMU开源PyRobot框架
+
+https://mp.weixin.qq.com/s/Uih8JaRCaeD38o9AoovRmA
+
+字节跳动开源高性能分布式训练框架BytePS：兼容TensorFlow、PyTorch等
+
+https://mp.weixin.qq.com/s/o9cYmqwuvlbOuUXSNIuicg
+
+十个最常用深度学习图像/视频数据标注工具
+
+https://mp.weixin.qq.com/s/iKXZmhffiYaFHsIU21zVQA
+
+NeuralNLP-NeuralClassifier：腾讯开源深度学习文本分类工具
+
+https://mp.weixin.qq.com/s/suLJs_GjRsdYA5fwtsje7g
+
+腾讯AI开源框架Angel 3.0重磅发布：超50万行代码，支持3种算法，打造全栈机器学习平台
+
+https://mp.weixin.qq.com/s/adroDI2bm13o6Q40ECc7Zw
+
+MediaPipe: Google Research 开源的跨平台多媒体机器学习模型应用框架
+
+https://mp.weixin.qq.com/s/U2e4H1QjjBqH9YbElFLhxw
+
+Microsoft Icecaps：一个用于会话建模的开源工具包
+
+https://zhuanlan.zhihu.com/p/75584326
+
+combo:“Python机器学习模型合并工具库”简介
+
+https://github.com/arraiyopensource/kornia
+
+可微分的“OpenCV”：这是基于PyTorch的可微计算机视觉库
+
+https://mp.weixin.qq.com/s/5Pm03dLW9vbDukgWi1-Tug
+
+OpenARK：惊艳的增强现实、虚实交互开源库
+
+https://mp.weixin.qq.com/s/h0PwA9vtABWHgxd42yX3Fg
+
+当时尚遇上AI！港中文MMLab开源MMFashion工具箱
+
+https://github.com/Media-Smart/vedaseg
+
+vedaseg:A semantic segmentation toolbox in pytorch
+
+https://mp.weixin.qq.com/s/gGCyMq4PM_Whv-Ssiwt-HA
+
+秒杀Deepfake！微软北大提出AI换脸工具FaceShifter和假脸检测工具Face X-Ray
+
+https://mp.weixin.qq.com/s/2EHv669PUqqgvAGz3XoZ6Q
+
+FaceBook开源PyTorch3D：基于PyTorch的新3D计算机视觉库
+
+https://mp.weixin.qq.com/s/Z27oInh5rdxnxt1-KFAiRA
+
+1GB文本标记只需20秒！抱抱脸团队发布最新NLP工具
+
+https://mp.weixin.qq.com/s/8mpc7AblZyRw7LCh35vL2g
+
+哈工大讯飞联合实验室发布知识蒸馏工具TextBrewer
+
+https://mp.weixin.qq.com/s/Zu_IPBQVJtcwNln-xvEZxQ
+
+DarkLabel：支持检测、跟踪、ReID数据集的标注软件
+
+https://mp.weixin.qq.com/s/5klwQCPtiZOwFJYHDOpWFg
+
+语义分割标注工具Semantic Segmentation Editor快速安装指南
+
+https://mp.weixin.qq.com/s/1EeYmZGoa-xpWmIvUoqCyw
+
+瑞士小哥开源文本英雄Texthero：一行代码完成数据预处理
+
+https://mp.weixin.qq.com/s/p9HpH2e5ShQCFcCxVNvMbg
+
+清华开源迁移学习算法库
+
+https://mp.weixin.qq.com/s/vzUt-5C_dRAChEfQYLp4lA
+
+PyTorch实现，GitHub 4000星：这是微软开源的计算机视觉库
+
+https://mp.weixin.qq.com/s/5VeersQKxcT9AtFXS_CXnA
+
+推荐一款超高速、多特性的高性能序列推理引擎——LightSeq
+
+https://mp.weixin.qq.com/s/kWJZA0acOPi46c2_Gd9aeA
+
+安利一个开源的好工具Label Studio,闭环数据标注和模型训练
+
+https://mp.weixin.qq.com/s/b-w_jUqxGR7hY19auiar-A
+
+FAIR发布自监督训练库VISSL
+
+# 东南亚++
+
+麓川王国、蒲甘王朝、勃固王朝、阿瓦王朝、东吁王朝、贡榜王朝。
+
+缅甸三大帝：阿奴律陀（蒲甘王朝）、莽应龙（东吁王朝）、雍籍牙（贡榜王朝）。
+
+麓川王朝的实力不在三大帝之下。但是由于其主要地盘是缅北+云南南部，和今天缅甸版图有较大差异，它甚至不被认为是缅甸的王朝。而三大帝虽然统一缅甸，但是并没有占据云南南部。
+
+https://zhuanlan.zhihu.com/p/242294917
+
+泰国，大战缅甸三百年！
+
+https://www.zhihu.com/question/501195504
+
+缅甸为何没有纳入清朝版图？
+
+https://www.zhihu.com/question/547317808
+
+为什么麓川战争无人知晓，瓦刺四部之一的准格尔却人尽皆知？
+
+---
+
+https://zhuanlan.zhihu.com/p/37928659
+
+越南帝国扩张
+
+https://zhuanlan.zhihu.com/p/303875663
+
+从数据看越南制造对中国的威胁有多大？
+
+https://mp.weixin.qq.com/s/NHkTQmJ3Jq1A3pgKI2DCeg
+
+这是9·11事件后，全世界最严重的恐怖袭击（巴厘岛恐怖袭击）
+
+https://zhuanlan.zhihu.com/p/377325999
+
+改名泰国，激怒中国
+
+https://mp.weixin.qq.com/s/61qqxaLhfcLSzbBi_x1XWw
+
+亚洲第二富国菲律宾，如今却靠出口女佣赚钱
+
+https://www.zhihu.com/question/456075868
+
+南越F4到底是什么来头？
+
+https://mp.weixin.qq.com/s/E-xJ1IGxklGpICFsrZla9Q
+
+西贡铁拳在西贡？南越总崩溃时的照片何止这张被误解
+
+https://www.zhihu.com/question/27700838
+
+越南的军事实力有能力统一中南半岛吗？
+
+https://www.zhihu.com/question/386153966
+
+导致明朝最终放弃安南的主导因素是什么？
+
+https://www.zhihu.com/question/292991962
+
+如何评价越南军队？
+
+https://www.zhihu.com/question/25673808
+
+越南侵略柬埔寨的真实动机是什么？

@@ -1,8 +1,69 @@
 ---
 layout: post
-title:  机器学习（二十四）——单分类SVM&多分类SVM, Stacking, 三门问题, 用户画像, 特征工程, 图论
+title:  机器学习（二十四）——单分类SVM&多分类SVM, Stacking, 花式采样, 数据清洗
 category: ML 
 ---
+
+* toc
+{:toc}
+
+# Optimizer（续）
+
+https://mp.weixin.qq.com/s/o10Fp2VCwoLqgzirbGL9LQ
+
+如何估算深度神经网络的最优学习率
+
+https://zhuanlan.zhihu.com/p/73441350
+
+从物理角度理解加速梯度下降
+
+https://mp.weixin.qq.com/s/n1Ks8I3Ldgb-u-kVbGBZ5Q
+
+机器学习中的优化方法
+
+https://mp.weixin.qq.com/s/4XOI8Dq6fqe8rhtJjeyxeA
+
+超级收敛：使用超大学习率超快速训练残差网络
+
+http://mp.weixin.qq.com/s/Q5kBCNZs3a6oiznC9-2bVg
+
+Michael Jordan新研究官方解读：如何有效地避开鞍点
+
+https://mp.weixin.qq.com/s/idmt0F49tOCh-ghWdHLdUw
+
+吴恩达导师Michael I.Jordan学术演讲：如何有效避开鞍点。这是Jordan半年后的另一个演讲，有些新内容。
+
+https://mp.weixin.qq.com/s/jVjemfcLzIWOdWdxMgoxsA
+
+超越Adam，从适应性学习率家族出发解读ICLR 2018高分论文
+
+https://mp.weixin.qq.com/s/B9nUwPtgpsLkEyCOlSAO5A
+
+1cycle策略：实践中的学习率设定应该是先增再降
+
+https://mp.weixin.qq.com/s/dseeCB-CRtZnzC3d4_8pYw
+
+AMSGrad能够取代Adam吗
+
+https://zhuanlan.zhihu.com/p/81020717
+
+从SGD到NadaMax，十种优化算法原理及实现
+
+https://zhuanlan.zhihu.com/p/22252270
+
+深度学习最全优化方法总结比较（SGD，Adagrad，Adadelta，Adam，Adamax，Nadam）
+
+https://www.zhihu.com/question/64134994
+
+如何理解深度学习分布式训练中的large batch size与learning rate的关系？
+
+https://mp.weixin.qq.com/s/2wolhiTrWVeaSHxOpalUZg
+
+深度学习中的优化算法串讲
+
+https://zhuanlan.zhihu.com/p/261134624
+
+pytorch的余弦退火学习率
 
 # 单分类SVM&多分类SVM
 
@@ -60,6 +121,10 @@ One-Class Support Vector Machines for Anomaly Detection
 https://www.zhihu.com/question/22365729
 
 什么是一类支持向量机（one class SVM）
+
+https://mp.weixin.qq.com/s/04rKUq2q70iyvgOEWQMs0g
+
+20年单类别(One-Class)分类全面综述论文，从2001到2020
 
 ## 多分类SVM
 
@@ -127,6 +192,10 @@ https://mp.weixin.qq.com/s/1ZNCbj5kMFENzP_SapQYgg
 
 Softmax分类及与SVM比较
 
+https://mp.weixin.qq.com/s/j_LzPcESaou0FOS2Z4f3kA
+
+关于SVM，面试官们都怎么问
+
 ## 数据不平衡问题
 
 SVM中超参数C决定了错误分类的惩罚值，为了处理不平衡类别的问题，我们可以给C按类加权重：
@@ -151,166 +220,94 @@ https://mp.weixin.qq.com/s/lYj-GVNSDp26czRXbf0iNw
 
 如果你会模型融合！那么，我要和你做朋友！！
 
-# 三门问题
+https://mp.weixin.qq.com/s/-MbiSkgkF11gt5t9W0ExTw
 
-https://www.zhihu.com/question/26709273/
+模型融合方法最全总结
 
-蒙提霍尔问题（又称三门问题、山羊汽车问题）的正解是什么？
+## GBDT+LR
 
-https://zhuanlan.zhihu.com/p/21461266
+论文：
 
-数学杂谈——“三门问题”：Monty Hall Problem
+《Practical Lessons from Predicting Clicks on Ads at Facebook》
 
-https://zhuanlan.zhihu.com/p/23338174
+GBDT除了单独使用之外，也可以和其他模型Stack使用。
 
-蒙提霍尔问题/三门问题（Monty Hall problem）
+![](/images/img3/GBDT_LR.png)
 
-# 用户画像
+上图就是GBDT+LR的示意图。上图中，GBDT有红蓝两个子树。黑色样本经子树分类后，落在子树打勾的分支中。将分类结果进行编码，然后交给LR进行进一步的分类。
 
-https://mp.weixin.qq.com/s/TydTE50NzxMbGAigqv6BCw
+当然了，把GBDT换成其他决策树，如XGBoost，把LR换成SVM，显然也是可行的。相对于LR之类的模型，决策树在特征提取方面，还是很有优势的。
 
-如何破解“千人千面”，深度解读用户画像
+参考：
 
-https://mp.weixin.qq.com/s/bdAp_FExIK5IJH8WnD53Wg
+https://www.cnblogs.com/wkang/p/9657032.html
 
-你真的懂用户画像吗？
+GBDT+LR算法解析及Python实现
 
-https://mp.weixin.qq.com/s/LN6ib-8b_SZHR9u_-OMwNg
+https://blog.csdn.net/losteng/article/details/78378958
 
-推荐系统眼中的你：内容画像与用户画像
+学习GBDT+LR
 
-https://mp.weixin.qq.com/s/95Zklj8ovheQV3Gnc-2h-Q
+# 花式采样
 
-小米大数据总监司马云瑞详解小米用户画像的演进及应用解读
+- 分层采样（stratified random sampling）
 
-https://mp.weixin.qq.com/s/iuchckQ-MRqSZ2QwghgPTQ
+假设我们需要估计选举中每个候选人的平均票数。现假设该国有3个城镇：
 
-浅谈“用户画像”
+A镇有100万工人，B镇有200万工人，以及C镇有300万退休人员。
 
-https://mp.weixin.qq.com/s/ptI6cBxtykTQoljZR94RTw
+如果我们选择从A、B和C镇分别抽取10、20和30个随机样本，那么我们可以在总样本一定的情况下，产生较小的估计误差。
 
-从入门到冠军：中国移动人群画像赛TOP1经验分享
+- 蓄水池采样(Reservoir sampling)
 
-https://mp.weixin.qq.com/s/mSBwsMpOcn4RyVsyWSaYnQ
+采样过程：集合中总元素个数为n，随机选取k个元素。
 
-用户画像必会的行为偏好计算方法
+step1：首先将前k个元素全部选取。
 
-# 特征工程
+step2：对于第i个元素(i>k)，以概率k/i来决定是否保留该元素，如果保留该元素的话，则随机丢弃掉原有的k个元素中的一个(即原来某个元素被丢掉的概率是1/k)。
 
-https://mp.weixin.qq.com/s/ibiElLIgrT3wYx3tDYMMTw
+结果：每个元素被最终被选取的概率都是k/n。
 
-理解特征工程
+- 欠采样（Undersampling）和过采样（Oversampling）
 
-https://mp.weixin.qq.com/s/3Ce8uMf_Kyt-hEZUYfdh3g
+![](/images/img3/sampling.png)
 
-特征工程之特征选择
+- Tomek Links
 
-https://mp.weixin.qq.com/s/tOcyfK68jW7Tr-PGCvdXMA
+在这个算法中，我们最终从Tomek Links中删除了大多数元素，这为分类器提供了一个更好的决策边界。
 
-特征工程最后一个要点:特征预处理
+![](/images/img3/Tomek_Links.png)
 
-https://mp.weixin.qq.com/s/c9iHdgtErVd_iitwny7_zw
+- SMOE（Synthetic Minority Oversampling Technique）
 
-Kaggle前1%参赛者经验：特征工程为何如此重要？
+在现有元素附近合并少数类的元素。
 
-https://mp.weixin.qq.com/s/xbPJD0uoRB-T1x09AUYdzg
+![](/images/img3/SMOE.png)
 
-基于Python的自动特征工程——教你如何自动创建机器学习特征
+参考：
 
-https://mp.weixin.qq.com/s?__biz=MjM5MTQzNzU2NA==&mid=2651664000&idx=1&sn=ae6dda80df6d6278ae33b7bf7fbadcd2
+https://mp.weixin.qq.com/s/d3bpfnx-JGY7whqnHwAmWw
 
-深度特征合成：自动化特征工程的运作机制
+机器学习中不得不知的5种采样方法，分层、水塘等！
 
-https://mp.weixin.qq.com/s/R1MhoCfnd5drvg2CGLVsPw
+https://mp.weixin.qq.com/s/OZ-HfxBgFSvqeH8AEjGluQ
 
-哪种特征分析法适合你的任务？Ian Goodfellow提出显著性映射的可用性测试
+采样算法哪家强？一个针对主流采样算法的比较
 
-https://mp.weixin.qq.com/s/XSovbUDVTKe59DDaC1Kl8Q
+# 数据清洗
 
-如何进行特征表达，你知道吗？
+https://mp.weixin.qq.com/s/YrCC8CmP6UKuCmSdF2K_3g
 
-https://mp.weixin.qq.com/s/vhr5gXoa0S4-QqFcK7uz-w
+数据挖掘中的数据清洗方法大全
 
-模型吞噬特征工程
+https://mp.weixin.qq.com/s/FHdo2DTapoTryA-hOM-y_w
 
-https://mp.weixin.qq.com/s/zgKbG3r_B8d1qQHnrD2NCg
+还在为数据清洗抓狂？这里有一个简单实用的清洗代码集
 
-特征工程宝典《Feature Engineering for Machine Learning》翻译及代码实现
+https://mp.weixin.qq.com/s/r7ngZOM9tO-_OSfvs2aDJw
 
-https://mp.weixin.qq.com/s/3Clq9ECs6M52Sg-_xMxJGw
+数据清洗&预处理入门完整指南
 
-最核心的特征工程方法-分箱算法
+https://mp.weixin.qq.com/s/r4ycLnjOl5hSPBMwKpnmsQ
 
-https://mp.weixin.qq.com/s/ghfh1x_lsEcoA8PFPXE46w
-
-练手扎实基本功必备：非结构文本特征提取方法
-
-https://mp.weixin.qq.com/s?__biz=MzU2OTA0NzE2NA==&mid=2247515402&idx=1&sn=ee3cd5c64a707246216a532fa3af422b
-
-面向机器学习和数据分析的特征工程
-
-https://mp.weixin.qq.com/s/NKKk8nRd0qn5XhxXgYWknw
-
-手把手带你入门和实践特征工程的万字笔记
-
-https://mp.weixin.qq.com/s/QZeyEN2DDM_etEki7uodMg
-
-一个神奇的特征选择轮子----MLFeatureSelection
-
-https://mp.weixin.qq.com/s/8NI-NayCg_gZmJ6-1FZ_DA
-
-一个Python特征选择工具，助力实现高效机器学习
-
-https://mp.weixin.qq.com/s/LbXHpnC19euqriCtSHeg1Q
-
-UC Berkeley提出特征选择新方法：条件协方差最小化
-
-https://mp.weixin.qq.com/s/V3w5Iu804O6PmnBjmwCbgw
-
-常用文本特征选择
-
-https://mp.weixin.qq.com/s/Rj-ObD-eM5zEfs5fkWamGQ
-
-三大特征选择策略，有效提升你的机器学习水准
-
-https://mp.weixin.qq.com/s/rNipJC5wljzCT6Aq5gvvqw
-
-一款功能强大的特征选择工具（FeatureSelector）
-
-https://mp.weixin.qq.com/s/Bu34hPN0XAj6GmLXuQwVsQ
-
-风控特征—关系网络特征工程入门实践
-
-# 图论
-
-https://mp.weixin.qq.com/s/zOdy-1vCJD_dPFSoe0ELFA
-
-图论与图学习（一）：图的基本概念
-
-https://mp.weixin.qq.com/s/0ZdS1WOSDZiXnxP8fybBAw
-
-图论与图学习（二）：图算法
-
-https://mp.weixin.qq.com/s/BkKw2C3n9WsmIchJkkZxUw
-
-从七桥问题开始：全面介绍图论及其应用
-
-https://mp.weixin.qq.com/s/ZDY3Yt67eXK5pjXgvJkkyQ
-
-图论的各种基本算法
-
-https://mp.weixin.qq.com/s/2h1dgvPbYKBOYZPiixg9iw
-
-手把手：四色猜想、七桥问题…程序员眼里的图论，了解下？
-
-https://mp.weixin.qq.com/s/ra9v1pgFsbOcJrtONoZNvQ
-
-图论基础与图存储结构
-
-https://mp.weixin.qq.com/s/Y7qZlJdJ8fav5BXFGwdSOQ
-
-Graph Analysis and Its Application
-
-https://mp.weixin.qq.com/s/VdvvQetxAvkiNF04hV9PeA
-
-图搜索算法介绍(RRT/RRT*)
+如何打造高质量的NLP数据集

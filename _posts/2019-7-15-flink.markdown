@@ -1,18 +1,27 @@
 ---
 layout: post
-title:  Flink, Parquet, Beam, ORC, Apache Arrow, Ceph
+title:  Flink, Beam, Parquet, ORC, Apache Arrow, Ceph, 5G
 category: AI 
 ---
+
+* toc
+{:toc}
 
 # Flink
 
 Flink是一个流计算引擎。
+
+Flink的关键算法即Chandy-Lamport分布式快照算法，参见《数据库（一）》的“分布式算法”一节。
 
 官网：
 
 https://flink.apache.org
 
 参考：
+
+https://mp.weixin.qq.com/s/MrcBcdGIT4ESPUL0_sI3oQ
+
+流数据处理，Streaming Data，219页pdf
 
 https://mp.weixin.qq.com/s/WNcs0P5baLclZFBmEH3CCA
 
@@ -168,6 +177,70 @@ https://mp.weixin.qq.com/s/RaEm3lqMZY2rdY3vX4s5ow
 
 反压（backpressure）意味着数据管道中某个节点成为瓶颈，处理速率跟不上上游发送数据的速率，而需要对上游进行限速。
 
+https://mp.weixin.qq.com/s/7PAumCJ-RfMcUG7Ean-WnQ
+
+阿里巴巴大规模应用Flink的踩坑经验：如何大幅降低HDFS压力？
+
+https://mp.weixin.qq.com/s/qzYuhlZKn-G16fhpVtFNGA
+
+从开发到生产上线，如何确定集群大小?
+
+https://mp.weixin.qq.com/s/C2Uft-IuzgiKa1aDlROIng
+
+Flink如何支持特征工程、在线学习、在线预测等AI场景？
+
+https://blog.csdn.net/CoderPai/article/details/104862303
+
+流处理介绍
+
+https://blog.csdn.net/CoderPai/article/details/104898891
+
+数据清洗
+
+https://mp.weixin.qq.com/s/nV9KuEDgLRqRr-rd8OKh1Q
+
+Flink的Hello World，我用三种方式实现
+
+https://mp.weixin.qq.com/s/AZW_qEvUPdhYSj0SzAka6Q
+
+从零搭建实时数据分析系统
+
+https://mp.weixin.qq.com/s/l3J8FK2p1V0ySLPPXl0t2Q
+
+基于Flink的流式数据实时去重
+
+https://mp.weixin.qq.com/s/GTq-xV0-RC7-kt2QucGBYw
+
+基于Flink实时计算商品订单流失量
+
+https://mp.weixin.qq.com/s/sA8ZNsxNkmvft-ln9-6zjA
+
+如何生成Flink作业的交互式火焰图？
+
+https://mp.weixin.qq.com/s/mOdq33TfAYZRFgyTciqqXQ
+
+深入解析Flink的算子链机制
+
+https://mp.weixin.qq.com/s/wBuE76WAY6dgVTQfTBxpRg
+
+Alink：基于Flink的机器学习平台
+
+https://mp.weixin.qq.com/s/nlW0Ds7ZlSZUiOIMNHHxxg
+
+Flink实时数据分析系列1. 有状态流处理简介
+
+https://mp.weixin.qq.com/s/57eqekksna9sV5vIAtzhZA
+
+Flink实时数据分析系列2. 流处理基本概念
+
+https://mp.weixin.qq.com/s/K2LOrLLq5Qt2BvxIqknWQQ
+
+字节跳动单点恢复功能及Regional CheckPoint优化实践
+
+https://mp.weixin.qq.com/s/xAlf3_EgJQbYvVDwUYCDoA
+
+Flink执行引擎：流批一体的融合之路
+
 # Beam
 
 Apache Beam是一个数据处理的通用引擎，集成了多个处理数据框架（包括Cassandra、Elasticesarch、Hadoop-file-system、Hadoop-hbase、Jdbc、Kafka等）。Beam SDK给上层应用的开发者提供了一个统一的编程接口，开发者不需要了解底层的具体的大数据平台的开发接口是什么，直接通过Beam SDK的接口就可以开发数据处理的加工流程，不管输入是用于批处理的有界数据集，还是流式的无界数据集。
@@ -218,6 +291,8 @@ https://mp.weixin.qq.com/s/aVLBXS-eiWVpvIbeE2JVIw
 
 Apache Arrow设计的目的在于作为一个跨平台的数据层，来加快大数据分析项目的运行速度。
 
+![](/images/img4/Apache_Arrow.png)
+
 参考：
 
 https://www.cnblogs.com/smartloli/p/6367719.html
@@ -228,6 +303,10 @@ https://mp.weixin.qq.com/s/5UtpFg7Zmm6WY0OOxzeueQ
 
 TensorFlow与Apache Arrow数据集搭配最佳实践
 
+https://mp.weixin.qq.com/s/2LTu4wIFnkfiQE8bgJ5wOg
+
+Apache Arrow：一种适合异构大数据系统的内存列存数据格式标准
+
 # Ceph
 
 Ceph是一种为提高性能、可靠性和可扩展性而设计的统一的、分布式的存储系统。
@@ -237,3 +316,55 @@ Ceph是一种为提高性能、可靠性和可扩展性而设计的统一的、�
 https://mp.weixin.qq.com/s/KBaagb1zrkAmLyVgmkzJ3A
 
 ceph基本架构及数据分布原理
+
+# Clickhouse
+
+Clickhouse是俄罗斯yandex公司于2016年开源的一个列式数据库管理系统，可提供超越hive sql和spark sql的查询性能的OLAP引擎。
+
+参考：
+
+https://mp.weixin.qq.com/s/5ws-sT-AYswdx3xQuqmPqQ
+
+Clickhouse的实践之路
+
+# 5G
+
+https://mp.weixin.qq.com/s/oN-drJHFU34XanBzOKzrUQ
+
+有史以来最强的5G入门科普！
+
+https://www.iyiou.com/p/93766.html
+
+5G将是一个彻底的失败通信技术
+
+https://mp.weixin.qq.com/s/yIJT9D1YXa4rhf-RMBVPLw
+
+1G到5G之争：一部30年惊心动魄的移动通信史
+
+https://mp.weixin.qq.com/s/1un50xpUf0JGIG03M93gZQ
+
+解析5G背后的核心技术：波束成形
+
+https://mp.weixin.qq.com/s/uxuWmcplTmS8cJObd8cfVw
+
+第一次有人把5G核心网讲得如此通俗易懂！
+
+https://mp.weixin.qq.com/s/uYnu7v3w0evrJhTBYjbI_g
+
+啥叫5G超级上行？
+
+https://mp.weixin.qq.com/s/5v1uknmAPfqFR_5meie9GQ
+
+5G基站功耗到底有多可怕？网友惊呼：国家电网或是5G最大赢家！
+
+---
+
+O-RAN是中国移动发起的，中国三大运营商都是成员。
+
+诺基亚和爱立信意识到大势不可阻挡，后来也先后加入了O-RAN。双方的博弈在于运营商要求兼容O-RAN，但是在政治影响下大干快上时也许顾不上。
+
+唯一拒绝O-RAN的是华为。三十多年辉煌的版图扩张使自己颠覆自己的决定太难了。
+
+https://mp.weixin.qq.com/s/F3KRfVyvbtc5x2LZ7wgXuQ
+
+媒体口中的5G和真实的5G区别有多大？

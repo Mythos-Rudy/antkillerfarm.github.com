@@ -4,11 +4,36 @@ title:  深度加速（一）——概述, Winograd（1）
 category: DL acceleration 
 ---
 
+* toc
+{:toc}
+
 # 概述
 
-书籍：
+## 书籍
 
 《Embedded Deep Learning:  Algorithms, Architectures and Circuits for Always-on Neural Network Processing》
+
+## 教程
+
+http://dlsys.cs.washington.edu/
+
+CSE 599W: Systems for ML（陈天奇主讲）
+
+https://zhuanlan.zhihu.com/p/104649426
+
+CSE 599W-Systems for ML-辛酸阅读记录
+
+https://mp.weixin.qq.com/s/2CT7PKBP6yKV5nmN3XqfaA
+
+MIT公开课-Vivienne Sze教授《深度学习硬件加速器》，86页ppt
+
+https://fullstackdeeplearning.com/march2019
+
+UCB: Full Stack Deep Learning。这个课程是专门讲述如何部署DL工程到实际产品中。
+
+https://mp.weixin.qq.com/s/A-bTzUZiuZ-Ua6bTHinReg
+
+深度神经网络高效处理，82页pdf论述DNN计算加速设计原理技术
 
 # Winograd
 
@@ -109,7 +134,7 @@ Fast Convolution算法主要有**基于Lagrange插值的Cook-Toom算法**和**�
 
 我们首先来看一个简单的多项式乘法的例子：
 
-$$(x^2+2x+2)(3x+2)=3x^3+\color{red}{(2\times 3+1\times 2)}x^2+10x+4$$
+$$(x^2+2x+2)(3x+2)=3x^3+{\color{red}{(2\times 3+1\times 2)}}x^2+10x+4$$
 
 上式中红色的部分是有意保留下来没有合并的同类项，是不是感觉上和卷积运算十分类似呢？
 
@@ -248,7 +273,9 @@ Cook-Toom algorithm的缺点在于：当卷积核较大时，增加的加法数�
 
 但这个算法实际上是个非常低效的方法。实际中最常用的是Euclid在他的巨著《几何原本》中，给出的**Euclidean algorithm**，中文叫做**辗转相除法**。
 
-顺便提一句，求余数的整数除法，也被称作**Euclidean division**。（普通整数除法以小数，而非余数（remainder），代替无法整除的部分）宗师就是这么牛！
+顺便提一句，求余数的整数除法，也被称作**Euclidean division**。（普通整数除法以小数，而非余数（remainder），代替无法整除的部分）
+
+宗师就是这么牛！
 
 这里引入如下数学符号：
 
@@ -261,21 +288,3 @@ $$m(m>0)$$整除n记作$$m \mid n$$，其定义为存在一个整数k使得$$km=
 $$x \equiv a \pmod{m}$$
 
 上式表示x除以m的余数和a除以m的余数相等，这样的关系被称为“x和a同余（模为m）”
-
-Euclidean algorithm的步骤如下图所示：
-
-![](/images/article/Euclidean_algorithm.png)
-
-1.假设$$a>b$$，则令$$c:=a \mod{b}$$。
-
-2.如果$$c=0$$，则$$GCD(a,b)=b$$。
-
-3.否则令$$a:=b,b:=c$$，并返回到第1步。
-
-这个算法应该是Euclid记述的前人成果，因为更早的Eudoxus of Cnidus曾提到过这个算法。
-
->Eudoxus of Cnidus，公元前390年～公元前337年，古希腊几何学家、天文学家和地理学家。柏拉图同时代最杰出的数学家。《几何原本》卷Ⅴ和卷Ⅻ主要来自欧多克索斯的工作。
-
-然而，小学课本不使用Euclidean algorithm是有原因的，除了Euclidean algorithm本身相对复杂之外，短除法能同时搞定最大公约数和最小公倍数（Least common multiple），这也是它的教学优势所在。
-
-Euclidean algorithm作为最古老的算法之一，被收录进Knuth的巨著TAOCP。这里的算法，指的是那些根据一定的规则来一步步执行的运算。

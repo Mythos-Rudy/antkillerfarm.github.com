@@ -1,18 +1,41 @@
 ---
 layout: post
-title:  机器学习（二十二）——机器学习分类器性能指标, 训练集、验证集和测试集
+title:  机器学习（二十二）——机器学习分类器性能指标
 category: ML 
 ---
 
-# Loss function详解（续）
+* toc
+{:toc}
+
+# Loss function详解
+
+## Triplet Loss（续）
+
+https://gehaocool.github.io/2018/03/20/Angular-Margin-%E5%9C%A8%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8/
+
+Angular Margin在人脸识别中的应用
+
+https://mp.weixin.qq.com/s/SqaR_7gwJpUNPM7g4IHaYw
+
+深度人脸识别中不同损失函数的性能对比
+
+https://zhuanlan.zhihu.com/p/138850070
+
+从Triplet loss看推荐系统中文章Embedding
+
+https://mp.weixin.qq.com/s/tpI5k5sg15WHGv3YoMp-rA
+
+​Triplet-loss原理与应用
+
+https://zhuanlan.zhihu.com/p/295512971
+
+完全解析triplet loss
 
 ## Coupled Cluster Loss
 
 论文：
 
 《Deep Relative Distance Learning: Tell the Difference Between Similar Vehicles》
-
-
 
 参考：
 
@@ -40,59 +63,53 @@ https://mp.weixin.qq.com/s/aKRUJt-_1QSQFcRVtuyJ4w
 
 https://zhuanlan.zhihu.com/p/55036597
 
-样本贡献不均：Focal Loss和 Gradient Harmonizing Mechanism
+样本贡献不均：Focal Loss和Gradient Harmonizing Mechanism
 
 https://mp.weixin.qq.com/s/LfCuOEndS4Y5dPqXTsE_hA
 
 剖析Focal Loss损失函数： 消除类别不平衡+挖掘难分样本
 
-## Other Loss
+https://mp.weixin.qq.com/s/Ryxu1qsmL_Roi5zDb1KSRQ
 
-https://mp.weixin.qq.com/s/7Jg-YvS3nvcPJ-zYhK96EA
+AP-Loss：提高单阶段目标检测性能的分类损失，超越Focal loss
 
-分享神经网络中设计loss function的一些技巧
+https://mp.weixin.qq.com/s/lzb-R0CQ3YRY4a8WBbdOhw
 
-https://mp.weixin.qq.com/s/cYcztl8N9JF-XXp9xLJIxg
+Focal Loss详解以及为什么能够提高处理不平衡数据分类的表现
 
-一文道尽softmax loss及其变种
+https://zhuanlan.zhihu.com/p/147691786
 
-https://mp.weixin.qq.com/s/MTeuRYutMiCmthEAObyAIg
+大白话Generalized Focal Loss
 
-从最优化的角度看待Softmax损失函数
+https://zhuanlan.zhihu.com/p/313684358
 
-https://zhuanlan.zhihu.com/p/23340343
+大白话Generalized Focal Loss V2
 
-Center Loss及其在人脸识别中的应用
+https://mp.weixin.qq.com/s/zLDUAnxghsBYiUMQQdbBGQ
 
-https://zhuanlan.zhihu.com/p/34404607
+Generalized Focal Loss：Focal loss魔改以及预测框概率分布
 
-人脸识别的LOSS（上）
+https://mp.weixin.qq.com/s/is8veFCOPpJDXA2okn7pNA
 
-https://zhuanlan.zhihu.com/p/34436551
+10分钟理解Focal loss数学原理与Pytorch代码
 
-人脸识别的LOSS（下）
+https://zhuanlan.zhihu.com/p/324613604
 
-https://mp.weixin.qq.com/s/kI22wSoyNT3QXXI8pVwbjA
-
-腾讯AI Lab提出新型损失函数LMCL：可显著增强人脸识别模型的判别能力
-
-https://mp.weixin.qq.com/s/8KM7wUg_lnFBd0fIoczTHQ
-
-用收缩损失(Shrinkage Loss)进行深度回归跟踪
-
-https://mp.weixin.qq.com/s/VNPX5BADo4EJkIp1yWGoag
-
-斯坦福学者提出GIoU，目标检测任务的新Loss
-
-https://mp.weixin.qq.com/s/piYyhPbA6kAXuSE5yHfQ1g
-
-人脸识别损失函数综述
+用概率分布评估检测框质量的Generalized Focal Loss V2
 
 ## 参考
+
+https://mp.weixin.qq.com/s/SsHF3Zpqv61G68nim8ocnQ
+
+深度学习激活函数全面综述论文
 
 https://mp.weixin.qq.com/s/gw3hoDSaojVQUiD6YsMabA
 
 理解神经网络中的目标函数
+
+https://mp.weixin.qq.com/s/l0FRj78M73vQGqppNSyBwQ
+
+深度学习常用损失函数总览：基本形式、原理、特点
 
 https://mp.weixin.qq.com/s/h-QbwEbaivvHjdhDhE4V1A
 
@@ -130,22 +147,6 @@ https://mp.weixin.qq.com/s/ixYhM29-famb8lbzNYnHAg
 
 深度学习中常用的损失函数有哪些？
 
-https://zhuanlan.zhihu.com/p/38855840
-
-SphereReID：从人脸到行人，Softmax变种效果显著
-
-https://mp.weixin.qq.com/s/ZoLO6OilivPgle03KdNzCQ
-
-人脸识别中Softmax-based Loss的演化史
-
-https://mp.weixin.qq.com/s/DwtA6GivVCDvL4MXNDBFWg
-
-阿里巴巴提出DR Loss：解决目标检测的样本不平衡问题
-
-https://blog.csdn.net/shanglianlm/article/details/85019768
-
-十九种损失函数
-
 https://mp.weixin.qq.com/s/AmXF0xA_T-ZjjnOt4XRgRw
 
 谷歌提出新分类损失函数：将噪声对训练结果影响降到最低
@@ -169,6 +170,10 @@ https://zhuanlan.zhihu.com/p/82199561
 https://mp.weixin.qq.com/s/CbORYhJQn27J0G4G6XpODw
 
 用于弱监督图像语义分割的新型损失函数
+
+https://mp.weixin.qq.com/s/Yo68YnMMvy5FXkCjBLCJuw
+
+常见的损失函数
 
 # 机器学习分类器性能指标
 
@@ -219,6 +224,16 @@ https://en.wikipedia.org/wiki/Sensitivity_and_specificity
 
 如果是做搜索，那就是保证召回的情况下提升准确率；如果做疾病监测、反垃圾，则是保准确率的条件下，提升召回率。所以，在两者都要求高的情况下，可以用F-measure来衡量。
 
+虽然precision、recall和F1为我们提供了一个单值度量，但它们不考虑返回的搜索结果的顺序。为了解决这一局限性，人们设计了以下排序感知的度量标准：
+
+Mean Reciprocal Rank(MRR)
+
+Average Precision(AP)
+
+Mean Average Precision(MAP)
+
+---
+
 Accuracy和Precision是一对容易混淆的概念。其一般定义如下图所示：
 
 ![](/images/article/Accuracy_and_precision.svg)
@@ -234,6 +249,30 @@ Accuracy和Precision是一对容易混淆的概念。其一般定义如下图所
 **Golden**：Golden这个术语的使用范围并不局限于ML领域，凡是能够给出“标准答案”的地方，都可以将该答案称为Golden。
 
 比如在DL领域的硬件优化中，通常使用标准算法生成Golden结果，然后用优化之后的运算结果与之比对，以验证优化的正确性。
+
+---
+
+上述内容中，预测结果和标签之间只有真和假两种关系，因此又被称为**二元相关性**问题。
+
+类似的还有**分等级的相关性**问题。例如，我们有一个排序模型，它会为一个特定的查询返回5个最相关的结果。这时预测结果和ground-truth之间就不是简单的真和假的关系了。
+
+比如，预测结果的第一名虽然不是ground-truth的第一名，但却是ground-truth的第二名。这样的话，显然就不能直接否定预测结果了。
+
+评估这类问题，可以采用如下度量：
+
+Cumulative Gain
+
+Discounted Cumulative Gain
+
+Normalized Discounted Cumulative Gain
+
+---
+
+![](/images/img4/AUC.jpg)
+
+如图，modelA和modelB的ROC曲线下面积AUC是相等的，但是两个模型在不同区域的预测能力是不相同的，所以我们不能单纯根据AUC的大小来判断模型的好坏。
+
+---
 
 参考：
 
@@ -269,28 +308,30 @@ https://mp.weixin.qq.com/s/sKiAwLoxdP9yyZX0-R4UrA
 
 一文读懂AUC-ROC
 
-# 训练集、验证集和测试集
+https://mp.weixin.qq.com/s/k-Jm24aMlPgWMtFYaKNlog
 
-对于一个模型来说，其参数可以分为**普通参数**和**超参数**。在不引入强化学习的前提下，那么普通参数就是可以被梯度下降所更新的，也就是训练集所更新的参数。另外，还有超参数的概念，比如网络层数、网络节点数、迭代次数、学习率等等，这些参数不在梯度下降的更新范围内。尽管现在已经有一些算法可以用来搜索模型的超参数，但多数情况下我们还是自己人工根据验证集来调。
+信息检索中的度量指标全解析
 
-从狭义来讲，验证集没有参与梯度下降的过程，也就是说是没有经过训练的；但从广义上来看，验证集却参与了一个“人工调参”的过程，我们根据验证集的结果调节了迭代数、调节了学习率等等，使得结果在验证集上最优。因此，我们也可以认为，验证集也参与了训练。
+https://mp.weixin.qq.com/s/Q_lN83h6nA242_Tv9hqtPQ
 
-那么就很明显了，我们还需要一个完全没有经过训练的集合，那就是测试集。
+关于个性化排序任务评价指标的大讨论
 
-参考：
+https://zhuanlan.zhihu.com/p/161703182
 
-http://kexue.fm/archives/4638/
+深挖一下F1 score
 
-训练集、验证集和测试集的意义
+https://zhuanlan.zhihu.com/p/69101372
 
-https://zhuanlan.zhihu.com/p/48976706
+分类问题的评估指标一览
 
-训练集、验证集和测试集
+https://zhuanlan.zhihu.com/p/92792702
 
-https://mp.weixin.qq.com/s/idS2l7u_OBxWi5UBexlK4w
+AUC的缺陷
 
-如何正确使用机器学习中的训练集、验证集和测试集？
+https://zhuanlan.zhihu.com/p/33025359
 
-https://mp.weixin.qq.com/s/ubpRPQ7-1nvY5CzICWi1Cg
+ROC和CMC曲线的理解（FAR, FRR的理解）
 
-似乎没区别，但你混淆过验证集和测试集吗？
+https://mp.weixin.qq.com/s/5Kl311pNRSwjo0yDGsrySA
+
+小孩都看得懂的ROC

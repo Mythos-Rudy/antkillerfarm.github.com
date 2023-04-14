@@ -1,8 +1,11 @@
 ---
 layout: post
-title:  Java构建工具, ZeroC ICE, Jam
-category: technology 
+title:  Java构建工具, Jam
+category: toolchain 
 ---
+
+* toc
+{:toc}
 
 # Java构建工具
 
@@ -104,7 +107,7 @@ http://repo.maven.apache.org/maven2
 
 >注意这个配置文件只对该repo生效，如果想全局有效的话，可修改/etc/maven/settings.xml。
 
-{% highlight xml %}
+```xml
 <mirrors>
   <mirror>
     <id>UK</id>
@@ -113,7 +116,7 @@ http://repo.maven.apache.org/maven2
     <mirrorOf>central</mirrorOf>
   </mirror>
 </mirrors>
-{% endhighlight %}
+```
 
 其他mirror有：
 
@@ -155,7 +158,7 @@ jcenter是JFrog的产品，后者专注于maven部署，因此该网站拥有的
 
 2.使用system scope。
 
-{% highlight xml %}
+```xml
   <dependencies>
     <dependency>
       <groupId>org.richard</groupId>
@@ -165,7 +168,7 @@ jcenter是JFrog的产品，后者专注于maven部署，因此该网站拥有的
       <systemPath>${project.basedir}/lib/my-jar.jar</systemPath>
     </dependency>
   </dependencies>
-{% endhighlight %}
+```
 
 这种方法下，jar可以和代码放在同一个文件夹下，以便分发。然而这种做法不是官方推荐的做法，在执行时，需要自己处理classpath的问题。
 
@@ -253,48 +256,6 @@ Gradle Wrapper能够让你的工程在没有安装Gradle的机器上编译。
 
 类似的，maven也有一个Wrapper，有些工程里的mvnw或mvnw.cmd，就是这个Wrapper的文件。
 
-# ZeroC ICE
-
-我在研究生时代，研究过CORBA、EJB、COM这样的中间件技术。然而工作以后，再没有机会使用。平时偶尔关注，也只是晓得CORBA从来没有流行过，EJB在Struts、Hibernate、Spring等框架的围攻下，用者寥寥。直到最近，因为项目需要接触到ZeroC的ICE框架。
-
-ICE框架的官网地址：
-
-https://zeroc.com/downloads/ice
-
-安装：
-
-{% highlight bash %}
-wget https://zeroc.com/download/GPG-KEY-zeroc-release
-sudo apt-key add GPG-KEY-zeroc-release
-sudo apt-add-repository "deb http://zeroc.com/download/apt/ubuntu16.04 stable main"
-sudo apt-get update
-sudo apt-get install zeroc-ice-all-runtime zeroc-ice-all-dev
-sudo apt-get install libssl-dev
-pip install zeroc-ice
-{% endhighlight %}
-
-多语言demo：
-
-https://github.com/zeroc-ice/ice-demos
-
-注意demo的master分支是开发分支，好多代码都是有问题的，请切换到正在使用版本的分支，例如：
-
-`git checkout 3.6`
-
-# Hprose
-
-Hprose是ZeroC ICE的一个竞争者，由国内某高手打造，支持的语言超过20种，堪称最全。不过貌似没什么大公司用啊。。。
-
-其标榜的无需生成桩代码的优点，相比ZeroC ICE的老版本来说，的确是个进步。但目前的ZeroC ICE 3.6版本，也同样提供了类似的功能。这或者也是Hprose一直火不起来的原因。
-
-官网：
-
-http://hprose.com/
-
-Github：
-
-https://github.com/hprose
-
 # Jam
 
 Jam是Perforce推出的构建工具。
@@ -332,3 +293,51 @@ https://github.com/antkillerfarm/antkillerfarm_crazy/tree/master/cpp/jam
 https://blog.csdn.net/jadedrip/article/details/1722318
 
 bjam初接触
+
+# Build tools+
+
+## blade
+
+blade是腾讯出品的构建工具。
+
+官网：
+
+https://github.com/chen3feng/blade-build
+
+## MSbuild
+
+MSbuild当然是微软的构建工具了。
+
+官网：
+
+https://msdn.microsoft.com/en-us/library/dd393574.aspx
+
+参考：
+
+http://www.cnblogs.com/linianhui/archive/2012/08/30/2662648.html
+
+MSBuild入门
+
+## OkBuck
+
+OkBuck是Uber推出的构建工具。
+
+官网：
+
+https://github.com/uber/okbuck
+
+## WAF
+
+WAF是一个python写的构建工具。
+
+官网：
+
+https://waf.io
+
+## vcpkg
+
+这是MS提供的一个C/C++包管理工具，一般配合CMake使用。支持平台包括Windows/Linux/MacOS。
+
+官网：
+
+https://github.com/Microsoft/vcpkg

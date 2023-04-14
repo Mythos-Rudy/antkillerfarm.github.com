@@ -4,6 +4,9 @@ title:  Kaldi（一）
 category: AI 
 ---
 
+* toc
+{:toc}
+
 # Kaldi
 
 Kaldi是一个语音识别的工具包。它由Daniel Povey于2009年创建。
@@ -64,32 +67,52 @@ https://mp.weixin.qq.com/s/f0B85WP-y84Xo3HaG3T6dQ
 
 语音识别开源工具PyTorch-Kaldi：兼顾Kaldi效率与PyTorch灵活性
 
+# Kaldi 2
+
+Kaldi 2是Daniel Povey来到小米之后，提出的新项目。
+
+它可以分为三个部分：
+
+- LHOTSE：训练数据的准备。
+
+代码：
+
+https://github.com/lhotse-speech/lhotse
+
+- K2：核心算法，旨在使用TF或Pytorch实现相关的音频算法，主要是Finite State Automaton(FSA)和Finite State Transducer(FST)方面的算法。
+
+代码：
+
+https://github.com/k2-fsa/k2
+
+- Icefall：示例脚本集合。
+
 # 编译
 
 1.检查依赖。
 
-{% highlight bash %}
+```bash
 cd tools
 extras/check_dependencies.sh
-{% endhighlight %}
+```
 
 根据提示，缺什么就装什么。
 
 2.编译tools文件夹
 
-{% highlight bash %}
+```bash
 make -j 4
-{% endhighlight %}
+```
 
 3.编译src文件夹
 
-{% highlight bash %}
+```bash
 cd ../src
 sudo apt install libatlas-base-dev
 ./configure --shared
 make depend -j 4
 make -j 4
-{% endhighlight %}
+```
 
 # 运行示例
 
@@ -111,7 +134,7 @@ http://cn-mirror.openslr.org/18/
 
 2.修改cmd.sh。
 
-{% highlight bash %}
+```bash
 export train_cmd=run.pl
 export decode_cmd="run.pl --mem 4G"
 export mkgraph_cmd="run.pl --mem 8G"
@@ -120,7 +143,7 @@ export cuda_cmd="run.pl --gpu 1"
 #export decode_cmd="queue.pl --mem 4G"
 #export mkgraph_cmd="queue.pl --mem 8G"
 #export cuda_cmd="queue.pl --gpu 1"
-{% endhighlight %}
+```
 
 3.修改run.sh中的数据路径，并运行之。
 
@@ -202,7 +225,7 @@ Kaldi里的音频默认是16k采样率，16bits，单通道。如果是其他参
 
 Kaldi里有很大一部分数据是LDC的，比如timit，rm，wsj等。它们虽然是wave的格式，但其实不是真正的wav格式，其实是nist的SPHERE格式，kaldi里通过sph2pipe这个来把格式转成真正的wave格式。
 
-如果有人要在windows下看这些音频，可以在linux下通过sph2pipe转换下，或者有个叫voicebox的matlab程序里有个readsph的程序来转下。
+如果有人要在windows下看这些音频，可以先在linux下通过sph2pipe转换，或者用一个叫voicebox的matlab程序包里的readsph程序来转换。
 
 此外，kaldi里librispeech其实是FLAC格式，这是一个无损的格式，也需要通过flac命令来转成wave来处理。
 
@@ -300,42 +323,42 @@ https://blog.csdn.net/snowdroptulip/article/details/78943748
 
 `utt_id    WORD1 WORD2 WORD3 WORD4 ...`
 
-{% highlight text %}
+```text
 110236_20091006_82330_F_0001 I'M WORRIED ABOUT THAT
 110236_20091006_82330_F_0002 AT LEAST NOW WE HAVE THE BENEFIT
 110236_20091006_82330_F_0003 DID YOU EVER GO ON STRIKE
-{% endhighlight %}
+```
 
 ## segments
 
 `utt_id    file_id    start_time    end_time`
 
-{% highlight text %}
+```text
 110236_20091006_82330_F_001 110236_20091006_82330_F 0.0 3.44
 110236_20091006_82330_F_002 110236_20091006_82330_F 4.60 8.54
 110236_20091006_82330_F_003 110236_20091006_82330_F 9.45 12.05
 110236_20091006_82330_F_004 110236_20091006_82330_F 13.29 16.13
-{% endhighlight %}
+```
 
 ## wav.scp
 
 `file_id    path/file`
 
-{% highlight text %}
+```text
 110236_20091006_82330_F path/110236_20091006_82330_F.wav
 111138_20091215_82636_F path/111138_20091215_82636_F.wav
 111138_20091217_82636_F path/111138_20091217_82636_F.wav
-{% endhighlight %}
+```
 
 ## utt2spk
 
 `utt_id    spkr_id`
 
-{% highlight text %}
+```text
 110236_20091006_82330_F_0001 110236
 110236_20091006_82330_F_0002 110236
 110236_20091006_82330_F_0003 110236
-{% endhighlight %}
+```
 
 ## spk2utt
 
@@ -345,16 +368,16 @@ https://blog.csdn.net/snowdroptulip/article/details/78943748
 
 lexicon.txt就是发声词典。
 
-{% highlight text %}
+```text
 WORD        W ER D
 LEXICON     L EH K S IH K AH N
-{% endhighlight %}
+```
 
 # ARPA文件格式
 
 SRILM生成的lm文件是ARPA文件格式。
 
-{% highlight text %}
+```text
 \data\
 ngram 1=64000
 ngram 2=522530
@@ -365,20 +388,6 @@ ngram 3=173445
 -4.675221    'em     -0.221857
 -4.989297    'n      -0.05809768
 -5.365303    'til    -0.1855581
-{% endhighlight %}
+```
 
 这个文件的头部比较好懂，不解释。
-
-1-grams部分中每一条包括了3项，其中第二项显然是条目文本本身。
-
-第一项表示ngram的条件概率，即$$P(word_N \mid word_1，word_2，\dots，word_{N-1})$$。
-
-第三项表示回退（backoff）概率。
-
-下面我们举例说明条件概率和回退概率的用法。
-
-假设arpa的最高元是3元，则句子ABCDEF发生的概率为：
-
-$$P(ABCDEF)=P(A)*P(B\mid A)*P(C\mid AB)*P(D\mid BC)*P(E\mid CD)*(F\mid DE)$$
-
-其中，P(A)通过访问arpa中的1-grams项获得，$$P(B\mid A)$$通过访问2-grams项获得，其他的概率通过访问3-grams项获得。

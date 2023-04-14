@@ -4,9 +4,26 @@ title:  GAN（三）——GAN的评估指标, DCGAN, WGAN-GP, CGAN, BEGAN & EBGA
 category: GAN & VAE 
 ---
 
+* toc
+{:toc}
+
 # GAN进阶
 
-## GAN的理论解释（续）
+## GAN的理论解释
+
+顾险峰教授对GAN提出了自己的理论解释。
+
+>顾险峰，1989年考入清华大学计算机科学与技术系。1992年获得清华大学特等奖学金。后于美国哈佛大学获得计算机博士学位，师从国际著名微分几何大师丘成桐先生。目前为美国纽约州立大学石溪分校计算机系终身教授。
+
+参考：
+
+https://mp.weixin.qq.com/s/7O0AKIUVYK7HRyvdRbUVkg
+
+虚构的对抗，GAN with the wind
+
+https://mp.weixin.qq.com/s/trvMOTXNs7L6fSmTkZXwsA
+
+看穿机器学习（W-GAN模型）的黑箱
 
 https://mp.weixin.qq.com/s/thcxsBVttSIEzVNLQlAVCA
 
@@ -50,13 +67,13 @@ Inception来源于Google的Inception Net，因为计算这个score需要用到In
 
 生成的图片不够清晰，显然说明生成模型表现欠佳；生成的图片够清晰了，我们还要看是不是能生成足够多样的图片，有些生成模型只能生成有限的几种清晰图片，陷入了所谓mode collapse，也不是好的模型。
 
-----
+---
 
 **mode collapse(模式坍塌)**，即生成高度相似的样本。
 
 ![](/images/img2/mode_collapse.jpg)
 
-假设某个data distribution有两个模式（如上图所示），generator可能就学到一个mode，另一个mode则完全没学到。
+假设某个data distribution有两个模式（如上图所示），generator可能就只学到一个mode，另一个mode则完全没学到。
 
 参考：
 
@@ -68,7 +85,7 @@ https://mp.weixin.qq.com/s/QFCJ7BxNvfj2L9Wlr6aq9A
 
 解决模式崩溃的两条思路：改进优化和网络架构
 
-----
+---
 
 针对这两方面，IS的思路如下：
 
@@ -133,6 +150,14 @@ Fréchet Inception Distance(FID)
 https://mp.weixin.qq.com/s/jGSqB6UpCeQo8FC219TWbQ
 
 学习GAN模型量化评价，先从掌握FID开始吧
+
+https://mp.weixin.qq.com/s/tV3ymNXo6xmXFu3K1AJYJQ
+
+最早被用于评价GAN模型的定量指标Inception Score是什么
+
+https://mp.weixin.qq.com/s/kHBPGq2z1IaKUFQe4WKd3Q
+
+长文综述解读如何定量评价生成对抗网络(GAN)
 
 # DCGAN
 
@@ -249,15 +274,3 @@ AutoEncoder包含两个部分：
 **2.Decoder。**将tensor解码为图片。
 
 对于原始的GAN来说，G网络和Decoder的结构类似，而D网络和Encoder的结构类似。所以整个网络D(G(z))就像是一个反着接的AutoEncoder。
-
-AutoEncoder：Encoder->Decoder
-
-GAN：Decoder->Encoder
-
-对于生成模型来说，细节是很重要的，然而原始的GAN，通常只能生成模糊的图片。如何提高图片的分辨率呢？
-
-EBGAN将D网络的结构由Encoder改为了Encoder->Decoder（也就是一个AE），即输入和输出都是图片。将Loss由KL散度改为了MSE。
-
-这样的做法可以类比CV中的分类网络和语义分割网络。由于Loss和图片的每个像素都直接相关，因此更利于生成细节信息。
-
-类似的，这里的AE，也可以换成其他Encoder->Decoder网络，例如U-NET。

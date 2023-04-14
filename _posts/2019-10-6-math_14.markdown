@@ -1,10 +1,31 @@
 ---
 layout: post
-title:  数学狂想曲（十四）——数学的深渊, Wavelet & Chirplet
+title:  数学狂想曲（十四）——数学的深渊, Wavelet & Chirplet, Lanchester战争模型
 category: math 
 ---
 
+* toc
+{:toc}
+
 # 软件滤波算法（续）
+
+## 限幅平均滤波法
+
+方法：相当于“限幅滤波法”+“递推平均滤波法”，每次采样到的新数据先进行限幅处理，再送入队列进行递推平均滤波处理。
+
+优点：融合了两种滤波法的优点，对于偶然出现的脉冲性干扰，可消弭由于脉冲干扰所惹起的采样值偏差。
+
+缺点：比较浪费RAM。
+
+<a name="Filter"/>
+
+## 一阶滞后滤波法
+
+方法：取a=0~1，本次滤波结果=(1-a)*本次采样值+a*上次滤波结果。
+
+优点：对周期性干扰具有良好的抑制造用，适用于波动频率较高的场合。
+
+缺点：相位滞后，灵敏度低，滞后程度取决于a值大小，不能消弭滤波频率高于采样频率的1/2的干扰信号。
 
 ## 加权递推平均滤波法
 
@@ -100,7 +121,7 @@ $$b_0*X(n)+b_1*X(n-1)+b_2*X(n-2)+...+b_k*X(n-k)$$
 
 ![](/images/img3/math_24.jpg)
 
-----
+---
 
 其他深渊：
 
@@ -122,59 +143,21 @@ $$size(A-C)\le size(A-B)+size(B-C)$$
 
 证明：
 
-$$A-C=\{x\mid x\in A \cap x\notin C\}=\{x\mid x\in A \cap (x\in B \cup x\notin B)\cap x\notin C\}
-\\=\{x\mid (x\in A \cap x\notin B \cap x\notin C) \cup (x\in A \cap x\in B \cap x\notin C) \}
-\\\subseteq \{x\mid (x\in A \cap x\notin B) \cup (x\in B \cap x\notin C) \}=(A-B)\cup (B-C)$$
+$$
+\begin{array}\\
+A-C=\{x\mid x\in A \cap x\notin C\}=\{x\mid x\in A \cap (x\in B \cup x\notin B)\cap x\notin C\}\\
+=\{x\mid (x\in A \cap x\notin B \cap x\notin C) \cup (x\in A \cap x\in B \cap x\notin C) \}\\
+\subseteq \{x\mid (x\in A \cap x\notin B) \cup (x\in B \cap x\notin C) \}=(A-B)\cup (B-C)
+\end{array}
+$$
 
 又因为：$$size(X\cup Y)\le size(X)+size(Y)$$，所以
 
 $$size(A-C)\le size((A-B)\cup (B-C))\le size(A-B)+size(B-C)$$
 
-# 拓扑学
-
-《Topopogy Without Tears》，University of New South Wales的Sidney A. Morris著。
-
-该书的中文版：
-
-http://www.topologywithouttears.net/topbookchinese.pdf
-
-# Lie Groups
-
-《State estimation for Robotics: A Matrix Lie Group Approach》
-
->Marius Sophus Lie，1842～1899，挪威数学家。University of Christiania博士（1871），University of Leipzig教授。当时德国的大学，一个系只有一个教授，所以这里的教授相当于现在的系主任或者院长。Lie接的是Felix Klein的班，后者跑到University of Göttingen当教授去了。
-
-参考：
-
-https://zhuanlan.zhihu.com/p/33156814
-
-李群和李代数
-
-https://zhuanlan.zhihu.com/p/76959511
-
-李群和李代数（一）：刚体的三维运动
-
-https://zhuanlan.zhihu.com/p/77576417
-
-李群和李代数（二）：矩阵李群基础
-
-https://zhuanlan.zhihu.com/p/80663767
-
-李群和李代数（三）：优化基础
-
-https://zhuanlan.zhihu.com/p/87438999
-
-李群和李代数（四）：姿态估计小结
-
-## Sophus
-
-Sophus是一个C++写的Lie Groups的库。显然，它得名自Marius Sophus Lie。
-
-代码：
-
-https://github.com/strasdat/Sophus
-
 # 莫比乌斯反演
+
+>August Ferdinand Möbius，1790～1868，德国数学家、天文学家。University of Leipzig毕业后，曾在University of Göttingen访学，导师Gauss。University of Leipzig教授，Leipzig天文台台长。
 
 http://blog.csdn.net/acdreamers/article/details/8542292
 
@@ -200,6 +183,34 @@ http://blog.csdn.net/outer_form/article/details/50588307
 
 莫比乌斯反演定理证明
 
+https://zhuanlan.zhihu.com/p/36390998
+
+Möbius inversion and Dirichlet convolution
+
+---
+
+Mobius Band可能是Mobius更著名的发现。
+
+![](/images/img3/Mobius_band.jpg)
+
+类似的还有Klein bottle。
+
+![](/images/img3/Klein_bottle.jpg)
+
+>Felix Christian Klein，1849~1925，德国数学家。University of Bonn博士（1868），先后执教于Institute of Technology in Munich、Universities of Leipzig、Göttingen。
+
+需要注意的是，Mobius Band一种2维变换，所以可以映射到3维空间，而Klein bottle本身是3维变换，只有在4维空间才能看到它的真面目，所以克莱因瓶实际上是造不出来的。
+
+https://www.zhihu.com/question/23922861
+
+克莱因瓶能否制造出来？
+
+参考：
+
+https://mp.weixin.qq.com/s/E-I_3C-3m0KTI1XjYaKWcA
+
+陶哲轩挑战失败的百年数学问题，被两名在家隔离的数学家破解了。（任何简单闭合环路，是否总能在其上找到四个点形成一个任意长宽比矩形？）
+
 # Wavelet & Chirplet
 
 ![](/images/img3/chirplet.png)
@@ -222,24 +233,96 @@ https://blog.csdn.net/sinat_26545113/article/details/78835038
 
 https://zhuanlan.zhihu.com/p/66189212
 
-从傅里叶变换进阶到小波变换（一）
+从傅立叶变换进阶到小波变换（一）
 
 https://zhuanlan.zhihu.com/p/66246381
 
-从傅里叶变换进阶到小波变换（二）
+从傅立叶变换进阶到小波变换（二）
 
 https://zhuanlan.zhihu.com/p/68323379
 
-从傅里叶变换进阶到小波变换（三）
+从傅立叶变换进阶到小波变换（三）
 
 https://zhuanlan.zhihu.com/p/69956002
 
-从傅里叶变换进阶到小波变换（四）
+从傅立叶变换进阶到小波变换（四）
 
-# 张量分析
+https://zhuanlan.zhihu.com/p/22450818
 
-在同构的意义下，第零阶张量（r = 0）为标量（Scalar），第一阶张量（r = 1）为向量（Vector），第二阶张量（r = 2）则成为矩阵（Matrix）。
+小波变换
 
-《张量分析》，黄克智著。
+# Lanchester战争模型
 
->注：黄克智，1927年生，固体力学家。江西中正大学本科+清华硕士+莫斯科大学博士（因应召回国，放弃博士学位）。清华大学工程力学系教授、工程力学研究所所长，中国科学院院士。断裂力学领域权威。
+第一次世界大战期间，英国工程师Lanchester针对战争问题建模，以预测战争的结果。
+
+>Frederick William Lanchester，1868～1946，被誉为英国三大最杰出的汽车工程师之一。英国皇家学会会员。
+
+该模型包含了两个子模型：
+
+**Lanchester's linear law**：假设双方的装备能力相当，则单位时间内的损失，和战线的长度成正比，且双方损失的数量相等。这个模型主要适用于远程兵器威力有限的古代战争，古代战争以短兵相接的肉搏战为主。而肉搏战的特点就是**一对一**。
+
+**Lanchester's square law**：现代战争越来越立体化，因此是个**多对多**的模型。
+
+首先，我们假设A军在战斗开始后的t时刻有$$x(t)$$人，B军在战斗开始后的t时刻有$$y(t)$$人，且每支军队的减员均由敌方攻击造成，减员速率与敌方人数成正比。忽略增员部队与非战斗减员，我们可以根据双方的减员速率列出如下的微分方程组：
+
+$$\frac{\mathrm{d}x}{\mathrm{d}t}=-by\tag{1}$$
+
+$$\frac{\mathrm{d}y}{\mathrm{d}t}=-cx\tag{2}$$
+
+在上述微分方程组中，b与c分别代表B军与A军的单兵作战效率，即每个战士在单位时间内干掉的敌军数量。我们可以用这个量来代表士兵的“质量”或“效率”，显然这个量与军队的武器水平，指挥员的指挥水平与战士的单兵素质有关。
+
+用公式2除以公式1，得：
+
+$$\cfrac{\cfrac{\mathrm{d}y}{\mathrm{d}t}}{\cfrac{\mathrm{d}x}{\mathrm{d}t}}=\frac{-cx}{-by}$$
+
+$$\frac{\mathrm{d}y}{\mathrm{d}x}=\frac{cx}{by}$$
+
+$$by\mathrm{d}y=cx\mathrm{d}x$$
+
+两边同时求t的定积分：
+
+$$\int_{t_0}^t by(t)\mathrm{d}y(t)=\int_{t_0}^t cx(t)\mathrm{d}x(t)$$
+
+$$b\int_{y_0}^y y\mathrm{d}y=c\int_{x_0}^x x\mathrm{d}x$$
+
+$$by^2-by_0^2=cx^2-cx_0^2$$
+
+$$by^2-cx^2=by_0^2-cx_0^2=K$$
+
+我们可以由b，c，与双方初始人数$$y_0，x_0$$计算出K值。显然：
+
+当K=0时，A、B平手。
+
+当K>0时，B胜。
+
+当K<0时，A胜。
+
+Lanchester模型是一个连续模型，但实际战斗，尤其是海战，一般是离散模型，这时就要用到Salvo combat model了。
+
+>比如中途岛战役，美国在击沉日本3艘航母之后，遭到日本飞龙号的反击，损失了约克城号，直到第二波攻击，才最终将飞龙号击沉。
+
+参考：
+
+https://mp.weixin.qq.com/s/npprTz_GRgdv3BK7ff2grg
+
+Lanchester战争模型：用可分离变量的微分方程占卜战事
+
+# 数学杂谈
+
+![](/images/article/joke.jpg)
+
+---
+
+日心说这个东西，现在的人总觉得古人脑子怎么不开窍，老以自己为中心，而没有想到地球围绕太阳转。
+
+其实日心说，古代就有。之所以不流行，是因为遇到了托勒密这个大牛，这哥们对球面几何和三角函数都研究的很深，发明了最早的三角函数表。
+
+托勒密的著作中不但建立了地心说模型，而且还有数学推导。这也使得他的反对者，长期以来搞不定他。
+
+就是哥白尼，其实也没有能翻案。真正搞定托勒密，要等到开普勒时代了。
+
+参考：
+
+https://mp.weixin.qq.com/s/jIlE6VDlgOgoIpUBiGzF5w
+
+他（Claude Ptolemy）是被埋没了1300年的超级学霸，却凭一己之力，影响世界，改变人类文明！

@@ -1,311 +1,350 @@
 ---
 layout: post
-title:  深度学习（三十六）——深度推荐系统（2）
+title:  深度学习（三十六）——手势识别, 深度图像压缩, 深度树学习
 category: DL 
 ---
 
-# 深度推荐系统（续）
+* toc
+{:toc}
 
-https://mp.weixin.qq.com/s/fiUcm143ieCe3KkcJ0V5LQ
+# 手势识别
 
-京东如何在仓储库存部署时保证“啤酒尿裤”的高效履约？
+https://zhuanlan.zhihu.com/p/26630215
 
-https://mp.weixin.qq.com/s/n9j9QuMe3fIPQFQKk5Tgjw
+浅谈手势识别在直播中的运用
 
-Airbnb: 深度学习在搜索排序业务中的探索与演进（一）
+https://zhuanlan.zhihu.com/p/30561160
 
-https://mp.weixin.qq.com/s/ejQW9EI48kJ4pvIlh7H3Dw
+2017-最全手势识别/跟踪相关资源大列表分享
 
-Airbnb: 深度学习在搜索排序业务中的探索与演进（二）
+http://www.sohu.com/a/203306961_465975
 
-https://zhuanlan.zhihu.com/p/57234648
+浙江大学CSPS最佳论文：使用卷积神经网络的多普勒雷达手势识别
 
-深入解读Airbnb推荐算法
+https://www.zhihu.com/question/20131478
 
-https://mp.weixin.qq.com/s/oOQfV35x9IJgE0y_ecjntA
+我打算只根据手的形状来识别手势。用哪种机器学习算法比较好？
 
-解读Airbnb的个性化搜索排序算法
+https://www.leiphone.com/news/201502/QM7LdSN874dWXFLo.html
 
-https://mp.weixin.qq.com/s/2Th2PO4rC-r4LOU46uYDjg
+带你了解世界最先进的手势识别技术
 
-重读Youtube深度学习推荐系统论文，字字珠玑，惊为神文
+https://mp.weixin.qq.com/s/DbvH6jM1VV47xKylbW-pug
 
-https://mp.weixin.qq.com/s/mcf3Aoub6VbNwtA-Izsdbg
+掌纹识别近十年进展综述
 
-YouTube深度学习推荐系统的十大工程问题
+https://mp.weixin.qq.com/s/mnPh8w3VuG9apprOkugbLA
 
-https://mp.weixin.qq.com/s/A7Qg1gd66aksA6npJl3dNQ
+中科大提出新型连续手语识别框架LS-HAN，帮助“听”懂听障人士
 
-深度学习在搜索业务中的探索与实践
+https://mp.weixin.qq.com/s/pUciYFjOKL3ea91fLCy0Yw
 
-https://mp.weixin.qq.com/s/wjgoH6-eJQDL1KUQD3aQUQ
+基于OpenCV与tensorflow实现实时手势识别
 
-大众点评搜索基于知识图谱的深度学习排序实践
+https://mp.weixin.qq.com/s/xtTmPtjCk4FQuQ3RnPZxEg
 
-https://mp.weixin.qq.com/s/Dmkc7X-GgRrdNVQXz6Mwgg
+UC伯克利黑科技：用语音数据预测说话人手势
 
-镶嵌在互联网技术上的明珠：漫谈深度学习时代点击率预估技术进展
+https://blog.csdn.net/wangyaninglm/article/details/87296595
 
-https://mp.weixin.qq.com/s/-EDxUwAKdXnmUKeLJTiAUw
+指纹的对比分析系统概述
 
-解构阿里深度兴趣网络（DIN）：如何将注意力机制引入推荐系统？
+https://mp.weixin.qq.com/s/oybz1DsC8lO5fmgA-3gEfQ
 
-https://mp.weixin.qq.com/s/lnCe_3ssP6IEOHEX-N4vyg
+指纹识别不灵敏怎么办？
 
-达观数据于敬：个性化推荐系统实践应用
+https://mp.weixin.qq.com/s/ji8sEzJXp1UNgBHVOui0ng
 
-https://mp.weixin.qq.com/s/CYW-WMl94FT2-fqsxShNDw
+谷歌开源手势识别器，手机能用，还有现成的App，但是被我们玩坏了
 
-读者喜欢看什么文章？腾讯微信融合时间过程与内容特征寻找答案
+# 深度图像压缩
 
-https://mp.weixin.qq.com/s/4k106lCBns-iEg3gy5mcbg
+Tiny Network Graphics是图鸭科技推出一种基于深度学习的图片压缩技术。由于商业因素，这里没有论文，技术细节也不详，但是下图应该还是有些用的。
 
-WSDM 2019教程—李航、何向南等，深度学习匹配在搜索和推荐中的应用
+![](/images/img2/TNG.png)
 
-https://mp.weixin.qq.com/s/SYFShtmBIgEW8_cEYec0kw
+还有视频压缩：
 
-清华张敏教授：个性化推荐研究进展（可解释性、鲁棒性和公平性）
+论文：
 
-https://zhuanlan.zhihu.com/p/57056588
+《Deep Learning-Based Video Coding: A Review and A Case Study》
 
-一图胜千言: 解读阿里的Deep Image CTR Model
+参考：
 
-https://mp.weixin.qq.com/s/98X2agJlZcCH6IdZqf9m0A
+https://mp.weixin.qq.com/s/YBJwLqqL7aVUTG0LaUbwxw
 
-深度学习在美团配送ETA预估中的探索与实践
+深度学习助力数据压缩，一文读懂相关理论
 
-https://mp.weixin.qq.com/s/J0j9NwSNhxab6bXqBBzaUw
+https://mp.weixin.qq.com/s/WYsxFX4LyM562bZD8rO95w
 
-进击的下一代推荐系统：多目标学习如何让知乎用户互动率提升100%？
+图鸭发布图片压缩TNG，节省55%带宽
 
-https://mp.weixin.qq.com/s/BInWMRt-fVcRbY8aCiPnpA
+https://mp.weixin.qq.com/s/meK8UBnVHzA9YspQ2RFp6Q
 
-淘宝总知道你要什么？万字讲述智能内容生成实践
+体积减半画质翻倍，他用TensorFlow实现了这个图像极度压缩模型
 
-https://mp.weixin.qq.com/s/E6EH6aJjzTwN2UZf_4nwoA
+https://mp.weixin.qq.com/s/_5tyt7pU0gIXbkmTOVEtDw
 
-从FFM到DeepFFM，推荐排序模型到底哪家强？
+嫌图片太大？！卷积神经网络轻松实现无损压缩到20%！
 
-https://www.zhihu.com/question/20830906/
+https://mp.weixin.qq.com/s/a4oU8UK_hLMrKXNRQizAag
 
-deep learning可以用来做推荐系统吗？
+图鸭科技获CVPR 2018图像压缩挑战赛单项冠军，技术解读端到端图像压缩框架
 
-https://mp.weixin.qq.com/s/WZ5CYdinRvRrCuniLHok-Q
+https://mp.weixin.qq.com/s/VDyPjzXdwMGEsoXQmhrp9g
 
-Embedding技术在深度学习CTR模型中的应用
+图鸭科技斩获CVPR图像压缩挑战赛冠军，TNGcnn4p技术全解读
 
-https://mp.weixin.qq.com/s/MBVac45WpZy4c208zF3Ang
+https://mp.weixin.qq.com/s/B7reSwa9sCZqbkYVM5-VOA
 
-当你打开天猫的那一刻，推荐系统做了哪些工作？
+图像压缩哪家强？请看这份超详细对比
 
-https://mp.weixin.qq.com/s/V7QODQ2F9q8Q7lfuny8JPw
+https://mp.weixin.qq.com/s/K17wlC3tueNBfHkYBUFcQg
 
-强化学习用于推荐系统，蚂蚁金服提出生成对抗用户模型
+基于深度学习的HEVC复杂度优化。这是篇视频压缩的blog。
 
-https://mp.weixin.qq.com/s/FevsysNqRhq6Njh0ILCveQ
+https://mp.weixin.qq.com/s/exUYS2v5VyRaMdFylWlobw
 
-推荐系统遇上深度学习，9篇阿里推荐论文汇总！
+用循环神经网络进行文件无损压缩：斯坦福大学提出DeepZip
 
-https://mp.weixin.qq.com/s/_YP6zpsgMLgAZemW3PRj3w
+https://mp.weixin.qq.com/s/GEMOfh04XR5IyWWlvZeeng
 
-基于深度学习的序列推荐系统：概念，算法与评估
+CLIC图像压缩挑战赛冠军方案解读
 
-https://mp.weixin.qq.com/s/X-1zyTPKlCSKupkhzVG_AQ
+https://zhuanlan.zhihu.com/p/78050429
 
-Airbnb实时个性化推荐之Embedding真的好用吗？
+基于深度学习的视频压缩方案介绍
 
-https://mp.weixin.qq.com/s/w3qt1qW8tfWr25ZemPdYvQ
+https://mp.weixin.qq.com/s/gNtxBI0Alk70cEujxQmSFQ
 
-推荐模型的演化趋势及FM统一召回模型实践
+如何将图像压缩10倍？阿里工程师有个大胆的想法！这是一篇传统算法的blog。
 
-https://mp.weixin.qq.com/s/IfS7-pMbyfkDENoEOFN6lQ
+https://mp.weixin.qq.com/s/OkywKX4XygM8VqkL8A1fcA
 
-学习偏好，北大&BOSS直聘的这个AI模型能更好的为你找工作
+TIP 2019开源论文：基于深度学习的HEVC多帧环路滤波方法
 
-https://mp.weixin.qq.com/s/d3ZQ07XJ8x8MRgWHpAckZg
+https://mp.weixin.qq.com/s/Qod-SHNa-El48_n-w5PCLQ
 
-工程师如何给女友买包？问问阿里“百事通”
+超越H.265，中科大使用多帧数据改进视频压缩新方法
 
-https://mp.weixin.qq.com/s/I5LG_u1_pcY9_tUCAxATGA
+https://zhuanlan.zhihu.com/p/150340687
 
-“看一看”推荐模型揭秘！微信团队提出实时Look-alike算法，解决推荐系统多样性问题
+可逆图像缩放：完美恢复降采样后的高清图片
 
-https://mp.weixin.qq.com/s/3-eGTFCtvSnk-29si2WJGA
+https://mp.weixin.qq.com/s/jFT6jULJXypFryLB5VEjpw
 
-深度学习在推荐系统中的应用及论文小结
+基于深度学习的图像与视频压缩
 
-https://mp.weixin.qq.com/s/TUXvhkdqQ_kdmSKknsvUcA
+https://mp.weixin.qq.com/s/sBdAj6tS_FJQ-uxqrMRuOQ
 
-深度学习在推荐系统中的应用
+大话实时视频编码中的人工智能（上）
 
-https://mp.weixin.qq.com/s/4VcRdEg_XcZ1TRKPfbCjaw
+https://mp.weixin.qq.com/s/9_ZHrgWwGwX0pyafgCvCsg
 
-想了解大厂如何做推荐？Facebook开源深度学习推荐模型DLRM
+大话实时视频编码中的人工智能（下）
 
-https://mp.weixin.qq.com/s/qoxEidhZAlY9R0T3y3nP6Q
+# 深度树学习
 
-阿里首次将用户手势数据用于电商场景！淘宝提出用户实时意图预测算法DIPN，效果秒杀传统模型
+决策树是传统ML领域的王者，对于如何将之深度化，一般有两个方向：
 
-https://mp.weixin.qq.com/s/MhW2RDgFv58Yt4cvD2YvHg
+- 树结构的深度化。代表：gcForest。
 
-CTR预估问题没有“银弹”，比模型结构更重要的是什么？
+- 树+DL。一般被称为深度树学习。
 
-https://mp.weixin.qq.com/s/a4_BLRB8Y1HvJcZS9O-I5A
+## gcForest
 
-阿里最新论文解读：考虑时空域影响的点击率预估模型DSTN
+http://mp.weixin.qq.com/s/aDKLcITA6TBZDyNmuAU4Bw
 
-https://zhuanlan.zhihu.com/p/69050253
+周志华教授gcForest（多粒度级联森林）算法预测股指期货涨跌
 
-五大顶会2019必读的深度推荐系统与CTR预估相关的论文
+https://mp.weixin.qq.com/s/GU9-rH0gFan620Jhc1HTDg
 
-https://mp.weixin.qq.com/s/HwMkRHGH_vH1M2naoW902A
+周志华提出的gcForest能否取代深度神经网络？
 
-深度学习在美团配送ETA预估中的探索与实践
+https://mp.weixin.qq.com/s/dEmox_pi6KGXwFoevbv14Q
 
-https://mp.weixin.qq.com/s/C0osCg2uNrzJv0kqZohUDg
+周志华：首个基于森林的自编码器，性能优于DNN
 
-当经济学遇见搜索引擎，287页教程带你领略最新研究成果
+http://mp.weixin.qq.com/s/IfEgSOIkIPA-YtC9NQW1ng
 
-https://mp.weixin.qq.com/s/x2nmmEcsV82dGBJgIj2Znw
+非神经网络的深度模型gcForest
 
-可解释性推荐和搜索教程
+https://mp.weixin.qq.com/s/N80l9PZQposbIOKXbv8ayw
 
-https://zhuanlan.zhihu.com/p/52824004
+周志华：最新实验表明gcForest已经是最好的非深度神经网络方法
 
-当推荐系统邂逅深度学习
+https://mp.weixin.qq.com/s/8QP5X9Hxi_6qyfxP4O0Gwg
 
-https://mp.weixin.qq.com/s/69z8LSuEM3Th8crhUNMhiA
+周志华团队和蚂蚁金服合作：用分布式深度森林算法检测套现欺诈
 
-基于知识的个性化推荐理由生成解析
+https://mp.weixin.qq.com/s/bE9BZQ6wCICvrgomdySDuw
 
-https://mp.weixin.qq.com/s/xxTP_WRGy-lYykk300SnWw
+周志华组提出可做表征学习的多层梯度提升决策树
 
-推荐系统工程难题：如何做好深度学习CTR模型线上Serving
+https://mp.weixin.qq.com/s/AwvSTF8j0AinS-EgmPFJTA
 
-https://mp.weixin.qq.com/s/ZZoQynG8XYzhtgwqorBUyg
+周志华团队：深度森林挑战多标签学习，9大数据集超越传统方法
 
-天下武功，唯快不破，论推荐系统的“实时性”
+## 深度树学习
 
-https://mp.weixin.qq.com/s/DzsS7Q1hqH2YwRTvKFVh6w
+https://mp.weixin.qq.com/s/GO7bXBY0cVfGIEEAtp0sKg
 
-如何增强推荐系统模型更新的“实时性”？
+什么时候以及为什么基于树的模型可以超过神经网络模型？
 
-https://mp.weixin.qq.com/s/G4G6okx8NGOH8hk92C0KmQ
+https://mp.weixin.qq.com/s/bjOVQu0FZyTWQRlwEn8IVA
 
-前沿推荐系统方法，UTS 316页PPT
+基于深度树学习的Zero-shot人脸检测识别
 
-https://www.zhihu.com/question/332347498
+https://mp.weixin.qq.com/s/pWcFuOecG-dZHZ365clDjg
 
-如何理解在各类NLP或CTR预估模型中，将embedding求平均这一做法的物理意义？
+阿里妈妈新突破！深度树匹配如何扛住千万级推荐系统压力
 
-https://mp.weixin.qq.com/s/F2DAMKXbc4MI3iaayljxtQ
+https://mp.weixin.qq.com/s/sw16_sUsyYuzpqqy39RsdQ
 
-Deep FM详解
+阿里妈妈深度树检索技术（TDM）及应用框架的探索实践
 
-https://zhuanlan.zhihu.com/p/79900211
+https://mp.weixin.qq.com/s/EFDmHH8oUmJk-rG5PNnsAg
 
-通过Embedding和Mapping方法实现跨领域推荐
+阿里妈妈深度树匹配技术演进：TDM->JTM->BSAT
 
-https://mp.weixin.qq.com/s/f8WypYGcz3W56o6aG0NuoA
+https://mp.weixin.qq.com/s/6r8y7tMqo53lnACWG1K4xA
 
-为什么说阿里工程师最懂时尚？
+深度树学习用于Zero-shot人脸的反欺诈
 
-https://mp.weixin.qq.com/s/t8HKBn2NKzEkzyZwR4svaA
+https://mp.weixin.qq.com/s/NBVPlFGO12PhMTF0dUL2hw
 
-Exact-k：阿里工程师找到了组合推荐的秘密！
+DeepGBM:使用树蒸馏提升在线预测任务下深度模型效果
 
-https://zhuanlan.zhihu.com/p/76413089
+# 视频处理+
 
-电商多目标优化小结
+https://mp.weixin.qq.com/s/cuejj8atJsbSDae9xnhsxA
 
-https://mp.weixin.qq.com/s/OL4X2hNlOcE3peD-CYTTdw
+锁定视频中的目标：港大提出运动注意力检测方法
 
-基于神经网络的协同过滤（NCF）详解
+https://mp.weixin.qq.com/s/AUfaghIcRwwzgZzhOqHVZg
 
-https://mp.weixin.qq.com/s/29mEv-trmrvIx_wqfu5EYw
+对标GLUE、ImageNet，谷歌推出视觉任务适应性基准VTAB
 
-Neural Factorization Machines神经因子分解机详解
+https://mp.weixin.qq.com/s/sc3ROchBFK9pAb-FCKNwLg
 
-https://mp.weixin.qq.com/s/92udRhAQHqDCCFpK6YUFOw
+你说我导！微软玩转标题描述生成视频
 
-深度学习在推荐系统中的最新应用
+https://mp.weixin.qq.com/s/jUPhF6OHtVrmTbg29sQV2Q
 
-https://mp.weixin.qq.com/s/ii7rLrZetLf3l_ThHc-4lQ
+谷歌提出TVN视频架构：单CPU处理1s视频仅需37ms、GPU仅需10ms
 
-Attentional Factorization Machines（AFM）详解
+https://mp.weixin.qq.com/s/wwHUjME5vR1uF3ad_wlMzw
 
-https://mp.weixin.qq.com/s/bBVFuxuq4e__MYmYyeX5bQ
+更准确的弱监督视频动作定位，从生成注意力模型出发
 
-MSRA开源基于注意力机制的全新推荐模型，融合用户长短期偏好
+https://mp.weixin.qq.com/s/18KzXb4hHrWvt3QK2UUm3w
 
-https://zhuanlan.zhihu.com/p/86031123
+使用深度学习从视频中估计车辆的速度
 
-深度CTR预估新积木ONN模型源码阅读与调参经验
+https://mp.weixin.qq.com/s/vuhoK4cVaHDn6oTuGqX_Eg
 
-https://mp.weixin.qq.com/s/B109cC_hf3XXsKRAw-0_xA
+你写脚本，AI自动剪视频：13分钟完成剪辑师7小时创作，清华北航联手打造
 
-YouTube视频推荐系统为什么那么强？
+https://mp.weixin.qq.com/s/IZs9Ctktmvzi_SAU9kD7Gg
 
-https://mp.weixin.qq.com/s/c6aZYgx7gKuZk3EMs6PNRQ
+多模态人物识别技术及其在爱奇艺视频场景中的应用
 
-Youtube推荐系统是如何挖掘用户内心另一面的
+https://mp.weixin.qq.com/s/_OTvNrUtbYaFvKlMxFXoDg
 
-https://zhuanlan.zhihu.com/p/53462648
+时间可以是二维的吗？基于二维时间图的视频内容片段检测
 
-AutoInt:使用Multi-head Self-Attention进行自动特征学习的CTR模型
+https://mp.weixin.qq.com/s/8N09Argm9sNJRYipq3Mipw
 
-https://mp.weixin.qq.com/s/JXW--wzpaFwRHSSvZEA0mg
+淘宝如何拥抱短视频时代？视频推荐算法实战
 
-阿里提出多目标优化全新算法框架，同时提升电商GMV和CTR
+https://mp.weixin.qq.com/s/1h9QvZirPa7EZIpOcC_aiw
 
-https://mp.weixin.qq.com/s/0vZqCswErlggD6S52GnYVA
+超清还不够，商汤插帧算法让视频顺滑如丝
 
-YouTube多目标排序系统：如何推荐接下来收看的视频
+https://mp.weixin.qq.com/s/adUW9QuXaJ9uIb7Co5j_gw
 
-https://mp.weixin.qq.com/s/km9jnS5_k3kvuyfhUvzbWQ
+视频物体分割算法：如何提升复杂场景的分割精度？
 
-推荐系统中的前沿技术研究与落地：深度学习、AutoML与强化学习
+https://mp.weixin.qq.com/s/mASzImKwlpX7BJZFux3Adw
 
-https://mp.weixin.qq.com/s/9DWyX2D6KlOVAJZoPgonYA
+视频预测领域有哪些最新研究进展？
 
-深度CTR预估模型的演化之路2019最新进展
+https://mp.weixin.qq.com/s/f2fYwaPNty72CFUIZZPBoA
 
-https://mp.weixin.qq.com/s/rAbSWoo3WMdHsHaOx_x6fw
+让电影动漫统统变丝滑，480帧也毫无卡顿，交大博士生开源插帧软件DAIN
 
-阿里巴巴素材治理算法介绍，为电商大促保驾护航
+https://mp.weixin.qq.com/s/8EQNRIIKQnyoPhUG8ben6A
 
-https://mp.weixin.qq.com/s/8M3MCrEFktUJPr7UsdMMew
+基于耦合知识蒸馏，速度提升200倍，一款视频显著区域检测新算法
 
-Google最新论文：Youtube视频推荐如何做多目标排序
+https://mp.weixin.qq.com/s/MjkdwozIXoCJbooQHype7w
 
-https://mp.weixin.qq.com/s/s4onMqilnlI1SNgFLr7gww
+视频异常检测：预测未来帧Future Frame Prediction的3个缺陷
 
-为什么你的毛衣显胖又显黑？这个算法给你答案
+https://mp.weixin.qq.com/s/ZVWxpZPCoUvzZH6F0YkjNg
 
-https://mp.weixin.qq.com/s/QSGrkLWDyeZLfyeeXHUS_w
+图像视频深度异常检测简明综述论文
 
-基于多视角学习和个性化注意力机制的新闻推荐
+https://zhuanlan.zhihu.com/p/114672282
 
-https://mp.weixin.qq.com/s/b6XHZq6C0ZWOcDrysjMoog
+漫谈视频目标跟踪与分割
 
-RALM: 实时Look-alike算法在微信看一看中的应用
+https://mp.weixin.qq.com/s/oY51Rk6qD7fxeSRIf7HAFg
 
-https://mp.weixin.qq.com/s/R0RGMTUj5Er07yvYurzFuQ
+图像生成玩腻了？视频生成技术何不来了解一下
 
-微信看一看实时Look-alike推荐算法
+https://mp.weixin.qq.com/s/sfdhG7Wv3s2XW6yYA1ELQA
 
-https://mp.weixin.qq.com/s/ZYbiNbBeEADvGafMKfy9zA
+基于记忆增强的全局-局部整合网络：更准确的视频物体检测方法
 
-淘宝首页那些“辣眼睛”的图去哪了？
+https://mp.weixin.qq.com/s/B5XrN3rxHsu4VrJLgL3bvg
 
-https://zhuanlan.zhihu.com/p/93467919
+视频分类与行为识别有哪些核心技术，对其进行长期深入学习
 
-推荐系统之序列化建模
+https://mp.weixin.qq.com/s/x-fBo5pFD6UlKLh7p68H2A
 
-https://mp.weixin.qq.com/s/HEMtps82qKKtq0mV0d4vdw
+用机器学习打造计数君，谷歌RepNet可自动计数视频重复片段
 
-微信算法工程师带你一文了解推荐系统领域的最新进展
+https://mp.weixin.qq.com/s/BSaacpLOVhrm94ufaSPtWA
 
-https://mp.weixin.qq.com/s/rM9jhcj1JlZSbXOP4m9E-Q
+RepNet：对视频中的重复周期进行计数
 
-FLEN: 一种时空高效的利用特征场信息缓解梯度耦合的CTR预测模型
+https://mp.weixin.qq.com/s/9Vt41Ygn767SnpjoXgnEEg
+
+基于语义流的快速而准确的场景解析
+
+https://mp.weixin.qq.com/s/V6UQ8r43p4ULmm4QgjmHSA
+
+OpenCV实现视频稳流
+
+https://mp.weixin.qq.com/s/Wn5k0VoscaiIHHC36_Jm2g
+
+视频目标检测大盘点
+
+https://mp.weixin.qq.com/s/1DA5KoqDskD-tk2Co8n0nQ
+
+阿里-优酷视频增强和超分辨率挑战赛冠军方案：VESR-Net
+
+https://zhuanlan.zhihu.com/p/340568861
+
+预测未来--随机视频生成
+
+https://mp.weixin.qq.com/s/ZIFEom7wpQll_DgE8bUxtA
+
+不同的AI视频推理场景下，如何构建通用高效的抽帧工具？
+
+https://zhuanlan.zhihu.com/p/347705276
+
+MMAction2: 新一代视频理解工具箱
+
+https://zhuanlan.zhihu.com/p/363872795
+
+无监督/自监督的视觉目标跟踪方法
+
+https://mp.weixin.qq.com/s/IuhOLVRgqnoOuxZ2boUGuw
+
+管中窥“视频”，“理解”一斑——视频理解概览
+
+https://mp.weixin.qq.com/s/4fL-6VSpBFgicJ2MAY7twA
+
+视频异常行为检测算法MPN，在多个数据库上达到SOTA

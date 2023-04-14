@@ -1,197 +1,362 @@
 ---
 layout: post
-title:  深度学习（十八）——语义分割, FCN
+title:  深度学习（十八）——无监督/半监督/自监督深度学习（1）
 category: DL 
 ---
 
-# 语义分割
+* toc
+{:toc}
 
-Semantic segmentation是图像理解的基石性技术，在自动驾驶系统（具体为街景识别与理解）、无人机应用（着陆点判断）以及穿戴式设备应用中举足轻重。
+# 无监督/半监督/自监督深度学习
 
-我们都知道，图像是由许多像素（Pixel）组成，而“语义分割”顾名思义就是将像素按照图像中表达语义含义的不同进行分组（Grouping）/分割（Segmentation）。
+自监督学习是一种特殊目的的无监督学习。不同于传统的AutoEncoder等方法，仅仅以重构输入为目的，而是希望通过surrogate task学习到和高层语义信息相关联的特征。
 
-![](/images/article/image_enet.png)
+## 对比学习
 
-上图是语义分割网络ENet的实际效果图。其中，左图为原始图像，右图为分割任务的真实标记（Ground truth）。
+![](/images/img4/SimCLR.jpg)
 
-显然，在图像语义分割任务中，其输入为一张HxWx3的三通道彩色图像，输出则是对应的一个HxW矩阵，矩阵的每一个元素表明了原图中对应位置像素所表示的语义类别（Semantic label）。
+https://mp.weixin.qq.com/s/r1uXn2jGsHZcZ8Nk7GnGFA
 
-因此，图像语义分割也称为“图像语义标注”（Image semantic labeling）、“像素语义标注”（Semantic pixel labeling）或“像素语义分组”（Semantic pixel grouping）。
+语义表征的无监督对比学习：一个新理论框架
 
-由于图像语义分割不仅要识别出对象，还要标出每个对象的边界。因此，与分类目的不同，相关模型要具有像素级的密集预测能力。
+https://zhuanlan.zhihu.com/p/346686467
 
-目前用于语义分割研究的两个最重要数据集是PASCAL VOC和MSCOCO。
+对比学习（Contrastive Learning）综述
+
+https://mp.weixin.qq.com/s/SOaA9XNnymLgGgJ5JNSdBg
+
+对比学习（Contrastive Learning）相关进展梳理
+
+https://mp.weixin.qq.com/s/U0pTQkW55evm94iQORwGeA
+
+图解SimCLR框架，用对比学习得到一个好的视觉预训练模型
+
+https://mp.weixin.qq.com/s/1RJ4bbfDC5LiN2PNIxdzew
+
+SimCLR框架的理解和代码实现以及代码讲解
+
+https://mp.weixin.qq.com/s/-Vtl_8nND7WCPLdL5bNlMw
+
+探索孪生神经网络：请停止你的梯度传递
+
+https://zhuanlan.zhihu.com/p/321642265
+
+《探索简单孪生网络表示学习》阅读笔记
+
+https://mp.weixin.qq.com/s/6qqFAQBaOFuXtaeRSmQgsQ
+
+一文梳理2020年大热的对比学习模型
+
+https://mp.weixin.qq.com/s/SeAZERYdfqDbtqTLnuWfGg
+
+盘点近期大热对比学习模型：MoCo/SimCLR/BYOL/SimSiam
+
+https://mp.weixin.qq.com/s/jHVg-BMRRVNjAf6ZFEoPxQ
+
+自监督学习的SimCLRv2框架
+
+https://mp.weixin.qq.com/s/7iBC_n6EARW3V8bNuKUqQA
+
+Hinton团队力作：SimCLR系列
+
+https://mp.weixin.qq.com/s/sH-G4g0EyQLu2l91Xvdefw
+
+Neighbor2Neighbor：无需干净图像的自监督图像降噪
+
+https://mp.weixin.qq.com/s/xYlCAUIue_z14Or4oyaCCg
+
+对比学习研究进展精要
+
+https://mp.weixin.qq.com/s/VlSoMmAGDblQ2UYhLD96gA
+
+什么是contrastive learning？
+
+https://mp.weixin.qq.com/s/qnG0YLf0yjs4aT9URRMDyw
+
+有监督对比学习的一个简单的例子
+
+https://mp.weixin.qq.com/s/h8loG3enT5U-5F2a2UflJg
+
+对比学习小综述
+
+https://mp.weixin.qq.com/s/v5p9QA3vDl-WTF3-7shp4g
+
+对比学习简述
+
+https://mp.weixin.qq.com/s/CeqoXqHjfa6UTWa8mmo_Ww
+
+Paper和陈丹琦撞车是一种怎样的体验（ConSERT vs. SimCSE）
+
+https://mp.weixin.qq.com/s/C4KaIXO9Lp8tlqhS3b0VCw
+
+美团提出基于对比学习的文本表示模型（ConSERT）
+
+## Prompt Learning
+
+在BERT和Word2Vec相关章节中，我们已经看到了，如何采用类似完形填空的方式，来利用大量的无标签语料，对模型进行预训练。这里的完形填空就是一种Prompt Learning。
+
+更一般的对于输入的文本$$x$$，有函数$$f_{prompt}(x)$$，将$$x$$转化成prompt的形式$$x'$$，即：
+
+$$x'=f_{prompt}(x)$$
+
+该函数通常会进行两步操作：
+
+- 使用一个模板，模板通常为一段自然语言，并且包含有两个空位置：用于填输入x的位置[X]和用于生成答案文本的位置[Z]。
+
+- 把输入x填到的位置[X]。
+
+例如，在文本情感分类的任务中，假设输入是：
+
+" I love this movie."
+
+使用的模板是
+
+" [X] Overall, it was a [Z] movie."
+
+那么得到的$$x'$$就应该是 "I love this movie. Overall it was a [Z] movie."
+
+在实际的研究中，prompts应该有空位置来填充答案，这个位置一般在句中或者句末。如果在句中，一般称这种prompt为cloze prompt；如果在句末，一般称这种prompt为prefix prompt。[X]和[Z]的位置以及数量都可能对结果造成影响，因此可以根据需要灵活调整。
+
+如何设计合适的[X]和[Z]，就是Prompt Learning的主要议题了。
+
+---
+
+目前学术界一般将NLP任务的发展分为四个阶段即NLP四范式：
+
+第一范式：基于传统机器学习模型的范式，如tf-idf特征+朴素贝叶斯等机器算法；
+
+第二范式：基于深度学习模型的范式，如word2vec特征+LSTM等深度学习算法，相比于第一范式，模型准确有所提高，特征工程的工作也有所减少；
+
+第三范式：基于预训练模型+finetuning的范式，如BERT+finetuning的NLP任务，相比于第二范式，模型准确度显著提高，但是模型也随之变得更大，但小数据集就可训练出好模型；
+
+第四范式：基于预训练模型+Prompt+预测的范式，如BERT+Prompt的范式相比于第三范式，模型训练所需的训练数据显著减少。
+
+---
 
 参考：
 
-https://mp.weixin.qq.com/s/Nmr5oLe_MSLjYjWXUILiMw
+https://mp.weixin.qq.com/s/dkNH4BLOH36B5h_UCcRLnA
 
-视觉分割任务：论文与评测基准列表汇总
+NLP新宠——浅谈Prompt的前世今生
 
-https://zhuanlan.zhihu.com/p/21824299
+https://www.zhihu.com/question/504324484
 
-从特斯拉到计算机视觉之“图像语义分割”
+Prompt Tuning相比于Fine Tuning在哪些场景下表现更好？
 
-https://zhuanlan.zhihu.com/SemanticSegmentation
+https://mp.weixin.qq.com/s/2eA4PBd-wr9tVyyuzJ66Bw
 
-一个语义分割的专栏
+Fine-tune之后的NLP新范式：Prompt越来越火，CMU华人博士后出了篇综述文章
 
-https://mp.weixin.qq.com/s/zZ-i54_wqzVQxTCFABNIMQ
+## 参考
 
-闲聊图像分割这件事儿
+https://mp.weixin.qq.com/s/sDkGAhnFC027XjpUImeatw
 
-https://zhuanlan.zhihu.com/p/22308032
+自监督、半监督、无监督学习，傻傻分不清楚？最新综述来帮你！
 
-图像语义分割之FCN和CRF
+https://mp.weixin.qq.com/s/L4GQF0eE7MjLPrb8UygCww
 
-https://zhuanlan.zhihu.com/p/25515361
+无监督深度学习全景教程（193页PDF）
 
-图像语义分割之特征整合和结构预测
+https://mp.weixin.qq.com/s/kbqTHIOzAj1aERl4tm-kVA
 
-https://zhuanlan.zhihu.com/p/27794982
+2017上半年无监督特征学习研究成果汇总
 
-语义分割中的深度学习方法全解：从FCN、SegNet到各代DeepLab
+https://mp.weixin.qq.com/s/J50L6hESBROfT8IIAnofQQ
 
-https://mp.weixin.qq.com/s/mQqEe4LC0VHBH2ZAtFanWQ
+Yan LeCun109页最新报告：图嵌入, 内容理解，自监督学习
 
-基于深度学习的图像语义分割方法回顾
+https://mp.weixin.qq.com/s/s440gdbUhLP41rLPjfgsmQ
 
-https://mp.weixin.qq.com/s/9G3kahaoOSoB-DiGey1VLA
+Yann Lecun自监督学习指南（附114页Slides全文下载）
 
-基于深度学习的图像语义分割算法综述
+https://mp.weixin.qq.com/s/foP1xSa5G8oNtAv_pI6AqQ
 
-https://mp.weixin.qq.com/s/9F2UB_5ah1nEe3dfyoeRhg
+深度神经网络自监督视觉特征学习综述
 
-图像分割算法综述
+https://mp.weixin.qq.com/s/sEHA6fb0XIXQWsmJGf3fTA
 
-https://mp.weixin.qq.com/s/JbdwtpA3iRXReyerO4HYIg
+DeepMind发布自监督学习最新教程，附122页全文资料下载
 
-一文了解什么是语义分割及常用的语义分割方法有哪些
+https://mp.weixin.qq.com/s/-JoB1MJ0ZpkYLlToS7-AOA
 
-https://mp.weixin.qq.com/s/jCv259hI0vl7st80Obfrcg
+牛津大学&DeepMind：自监督学习教程，141页ppt
 
-图像语义分割的工作原理和CNN架构变迁
+https://mp.weixin.qq.com/s/HfqH-b8x8SsE6zb8pcF3Og
 
-https://mp.weixin.qq.com/s/KcVKKsAyz-eVsyWR0Y812A
+自监督学习（Self-Supervised Learning） 2018-2020年发展综述
 
-分割算法——可以分割一切目标
+https://mp.weixin.qq.com/s/2Wm6eQodwlc5XkjGKqhwCg
 
-https://mp.weixin.qq.com/s/MFNKDNTrF-8VuKrwcsTDLw
+南京大学周志华教授综述论文：弱监督学习
 
-纵览图像语义分割发展史，11篇关键文章简介
+https://mp.weixin.qq.com/s/_3DqXBpZhstVv6BkBR4oag
 
-# 前DL时代的语义分割
+自监督学习综述
 
-![](/images/img3/Image_Segmentation.png)
+https://mp.weixin.qq.com/s/aCWAU2RXk9fTzfFqOyjqUw
 
-从最简单的像素级别“阈值法”（Thresholding methods）、基于像素聚类的分割方法（Clustering-based segmentation methods）到“图划分”的分割方法（Graph partitioning segmentation methods），在DL“一统江湖”之前，图像语义分割方面的工作可谓“百花齐放”。在此，我们仅以“Normalized cut”和“Grab cut”这两个基于图划分的经典分割方法为例，介绍一下前DL时代语义分割方面的研究。
+能自主学习的人工突触，为无监督学习开辟新的路径
 
-## Normalized cut
+https://mp.weixin.qq.com/s/9kMz-eNRwC51Fi0-7BfKzA
 
-Normalized cut （N-cut）方法是基于图划分（Graph partitioning）的语义分割方法中最著名的方法之一，于2000年Jianbo Shi和Jitendra Malik发表于相关领域顶级期刊TPAMI。
+Active Learning: 一个降低深度学习时间，空间，经济成本的解决方案
 
-通常，传统基于图划分的语义分割方法都是将图像抽象为图（Graph）的形式$$\bf{G}=(\bf{V},\bf{E})$$（$$\bf{V}$$为图节点，$$\bf{E}$$为图的边），然后借助图理论（Graph theory）中的理论和算法进行图像的语义分割。
+https://mp.weixin.qq.com/s/ZvTm9omnIRqPXcLFbZtoeg
 
-常用的方法为经典的最小割算法（Min-cut algorithm）。不过，在边的权重计算时，经典min-cut算法只考虑了局部信息。如下图所示，以二分图为例（将$$\bf{G}$$分为不相交的$$\bf{A},\bf{B}$$两部分），若只考虑局部信息，那么分离出一个点显然是一个min-cut，因此图划分的结果便是类似$$n_1$$或$$n_2$$这样离群点，而从全局来看，实际想分成的组却是左右两大部分。
+深度学习的关键：无监督深度学习简介
 
-![](/images/article/N_cut.jpg)
+https://mp.weixin.qq.com/s/GHjmiB6F2W3Zo8gVllTyyQ
 
-针对这一情形，N-cut则提出了一种考虑全局信息的方法来进行图划分（Graph partitioning），即，将两个分割部分$$\bf{A},\bf{B}$$与全图节点的连接权重（$${\rm assoc(\bf{A},\bf{V})}$$和$$\rm assoc(\bf{B},\bf{V})$$）考虑进去：
+重现“世界模型”实验，无监督方式快速训练
 
-$$N_{cut}(\bf{A},\bf{B})=\frac{cut(\bf{A},\bf{B})}{assoc(\bf{A},\bf{V})}+\frac{cut(\bf{A},\bf{B})}{assoc(\bf{B},\bf{V})}$$
+https://mp.weixin.qq.com/s/3_VtdZNKBwNtMEMf2xc7qw
 
-如此一来，在离群点划分中，$$N_{cut}(\bf{A},\bf{B})$$中的某一项会接近1，而这样的图划分显然不能使得$$N_{cut}(\bf{A},\bf{B})$$是一个较小的值，故达到考虑全局信息而摒弃划分离群点的目的。这样的操作类似于机器学习中特征的规范化（Normalization）操作，故称为Normalized cut。N-cut不仅可以处理二类语义分割，而且将二分图扩展为K路（K-way）图划分即可完成多语义的图像语义分割，如下图例。
+CVPR智慧城市挑战赛：无监督交通异常检测，冠军团队技术分享
 
-![](/images/article/N_cut_2.jpg)
+https://mp.weixin.qq.com/s/3aAaM1DWsnCWEEbP7dOZEg
 
-## Grab cut
+伯克利等提出无监督特征学习新方法，代码已开源
 
-Grab cut是微软剑桥研究院于2004年提出的著名交互式图像语义分割方法。与N-cut一样，grab cut同样也是基于图划分，不过grab cut是其改进版本，可以看作迭代式的语义分割算法。Grab cut利用了图像中的纹理（颜色）信息和边界（反差）信息，只要少量的用户交互操作即可得到比较好的前后背景分割结果。
+https://mp.weixin.qq.com/s/kNTRpDbKQIalzJi_rx0noQ
 
-在Grab cut中，RGB图像的前景和背景分别用一个高斯混合模型（Gaussian mixture model, GMM）来建模。两个GMM分别用以刻画某像素属于前景或背景的概率，每个GMM高斯部件（Gaussian component）个数一般设为k=5。接下来，利用吉布斯能量方程（Gibbs energy function）对整张图像进行全局刻画，而后迭代求取使得能量方程达到最优值的参数作为两个GMM的最优参数。GMM确定后，某像素属于前景或背景的概率就随之确定下来。
+无标签表示学习，222页ppt，DeepMind
 
-在与用户交互的过程中，Grab cut提供两种交互方式：一种以包围框（Bounding box）为辅助信息；另一种以涂写的线条（Scribbled line）作为辅助信息。以下图为例，用户在开始时提供一个包围框，grab cut默认的认为框中像素中包含主要物体／前景，此后经过迭代图划分求解，即可返回扣出的前景结果，可以发现即使是对于背景稍微复杂一些的图像，grab cut仍有不俗表现。
+https://mp.weixin.qq.com/s/ZDPPWH570Vc6e1irwP1b1Q
 
-![](/images/article/grab_cut.jpg)
+精细识别现实世界图像：李飞飞团队提出半监督适应性模型
 
-不过，在处理下图时，grab cut的分割效果则不能令人满意。此时，需要额外人为的提供更强的辅助信息：用红色线条／点标明背景区域，同时用白色线条标明前景区域。在此基础上，再次运行grab cut算法求取最优解即可得到较为满意的语义分割结果。Grab cut虽效果优良，但缺点也非常明显，一是仅能处理二类语义分割问题，二是需要人为干预而不能做到完全自动化。
+https://mp.weixin.qq.com/s/X1Alcl7rVfTtZGZ40iXjXw
 
-![](/images/article/grab_cut_2.jpg)
+Spotlight 论文：非参数化方法实现的极端无监督特征学习
 
-不难看出，前DL时代的语义分割工作多是根据图像像素自身的低阶视觉信息（Low-level visual cues）来进行图像分割。由于这样的方法没有算法训练阶段，因此往往计算复杂度不高，但是在较困难的分割任务上（如果不提供人为的辅助信息），其分割效果并不能令人满意。
+https://mp.weixin.qq.com/s/kxEfoSjCF8n2jxlDfMaNDA
 
-参考：
+半监督学习在图像分类上的基本工作方式
 
-https://mp.weixin.qq.com/s/AiuwMytfux9BMt__eVtj6w
+https://mp.weixin.qq.com/s/uUMPUdG2TI10W5RumPaXkA
 
-基于图割算法的木材表面缺陷图像分析
+DeepMind无监督表示学习重大突破：语音、图像、文本、强化学习全能冠军！
 
-# FCN
+https://mp.weixin.qq.com/s/_VC6PGdCjlhcsndpunIteg
 
-Fully Convolutional Networks是Jonathan Long和Evan Shelhamer于2015年提出的网络结构。
+何恺明等人提出新型半监督实例分割方法：学习分割Every Thing
 
-论文：
+https://mp.weixin.qq.com/s/qaxzSSDuuscwL5tt0QCQ0Q
 
-《Fully Convolutional Networks for Semantic Segmentation》
+破解人类识别文字之谜：对图像中的字母进行无监督学习
 
-代码：
+https://mp.weixin.qq.com/s/VnOfYuHQQf_q92VHVE3mrQ
 
-https://github.com/shelhamer/fcn.berkeleyvision.org
+谷歌新发布的半监督学习算法降低4倍错误率
 
->Jonathan Long，CMU本科（2010年）+UCB博士在读。   
->个人主页：   
->https://people.eecs.berkeley.edu/~jonlong/
+https://mp.weixin.qq.com/s/rOj_J1zNYf-Vj9tqLG5KOQ
 
->Evan Shelhamer，UCB博士在读。   
->个人主页：   
->http://imaginarynumber.net/
+超强半监督学习MixMatch
 
->Trevor Darrell，University of Pennsylvania本科（1988年）+MIT硕博（1992年、1996年）。MIT教授（1999～2008）。UCB教授。   
->个人主页：   
->https://people.eecs.berkeley.edu/~trevor/
+https://zhuanlan.zhihu.com/p/66389797
 
-通常CNN网络在卷积层之后会接上若干个全连接层, 将卷积层产生的特征图(feature map)映射成一个固定长度的特征向量。以AlexNet为代表的经典CNN结构适合于图像级的分类和回归任务，因为它们最后都期望得到整个输入图像的一个数值描述（概率），比如AlexNet的ImageNet模型输出一个1000维的向量表示输入图像属于每一类的概率(softmax归一化)。
+虚拟对抗训练（VAT）：一种新颖的半监督学习正则化方法
 
-示例：下图中的猫, 输入AlexNet, 得到一个长为1000的输出向量, 表示输入图像属于每一类的概率, 其中在“tabby cat”这一类统计概率最高。
+https://mp.weixin.qq.com/s/DAtHXSfCpqCAZ0iVsfWkDA
 
-![](/images/article/FCN_2.png)
+半监督学习理论及其研究进展概述
 
-然而CNN网络的问题在于：全连接层会将原来二维的矩阵（图片）压扁成一维的，从而丢失了空间信息。这对于分类是没有问题的，但对于语义分割显然就不行了。
+https://mp.weixin.qq.com/s/eHzNIO-RSY-uf-K-OwtWfw
 
-![](/images/article/FCN.png)
+集多种半监督学习范式为一体，谷歌新研究提出新型半监督方法MixMatch
 
-上图是FCN的网络结构图，它的主要思想包括：
+https://mp.weixin.qq.com/s/3el7bPAeJrTQGfWW29ewuA
 
-1.采用end-to-end的结构。
+新技术“红”不过十年，半监督学习为什么是个例外？
 
-2.取消FC层。当图片的feature map缩小（下采样）到一定程度之后，进行反向的上采样操作，以匹配图片的语义分割标注图。这里的上采样所采用的方法，就是《深度学习（九）》中提到的transpose convolution。
+https://mp.weixin.qq.com/s/alnji5kgTxc34O7k78uGiA
 
-4.由于上采样会丢失信息。因此，为了更好的预测图像中的细节部分，FCN还将网络中浅层的响应也考虑进来。具体来说，就是将Pool4和Pool3的响应也拿来，分别作为模型FCN-16s和FCN-8s的输出，与原来FCN-32s的输出结合在一起做最终的语义分割预测（如下图所示）。
+无监督学习中的目标检测
 
-![](/images/article/FCN_3.png)
+https://mp.weixin.qq.com/s/8FtDhpgc-1j3TSL771N-Ng
 
-上图的结构在论文中被称为Skip Layer。
+无标注数据是鸡肋还是宝藏？阿里工程师这样用它
 
-FCN的另一贡献是**支持任意大小的图像**。在CNN的常见操作中，Conv和Pooling都不在意图像大小。一组参数可以应用于任意大小的图像，但FC要求固定的输入维度，这决定了输入的图像的大小必须是固定的。因此，现代的CNN为了支持任意大小的图像，都有意减少或避免使用FC。
+https://mp.weixin.qq.com/s/LdfLd2cZCdpvNYLKHUNwuA
 
-参考：
+简述无监督图像分类发展现状
 
-http://www.cnblogs.com/gujianhan/p/6030639.html
+https://mp.weixin.qq.com/s/qaLQK3uzaeyp68AbL0aOOQ
 
-全卷积网络FCN详解
+怎么在视频标注上省钱？这里有一个面向视频推荐的多视图主动学习
 
-https://zhuanlan.zhihu.com/p/32506912
+https://mp.weixin.qq.com/s/-cXOUw9zJteVUkbpRMIWtQ
 
-FCN的简单实现
+何恺明一作，刷新7项检测分割任务，无监督预训练完胜有监督
 
-https://mp.weixin.qq.com/s/kc0tTcTzRAT0p7q6ejXbqQ
+https://mp.weixin.qq.com/s/wtHrHFoT2E_HLHukPdJUig
 
-重新发现语义分割，一文简述全卷积网络
+OpenAI科学家一文详解自监督学习
 
-https://www.zhihu.com/question/56688854
+https://mp.weixin.qq.com/s/fy1gUElWVWcOVvzv6fGmdg
 
-卷积神经网络里输入图像大小何时是固定，何时是任意？
+谷歌大脑推出视觉领域任务自适应基准：VTAB
 
-https://mp.weixin.qq.com/s/AXfyMeFnCENIMc2qS8hNtA
+https://zhuanlan.zhihu.com/p/80815225
 
-10分钟看懂全卷积神经网络（FCN）：语义分割深度模型先驱
+Image-Level弱监督图像语义分割汇总简析
+
+https://mp.weixin.qq.com/s/5czWf0xpqva5pmuvJDn5AQ
+
+Google研究院提出FixMatch，简单粗暴却极其有效的半监督学习方法，附14页PDF下载
+
+https://zhuanlan.zhihu.com/p/108088719
+
+SSL:Self-Supervised Learning(自监督学习)
+
+https://zhuanlan.zhihu.com/p/108625273
+
+Self-Supervised Learning入门介绍
+
+https://zhuanlan.zhihu.com/p/108906502
+
+Self-supervised Learning再次入门
+
+https://mp.weixin.qq.com/s/VvUj0S2OTf8BowGRjDuVag
+
+图解自监督学习，人工智能蛋糕中最大的一块
+
+https://mp.weixin.qq.com/s/df51T24mBVycBeI_M7QqOQ
+
+无标记数据学习, 83ppt
+
+https://mp.weixin.qq.com/s/2FxD6ga6b_WOdAni16wd2Q
+
+自监督学习在计算机视觉应用最新概述，108页ppt Self-supervised learning
+
+https://mp.weixin.qq.com/s/3kwLoojFjJoPz4pUuEVA8g
+
+神奇的自监督场景去遮挡
+
+https://mp.weixin.qq.com/s/eROWWPQkUs91bcv4VsQqSA
+
+NLP中的自监督表示学习，全是动图，很过瘾的
+
+https://mp.weixin.qq.com/s/IsLlzDWnUXe8LVp4Y1Jb_A
+
+35亿张图像！Facebook基于弱监督学习刷新ImageNet基准测试记录
+
+https://mp.weixin.qq.com/s/TEk_i4kEjUqmAqF8LgTVjg
+
+FAIR提出用聚类方法结合卷积网络，实现无监督端到端图像分类
+
+https://mp.weixin.qq.com/s/dSncg1pDHpIFOT4mXrFntA
+
+Yan Lecun自监督学习：机器能像人一样学习吗？ 110页PPT
+
+https://mp.weixin.qq.com/s/W4zwKqkVQN4v-IKzGrkudg
+
+通过传递不变性实现自监督视觉表征学习
+
+https://zhuanlan.zhihu.com/p/30265894
+
+自监督学习近期进展
+
+https://mp.weixin.qq.com/s/qyQjKsgktWv9SihotaQX3w
+
+从顶会看自监督学习最新研究进展

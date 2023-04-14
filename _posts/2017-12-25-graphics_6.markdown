@@ -4,7 +4,60 @@ title:  图像处理理论（六）——颜色空间, 霍夫变换, Eigenface
 category: graphics 
 ---
 
+* toc
+{:toc}
+
 # ISP（续）
+
+## Black Level Compensation
+
+为了增加图片的对比度，我们可将该取值范围映射到整个区间。这里一般采用线性变换。
+
+![](/images/img2/ISP_2.png)
+
+这个过程被称为Black Level Compensation。效果如上图所示，我们开始可以看清一些东西了。
+
+## Green Balance
+
+由于Bayer Array的关系，每个点的光强都只是实际光强的一部分。由于接收的绿光较多，通常以绿光光强为基准，对红蓝光强进行修正。这个过程就是Green Balance。
+
+理论上绿光强度应是红蓝光强的两倍，但由于各相机滤光片的性能不同，实际参数略有差异。比如上图相机的RGB修正参数为：[2.648438, 1.000000, 1.484375]
+
+修正效果如下图所示：
+
+![](/images/img2/ISP_3.png)
+
+## Bad Pixel Correction
+
+![](/images/img2/BPC.png)
+
+sensor上可能有坏点存在（如上图中的白点），可以用中值滤波去除之。（参见《图像处理理论（二）》）
+
+Black Level Compensation、Green Balance和Bad Pixel Correction，一般统称为Raw Data Process。这些功能现在通常由图像sensor直接提供，一般不在ISP的处理范畴。
+
+## Demosaic
+
+由于RAW Data中的每个像素点只包含一种颜色，因此若要还原成彩色图片，就需要想办法补齐每个像素点缺失的色彩值。这个过程叫做Demosaic。
+
+Demosaic的算法一般如下图所示：
+
+![](/images/img2/Demosaic.png)
+
+简单来说就是各种插值算法。
+
+Demosaic处理后的图片才是真正的彩色图片，如下图所示：
+
+![](/images/img2/ISP_4.png)
+
+参考：
+
+https://mp.weixin.qq.com/s/sPmPFdfONapA5Y53AI7hSA
+
+小话Demosaic（一）
+
+https://mp.weixin.qq.com/s/8gRzW4qsX6SBzKn8FJ-hJQ
+
+小话demosaic（二）
 
 ## AWB(Auto White Balance) & Color Correction
 
@@ -52,10 +105,6 @@ $$B_{new}=B*K_b$$
 
 参考：
 
-http://blog.163.com/hong.lg0518@126/blog/static/18907460200972711556304/
-
-伽马校正（Gamma Correction）
-
 http://www.cnblogs.com/pzxbc/archive/2011/12/26/2302572.html
 
 Gamma矫正(Gamma correction)
@@ -89,6 +138,14 @@ www.cnetnews.com.cn/2016/0128/3072316.shtml
 ## 总结
 
 上面提到的主要是普通相机的ISP，但从目前的趋势来看，由于汽车自动驾驶技术的目标逐渐趋于全自动驾驶，以人的视觉友好性为目的的图像色彩重建变得多余，而以计算机视觉友好性为目的的图像质量需求将会进一步增加。
+
+---
+
+3A技术指的是自动对焦（AF，Auto Focus）、自动曝光（AE，Auto Exposure）及自动白平衡（AWB，Auto White Balance）。
+
+https://www.cnblogs.com/lifan3a/articles/5006772.html
+
+相机的3A技术
 
 ## 参考
 
@@ -143,6 +200,22 @@ HSL为Hue, Saturation, Lightness（亮度）。
 https://mp.weixin.qq.com/s/f0ppg3ow-XKNuP1eNjh1-w
 
 色差计算进化史
+
+https://zhuanlan.zhihu.com/p/103387082
+
+色彩空间
+
+https://mp.weixin.qq.com/s/SaCqrhd8RVeKGDqo6vhUjg
+
+图像色彩空间与应用转换
+
+https://mp.weixin.qq.com/s/OM6y9Za9OUTYcQfr43RoIQ
+
+基于OpenCV的彩色空间互转
+
+https://mp.weixin.qq.com/s/rzZU7bylqiPRGJwQ1zz4MQ
+
+Camera和Display颜色评测色空间简介
 
 # 霍夫变换
 
@@ -218,6 +291,14 @@ https://mp.weixin.qq.com/s/WV78mvRn-cYm11cL4l2ScA
 
 开源、快速、高精度的椭圆检测—你值得拥有！
 
+https://mp.weixin.qq.com/s/QEX46FBulPeGEwdlp469hg
+
+基于霍夫变换进行线检测
+
+https://mp.weixin.qq.com/s/pG-7p74-VGT9JpN-cS3i_Q
+
+南开大学提出深度霍夫变换：语义线检测新方法
+
 # Eigenface
 
 Eigenface是M. Turk和A. Pentland于1991年提出的人脸识别算法。
@@ -245,43 +326,3 @@ $$\Phi_i=\Gamma_i-\Psi$$
 **Step 4**：计算协方差矩阵：
 
 $$C=\frac{1}{M}\sum_{n=1}^M\Phi_n \Phi_n^T=AA^T(N^2\times N^2 \text{matrix})$$
-
-**Step 5**：计算的$$AA^T$$特征向量$$u_i$$。然而，$$AA^T$$太大了，我们只能退而求其次计算$$A^TA(M\times M \text{matrix})$$的特征向量$$v_i$$。
-
-那么$$u_i$$和$$v_i$$到底有什么关系呢？我们首先根据特征向量的定义，给出下式：
-
-$$A^TAv_i=\mu_iv_i$$
-
-其中，$$\mu_i$$是$$A^TA$$的特征值。
-
-$$A^TAv_i=\mu_iv_i\Rightarrow AA^TAv_i=\mu_iAv_i\Rightarrow CAv_i=\mu_iAv_i$$
-
-令$$u_i=Av_i$$，则：
-
-$$Cu_i=\mu_iu_i$$
-
-可见$$\mu_i$$同时也是$$AA^T$$的特征值，而对应的特征向量则是$$Av_i$$。
-
-实际上，$$A^TA$$的M个特征值，就是$$AA^T$$的前M大的特征值。
-
-**Step 6**：从中选出K个最大的特征向量供后续使用。
-
-## 使用Eigenface
-
-**Step 1**：给定图片$$\Gamma$$，计算：
-
-$$\Phi=\Gamma-\Psi$$
-
-**Step 2**：将$$\Phi$$映射到K维特征向量空间：
-
-$$\Omega=[w_1,\dots,w_K]^T$$
-
-**Step 3**：计算与图片l的距离：
-
-$$e_r=\|\Omega-\Omega^l\|$$
-
-当$$e_r<T_r$$时，就认为是同一张人脸。
-
-这里的距离可以是欧氏距离，但作者指出使用马式距离效果更佳。
-
-综上，**Eigenface实际上就是PCA在人脸识别上的应用。**

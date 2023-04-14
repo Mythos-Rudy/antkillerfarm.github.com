@@ -1,8 +1,11 @@
 ---
 layout: post
-title:  Raspberry Pi, UPNP（二）
+title:  Raspberry Pi
 category: technology 
 ---
+
+* toc
+{:toc}
 
 # Raspberry Pi
 
@@ -169,7 +172,7 @@ Raspberry Pi默认支持SSH登录。这里我使用putty作为SSH客户端。
 
 VNC或者MS远程桌面都能登录Pi，这里使用VNC协议。
 
-Raspbian和Ubuntu一样，使用apt-get来安装软件包。但它默认使用的是国外的软件源，因此速度很慢。
+Raspbian和Ubuntu一样，使用apt来安装软件包。但它默认使用的是国外的软件源，因此速度很慢。
 
 我们首先在下面的网页中，查找适合的镜像软件源：
 
@@ -187,13 +190,15 @@ http://mirrors.ustc.edu.cn/raspbian/raspbian/
 
 安装TightVncServer：
 
-`sudo apt-get install tightvncserver`
+`sudo apt install tightvncserver`
 
 首次运行tightvncserver，会让你设置远程访问的密码。
 
 相应的客户端下载地址：
 
 http://www.tightvnc.com/download.php
+
+`sudo apt install tigervnc-viewer`
 
 打开TightVncViewer，在Remote Host中填入Raspberry Pi的IP地址，注意IP后需要加“:1”，否则连接不上。
 
@@ -245,28 +250,6 @@ https://github.com/antkillerfarm/antkillerfarm_crazy/blob/master/other/vncserver
 
 默认的hostname是raspberrypi。将/etc/hostname和/etc/hosts中的相应字段，改成你想要的名字，保存重启即可。
 
-## 参考
-
-https://mp.weixin.qq.com/s/YeoBILcLy2LNzDAnxygKAg
-
-如何手动养成一只“咖啡女仆”？
-
-https://mp.weixin.qq.com/s/CLwGEVgkGk7Zm7Acp8NAmg
-
-树莓派上利用Tensorflow实现小车的自动驾驶
-
-https://mp.weixin.qq.com/s/1wxA7jnCgmXt5j9DXxH1UA
-
-超有趣！手把手教你使用树莓派实现实时人脸检测
-
-https://mp.weixin.qq.com/s/tW54lcv9aRz9xXC9V-DsWw
-
-Keras+树莓派，130行代码找到圣诞老人
-
-https://mp.weixin.qq.com/s?__biz=MzU1OTMyNDcxMQ==&mid=2247484969&idx=1&sn=29d04fbb56a4464b08407eb87d26325e
-
-基于源代码为Raspberry Pi设备构建TensorFlow
-
 ## Raspberry Pi 4
 
 2019.6
@@ -283,38 +266,26 @@ https://mp.weixin.qq.com/s?__biz=MzU1OTMyNDcxMQ==&mid=2247484969&idx=1&sn=29d04f
 
 >VideoCore是Broadcom旗下的GPU产品。
 
-# UPNP（二）
+## Raspberry Pi Pico
 
-## upnp-inspector
+2021.1，树莓派基金会发布了首款微控制器级产品：Raspberry Pi Pico。
 
-upnp-inspector是一个局域网内的UPNP协议的嗅探分析器。可充当DMC，推送多媒体数据到相关DLNA设备。安装方法如下：
+https://mp.weixin.qq.com/s/rfOTxVUpqyfqNQQJh_WhNg
 
-`sudo apt-get install upnp-inspector`
+树莓派Pico VS Arduino该选哪个？
 
-upnp-inspector的功能包括：
+## 参考
 
-1.列出局域网内的UPNP设备。
+树莓派的博通芯片是专门定制的，这帮英国佬精的很，现在github上很多树莓派项目都深度适配博通的那款芯片，比如有一个用来驱动spi屏幕的fbcp项目，只针对树莓派自己的videocore来写，而山寨派一般用的是国产全志芯片，虽然配置是高，但从硬件上就决定了山寨派不能直接进入树莓派生态。
 
-2.列出UPNP设备所支持的UPNP服务。
+国产也有各种派，芒果派，菠萝派啥的，价格是树莓派的1/2～1/4，性能一致，生态系统不如树莓派丰富，需要一定经验才能玩。
 
-3.列出UPNP服务所支持的函数，并可发送相关函数。（左键双击树状列表中的函数名即可）
+---
 
-upnp-inspector是coherence的一部分。后者是一个Python语言写的DLNA框架。它的官网：
+https://mp.weixin.qq.com/s/YeoBILcLy2LNzDAnxygKAg
 
-http://coherence-project.org/
+如何手动养成一只“咖啡女仆”？
 
-upnp-inspector的代码地址：
+https://mp.weixin.qq.com/s/CLwGEVgkGk7Zm7Acp8NAmg
 
-https://github.com/coherence-project/UPnP-Inspector
-
-## libmcupnp
-
-libmcupnp是一个基于libupnp的Control Point实现，用C++写的。从代码来看，明显参考了libupnp里的demo示例。
-
-https://sourceforge.net/projects/libmcupnp/
-
-## gupnp
-
-这是GNOME项目的upnp库，使用libsoup处理HTTP，libxml处理XML。它的官网是：
-
-https://wiki.gnome.org/Projects/GUPnP
+树莓派上利用Tensorflow实现小车的自动驾驶

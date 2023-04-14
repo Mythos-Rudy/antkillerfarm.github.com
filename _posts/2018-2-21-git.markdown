@@ -1,8 +1,11 @@
 ---
 layout: post
-title:  Git, ZeroMQ, WebKit
-category: technology 
+title:  Git
+category: toolchain 
 ---
+
+* toc
+{:toc}
 
 # Git
 
@@ -12,9 +15,23 @@ https://learngitbranching.js.org
 
 这个网站提供了一个可视化的交互式git教程。非常不错。
 
+## git实现原理
+
+![](/images/img3/git.jpg)
+
+git采用如上图所示的树状结构，因此分支的速度很快。
+
+svn本身不支持分支功能，所谓分支无非是创建一个新的副本文件夹，而这是一个代价很高的操作，而git就简单多了，增加一个指向新分支的指针即可。
+
+https://zhuanlan.zhihu.com/p/142289703
+
+一文讲透Git底层数据结构和原理
+
 ## git常用命令
 
-0.GUI工具
+![](/images/img3/git.png)
+
+### GUI工具
 
 - gitk：主要用于展示分支树。
 
@@ -28,25 +45,35 @@ https://learngitbranching.js.org
 
 `gitk --all`：展示所有分支。
 
+`gitk v1.0`：展示特定分支。
+
 - git-gui：主要用于提交文件。
 
 安装：
 
-`sudo apt install gitk`
+`sudo apt install git-gui`
 
 运行：
 
 `git gui`
 
-以上两个工具用tk/tcl编写，都是全平台支持的。
+以上两个工具采用tk/tcl编写，都是全平台支持的。
 
-- tig：一个字符式的图形界面工具。
+>这两个工具的作者虽然不同，但是都在自己软件中，留下了打开对方软件的快捷方式，真可谓狼狈为奸？
 
-1.创建版本库
+- tig：一个字符式的图形界面工具。类似的还有Lazygit和gitui。
+
+---
+
+https://zhuanlan.zhihu.com/p/601987272
+
+有了这款开源神器，Git容易多了！（git-sim）
+
+### 创建版本库
 
 `git init`
 
-2.Git常用的撤销操作
+### Git常用的撤销操作
 
 基本状态标识
 
@@ -59,6 +86,7 @@ https://learngitbranching.js.org
 各状态之间变化
 
 - A- -> B : `git add <FILE>`
+- B -> A : `git restore <FILE>`
 - B -> A- : `git rm --cached <FILE>`
 - B -> 删除不保留文件 : `git rm -f <FILE>`
 - A -> A- : `git rm --cached <FILE>`
@@ -70,8 +98,9 @@ https://learngitbranching.js.org
 - C -> B : `git reset --soft HEAD^`
 - 修改最后一次提交: `git commit --amend`
 - 只修改内容，不改msg: `git commit --amend --no-edit`
+- 修改最后一次提交的author: `git commit --amend --reset-author` 这里直接用当前author信息替换之，所以需要在修改前，设置好author信息
 
-3.暂存本地修改及恢复
+### 暂存本地修改及恢复
 
 如果`git pull`的时候，本地有修改，就需要暂存，并在`git pull`之后，恢复之。
 
@@ -79,7 +108,7 @@ https://learngitbranching.js.org
 
 `git stash pop`
 
-4.回退和前进
+### 回退和前进
 
 回退历史版本：
 
@@ -87,7 +116,7 @@ https://learngitbranching.js.org
 
 回退之后，如果不满意，就需要前进操作，以恢复后续的更新。然而这个时候有个麻烦的地方，在`git log`中已经找不到后续的更新记录，也就查不到commit id。这时可以用`git reflog`查看git操作记录，以获得想要的commit id，并checkout之。
 
-5.远程操作
+### 远程操作
 
 查看远程仓库的地址：
 
@@ -101,29 +130,43 @@ checkout远程分支：
 
 `git checkout -b dev origin/dev`
 
-6.check out有submodule的版本库
+push远程分支：
+
+`git push <远程主机名> <本地分支名>:<远程分支名>`
+
+删除远程分支：
+
+`git push origin --delete dev_2`
+
+同步已经删除的远程分支：
+
+`git remote prune origin`
+
+### check out有submodule的版本库
 
 `git clone --recursive URL`
 
-7.checkout和reset的区别
-
-http://wbj05791467.blog.163.com/blog/static/120329697201331735158420/
-
-git reset和git checkout
+### checkout和reset的区别
 
 https://segmentfault.com/a/1190000006185954
 
 git的reset和checkout的区别
 
-8.制作和应用patch
+### 制作和应用patch
 
 制作patch主要有两种方式：`git diff`和`git format-patch`。前者生成通用patch，而后者生成git专用patch。使用示例：
 
 `git diff SHA1 SHA2` 比较两个历史版本之间的差异，SHA1和SHA2是两次commit的SHA值。
 
-应用patch：`git am`
+`git format-patch HEAD^`
 
-9.使用tag
+`git format-patch -1`
+
+应用patch：`git am`和`git apply`。
+
+`git apply`并不会将commit message等打上去，打完patch后需要重新`git add`和`git commit`，而`git am`会直接将patch的所有信息打上去。
+
+### 使用tag
 
 打标签：
 
@@ -137,60 +180,44 @@ git的reset和checkout的区别
 
 `git checkout v0.1.2`
 
-10.强制更新
+### 强制更新
 
 当发生冲突，需要放弃修改，强制更新的时候，可以：
 
 `git reset --hard origin/master`
 
-11.保存密码
+### 保存密码
 
 编辑仓库目录中本地的”.git/config”文件，增加如下属性：
 
-{% highlight bash %}
+```bash
 [credential]
     helper = store
-{% endhighlight %}
+```
 
-12.SSH
+### 使用密码
 
-{% highlight bash %}
-cd ~/.ssh
-ssh-keygen
-cat ~/.ssh/id_rsa.pub
-{% endhighlight %}
+`git clone https://<USERNAME>:<PASSWORD>@github.com/path/to/repo1.git`
 
->`ssh-keygen`命令会生成两个文件id_rsa和id_rsa.pub，前者是私钥，后者是公钥，不要弄错了。
+### cherry-pick
 
-13.submodule
-
-有的时候，包太大了，可以将之分成若干小包（submodule）。
-
-`git submodule update --init --remote`
-
-如果使用SSH的话，有的时候会update失败。
-
-解决办法：
-
-修改~/.ssh/config，添加:
-
-`User XXX`
-
-参考：
-
-https://git-scm.com/book/en/v2/Git-on-the-Server-Generating-Your-SSH-Public-Key
-
-Generating Your SSH Public Key
-
-14.`git blame`查看一行代码是谁改的。
-
-15.`HEAD`表示当前版本，`HEAD^^`表示当前版本之前的两个版本，如果回溯的版本较多也可以写作`HEAD~100`。
-
-16.cherry-pick用于将分支A上的修改C，移植到分支B上。
+用于将分支A上的修改C，移植到分支B上。
 
 `git cherry-pick <commit id>`
 
-## 如何git超大版本库
+### 撤销已经push的内容
+
+`git reset --soft <SHA>`
+
+`git push origin master --force`
+
+### Other
+
+`git blame`查看一行代码是谁改的。
+
+`HEAD`表示当前版本，`HEAD^^`表示当前版本之前的两个版本，如果回溯的版本较多也可以写作`HEAD~100`。
+
+## 如何git下载超大版本库
 
 自从两次git完整的linux kernel，都因为网络问题，而中途失败之后，不甘心的我，继续在网上寻找答案。
 
@@ -268,11 +295,11 @@ https://gitextensions.github.io/
 
 这时，你可以编辑.gitignore来忽略这些文件，相当于是加了一个黑名单。但其实.gitignore也可定义白名单：
 
-{% highlight bash %}
+```bash
 */
 !src/
 !src/**
-{% endhighlight %}
+```
 
 参考：
 
@@ -286,7 +313,7 @@ https://github.com/github/gitignore
 
 ## LF与CRLF转换
 
-{% highlight bash %}
+```bash
 #提交时转换为LF，检出时转换为CRLF
 git config --global core.autocrlf true
 
@@ -304,7 +331,7 @@ git config --global core.safecrlf false
 
 #提交包含混合换行符的文件时给出警告
 git config --global core.safecrlf warn
-{% endhighlight %}
+```
 
 参考：
 
@@ -317,6 +344,8 @@ git换行符LF与CRLF转换问题
 `git config user.name XXX`
 
 `git config user.email XXX@YYY`
+
+全局配置放在`~/.gitconfig`，单个仓库的配置放在`.git/config`。
 
 ## 下载单个文件夹
 
@@ -332,12 +361,12 @@ https://github.com/Sarasra/models/tree/master/research/capsules
 
 2.使用Sparse checkout。
 
-{% highlight bash %}
+```bash
 git init
 git remote add -f origin <url>
 git config core.sparsecheckout true
 echo “libs” >> .git/info/sparse-checkout
-{% endhighlight %}
+```
 
 参考：
 
@@ -361,7 +390,7 @@ http://www.ruanyifeng.com/blog/2016/07/google-monolithic-source-repository.html
 
 谷歌的代码管理
 
-https://www.zhihu.com/question/25491925/answer/175222330
+https://www.zhihu.com/answer/175222330
 
 代码版本控制用SVN还是Git好？
 
@@ -383,48 +412,30 @@ Gerrit，一种免费、开放源代码的代码审查软件，它使用Git作�
 
 https://www.gerritcodereview.com/
 
-## 参考
+### GitLab self-managed
 
-https://mp.weixin.qq.com/s/0Cv968LpSSYKJpAbW1MlMA
+GitLab self-managed是GitLab出品的本地Git Server。
 
-手把手教你git全操作
+---
 
-https://mp.weixin.qq.com/s/DbvRbaH7BJKeTCT4LVXUoA
+研发人员太多的时候，还需要分布式的代码托管平台。基于GitLab生态开源组件二次开发，是其中的一种选择。
 
-Git的4个阶段的撤销更改
+https://mp.weixin.qq.com/s/aY-QJN2Fkp86ATdvqVvpZQ
 
-# ZeroMQ
+Code：美团代码托管平台的演进与实践
 
-ZeroMQ是个在Socket之上，而在MQ之下的网络通信库。正如名称所言，它实际上并不是一个完整的MQ，而仅仅只有MQ的一些子功能罢了。
+## Monorepo
 
-http://zeromq.org
+上面提到的多项目管理，一般称为MultiRepo，即每个项目对应一个单独的仓库。与之相对的则是Monorepo，即把多个项目放在一个仓库里面。
+
+![](/images/img4/Monorepo.png)
 
 参考：
 
-https://blog.csdn.net/w174504744/article/details/73187697
+https://juejin.cn/post/6944877410827370504
 
-ZeroMQ
+现代前端工程为什么越来越离不开Monorepo?
 
-# WebKit
+https://zhuanlan.zhihu.com/p/77577415
 
-WebKit的代码可以从它的官网www.webkit.org下获得。
-
-在以下网页可以获得webkit向各种GUI移植的相关信息。
-
-http://trac.webkit.org/wiki
-
-由于获得的代码比较新，所以在linux平台下常有一些组件由于过于古老而导致编译失败。所以需要使用yum或者apt-get之类的工具从网上更新相关的组件。这里不推荐使用RHEL或者CentOS之类的服务器版本，因为服务器版本为了追求稳定性，不但组件不是最新的，就连网上的组件源也不是最新的。
-
-可以使用ubuntu 9.04桌面版，不过里面缺少很多开发用的组件，除了
-
-http://trac.webkit.org/wiki/BuildingGtk
-
-列出的之外，还有不少组件需要下载。主要有：
-
-1)autoconf
-
-2)libtool
-
-3)gtk-doc-tools
-
-4)libgail-dev
+Monorepo是什么，为什么大家都在用？

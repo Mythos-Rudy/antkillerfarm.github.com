@@ -1,8 +1,66 @@
 ---
 layout: post
-title:  数学狂想曲（八）——莱洛三角形, 核弹当量问题, Lanchester战争模型, 随机过程
+title:  数学狂想曲（八）——莱洛三角形, 核弹当量问题, 随机过程
 category: math 
 ---
+
+* toc
+{:toc}
+
+# 函数连续性（续）
+
+## 函数连续性和神经网络
+
+理论上说，多层神经网络只要有足够的深度和宽度，就可以任意逼近任意**连续函数**。（严格的说，这里的连续函数必须是Borel可测函数。）
+
+然而从网络训练的角度来说，只有Lipschitz连续的函数才一定会收敛，否则的话，可能会出现梯度爆炸的情况。
+
+此外，不同函数的收敛速度也不一样：
+
+|  | GD | SGD |
+|:--:|:--:|:--:|
+| Lipschitz | $$\frac{1}{\sqrt{k}}$$ | $$\frac{1}{\sqrt{k}}$$ |
+| +smoothness | $$\frac{1}{k}$$ | $$\frac{1}{\sqrt{k}}$$ |
+| +strong convexity | $$\frac{1}{k}$$ | $$\frac{1}{k}$$ |
+| +smoothness and strong convexity | $$\exp^{-k}$$ | $$\exp^{-k}$$ |
+
+## 参考
+
+https://www.zhihu.com/question/32201415
+
+函数连续和一致连续有什么区别？开区间上的连续函数不一定是一致连续的，为什么？
+
+http://www.cnblogs.com/flywithyou/p/4135562.html
+
+Lipschitz连续
+
+https://www.zhihu.com/question/62554985
+
+神经网络的上同调理论
+
+http://tech.scichina.com:8082/sciE/CN/abstract/abstract404403.shtml
+
+神经网络的本质逼近阶
+
+http://www.doc88.com/p-2337088655000.html
+
+神经网络的函数逼近理论
+
+https://zhuanlan.zhihu.com/p/25590725
+
+神经网络为什么能够无限逼近任意连续函数？
+
+https://max.book118.com/html/2015/0401/14126427.shtm
+
+浅谈Borel可测函数及其性质
+
+https://mp.weixin.qq.com/s/jrNIhSlTiXsO2sGWmzcFfg
+
+Michael I. Jordan最新清华授课笔记！
+
+https://mp.weixin.qq.com/s/hDRLyOFpLUSW6ZDamwPiAg
+
+相较神经网络，大名鼎鼎的傅里叶变换，为何没有一统函数逼近器？
 
 # 莱洛三角形
 
@@ -18,9 +76,7 @@ category: math
 
 >Franz Reuleaux，1829～1905，德国人。这个人可谓是全才。   
 >在教育界，当过ETH和柏林工业大学的教授和校长，当然了那个时代这两所学校还不叫现在的名字。   
->在工业界，他发明了300多种机械模型，被誉为动力学（kinematics）之父。动力学是一门研究机械以及组成机械的各个部件之间的运动关系的科学，被广泛应用于机械设计领域。比如：   
->![](/images/article/Reuleaux_triangle.gif)   
->上图是一个没有活塞的发动机气缸，转子的形状就是类Reuleaux triangle的。   
+>在工业界，他发明了300多种机械模型，被誉为动力学（kinematics）之父。
 >在政界，他是1876年世界工业博览会德国代表团的主席，参与创立了德国的专利体系。
 
 ![](/images/article/Construction_triangle_Reuleaux.png)
@@ -39,13 +95,25 @@ Reuleaux triangle是“**除了圆形以外，还有什么形状的下水道盖�
 
 后者叫做delta curves，不过它并不是个定宽曲线。
 
->上面的活塞由于汽缸不是方形的，因此只是一个类Reuleaux triangle。
+动力学是一门研究机械以及组成机械的各个部件之间的运动关系的科学，被广泛应用于机械设计领域。比如：
+
+![](/images/article/Reuleaux_triangle.gif)
+
+上图是一个没有活塞的发动机气缸，转子的形状就是类Reuleaux triangle的。   
+
+>这里由于汽缸不是方形的，因此只是一个类Reuleaux triangle。
 
 当然，Reuleaux triangle也有它的问题：
 
 ![](/images/article/Reuleaux_triangle_2.jpg)
 
 Reuleaux triangle形状的轮子，在上面铺板子跑，当然毫无问题。但如果安装车轴的话，那就蛋碎了...
+
+所以，又有了下面这样的逆问题：
+
+![](/images/img3/curve.jpg)
+
+如何让方轮车平稳地行驶呢？只要让波浪轨道符合一段一段的**悬链线**方程。
 
 参考：
 
@@ -66,6 +134,10 @@ http://twistedsifter.com/2012/11/animated-gifs-that-explain-how-things-work/
 https://mp.weixin.qq.com/s/uUUhQ6tJMrn3J5Ko2u1Hiw
 
 三角形中惊现叛徒！自己胖的像个球，却能成就世界上最快的赛车引擎......
+
+https://mp.weixin.qq.com/s/463KqrYA968HjaBBlsdmow
+
+小伙打造一辆奇葩自行车，走路上百分百的回头率
 
 # hinged dissections
 
@@ -109,11 +181,37 @@ http://www.applet-magic.com/fireball.htm
 
 The Expansion of the Fireball of an Explosion
 
+推导主要用到了物理学的等式两边量纲齐次的原则，并不是很复杂。
+
 实测值2.46和理论值符合的非常好。
 
 这里的推导和热力学统计其实没多大关系，算是本人学习玻尔兹曼分布的副产品吧。
 
-----
+以下来几个实际爆炸的例子：
+
+https://mp.weixin.qq.com/s/VOeBV4gufdeV1FQ1ol2whA
+
+爆炸的能量（当量）有多大？
+
+---
+
+1947年4月16日，美国得克萨斯州得克萨斯城一艘停泊在加尔维斯敦湾内的法国货轮起火，致使船上运载的约2300吨硝酸铵爆炸，进而引发附近船只与储油设施爆炸。这也是人类历史上最大的一次意外非核（工业）爆炸！
+
+https://www.zhihu.com/question/412103180
+
+黎巴嫩首都发生巨大爆炸，或由存放的2700吨硝酸铵引起，目前情况如何？
+
+https://mp.weixin.qq.com/s/V5gymAXJBMmN0Nqbwte2hQ
+
+黎巴嫩港口大爆炸到底有多厉害？
+
+---
+
+![](/images/article/nuclear.png)
+
+![](/images/img4/w88.jpg)
+
+原子弹称为“一相弹”，只有铀235，氢弹“双相弹”，核裂变加核聚变，威力更大，三相弹就是氢弹外面再包一层铀238，这玩意便宜，在氢弹爆炸产生的极端环境下可以裂变，还产生大量核污染。
 
 https://futureoflife.org/background/us-nuclear-targets/
 
@@ -123,65 +221,17 @@ https://nuclearsecrecy.com/nukemap/
 
 一个核弹效果的评估网站
 
+https://nuclearsecrecy.com/missilemap/
+
+上述网站还有一个评估导弹的网页
+
 https://www.zhihu.com/question/36188584
 
 “大伊万”到底有多强？
 
-# Lanchester战争模型
+https://baijiahao.baidu.com/s?id=1672436291069334638
 
-第一次世界大战期间，英国工程师Lanchester针对战争问题建模，以预测战争的结果。
-
->Frederick William Lanchester，1868～1946，被誉为英国三大最杰出的汽车工程师之一。英国皇家学会会员。
-
-该模型包含了两个子模型：
-
-**Lanchester's linear law**：假设双方的装备能力相当，则单位时间内的损失，和战线的长度成正比，且双方损失的数量相等。这个模型主要适用于远程兵器威力有限的古代战争，古代战争以短兵相接的肉搏战为主。而肉搏战的特点就是**一对一**。
-
-**Lanchester's square law**：现代战争越来越立体化，因此是个**多对多**的模型。
-
-首先，我们假设A军在战斗开始后的t时刻有$$x(t)$$人，B军在战斗开始后的t时刻有$$y(t)$$人，且每支军队的减员均由敌方攻击造成，减员速率与敌方人数成正比。忽略增员部队与非战斗减员，我们可以根据双方的减员速率列出如下的微分方程组：
-
-$$\frac{\mathrm{d}x}{\mathrm{d}t}=-by\tag{1}$$
-
-$$\frac{\mathrm{d}y}{\mathrm{d}t}=-cx\tag{2}$$
-
-在上述微分方程组中，b与c分别代表B军与A军的单兵作战效率，即每个战士在单位时间内干掉的敌军数量。我们可以用这个量来代表士兵的“质量”或“效率”，显然这个量与军队的武器水平，指挥员的指挥水平与战士的单兵素质有关。
-
-用公式2除以公式1，得：
-
-$$\cfrac{\cfrac{\mathrm{d}y}{\mathrm{d}t}}{\cfrac{\mathrm{d}x}{\mathrm{d}t}}=\frac{-cx}{-by}$$
-
-$$\frac{\mathrm{d}y}{\mathrm{d}x}=\frac{cx}{by}$$
-
-$$by\mathrm{d}y=cx\mathrm{d}x$$
-
-两边同时求t的定积分：
-
-$$\int_{t_0}^t by(t)\mathrm{d}y(t)=\int_{t_0}^t cx(t)\mathrm{d}x(t)$$
-
-$$b\int_{y_0}^y y\mathrm{d}y=c\int_{x_0}^x x\mathrm{d}x$$
-
-$$by^2-by_0^2=cx^2-cx_0^2$$
-
-$$by^2-cx^2=by_0^2-cx_0^2=K$$
-
-我们可以由b，c，与双方初始人数$$y_0，x_0$$计算出K值。显然：
-
-当K=0时，A、B平手。
-
-当K>0时，B胜。
-
-当K<0时，A胜。
-
-Lanchester模型是一个连续模型，但实际战斗，尤其是海战，一般是离散模型，这时就要用到Salvo combat model了。
-
->比如中途岛战役，美国在击沉日本3艘航母之后，遭到日本飞龙号的反击，损失了约克城号，直到第二波攻击，才最终将飞龙号击沉。
-
-参考：
-
-https://mp.weixin.qq.com/s/npprTz_GRgdv3BK7ff2grg
-
-Lanchester战争模型：用可分离变量的微分方程占卜战事
+纳粹德国为什么没有造出原子弹？就因为这个醉汉（醉汉回家问题）
 
 # 随机过程
 
@@ -234,27 +284,3 @@ https://mp.weixin.qq.com/s/46NrpIako2lJ2ZitAQs8Sw
 http://pinkyjie.com/2010/08/31/covariance/
 
 浅谈协方差矩阵
-
-## 平稳过程
-
-严平稳过程：有限维分布。
-
-宽平稳过程：二阶矩。
-
-不要被名字迷惑了，由于两者关注的东西不同，一般情况下，严平稳过程不一定是宽平稳过程，宽平稳过程也不一定是严平稳过程。
-
-只有以下特例：
-
-1.对于二阶矩过程，严平稳过程一定是宽平稳过程。
-
-2.对于正态过程，严平稳过程和宽平稳过程是等价的。
-
-## 大数定律与中心极限定理
-
-### 大数定律
-
-切比雪夫大数定律：用统计方法来估计**期望**的理论依据。
-
-$$E(X)\approx \frac{1}{n}\sum_{k=1}^{n}x_k$$
-
-贝努利大数定律：事件A发生的频率$$\frac{n_A}{n}$$依概率收敛于事件A的概率p。当n很大时，事件发生的频率与概率有较大偏差的可能性很小：$$p\approx \frac{n_A}{n}$$

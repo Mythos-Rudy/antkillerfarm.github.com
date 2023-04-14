@@ -4,7 +4,26 @@ title:  图像处理理论（四）——Schmid滤波, HOG, Haar, SIFT
 category: graphics 
 ---
 
-# Gabor滤波（续）
+* toc
+{:toc}
+
+# Gabor滤波
+
+## Gabor filter（续）
+
+$$\lambda$$：正弦函数波长；$$\theta$$：Gabor核函数的方向；$$\psi$$：相位偏移；$$\sigma$$：高斯函数的标准差；$$\gamma$$： 空间的宽高比。
+
+可以看出Gabor filter是一个复函数，其实部为：
+
+$$g(x,y;\lambda,\theta,\psi,\sigma,\gamma)=\exp\left(-\frac{x'^2+\gamma^2y'^2}{2\sigma^2}\right)\cos\left(2\pi\frac{x'}{\lambda}+\psi\right)$$
+
+其虚部为：
+
+$$g(x,y;\lambda,\theta,\psi,\sigma,\gamma)=\exp\left(-\frac{x'^2+\gamma^2y'^2}{2\sigma^2}\right)\sin\left(2\pi\frac{x'}{\lambda}+\psi\right)$$
+
+此外，还有对数Gabor函数：
+
+$$G(f)=\exp\left(\frac{-(log(f/f_0))^2}{2(log(\sigma/f_0))^2}\right)$$
 
 ## Gabor滤波的效果
 
@@ -88,6 +107,8 @@ Gabor滤波器
 
 基于OpenCV的Gabor变换及特征提取
 
+---
+
 https://mp.weixin.qq.com/s/RS0Zw6iLFQBUlpOdkuoFbg
 
 从傅立叶变换到Gabor滤波器
@@ -98,7 +119,15 @@ https://mp.weixin.qq.com/s/UDJAYB79KaPB0pgnnCIPTw
 
 https://blog.csdn.net/jbb0523/article/details/42028587
 
-从傅里叶(Fourier)变换到伽柏(Gabor)变换再到小波(Wavelet)变换
+从傅立叶(Fourier)变换到伽柏(Gabor)变换再到小波(Wavelet)变换
+
+https://mp.weixin.qq.com/s/U96qNphaZOPQJj97xexluw
+
+让机器“看见”：图像数据的特征提取方法
+
+https://mp.weixin.qq.com/s/pR9mKpSjdObkNWHrkezPcw
+
+简简单单用OpenCV让一只小猫咪变成奶凶奶凶的科技猫
 
 # Schmid滤波
 
@@ -150,6 +179,10 @@ https://mp.weixin.qq.com/s/9345Y-Ag-2AWPur-NAdiEw
 
 HOG特征详解与行人检测
 
+https://mp.weixin.qq.com/s/eRyCrvZGjsd9ZQ_NbNwB3w
+
+梯度直方图(HOG)用于图像多分类和图像推荐
+
 # Haar
 
 ![](/images/article/Haar.png)
@@ -157,6 +190,8 @@ HOG特征详解与行人检测
 Haar特征本身并不复杂，就是用图中黑色矩形区域内所有像素值的和减去白色矩形区域内所有像素值的和，得到的值称为Haar特征值。
 
 同样的，将整幅图所有Cell的Haar特征值交给SVM或者AdaBoost之类的分类器，就得到了待识别物体的Haar特征。
+
+这也是2010年前后人脸识别/车牌识别的标准做法，OpenCV在v4以前的识别算法就是基于这套算法。
 
 从上面的描述可以看出：早期的算子主要从信号处理的角度出发，而HOG和Haar开始考虑使用统计学方法提取有效特征。这也是90年代后期，统计学被引入CV界的直接结果。
 
@@ -178,6 +213,10 @@ https://mp.weixin.qq.com/s/g-F-D5PC75BjbaRBmifnZw
 
 人脸Haar特征与快速计算神器：积分图
 
+https://mp.weixin.qq.com/s/0yaBwb_HZQXV27ep87ch_A
+
+基于Adaboost算法的人脸检测分类器！
+
 # SIFT
 
 ## 概述
@@ -197,21 +236,3 @@ SIFT算法是CV领域在DL进入之前的20年中，最重要的成果。
 尺度空间(scale space)思想最早是由Iijima于1962年提出的，后经witkin和Koenderink等人的推广逐渐得到关注，在计算机视觉领域使用广泛。
 
 尺度空间理论的基本思想是：在图像信息处理模型中引入一个被视为尺度的参数，通过连续变化尺度参数获得多尺度下的尺度空间表示序列，对这些序列进行尺度空间主轮廓的提取，并以该主轮廓作为一种特征向量，实现边缘、角点检测和不同分辨率上的特征提取等。
-
-尺度空间方法将传统的单尺度图像信息处理技术纳入尺度不断变化的动态分析框架中，更容易获取图像的本质特征。尺度空间中各尺度图像的模糊程度逐渐变大，能够模拟人在距离目标由近到远时目标在视网膜上的形成过程。
-
-尺度空间的应用实例就是**图像金字塔**。
-
-参考：
-
-http://www.cnblogs.com/ronny/p/3886013.html
-
-尺度空间理论
-
-## 尺度空间的视觉不变性
-
-视觉不变性是对尺度空间算子提出的一种要求：
-
-1.对图像的分析不受图像的灰度水平和对比度变化的影响，即满足灰度不变性和对比度不变性。这主要体现了物体的**光照变化**。
-
-2.对图像的分析和图像的位置、大小、角度以及仿射变换无关，即满足平移不变性、尺度不变性、欧几里德不变性以及仿射不变性。这主要体现了物体的**空间位置变化**。

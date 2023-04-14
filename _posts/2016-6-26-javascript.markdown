@@ -4,9 +4,10 @@ title:  Javascript（一）
 category: language 
 ---
 
-# Javascript
+* toc
+{:toc}
 
-## 参考指南 & 教程
+# 参考指南 & 教程
 
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference
 
@@ -18,7 +19,7 @@ http://www.w3school.com.cn
 
 这是一个中文的参考网站。内容包括HTML、CSS、JS等前端技术，以及其他一些后端技术。
 
-http://www.liaoxuefeng.com/wiki/001434446689867b27157e896e74d51a89c25cc8b43bdb3000
+https://www.liaoxuefeng.com/wiki/1022910821149312
 
 一个中文入门教程。该作者还编写了Python教程。
 
@@ -26,11 +27,11 @@ http://www.bootcss.com/
 
 这个网站虽然只是Bootstrap的教程网站，然而它首页的项目推荐，几乎涵盖了前端开发所用的各种JS库。
 
-## Javascript和C的互相调用
+# Javascript和C的互相调用
 
 Javascript本质上是服务器发出的，由客户端执行的脚本。出于安全原因，本地功能比较弱。所谓Javascript和C的互相调用，基本上都依赖于浏览器的实现。比如，在IE中依赖于ActiveX插件，在Firefox中依赖于JSAPI。
 
-## CDN
+# CDN
 
 CDN的全称是Content Delivery Network，即内容分发网络。这里主要使用它来存储一些通用的JS库，比如JQuery，以达到节省带宽和提高加载速度的目的。
 
@@ -46,7 +47,13 @@ http://libs.useso.com/js/jquery/1.9.1/jquery.min.js
 
 http://developer.baidu.com/wiki/index.php?title=docs/cplat/libs
 
-## Template Engine
+参考：
+
+https://mp.weixin.qq.com/s/VUxejzYtICqk6GB8iQwRQA
+
+一文搞懂CDN加速原理
+
+# Template Engine
 
 ![](/images/article/web.png)
 
@@ -56,39 +63,39 @@ http://developer.baidu.com/wiki/index.php?title=docs/cplat/libs
 
 Template Engine有很多种。例如：
 
-### hbs
+## hbs
 
 https://www.npmjs.com/package/hbs
 
-### jade
+## jade
 
 http://jade-lang.com/
 
-## jslint
+# jslint
 
 http://www.jslint.com/
 
 jslint是一个JavaScript语法的检查工具。
 
-## UI控件库
+# UI控件库
 
-### jQuery UI
+## jQuery UI
 
 这是jQuery官方推出的UI库。官网：
 
 http://jqueryui.com/
 
-### jQuerytools
+## jQuerytools
 
 另一个基于jQuery的UI库。
 
-### YUI
+## YUI
 
 Yahoo User Interface library。这是一个大型的JS工具库，已经停止更新及维护。官网：
 
 http://yuilibrary.com/
 
-### Other
+## Other
 
 Bootstrap、Foundation、Semantic UI。
 
@@ -140,6 +147,10 @@ https://mp.weixin.qq.com/s/uDwX0iq9RWs1sK1ct0tiCg
 
 浅谈Node.js在携程的应用
 
+https://mp.weixin.qq.com/s/L4Vq7BhjuAw7WBY7sV2ICw
+
+有意思的Node.js内存泄漏问题（JS虚拟机）
+
 ## NPM
 
 npm是node.js的软件包管理工具。它的官网是：
@@ -170,9 +181,25 @@ npm有两种安装方式：
 
 普通的包管理工具，一般一个模块只有一个副本，但npm不是这样。比如，A和B都用到了C，那么npm安装之后，A和B的node_modules下都能找到C，无论是本地安装，还是全局安装。
 
-这样做的优点在于，A和B可以使用C的不同版本，且互不影响，缺点是占用的空间过大。
+这样做的优点在于，A和B可以使用C的不同版本，且互不影响，缺点是占用的空间过大。所以，又有arborist项目，用于处理版本共存问题，毕竟多数情况下，大多数的库是不挑版本的。
 
 然而也不用太过担心空间问题，npm有cache功能。下载的npm包放在~/.npm下，且每个包只有一份。所以暂时不用的工程，把node_modules删掉就行了。再次安装时，由于不用下载文件，速度还是非常快的。
+
+## yarn
+
+yarn是facebook开源的一款代替npm的js包管理工具。注意别和Hadoop YARN搞混了。
+
+https://www.jianshu.com/p/f05eabdf3ab6
+
+使用yarn包管理工具
+
+## nvm
+
+node的版本升级很快，即使ubuntu 20.04自带的也远远不够新。为了维持多版本共存，可以使用nvm。
+
+官网：
+
+https://github.com/nvm-sh/nvm
 
 ## NW.js
 
@@ -210,7 +237,7 @@ nw打包是指将nw脚本打包成可执行文件的过程。打包的目的如�
 
 Electron是另一套node.js的客户端开发SDK。其官网为：
 
-http://electron.atom.io/
+https://www.electronjs.org/
 
 教程：
 
@@ -252,6 +279,14 @@ https://mp.weixin.qq.com/s/pBKoRBO_Grp1otGlDp5pUw
 
 教你做个属于自己的Markdown编辑器
 
+https://mp.weixin.qq.com/s/vq2znBRXqW3kAtk5Ixn_Jg
+
+JavaScript和Node.js简史，前端未来走向何方？
+
+http://www.uinio.com/Web/Electron/
+
+使用Electron打造跨平台桌面应用
+
 ## CEF
 
 Chromium Embedded Framework的官网是：
@@ -269,6 +304,16 @@ https://cefbuilds.com/
 http://www.alloyteam.com/2016/03/node-embedded-database-nedb/
 
 Node嵌入式数据库——NeDB
+
+# Deno
+
+Deno是node.js之父Ryan Dahl在2017年创立的后者的替代品。
+
+参考：
+
+https://www.ruanyifeng.com/blog/2020/01/deno-intro.html
+
+Deno运行时入门教程：Node.js的替代品
 
 # HTML & CSS
 
@@ -296,46 +341,36 @@ selector {property1: value1; property2: value2; ... propertyN: valueN}
 
 name没有快捷的选择方法，但可以采用属性的方式进行选择，例如：`input[name="you"]`
 
-## CSS动画
+## 参考
 
-### 动画
+https://www.zhihu.com/question/21775016
 
-HTML动画一般有两种实现方式：
+网页布局都有哪种？一般都用什么布局？
 
-1.JS。JS脚本通过动态改变HTML、CSS的内容来实现动画效果。这种方式功能全面，且可在旧版本浏览器中执行。
+https://mp.weixin.qq.com/s/DUOfYS-0k-F1p1-_YO9udA
 
-2.CSS3。CSS3引入了一些动画属性，它由浏览器直接解释执行。这种方式执行效率很高，但需要浏览器本身支持CSS3。并且，有些复杂的动画，可能会超出CSS3的能力范围，这时不可避免的还是会用到JS。
+前端开发者们值得了解的11项前端技巧
 
-### Animate.css
+https://mp.weixin.qq.com/s/bgxkqnr-MPwsKDBicJIpgA
 
-Animate.css是Daniel Eden使用CSS3的animation制作的动画效果的CSS集合。其官网是：
+如何只使用CSS提升页面渲染速度
 
-http://daneden.github.io/animate.css/
+# Traffic Demo
 
-教程：
+2019.9
 
-http://www.dowebok.com/98.html
+最近心血来潮，翻出了本科时代的作业。其中有一个交通仿真的小demo，最早是用Java Applet写的。岂料，现在别说浏览器了，就连专门看这个的AppletViewer在新版SDK中，都不见踪影了。。。
 
-animate.css–齐全的CSS3动画库
+于是，只好做现代化移植。本来首选JavaFX的，不料刚开始写，就发现JavaFX对于多线程渲染做的很差，而这个Demo正是个多线程的版本。
 
-### Step1：事件触发动画
+反正都要大改，还不如直接移植到js上，连编译都省了。
 
-网上的CSS动画例子，多数是加载网页时直接触发（这种最简单），少部分是鼠标移动到控件上时触发（这种方式主要使用了:hover选择器）。
+原始版本：
 
-这里介绍一下，click事件触发动画的机制。示例代码：
+https://github.com/antkillerfarm/antkillerfarm_crazy/tree/master/java/trafic
 
-https://github.com/antkillerfarm/antkillerfarm_crazy/tree/master/nodejs/js/hello/super_button.html
+新版本：
 
-1.在sb.css中，自定义按钮旋转动画的样式rotate_mill。
+https://github.com/antkillerfarm/antkillerfarm_crazy/tree/master/nodejs/js/traffic
 
-2.在click事件处理函数中，使用addClass函数，将rotate_mill应用到控件上，就可以触发动画效果。
-
-3.动画结束时，会触发AnimationEnd事件。在该事件处理函数中，使用removeClass函数，去掉rotate_mill样式，以恢复原状。否则，下次click时，由于样式没变化，就不会触发动画效果了。
-
-4.和AnimationEnd类似的事件，还有AnimationIteration和AnimationStart。
-
-### Step2：回调函数嵌套问题
-
-在上面的例子中，所有的button都是同步动画的。如果想要一个接着一个播放动画的话。一种思路就是：在上一个动画的AnimationEnd事件处理函数中，启动下一个动画。但这种方法会导致回调函数的嵌套问题。
-
-首先需要明确一点：回调嵌套并没有执行效率的问题。JS脚本都是单线程执行的，因此无论采用何种写法，都不会改变函数的执行顺序。回调嵌套的问题主要出在可读性方面。
+众所周知，js是单线程的，所以这个版本也是单线程的，逻辑稍微复杂了一些。

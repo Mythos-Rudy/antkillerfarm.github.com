@@ -1,10 +1,263 @@
 ---
 layout: post
-title:  机器人/无人驾驶参考资源（三）, Apollo
+title:  机器人/无人驾驶参考资源（三）
 category: resource 
 ---
 
+* toc
+{:toc}
+
 # 机器人/无人驾驶参考资源
+
+## 组合导航
+
+https://mp.weixin.qq.com/s/F8aLNue_qDlMyTAznBLC7g
+
+GPS/IMU/DMI组合导航方法研究
+
+https://mp.weixin.qq.com/s/tin5FtrJLnuKZCGDr8s3GA
+
+组合导航系列文章（一）：开篇
+
+https://mp.weixin.qq.com/s/BLEP6nmGSfPY3iMh_N3JKw
+
+组合导航系列文章（二）：惯性器件综述
+
+https://zhuanlan.zhihu.com/p/515485538
+
+高精度组合导航里的松、紧、深耦合
+
+https://mp.weixin.qq.com/s/YypYIwbXavrnodGENNfZnw
+
+RTK，自动驾驶之锚
+
+## 泊车
+
+**半自动泊车**系统为驾驶员操控车速，计算平台根据车速及周边环境来确定并执行转向，对应于SAE自动驾驶级别中的L1；
+
+**全自动泊车**为计算平台根据周边环境来确定并执行转向和加减速等全部操作，驾驶员可在车内或车外监控，对应于SAE L2级。
+
+**自主泊车**又称为代客泊车或一键泊车：指驾驶员可以在指定地点处召唤停车位上的车辆，或让当前驾驶的车辆停入指定或随机的停车位。整个过程正常状态下无需人员操作和监管，对应于SAE L3级别。
+
+参考：
+
+https://zhuanlan.zhihu.com/p/56236181
+
+自动/自主泊车技术简介
+
+https://mp.weixin.qq.com/s/GN4u91Dc5uYLP8N8rptczA
+
+全自动泊车辅助F-APA简介
+
+https://mp.weixin.qq.com/s/o74udojH7jGPPoxJSSBdMg
+
+停车不再难，L2到L4的泊车辅助系统技术剖析
+
+https://mp.weixin.qq.com/s/M5VphyTAFXiK2mJhIsvyvA
+
+从自动泊车到自主泊车
+
+## 软件仿真
+
+https://mp.weixin.qq.com/s/yNr4_tEyYg_VBmNjIrjYug
+
+自动驾驶车辆仿真模拟软件盘点
+
+https://zhuanlan.zhihu.com/p/66961439
+
+交通模型仿真工具SUMO介绍
+
+https://mp.weixin.qq.com/s/eQJ8dgNNd3iE2fXXUcXG2A
+
+一贴集齐86种交通建模与仿真软件综述
+
+https://mp.weixin.qq.com/s/Ja6DxqadbFBIWUk44DjGqw
+
+密集场景中自动驾驶车辆的仿真与导航
+
+https://zhuanlan.zhihu.com/p/57169482
+
+自动驾驶研发模拟仿真系统的工作介绍
+
+https://zhuanlan.zhihu.com/p/66963787
+
+自动驾驶模拟仿真系统中的传感器模型
+
+https://mp.weixin.qq.com/s/E-Vo3mqANB21Gv-X3b6o1A
+
+用虚拟仿真平台实现ADAS目标融合、检测和跟踪
+
+https://mp.weixin.qq.com/s/seAKqsJDcPHAa_BZDfav_w
+
+谈谈自动驾驶仿真
+
+https://mp.weixin.qq.com/s/pOX84vc2JlYidkTZt73rcQ
+
+英特尔&丰田联合开源城市驾驶模拟器CARLA
+
+https://mp.weixin.qq.com/s/bs6DQveNwJh6auIAExj4VA
+
+驾驶模拟器之CARLA篇：An Open Urban Driving Simulator
+
+https://mp.weixin.qq.com/s/yHP9bKUtQRR1YPcI3nTjiQ
+
+机器人系统仿真
+
+## 电气&机械
+
+电气&机械虽然不是控制系统算法的一部分，但却是控制系统的物理基础。
+
+https://mp.weixin.qq.com/s/tSrb5wljrCvy3TgfbsyjOQ
+
+汽车电源为何抛弃12V选择48V？
+
+https://mp.weixin.qq.com/s/XJVyoQTDljO8F6GVthsxKw
+
+汽车安全气囊结构原理
+
+## Boston Dynamics
+
+Boston Dynamics算是人形机器人的标杆企业了。它采用了液压驱动的路线。
+
+相比于电机驱动，液压驱动功率更大，环境适应性更好，缺点是非线性系统，控制比较复杂。
+
+参考：
+
+https://mp.weixin.qq.com/s/BNanIQKY9SSNpms0qSTOBA
+
+硬核干货！揭秘波士顿动力背后的专利技术
+
+https://www.zhihu.com/question/437149222
+
+波士顿动力12月29日发布了机器人跳舞的视频，在这个领域我们现在差距有多大？
+
+https://www.zhihu.com/question/347701202
+
+波士顿动力旋转跳跃360°视频火了，那么它的背后是通过什么算法实现的呢？
+
+## 大疆
+
+https://zhuanlan.zhihu.com/p/59329666
+
+如何使用大疆无人机开展国土三调
+
+https://www.zhihu.com/question/292721850
+
+大疆为什么不做油动无人机？
+
+## 参考
+
+![](/images/img5/auto.jpg)
+
+1967年，英国哲学家菲利帕·福特提出过电车难题：一个疯子把五个无辜的人绑在电车轨道上。一辆失控的电车朝他们驶来，并且片刻后就要碾压到他们。幸运的是，你可以拉一个拉杆，让电车开到另一条轨道上。但是还有一个问题，那个疯子在那另一条轨道上也绑了一个人。考虑以上状况，你应该拉拉杆吗？
+
+---
+
+https://www.zhihu.com/question/404870865
+
+自动驾驶什么时候才会凉凉，估计还要多久？
+
+https://zhuanlan.zhihu.com/p/26988866
+
+机器人学习Robot Learning的发展
+
+https://mp.weixin.qq.com/s/YLhECwwig9f21zk1-PNiTw
+
+25篇车辆检测与分类DL文章读懂自动驾驶
+
+https://mp.weixin.qq.com/s/cqzk7iHD8sJGLnIhkTgN3w
+
+一文读懂全球自动驾驶研究现状
+
+https://zhuanlan.zhihu.com/p/87416772
+
+自动驾驶中深度学习-综述
+
+https://mp.weixin.qq.com/s/W5f08aPQr0omAsJoXnbJIA
+
+最新《深度学习自动驾驶》技术综述论文，28页pdf
+
+https://mp.weixin.qq.com/s/Z6j3YA_WPxRTRWS7-avE6w
+
+自动驾驶汽车的计算机视觉全面综述论文：问题、数据集和现状
+
+https://mp.weixin.qq.com/s/lgqSCAE6wh_L4d6VT12fKA
+
+面向机器人的机器学习，63页ppt
+
+https://mp.weixin.qq.com/s/3lgOxQm07nFpxWauT8b2ow
+
+值得收藏，自动驾驶技术与实例最全解析！
+
+http://mp.weixin.qq.com/s/KcHlWmIdKpjledwWFdNbCw
+
+自动驾驶汽车到底涉及了哪些技术？
+
+https://mp.weixin.qq.com/s/qyZS6ufN6f4dQRdG9diP0A
+
+自动驾驶传感器，感知，地图定位和规划控制发展现状及热点研究
+
+https://mp.weixin.qq.com/s/9Oghiqbuz4sUFisylTEzng
+
+雷洪钧：汽车自动驾驶技术与实例的研究（上）
+
+https://mp.weixin.qq.com/s/7gBl3ckqk7gQJ0FGMmv_jg
+
+雷洪钧：汽车自动驾驶技术与实例的研究（下）
+
+https://mp.weixin.qq.com/s/pPPq3b1yj92RaGgIpTAhqQ
+
+一文看透汽车无人驾驶技术、产品和市场
+
+https://zhuanlan.zhihu.com/p/79391139
+
+MIT Cheetah完整开源代码与论文简介
+
+https://rsu.data61.csiro.au/people/jalvarez/research_bbdd.php
+
+这个网站提供了一系列用于汽车自动驾驶的视频标注的工具。
+
+>Jose M. Alvarez，西班牙巴塞罗那自治大学博士（2010年）。现为澳大利亚CSIRO研究员。CSIRO是澳大利亚最大的国家级科研机构。
+
+https://zhuanlan.zhihu.com/p/41460767
+
+无人驾驶与视觉感知导读
+
+https://zhuanlan.zhihu.com/p/43285246
+
+自动驾驶决策控制技术-A Survey
+
+https://zhuanlan.zhihu.com/p/57028341
+
+自动驾驶系统的传感器标定方法
+
+https://mp.weixin.qq.com/s/qrvcvYzSwxSR1-tkvZLUaQ
+
+使用自动编码器从自然驾驶数据中估计测试场景的独特性
+
+https://mp.weixin.qq.com/s/Gqffn_1kgP34MwthcCKH0Q
+
+基于机动LSTM的周围车辆多模态轨迹预测
+
+https://mp.weixin.qq.com/s/WbTtBjeUmBeS3OQgaFG4eA
+
+Apollo控制算法之LQR
+
+https://mp.weixin.qq.com/s/G3Plo1Ogcx3s6nz_rdeKtA
+
+Apollo控制算法之汽车动力学模型
+
+https://zhuanlan.zhihu.com/p/59089908
+
+自动驾驶中的规划控制概述
+
+https://mp.weixin.qq.com/s/eOxle3q_QgejlX10kc30Rg
+
+Apollo无人车自定位技术入门
+
+https://zhuanlan.zhihu.com/p/59890550
+
+自动驾驶中的目标跟踪方法
 
 https://mp.weixin.qq.com/s/kqIAXs7A1GuXPUwSMLw7ZQ
 
@@ -46,9 +299,9 @@ https://mp.weixin.qq.com/s/NH09Pvh8vKtOGrS6Lwq3Tw
 
 自动驾驶中行为预测的一些根本问题和最新方法
 
-https://mp.weixin.qq.com/s/UAPbNq_KNWCFd7p8U8HnYQ
+https://zhuanlan.zhihu.com/p/93828943
 
-模型预测控制（MPC)
+仿人双足机器人步态规划——零力矩点（ZMP）
 
 https://mp.weixin.qq.com/s/0EsgWDCFGbjLv8Rn_OBG1g
 
@@ -58,10 +311,6 @@ https://mp.weixin.qq.com/s/dQd-2gGyLQURfK4SO9kjPA
 
 智能体张量融合，一种保持空间结构信息的轨迹预测方法
 
-https://mp.weixin.qq.com/s/BNanIQKY9SSNpms0qSTOBA
-
-硬核干货！揭秘波士顿动力背后的专利技术
-
 https://mp.weixin.qq.com/s/GDQSxVxwx7z-YW0QkCeVBQ
 
 马斯克刚骂了激光雷达，这篇用纯视觉代替激光雷达的名校论文“力挺”了他
@@ -69,14 +318,6 @@ https://mp.weixin.qq.com/s/GDQSxVxwx7z-YW0QkCeVBQ
 https://mp.weixin.qq.com/s/7mu-n13H2YxbCFrVJ0fD1A
 
 如何基于深度神经网络设计一个端到端的自动驾驶模型？如何设计一个基于增强学习的自动驾驶决策系统？
-
-https://mp.weixin.qq.com/s/ShLqAgB8VJJQjCS9iako6Q
-
-一文了解超级电容器
-
-https://mp.weixin.qq.com/s/GN4u91Dc5uYLP8N8rptczA
-
-全自动泊车辅助F-APA简介
 
 https://mp.weixin.qq.com/s/b4cnjOByE2j0gIljF7IXCw
 
@@ -114,10 +355,6 @@ https://zhuanlan.zhihu.com/p/68127887
 
 驾驶员监控DMS
 
-https://zhuanlan.zhihu.com/p/66963787
-
-自动驾驶模拟仿真系统中的传感器模型
-
 https://mp.weixin.qq.com/s/AlYTOetU43VDaSlotRDUDg
 
 秒杀高精地图？MIT&丰田称仅靠简单地图和视觉就可让无人车适应新环境
@@ -142,6 +379,10 @@ https://mp.weixin.qq.com/s/ao5hC_3A7fn8_L_PFw399A
 
 轨迹规划技术分享
 
+https://mp.weixin.qq.com/s/mPiAPT5hBlhR5gINIEMnkw
+
+轨迹规划——算法综述
+
 https://mp.weixin.qq.com/s/pEA7mN7AhxrDqLb3ku1CxQ
 
 ADAS以及自动驾驶车辆运动特性
@@ -157,273 +398,3 @@ ADAS系统横纵向控制策略之碰撞时间计算方法
 https://mp.weixin.qq.com/s/ZEvNniUUzcsCbU-UpzxtEA
 
 ADAS高级辅助驾驶视觉系统（Advanced Driver Assistant System）
-
-https://zhuanlan.zhihu.com/p/73073753
-
-基于深度学习的多传感器标定
-
-https://mp.weixin.qq.com/s/m4KtRGoBgqcgF8ZBMjG6Hg
-
-深层卷积神经网络在路面分类中的应用
-
-https://mp.weixin.qq.com/s/nQq2tzK_2y2lEt9H14zdwA
-
-自动驾驶中的决策规划算法概述
-
-https://mp.weixin.qq.com/s/yIFgwxU-DI6NBogfmxqqKQ
-
-基于深度学习的计算机视觉技术在无人驾驶中的应用
-
-https://mp.weixin.qq.com/s/x0Ls8jeqjuyJoZ53q5R7_A
-
-自动驾驶中的障碍物行为预测
-
-https://mp.weixin.qq.com/s/cV1-mxUKisRgeu9G4NPLrQ
-
-出行领域计算机视觉技术，滴滴AI Labs教程，117页PPT
-
-https://mp.weixin.qq.com/s/lSkMJTPitiswAp3GV3NDSQ
-
-基于车辆动力学辅助多轴IMU的自动驾驶汽车车身侧偏角和姿态角估计
-
-https://mp.weixin.qq.com/s/vSa5KSSj_B_2YFNvZuaygQ
-
-规划技术详解——Motion Planning Environment
-
-https://mp.weixin.qq.com/s/E7nxUyX5TjsPnaAovf3PdA
-
-自动驾驶思考：硬件篇
-
-https://mp.weixin.qq.com/s/jMqkdhtPRUurgC5XRYWqFw
-
-分割驱动下的6D物体姿态估计
-
-https://mp.weixin.qq.com/s/OHZl3KHfhh7i_EJ9pDvBPg
-
-V2X技术发展历程及应用研究
-
-https://mp.weixin.qq.com/s/UOfagdeiREP4Acakkvfd7A
-
-自动驾驶四轮独立驱动电动汽车的自适应分层轨迹跟踪控制方法
-
-https://www.cnblogs.com/guoyaohua/p/8940871.html
-
-SCNN车道线检测--(SCNN)Spatial As Deep: Spatial CNN for Traffic Scene Understanding（论文解读）
-
-https://mp.weixin.qq.com/s/NREmqVYXo6hWsIvzcnwIDA
-
-开源AI画出超准街道地图，全球适用，刷新DeepGlobe最好成绩
-
-https://zhuanlan.zhihu.com/p/76828112
-
-通路规划的行为树（自动驾驶）
-
-https://mp.weixin.qq.com/s/8znzrzoBAYGza6uOFfuz5g
-
-一文读懂无人驾驶汽车系统基本框架
-
-https://mp.weixin.qq.com/s/cLhnFCQdftj6Qi5j-PWDzw
-
-控制技术详解——控制理论
-
-https://mp.weixin.qq.com/s/N39CF1M7nV2cwUUMGRnG7g
-
-控制技术详解——基于模型的控制方法
-
-https://mp.weixin.qq.com/s/DrWeZOIhJV1dbpg7Ns6gJQ
-
-控制技术详解——控制器的类型
-
-https://mp.weixin.qq.com/s/E-Vo3mqANB21Gv-X3b6o1A
-
-用虚拟仿真平台实现ADAS目标融合、检测和跟踪
-
-https://mp.weixin.qq.com/s/Q4me1G9B8uwwRIr6dfETEA
-
-行为轨迹预测技术
-
-https://mp.weixin.qq.com/s/3ApXC3u13_O8s4QCYxldlQ
-
-基于模块化轻量级网络的道路目标检测
-
-https://mp.weixin.qq.com/s/kAP8MMjTjVyeBPcpY5E1FQ
-
-障碍物行为预测技术
-
-https://mp.weixin.qq.com/s/VwLNq84Nmg5--yTHlRdSJA
-
-深度学习在道路封闭挖掘方案的探索与实践
-
-https://mp.weixin.qq.com/s/sxm2cD7DAhJ6eIhUDvYRKA
-
-运动轨迹规划技术
-
-https://mp.weixin.qq.com/s/hs6uMkRctASmH1YrNOKFdw
-
-脱手检测在自动驾驶中的原理及应用
-
-https://mp.weixin.qq.com/s/o74udojH7jGPPoxJSSBdMg
-
-停车不再难，L2到L4的泊车辅助系统技术剖析
-
-https://zhuanlan.zhihu.com/p/83129242
-
-自动驾驶近期行为预测和规划的一些文章介绍
-
-https://zhuanlan.zhihu.com/p/83605553
-
-移动机器人同时估计自身位姿和物体位姿
-
-https://mp.weixin.qq.com/s/M-ihYsQUsT3deekhniixrQ
-
-聊聊无人驾驶技术中的路由寻径
-
-https://mp.weixin.qq.com/s/eVHAmNn7sHcghLkl-ksnAw
-
-谈谈“域控制器”
-
-https://mp.weixin.qq.com/s/aaN7W1cnlQyl4kPNGvxn_Q
-
-斯坦福大学李飞飞高徒朱玉可博士毕业论文——闭合感知-动作循环: 通用自主机器人探索
-
-https://mp.weixin.qq.com/s/w8gjhL_NiQSY_OKZ_RXb2g
-
-3D机器人视觉在仓储物流和工业自动化领域的应用
-
-https://mp.weixin.qq.com/s/rA9AAVx7AlNuS1l4IUuG0w
-
-深度学习技术在自动驾驶中的应用
-
-https://mp.weixin.qq.com/s/4_jtb9gv20F6h1Ljw4JwEw
-
-车载以太网通信的“套娃游戏”
-
-https://zhuanlan.zhihu.com/p/86184886
-
-行人的行为意图建模和预测(上)
-
-https://zhuanlan.zhihu.com/p/86185203
-
-行人的行为意图建模和预测(下)
-
-https://zhuanlan.zhihu.com/p/90773462
-
-多传感器数据深度图的融合：最近基于深度学习的方法
-
-https://mp.weixin.qq.com/s/4tOYmCRiFN0xsG6vbedrrg
-
-ADAS系统中的动态目标感知策略（一）
-
-https://mp.weixin.qq.com/s/JT4p03m77ohOufL3JFecvA
-
-从硬件角度剖析自动驾驶，为什么说它是复杂的系统工程？
-
-# Apollo
-
-Apollo是百度开源的无人驾驶平台，也是目前已开源的平台中最专业的。
-
-官网：
-
-http://apollo.auto/
-
-代码：
-
-https://github.com/ApolloAuto/apollo
-
-参考：
-
-https://github.com/TeamStuQ/skill-map/blob/master/data/map-Apollo.md
-
-Apollo自动驾驶工程师技能图谱
-
-https://mp.weixin.qq.com/s/qtoHF4Mnj_aeGBJbkjJUMA
-
-Apollo小度车载系统
-
-https://mp.weixin.qq.com/s/rWhnazEC35U7nsVpsxhFEg
-
-Apollo 2.0软硬件框架初探（一）
-
-https://mp.weixin.qq.com/s/GccST3xJ1QRIVM7cFgsn3A
-
-Apollo 2.0软硬件框架初探（二）
-
-https://mp.weixin.qq.com/s/UHQXF2Ju8erw9thm0Jjt2A
-
-Apollo 2.0框架及源码分析(三)
-
-https://mp.weixin.qq.com/s/3i8mJn4OPjt-KV1fp8bZQQ
-
-Apollo Planning模块源代码分析（上）
-
-https://mp.weixin.qq.com/s/DfdMDOQMncTau-9zGq9CYw
-
-Apollo Planning模块源代码分析（下）
-
-https://mp.weixin.qq.com/s/bH6khM8gO3JE4YT9i8hSlQ
-
-Apollo 2.0自动驾驶平台技术解析与应用
-
-https://mp.weixin.qq.com/s/EgsdlDhd8lIXU3bnTYJh0w
-
-Apollo高精地图解析
-
-https://mp.weixin.qq.com/s/027QogNXtW2NPIDVcGQGzw
-
-Apollo“云+端”研发迭代新模式实战
-
-https://mp.weixin.qq.com/s/Pjfhs-03HxFeyeKo1BmAPw
-
-Apollo小度车载系统打造更舒心的出行
-
-https://mp.weixin.qq.com/s/j4faPastB3nFmgH_nhVW6g
-
-Apollo仿真平台如何Hold住99.9999%的复杂场景？
-
-https://mp.weixin.qq.com/s/PFCCRBGWmaTQkeyOlG1qng
-
-Apollo 2.0多传感器融合定位模块
-
-https://mp.weixin.qq.com/s/KEdXmwUGHysy_LZAfdkmlw
-
-Apollo的分布式可扩展计算平台探索
-
-https://mp.weixin.qq.com/s/MfTsH9mowuWFA54z7vs5fA
-
-Apollo Control模块源码解析
-
-https://mp.weixin.qq.com/s/bIjnm74cJcHP8Zab4kt5zA
-
-Apollo 2.5实时相对地图的分享
-
-https://mp.weixin.qq.com/s/hU8__GPgxaCStSgv4FyLIw
-
-无人驾驶行业及Apollo的Overview
-
-https://mp.weixin.qq.com/s/48DcWP1kAoze0Lv8jHY3Ow
-
-Apollo 2.5预测系统介绍
-
-https://mp.weixin.qq.com/s/7ftd941pycD7h_R10cDecg
-
-Apollo 2.5自动驾驶规划控制
-
-https://mp.weixin.qq.com/s/y_mOKpgLEvDjoO-UdMBcyw
-
-Apollo AdaperManager和Routing模块源代码分析
-
-https://mp.weixin.qq.com/s/k5GNHhxEE6mIOnxXlCpKXg
-
-Apollo 3.5软件架构
-
-https://mp.weixin.qq.com/s/Xhy1w87l_b47_hS3zzCgaA
-
-3D障碍物感知
-
-https://mp.weixin.qq.com/s?__biz=MzI1NjkxOTMyNQ==&mid=2247488270&idx=1&sn=25b6e9b4fbe02ef6c84f3171c4bd2e2a
-
-Apollo决策技术分享
-
-https://mp.weixin.qq.com/s/E65x4kNNZ4ctc12e5v095w
-
-自动驾驶专用计算框架探索和实践

@@ -4,6 +4,9 @@ title:  linux内核研究（一）
 category: linux 
 ---
 
+* toc
+{:toc}
+
 # 驱动开发
 
 推荐入门读物《Beginning Linux Programming》，该书第3版已有中译本。
@@ -62,7 +65,9 @@ simple_lkm: module verification failed: signature and/or  required key missing -
 
 3）自动加载LKM
 
-参考文献: [http://edoceo.com/howto/kernel-modules](http://edoceo.com/howto/kernel-modules)
+参考文献: 
+
+http://edoceo.com/howto/kernel-modules
 
 以下为节选:
 
@@ -80,7 +85,9 @@ rc.local - Using this method loads the modules after all other services are star
 
 PS：/etc/modules由/etc/init/module-init-tools.conf 或 /etc/init/kmod.conf负责执行。
 
-例子见[这里](https://github.com/antkillerfarm/antkillerfarm_crazy/tree/master/linux_driver/simple-lkm)。
+示例：
+
+https://github.com/antkillerfarm/antkillerfarm_crazy/tree/master/linux_driver/simple-lkm
 
 * proc文件系统
 
@@ -88,7 +95,9 @@ PS：/etc/modules由/etc/init/module-init-tools.conf 或 /etc/init/kmod.conf负�
 
 这个过程同时也打开了我的思路——还有什么比内核代码更丰富的例子库呢？不管是proc文件系统，还是普通的设备驱动，在内核代码里例子比比皆是。
 
-因此，有了下面的[例子](https://github.com/antkillerfarm/antkillerfarm_crazy/tree/master/linux_driver/simple-vfs)。
+因此，有了下面的示例：
+
+https://github.com/antkillerfarm/antkillerfarm_crazy/tree/master/linux_driver/simple-vfs
 
 这里需要注意的是:
 
@@ -120,29 +129,29 @@ PS：/etc/modules由/etc/init/module-init-tools.conf 或 /etc/init/kmod.conf负�
 
 数据结构课本上教链表的时候，一般是这样定义链表的数据结构的：
 
-{% highlight c %}
+```c
 typedef struct {
     struct Node *next;
     UserData data;
 }Node;
-{% endhighlight %}
+```
 
 其中，data字段包含了要保存到链表中的数据内容。使用这样的数据结构实现的链表，通用性不好，需要针对不同的UserData类型定义不同的链表类型，尽管所有这些链表的操作都是类似的。当然这样的定义在C++中不是太大的问题，使用模板就可以实现对不同UserData类型的处理，虽然这样做无法避免代码段的膨胀，但是仅就书写使用来说，并没有太大的不方便。
 
 一种改进的办法是将数据结构改为下面的样子：
 
-{% highlight c %}
+```c
 typedef struct {
     struct Node *next;
     void* data;
 }Node;
-{% endhighlight %}
+```
 
 用无类型的指针指向需要保存的数据内容，是一个通用性不错的办法。但是C语言本身没有对元数据的支持，一旦指针退化成无类型的指针，再想恢复成原来的数据类型就比较困难了。（元数据就是所有数据类型的基类，例如Java语言的Object类、MFC的CObject类、GTK的GObject结构。虽然元数据本身并不要求包含数据的类型信息，但在上述这些元数据的实现中，都提供了这个功能。）
 
 Linux的做法是：（为了便于理解，进行了一些改写，以忽略与本话题无关的部分）
 
-{% highlight c %}
+```c
 typedef struct {
     struct Node *next;
 }Node;
@@ -150,17 +159,13 @@ typedef struct {
     Node *node;
     UserDataActual data;
 }UserData;
-{% endhighlight %}
+```
 
 这实际上是一种逆向思维，也就是将链表结点中包含用户数据，改为用户数据中包含链表结点。在链表处理时，将node传给链表处理函数。而在引用用户数据时，通过计算node和data的地址偏差，获得data的实际地址。具体的技巧如下：
 
 `UserDataActual* p_data = (UserDataActual*)(((char*)node) - (int)(&(((UserData*)0)->node)) + (int)(&(((UserData*)0)->data)));`
 
 可以看出，这种实现方式对node在UserData中出现的位置也没有什么额外的要求，有很好的灵活性。
-
-# 同步锁
-
-read-write lock、RCU lock、spin lock
 
 # 内核模块的参数
 
@@ -172,13 +177,13 @@ read-write lock、RCU lock、spin lock
 
 # IO操作
 
-readb 从 I/O 读取 8 位数据 ( 1 字节 )
+readb从I/O读取8位数据(1字节)
 
-readw 从 I/O 读取 16 位数据 ( 2 字节 )
+readw从I/O读取16位数据(2字节)
 
-readl 从 I/O 读取 32 位数据 ( 4 字节 )
+readl从I/O读取32位数据(4字节)
 
-writeb(), writew(), writel()也是类似的。
+writeb(),writew(),writel()也是类似的。
 
 IO操作之所以用宏实现，是由于这是和具体机器相关的操作，有的甚至要用到汇编来实现。从计算机体系结构来说，IO空间可以和内存空间属于同一个地址空间，这样就无需特殊的指令，直接使用C语言的赋值语句即可达到效果。IO空间也可以和内存空间采用不同的地址空间（比如x86就是这样的），这时就需要特殊处理了。
 
@@ -196,9 +201,8 @@ IO操作之所以用宏实现，是由于这是和具体机器相关的操作，
 
 `obj-$(CONFIG_FOO) += foo.o`
 
-这里的`$(CONFIG_FOO)`可以为y(编译进内核) 或m(编译成模块)。如果CONFIG_FOO不是y 和m,那么该文件就不会被编译联接了。通过控制`$(CONFIG_FOO)`的值，即可实现.o文件一级的条件编译。
+这里的`$(CONFIG_FOO)`可以为y(编译进内核)或m(编译成模块)。如果CONFIG_FOO不是y和m,那么该文件就不会被编译联接了。通过控制`$(CONFIG_FOO)`的值，即可实现.o文件一级的条件编译。
 
 # 内核重启
 
 include/reboot.h里总有一个函数可以满足你的需要。
-

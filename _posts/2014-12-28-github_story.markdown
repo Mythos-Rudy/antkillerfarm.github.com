@@ -1,8 +1,11 @@
 ---
 layout: post
-title:  GitHub, Google Code, and other, BBR
-category: technology 
+title:  GitHub, Google Code, and other
+category: toolchain 
 ---
+
+* toc
+{:toc}
 
 # GitHub
 
@@ -30,7 +33,7 @@ https://github.com/trending/python?since=monthly
 
 这个可以看到python的月度趋势，便于分析技术热点。其他语言可以此类推。
 
-----
+---
 
 `svn checkout https://github.com/rain1024/slp2-pdf/trunk/complete-book-pdf`
 
@@ -38,17 +41,23 @@ https://github.com/trending/python?since=monthly
 
 要点：将`tree/master`换成`trunk`。
 
-----
+---
 
 在搜索栏输入`stars:>10000`可以查看star最多的项目。
 
-----
+---
 
 在浏览器中输入：
 
 `https://api.github.com/repos/antkillerfarm/antkillerfarm.github.com`
 
 可以查看repo的基本信息，比如repo的大小（单位：KB）。
+
+---
+
+https://zhuanlan.zhihu.com/p/250534172
+
+基于Github Action的CI/CD流程
 
 ## 搭建本地GitHub Blog服务
 
@@ -64,12 +73,10 @@ https://rubyinstaller.org/
 
 作为生活在水深火热的墙内人民，有必要进行下面一步修改gem的源，方便我们更快的下载所需的组件：
 
-{% highlight bash %}
-sudo gem sources --add https://gems.ruby-china.org/ --remove https://rubygems.org/
-{% endhighlight %}
+`sudo gem sources --add https://gems.ruby-china.com/ --remove https://rubygems.org/`
 
->**关于 Windows 下证书无法验证问题 (certificate verify failed)**   
->ruby 没有包含 SSL 证书，所以 https 的链接被服务器拒绝。   
+>**关于Windows下证书无法验证问题 (certificate verify failed)**   
+>ruby没有包含SSL证书，所以https的链接被服务器拒绝。   
 >解决方法很简单，首先在这里下载证书 http://curl.haxx.se/ca/cacert.pem, 然后在环境变量里设置SSL_CERT_FILE这个环境变量，并指向cacert.pem文件。
 
 3.安装ruby-dev
@@ -84,7 +91,7 @@ sudo gem sources --add https://gems.ruby-china.org/ --remove https://rubygems.or
 
 4.安装jekyll和rdiscount
 
-`sudo gem install jekyll rdiscount`
+`sudo gem install jekyll rdiscount webrick`
 
 5.进入blog的根目录之后,运行
 
@@ -96,11 +103,107 @@ http://jekyllthemes.org/
 
 jekyll的官方主题站点
 
-## Markdown
+https://mp.weixin.qq.com/s/ih0jurQ4OzvLh3lmhGGxTA
+
+Ruby 3编程: 从小白到专家，598页pdf
+
+## GitHub下载速度慢
+
+219.76.4.4  http://github-cloud.s3.amazonaws.com
+
+https://zhuanlan.zhihu.com/p/314071453
+
+提高国内访问github速度的9种方法！
+
+`https://raw.githubusercontent.com/`
+
+替换为：
+
+`https://raw.fastgit.org/`
+
+https://zhuanlan.zhihu.com/p/248356236
+
+让你访问github提速到2MB每秒
+
+https://blog.csdn.net/yimenren/article/details/124773923
+
+github国内镜像https://hub.fastgit.xyz/使用指南
+
+## arxiv下载速度慢
+
+http://xxx.itp.ac.cn
+
+http://cn.arxiv.org/
+
+最著名的论文网站arxiv.org的中国镜像网站。arxiv.org中的论文都有编号。比如1608.06993v4，1608表示这是2016年8月的文章，v4表示这是第4版。
+
+## Git LFS
+
+Git LFS（Large File Storage）是Github开发的一个Git的扩展，用于实现Git对大文件的支持。
+
+Git LFS可以把音乐、图片、视频等指定的任意文件存在Git仓库之外，而在Git仓库中用一个占用空间1KB不到的文本指针来代替文件的存在。
+
+通过把大文件存储在Git仓库之外，可以减小Git仓库本身的体积，使克隆Git仓库的速度加快，也使得Git不会因为仓库中充满大文件而损失性能。
+
+官网：
+
+https://git-lfs.github.com
+
+中文简介：
+
+https://gitee.com/help/articles/4235
+
+安装：
+
+```bash
+curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | sudo bash
+sudo apt install git-lfs
+git lfs install
+```
+
+没有带宽问题的话，可以直接`git lfs fetch --all`。但是考虑到国内的访问速度，最好还是指定单个文件，逐个下载比较好。
+
+白名单：
+
+`git config lfs.fetchinclude '<file path>'`
+
+黑名单：
+
+`git config lfs.fetchexclude '<file path>'`
+
+然后：
+
+`git lfs fetch --recent`
+
+>gitee由于将LFS当作收费功能，竟然丧心病狂的将黑名单设为`*`，导致fetch不到任何东西。。。
+
+最后：
+
+`git lfs checkout`
+
+使用中遇到问题，可以查询设置：
+
+`git lfs env`
+
+列出repo里所有lfs文件：
+
+`git lfs ls-files`
+
+参考：
+
+https://mp.weixin.qq.com/s/yoSeUTy13LoKyS1UFKaUbA
+
+如何存储Git大文件？
+
+# Markdown
 
 自从我在github建立blog以来，一直都在使用markdown语言。这里仅针对我使用过程中遇到的问题做一个笔记。
 
-### markdown渲染器
+https://mp.weixin.qq.com/s/hSbphAIJTjDn_Th7Oab46g
+
+Markdown速查表
+
+## markdown渲染器
 
 Jekyll原生支持maruku，rdiscount，kramdown，redcarpet等markdown渲染器。其中的maruku由于已经不维护，在Jekyll 3.0以后被抛弃。
 
@@ -118,11 +221,11 @@ Jekyll原生支持maruku，rdiscount，kramdown，redcarpet等markdown渲染器�
 
 正确写法：`<td rowspan="2">`
 
-### 语法高亮
+## 语法高亮
 
 之前一直使用pygments作为语法高亮的着色器。近来，github推荐我使用rouge。经过一番研究才发现，pygments是用python写的，难怪windows环境下的Jekyll老是无法集成pygments。
 
-### StackEdit
+## StackEdit
 
 StackEdit是一个在线的markdown编辑工具，被CSDN等网站所使用。
 
@@ -130,13 +233,11 @@ StackEdit是一个在线的markdown编辑工具，被CSDN等网站所使用。
 
 https://stackedit.io/
 
-## GitHub下载速度慢
+## Markdown编辑器
 
-219.76.4.4  http://github-cloud.s3.amazonaws.com
+https://github.com/marktext/marktext
 
-## arxiv下载速度慢
-
-http://xxx.itp.ac.cn
+MarkText
 
 ## Hexo
 
@@ -148,11 +249,39 @@ https://mp.weixin.qq.com/s/0Bd1bxoWx6MnGccnHc15ZA
 
 利用GitHub从零开始搭建一个自己的专属博客
 
+## TOC
+
+vscode有个叫做`Markdown TOC`的插件，可以生成TOC。
+
+编程实现的话，有两个库可以使用：
+
+- python-markdown
+
+官网：
+
+https://python-markdown.github.io
+
+但是这个库的输出是HTML，显得过于繁琐。
+
+- markdown-toclify
+
+https://github.com/rasbt/markdown-toclify
+
+这也是github官方使用的方法。
+
 ## 参考
+
+vscode有个叫做`Markdown PDF`的插件，可以将markdown转化为PDF。
+
+---
 
 https://mp.weixin.qq.com/s/CHca0V7LR4NhomtLIPhc4w
 
 如何用Markdown做幻灯？
+
+https://zhuanlan.zhihu.com/p/372729473
+
+Slidev：一个用Markdown写slides的神器
 
 # Google Code
 
@@ -191,73 +320,3 @@ https://mp.weixin.qq.com/s/CHca0V7LR4NhomtLIPhc4w
 而现在的话，你可以有别的选择，比如ifttt.com。ifttt是If this then that的缩写。国内的山寨版本有“如果云”。这些网站允许你自己创建一定的规则，来完成一定的动作。具体到当前的目标，就是创建以下规则：一旦rss的内容有更新，就立即将新内容以电子邮件的方式发送到我的邮箱里。
 
 剩下的问题就简单了，找一个好用的邮箱。使用邮箱的手机客户端，将邮件下载到手机上，这样每天的早报就有了:)
-
-# 我的AI简史
-
-2018.5
-
-上一篇技术简史还是2014.12的事情，时间又过了3年半。除了在智能硬件上捣鼓了一年多以外，这几年就主要是在AI上折腾了。
-
-2016.3的AlphaGo大战李世石事件，虽然新闻效应很大，对我的震撼也很大，但对于我从事AI，实际上并无直接关联。
-
-我的AI路的开端实际上非常偶然。某天闲逛，无意发现了一个开源app的UI使用了毛玻璃特效。作者特意指出该特效使用了Gauss filter。
-
-接着便搜索到了一个介绍Gauss filter的blog，这是该博主OpenCV系列的其中一篇，于是从此入了CV的坑。这大概是2016年3月底的事情，距离AlphaGo大战李世石不过一周左右。
-
-2016.4，公司开始涉足大数据研发，但暂时和我没有交集。
-
-2016.5，参加某安防展，看到了CV在停车场中，对于车辆跟踪的应用，对CV兴趣更浓。同时得知同事L是此中高手。
-
-2016.7，在OpenCV的官方手册中，发现了ML一词。接着找到了吴恩达早期的ML讲义，从此入坑ML。
-
-2016.8，大数据项目进入开展阶段，我自告奋勇，负责算法的设计。从此成为职业AI人。
-
-2016.10，入坑NLP。
-
-2016.12，入坑DL。但是由于初期ML的基础较差，因此在看完MLP之后，暂时停了一阵子。2017.5以后，全面转入DL。
-
-2017.10，入坑RL。
-
-2018.3，入坑ASR。
-
-# BBR
-
-**B**ottleneck **B**andwidth and **R**ound-trip propagation time是Google于2016年10月提出的TCP拥塞控制算法，其相关代码目前已经加入Linux内核中。
-
-经典的拥塞控制算法设计于1980年代，当时将丢包作为拥塞的信号，这是符合当时落后的实际情况的。
-
-但是网络丢包存在两种情况：第一为拥塞丢包，第二为错误丢包。因此丢包通常并不等同于拥塞。
-
-随着带宽的增加，第一类丢包已经大为减少。目前广域网普遍属于高带宽，高延迟的情况。这种情况术语叫做**长肥管道**（**long-fat pipe**，即延迟高、带宽大的链路）。
-
-BBR就是针对长肥管道而设计的新式算法。
-
-参考：
-
-http://netdevconf.org/1.2/slides/oct5/04_Making_Linux_TCP_Fast_netdev_1.2_final.pdf
-
-Making Linux TCP Fast
-
-https://www.zhihu.com/question/53559433
-
-Linux Kernel 4.9 中的BBR算法与之前的TCP拥塞控制相比有什么优势？
-
-http://blog.csdn.net/dog250/article/details/52895080
-
-Google's BBR拥塞控制算法模型解析
-
-https://zhuanlan.zhihu.com/p/24431669
-
-BBR是个什么鬼？-1 带宽与RTT探测
-
-https://zhuanlan.zhihu.com/p/26321951
-
-BBR是个什么鬼？-2 外皮后的真相
-
-https://mp.weixin.qq.com/s/NWNMfykpJQ-LD9oV1X6zTw
-
-基于bbr拥塞控制的云盘提速实践
-
-https://mp.weixin.qq.com/s/P3zAW3lxj8aowXtxXCOwqA
-
-Google BBR拥塞控制算法背后的数学解释

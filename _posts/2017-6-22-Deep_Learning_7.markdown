@@ -1,12 +1,180 @@
 ---
 layout: post
-title:  深度学习（七）——神经元激活函数进阶, ResNet
+title:  深度学习（七）——LSTM, 神经元激活函数进阶
 category: DL 
 ---
 
+* toc
+{:toc}
+
+# RNN
+
+## RNN的历史（续）
+
+>Harvard College是Harvard University最古老的本部，目前一般提供本科教育。它和其他许多研究生院以及相关部门，共同组成了Harvard University。类似的还有Yale College和Yale University。
+
+>American Academy of Arts and Sciences建于1780年。当时，美国正在法国等国的协助下与英国作战，所以美国的创立者选择比照包括作家、人文学者、科学家、军事家、政治家在内的法兰西学术院，建立新大陆的学术院。   
+>后来，林肯总统比照英国皇家学会，于1863年创建了主要涵盖自然科学的National Academy of Sciences，United States。   
+>这两个学院是美国学术界最权威的组织。前者的重要度略高于后者。
+
+>美国的创立者，一般被翻译为Founding Fathers of the United States。此外还有一个更响亮的称号76ers。没错，NBA那支球队的名字就是这么来的。
+
+除了Elman RNN之外，还有Jordan RNN。（没错，这就是吴恩达的导师的作品）
+
+$$\begin{align}
+h_t &= \sigma_h(W_{h} x_t + U_{h} y_{t-1} + b_h) \\
+y_t &= \sigma_y(W_{y} h_t + b_y)
+\end{align}$$
+
+Elman RNN的记忆来自于隐层单元，而Jordan RNN的记忆来自于输出层单元。
+
+## 参考
+
+http://blog.csdn.net/aws3217150/article/details/50768453
+
+递归神经网络(RNN)简介
+
+http://blog.csdn.net/heyongluoyao8/article/details/48636251
+
+循环神经网络(RNN, Recurrent Neural Networks)介绍
+
+http://mp.weixin.qq.com/s?__biz=MzIzODExMDE5MA==&mid=2694182661&idx=1&sn=ddfb3f301f5021571992824b21ddcafe
+
+循环神经网络
+
+http://www.wildml.com/2015/10/recurrent-neural-networks-tutorial-part-3-backpropagation-through-time-and-vanishing-gradients/
+
+Backpropagation Through Time算法
+
+https://baijia.baidu.com/s?old_id=560025
+
+Tomas Mikolov详解RNN与机器智能的实现
+
+https://sanwen8.cn/p/3f8sRTh.html
+
+为什么RNN需要做正交初始化？
+
+http://blog.csdn.net/shenxiaolu1984/article/details/71508892
+
+RNN的梯度消失/爆炸与正交初始化
+
+https://mp.weixin.qq.com/s/vHQ1WbADHAISXCGxOqnP2A
+
+看大牛如何复盘递归神经网络！
+
+https://mp.weixin.qq.com/s/0V9DeG39is_BxAYX0Yomww
+
+为何循环神经网络在众多机器学习方法中脱颖而出？
+
+https://mp.weixin.qq.com/s/-Am9Z4_SsOc-fZA_54Qg3A
+
+深度理解RNN：时间序列数据的首选神经网络！
+
+https://mp.weixin.qq.com/s/ztIrt4_xIPrmCwS1fCn_dA
+
+“魔性”的循环神经网络
+
+https://mp.weixin.qq.com/s/BqVicouktsZu8xLVR-XnFg
+
+完全图解RNN、RNN变体、Seq2Seq、Attention机制
+
+https://mp.weixin.qq.com/s/gGGXKT2fTn2xPPvo7PE8IA
+
+像训练CNN一样快速训练RNN：全新RNN实现，比优化后的LSTM快10倍
+
+https://mp.weixin.qq.com/s/OltT-GFDVxaiukb1HVSY3w
+
+通俗讲解循环神经网络的两种应用
+
+https://mp.weixin.qq.com/s/PZMmjT9eXL7rU2pxkQWTiw
+
+从90年代的SRNN开始，纵览循环神经网络27年的研究进展
+
+https://mp.weixin.qq.com/s/7LcqRGPYX6JXpY_0hbjmbA
+
+循环神经网络(RNN)入门帖：向量到序列，序列到序列，双向RNN，马尔科夫化
+
 # LSTM
 
-## LSTM的变体（续）
+本篇笔记主要摘自：
+
+http://www.jianshu.com/p/9dc9f41f0b29
+
+理解LSTM网络
+
+## LSTM结构图
+
+为了解决原始RNN只有短时记忆的问题，人们又提出了一个RNN的变种——LSTM（Long Short-Term Memory）。其结构图如下所示：
+
+![](/images/article/LSTM.png)
+
+和RNN的时序展开图类似，这里的每个方框表示**某个时刻从输入层到隐层的映射**。
+
+我们首先回顾一下之前的模型在这里的处理。
+
+MLP的该映射关系为：
+
+$$h=\sigma (W\cdot x+b)$$
+
+RNN在上式基础上添加了历史状态$$h_{t-1}$$：
+
+$$h_t=\sigma (W\cdot [h_{t-1},x_t]+b)$$
+
+LSTM不仅添加了历史状态$$h_{t-1}$$，还添加了所谓的**细胞状态**$$C_{t-1}$$，即上图中图像上部的水平横线。
+
+## 步骤详解
+
+神经网络的设计方式和其他算法不同，我们不需要指定具体的参数，而只需要给出一个功能的实现机制，然后借助误差的反向传播算法，训练得到相应的参数。这一点在LSTM上体现的尤为明显。
+
+LSTM主要包括以下4个步骤（也可称为4个功能或门）：
+
+- 决定丢弃信息
+
+![](/images/article/LSTM_1.png)
+
+这一部分也被称为**忘记门**。
+
+- 确定更新的信息
+
+![](/images/article/LSTM_2.png)
+
+这一部分也被称为**输入门**。
+
+- 更新细胞状态
+
+![](/images/article/LSTM_3.png)
+
+- 输出信息
+
+![](/images/article/LSTM_4.png)
+
+显然，在这里不同的参数会对上述4个功能进行任意组合，从而最终达到长时记忆的目的。
+
+>上面的公式中，$$\cdot$$表示Dot product，而$$*$$表示eltwise product。
+
+### 其他细节
+
+在一般的神经网络中，激活函数可以随意选择，无论是传统的sigmoid，还是新的tanh、ReLU，都不影响模型的大致效果。（差异主要体现在训练的收敛速度上，最终结果也可能会有细微影响。）
+
+**但是，上述标准LSTM模型中，tanh函数可以随意替换，而sigmoid函数却不能被替换，切记。**
+
+sigmoid用在了各种gate上，产生0~1之间的值，这个一般只有sigmoid最直接了。
+
+tanh用在了状态和输出上，是对数据的处理，这个用其他激活函数也可以。
+
+forget bias的初始值可以设为以1为均值，这对于训练很有好处，这就是tensorflow中forget_bias参数的来历。参见论文：
+
+《An Empirical Exploration of Recurrent Network Architectures》
+
+## LSTM的变体
+
+![](/images/article/LSTM_5.png)
+
+上图中的LSTM变体被称为**peephole connection**。其实就是将细胞状态加入各门的输入中。可以全部添加，也可以部分添加。
+
+![](/images/article/LSTM_6.png)
+
+上图中的LSTM变体被称为**Coupled Input and Forget Gate（CIFG）**。它将忘记和输入门连在了一起。
 
 ![](/images/article/LSTM_7.png)
 
@@ -102,6 +270,8 @@ https://blog.csdn.net/taoqick/article/details/79475350
 
 在《深度学习（二）》中，我们探讨了ReLU相对于sigmoid函数的改进，以及一些保证深度神经网络能够训练的措施。然而即便如此，深度神经网络的训练仍然是一件非常困难的事情，还需要更多的技巧和方法。
 
+![](/images/img4/activation.png)
+
 ## 激活函数的作用
 
 神经网络中激活函数的主要作用是提供网络的**非线性建模能力**，如不特别说明，激活函数一般而言是非线性函数。
@@ -133,201 +303,3 @@ https://mp.weixin.qq.com/s/PNe2aKVMYjV_Nd7qZwGuOw
 而深度网络的**直接监督式训练**的最终突破，最主要的原因是采用了新型激活函数ReLU。
 
 但是ReLU并不完美。它在x<0时硬饱和，而当x>0时，导数为1。所以，ReLU能够在x>0时保持梯度不衰减，从而缓解梯度消失问题。但随着训练的推进，部分输入会落入硬饱和区，导致对应权重无法更新。这种现象被称为**神经元死亡**。
-
-ReLU还经常被“诟病”的另一个问题是输出具有**偏移现象**，即输出均值恒大于零。偏移现象和神经元死亡会共同影响网络的收敛性。实验表明，如果不采用Batch Normalization，即使用MSRA初始化30层以上的ReLU网络，最终也难以收敛。
-
-为了解决上述问题，人们提出了Leaky ReLU、PReLU、RReLU、ELU、Maxout等ReLU的变种。
-
-Leaky ReLU:
-
-$$f(x)  = \begin{cases}
-    x & \mbox{if } x > 0 \\
-    a x & \mbox{otherwise}
-\end{cases}$$
-
-这里的a是个常数，如果是个vector的话，那么就是PReLU了。
-
-ELU：
-
-$$f(x) = \begin{cases} 
-x & \mbox{if } x \geq 0 \\ 
-a(e^x-1) & \mbox{otherwise}
-\end{cases}$$
-
-## Maxout
-
-Maxout Networks是Ian J. Goodfellow于2013年提出的一大类激活函数。
-
-![](/images/article/maxout.png)
-
-上图是Maxout Networks的结构图。传统的激活函数一般是这样的形式：$$\sigma(Wx+b)$$
-
-Maxout Networks将$$Wx+b$$这部分运算，分成k个组。每组的w和b都不相同。然后对每组计算结果$$z_{ij}$$取最大值。
-
-从这个意义来说，ReLU可以看做是Maxout的特殊情况，即：
-
-$$y=\max(W_1x+b_1,W_2x+b_2)=\max(0,Wx+b)$$
-
-更多的情况参见下图：
-
-![](/images/article/maxout_2.png)
-
-从Maxout Networks的角度来看，ReLU和DropOut实际上是非常类似的。
-
-参考：
-
-http://blog.csdn.net/hjimce/article/details/50414467
-
-Maxout网络学习
-
-## GLU
-
-Gated Linear Unit是由facebook提出的：
-
-$$(\boldsymbol{W}_1\boldsymbol{x}+\boldsymbol{b}_1)\otimes \sigma(\boldsymbol{W}_2\boldsymbol{x}+\boldsymbol{b}_2)$$
-
-![](/images/img2/GLU.png)
-
-上图右侧是一个Linear Unit，左侧的$$\sigma$$相当于一个Gate，故名。
-
-论文：
-
-《Language Modeling with Gated Convolutional Networks》
-
-GLU一般用在NLP领域，它和CNN结合，也就是所谓的GCNN了。
-
-## Swish
-
-Swish是Google大脑团队提出的一个新的激活函数：
-
-$$\text{swish}(x)=x\cdot\sigma(x)=\frac{x}{1+e^{-x}}$$
-
-它的图像如下图中的橙色曲线所示：
-
-![](/images/article/swish.png)
-
-Swish可以看作是GLU的特例（Swish的两组参数相同）。
-
-Swish在原点附近不是饱和的，只有负半轴远离原点区域才是饱和的，而ReLu在原点附近也有一半的空间是饱和的。
-
-而我们在训练模型时，一般采用的初始化参数是均匀初始化或者正态分布初始化，不管是哪种初始化，其均值一般都是0，也就是说，初始化的参数有一半处于ReLu的饱和区域，这使得刚开始时就有一半的参数没有利用上。
-
-特别是由于诸如BN之类的策略，输出都自动近似满足均值为0的正态分布，因此这些情况都有一半的参数位于ReLu的饱和区。
-
-相比之下，Swish好一点，因为它在负半轴也有一定的不饱和区，所以参数的利用率更大。
-
-苏剑林据此提出了自己的激活函数：
-
-$$\max(x, x\cdot e^{-\mid x\mid })$$
-
-该函数的图像如上图的蓝色曲线所示。
-
-参考：
-
-https://mp.weixin.qq.com/s/JticD0itOWH7Aq7ye1yzvg
-
-谷歌大脑提出新型激活函数Swish惹争议：可直接替换并优于ReLU？
-
-http://kexue.fm/archives/4647/
-
-浅谈神经网络中激活函数的设计
-
-## 其他激活函数
-
-### hard tanh
-
-$$\text{HardTanh}(x)=\begin{cases}
--1, & x<-1 \\
-x, & -1\le x \le 1 \\
-1, & x>1 \\
-\end{cases}$$
-
-![](/images/article/hard_tanh.png)
-
-### hard sigmoid
-
-$$\text{HardSigmoid}(x)=\begin{cases}
-0, & x<-2.5 \\
-0.2x, & -2.5\le x \le 2.5 \\
-1, & x>2.5 \\
-\end{cases}$$
-
-![](/images/img3/hard_sigmoid2.png)
-
-### soft sign
-
-$$\text{softsign}(x)=\frac{x}{1+\mid x\mid }$$
-
-## 参考
-
-https://zhuanlan.zhihu.com/p/22142013
-
-深度学习中的激活函数导引
-
-http://blog.csdn.net/u012328159/article/details/69898137
-
-几种常见的激活函数
-
-https://mp.weixin.qq.com/s/Hic01RxwWT_YwnErsJaipQ
-
-什么是激活函数？
-
-https://mp.weixin.qq.com/s/4gElB_8AveWuDVjtLw5JUA
-
-深度学习激活函数大全
-
-https://mp.weixin.qq.com/s/7DgiXCNBS5vb07WIKTFYRQ
-
-从ReLU到Sinc，26种神经网络激活函数可视化
-
-http://www.cnblogs.com/ymjyqsx/p/6294021.html
-
-PReLU与ReLU
-
-http://www.cnblogs.com/pinard/p/6437495.html
-
-深度神经网络（DNN）损失函数和激活函数的选择
-
-https://mp.weixin.qq.com/s/VSRtjIH1tvAVhGAByEH0bg
-
-21种NLP任务激活函数大比拼：你一定猜不到谁赢了
-
-https://www.cnblogs.com/makefile/p/activation-function.html
-
-激活函数(ReLU, Swish, Maxout)
-
-https://mp.weixin.qq.com/s/YVi9ke3VSidBvzfLPjMkZg
-
-激活函数-从人工设计到自动搜索
-
-https://mp.weixin.qq.com/s/i8aShQvJhSgP7KY5Qgm36A
-
-ReLU的继任者Mish：一个新的state of the art的激活函数
-
-https://mp.weixin.qq.com/s/XttlCNKGvGZrD7OQZOQGnw
-
-如何发现“将死”的ReLu？
-
-# ResNet
-
-无论采用何种方法，可训练的神经网络的层数都不可能无限深。有的时候，即使没有梯度消失，也存在训练退化（即深层网络的效果还不如浅层网络）的问题。
-
-最终2015年，微软亚洲研究院的何恺明等人，使用残差网络ResNet参加了当年的ILSVRC，在图像分类、目标检测等任务中的表现大幅超越前一年的比赛的性能水准，并最终取得冠军。
-
-论文：
-
-《Deep Residual Learning for Image Recognition》
-
-代码：
-
-https://github.com/KaimingHe/deep-residual-networks
-
-残差网络的明显特征是有着相当深的深度，从32层到152层，其深度远远超过了之前提出的深度网络结构，而后又针对小数据设计了1001层的网络结构。
-
-其简化版的结构图如下所示：
-
-![](/images/article/drn.png)
-
-简单的说，就是把前面的层跨几层直接接到后面去，以使误差梯度能够传的更远一些。
-
-DRN的基本思想倒不是什么新东西了，在2003年Bengio提出的词向量模型中，就已经采用了这样的思路。

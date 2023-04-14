@@ -1,10 +1,169 @@
 ---
 layout: post
-title:  深度强化学习（五）——AlphaGo
+title:  深度强化学习（五）——Hierarchical RL, OpenAI, AlphaGo（1）
 category: DRL 
 ---
 
-# OpenAI（续）
+* toc
+{:toc}
+
+# Hierarchical RL
+
+![](/images/img3/Montezuma.png)
+
+之前已经提到，在DeepMind测试的40多款游戏中，有那么几款游戏无论怎么训练，结果都是0，也就是DQN完全无效。上面就是其中最知名的代表游戏《Montezuma’s Revenge》。这是一个解谜游戏，比如图中要拿到钥匙，然后去开门。这对我们而言是通过先验知识得到的。但是很难想象计算机如何仅仅通过图像感知这些内容。感知不到，那么这种游戏也就无从解决。
+
+论文：
+
+《Hierarchical Deep Reinforcement Learning: Integrating Temporal Abstraction and Intrinsic Motivation》
+
+![](/images/img3/HRL.png)
+
+该论文的主要思路就是，弄一个两个层级的神经网络，顶层用于决策，确定下一步的目标，底层用于具体行为。 
+
+这里的内在目标是人工确定的，因此智能程度不高，但是比较实用。
+
+其他算法：
+
+FuN (FeUdal Networks for Hierarchical Reinforcement Learning)
+
+HIRO (Data Efficient Hierarchical Reinforcement Learning)
+
+HAC (Learning Multi-Level Hierarchies with Hindsight)
+
+参考：
+
+https://zhuanlan.zhihu.com/p/78098982
+
+Hierarchical IL/RL(ICML 2018)
+
+https://zhuanlan.zhihu.com/p/267524544
+
+分层强化学习survey
+
+https://blog.csdn.net/zhkmxx930xperia/article/details/87742722
+
+Integrating Temporal Abstraction and Intrinsic Motivation
+
+https://blog.csdn.net/songrotek/article/details/51384752
+
+DRL前沿之：Hierarchical Deep Reinforcement Learning
+
+https://mp.weixin.qq.com/s/IYyGgnoXZm6YfamLejqoNQ
+
+深度强化学习试金石：DeepMind和OpenAI攻克蒙特祖玛复仇的真正意义
+
+https://mp.weixin.qq.com/s/iBWjobr9srhB3MTiE_Wwmg
+
+史上最强Atari游戏通关算法：蒙特祖玛获分超过200万！
+
+# PILCO
+
+论文：
+
+《PILCO： A Model-Based and Data-Efficient Approach to Policy Search》
+
+《Efficient Reinforcement Learning using Gaussian Processes》
+
+《Data-Efficient Reinforcement Learning in Continuous-State POMDPs》
+
+《Improving PILCO with Bayesian Neural Network Dynamics Models》
+
+参考：
+
+https://zhuanlan.zhihu.com/p/27537744
+
+基于模型的强化学习方法PILCO及其扩展（一）
+
+https://zhuanlan.zhihu.com/p/27539273
+
+基于模型的强化学习方法PILCO及其扩展（二）
+
+https://zhuanlan.zhihu.com/p/27697260
+
+基于模型的强化学习算法PILCO及其扩展（三）
+
+https://zhuanlan.zhihu.com/p/72642285
+
+基于模型的强化学习论文合集
+
+# OpenAI
+
+OpenAI，由诸多硅谷大亨（Elon Musk等）联合建立的人工智能非营利组织。
+
+官网：
+
+https://openai.com/
+
+github：
+
+https://github.com/openai
+
+## Baselines
+
+若干经典RL算法的实现，包括A2C、DQN等。
+
+代码：
+
+https://github.com/openai/baselines
+
+## Gym
+
+Openai gym是一个用于开发和比较强化学习（reinforcement learning，RL）算法的工具包，与其他的数值计算库兼容，如tensorflow或者theano库。现在主要支持的是python语言，以后将支持其他语言。
+
+官网：
+
+https://gym.openai.com/
+
+```bash
+sudo apt install libffi-dev swig
+git clone https://github.com/openai/gym 
+cd gym
+pip install -e . # minimal install
+pip install -e .[all] # all install
+```
+
+这里选择minimal install就可以了，all install需要安装MuJoCo，而后者是收费软件。（2021.10被DeepMind收购并免费。）
+
+和Gym配套的还有一个算法库：
+
+https://github.com/openai/baselines
+
+当然，看名字也知道这只是一个简单的算法库。
+
+参考：
+
+http://tech.163.com/16/0510/09/BMMOPSCR00094OE0.html
+
+马斯克的AI野心——OpenAI Gym系统深度解析
+
+https://mp.weixin.qq.com/s/KK1gwDW2EyptZOiuFjyAlw
+
+OpenAI发布强化学习环境Gym Retro：支持千种游戏
+
+https://blog.csdn.net/jinzhuojun/article/details/77144590
+
+常用增强学习实验环境 I (MuJoCo, OpenAI Gym, rllab, DeepMind Lab, TORCS, PySC2)
+
+https://blog.csdn.net/jinzhuojun/article/details/78508203
+
+常用增强学习实验环境 II (ViZDoom, Roboschool, TensorFlow Agents, ELF, Coach等)
+
+https://mp.weixin.qq.com/s/0oVG7zMi08dzMQrk43T3mw
+
+像训练Dota2一样训练真实机器人？Gibson Environment环境了解一下
+
+https://mp.weixin.qq.com/s/_A0q8DFAsIclaofVgZfjMA
+
+定制股票交易OpenAI Gym强化学习环境
+
+https://blog.csdn.net/gsww404/article/details/80627892
+
+OpenAI-baselines的使用方法
+
+https://mp.weixin.qq.com/s/6yXI2PXuuPeipj9WQo_e2Q
+
+如何在Windows上安装和渲染OpenAI-Gym
 
 ## RND
 
@@ -114,7 +273,7 @@ AlphaGo主要由几个部分组成：
 
 它们的差异在于：
 
-1.DarkForestGo训练时，会预测三步而非一步，提高了策略输出的质量。
+1. DarkForestGo训练时，会预测三步而非一步，提高了策略输出的质量。
 
 Policy Network摆脱了之前的基于规则的围棋软件，长于局部，但大局较差的弱点，它的大局观非常强，不会陷入局部战斗中。例如，DarkForestGo的走棋网络直接放上KGS就有3d的水平。
 
@@ -122,7 +281,7 @@ Policy Network摆脱了之前的基于规则的围棋软件，长于局部，但
 
 ### Value Network
 
-AlphaGo的Value Network也是一个和Policy Network几乎一样的深度卷积网络。
+AlphaGo的Value Network是一个和Policy Network几乎一样的深度卷积网络。
 
 ### Fast rollout
 
@@ -134,7 +293,9 @@ AlphaGo的Value Network也是一个和Policy Network几乎一样的深度卷积�
 
 为了速度快，Fast rollout没有使用神经网络，而是使用传统的局部特征匹配（local pattern matching）加线性回归（logistic regression）的方法。
 
-这种方法虽然没有NN这么强，但还是比更为传统的基于规则的方案适应性好。毕竟规则是死的，而传统的机器学习，再怎么说也是可以自动学习规则的。当然了，这更比随机走子的效率高了。
+这种方法虽然没有NN这么强，但还是比更为传统的基于规则的方案适应性好。毕竟规则是死的，而传统的机器学习，再怎么说也是可以自动学习规则的。当然，这更比随机走子的效率高了。
+
+DarkForestGo的走子基于规则模板，且没有快速走子，个人以为这才是它棋力差的主要原因。
 
 由于Fast rollout既可以提供策略，又有一定的价值评估的手段，因此单独使用它，比单独使用Policy Network或者Value Network都要好。相当于是一个劣化版本的AlphaGo。
 
@@ -151,121 +312,3 @@ AlphaGo不是一个纯粹的DRL，它还是使用了人类棋谱的先验数据�
 - 首先，从人类棋谱中学习rollout策略，并初始化Policy Network。
 
 - 然后，使用自我博弈的方式，训练Policy Network和Value Network。
-
-由于很多人类的棋局都是因为中间偶然的失误导致了全盘覆灭（所谓“一着不慎满盘皆输”），其中的偶然性非常大，局部的优劣往往和棋局的最终结果无关，因此Value Network并没有用人类棋谱来训练。
-
-AlphaGo每更新一个“小版本”后，都要将这个版本和迄今最好的版本对比，如果新的版本胜率超过55%，才会用来取代以前最好的版本。这样做的显然的好处是防止AlphaGo自我博弈得“走火入魔”，陷入局部最优。
-
-## AlphaGo Zero
-
-论文：
-
-《Mastering the game of Go without human knowledge》
-
-![](/images/img3/AlphaGo_Zero.png)
-
-AlphaGo Zero对AlphaGo进行了全面提升：
-
-- input plane去掉了手工特征，基本全由历史信息组成。
-
-- Policy Network和Value Network不再是两个同构的独立网络，而是合并成了一个网络，只是该网络有两个输出——Policy Head和Value Head。
-
-- 骨干结构采用了Resnet，层数大大增加。
-
-- 完全采用自我博弈，去掉了人类棋谱。
-
-- 取消了Fast rollout。AlphaGo Zero的实践表明，如果有足够好的Value函数的话，MCTS的采样效率要远远高于传统的alpha-beta剪枝。因此，rollout也不是必须的。
-
->稍后的AlphaZero的实践表明：AlphaZero搜索80000个节点的棋力，已经超过了Stockfish搜索70000000个节点的棋力。
-
-- Policy Gradient vs. Policy Iteration
-
-AlphaGo依赖快速走子的结果，获得最终的结果信息。因此，它的奖励来源比较单一：只有对局的最终结果。这种做法实际上就是通常说的Policy Gradient。
-
-但正如之前指出的：棋下输了，不意味着每步棋都是臭棋。因此，只使用最终结果，既会导致奖励稀疏，也不利于实时评估走子的价值。
-
-AlphaGo Zero转而采用Policy Iteration方法，实时对盘面进行估计，不再依赖终局结果。
-
-![](/images/img3/AlphaGo_Zero_2.jpg)
-
-## AlphaZero
-
-论文：
-
-《Mastering Chess and Shogi by Self-Play with aGeneral Reinforcement Learning Algorithm》
-
-AlphaZero相对于AlphaGo Zero的改进不算大，毕竟也就只差2个月。它的贡献在于，证明了DRL对于很多棋类都是有效的。
-
-## Leela Zero
-
-Leela Zero是比利时人Gian-Carlo Pascutto开源的围棋AI。它的算法与AlphaGo Zero相同。而训练采用GTP协议，集合全球算力，进行分布式训练。
-
-官网：
-
-http://zero.sjeng.org/
-
-代码：
-
-https://github.com/gcp/leela-zero
-
->十多年前，当我还是一个中二青年的时候，就幻想有朝一日能够拿围棋世界冠军。当然，就算再中二，我自己也明白靠实力那是不可能的，当时做梦的法宝是制造一个AI，然后碾压一下所谓的国手。   
->按照当时(2000年前后)人们的预计，这个AI在2030年之前，都不可能造出来，然而，最终的结果实际上只花了一半左右的时间。   
->再之后，随着AI围棋的平民化，我的中二梦终于也有人将之付诸实现了：   
->https://mp.weixin.qq.com/s/npt2zZrKwPnNdY-hsa2RjQ   
->AI再乱围棋圈：“食言之战”柯洁落败；首例素人作弊引风波
-
-这次作弊风波所使用的AI就是Leela Zero，可见目前（2018.5）它的棋力已经超过了顶尖棋手。
-
-## ELF OpenGo
-
-ELF OpenGo是Facebook开源的围棋AI，它是FB的AI游戏框架ELF的一部分。
-
-官网：
-
-https://github.com/pytorch/ELF
-
-参考：
-
-https://mp.weixin.qq.com/s/lOAx3suLIS-pEWyi8xZl6Q
-
-“全民体验”AlphaZero：FAIR田渊栋首次开源超级围棋AI
-
-## PhoenixGo
-
-PhoenixGo是腾讯微信团队的AlphaGo Zero复刻版。
-
-官网：
-
-https://github.com/Tencent/PhoenixGo
-
-参考：
-
-https://mp.weixin.qq.com/s/tJDmxsuS1QigYS75ZIdzRA
-
-微信团队开源围棋AI技术PhoenixGo，复现AlphaGo Zero论文
-
-## 参考
-
-https://blog.csdn.net/amds123/article/details/70666594
-
-论文笔记：Mastering the game of Go with deep neural networks and tree search
-
-https://mp.weixin.qq.com/s/Sfv-jzQAkN0PsZOGZUQhkQ
-
-AlphaGo Zero横空出世，DeepMind Nature论文解密不使用人类知识掌握围棋
-
-https://mp.weixin.qq.com/s/oAxouYX7-wDC5okbu--Wuw
-
-Nature重磅：人工智能从0到1, 无师自通完爆阿法狗100-0
-
-https://zhuanlan.zhihu.com/p/30262872
-
-关于AlphaGo Zero
-
-https://zhuanlan.zhihu.com/p/30263585
-
-DeepMind新一代围棋程序AlphaGo Zero再次登上Nature
-
-https://www.zhihu.com/question/66861459
-
-如何评价DeepMind发表在Nature上的AlphaGo Zero？

@@ -4,6 +4,9 @@ title:  有用的网址集合
 category: resource 
 ---
 
+* toc
+{:toc}
+
 # 有用的网址集合
 
 ## 教程类
@@ -20,17 +23,52 @@ http://www.alldatasheet.com/
 
 可以查找各类芯片的手册。
 
-http://www.hellogcc.org/
-
-一个有关GCC和GDB的博客。其中的大牛teawater（朱辉）开发了一个Linux动态跟踪器KGTP，他的blog：http://teawater.github.io/
+---
 
 http://blog.csdn.net/leixiaohua1020/
 
 中国传媒大学雷霄骅博士的blog，专注ffmpeg等的音视频研究。
 
+>2020.2   
+>一直奇怪雷神的blog怎么从2016年之后就不再更新了。最近才知道，原来他早已于该年7月17日猝死。。。
+
+https://blog.csdn.net/machh/article/details/52109231
+
+雷霄骅---巨星陨落
+
+---
+
+https://www.cnblogs.com/vamei
+
+也是一个去世的博士：
+
+https://www.sohu.com/a/299731374_463994
+
+痛心！31岁程序员因抑郁症突然离世...
+
+---
+
+https://blog.csdn.net/poem_qianmo
+
+毛星云，网络ID“浅墨”，2016年硕士毕业于南京航空航天大学航天学院。2021.12.11跳楼自杀。
+
+https://www.zhihu.com/question/506002000
+
+腾讯确认游戏开发大神毛星云意外身故，如何评价他在游戏开发圈的影响力？
+
+---
+
+https://cloud.tencent.com/developer/devdocs
+
+腾讯云的开发者手册，包含30+的教程
+
+https://www.runoob.com/
+
+一个偏前端开发的教程网站
+
 http://www.uedtech.com/
 
-UED方面的教程网站。
+UED方面的教程网站。用户体验设计（User Experience Design）。
 
 https://github.com/HQarroum/awesome-iot
 
@@ -40,9 +78,7 @@ http://academic.research.microsoft.com/
 
 微软学术搜索，查论文的好帮手。
 
-http://cn.arxiv.org/
-
-最著名的论文网站arxiv.org的中国镜像网站。arxiv.org中的论文都有编号。比如1608.06993v4，1608表示这是2016年8月的文章，v4表示这是第4版。
+![](/images/img3/Xiv.png)
 
 https://github.com/CyC2018/CS-Notes
 
@@ -50,29 +86,33 @@ https://github.com/CyC2018/CS-Notes
 
 ## 工具软件及其官网
 
-Box2D---www.box2d.org
+http://www.box2d.org
 
-一个游戏物理引擎。
+Box2D---一个游戏物理引擎。
 
-WinPcap---www.winpcap.org
+http://www.winpcap.org
 
-一个windows下的网络抓包工具。
+WinPcap---一个windows下的网络抓包工具。
 
-CommMonitor---http://www.ceiwei.com/CommMonitor.html
+http://www.ceiwei.com/CommMonitor.html
 
-一个串口监控工具。
+CommMonitor---一个串口监控工具。
 
-Android FFmpeg---https://github.com/appunite/AndroidFFmpeg
+https://github.com/sige5193/bittly
 
-Android上的一个FFmpeg开源实现。
+Bittly---一个串口监控工具。基于electron。
 
-Conky---http://conky.sourceforge.net/
+https://github.com/appunite/AndroidFFmpeg
 
-自由软件，用于X视窗系统的系统监视。
+Android FFmpeg---Android上的一个FFmpeg开源实现。
 
-ocenaudio---http://www.ocenaudio.com.br/download
+http://conky.sourceforge.net/
 
-用于音频剪辑处理的工具。免费但不开源。
+Conky---自由软件，用于X视窗系统的系统监视。
+
+https://obsproject.com/
+
+OBS Studio---一个录屏软件
 
 https://xue.glgoo.net/
 
@@ -94,7 +134,45 @@ https://www.photopea.com/
 
 一个在线版本的Photoshop替代品
 
+https://xblog.lufficc.com/blog/useful-online-tools
+
+实用的工具网站
+
+https://libgeos.org/
+
+一个GIS方面的C++库
+
+http://ogdi.sourceforge.net/
+
+Open Geographic Datastore Interface
+
+https://carbon.now.sh
+
+一个在线把code转成图片的网站，便于在ppt上展示代码
+
+## Wikipedia镜像网站
+
+https://encyclopedia.thefreedictionary.com
+
+https://en-m.jinzhao.wiki/wiki/Main_Page
+
+https://www.douban.com/note/748489872/
+
+---
+
+伪基百科（英语：Uncyclopedia），是一个以戏仿维基百科为目的而讽刺、恶搞、幽默、搞笑与娱乐的网络百科全书。
+
+类似的还有萌娘百科、恶俗维基。
+
 ## Other
+
+黑轴、青轴、茶轴、红轴。
+
+https://mp.weixin.qq.com/s/J5wavE5JFjfAuP2O01OFUA
+
+工欲善其事，如何挑选一款趁手的键盘？
+
+---
 
 http://www.alsrobot.cn/
 
@@ -121,10 +199,6 @@ http://www.hello2025.com/
 http://intellif.com/
 
 云天励飞——一家人脸识别的公司
-
-http://blog.shengbin.me/posts/multi-user-video-conference-based-on-webrtc
-
-基于WebRTC的多人视频会议
 
 http://chongzhuang.windowszj.com/
 
@@ -202,6 +276,10 @@ http://lucacardelli.name/
 
 Luca Andrea Cardelli的个人主页。英国皇家学会会员。主要从事生物化学领域的信息处理和计算。
 
+http://www.pengzhihui.xyz/
+
+一个极客的blog
+
 https://mp.weixin.qq.com/s/mHJnbgOjydUrAmF-bLKJ1Q
 
 存储数据包的一生（上）
@@ -234,14 +312,6 @@ https://mp.weixin.qq.com/s/wKpNJY6PD0ArxnKtl71xwQ
 
 程序员实用的工具网站整理
 
-https://mp.weixin.qq.com/s/9YXsJo_u2zVNqvABoGqfqg
-
-五种IO模型分析
-
-https://mp.weixin.qq.com/s/9oi-zkuUtjv0P6GyBLmatg
-
-简单说明CGI和动态请求是什么
-
 https://mp.weixin.qq.com/s/OJJLY5DiCa0e3UVjPtLXmw
 
 PPT中帅气的文字云，该怎么用？
@@ -258,10 +328,6 @@ https://mp.weixin.qq.com/s/sYm-5jo-batq1fwv_tCmQw
 
 微信小程序30分钟从陌生到熟悉（下）
 
-https://mp.weixin.qq.com/s/VgJSMN0mkfEerhWpWpEFbg
-
-一个42KB的文件，解压完其实是个4.5PB的“炸弹”
-
 https://mp.weixin.qq.com/s/6AfmiLRSUP819J43EwJBqA
 
 ORACLE ERP的前世今生
@@ -274,13 +340,9 @@ https://mp.weixin.qq.com/s/0QnH0F8JZQBsECoJeGqpsg
 
 虚拟现实与增强现实的前沿技术PPT
 
-https://mp.weixin.qq.com/s?__biz=MzIyNzUwMjM2MA==&mid=2247485942&idx=1&sn=1597233c1527cac63a2c734ec0b14f02
+https://mp.weixin.qq.com/s/qD2Fb9QMdtOcvHtcVa9pOA
 
 编程基础知识
-
-https://mp.weixin.qq.com/s?__biz=MzIyNzUwMjM2MA==&mid=2247486006&idx=1&sn=d4978396fa18e5dfce69a51ac7748898
-
-网络编程基础知识
 
 https://mp.weixin.qq.com/s/EPWRwOBT8_616R5RWbdaTQ
 
@@ -289,26 +351,6 @@ https://mp.weixin.qq.com/s/EPWRwOBT8_616R5RWbdaTQ
 https://fwupd.org/
 
 Linux Vendor Firmware Service。这个网站提供Linux平台的各种BIOS或者外设的固件更新。
-
-https://mp.weixin.qq.com/s/yHSraIAYsjYWPaGXA3PijA
-
-一张图读懂非公平锁与公平锁
-
-https://mp.weixin.qq.com/s/3a5k3YA6ALri3BrQWQbOpw
-
-浅谈Cgroups
-
-https://mp.weixin.qq.com/s/8Rr-hxKQyHpT7L-Zx7PkcA
-
-浅谈Cgroups V2
-
-https://mp.weixin.qq.com/s/h4LwSRAsDgRqOq3mLt_SCw
-
-浅谈mmap
-
-https://mp.weixin.qq.com/s/_7q9K9D1q40eaGkLt9yDhQ
-
-分布式系统关注点——深入浅出“异步”
 
 https://mp.weixin.qq.com/s/pSUXoLrwQeaxsI2LI-13EA
 
@@ -326,21 +368,43 @@ https://mp.weixin.qq.com/s/BJwohmG_BEJ7dXbcPTgaCQ
 
 风口上的RPA：是AI落地缓冲剂，还是创投圈的一场炒作？
 
-https://mp.weixin.qq.com/s/geT7x5RG4xhD-Ro1eZvrdg
-
-深入浅出Serverless：优势、意义与应用
-
 https://mp.weixin.qq.com/s/esunl-zyplt-V70PgPDWqA
 
 我收集了12款自动生成器，无聊人士自娱自乐专用
 
+https://mp.weixin.qq.com/s/s5BI2r0KxGVXZC4LsOAwpw
+
+4行代码重现《黑客帝国》特效！
+
+https://mp.weixin.qq.com/s/LqkR4fhdxdMVGUn21mb76Q
+
+如果把中国历史浓缩成一天，会是什么样子？
+
+http://sports.sina.com.cn/z/CFFixtures/
+
+国足历史战绩
+
 ## 科研人生
+
+![](/images/img4/dunning-kruger-effect-curve.png)
+
+送东阳马生序
+
+https://mp.weixin.qq.com/s/QMUWtI9jICOkLMlz2E1sUg
+
+看哭了！中科院黄国平博士论文火了
+
+https://mp.weixin.qq.com/s/hr4bPG01dXuyPhUn3tRHKA
+
+寒门博士与千万外卖小哥，谁更代表年轻人现状？
+
+---
 
 https://mp.weixin.qq.com/s/6gX1UFSykuzw358ARUzifw
 
 张溪梦：14年数据分析经历，我总结为这三点“道、术、器”
 
-https://www.zhihu.com/question/30022694/answer/224543003
+https://www.zhihu.com/answer/224543003
 
 田渊栋：作为入行数年的专业科研工作者，你每周看几篇paper？
 
@@ -355,6 +419,22 @@ http://phdcomics.com/
 https://zhuanlan.zhihu.com/p/74249758
 
 陈天奇：机器学习科研的十年
+
+https://zhuanlan.zhihu.com/p/90255939
+
+创始人Alexandra Elbakyan亲自发长文讲述Sci-Hub的前世今生
+
+https://mp.weixin.qq.com/s/EWDRd4JDvrVorOgWvJIksQ
+
+还只是39岁！一个天才年轻程序员的陨落
+
+https://mp.weixin.qq.com/s/UWMl0bd7hIgoFUWZRgmajQ
+
+谁在为科学买单？
+
+https://mp.weixin.qq.com/s/GhpPiv8CeYEOgHwsCSnBQA
+
+为什么现在很多人想读博了？
 
 # 知名AI公司技术主页
 

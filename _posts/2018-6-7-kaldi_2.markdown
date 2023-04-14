@@ -1,10 +1,27 @@
 ---
 layout: post
-title:  Kaldi（二）, 计算机体系结构
+title:  Kaldi（二）
 category: AI 
 ---
 
+* toc
+{:toc}
+
 # ARPA文件格式（续）
+
+1-grams部分中每一条包括了3项，其中第二项显然是条目文本本身。
+
+第一项表示ngram的条件概率，即$$P(word_N \mid word_1，word_2，\dots，word_{N-1})$$。
+
+第三项表示回退（backoff）概率。
+
+下面我们举例说明条件概率和回退概率的用法。
+
+假设arpa的最高元是3元，则句子ABCDEF发生的概率为：
+
+$$P(ABCDEF)=P(A)*P(B\mid A)*P(C\mid AB)*P(D\mid BC)*P(E\mid CD)*(F\mid DE)$$
+
+其中，P(A)通过访问arpa中的1-grams项获得，$$P(B\mid A)$$通过访问2-grams项获得，其他的概率通过访问3-grams项获得。
 
 P(A)的计算直接找对应A的文法项获得概率即可。如果2-grams中存在“A B”项，$$P(B\mid A)$$的概率也很容易获得，但是如果“A B”词组在2-grams中不存在，我们就需要利用回退概率计算$$P(B\mid A)$$，计算公式为$$P(B\mid A)=\alpha(A)*P(B)$$，其中的$$\alpha(A)$$就表示A的回退概率。
 
@@ -43,43 +60,43 @@ https://blog.csdn.net/nihaomafb/article/details/48009695
 
 生成L：
 
-{% highlight bash %}
+```bash
 scripts/make_lexicon_fst.pl data/lexicon.txt 0.5 SIL | \
   fstcompile --isymbols=data/phones.txt --osymbols=data/words.txt \
   --keep_isymbols=false --keep_osymbols=false | \
    fstarcsort --sort_type=olabel > data/L.fst
-{% endhighlight %}
+```
 
 生成G：
 
-{% highlight bash %}
+```bash
 gunzip -c data_prep/lm.arpa.gz | \
   arpa2fst --disambig-symbol=#0 \
              --read-symbol-table=data/words.txt - data/G.fst
-{% endhighlight %}
+```
 
 生成$$L \circ G$$：
 
-{% highlight bash %}
+```bash
 fsttablecompose data/L_disambig.fst data/G.fst | \
     fstdeterminizestar --use-log=true | \
     fstminimizeencoded | fstpushspecial | \
     fstarcsort --sort-type=ilabel > somedir/LG.fst
-{% endhighlight %}
+```
 
 生成$$C \circ L \circ G$$：
 
-{% highlight bash %}
+```bash
 fstmakecontextfst --read-disambig-syms=$dir/disambig_phones.list \
 --write-disambig-syms=$dir/disambig_ilabels.list data/phones.txt $subseq_sym \
   $dir/ilabels | fstarcsort --sort_type=olabel > $dir/C.fst
 fstaddsubsequentialloop $subseq_sym $dir/LG.fst | \
  fsttablecompose $dir/C.fst - > $dir/CLG.fst
-{% endhighlight %}
+```
 
 生成$$H \circ C \circ L \circ G$$：
 
-{% highlight bash %}
+```bash
 make-h-transducer --disambig-syms-out=$dir/disambig_tstate.list \
    --transition-scale=1.0  $dir/ilabels.remapped \
    $tree $model  > $dir/Ha.fst
@@ -89,9 +106,13 @@ fsttablecompose $dir/Ha.fst $dir/CLG2.fst | \
    fstrmepslocal  | fstminimizeencoded > $dir/HCLGa.fst
 add-self-loops --self-loop-scale=0.1 \
     --reorder=true $model < $dir/HCLGa.fst > $dir/HCLG.fst
-{% endhighlight %}
+```
 
 ## 解码
+
+https://mp.weixin.qq.com/s/2HqAQjLIQBGbuSQ9FYvTJg
+
+Kaldi的解码搜索
 
 # 对齐工具
 
@@ -209,7 +230,7 @@ http://www.luojie1987.com/index.php/post/140.html
 
 Kaldi离线在线解码应用
 
-## 参考
+# Kaldi参考资源
 
 https://mp.weixin.qq.com/s/xBbYHMQhxkRQ-dy-0gHvaw
 
@@ -218,6 +239,10 @@ https://mp.weixin.qq.com/s/xBbYHMQhxkRQ-dy-0gHvaw
 https://zhuanlan.zhihu.com/p/59686031
 
 怎样从二进制数据分辨单声道与双声道音频
+
+https://mp.weixin.qq.com/s/BDrJjrYsOJ2WP3niVG_aZA
+
+语音识别系列之区分性训练和LF-MMI
 
 # SpeechBrain
 
@@ -229,50 +254,20 @@ SpeechBrain是一个基于pytorch的语音工具包，目前（2019.9）正在�
 
 https://speechbrain.github.io/
 
-# 计算机体系结构
+# Flume & Kafka+
 
-按照Michael J. Flynn的分类方法，计算机的体系结构可分为如下四类：
+https://mp.weixin.qq.com/s/UFfpPnouxXjOFAmZVdSTVg
 
-**Single instruction stream single data stream (SISD)**
+Kafka核心源码剖析（一）：Producer发送消息流程
 
-**Single instruction stream, multiple data streams (SIMD)**
+https://mp.weixin.qq.com/s/exOs0zrZ2x8Mxi6aB1x-QQ
 
-**Multiple instruction streams, single data stream (MISD)**
+流数据并行处理性能比较：Kafka vs Pulsar vs Pravega
 
-**Multiple instruction streams, multiple data streams (MIMD)**
+https://mp.weixin.qq.com/s/ijek6Tdb6H3hqY2CEC917Q
 
-![](/images/article/simd_mimd.png)
+从面试角度来看一看Kafka
 
-原图地址：
+https://mp.weixin.qq.com/s/zmDTaW8c65BWZ-mhsED1jw
 
-https://en.wikipedia.org/wiki/Flynn%27s_taxonomy
-
-CPU通常是SISD和SIMD的，而GPU则是SIMD的，超级计算机则是MIMD的。
-
-参考：
-
-https://zhuanlan.zhihu.com/p/31271788
-
-SIMD指令集
-
-## 术语
-
-Shared Virtual Memory，SVM
-
-Memory consistency model
-
-Multisample anti-aliasing，MSAA
-
-## 参考
-
-https://blog.csdn.net/do2jiang/article/details/4545889
-
-流水线、超流水线、超标量技术对比
-
-https://blog.csdn.net/edonlii/article/details/8755205
-
-单发射与多发射
-
-https://mp.weixin.qq.com/s/FJX9eeRkxS5nJ4XIhRVwkg
-
-从ServerSwitch到SONiC Chassis：数据中心交换机技术的十年探索历程
+从演进式角度看消息队列

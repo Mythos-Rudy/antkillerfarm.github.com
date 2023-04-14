@@ -1,0 +1,336 @@
+---
+layout: post
+title: GPU体系结构, GPU通信技术, Shader
+category: Chip 
+---
+
+* toc
+{:toc}
+
+# GPU体系结构
+
+Intel曾经用自己最强的CPU和NVIDIA的GPU做过性能对比。
+
+两块Xeon 9282（五十六核处理器）的性能是与一块V100非常接近的，但是功率却是V100的两倍多。至于价格方面，据说9282的价格在2.5w-5w美元之间，两块的价格就是5w-10w美元了。
+
+而V100的32GB版的价格约为1w美元（16GB版的大概7000美元），价格差距比能耗差距要大得多。
+
+同等价格的CPU和GPU速度差可能在十倍以上；同等性能的CPU和GPU的价格可能也会接近十倍；
+
+https://www.zhihu.com/question/273812506
+
+CPU和GPU跑深度学习差别有多大？
+
+---
+
+![](/images/img4/SGI.png)
+
+上图是SGI公司1993年的一款显卡的模块图。可以看出，早期的显卡是一个具有固定流水线的专用芯片，只能处理特定任务，没有多少可编程的能力。
+
+![](/images/img4/Tesla.png)
+
+到了2005年左右，这些渲染流水线的功能被统一到一个叫做Shader Processor的可编程单元中。此后，显卡也被称为GPU（Graphics Processing Unit）。
+
+![](/images/img4/Shader.png)
+
+无论是CPU，还是GPU，或者是现在比较火的NPU，一个Processing Unit，一般都是由上图所示的三部分组成：
+
+- Fetch/Decode。数据的输入/输出单元。
+
+- ALU（arithmetic and logic unit）。运算单元。
+
+- Execution Context。寄存器单元。
+
+CPU强调单core的极致性能，因此广泛使用了如下技术：
+
+- Out-of-order control logic
+
+- Fancy branch predictor 
+
+- Memory pre-fetcher
+
+![](/images/img4/GPU.png)
+
+GPU不追求单core的性能，因此也没有那些复杂的控制逻辑。这样省下来的电路，可以变成更多的ALU。由于数据处理的局部性，通常可以若干ALU共享一套Fetch/Decode和Ctx。
+
+当然，如果ALU非常多的话，就不能都共享一套了，这时可以采用下图所示的分组共享。
+
+![](/images/img4/GPU_2.png)
+
+其中的每个组，被称为一个**core**。
+
+有利就有弊，下面看看GPU是如何执行条件语句的。
+
+![](/images/img4/GPU_3.png)
+
+上图展示了8个ALU并行执行条件语句的过程：
+
+- 计算每个数据的条件，生成对应的标志。
+
+- 执行True分支。
+
+- 执行False分支。
+
+可以看出，GPU对于条件语句的执行时间=True分支执行时间+False分支执行时间。而CPU只需要根据条件，执行一个分支就可以了。显然，GPU对于程序的控制能力，相对CPU简直弱爆了。GPU并不擅长做这些东西。
+
+>CPU的SSE、AVX之类的指令集，也借鉴了GPU的设计思想，但是CPU的core数，相对于GPU而言，差了10～1000倍。
+
+---
+
+VGPR：Vector general purpose register
+
+SGPR：Scalar general purpose register
+
+Two-Level Adaptive Branch Predictor
+
+---
+
+参考：
+
+http://www.cnblogs.com/geniusalex/archive/2008/12/26/1941766.html
+
+CPU GPU设计工作原理
+
+https://mp.weixin.qq.com/s/-Wg1GtVGUxfshJ5d5NDd-Q
+
+聊聊GPU的计算能力上限
+
+https://mp.weixin.qq.com/s/zdr7BfJxVepQL1TCDXQoJA
+
+一文带你了解GPU的前生今世
+
+https://www.zhihu.com/question/22219245
+
+GPU不能完全取代CPU的最大原因是什么？
+
+https://mp.weixin.qq.com/s/tyZXc_hz89SxERjb_c34_w
+
+现代处理器分支预测技术
+
+## Programming Model vs Hardware Execution Model
+
+- **Programming Model**: how the programmer expresses the code.
+
+Sequential (von Neumann), Data Parallel (SIMD), Dataflow, Multi-threaded (MIMD, SPMD), …
+
+- **Execution Model**: how the hardware executes the code underneath.
+
+Out-of-order execution, Vector processor, Array processor, Dataflow processor, Multiprocessor, Multithreaded processor, …
+
+- Execution Model can be very different from the Programming Model.
+
+von Neumann model implemented by an OoO processor
+
+SPMD model implemented by a SIMD processor (a GPU)
+
+GPU虽然是一个SIMD机器，但是并没有采用SSE、AVX之类的SIMD编程模型，而是SPMD模型。
+
+## 移动GPU
+
+移动GPU和桌面GPU最核心的差别在于渲染流程不同。目前主流的移动GPU，无论ARM、高通还是Imagination，其GPU都是TBR（Tile Based Rendering）。而桌面GPU，无论NVIDIA、AMD还是Intel，都是Immediate Rendering。
+
+所谓的Immediate Rendering，就是将一个图元（最常见的是三角形），从头到尾走完整个Pipeline，中间没有停止。这种结构，控制简单，容易实现。问题是在做blending的时候需要从存储单元中不断读回之前render的结果，因此在绘制一个大的场景时这个带宽消耗是比较大的。而桌面GPU都是有自身显存的，它不需要通过系统总线从系统的DDR memory中读回数据。所以开销比较小，这是完全可以接受的。
+
+TBR的精髓就是一个Tile一个Tile的渲染。这样只需要给GPU配上一块很小的片上cache（足够装下一两个Tile的内容就行），就能实现高效的blending。移动GPU中有Tiler模块，将整个场景的图元信息（最主要的是位置）都保存下来，并且能在做光栅化时快速的检索出属于这个Tile的图元。
+
+https://www.zhihu.com/question/20720436
+
+移动GPU和桌面GPU的差距有哪些？
+
+## GPGPU
+
+通用图形处理器（General-purpose computing on graphics processing units，简称GPGPU），是一种利用处理图形任务的图形处理器来计算原本由中央处理器处理的通用计算任务。**这些通用计算常常与图形处理没有任何关系。**
+
+从市场宣传的角度，如果某家公司的产品定位为GPGPU，那么也就意味着该GPU没有图形能力。
+
+![](/images/img4/GPU_4.png)
+
+上图展现了GPU和GPGPU之间的差异。
+
+![](/images/img4/GPU_5.png)
+
+然而通用处理对于图形处理的侵蚀，或者说充分运用AI算力，简化图形专用硬件也是一大趋势。
+
+如上图所示，先进图形标准中，崭新的、更加利用计算功能的mesh shader可以取代从vertex shader到geometry shader的着色器，从而在不减功能的前提下，将图形管线节点数大量减少，并移除一些连接节点的专用硬件。性能还可能因为mesh shader拥有的弹性，而有所提升。
+
+# GPU
+
+AMD：RDNA
+
+Imagination：PowerVR
+
+Qualcomm：Adreno
+
+ARM：Mali
+
+---
+
+![](/images/img4/AMD.jpg)
+
+https://www.expreview.com/68888.html
+
+AMD RDNA显卡架构简析
+
+---
+
+http://tieba.baidu.com/p/2250616047
+
+史上最全桌面显卡天梯图
+
+https://zhuanlan.zhihu.com/p/365926059
+
+2021超全的显卡挑选指南
+
+https://mp.weixin.qq.com/s/8HIZRhb-KJOtPnQtQ3GQVg
+
+第一代芯片是CPU，第二代是GPU，第三代是什么？
+
+https://mp.weixin.qq.com/s/qkpbKN62YV2f0W5HLnr7Dg
+
+GPU是如何工作的？与CPU、DSP有什么区别？
+
+https://mp.weixin.qq.com/s/Jof-u8oUuLR4v7t3jjXEmA
+
+GPU和线下训练
+
+https://mp.weixin.qq.com/s/HeoVktVtvOK4VgocyxuCXg
+
+摩尔定律已死？GPU会取代CPU的位置吗？
+
+https://mp.weixin.qq.com/s/zTO4UZ3zDLZL0GOjv0YqrQ
+
+GPU加速深度学习
+
+https://mp.weixin.qq.com/s/VysqrYVXG1JiNG86viQ6Xg
+
+学深度学习的你有GPU了吗
+
+https://mp.weixin.qq.com/s/fUl-YjMlfZs9XXZ1W4DFBQ
+
+GPU历史系列（一）：故事从19世纪70年代讲起
+
+https://mp.weixin.qq.com/s/QuvpUYNhmf3htl0ea9TT8Q
+
+GPU历史系列（二）：改变游戏规则的3Dfx Voodoo
+
+https://mp.weixin.qq.com/s/BisVJ3VDxcUpSMyoGmQicw
+
+GPU历史系列（三）：Nvidia一统江湖
+
+https://mp.weixin.qq.com/s/5ahh8EihTefzMmCGSwmwHw
+
+GPU历史系列（四）：通用GPU的来临
+
+https://mp.weixin.qq.com/s/iBgTyDiNNTUuuCgWJCyKig
+
+深度报告：GPU产业纵深及国产化替代
+
+https://zhuanlan.zhihu.com/p/463629676
+
+从AI系统角度回顾GPU架构变迁--从Fermi到Ampere
+
+https://zhuanlan.zhihu.com/p/446830540
+
+GPU架构（上）—AI芯片设计入门
+
+https://zhuanlan.zhihu.com/p/446837354
+
+GPU架构（下）—AI芯片设计入门
+
+https://www.cnblogs.com/timlly/p/11471507.html
+
+深入GPU硬件架构及运行机制
+
+https://zhuanlan.zhihu.com/p/576793055
+
+Intel四十年显卡坎坷路
+
+https://zhuanlan.zhihu.com/p/572302589
+
+GPGPU流式多处理器架构之取指译码发射
+
+# GPU通信技术
+
+## 共享数据
+
+共享数据很简单，OpenGL时代的persistent map，让驱动去做同步、做数据搬运，从而给开发者营造“数据随时可得”的假象（当然也可能的确就是随时可得），这就已经达到共享数据的要求了。
+
+共享地址的难度则增加了一些，其目标是为了让你在CPU上跑的链表能直接在GPU等地方使用。x64时代到来使得内存地址扩充到48位，而且CPU上已经全面虚拟地址，GPU也要跟着加上地址转换的能力。
+
+共享物理内存则明确表明，实现了上两者的独显（OpenCL的SVM就是前两个要求）也要被排除。那就基本是核显Only（主机的架构也可以看作是核显）。
+
+https://www.zhihu.com/question/430936274
+
+苹果的统一内存和集成显卡与CPU共用内存有什么区别？
+
+## RDMA
+
+RDMA网卡（Remote Direct Memory Access，这是一种硬件的网络技术，它使得计算机访问远程的内存时无需远程机器上CPU的干预）已经可以提供50~100Gbps的网络带宽和微秒级的传输延迟。
+
+目前许多以深度学习为目标应用的GPU机群都部署了这样的网络。
+
+UCX是一个建立在RDMA等技术之上的用于数据处理和高性能计算的通信框架，RDMA是其底层核心之一。
+
+OpenUCX是UCX的一个开源实现。
+
+官网：
+
+https://www.openucx.org/
+
+参考：
+
+https://mp.weixin.qq.com/s/_xcE8RUs0m4gwk3kxpe9jA
+
+基于HTM/RDMA的可扩展内存事务处理系统
+
+https://www.zhihu.com/column/c_1231181516811390976
+
+一个RDMA方面的专栏
+
+## NVLink
+
+NVLink技术提供比PCIe 3更高的带宽与更多的链路，并可提升多GPU和多GPU/CPU系统配置的可扩展性。
+
+SXM是Nvidia的双插槽卡设计，与PCIe卡不同，它不需要连接电源。
+
+---
+
+![](/images/img4/PCIE.jpg)
+
+# Shader
+
+基于OpenGL的OpenGL Shading Language，简称GLSL;
+
+基于DirectX的High Level Shading Language，简称HLSL;
+
+NVIDIA公司的C for Graphic，简称Cg。
+
+除此之外，一些框架也有自己的SL，例如Unity-Shader。
+
+https://zhuanlan.zhihu.com/p/47433678
+
+三大Shader编程语言（CG/HLSL/GLSL）
+
+https://zhuanlan.zhihu.com/p/25024372
+
+跨平台shader编译的过去、现在和未来
+
+http://tieba.baidu.com/p/2155772860
+
+GPU和Shader技术的基础知识
+
+http://www.jianshu.com/p/8687a040eb48
+
+GPU处理图像Shader的入门
+
+https://zhuanlan.zhihu.com/p/25595069
+
+卡通渲染（上）：致从没看懂过着色器代码的你
+
+https://zhuanlan.zhihu.com/p/25939794
+
+卡通渲染（下）
+
+https://zhuanlan.zhihu.com/p/544879511
+
+GPU底层机制分析：显存分配开销

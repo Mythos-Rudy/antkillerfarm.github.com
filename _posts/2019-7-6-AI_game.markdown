@@ -1,10 +1,17 @@
 ---
 layout: post
 title:  AI游戏
-category: resource 
+category: DRL 
 ---
 
+* toc
+{:toc}
+
 # AI游戏
+
+游戏AI本身是个大箩筐，包含了很多方面的知识，并不局限于DRL。但考虑到后者在其中的重要影响，这里还是将之放到DRL分类里吧。
+
+---
 
 CFR（Counterfactual Regret Minimization）
 
@@ -20,11 +27,23 @@ CFR（Counterfactual Regret Minimization）
 
 而对于不完美信息游戏，隐藏信息对于游戏的难度影响很大，我们可以用信息集（Information Set）数目和信息集平均大小对其难度进行衡量。
 
+举例而言，在扑克游戏中，玩家A拿了两张K，玩家B拿了不同的牌对应不同的状态；但是从A的视角看，这些状态是不可区分的。我们把每组这种无法区分的游戏状态称为一个信息集。
+
+完美信息游戏里所有信息都是已知的，每个信息集只包含一个游戏状态，因此它的信息集数目与状态空间数目是相等的。
+
+而不完美信息游戏中，每个信息集包含若干个游戏状态，因此信息集数目通常小于状态空间的数目。
+
+与信息集数目匹配的，是信息集的平均大小。这个概念指的是在信息集中平均有多少不可区分的游戏状态。显然对于完美信息游戏，其信息集的平均大小为1。
+
 ![](/images/img3/AI_game.png)
 
 目前大部分完美信息游戏（如国际象棋、围棋等）以及信息集平均大小较小的不完美信息游戏（如两人德州扑克和多人德州扑克等）都有了相当好的解决方法。然而，对于桥牌和麻将这类含有大量隐藏信息的不完美信息游戏，需要我们发明全新的方法论，才能有所突破。
 
 ![](/images/img3/AI_problem.png)
+
+![](/images/img4/AI_Game.png)
+
+图自《AI in Games: Techniques, Challenges and Opportunities》。
 
 ## 资料
 
@@ -50,10 +69,6 @@ http://www.biologic.com.au/bugbrain/
 
 BugBrain是一个神经网络相关的益智游戏。
 
-https://mp.weixin.qq.com/s/zbki0baZw-NjAgZwKcfgFg
-
-《星际争霸》与人工智能
-
 https://mp.weixin.qq.com/s/xnbNkKOomwvwYC_ThKPJ_g
 
 田渊栋报告：游戏中的人工智能：成就与挑战
@@ -62,41 +77,9 @@ https://mp.weixin.qq.com/s/napcf9UDwTVmUXV7BBzdaw
 
 田渊栋：深度学习如何进行游戏推理？
 
-https://mp.weixin.qq.com/s/Jdd7S6JFKRdsVe2w-W01IA
-
-Facebook田渊栋开源游戏平台ELF，简化版《星际争霸》完美测试人工智能
-
-https://mp.weixin.qq.com/s/QD6BdAB332xHoSH3dIfM5Q
-
-学习顶级玩家Replay，人工智能学会了星际争霸的“大局观”
-
-https://mp.weixin.qq.com/s/0Q-Kg6pNVRl3tqv8-wH-bg
-
-Facebook开源史上最大星际争霸AI研究数据集
-
-https://mp.weixin.qq.com/s/KbFvs8EcEfm29zhLCPt0Iw
-
-DeepMind进军星际争霸2，谷歌Facebook打响通用AI战争
-
-https://mp.weixin.qq.com/s/WTRD3wRQ_wSXjjlt7jiwSg
-
-CommandCenter：基于暴雪官方API的星际争霸2 AI Bot
-
 https://mp.weixin.qq.com/s/cCnSvD5oEWZSu48Oyec-Kg
 
 从FPS到RTS，一文概述游戏人工智能中的深度学习算法
-
-https://mp.weixin.qq.com/s/CQmZcwI4bgrEiWHP0gBLfQ
-
-DeepMind星际争霸2开源机器学习平台入门
-
-https://zhuanlan.zhihu.com/p/28434323
-
-迈向通用人工智能：星际争霸2人工智能研究环境SC2LE完全入门指南
-
-https://zhuanlan.zhihu.com/p/29246185
-
-重现DeepMind星际争霸强化学习算法
 
 https://mp.weixin.qq.com/s/SAp0alFSLKN1CHX0_vdTjg
 
@@ -118,14 +101,6 @@ https://mp.weixin.qq.com/s/WMDbCdrX_3W22Qfh_joB-A
 
 一文读懂人工智能打德扑
 
-https://mp.weixin.qq.com/s/x0G-LNCano7qjGdpj-fpCQ
-
-2017年度星际争霸AI竞赛结果出炉
-
-https://mp.weixin.qq.com/s/AndV-htPeTXlpAm1GONNtA
-
-中科院开源星际争霸2宏观运营研究数据集MSC
-
 https://mp.weixin.qq.com/s/0OlKixcT20wao4xkWa6M5A
 
 超越蒙特卡洛树搜索：北大提出深度交替网络和长期评估围棋模型
@@ -138,10 +113,6 @@ https://mp.weixin.qq.com/s/c160AUDdgw37L1XruPoZ-w
 
 电竞数据化：英雄联盟总决赛也靠它！
 
-https://zhuanlan.zhihu.com/p/29222384
-
-sc2-101: 第一个rule-base的星际二agent
-
 https://mp.weixin.qq.com/s/rmi5ulyLdRIw11sKDxPYvQ
 
 学会了玩街霸2的AI，你怕不怕？
@@ -149,10 +120,6 @@ https://mp.weixin.qq.com/s/rmi5ulyLdRIw11sKDxPYvQ
 https://mp.weixin.qq.com/s/Wqy-GeXpW8s0j7m5OYpcDA
 
 过去十年，我们用了哪些即时战略游戏训练AI？
-
-https://mp.weixin.qq.com/s/ma2SgFuNYu50oexnfBYYLw
-
-用AI打王者荣耀？认真谈谈强化学习的价值
 
 https://mp.weixin.qq.com/s/28r1deIM2-eDOpX29QWLfw
 
@@ -186,10 +153,6 @@ https://mp.weixin.qq.com/s/sYXVqnk5p8tvl6s0EIkr3w
 
 游戏代理框架，帮助您创建AI来玩任何您拥有的游戏！
 
-https://mp.weixin.qq.com/s/IFGUXI3YXVsjIVuJ717uaw
-
-用人工智能打王者荣耀：匹茨堡大学&腾讯AI Lab为游戏AI引入MCTS方法
-
 https://mp.weixin.qq.com/s/Mp_thK_zTMOX0p5oSZOIQw
 
 一台笔记本打败超算：CMU冷扑大师团队提出全新德扑AI Modicum
@@ -218,45 +181,9 @@ https://mp.weixin.qq.com/s/OdQ_zH9jbZgEqOD3vHtkng
 
 不设目标也能通关“马里奥”的AI算法，全靠好奇心学习
 
-https://mp.weixin.qq.com/s/h0be7yRQMjLFi8EteTzuMQ
-
-腾讯AI在星际2完整对战中击败“作弊级”内建Bot
-
 https://mp.weixin.qq.com/s/BnS5KECLiUNGFd0EtTovTw
 
 南大AI单机训练一天，击败最高难度内置Bot
-
-https://mp.weixin.qq.com/s/I9gfoCxEYW5lSIy5QGyt6w
-
-2018星际AI大赛（2018.11）冠军诞生！一个个机器学习算法，都输给不会学习的韩国bot
-
-https://github.com/TeamSAIDA/SAIDA
-
-2018.11冠军SAIDA的github
-
-https://github.com/TorchCraft/TorchCraft
-
-2018.11亚军CherryPi的github
-
-https://github.com/bmnielsen/Locutus/
-
-2018.8冠军Locutus的github
-
-https://mp.weixin.qq.com/s/yAYF2i-Pr84RliKrJyPaUA
-
-伯克利星际争霸II AI“撞车”腾讯，作者：我们不一样
-
-https://mp.weixin.qq.com/s/uC8gi4kN_muRTwRL0RCZjQ
-
-要玩转这个星际争霸II开源AI，你只需要i5+GTX1050
-
-https://mp.weixin.qq.com/s/Q3WWqEnUaIvnLwoFHY5lfQ
-
-腾讯王者荣耀AI论文首次曝光：五AI王者局开黑与人类战队打成平手
-
-https://mp.weixin.qq.com/s/wyn-V4-DcjjOKziith3pXw
-
-开源星际争霸2多智能体挑战smac
 
 https://mp.weixin.qq.com/s/WabOUqqK6RW8mTNR53esYQ
 
@@ -294,36 +221,102 @@ https://mp.weixin.qq.com/s/pejkWw0mqKMAErfj3u_Vpg
 
 我在哥大研究网游开箱氪金建模
 
-# Machine Learning之Python篇+
+https://mp.weixin.qq.com/s/94OzNo6HFgzA9lM2hDUjRw
 
-https://mp.weixin.qq.com/s/Ljo36772QTUDKuRrxIRmmw
+微软麻将AI论文发布，首次公开技术细节
 
-100多个Jupyter精选资源，有人整理在一个GitHub项目里！
+https://mp.weixin.qq.com/s/s28FNaL_j1logmNSIaPbfw
 
-https://mp.weixin.qq.com/s/8XDXgIm-Zcb3dL-2h9eSjA
+微软超级麻将AI Suphx论文发布，研发团队深度揭秘技术细节
 
-用Python构建NLP Pipeline，从思路到具体代码，这篇文章一次性都讲到了
+https://zhuanlan.zhihu.com/p/129247756
 
-https://mp.weixin.qq.com/s/8H8GrAe7wMaLGWKjKUVp2Q
+麻将AI Suphx
 
-用文本分类模型轻松搞定复杂语义分析
+https://mp.weixin.qq.com/s/2GQacLs1CNNQXKjmJmPiVQ
 
-https://mp.weixin.qq.com/s/ss9UlDU9lYokS-EDrPnOxQ
+用对线阶段数据分析和预测《英雄联盟》的游戏结果
 
-如何在Python中使用LightFM构建可扩展的电子商务推荐系统？
+https://mp.weixin.qq.com/s/DXIGBypPQd1FkZ70aBG_9g
 
-https://mp.weixin.qq.com/s/tzyj0LaJ2Ccv730UhJBdig
+我用Python合成大西瓜！
 
-拿起Python，防御特朗普的Twitter！
+https://zhuanlan.zhihu.com/p/475557186
 
-https://mp.weixin.qq.com/s/tARJdv_ybTmVigTXPoeuYw
+如何下出最菜的五子棋？“反五子棋”玩法简介与AI研究
 
-还在用Matplotlib? 又一可视化神器Altair登场
+# 英雄无敌
 
-https://mp.weixin.qq.com/s/wwhjwQyM2r0F-hOIWV35pg
+1、2代：New Word Computing
 
-Python数据科学手册专题：线性回归
+3、4代：3DO旗下的New Word Computing
 
-https://mp.weixin.qq.com/s/VZlrWwbU0nJIlSVa9PgMBQ
+5代以后，发行商均为育碧。
 
-在Python中简洁使用CSV、JSON、XML
+5代：Nival Interactive
+
+6代：Black Hole Entertainment
+
+7代：Limbic Entertainment
+
+http://heroworld.gamerhome.com/
+
+这是目前网上最全面的英雄无敌系列的资料站。
+
+# RTS+
+
+## DosBox
+
+DosBox是Linux平台玩DOS老游戏的法宝。
+
+安装：
+
+`sudo apt install dosbox`
+
+启动DosBox之后，需要使用如下命令加载本地文件夹：
+
+`mount c ~/dosprom`
+
+---
+
+DOS下的游戏编程主要是受内存访问范围的限制，实模式直接可以访问的内存才640KB。突破内存的技术有EMS和XMS等。发展到后期，基本上都使用DOS下32位保护模式技术。比如DPMI、DOS4GW。使用Watcom C++ & DOS4GW就能轻松获得平展的4G内存空间。
+
+## 藏宝屋
+
+https://github.com/rwv/chinese-dos-games
+
+中文DOS游戏
+
+https://github.com/skywind3000/preserve-cd
+
+绝版游戏保护工程
+
+## 历史
+
+细软快短：Infi、Th000、fly、Ted。
+
+鱼丸欺诈者：斗鱼有打赏用的鱼丸系统。
+
+---
+
+Sky：WCG2005、2006魔兽冠军。WCG2007、2011亚军。WCG 2012季军。
+
+---
+
+在WCS2012的亚洲杯锦标赛中，韩国选手包揽前8强，国内专业体育报刊《体坛周报》以《星际之差 尤甚男足》为标题发表文章，痛批国内电竞选手，令人哀叹不已。
+
+10年后，星际已经拿到冠军了，而国足还是那个鸟样。
+
+https://www.zhihu.com/question/583694151
+
+李培楠夺《星际争霸 2》2023 IEM总冠军，成为中国该项目首位世界冠军，对此你有什么想说？
+
+---
+
+https://www.sohu.com/a/299902957_100163351
+
+女神节特辑：那些年我们一起追过的War3女神
+
+https://www.zhihu.com/question/512061573
+
+电竞女主播Miss透露早期经常吃馊米饭，以前的电竞选手真的这么苦吗？

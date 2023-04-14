@@ -4,7 +4,12 @@ title:  知名数据集（一）
 category: resource 
 ---
 
+* toc
+{:toc}
+
 # 知名数据集
+
+![](/images/img4/dataset.png)
 
 ## MNIST
 
@@ -40,7 +45,7 @@ CIFAR-10是由Hinton的两个大弟子Alex Krizhevsky、Ilya Sutskever收集的�
 
 DL强调的是自适应感知和人工智能，是计算机与神经科学交叉。DM强调的是高速、大数据、统计数学分析，是计算机和数学的交叉。
 
-CIFAR-10由60000张32x32的RGB彩色图片构成，共10个分类。50000张训练，10000张测试（交叉验证）。这个数据集最大的特点在于将识别迁移到了普适物体，而且应用于多分类（姊妹数据集CIFAR-10达到100类，ILSVRC比赛则是1000类）。
+CIFAR-10由60000张32x32的RGB彩色图片构成，共10个分类。50000张训练，10000张测试（交叉验证）。这个数据集最大的特点在于将识别迁移到了普适物体，而且应用于多分类（姊妹数据集CIFAR-100达到100类，ILSVRC比赛则是1000类）。
 
 官网：
 
@@ -61,6 +66,24 @@ ImageNet是由李飞飞等创建的一个计算机视觉系统识别项目，是
 http://www.image-net.org/
 
 需要注意的是，由于ImageNet的数据过于庞大，因此主页下载的数据文件，仅仅只是图片的URL而已。
+
+ImageNet的标签包含在图片的文件名中，具体的对应关系参见imagenet_class_index.json：
+
+`"812": ["n04266014", "space_shuttle"],`
+
+以上面片段为例：
+
+`812`：类别ID。
+
+`n04266014`：该类别在图片文件名中的名字前缀。
+
+`space_shuttle`：该类别的真实名称。
+
+参考：
+
+https://blog.csdn.net/weixin_41770169/article/details/80482942
+
+ImageNet图像库1000个类别名称
 
 ## PASCAL VOC
 
@@ -216,7 +239,19 @@ https://www.datasetlist.com/
 
 收藏：全网最大机器学习数据集，视觉、NLP、音频都在这了
 
+https://mp.weixin.qq.com/s/_7uGn2HadW896co4qSzC3g
+
+这是一份非常全面的开源数据集！
+
 ## NLP
+
+SQuAD(The Stanford Question Answering Dataset)大概算是NLP领域最知名的数据集了。
+
+---
+
+https://mp.weixin.qq.com/s/xoOFbUjABKmQIVzTcHE6KQ
+
+CLUEDatasetSearch：搜索所有中文数据集，附常用英文数据集
 
 https://mp.weixin.qq.com/s/tewjGzfAVCKcG1dlURxyeg
 
@@ -337,37 +372,3 @@ https://mp.weixin.qq.com/s/txlWG1yAFlSMMVNKYssMsw
 https://mp.weixin.qq.com/s/dlmzRrAeB-jkhk7rbUrNpg
 
 微软亚洲研究院发布业界最全面的语义分析数据集MSParS
-
-## CV
-
-http://www.cvpapers.com/datasets.html
-
-常见的cvpr研究的数据库下载链接
-
-https://mp.weixin.qq.com/s/SKZhcd3QpoVMubTkD14iWw
-
-Fashion-MNIST：替代MNIST手写数字集的图像数据集
-
-https://niessner.github.io/Matterport/
-
-全球最大的3D数据集公开了！标记好的10800张全景图
-
-https://mp.weixin.qq.com/s/q2lsD4MSqQG-LqRmVjEHeg
-
-图像配对数据集TTL：展现人类和机器判断图像相似性的差异
-
-https://mp.weixin.qq.com/s/Y__z-0nxAZNuZsZefCm4IA
-
-纽约大学联合谷歌大脑提出“COG”数据集，可提高系统的“视觉推理”能力
-
-https://mp.weixin.qq.com/s/0D8OQ6hF_70mNtadewyGVw
-
-全球最大的第一视角视频数据集开源，取自真实生活，还能提升厨艺
-
-https://mp.weixin.qq.com/s/NXI9Bp4xxbZCQqAddK1HgA
-
-Google开放最大目标检测数据集，还要为它举办AI挑战赛
-
-https://mp.weixin.qq.com/s/DsBoGT2Pl4tRwHX8REOqnw
-
-MURA：斯坦福ML团队开放的大型放射影像数据集与挑战赛
